@@ -4,15 +4,18 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "nodemon -L",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "FT14 - Team 13 - Henry",
   "license": "ISC",
   "dependencies": {
     "axios": "^0.21.1",
+    "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
-    "mongoose": "^5.13.5"
+    "mongoose": "^5.13.5",
+    "morgan": "^1.10.0"
   }
 }
