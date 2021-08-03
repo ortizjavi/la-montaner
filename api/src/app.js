@@ -3,7 +3,6 @@ const morgan = require('morgan');
 const cors = require('cors');
 const setHeaders =  require('./setHeaders')
 
-
 const server = express();
 
 server.name = 'API';
