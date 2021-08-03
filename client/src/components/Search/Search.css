@@ -1,0 +1,37 @@
+
+
+.form-container {
+    background: rgb(247, 247, 247);
+}
+
+.input_search{
+    border-radius: 2rem;
+    border: solid 1px #845EC2;
+
+}
+
+.input_search:hover{
+    background: rgb(250, 248, 248);
+
+}
+button{
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+    background: #845EC2;
+    font-family: sans-serif;
+    color: #fff;
+    font-size: 1.1rem;
+    border:none;
+    border-radius: 4px;
+    margin: 4px;
+    height: 2rem;
+}
+button:hover{
+    background:#FF6F91 ;
+    border-radius: 4px;
+
+}
+
+/* .disabled{
+    background: #FBEAFF;
+          pointer-events: none;
+} */
