@@ -1,17 +1,12 @@
 const server = require('./src/app');
 const { conn }= require('./src/database');
 require('dotenv').config();
+const {dbConnection} = require('./src/database/index')
 
 
-// connection abierta
-conn.once('open', () => {
-  console.log('DB connected!');
+
+dbConnection().then(() => {
   server.listen(process.env.PORT, () => {
-    console.log(`%s listening at ${process.env.PORT}`); // eslint-disable-line no-console
-  })
-});
+  console.log(`%s listening at ${process.env.PORT}`); // eslint-disable-line no-console
+})})
 
-conn.on('error', (err) => {
-    console.log('Failed to connect to database');
-    process.exit(1);
-})
