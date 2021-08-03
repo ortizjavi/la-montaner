@@ -3,7 +3,8 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const cors = require('cors');
-const setHeaders =  require('./setHeaders')
+const setHeaders =  require('./setHeaders');
+const routes = require('../src/routes/index')
 
 
 const server = express();
@@ -19,6 +20,7 @@ server.use(setHeaders)
 
 //Seteamos las rutas
 server.use(cors());
+server.use('/', routes);
 
 // Error catching endware.
 server.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
