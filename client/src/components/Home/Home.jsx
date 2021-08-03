@@ -1,10 +1,11 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React from 'react';
+import SearchBar from '../SearchBar/SearchBar';
+
 export default function Home() {
   return (
     <div>
       Home
-      <Link to="/home/creation">Go</Link>
+      <SearchBar/>
     </div>
-  );
+  )
 }
