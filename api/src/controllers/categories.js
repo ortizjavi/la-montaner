@@ -1,4 +1,4 @@
-const { Category } = require('../database');
+const { Category } = require('../models/');
 
 const create = (req, res, next) => {
     const { name } = req.body;
@@ -13,7 +13,14 @@ const create = (req, res, next) => {
 
 }
 
+const get = (req, res, next) => {
+    Category.find({}).then(Categories => {
+        return res.json(Categories);
+    })
+}
+
 module.exports = {
-    create
+    create,
+    get
 }
 
