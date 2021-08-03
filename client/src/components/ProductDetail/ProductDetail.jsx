@@ -10,7 +10,7 @@ export default function ProductDetail() {
 
   useEffect(() => {
     dispatch(getProductDetail(id));
-  });
+  }, []);
 
   return (
     <div>
