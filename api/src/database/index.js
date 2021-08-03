@@ -32,8 +32,6 @@ mongoose.connect(process.env.DB_CONNECT, {
     console.error(error);
 })
 
-
-
 module.exports = {
     ...mongoose.models,
     conn: mongoose.connection
