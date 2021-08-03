@@ -3,7 +3,7 @@ const cookieParser = require('cookie-parser');
 const morgan = require('morgan');
 const cors = require('cors');
 const setHeaders =  require('./setHeaders');
-const routes = require('../src/routes/index')
+const routes = require('./routes/index');
 
 const server = express();
 
@@ -18,6 +18,7 @@ server.use(setHeaders)
 
 //Seteamos las rutas
 server.use(cors());
+
 server.use('/', routes);
 
 // Error catching endware.
