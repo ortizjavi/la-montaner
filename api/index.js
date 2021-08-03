@@ -1,12 +1,17 @@
 const server = require('./src/app');
-const {dbConnection}=require('./src/database/config')
+const { conn }= require('./src/database');
 require('dotenv').config();
 
 
-// Syncing all the models at once.
-dbConnection().then(() => {
-  console.log('base de datos conectada!')
+// connection abierta
+conn.once('open', () => {
+  console.log('DB connected!');
   server.listen(process.env.PORT, () => {
     console.log(`%s listening at ${process.env.PORT}`); // eslint-disable-line no-console
-  });
+  })
 });
+
+conn.on('error', (err) => {
+    console.log('Failed to connect to database');
+    process.exit(1);
+})
