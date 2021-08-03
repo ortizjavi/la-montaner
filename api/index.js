@@ -2,7 +2,6 @@ const server = require('./src/app');
 const { conn }= require('./src/database');
 require('dotenv').config();
 
-
 // connection abierta
 conn.once('open', () => {
   console.log('DB connected!');
