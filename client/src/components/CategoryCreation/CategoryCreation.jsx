@@ -4,7 +4,7 @@ import {createCategory} from '../../actions/types'
 
 export default function CategoryCreator() {
   const dispatch = useDispatch();
-  const allProducts = useSelector( state => state.allProducts)
+  const categories = useSelector( state => state.allCategories)
   const [state, setState] = useState("")
 
   const handleChange = (event) => {
@@ -20,7 +20,12 @@ export default function CategoryCreator() {
   }
 
   return (
-    <div>     
+    <div>
+      <ul className="category-list">
+         { categories?.map((category, i) => (
+           <li key={i}> {category.name} </li>
+           ))}
+      </ul>
       <form className="form-container" >
         <label  >Crear Categoría: </label>
           <input className='input_search' name='product' placeholder='Categoría' value={state} onChange={(e) => handleChange(e)} />
