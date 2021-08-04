@@ -8,6 +8,7 @@
     background: rgb(247, 247, 247);
 }
 
+
 .input_search{
     /* border-radius: 2rem;
     border: solid 1px #333533;
@@ -61,6 +62,7 @@ button:hover{
 .allproducts{
     display: flex;
     justify-content:space-around;
+    flex-wrap: wrap;
     margin-top: 40px;
 }
 
@@ -73,7 +75,8 @@ button:hover{
 
     border: solid black 2px;
     border-radius: 5px;
-    width: 30vw;
+    width: 20vw;
+    min-width: 20vw;
     margin: 10px;
 }
 
@@ -100,6 +103,9 @@ button:hover{
     background:#f5cb5c;
     border-radius: 4px;
     color: black;
+}
+.item_image{
+    width: 100%;
 }
 img:hover{
     object-fit: cover;
