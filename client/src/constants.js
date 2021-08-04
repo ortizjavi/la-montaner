@@ -1,3 +1,4 @@
+
 export const SERVER = 'http://localhost:3001';
 export const ADMIN_SERVER = `${SERVER}/admin`;
 export const GET_CATEGORY_ENDPOINT = `${ADMIN_SERVER}/category`;
