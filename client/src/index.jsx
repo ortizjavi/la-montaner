@@ -7,7 +7,6 @@ import { BrowserRouter } from 'react-router-dom';
 import store from './store/index';
 import reportWebVitals from './reportWebVitals';
 
-
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>

@@ -7,8 +7,7 @@ detailProducts.get("/:id", async (req, res) => {
 
   try {
     if (!id) return res.status(400).send({ error: "Id not found" });
-
-    let product = await Product.findById(id);
+    const product = await Product.findById(id);
     return res.json(product);
   } catch (error) {
     console.log(error);

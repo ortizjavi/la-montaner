@@ -1,16 +1,13 @@
-
 import React, { useState, useEffect }  from 'react';
 import { useDispatch, useSelector} from 'react-redux';
 import './SearchBar.css';
 import { getAllProducts } from '../../actions/types';
 import{ Link } from 'react-router-dom';
 
-const Search = ()=>{
-
+export default function Search() {
     const dispatch = useDispatch();
     const allProducts = useSelector( state => state.allProducts)
     const [state, setState] = useState({product: "",})
-
 
     useEffect( () => {
        console.log('components/Search/state: ',state.product)
@@ -21,10 +18,12 @@ const Search = ()=>{
         event.preventDefault();
         setState({ ...state, [event.target.name]: event.target.value });
       }
+
     const handleSubmit = (event) => {
         event.preventDefault();
         setState({ ...state, product: ""});
     }
+    
     console.log('components/searchBar: allProducts:', allProducts[0])
     return(
         <div>
@@ -57,8 +56,4 @@ const Search = ()=>{
                      
                 }
             </section>
-        </div>
-    )
 };
-
-export default Search;

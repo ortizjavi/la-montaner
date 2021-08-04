@@ -5,5 +5,7 @@ const routerProducts = require('./addProducts')
 
 router.use('/admin', routerProducts)
 router.use('/search', searchP)
+router.use('/categories', routerCategories);
+router.use('/products', detailsProducts);
 
 module.exports = router;

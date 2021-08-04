@@ -6,7 +6,7 @@ import ProductDetail from "../components/ProductDetail/ProductDetail";
 import ProductCreation from "../components/ProductCreation/ProductCreation";
 import CategoryCreation from "../components/CategoryCreation/CategoryCreation";
 
-function App() {
+export default function App() {
   return (
     <div>
       <Route exact path="/" component={Landing} />
@@ -19,5 +19,3 @@ function App() {
     </div>
   );
 }
-
-export default App;
