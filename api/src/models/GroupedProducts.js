@@ -2,7 +2,6 @@ const { Schema, model }  = require('mongoose');
 const CategoryModel = require('./Category');
 const ProductModel = require('./Product');
 
-
 const GroupedProductsSchema =  Schema ({
     name: {
         type: String,
