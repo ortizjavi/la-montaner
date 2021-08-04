@@ -44,8 +44,8 @@ export default function Search() {
                             <br></br>
                             <Link className='link' to={`/home/${item?._id}`}>
                                 <picture className='image_contain'>
-                                    {/* <img className="item_image" src={item?.image}  alt="Imagen de Birra" /> */}
-                                    <img className="item_image" src="https://live.staticflickr.com/65535/51357138820_5d67c34fa6_m.jpg"  alt="Imagen de Birra" />
+                                    <img className="item_image" src={item?.img}  alt="Imagen de Birra" />
+                                    {/* <img className="item_image" src="https://live.staticflickr.com/65535/51357138820_5d67c34fa6_m.jpg"  alt="Imagen de Birra" /> */}
                                 </picture>
                             </Link>
                         
