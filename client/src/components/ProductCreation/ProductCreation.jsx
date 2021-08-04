@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useState, useEffect, forwardRef } from "react";
+import { Link } from 'react-router-dom';
 import TextField from "@material-ui/core/TextField";
 import { makeStyles } from "@material-ui/core/styles";
 import "./ProductCreation.css";
@@ -90,6 +91,7 @@ export default function ProductCreation() {
 
   return (
     <div className="contentPC">
+      <Link to="/home"> <button>Home</button> </Link>
       <h2>Crear Nuevo Producto</h2>
       <form className={contentPC.root} onSubmit={handleSubmit}>
         <TextField
