@@ -9,13 +9,36 @@
 }
 
 .input_search{
-    border-radius: 2rem;
+    /* border-radius: 2rem;
     border: solid 1px #333533;
+    height: 30px; */
+    background-color: rgba(255, 255, 255);
+    border: 2px solid black;
+    border-radius: 30px;
+    color: black;
+    font-size: 16px;
+    height: 30px;
+    padding: 0 20px;
+    width: 30%;
+    outline: none;
+
+    background: url('https://live.staticflickr.com/65535/51357603650_45cf92eb85_m.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 1.2em;
+    background-position-x: 95%;
 
 }
 
 .input_search:hover{
-    background: rgb(250, 248, 248);
+    background: #e8eddf;
+    /* filter:invert(1) */
+    background: url('https://live.staticflickr.com/65535/51357603650_45cf92eb85_m.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 1.5em;
+    background-position-x: 93%;
+
 
 }
 button{
@@ -85,7 +108,7 @@ img:hover{
     border-radius: 4px;
 }
 
-/* .disabled{
-    background: #FBEAFF;
+.disabled{
+    background: #e8eddf;
           pointer-events: none;
-} */
+}

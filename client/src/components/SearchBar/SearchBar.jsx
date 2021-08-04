@@ -33,7 +33,7 @@ const Search = ()=>{
               
                     <label  >Buscar Producto: </label>
                     <input className='input_search' name='product' placeholder='Birras' value={state.product} onChange={(e) => handleChange(e)} />
-                    <button  type="button" onClick={(e) => handleSubmit(e)}>Limpiar</button> 
+                    <button className={`${!state.product?.length && "disabled"}`} type="button" onClick={(e) => handleSubmit(e)}>Limpiar</button> 
             </form>
             <section className='allproducts'>
                 {
