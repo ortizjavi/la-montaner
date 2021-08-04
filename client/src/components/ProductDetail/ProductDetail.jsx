@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector  } from 'react-redux';
 import { useParams } from 'react-router';
+import { Link } from 'react-router-dom';
 import { getProductDetail } from '../../actions/types.js';
 import Loading from '../Loading/Loading.js';
 
@@ -25,6 +26,7 @@ export default function ProductDetail() {
         <Loading />
       ): detail.name ? (
         <div>
+          <Link to="/home"> <button>Home</button> </Link>
           <h1>{detail.name}</h1>
           {detail.img ? <img src={detail.img} alt="not found1" /> : <p>image not found2</p>}
           <div>
