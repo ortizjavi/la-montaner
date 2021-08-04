@@ -5,7 +5,8 @@ import {
   CREATE_PRODUCT_ENDPOINT,
   UPDATE_PRODUCT_ENDPOINT,
   DELETE_PRODUCT_ENDPOINT,
-  CATEGORY_ENDPOINT,
+  GET_CATEGORY_ENDPOINT,
+  CREATE_CATEGORY_ENDPOINT,
 } from '../constants';
 
 export function getProductDetail(id) {
@@ -32,7 +33,7 @@ export function getAllProducts() {
 export function createCategory(name) {
   return async function(dispatch) {
     try {
-        const response = await axios.post(`${CATEGORY_ENDPOINT}`, {name});
+        const response = await axios.post(`${CREATE_CATEGORY_ENDPOINT}`, {name});
         return dispatch({ type: CREATE_CATEGORY, payload: response.data});
     } catch(e) {
       console.log(e);
