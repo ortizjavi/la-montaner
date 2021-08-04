@@ -1,9 +1,6 @@
 import axios from 'axios';
 import { GET_PRODUCT_DETAIL, CREATE_CATEGORY } from './names';
-
-const SERVER = 'http://localhost:3001';
-const PRODUCTS_ENDPOINT = `${SERVER}/products`
-const CATEGORIES_ENDPOINT = `${SERVER}/categories`
+import { PRODUCTS_ENDPOINT, CATEGORIES_ENDPOINT } from '../constants';
 
 export function getProductDetail(id) {
   return async function(dispatch) {
@@ -26,4 +23,3 @@ export function createCategory(name) {
     }
   }
 }
-
