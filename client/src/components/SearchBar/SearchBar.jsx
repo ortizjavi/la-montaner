@@ -34,6 +34,7 @@ export default function Search() {
                     <input className='input_search' name='product' placeholder='Birras' value={state.product} onChange={(e) => handleChange(e)} />
                     <button className={`${!state.product?.length && "disabled"}`} type="button" onClick={(e) => handleSubmit(e)}>Limpiar</button> 
             </form>
+
             <section className='allproducts'>
                 {
                     allProducts?.length && allProducts.filter(item => item.name.includes(state.product)).length ? 
@@ -56,4 +57,9 @@ export default function Search() {
                      
                 }
             </section>
+
+            </div>
+
+    )
+
 };
