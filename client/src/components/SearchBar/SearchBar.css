@@ -20,8 +20,9 @@
     font-size: 16px;
     height: 30px;
     padding: 0 20px;
-    width: 30%;
+    width: 30vw;
     outline: none;
+    margin-left: 10px;
 
     background: url('https://live.staticflickr.com/65535/51357603650_45cf92eb85_m.jpg');
     background-repeat: no-repeat;
@@ -33,13 +34,11 @@
 
 .input_search:hover{
     background: #e8eddf;
-    /* filter:invert(1) */
     background: url('https://live.staticflickr.com/65535/51357603650_45cf92eb85_m.jpg');
     background-repeat: no-repeat;
     background-position: center;
     background-size: 1.5em;
     background-position-x: 93%;
-
 
 }
 button{
@@ -93,10 +92,6 @@ button:hover{
     height: 2rem;
     padding-top: 5px;
     text-align: center;
-    /* display: flex;
- 
-    flex-direction: column;
-    justify-content: center; */
 
 }
 .link:hover{
@@ -118,3 +113,8 @@ img:hover{
     background: #e8eddf;
           pointer-events: none;
 }
+
+input::-webkit-calendar-picker-indicator {
+        filter:invert(1)
+    opacity(0.01)
+  }
