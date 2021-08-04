@@ -26,7 +26,7 @@ export default function App() {
       <Route exact path="/" component={Landing} />
       <Route exact path="/home" component={Home} />
       <Switch>
-        <Route exact path="/home/produtCreation" component={ProductCreation} />
+        <Route exact path="/home/productCreation" component={ProductCreation} />
         <Route exact path="/admin/categoryCreation" component={CategoryCreation} />
         <Route exact path="/home/:id" component={ProductDetail} />
       </Switch>
