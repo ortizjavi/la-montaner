@@ -1,4 +1,6 @@
 const { Schema, model }  = require('mongoose');
+const {schema } = require('./Category');
+
 
 const ProductSchema =  Schema ({
     name: {
@@ -6,7 +8,7 @@ const ProductSchema =  Schema ({
         required: true
     },
     category: {
-        type: String,
+        type: schema,
         required: true
     },
     img: {
