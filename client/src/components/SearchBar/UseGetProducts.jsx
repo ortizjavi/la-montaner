@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { GET_PRODUCTS_ENDPOINT  } from '../../constants';
 
