@@ -4,6 +4,7 @@ import Home from "../components/Home/Home";
 import Landing from "../components/Landing/Landing";
 import ProductDetail from "../components/ProductDetail/ProductDetail";
 import ProductCreation from "../components/ProductCreation/ProductCreation";
+import CategoryCreation from "../components/CategoryCreation/CategoryCreation";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       <Route exact path="/home" component={Home} />
       <Switch>
         <Route exact path="/home/creation" component={ProductCreation} />
+        <Route exact path="/admin/creation" component={CategoryCreation} />
         <Route exact path="/home/:id" component={ProductDetail} />
       </Switch>
     </div>
