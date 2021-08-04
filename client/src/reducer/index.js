@@ -1,4 +1,9 @@
-import { GET_PRODUCT_DETAIL, ALL_PRODUCTS, CREATE_CATEGORY, GET_CATEGORIES } from '../actions/names';
+import { 
+  GET_PRODUCT_DETAIL,
+  ALL_PRODUCTS,
+  CREATE_CATEGORY,
+  GET_CATEGORIES,
+} from '../actions/names';
 
 const initialState = {
   allProducts: [],
