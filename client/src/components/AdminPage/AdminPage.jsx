@@ -2,6 +2,9 @@ import React from 'react';
 
 export default function AdminPage() {
   return (
-    <div>Admin page</div>
+    <div>
+      <h1>Admin page</h1>
+      </div>
+    
   )
 }
