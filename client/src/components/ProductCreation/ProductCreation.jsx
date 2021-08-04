@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, forwardRef } from "react";
 import TextField from "@material-ui/core/TextField";
 import { makeStyles } from "@material-ui/core/styles";
 import "./ProductCreation.css";
@@ -14,14 +14,14 @@ const useStyles = makeStyles((theme) => ({
 }));
 export default function ProductCreation() {
   const [loadingImg, setLoadingImg] = useState(false);
-  const [image, setImage] = useState('')
+  const [image, setImage] = useState([]);
 
   const [createProduct, setCreateProduct] = useState({
     name: "",
     category: {
       name: "",
     },
-    img:'',
+    img: [],
     price: 0,
     stock: 0,
     abv: 0,
@@ -32,13 +32,13 @@ export default function ProductCreation() {
   });
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(createProduct);
     try {
-      
-      let post = await axios.post(
-        "http://localhost:4000/admin/add",
-        createProduct
-      );
+      /* await setCreateProduct({ ...createProduct, img: image }); */
+      console.log(createProduct);
+      let post = await axios.post("http://localhost:3001/admin/product", {
+        ...createProduct,
+        img: image,
+      });
       console.log(post);
       /* setTimeout(() => (document.location.href = HOME), 1000); */
     } catch (err) {
@@ -61,21 +61,32 @@ export default function ProductCreation() {
   };
   const contentPC = useStyles();
 
-
   const uploadImage = async (e) => {
-    const files = e.target.files
-    const images = new FormData()
-    images.append("file",files[0])
-    images.append("upload_preset", "laMontanes")
-    setLoadingImg(true)
+    const files = e.target.files;
+    const images = new FormData();
+    for (let i = 0; i < files.length; i++) {
+      console.log(files[i]);
+      images.append("file", files[i]);
+      console.log(i.name);
+      images.append("upload_preset", "laMontanes");
+      await axios
+        .post(
+          "https://api.cloudinary.com/v1_1/la-montanes/image/upload",
+          images
+        )
+        .then((res) => {
+          setImage((imgs) => [...imgs, res.data.secure_url]);
+          console.log(res.data.secure_url);
+        })
+        .catch((err) => console.log(err));
+    }
+    console.log(image);
+    /* files.map((i) => {
+    }); */
+    setLoadingImg(true);
 
-    await axios.post("https://api.cloudinary.com/v1_1/la-montanes/image/upload", images).then((res)=>{setImage(res.data.secure_url)
-    setCreateProduct({...createProduct, img:res.data.secure_url})
-  })
-    
-    setLoadingImg(false)
-
-  }
+    setLoadingImg(false);
+  };
 
   return (
     <div className="contentPC">
@@ -99,14 +110,15 @@ export default function ProductCreation() {
           variant="outlined"
           onChange={handleCategoryChange}
         />
-        <input type="file" placeholder="img" name="img" onChange={uploadImage}/>
-        {
-          loadingImg?(
-            <h4>Loading...</h4>
-          ):(
-            <img src={image} alt="" style={{width:'300px'}}/>
-          )
-        } 
+        <input
+          type="file"
+          placeholder="img"
+          multiple={true}
+          name="img"
+          onChange={uploadImage}
+        />
+        {image &&
+          image.map((i) => <img src={i} alt="" style={{ width: "300px" }} />)}
         <TextField
           id="outlined-number"
           label="Precio"
