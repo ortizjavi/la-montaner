@@ -3,7 +3,7 @@ const routerProducts = Router();
 const Product = require("../models/Product");
 
 routerProducts.post("/add", async (req, res) => {
-  console.log(req.body);
+  console.log('routerProducts.post:',req.body);
   const product = new Product(req.body);
   //name, category, img, price, stock, abv, ibu, description, volumen, others
 
