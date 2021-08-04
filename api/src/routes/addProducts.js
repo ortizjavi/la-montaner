@@ -24,19 +24,14 @@ routerProducts.post("/add", async (req, res) => {
 
 routerProducts.put('/update/:id', async (req, res) => {
     const productId = req.params.id;
-    const update = {
-        ...req.body}
-
+    const update = { ...req.body }
     try {
         //const productoEncontrado = await Product.findById(productId);
-
         const productoActualizado = await Product.findByIdAndUpdate(productId, update,{new:true})
-
         res.json({
             ok: true,
             product: productoActualizado
         })
-
     } catch (error) {
         console.log(error);
         res.json({
@@ -47,15 +42,11 @@ routerProducts.put('/update/:id', async (req, res) => {
 
 routerProducts.delete('/delete/:id', async (req, res) => {
     const productId = req.params.id;
-
     try {
-
         await Product.findByIdAndDelete(productId)
-
         res.json({
             ok: true
         })
-
     } catch (error) {
         console.log(error);
         res.json({
@@ -65,4 +56,3 @@ routerProducts.delete('/delete/:id', async (req, res) => {
 })
 
 module.exports = routerProducts;
-
