@@ -1,5 +1,6 @@
 const Category = require('../../../models/Category');
 
+
 module.exports = {
   createCategory: (req, res, next) => {
     const { name } = req.body;
@@ -12,4 +13,11 @@ module.exports = {
         res.json(newCategory);
     });
   }
+}
+
+
+const createGroup = (req, res, next) => {
+   const newGroup = new GroupedProducts(req.body);
+   console.log(newGroup)
+   res.send('Ok')
 }
