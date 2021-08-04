@@ -13,12 +13,15 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 export default function ProductCreation() {
+  const [loadingImg, setLoadingImg] = useState(false);
+  const [image, setImage] = useState('')
+
   const [createProduct, setCreateProduct] = useState({
     name: "",
     category: {
       name: "",
     },
-    img: "https://misanimales.com/wp-content/uploads/2018/04/mangosta-alimentacion.jpg",
+    img:'',
     price: 0,
     stock: 0,
     abv: 0,
@@ -31,8 +34,9 @@ export default function ProductCreation() {
     e.preventDefault();
     console.log(createProduct);
     try {
+      
       let post = await axios.post(
-        "http://localhost:3001/admin/add",
+        "http://localhost:4000/admin/add",
         createProduct
       );
       console.log(post);
@@ -56,6 +60,23 @@ export default function ProductCreation() {
     });
   };
   const contentPC = useStyles();
+
+
+  const uploadImage = async (e) => {
+    const files = e.target.files
+    const images = new FormData()
+    images.append("file",files[0])
+    images.append("upload_preset", "laMontanes")
+    setLoadingImg(true)
+
+    await axios.post("https://api.cloudinary.com/v1_1/la-montanes/image/upload", images).then((res)=>{setImage(res.data.secure_url)
+    setCreateProduct({...createProduct, img:res.data.secure_url})
+  })
+    
+    setLoadingImg(false)
+
+  }
+
   return (
     <div className="contentPC">
       <h2>Crear Nuevo Producto</h2>
@@ -78,7 +99,14 @@ export default function ProductCreation() {
           variant="outlined"
           onChange={handleCategoryChange}
         />
-        {/* <input type="text" placeholder="img" /> */}
+        <input type="file" placeholder="img" name="img" onChange={uploadImage}/>
+        {
+          loadingImg?(
+            <h4>Loading...</h4>
+          ):(
+            <img src={image} alt="" style={{width:'300px'}}/>
+          )
+        } 
         <TextField
           id="outlined-number"
           label="Precio"
