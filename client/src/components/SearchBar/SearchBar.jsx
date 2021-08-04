@@ -1,42 +1,39 @@
-
 import React, { useState, useEffect }  from 'react';
 import { useDispatch, useSelector} from 'react-redux';
 import './SearchBar.css';
+import { getAllProducts } from '../../actions/types';
+import{ Link } from 'react-router-dom';
 
-const Search = ()=>{
-
+export default function Search() {
     const dispatch = useDispatch();
     const allProducts = useSelector( state => state.allProducts)
     const [state, setState] = useState({product: "",})
 
-
     useEffect( () => {
        console.log('components/Search/state: ',state.product)
+       dispatch(getAllProducts())
       }, [state])
 
     const handleChange = (event) => {
         event.preventDefault();
         setState({ ...state, [event.target.name]: event.target.value });
       }
+
     const handleSubmit = (event) => {
         event.preventDefault();
-        alert('me clickeaste')
         setState({ ...state, product: ""});
     }
-
+    
+    console.log('components/searchBar: allProducts:', allProducts[0])
     return(
         <div>
-            <h2>Buscador</h2>
+            
             <form className="form-container" >
               
                     <label  >Buscar Producto: </label>
                     <input className='input_search' name='product' placeholder='Birras' value={state.product} onChange={(e) => handleChange(e)} />
-                    <button  type="button" onClick={(e) => handleSubmit(e)}>BUSCAR</button> 
-           
-
+                    <button className={`${!state.product?.length && "disabled"}`} type="button" onClick={(e) => handleSubmit(e)}>Limpiar</button> 
             </form>
-
-        
 
             <section className='allproducts'>
                 {
@@ -60,9 +57,9 @@ const Search = ()=>{
                      
                 }
             </section>
+
             </div>
 
     )
-};
 
-export default Search;
+};

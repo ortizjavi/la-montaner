@@ -11,7 +11,7 @@ export default function ProductDetail() {
   useEffect(() => {
     dispatch(getProductDetail(id));
   }, []);
-
+console.log('components/ProductDetail:', detail,'id:',id)
   return (
     <div>
       <h1>{detail.name}</h1>

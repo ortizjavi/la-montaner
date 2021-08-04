@@ -1,9 +1,10 @@
 import axios from 'axios';
-import { GET_PRODUCT_DETAIL, CREATE_CATEGORY } from './names';
-
-const SERVER = 'http://localhost:3001';
-const PRODUCTS_ENDPOINT = `${SERVER}/products`
-const CATEGORIES_ENDPOINT = `${SERVER}/categories`
+import { GET_PRODUCT_DETAIL, ALL_PRODUCTS, CREATE_CATEGORY } from './names';
+import { 
+  PRODUCTS_ENDPOINT,
+  CATEGORIES_ENDPOINT,
+  ALL_PRODUCTS_ENDPOINT,
+} from '../constants';
 
 export function getProductDetail(id) {
   return async function(dispatch) {
@@ -12,6 +13,16 @@ export function getProductDetail(id) {
         return dispatch({ type: GET_PRODUCT_DETAIL, payload: productDetail.data });
     } catch(e) {
       console.log(e);
+    }
+  }
+}
+export function getAllProducts() {
+  return async function(dispatch) {
+    try {
+        const response = await axios.get(`${ALL_PRODUCTS_ENDPOINT}`);
+        return dispatch({ type: ALL_PRODUCTS, payload: response.data });
+    } catch(e) {
+      console.log('actions/types/getAllProducts-Error:',e);
     }
   }
 }
@@ -26,4 +37,3 @@ export function createCategory(name) {
     }
   }
 }
-
