@@ -58,8 +58,5 @@ export default function Search() {
                 }
             </section>
 
-            </div>
-
-    )
-
-};
+        </div>
+    )};
