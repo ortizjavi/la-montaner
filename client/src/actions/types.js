@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { GET_PRODUCT_DETAIL, ALL_PRODUCTS, CREATE_CATEGORY } from './names';
+import { GET_PRODUCT_DETAIL, ALL_PRODUCTS, CREATE_CATEGORY, GET_CATEGORIES } from './names';
 import { 
   GET_PRODUCTS_ENDPOINT,
   CREATE_PRODUCT_ENDPOINT,
@@ -37,6 +37,17 @@ export function createCategory(name) {
         return dispatch({ type: CREATE_CATEGORY, payload: response.data});
     } catch(e) {
       console.log(e);
+    }
+  }
+}
+
+export function getCategories() {
+  return async function(dispatch) {
+    try {
+        const response = await axios.get(`${GET_CATEGORY_ENDPOINT}`);
+        return dispatch({ type: GET_CATEGORIES, payload: response.data });
+    } catch(e) {
+      
     }
   }
 }
