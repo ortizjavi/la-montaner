@@ -1,29 +1,44 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector  } from 'react-redux';
 import { useParams } from 'react-router';
 import { getProductDetail } from '../../actions/types.js';
+import Loading from '../Loading/Loading.js';
 
 export default function ProductDetail() {
   const { id } = useParams();
   const detail = useSelector((state) => state.productDetail);
   const dispatch = useDispatch();
+	const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     dispatch(getProductDetail(id));
-  }, []);
-console.log('components/ProductDetail:', detail,'id:',id)
+    setTimeout(() => {
+			setLoading(false);
+		}, 2000);
+  }, [id, dispatch]);
+  
+  console.log('components/ProductDetail:', detail,'id:',id)
+  
   return (
     <div>
-      <h1>{detail.name}</h1>
-      <p>{detail.category}</p>
-      <p>{detail.img}</p>
-      <p>{detail.price}</p>
-      <p>{detail.stock}</p>
-      <p>{detail.abv}</p>
-      <p>{detail.ibu}</p>
-      <p>{detail.description}</p>
-      <p>{detail.volume}</p>
-      <p>{detail.others}</p>
-    </div>
+      {loading ? (
+        <Loading />
+      ): detail.name ? (
+        <div>
+          <h1>{detail.name}</h1>
+          {detail.img ? <img src={detail.img} alt="not found1" /> : <p>image not found2</p>}
+          <div>
+            <h3>Price</h3>
+            <p> {detail.price} </p>
+
+            <h3>Stock</h3>
+            <p> {detail.stock} </p>
+
+          </div>
+        </div>
+      ) : (
+        <h1>Something went wrong!</h1>
+      )}
+  </div>
   )
 }

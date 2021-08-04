@@ -1,13 +1,11 @@
-const {Router} = require('express');
-const searchP = require('../controllers/searchProducts');
-const router = Router();
-const routerProducts = require('./addProducts')
-const routerCategories = require('./categories')
-const detailsProducts = require('./detailsProducts')
+const { Router } = require('express');
 
-router.use('/admin', routerProducts)
-router.use('/search', searchP)
-router.use('/categories', routerCategories);
-router.use('/products', detailsProducts);
+const generalRoutes = require('./generalRoutes');
+const adminRoutes = require('./adminRoutes');
+
+const router = Router();
+
+router.use('/admin', adminRoutes);
+router.use('/', generalRoutes);
 
 module.exports = router;
