@@ -4,8 +4,8 @@ const routerProducts = require('./addProducts')
 const routerCategories = require('./categories')
 const detailsProducts = require('./detailsProducts');
 
-router.use('/categories', routerCategories)
-router.use('/admin', routerProducts)
-router.use('/products', detailsProducts)
+router.use('/categories', routerCategories);
+router.use('/admin', routerProducts);
+router.use('/products', detailsProducts);
 
 module.exports = router;
