@@ -1,9 +1,5 @@
-<<<<<<< Updated upstream:api/src/controllers/Admin/Category/createCategory.js
 const Category = require('../../../models/Category');
-=======
-const  Category  = require('../models/Category');
-const  GroupedProducts  = require('../models/GroupedProducts');
->>>>>>> Stashed changes:api/src/controllers/categories.js
+
 
 module.exports = {
   createCategory: (req, res, next) => {
