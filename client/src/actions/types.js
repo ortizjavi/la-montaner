@@ -26,10 +26,10 @@ export function getProductDetail(id) {
     }
   }
 }
-export function getAllProducts() {
+export function getAllProducts(query) {
   return async function(dispatch) {
     try {
-        const response = await axios.get(`${GET_PRODUCTS_ENDPOINT}`);
+        const response = await axios.get(`${GET_PRODUCTS_ENDPOINT}?name=${query}`);    
         return dispatch({ type: ALL_PRODUCTS, payload: response.data });
     } catch(e) {
       console.log('actions/types/getAllProducts-Error:',e);

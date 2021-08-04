@@ -7,16 +7,15 @@ import{ Link } from 'react-router-dom';
 export default function Search() {
     const dispatch = useDispatch();
     const allProducts = useSelector( state => state.allProducts)
-    const [state, setState] = useState({product: "",})
+    const [state, setState] = useState({product: ""})
 
     useEffect( () => {
-       console.log('components/Search/state: ',state.product)
-       dispatch(getAllProducts())
+            dispatch(getAllProducts(state.product))
       }, [state])
 
     const handleChange = (event) => {
         event.preventDefault();
-        setState({ ...state, [event.target.name]: event.target.value });
+            setState({ ...state, [event.target.name]: event.target.value });
       }
 
     const handleSubmit = (event) => {
@@ -24,21 +23,37 @@ export default function Search() {
         setState({ ...state, product: ""});
     }
     
-    console.log('components/searchBar: allProducts:', allProducts[0])
+    console.log('Search/getallproduct', allProducts.length)
+    
     return(
         <div>
             
             <form className="form-container" >
               
-                    <label  >Buscar Producto: </label>
-                    <input className='input_search' name='product' placeholder='Birras' value={state.product} onChange={(e) => handleChange(e)} />
-                    <button className={`${!state.product?.length && "disabled"}`} type="button" onClick={(e) => handleSubmit(e)}>Limpiar</button> 
+                    {/* <label  >Buscar Producto: </label>
+                    <input className='input_search' name='product' placeholder='Birras' value={state.product} onChange={(e) => handleChange(e)} /> */}
+                    <label>
+                    
+                <input list="product" multiple  className='input_search' autoComplete='off' placeholder='Buscar Productos' name="product" onChange={handleChange} />  
+                </label>   
+                <datalist  id="product" multiple  >
+                    {
+                        state.product.length >=2 ? allProducts?.map( (t, key) => (
+                            <option key={key} value={t.name} />  
+                        ))
+                            :
+                            <option/>
+
+                    }  
+                </datalist>
+                    {/* <button className={`${!state.product?.length && "disabled"}`} type="button" onClick={(e) => handleSubmit(e)}>Limpiar</button>  */}
             </form>
+            
 
             <section className='allproducts'>
                 {
-                    allProducts?.length && allProducts.filter(item => item.name.includes(state.product)).length ? 
-                    allProducts.filter(item => item.name.includes(state.product)).map( item =>
+                    allProducts.length > 0 ?
+                    allProducts.map( item =>
                         <div className='product_container' key={item._id}>
                             <Link className='link' to={`/home/${item?._id}`}>{item?.name}</Link>
                             <br></br>
