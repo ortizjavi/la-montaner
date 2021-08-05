@@ -21,10 +21,10 @@ export default function CategoryCreator() {
   }
 
   return (
-    <div>
-      <form className="form-container" onSubmit={(e) => handleSubmit(e)} >
+    <div className="category-create-container">
+      <form className="category-form-container" onSubmit={(e) => handleSubmit(e)} >
           <input required className='input-create-category' name='product' placeholder='Categoría' value={state} onChange={(e) => handleChange(e)} />
-          <button type="submit">CREAR</button> 
+          <button className="category-submit" type="submit">CREAR</button> 
       </form>
       <ul className="category-list">
         <li className="category-list-title">Categorías Actuales</li>
