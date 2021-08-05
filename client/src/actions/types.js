@@ -14,7 +14,6 @@ import {
   UPDATE_PRODUCT_ENDPOINT,
   DELETE_PRODUCT_ENDPOINT,
   ADMIN_CATEGORY_ENDPOINT,
-  DELETE_CATEGORY_ENDPOINT
 } from '../constants';
 
 export function getProductDetail(id) {
@@ -63,8 +62,8 @@ export function getCategories() {
 export function deleteCategories(id) {
   return async function(dispatch) {
     try {
-        const response = await axios.delete(`${DELETE_CATEGORY_ENDPOINT}`, {id});
-        return dispatch({ type: DELETE_CATEGORY, payload: response.data });
+        const response = await axios.delete(`${ADMIN_CATEGORY_ENDPOINT}/${id}`);
+        return dispatch({ type: DELETE_CATEGORY, payload: response.data._id });
     } catch(e) {
       
     }
