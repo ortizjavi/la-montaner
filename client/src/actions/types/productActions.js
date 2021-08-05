@@ -17,6 +17,7 @@ export function getProductDetail(id) {
     }
   }
 }
+
 export function getAllProducts(query) {
   return async function(dispatch) {
     try {
