@@ -1,0 +1,38 @@
+.category-bullet{
+    list-style-type: none;
+    font-size: 1.1rem;
+    letter-spacing: 2px;
+    padding: 5px;
+}
+.category-list{
+    text-align: left;
+    width:50%;
+    
+}
+.category-list-title{
+    text-decoration: underline;
+    list-style-type: none;
+    font-size: 1.25rem;
+    text-align:left;
+    letter-spacing: normal;
+    font-weight: bold;
+}
+
+.input-create-category{
+    background-color: rgba(255, 255, 255);
+    border: 2px solid black;
+    border-radius: 30px;
+    color: black;
+    font-size: 16px;
+    height: 30px;
+    padding: 0 20px;
+    width: 30vw;
+    outline: none;
+    margin-left: 10px;
+    margin-top: 10px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 1.2em;
+    background-position-x: 95%;
+
+}

@@ -1,3 +1,4 @@
+import './CategoryCreation.css';
 import React, { useState }  from 'react';
 import { useDispatch, useSelector} from 'react-redux';
 import {createCategory} from '../../actions/types'
@@ -21,16 +22,17 @@ export default function CategoryCreator() {
 
   return (
     <div>
+      <form className="form-container" onSubmit={(e) => handleSubmit(e)} >
+          <input required className='input-create-category' name='product' placeholder='Categoría' value={state} onChange={(e) => handleChange(e)} />
+          <button type="submit">CREAR</button> 
+      </form>
       <ul className="category-list">
+        <li className="category-list-title">Categorías Actuales</li>
+        <br/>
          { categories?.map((category, i) => (
-           <li key={i}> {category.name} </li>
+           <li className="category-bullet" key={i}> {category.name.toUpperCase()}</li> 
            ))}
       </ul>
-      <form className="form-container" >
-        <label  >Crear Categoría: </label>
-          <input className='input_search' name='product' placeholder='Categoría' value={state} onChange={(e) => handleChange(e)} />
-          <button  type="button" onClick={(e) => handleSubmit(e)}>CREAR CATEGORÍA</button> 
-      </form>
     </div>
   )
 };
