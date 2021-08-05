@@ -1,11 +1,13 @@
 import axios from 'axios';
-import { ALL_PRODUCTS, GET_PRODUCT_DETAIL } from '../names';
+import { ADMIN_GET_PRODUCTS, ALL_PRODUCTS, GET_PRODUCT_DETAIL } from '../names';
 import { 
   GET_PRODUCTS_ENDPOINT,
   CREATE_PRODUCT_ENDPOINT,
   UPDATE_PRODUCT_ENDPOINT,
   DELETE_PRODUCT_ENDPOINT,
+  ADMIN_GET_PRODUCTS_ENDPOINT
 } from '../../utils/endpoints';
+
 
 export function getProductDetail(id) {
   return async function(dispatch) {
@@ -28,4 +30,17 @@ export function getAllProducts(query) {
     }
   }
 }
+
+export function getAdminProducts() {
+  return async function(dispatch) {
+    try {
+      const res = await axios.get(`${ADMIN_GET_PRODUCTS_ENDPOINT}`);
+      return dispatch({type: ADMIN_GET_PRODUCTS, payload:res.data})
+    } catch (error) {
+      console.log(error)
+    }
+  }
+}
+
+
 

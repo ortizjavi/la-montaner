@@ -11,6 +11,8 @@ import { getCategories } from "../actions/types/categoryActions.js";
 import { createTheme, ThemeProvider } from "@material-ui/core/styles";
 import green from "@material-ui/core/colors/green";
 import lightGreen from "@material-ui/core/colors/lightGreen";
+import { Dashboard } from "../components/DashboardAdmin/Dashboard";
+
 const theme = createTheme({
   palette: {
     primary: green,
@@ -30,9 +32,10 @@ export default function App() {
         <Route exact path="/" component={Landing} />
         <Route exact path="/home" component={Home} />
         <Switch>
+          <Route exact path="/home/admin" component={Dashboard} />
           <Route
             exact
-            path="/home/productCreation"
+            path="/home/admin/productCreation"
             component={ProductCreation}
           />
           <Route
