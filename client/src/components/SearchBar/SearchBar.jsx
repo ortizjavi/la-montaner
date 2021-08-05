@@ -1,7 +1,7 @@
 import React, { useState, useEffect }  from 'react';
 import { useDispatch, useSelector} from 'react-redux';
 import './SearchBar.css';
-import { getAllProducts } from '../../actions/types';
+import { getAllProducts } from '../../actions/types/productActions.js';
 import{ Link } from 'react-router-dom';
 import Pagination from '../Pagination/Pagination';
 
