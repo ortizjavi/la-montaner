@@ -17,11 +17,6 @@ export default function Search() {
     setState({ ...state, [event.target.name]: event.target.value });
   }
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    setState({ ...state, product: ""});
-  }
-    
   return (
     <div>
       <form className="form-container" >
