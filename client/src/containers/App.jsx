@@ -8,6 +8,7 @@ import ProductDetail from "../components/ProductDetail/ProductDetail";
 import ProductCreation from "../components/ProductCreation/ProductCreation";
 import CategoryCreation from "../components/CategoryCreation/CategoryCreation";
 import { getCategories } from '../actions/types';
+import { Dashboard } from "../components/DashboardAdmin/Dashboard";
 
 
 
@@ -26,7 +27,8 @@ export default function App() {
       <Route exact path="/" component={Landing} />
       <Route exact path="/home" component={Home} />
       <Switch>
-        <Route exact path="/home/productCreation" component={ProductCreation} />
+        <Route exact path="/home/admin" component={Dashboard} />
+        <Route exact path="/home/admin/productCreation" component={ProductCreation} />
         <Route exact path="/admin/categoryCreation" component={CategoryCreation} />
         <Route exact path="/home/:id" component={ProductDetail} />
       </Switch>

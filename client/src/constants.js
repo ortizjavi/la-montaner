@@ -8,6 +8,7 @@ export const CREATE_CATEGORY_ENDPOINT = `${ADMIN_SERVER}/category`;
 
 // endpoints de producto
 export const GET_PRODUCTS_ENDPOINT = `${SERVER}`;
+export const GET_ADMIN_PRODUCTS_ENDPOINT = `${ADMIN_SERVER}/product`;
 export const CREATE_PRODUCT_ENDPOINT = `${ADMIN_SERVER}/product`;
 export const UPDATE_PRODUCT_ENDPOINT = `${ADMIN_SERVER}/product`;
 export const DELETE_PRODUCT_ENDPOINT = `${ADMIN_SERVER}/product`;
