@@ -11,13 +11,6 @@ module.exports = {
         } catch (error) {
           console.log(error);
         }
-    } else {
-      try {
-        const product = await Product.find()
-        return res.json(product);
-      } catch (error) {
-        console.log(error);
-      }
-    }
+    }  
   }
 }
