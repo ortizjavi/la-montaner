@@ -67,7 +67,7 @@
     background: url('https://www.makemytrip.com/travel-guide/media/dg_image/pattaya/Khao-Chee-Chan.jpg') rgba(255,255,255,0.6);
     background-repeat: no-repeat;
     background-size: cover;
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
     margin:0;
 }
