@@ -2,32 +2,37 @@ import React, { useState, useEffect }  from 'react';
 import { useDispatch, useSelector} from 'react-redux';
 import './SearchBar.css';
 import { getAllProducts } from '../../actions/types/productActions.js';
+import { searchProducts } from '../../actions/types/productActions.js';
 import{ Link } from 'react-router-dom';
 import Pagination from '../Pagination/Pagination';
 
 export default function Search() {
-  const dispatch = useDispatch();
-  const allProducts = useSelector( state => state.allProducts)
-  const [state, setState] = useState({product: ""})
-  useEffect(() => {
-    dispatch(getAllProducts(state.product))
-  }, [state])
+    const dispatch = useDispatch();
+    const allProducts = useSelector( state => state.allProducts)
+    const [state, setState] = useState({product: ""})
+
+    useEffect(() => {
+        dispatch(searchProducts(0, state.product))
+        //   dispatch(getAllProducts(state.product))
+    }, [state])
 
     const handleChange = (event) => {
         event.preventDefault();
         setState({ ...state, [event.target.name]: event.target.value });
      }
+     console.log('allProducts', allProducts)
     
     return(
         <div>
             <form className="form-container" >
                 <label >     
-                    <input list="product" multiple value={state.product} className='input_search' autoComplete='off' placeholder='Buscar Productos' name="product" onChange={handleChange} />  
+                    <input list="product" multiple value={state.product} className='input_search' autoComplete='off' placeholder='Buscar Productos' name="product" onChange={handleChange} />
+                    {/* <button onClick={renderCards}>Buscar</button>   */}
                 </label>   
                 <datalist  id="product" multiple  >
                     {
                         state.product.length >=2 ?
-                        allProducts?.map( (t, key) => (
+                        allProducts[1].map( (t, key) => (
                             <option key={key} value={t.name} />  
                         ))
                         :
@@ -35,29 +40,28 @@ export default function Search() {
                     }  
                 </datalist>
             </form>
-
+{/* 
             <section className="items-container">
             {
                 allProducts.length > 0 ?
-                allProducts.length < 9 ?
-                allProducts.map( item =>
+                allProducts[1].length < 9 ?
+                allProducts[1].map( item =>
                     <div className='product_container' key={item._id}>
                         <Link className='link' to={`/home/${item?._id}`}>{item?.name}</Link>
                             <br></br>
                             <Link className='' to={`/home/${item?._id}`}>
                                 <picture className='image_contain'>
                                     <img className="item_image" src={item?.img} placeholder="https://live.staticflickr.com/65535/51357138820_5d67c34fa6_m.jpg" alt="Imagen de Birra" />
-                                    {/* <img className="item_image" src="https://live.staticflickr.com/65535/51357138820_5d67c34fa6_m.jpg"  alt="Imagen de Birra" /> */}
                                 </picture>
                         </Link>
                     </div>
                 )
                 :
-                    <Pagination response={allProducts}/>
+                    <Pagination response={allProducts[0]}/>
                 :
                     <h2> 😢 No hay productos que coincidan</h2>
             }
-            </section>
+            </section> */}
         </div>
     );
 };
