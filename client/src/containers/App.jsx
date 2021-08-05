@@ -7,16 +7,12 @@ import Landing from "../components/Landing/Landing";
 import ProductDetail from "../components/ProductDetail/ProductDetail";
 import ProductCreation from "../components/ProductCreation/ProductCreation";
 import CategoryCreation from "../components/CategoryCreation/CategoryCreation";
-import { getCategories } from "../actions/types";
+import { getCategories } from "../actions/types/categoryActions";
 import { createTheme, ThemeProvider } from "@material-ui/core/styles";
 import green from "@material-ui/core/colors/green";
 import lightGreen from "@material-ui/core/colors/lightGreen";
-<<<<<<< HEAD
-import {Dashboard} from '../components/DashboardAdmin/Dashboard'
+import {Dashboard} from '../components/DashboardAdmin/Dashboard';
 
-
-=======
->>>>>>> fe08e792003c23c3948368f6c8e3411ba264b75e
 const theme = createTheme({
   palette: {
     primary: green,

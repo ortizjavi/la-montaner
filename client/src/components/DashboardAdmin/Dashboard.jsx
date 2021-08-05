@@ -22,7 +22,7 @@ import Switch from '@material-ui/core/Switch';
 import DeleteIcon from '@material-ui/icons/Delete';
 import CreateSharpIcon from '@material-ui/icons/CreateSharp';
 import AddCircleRoundedIcon from '@material-ui/icons/AddCircleRounded';
-import {getAdminProducts} from '../../actions/types';
+import {getAdminProducts} from '../../actions/types/productActions';
 import {Link} from 'react-router-dom';
 
 
