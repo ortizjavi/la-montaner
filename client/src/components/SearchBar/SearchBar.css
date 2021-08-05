@@ -1,5 +1,3 @@
-
-
 .form-container {
     display: flex;
     
@@ -7,7 +5,6 @@
     padding-left: 30px;
     background: rgb(247, 247, 247);
 }
-
 
 .input_search{
     /* border-radius: 2rem;
@@ -23,7 +20,7 @@
     width: 30vw;
     outline: none;
     margin-left: 10px;
-
+    margin-top: 10px;
     background: url('https://live.staticflickr.com/65535/51357603650_45cf92eb85_m.jpg');
     background-repeat: no-repeat;
     background-position: center;
@@ -41,6 +38,7 @@
     background-position-x: 93%;
 
 }
+
 button{
     box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
     background: #333533;
@@ -52,12 +50,14 @@ button{
     margin: 4px;
     height: 2rem;
 }
+
 button:hover{
     background:#f5cb5c ;
     border-radius: 4px;
     color: black;
 
 }
+
 .allproducts{
     display: flex;
     justify-content:space-around;
@@ -94,14 +94,17 @@ button:hover{
     text-align: center;
 
 }
+
 .link:hover{
     background:#f5cb5c;
     border-radius: 4px;
     color: black;
 }
+
 .item_image{
     width: 100%;
 }
+
 img:hover{
     object-fit: cover;
     transform: scale(1,1.01);
