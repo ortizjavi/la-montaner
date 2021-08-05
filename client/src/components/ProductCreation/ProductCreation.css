@@ -1,0 +1,17 @@
+.contentPC{
+    display:grid;
+    margin: 10% auto;
+    border:1px solid #000;
+    width: 70%;
+    border-radius: 15px;
+}
+.contentPC h2{
+    text-align: center;
+}
+.contentPC form{
+    width: 70%;
+    margin: auto
+}
+.contentPC button{
+    margin-left: 90%;
+}

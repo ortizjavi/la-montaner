@@ -6,18 +6,17 @@ import{ Link } from 'react-router-dom';
 import Pagination from './Pagination/Pagination';
 
 export default function Search() {
-    const dispatch = useDispatch();
-    const allProducts = useSelector( state => state.allProducts)
-    const [state, setState] = useState({product: ""})
-
-    useEffect( () => {
-            dispatch(getAllProducts(state.product))
-      }, [state])
+  const dispatch = useDispatch();
+  const allProducts = useSelector( state => state.allProducts)
+  const [state, setState] = useState({product: ""})
+  useEffect(() => {
+    dispatch(getAllProducts(state.product))
+  }, [state])
 
     const handleChange = (event) => {
         event.preventDefault();
-            setState({ ...state, [event.target.name]: event.target.value });
-      }
+        setState({ ...state, [event.target.name]: event.target.value });
+     }
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -69,25 +68,4 @@ export default function Search() {
     );
 };
 
-     {/* {
-                    allProducts.length > 0 ?
-                    allProducts.map( item =>
-                        <div className='product_container' key={item._id}>
-                            <Link className='link' to={`/home/${item?._id}`}>{item?.name}</Link>
-                            <br></br>
-                            <Link className='link' to={`/home/${item?._id}`}>
-                                <picture className='image_contain'>
-                                    <img className="item_image" src={item?.img} placeholder="https://live.staticflickr.com/65535/51357138820_5d67c34fa6_m.jpg" alt="Imagen de Birra" />
-                                     <img className="item_image" src="https://live.staticflickr.com/65535/51357138820_5d67c34fa6_m.jpg"  alt="Imagen de Birra" /> 
-                                </picture>
-                            </Link>
-                        
-                        
-                        </div>
-                    )
-                    :
-                        <h2> 😢 No hay productos que coincidan</h2>
-                     
-                } */}
-                              {/* <label  >Buscar Producto: </label>
-                    <input className='input_search' name='product' placeholder='Birras' value={state.product} onChange={(e) => handleChange(e)} /> */}
+     

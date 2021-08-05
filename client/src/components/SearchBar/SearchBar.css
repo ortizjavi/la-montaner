@@ -25,7 +25,6 @@ font-size_narvar:rgb(130,130,130); */
     background: rgb(247, 247, 247);
 }
 
-
 .input_search{
     background-color: rgba(255, 255, 255);
     border: 2px solid black;
@@ -37,7 +36,7 @@ font-size_narvar:rgb(130,130,130); */
     width: 30vw;
     outline: none;
     margin-left: 10px;
-
+    margin-top: 10px;
     background: url('https://live.staticflickr.com/65535/51357603650_45cf92eb85_m.jpg');
     background-repeat: no-repeat;
     background-position: center;
@@ -55,6 +54,7 @@ font-size_narvar:rgb(130,130,130); */
     background-position-x: 93%;
 
 }
+
 button{
     box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
     background: rgb(43,149,89);
@@ -66,6 +66,7 @@ button{
     margin: 4px;
     height: 2rem;
 }
+
 button:hover{
     background:rgb(43,149,89, 0.6);
     border-radius: 4px;
@@ -105,6 +106,7 @@ button:hover{
     padding-top: 5px;
     text-align: center;
 }
+
 .link:hover{
     background:rgb(43,149,89, 0.6);
     border-radius: 4px;
@@ -114,6 +116,7 @@ button:hover{
 .item_image{
     width: 100%;
 }
+
 img:hover{
     object-fit: cover;
     transform: scale(1,1.01);

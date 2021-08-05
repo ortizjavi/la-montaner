@@ -1,5 +1,12 @@
 import axios from 'axios';
-import { GET_PRODUCT_DETAIL, ALL_PRODUCTS, CREATE_CATEGORY, GET_CATEGORIES } from './names';
+
+import { 
+  GET_PRODUCT_DETAIL,
+  ALL_PRODUCTS,
+  CREATE_CATEGORY,
+  GET_CATEGORIES,
+} from './names';
+
 import { 
   GET_PRODUCTS_ENDPOINT,
   CREATE_PRODUCT_ENDPOINT,

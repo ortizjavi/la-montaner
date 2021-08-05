@@ -1,0 +1,73 @@
+.detail_container{
+    background: rgb(148, 148, 148);
+    border: solid black 2px;
+    border-radius: 5px;
+}
+.detail_title{
+position: absolute;
+font-size: 60px;
+left: 933px;
+top: 130px;
+}
+
+.detail_puntuaction{
+position: absolute;
+width: 285px;
+height: 90px;
+left: 933px;
+top: 280px;
+font-size: 30px;
+}
+
+.detail_price{
+position: absolute;
+width: 389px;
+height: 59px;
+left: 931px;
+top: 411px;
+font-size: 20px;
+}
+
+.detail_description{
+position: absolute;
+width: 387px;
+height: 105px;
+left: 933px;
+top: 490px;
+
+font-family: Montserrat;
+font-style: normal;
+font-weight: 300;
+font-size: 20px;
+line-height: 21px;
+}
+
+.detail_button{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px 57px;
+}
+
+.detail_button button {
+    position: absolute;
+    width: 150px;
+    height: 60px;
+    left: 933px;
+    top: 700px;
+    background: #047e28;
+}
+
+.detail_img img{
+position: absolute;
+width: 590px;
+height: 711px;
+margin-left: 222px;
+top: 148px;
+}
+.detail_img img:hover{
+    object-fit: cover;
+    transform: scale(1,1.01);
+    border: solid 1px #f5cb5c;
+    border-radius: 4px;
+}

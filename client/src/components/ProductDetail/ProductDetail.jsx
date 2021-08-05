@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector  } from 'react-redux';
 import { useParams } from 'react-router';
+import { Link } from 'react-router-dom';
 import { getProductDetail } from '../../actions/types.js';
 import Loading from '../Loading/Loading.js';
+import './ProductDetail.css';
 
 export default function ProductDetail() {
   const { id } = useParams();
@@ -25,15 +27,23 @@ export default function ProductDetail() {
         <Loading />
       ): detail.name ? (
         <div>
-          <h1>{detail.name}</h1>
+          <Link to="/home"> <button>Home</button> </Link>
+          <h1 className="detail_title">{detail.name}</h1>
+          <div className="detail_img">
           {detail.img ? <img src={detail.img} alt="not found1" /> : <p>image not found2</p>}
-          <div>
-            <h3>Price</h3>
-            <p> {detail.price} </p>
-
-            <h3>Stock</h3>
-            <p> {detail.stock} </p>
-
+          </div>
+          <div className="detail_puntuaction">
+          ⭐⭐⭐⭐⭐
+          </div>
+          <div className="detail_price">
+            <h3>Precio ${detail.price} </h3>
+          </div>
+          <div className="detail_button">
+            <button>Agregar al carrito</button>
+          </div>
+          <div className="detail_description">
+          <h3>Descripcion:</h3>
+            <p>{detail.description}</p>
           </div>
         </div>
       ) : (
