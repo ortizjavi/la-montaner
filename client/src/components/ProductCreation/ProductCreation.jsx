@@ -1,18 +1,28 @@
 import axios from "axios";
 import React, { useState, useEffect, forwardRef } from "react";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 import TextField from "@material-ui/core/TextField";
 import { makeStyles } from "@material-ui/core/styles";
+import { styled } from "@material-ui/core/styles";
+import Button from "@material-ui/core/Button";
 import "./ProductCreation.css";
 
 const useStyles = makeStyles((theme) => ({
   root: {
+    alignContent: "center",
     "& .MuiTextField-root": {
+      color: "#4caf50",
       margin: theme.spacing(1),
       width: "100%",
     },
   },
+  button: {
+    color: "#fff",
+  },
 }));
+const Input = styled("input")({
+  display: "none",
+});
 export default function ProductCreation() {
   const [loadingImg, setLoadingImg] = useState(false);
   const [image, setImage] = useState([]);
@@ -91,7 +101,10 @@ export default function ProductCreation() {
 
   return (
     <div className="contentPC">
-      <Link to="/home"> <button>Home</button> </Link>
+      <Link to="/home">
+        {" "}
+        <button>Home</button>{" "}
+      </Link>
       <h2>Crear Nuevo Producto</h2>
       <form className={contentPC.root} onSubmit={handleSubmit}>
         <TextField
@@ -112,13 +125,26 @@ export default function ProductCreation() {
           variant="outlined"
           onChange={handleCategoryChange}
         />
-        <input
-          type="file"
-          placeholder="img"
-          multiple={true}
-          name="img"
-          onChange={uploadImage}
-        />
+        <div>
+          <label htmlFor="contained-button-file" color="primary">
+            <Input
+              accept="image/*"
+              id="contained-button-file"
+              multiple
+              type="file"
+              onChange={uploadImage}
+            />
+            <Button
+              variant="contained"
+              component="span"
+              className={contentPC.button}
+              color="primary"
+            >
+              Sube tus imagenes
+            </Button>
+          </label>
+        </div>
+
         {image &&
           image.map((i) => <img src={i} alt="" style={{ width: "300px" }} />)}
         <TextField
@@ -137,7 +163,7 @@ export default function ProductCreation() {
           label="abv"
           name="abv"
           type="number"
-          min="1"
+          InputProps={{ inputProps: { min: 0, max: 10 } }}
           InputLabelProps={{
             shrink: true,
           }}

@@ -5,7 +5,7 @@ import {
   ALL_PRODUCTS,
   CREATE_CATEGORY,
   GET_CATEGORIES,
-  ADMIN_ALL_PRODUCTS
+  ADMIN_GET_PRODUCTS,
 } from './names';
 
 import { 
@@ -13,9 +13,9 @@ import {
   CREATE_PRODUCT_ENDPOINT,
   UPDATE_PRODUCT_ENDPOINT,
   DELETE_PRODUCT_ENDPOINT,
-  GET_ADMIN_PRODUCTS_ENDPOINT,
   GET_CATEGORY_ENDPOINT,
   CREATE_CATEGORY_ENDPOINT,
+  ADMIN_GET_PRODUCTS_ENDPOINT,
 } from '../constants';
 
 export function getProductDetail(id) {
@@ -61,13 +61,13 @@ export function getCategories() {
   }
 }
 
-export function getAdminProducts (){
-  return async function(dispatch){
+export function getAdminProducts() {
+  return async function(dispatch) {
     try {
-      const res = await axios.get(`${GET_ADMIN_PRODUCTS_ENDPOINT}`);
-      return dispatch({type: ADMIN_ALL_PRODUCTS, payload:res.data})
-    } catch (error) {
-      console.log(error)
+        const response = await axios.get(`${ADMIN_GET_PRODUCTS_ENDPOINT}`);
+        return dispatch({ type: ADMIN_GET_PRODUCTS, payload: response.data });
+    } catch(e) {
+      console.log(e);
     }
   }
 }

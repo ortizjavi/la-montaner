@@ -3,14 +3,14 @@ import {
   ALL_PRODUCTS,
   CREATE_CATEGORY,
   GET_CATEGORIES,
-  ADMIN_ALL_PRODUCTS
+  ADMIN_GET_PRODUCTS
 } from '../actions/names';
 
 const initialState = {
   allProducts: [],
   productDetail: {},
   allCategories: [],
-  adminProducts: []
+  adminProducts:[]
 }
 
 const rootReducer = (state = initialState, action) => {
@@ -19,7 +19,7 @@ const rootReducer = (state = initialState, action) => {
     case ALL_PRODUCTS: return { ...state, allProducts: action.payload };
     case CREATE_CATEGORY: return { ...state, allCategories: state.allCategories.concat(action.payload)};
     case GET_CATEGORIES: return { ...state, allCategories: action.payload };
-    case ADMIN_ALL_PRODUCTS: return {...state, adminProducts:action.payload};
+    case ADMIN_GET_PRODUCTS: return {...state, adminProducts: action.payload}
     default: return state;
   }
 }
