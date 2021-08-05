@@ -1,7 +1,7 @@
 import './CategoryCreation.css';
 import React, { useState }  from 'react';
 import { useDispatch, useSelector} from 'react-redux';
-import {createCategory} from '../../actions/types'
+import { createCategory } from '../../actions/types/categoryActions';
 
 export default function CategoryCreator() {
   const dispatch = useDispatch();

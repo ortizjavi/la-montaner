@@ -1,4 +1,5 @@
 import axios from 'axios';
+<<<<<<< HEAD:client/src/actions/types.js
 
 import { 
   GET_PRODUCT_DETAIL,
@@ -8,15 +9,22 @@ import {
   ADMIN_GET_PRODUCTS,
 } from './names';
 
+=======
+import { ALL_PRODUCTS, GET_PRODUCT_DETAIL } from '../names';
+>>>>>>> fe08e792003c23c3948368f6c8e3411ba264b75e:client/src/actions/types/productActions.js
 import { 
   GET_PRODUCTS_ENDPOINT,
   CREATE_PRODUCT_ENDPOINT,
   UPDATE_PRODUCT_ENDPOINT,
   DELETE_PRODUCT_ENDPOINT,
+<<<<<<< HEAD:client/src/actions/types.js
   GET_CATEGORY_ENDPOINT,
   CREATE_CATEGORY_ENDPOINT,
   ADMIN_GET_PRODUCTS_ENDPOINT,
 } from '../constants';
+=======
+} from '../../utils/endpoints';
+>>>>>>> fe08e792003c23c3948368f6c8e3411ba264b75e:client/src/actions/types/productActions.js
 
 export function getProductDetail(id) {
   return async function(dispatch) {
@@ -28,6 +36,7 @@ export function getProductDetail(id) {
     }
   }
 }
+
 export function getAllProducts(query) {
   return async function(dispatch) {
     try {
@@ -39,6 +48,7 @@ export function getAllProducts(query) {
   }
 }
 
+<<<<<<< HEAD:client/src/actions/types.js
 export function createCategory(name) {
   return async function(dispatch) {
     try {
@@ -71,3 +81,5 @@ export function getAdminProducts() {
     }
   }
 }
+=======
+>>>>>>> fe08e792003c23c3948368f6c8e3411ba264b75e:client/src/actions/types/productActions.js
