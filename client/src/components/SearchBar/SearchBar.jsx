@@ -1,9 +1,9 @@
 import React, { useState, useEffect }  from 'react';
 import { useDispatch, useSelector} from 'react-redux';
 import './SearchBar.css';
-import { getAllProducts } from '../../actions/types/productActions';
-import { Link } from 'react-router-dom';
-import Pagination from './Pagination/Pagination';
+import { getAllProducts } from '../../actions/types/productActions.js';
+import{ Link } from 'react-router-dom';
+import Pagination from '../Pagination/Pagination';
 
 export default function Search() {
   const dispatch = useDispatch();
@@ -17,16 +17,11 @@ export default function Search() {
         event.preventDefault();
         setState({ ...state, [event.target.name]: event.target.value });
      }
-
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        setState({product: ""});
-    }
     
     return(
         <div>
             <form className="form-container" >
-                <label>     
+                <label >     
                     <input list="product" multiple value={state.product} className='input_search' autoComplete='off' placeholder='Buscar Productos' name="product" onChange={handleChange} />  
                 </label>   
                 <datalist  id="product" multiple  >
@@ -39,7 +34,6 @@ export default function Search() {
                             <option/>
                     }  
                 </datalist>
-                <button className={`${!state.product?.length && "disabled"}`} type="button" onClick={(e) => handleSubmit(e)}>Limpiar</button> 
             </form>
 
             <section className="items-container">

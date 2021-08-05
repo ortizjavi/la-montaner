@@ -7,7 +7,7 @@ import Landing from "../components/Landing/Landing";
 import ProductDetail from "../components/ProductDetail/ProductDetail";
 import ProductCreation from "../components/ProductCreation/ProductCreation";
 import CategoryCreation from "../components/CategoryCreation/CategoryCreation";
-import { getCategories } from '../actions/types';
+import { getCategories } from '../actions/types/categoryActions';
 
 
 
