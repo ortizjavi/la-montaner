@@ -21,7 +21,6 @@ export default function CategoryCreator() {
   }
 
   return (
-    <div className="container">
     <div className="category-create-container">
       <form className="category-form-container" onSubmit={(e) => handleSubmit(e)} >
           <input required className='input-create-category' name='product' placeholder='Categoría' value={state} onChange={(e) => handleChange(e)} />
@@ -34,7 +33,6 @@ export default function CategoryCreator() {
            <li className="category-bullet" key={i}> {category.name.toUpperCase()}</li> 
            ))}
       </ul>
-    </div>
     </div>
   )
 };
