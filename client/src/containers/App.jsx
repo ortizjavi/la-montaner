@@ -7,11 +7,11 @@ import Landing from "../components/Landing/Landing";
 import ProductDetail from "../components/ProductDetail/ProductDetail";
 import ProductCreation from "../components/ProductCreation/ProductCreation";
 import CategoryCreation from "../components/CategoryCreation/CategoryCreation";
-import { getCategories } from "../actions/types/categoryActions";
+import { getCategories } from "../actions/types/categoryActions.js";
 import { createTheme, ThemeProvider } from "@material-ui/core/styles";
 import green from "@material-ui/core/colors/green";
 import lightGreen from "@material-ui/core/colors/lightGreen";
-import {Dashboard} from '../components/DashboardAdmin/Dashboard';
+import { Dashboard } from "../components/DashboardAdmin/Dashboard";
 
 const theme = createTheme({
   palette: {
@@ -32,10 +32,7 @@ export default function App() {
         <Route exact path="/" component={Landing} />
         <Route exact path="/home" component={Home} />
         <Switch>
-          <Route
-          exact
-          path="/home/admin"
-          component={Dashboard}/>
+          <Route exact path="/home/admin" component={Dashboard} />
           <Route
             exact
             path="/home/admin/productCreation"

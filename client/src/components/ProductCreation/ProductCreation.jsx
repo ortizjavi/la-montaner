@@ -125,7 +125,7 @@ export default function ProductCreation() {
           variant="outlined"
           onChange={handleCategoryChange}
         />
-        <div>
+        <div className="images">
           <label htmlFor="contained-button-file" color="primary">
             <Input
               accept="image/*"
@@ -143,10 +143,9 @@ export default function ProductCreation() {
               Sube tus imagenes
             </Button>
           </label>
+          {image && image.map((i) => <img src={i} alt="" />)}
         </div>
 
-        {image &&
-          image.map((i) => <img src={i} alt="" style={{ width: "300px" }} />)}
         <TextField
           id="outlined-number"
           label="Precio"

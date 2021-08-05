@@ -62,3 +62,23 @@
     -webkit-box-shadow: 0 3px 5px var(--color-shadow-btn-active) inset;
     box-shadow: 0 3px 5px var(--color-shadow-btn-active) inset;
 }
+
+.images {
+    display: grid;
+    justify-content: center;
+    width: 100%;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: 50px;
+}
+
+.images label {
+    margin: 0 auto;
+    grid-column-start: 1;
+    grid-column-end: 3;
+}
+
+.images img {
+    width: 100%;
+    max-height: 200px;
+    object-fit: cover;
+}
