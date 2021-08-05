@@ -1,15 +1,31 @@
+/* Button: rgb(43,149,89);
+Button: #2B9559;
+
+footer:rgb(2,46,26);
+footer:#2B9559;
+
+h1, search: #CB9D57;
+h1, search: rgb(203,157,87);
+
+logo_search:#42A16B;
+logo_search: rgb(203,157,87);
+
+font-size_narvar: #828282;
+font-size_narvar:rgb(130,130,130); */
+
+:root{
+    --color-button:rgb(43,149,89);
+}
+
 .form-container {
     display: flex;
-    
     align-items: center;
     padding-left: 30px;
+    height: 5vw;
     background: rgb(247, 247, 247);
 }
 
 .input_search{
-    /* border-radius: 2rem;
-    border: solid 1px #333533;
-    height: 30px; */
     background-color: rgba(255, 255, 255);
     border: 2px solid black;
     border-radius: 30px;
@@ -41,7 +57,7 @@
 
 button{
     box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
-    background: #333533;
+    background: rgb(43,149,89);
     font-family: sans-serif;
     color: #fff;
     font-size: 1.1rem;
@@ -52,17 +68,15 @@ button{
 }
 
 button:hover{
-    background:#f5cb5c ;
+    background:rgb(43,149,89, 0.6);
     border-radius: 4px;
-    color: black;
 
 }
 
-.allproducts{
+.items-container{
     display: flex;
-    justify-content:space-around;
     flex-wrap: wrap;
-    margin-top: 40px;
+    justify-content: space-evenly;
 }
 
 .product_container{
@@ -71,7 +85,6 @@ button:hover{
     justify-content: center;
     align-items: center;
     background: rgb(247, 247, 247);
-
     border: solid black 2px;
     border-radius: 5px;
     width: 20vw;
@@ -82,7 +95,7 @@ button:hover{
 .link{
     display: inline-table;
     text-decoration: none;
-    background: #333533;
+    background: var(--color-button);
     font-family: sans-serif;
     color: #fff;
     font-size: 1.1rem;
@@ -92,13 +105,12 @@ button:hover{
     height: 2rem;
     padding-top: 5px;
     text-align: center;
-
 }
 
 .link:hover{
-    background:#f5cb5c;
+    background:rgb(43,149,89, 0.6);
     border-radius: 4px;
-    color: black;
+    font-size: 1.12rem;
 }
 
 .item_image{
@@ -114,10 +126,10 @@ img:hover{
 
 .disabled{
     background: #e8eddf;
-          pointer-events: none;
+    pointer-events: none;
 }
 
 input::-webkit-calendar-picker-indicator {
-        filter:invert(1)
+    filter:invert(1)
     opacity(0.01)
   }
