@@ -2,9 +2,9 @@ const Product = require('../../../models/Product');
 
 module.exports = {
   deleteProduct: async (req, res, next) => {
-    const { productId } = req.params;
+    const { id } = req.params;
     try {
-        await Product.findByIdAndDelete(productId)
+        await Product.findByIdAndDelete(id)
         res.json({
             ok: true
         })

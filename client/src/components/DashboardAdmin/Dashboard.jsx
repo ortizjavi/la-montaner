@@ -22,7 +22,7 @@ import Switch from '@material-ui/core/Switch';
 import DeleteIcon from '@material-ui/icons/Delete';
 import CreateSharpIcon from '@material-ui/icons/CreateSharp';
 import AddCircleRoundedIcon from '@material-ui/icons/AddCircleRounded';
-import {getAdminProducts} from '../../actions/types/productActions';
+import {getAdminProducts, deleteProducts, selectedProducts} from '../../actions/types/productActions';
 import {Link} from 'react-router-dom';
 
 
@@ -58,13 +58,17 @@ const headCells = [
   { id: 'stock', numeric: true, disablePadding: false, label: 'Stock' }
 ];
 
-function EnhancedTableHead(props) {
-    const { classes, onSelectAllClick, order, orderBy, numSelected, rowCount, onRequestSort } = props;
-    const createSortHandler = (property) => (event) => {
-        onRequestSort(event, property);
-    };
 
-    return (
+function EnhancedTableHead(props) {
+  const { classes, onSelectAllClick, order, orderBy, numSelected, rowCount, onRequestSort } = props;
+  const createSortHandler = (property) => (event) => {
+    onRequestSort(event, property);
+  };
+
+  
+    
+  
+  return (
     <TableHead>
       <TableRow>
         <TableCell padding="checkbox">
@@ -102,10 +106,10 @@ function EnhancedTableHead(props) {
 }
 
 EnhancedTableHead.propTypes = {
-    classes: PropTypes.object.isRequired,
-    numSelected: PropTypes.number.isRequired,
-    onRequestSort: PropTypes.func.isRequired,
-    onSelectAllClick: PropTypes.func.isRequired,
+  classes: PropTypes.object.isRequired,
+  numSelected: PropTypes.number.isRequired,
+  onRequestSort: PropTypes.func.isRequired,
+  onSelectAllClick: PropTypes.func.isRequired,
     order: PropTypes.oneOf(['asc', 'desc']).isRequired,
     orderBy: PropTypes.string.isRequired,
     rowCount: PropTypes.number.isRequired,
@@ -133,8 +137,21 @@ const useToolbarStyles = makeStyles((theme) => ({
 }));
 
 const EnhancedTableToolbar = (props) => {
+  const dispatch = useDispatch()
   const classes = useToolbarStyles();
-  const { numSelected } = props;
+  var { numSelected } = props;
+  
+  const seleccionados = useSelector(state => state.selectedAdminProducts)
+  
+  const handleDelete = (e) => {
+    seleccionados.forEach(i => dispatch(deleteProducts(i)))
+    dispatch(getAdminProducts()); 
+    alert("Eliminados");
+  }
+  useEffect(() => {
+    dispatch(getAdminProducts())  
+  }, [dispatch])
+  
 
   return (
     <Toolbar
@@ -142,7 +159,7 @@ const EnhancedTableToolbar = (props) => {
         [classes.highlight]: numSelected > 0,
       })}
     >
-      {numSelected > 0 ? (
+      {seleccionados.length > 0 ? (
         <Typography className={classes.title} color="inherit" variant="subtitle1" component="div">
           {numSelected} seleccionados
         </Typography>
@@ -152,10 +169,10 @@ const EnhancedTableToolbar = (props) => {
         </Typography>
       )}
 
-      {numSelected > 0 ? (
+      {seleccionados.length > 0 ? (
           <div>
         <Tooltip title="Delete">
-          <IconButton aria-label="delete">
+          <IconButton aria-label="delete" onClick={handleDelete}>
             <DeleteIcon />
           </IconButton>
         </Tooltip>
@@ -217,9 +234,9 @@ export const Dashboard = () => {
       
       const productos = useSelector(state => state.adminProducts)
       
-          useEffect(() => {
-            dispatch(getAdminProducts())  
-          }, [dispatch])
+      useEffect(() => {
+        dispatch(getAdminProducts())  
+      }, [dispatch])
       
       productos.forEach(p => {
           let fila = createData(
@@ -250,6 +267,15 @@ export const Dashboard = () => {
     }
     setSelected([]);
   };
+
+  
+
+  useEffect(() => {
+    dispatch(selectedProducts(selected))
+    console.log(selected)
+  }, [dispatch, selected])
+
+  
 
   const handleClick = (event, _id) => {
     const selectedIndex = selected.indexOf(_id);

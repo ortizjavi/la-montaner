@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { ADMIN_GET_PRODUCTS, ALL_PRODUCTS, GET_PRODUCT_DETAIL } from '../names';
+import { ADMIN_GET_PRODUCTS, ALL_PRODUCTS, GET_PRODUCT_DETAIL, ADMIN_SELECT_PRODUCTS, ADMIN_SELECT_DELETED_PRODUCTS } from '../names';
 import { 
   GET_PRODUCTS_ENDPOINT,
   CREATE_PRODUCT_ENDPOINT,
@@ -20,11 +20,12 @@ export function getProductDetail(id) {
   }
 }
 
+
 export function getAllProducts(query) {
   return async function(dispatch) {
     try {
-        const response = await axios.get(`${GET_PRODUCTS_ENDPOINT}?name=${query}`);    
-        return dispatch({ type: ALL_PRODUCTS, payload: response.data });
+      const response = await axios.get(`${GET_PRODUCTS_ENDPOINT}?name=${query}`);    
+      return dispatch({ type: ALL_PRODUCTS, payload: response.data });
     } catch(e) {
       console.log('actions/types/getAllProducts-Error:',e);
     }
@@ -42,5 +43,36 @@ export function getAdminProducts() {
   }
 }
 
+export function selectedProducts(id){
+  return async function(dispatch) {
+    try {
+      return dispatch({type: ADMIN_SELECT_PRODUCTS, payload:id})
+    } catch (error) {
+      console.log(error)
+    }
+  }
+}
+
+export function deleteProducts(id){
+  return async function(dispatch) {
+    try {
+      await axios.delete(`${ADMIN_GET_PRODUCTS_ENDPOINT}/${id}`);
+      return dispatch({type: ADMIN_SELECT_DELETED_PRODUCTS})
+    } catch (error) {
+      console.log(error)
+    }
+  }
+}
+
+export function updateProducts(id){
+  return async function(dispatch) {
+    try {
+      await axios.put(`${ADMIN_GET_PRODUCTS_ENDPOINT}/${id}`);
+      return dispatch({type: ADMIN_SELECT_PRODUCTS, payload:id})
+    } catch (error) {
+      console.log(error)
+    }
+  }
+}
 
 
