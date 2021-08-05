@@ -1,8 +1,8 @@
 import React, { useState, useEffect }  from 'react';
 import { useDispatch, useSelector} from 'react-redux';
 import './SearchBar.css';
-import { getAllProducts } from '../../actions/types';
-import{ Link } from 'react-router-dom';
+import { getAllProducts } from '../../actions/types/productActions';
+import { Link } from 'react-router-dom';
 import Pagination from './Pagination/Pagination';
 
 export default function Search() {
