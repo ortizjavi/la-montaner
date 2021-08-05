@@ -14,7 +14,7 @@ import {
   DELETE_PRODUCT_ENDPOINT,
   GET_CATEGORY_ENDPOINT,
   CREATE_CATEGORY_ENDPOINT,
-} from '../constants';
+} from '../utils/endpoints';
 
 export function getProductDetail(id) {
   return async function(dispatch) {
