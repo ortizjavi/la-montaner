@@ -1,11 +1,17 @@
 import axios from "axios";
 import React, { useState, useEffect, forwardRef } from "react";
 import { Link } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import Input from "@material-ui/core/Input";
 import TextField from "@material-ui/core/TextField";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles, useTheme } from "@material-ui/core/styles";
 import { styled } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
+import MenuItem from "@material-ui/core/MenuItem";
+import FormControl from "@material-ui/core/FormControl";
+import Select from "@material-ui/core/Select";
+import InputLabel from "@material-ui/core/InputLabel";
+import Chip from "@material-ui/core/Chip";
 import "./ProductCreation.css";
 
 
@@ -21,39 +27,59 @@ const useStyles = makeStyles((theme) => ({
   button: {
     color: "#fff",
   },
+  formControl: {
+    margin: theme.spacing(1),
+    width: "100%",
+  },
+  chips: {
+    display: "flex",
+    flexWrap: "wrap",
+  },
+  chip: {
+    margin: 2,
+  },
+  images: {
+    display: "none",
+  },
 }));
-const Input = styled("input")({
-  display: "none",
-});
-
-
-
+const MenuProps = {
+  PaperProps: {
+    style: {
+      width: 250,
+    },
+  },
+};
 export default function ProductCreation() {
 
   const [loadingImg, setLoadingImg] = useState(false);
+  const theme = useTheme();
   const [image, setImage] = useState([]);
-  const categories = useSelector((state) => state.allCategories);
+  const allCategories = useSelector((state) => state.allCategories);
   const [createProduct, setCreateProduct] = useState({
     name: "",
-      category: {
-        name: "",
-        _id: "",
-      },
-      img: [],
-      price: 0,
-      stock: 0,
-      abv: 0,
-      ibu: 0,
-      description: "",
-      volumen: 0,
-      others: "",
+    categories: [],
+    img: [],
+    price: 0,
+    stock: 0,
+    abv: 0,
+    ibu: 0,
+    description: "",
+    volumen: 0,
+    others: "",
   });
+  function getStyles(name, personName, theme) {
+    return {
+      fontWeight:
+        personName.indexOf(name) === -1
+          ? theme.typography.fontWeightRegular
+          : theme.typography.fontWeightMedium,
+    };
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       /* await setCreateProduct({ ...createProduct, img: image }); */
-      console.log(createProduct);
       let post = await axios.post("http://localhost:3001/admin/product", {
         ...createProduct,
         img: image,
@@ -73,8 +99,9 @@ export default function ProductCreation() {
   const handleCategoryChange = (e) => {
     setCreateProduct({
       ...createProduct,
-      category: categories.find((cat) => cat.name === e.target.value),
+      categories: e.target.value,
     });
+    console.log(createProduct.categories);
   };
   const contentPC = useStyles();
 
@@ -94,15 +121,10 @@ export default function ProductCreation() {
         .then((res) => {
           setImage((imgs) => [...imgs, res.data.secure_url]);
           console.log(res.data.secure_url);
+          console.log(image);
         })
         .catch((err) => console.log(err));
     }
-    console.log(image);
-    /* files.map((i) => {
-    }); */
-    setLoadingImg(true);
-
-    setLoadingImg(false);
   };
 
   return (
@@ -113,6 +135,44 @@ export default function ProductCreation() {
       </Link>
       <h2>Crear Nuevo Producto</h2>
       <form className={contentPC.root} onSubmit={handleSubmit}>
+        {/* <TextField
+          id="outlined-helperText"
+          label="Categoria"
+          name="category"
+          defaultValue=""
+          helperText="*"
+          variant="outlined"
+          onChange={handleCategoryChange}
+        /> */}
+        <FormControl className={contentPC.formControl}>
+          <InputLabel id="demo-mutiple-chip-label">Categorias</InputLabel>
+          <Select
+            labelId="demo-mutiple-chip-label"
+            id="demo-mutiple-chip"
+            multiple
+            value={createProduct.categories}
+            onChange={handleCategoryChange}
+            input={<Input id="select-multiple-chip" />}
+            renderValue={(selected) => (
+              <div className={contentPC.chips}>
+                {selected.map((value) => (
+                  <Chip key={value} label={value} className={contentPC.chip} />
+                ))}
+              </div>
+            )}
+            MenuProps={MenuProps}
+          >
+            {allCategories.map((i) => (
+              <MenuItem
+                key={i._id}
+                value={i.name}
+                tyle={getStyles(i.name, createProduct.categories, theme)}
+              >
+                {i.name}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
         <TextField
           id="outlined-helperText"
           name="name"
@@ -122,21 +182,13 @@ export default function ProductCreation() {
           variant="outlined"
           onChange={handleInputChange}
         />
-        <TextField
-          id="outlined-helperText"
-          label="Categoria"
-          name="category"
-          defaultValue=""
-          helperText="*"
-          variant="outlined"
-          onChange={handleCategoryChange}
-        />
         <div className="images">
           <label htmlFor="contained-button-file" color="primary">
             <Input
+              className={contentPC.images}
               accept="image/*"
               id="contained-button-file"
-              multiple
+              inputProps={{ multiple: true }}
               type="file"
               onChange={uploadImage}
             />
@@ -149,7 +201,7 @@ export default function ProductCreation() {
               Sube tus imagenes
             </Button>
           </label>
-          {image && image.map((i) => <img src={i} alt="" />)}
+          {image && image.map((i) => <img key={i} src={i} alt="" />)}
         </div>
 
         <TextField

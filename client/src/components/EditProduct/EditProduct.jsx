@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 const Input = styled("input")({
-  display: "none",
+  /* display: "none", */
 });
 export default function EditProduct(props) {
 

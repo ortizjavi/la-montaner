@@ -154,20 +154,16 @@ const EnhancedTableToolbar = (props) => {
 
   const seleccionados = useSelector((state) => state.selectedAdminProducts);
 
-  const handleDelete = (e) => {
+  const handleDelete = () => {
     seleccionados.forEach((i) => dispatch(deleteProducts(i)));
     console.log(seleccionados)
     dispatch(getAdminProducts());
-    console.log(seleccionados)
     alert("Eliminados");
   };
-  const handleEdit = () => {
-    const seleccionado = seleccionados[0];
-  };
+
   useEffect(() => {
     dispatch(getAdminProducts());
-    console.log(seleccionados)
-  }, [dispatch, seleccionados]);
+  }, [ dispatch, seleccionados]);
 
   return (
     <Toolbar
@@ -262,10 +258,17 @@ export const Dashboard = () => {
   const rows = [];
 
   const productos = useSelector((state) => state.adminProducts);
+  const seleccionados = useSelector(state => state.selectedAdminProducts)
 
   useEffect(() => {
     dispatch(getAdminProducts());
   }, [dispatch]);
+
+  /* useEffect(() => {
+    if(!seleccionados.length){
+      
+    }
+  }, [seleccionados]) */
 
   productos.forEach((p) => {
     let fila = createData(p._id, p.name, p.price, p.stock);
@@ -296,8 +299,11 @@ export const Dashboard = () => {
   };
 
   useEffect(() => {
-    dispatch(selectedProducts(selected));
-    console.log(selected);
+    if(selected.length){
+      dispatch(selectedProducts(selected));
+    }else{
+      setSelected([])
+    } 
   }, [dispatch, selected]);
 
   const handleClick = (event, _id) => {
@@ -316,7 +322,7 @@ export const Dashboard = () => {
         selected.slice(selectedIndex + 1)
       );
     }
-
+    console.log(newSelected)
     setSelected(newSelected);
   };
 
