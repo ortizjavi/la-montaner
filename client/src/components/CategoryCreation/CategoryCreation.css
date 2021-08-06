@@ -39,18 +39,19 @@
 
 .category-create-container {
     display: flex;
-    flex-direction: row-reverse;
+    flex-direction: row;
     width: 40vw;
     box-shadow: 0 0 5px 0px rgb(0 0 0 / 25%), 10px 5px 5px 0px rgb(0 0 0 / 10%);
     margin: 20px;
     /*background: url('https://www.makemytrip.com/travel-guide/media/dg_image/pattaya/Khao-Chee-Chan.jpg') rgba(255,255,255,0.6);
     background-repeat: no-repeat;
     background-size: cover;*/
+    justify-content: flex-end;
 }
 
 .category-form-container {
-    align-self: flex-end;
-    margin: 0px 10px 10px 0px;
+    align-self: flex-start;
+    margin: 0px -120px 10px 0px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -65,8 +66,19 @@
 
 .delete-btn{
     cursor: pointer;
+    width:5%;
+    height:15%;
+    font-size: 0.7em;
+    margin-left:90%;
+    margin-top:-10%;
+    background-color:rgb(192, 43, 43);
     display: flex;
-    flex-direction:row-reverse;
-    align-items: center;
-    align-self: right;
+    flex-direction:column;
+    align-items: center; 
+   
+}
+.item_image_form{
+    max-height:23vh;
+    margin-top:75%;
+    margin-left:-70%;
 }
