@@ -12,11 +12,22 @@ import { createTheme, ThemeProvider } from "@material-ui/core/styles";
 import green from "@material-ui/core/colors/green";
 import lightGreen from "@material-ui/core/colors/lightGreen";
 import { Dashboard } from "../components/DashboardAdmin/Dashboard";
+import EditProduct from "../components/EditProduct/EditProduct";
 
 const theme = createTheme({
   palette: {
-    primary: green,
-    secondary: lightGreen,
+    primary: {
+      light: "#388e3c",
+      main: "#047e28",
+      dark: "#33691e",
+      contrastText: "#fff",
+    },
+    secondary: {
+      light: "#008037",
+      main: "#022E1A",
+      dark: "#1b5e20",
+      contrastText: "#000",
+    },
   },
 });
 
@@ -38,6 +49,8 @@ export default function App() {
             path="/home/admin/productCreation"
             component={ProductCreation}
           />
+          <Route exact path="/home/admin/editProduct" component={EditProduct} />
+
           <Route
             exact
             path="/admin/categoryCreation"

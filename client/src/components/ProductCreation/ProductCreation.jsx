@@ -150,6 +150,7 @@ export default function ProductCreation() {
           id="outlined-number"
           label="Precio"
           name="price"
+          InputProps={{ inputProps: { min: 0, max: 999999999 } }}
           type="number"
           InputLabelProps={{
             shrink: true,
@@ -162,7 +163,7 @@ export default function ProductCreation() {
           label="abv"
           name="abv"
           type="number"
-          InputProps={{ inputProps: { min: 0, max: 10 } }}
+          InputProps={{ inputProps: { min: 0, max: 100 } }}
           InputLabelProps={{
             shrink: true,
           }}
@@ -174,6 +175,7 @@ export default function ProductCreation() {
           label="ibu"
           type="number"
           name="ibu"
+          InputProps={{ inputProps: { min: 0, max: 100 } }}
           min="1"
           InputLabelProps={{
             shrink: true,
@@ -185,6 +187,7 @@ export default function ProductCreation() {
           id="outlined-number"
           label="Stock"
           type="number"
+          InputProps={{ inputProps: { min: 0, max: 999999999 } }}
           name="stock"
           min="1"
           InputLabelProps={{
@@ -208,6 +211,7 @@ export default function ProductCreation() {
           id="outlined-number"
           label="Volumen"
           type="number"
+          InputProps={{ inputProps: { min: 0, max: 99999 } }}
           name="volumen"
           min="1"
           pattern="^[0-9]+"
@@ -227,7 +231,9 @@ export default function ProductCreation() {
           variant="outlined"
           onChange={handleInputChange}
         />
-        <button type="submit">Crear</button>
+        <Button variant="contained" color="primary" type="submit">
+          Crear
+        </Button>
       </form>
     </div>
   );

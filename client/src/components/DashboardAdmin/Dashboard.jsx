@@ -1,49 +1,52 @@
-import React, {useState, useEffect} from 'react';
-import {useDispatch ,useSelector} from 'react-redux';
-import PropTypes from 'prop-types';
-import clsx from 'clsx';
-import { lighten, makeStyles } from '@material-ui/core/styles';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TablePagination from '@material-ui/core/TablePagination';
-import TableRow from '@material-ui/core/TableRow';
-import TableSortLabel from '@material-ui/core/TableSortLabel';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import Paper from '@material-ui/core/Paper';
-import Checkbox from '@material-ui/core/Checkbox';
-import IconButton from '@material-ui/core/IconButton';
-import Tooltip from '@material-ui/core/Tooltip';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Switch from '@material-ui/core/Switch';
-import DeleteIcon from '@material-ui/icons/Delete';
-import CreateSharpIcon from '@material-ui/icons/CreateSharp';
-import AddCircleRoundedIcon from '@material-ui/icons/AddCircleRounded';
-import {getAdminProducts, deleteProducts, selectedProducts} from '../../actions/types/productActions';
-import {Link} from 'react-router-dom';
-
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import PropTypes from "prop-types";
+import clsx from "clsx";
+import { lighten, makeStyles } from "@material-ui/core/styles";
+import Table from "@material-ui/core/Table";
+import TableBody from "@material-ui/core/TableBody";
+import TableCell from "@material-ui/core/TableCell";
+import TableContainer from "@material-ui/core/TableContainer";
+import TableHead from "@material-ui/core/TableHead";
+import TablePagination from "@material-ui/core/TablePagination";
+import TableRow from "@material-ui/core/TableRow";
+import TableSortLabel from "@material-ui/core/TableSortLabel";
+import Toolbar from "@material-ui/core/Toolbar";
+import Typography from "@material-ui/core/Typography";
+import Paper from "@material-ui/core/Paper";
+import Checkbox from "@material-ui/core/Checkbox";
+import IconButton from "@material-ui/core/IconButton";
+import Tooltip from "@material-ui/core/Tooltip";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Switch from "@material-ui/core/Switch";
+import DeleteIcon from "@material-ui/icons/Delete";
+import CreateSharpIcon from "@material-ui/icons/CreateSharp";
+import AddCircleRoundedIcon from "@material-ui/icons/AddCircleRounded";
+import {
+  getAdminProducts,
+  deleteProducts,
+  selectedProducts,
+} from "../../actions/types/productActions";
+import { Link } from "react-router-dom";
 
 function descendingComparator(a, b, orderBy) {
-    if (b[orderBy] < a[orderBy]) {
+  if (b[orderBy] < a[orderBy]) {
     return -1;
   }
   if (b[orderBy] > a[orderBy]) {
-      return 1;
+    return 1;
   }
   return 0;
 }
 
 function getComparator(order, orderBy) {
-  return order === 'desc'
-  ? (a, b) => descendingComparator(a, b, orderBy)
+  return order === "desc"
+    ? (a, b) => descendingComparator(a, b, orderBy)
     : (a, b) => -descendingComparator(a, b, orderBy);
 }
 
 function stableSort(array, comparator) {
-    const stabilizedThis = array.map((el, index) => [el, index]);
+  const stabilizedThis = array.map((el, index) => [el, index]);
   stabilizedThis.sort((a, b) => {
     const order = comparator(a[0], b[0]);
     if (order !== 0) return order;
@@ -53,21 +56,30 @@ function stableSort(array, comparator) {
 }
 
 const headCells = [
-    { id: 'name', numeric: false, disablePadding: true, label: 'Nombre de Producto' },
-  { id: 'price', numeric: true, disablePadding: false, label: 'Precio' },
-  { id: 'stock', numeric: true, disablePadding: false, label: 'Stock' }
+  {
+    id: "name",
+    numeric: false,
+    disablePadding: true,
+    label: "Nombre de Producto",
+  },
+  { id: "price", numeric: true, disablePadding: false, label: "Precio" },
+  { id: "stock", numeric: true, disablePadding: false, label: "Stock" },
 ];
 
-
 function EnhancedTableHead(props) {
-  const { classes, onSelectAllClick, order, orderBy, numSelected, rowCount, onRequestSort } = props;
+  const {
+    classes,
+    onSelectAllClick,
+    order,
+    orderBy,
+    numSelected,
+    rowCount,
+    onRequestSort,
+  } = props;
   const createSortHandler = (property) => (event) => {
     onRequestSort(event, property);
   };
 
-  
-    
-  
   return (
     <TableHead>
       <TableRow>
@@ -76,25 +88,25 @@ function EnhancedTableHead(props) {
             indeterminate={numSelected > 0 && numSelected < rowCount}
             checked={rowCount > 0 && numSelected === rowCount}
             onChange={onSelectAllClick}
-            inputProps={{ 'aria-label': 'select all desserts' }}
-            />
+            inputProps={{ "aria-label": "select all desserts" }}
+          />
         </TableCell>
         {headCells.map((headCell) => (
           <TableCell
             key={headCell.id}
-            align={headCell.numeric ? 'right' : 'left'}
-            padding={headCell.disablePadding ? 'none' : 'normal'}
+            align={headCell.numeric ? "right" : "left"}
+            padding={headCell.disablePadding ? "none" : "normal"}
             sortDirection={orderBy === headCell.id ? order : false}
-            >
+          >
             <TableSortLabel
               active={orderBy === headCell.id}
-              direction={orderBy === headCell.id ? order : 'asc'}
+              direction={orderBy === headCell.id ? order : "asc"}
               onClick={createSortHandler(headCell.id)}
-              >
+            >
               {headCell.label}
               {orderBy === headCell.id ? (
-                  <span className={classes.visuallyHidden}>
-                  {order === 'desc' ? 'sorted descending' : 'sorted ascending'}
+                <span className={classes.visuallyHidden}>
+                  {order === "desc" ? "sorted descending" : "sorted ascending"}
                 </span>
               ) : null}
             </TableSortLabel>
@@ -110,48 +122,49 @@ EnhancedTableHead.propTypes = {
   numSelected: PropTypes.number.isRequired,
   onRequestSort: PropTypes.func.isRequired,
   onSelectAllClick: PropTypes.func.isRequired,
-    order: PropTypes.oneOf(['asc', 'desc']).isRequired,
-    orderBy: PropTypes.string.isRequired,
-    rowCount: PropTypes.number.isRequired,
+  order: PropTypes.oneOf(["asc", "desc"]).isRequired,
+  orderBy: PropTypes.string.isRequired,
+  rowCount: PropTypes.number.isRequired,
 };
 
 const useToolbarStyles = makeStyles((theme) => ({
-    root: {
-        paddingLeft: theme.spacing(2),
-        paddingRight: theme.spacing(1),
-    },
-    highlight:
-    theme.palette.type === 'light'
-    ? {
-        color: theme.palette.secondary.main,
-        backgroundColor: lighten(theme.palette.secondary.light, 0.85),
-    }
-    
+  root: {
+    paddingLeft: theme.spacing(2),
+    paddingRight: theme.spacing(1),
+  },
+  highlight:
+    theme.palette.type === "light"
+      ? {
+          color: theme.palette.secondary.main,
+          backgroundColor: lighten(theme.palette.secondary.light, 0.85),
+        }
       : {
           color: theme.palette.text.primary,
           backgroundColor: theme.palette.secondary.dark,
         },
   title: {
-    flex: '1 1 100%',
+    flex: "1 1 100%",
   },
 }));
 
 const EnhancedTableToolbar = (props) => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const classes = useToolbarStyles();
   var { numSelected } = props;
-  
-  const seleccionados = useSelector(state => state.selectedAdminProducts)
-  
+
+  const seleccionados = useSelector((state) => state.selectedAdminProducts);
+
   const handleDelete = (e) => {
-    seleccionados.forEach(i => dispatch(deleteProducts(i)))
-    dispatch(getAdminProducts()); 
+    seleccionados.forEach((i) => dispatch(deleteProducts(i)));
+    dispatch(getAdminProducts());
     alert("Eliminados");
-  }
+  };
+  const handleEdit = () => {
+    const seleccionado = seleccionados[0];
+  };
   useEffect(() => {
-    dispatch(getAdminProducts())  
-  }, [dispatch])
-  
+    dispatch(getAdminProducts());
+  }, [dispatch]);
 
   return (
     <Toolbar
@@ -160,33 +173,45 @@ const EnhancedTableToolbar = (props) => {
       })}
     >
       {seleccionados.length > 0 ? (
-        <Typography className={classes.title} color="inherit" variant="subtitle1" component="div">
+        <Typography
+          className={classes.title}
+          color="inherit"
+          variant="subtitle1"
+          component="div"
+        >
           {numSelected} seleccionados
         </Typography>
       ) : (
-        <Typography className={classes.title} variant="h6" id="tableTitle" component="div">
+        <Typography
+          className={classes.title}
+          variant="h6"
+          id="tableTitle"
+          component="div"
+        >
           Productos - La Montañes
         </Typography>
       )}
 
       {seleccionados.length > 0 ? (
-          <div>
-        <Tooltip title="Delete">
-          <IconButton aria-label="delete" onClick={handleDelete}>
-            <DeleteIcon />
-          </IconButton>
-        </Tooltip>
-        <Tooltip title="Delete">
-          <IconButton aria-label="delete">
-            <CreateSharpIcon />
-          </IconButton>
-        </Tooltip>
+        <div>
+          <Tooltip title="Delete">
+            <IconButton aria-label="delete" onClick={handleDelete}>
+              <DeleteIcon />
+            </IconButton>
+          </Tooltip>
+          {seleccionados.length === 1 && (
+            <Tooltip title="Delete">
+              <IconButton aria-label="delete">
+                <CreateSharpIcon />
+              </IconButton>
+            </Tooltip>
+          )}
         </div>
       ) : (
         <Tooltip title="Crear Producto">
           <IconButton aria-label="filter list">
             <Link to="/home/admin/productCreation">
-            <AddCircleRoundedIcon />
+              <AddCircleRoundedIcon />
             </Link>
           </IconButton>
         </Tooltip>
@@ -201,10 +226,10 @@ EnhancedTableToolbar.propTypes = {
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    width: '100%',
+    width: "100%",
   },
   paper: {
-    width: '100%',
+    width: "100%",
     marginBottom: theme.spacing(2),
   },
   table: {
@@ -212,50 +237,47 @@ const useStyles = makeStyles((theme) => ({
   },
   visuallyHidden: {
     border: 0,
-    clip: 'rect(0 0 0 0)',
+    clip: "rect(0 0 0 0)",
     height: 1,
     margin: -1,
-    overflow: 'hidden',
+    overflow: "hidden",
     padding: 0,
-    position: 'absolute',
+    position: "absolute",
     top: 20,
     width: 1,
   },
 }));
 
 export const Dashboard = () => {
+  const dispatch = useDispatch();
+  function createData(_id, name, price, stock) {
+    return { _id, name, price, stock };
+  }
 
-    const dispatch = useDispatch()
-    function createData(_id, name, price, stock) {
-        return { _id, name, price, stock };
-      }
-      
-      const rows = [];
-      
-      const productos = useSelector(state => state.adminProducts)
-      
-      useEffect(() => {
-        dispatch(getAdminProducts())  
-      }, [dispatch])
-      
-      productos.forEach(p => {
-          let fila = createData(
-              p._id, p.name, p.price, p.stock
-          )
-          rows.push(fila)
-      })
+  const rows = [];
+
+  const productos = useSelector((state) => state.adminProducts);
+
+  useEffect(() => {
+    dispatch(getAdminProducts());
+  }, [dispatch]);
+
+  productos.forEach((p) => {
+    let fila = createData(p._id, p.name, p.price, p.stock);
+    rows.push(fila);
+  });
 
   const classes = useStyles();
-  const [order, setOrder] = useState('asc');
-  const [orderBy, setOrderBy] = useState('calories');
+  const [order, setOrder] = useState("asc");
+  const [orderBy, setOrderBy] = useState("calories");
   const [selected, setSelected] = useState([]);
   const [page, setPage] = useState(0);
   const [dense, setDense] = useState(false);
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
   const handleRequestSort = (event, property) => {
-    const isAsc = orderBy === property && order === 'asc';
-    setOrder(isAsc ? 'desc' : 'asc');
+    const isAsc = orderBy === property && order === "asc";
+    setOrder(isAsc ? "desc" : "asc");
     setOrderBy(property);
   };
 
@@ -268,14 +290,10 @@ export const Dashboard = () => {
     setSelected([]);
   };
 
-  
-
   useEffect(() => {
-    dispatch(selectedProducts(selected))
-    console.log(selected)
-  }, [dispatch, selected])
-
-  
+    dispatch(selectedProducts(selected));
+    console.log(selected);
+  }, [dispatch, selected]);
 
   const handleClick = (event, _id) => {
     const selectedIndex = selected.indexOf(_id);
@@ -290,7 +308,7 @@ export const Dashboard = () => {
     } else if (selectedIndex > 0) {
       newSelected = newSelected.concat(
         selected.slice(0, selectedIndex),
-        selected.slice(selectedIndex + 1),
+        selected.slice(selectedIndex + 1)
       );
     }
 
@@ -312,7 +330,8 @@ export const Dashboard = () => {
 
   const isSelected = (_id) => selected.indexOf(_id) !== -1;
 
-  const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
+  const emptyRows =
+    rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
 
   return (
     <div className={classes.root}>
@@ -322,7 +341,7 @@ export const Dashboard = () => {
           <Table
             className={classes.table}
             aria-labelledby="tableTitle"
-            size={dense ? 'small' : 'medium'}
+            size={dense ? "small" : "medium"}
             aria-label="enhanced table"
           >
             <EnhancedTableHead
@@ -354,10 +373,15 @@ export const Dashboard = () => {
                       <TableCell padding="checkbox">
                         <Checkbox
                           checked={isItemSelected}
-                          inputProps={{ 'aria-labelledby': labelId }}
+                          inputProps={{ "aria-labelledby": labelId }}
                         />
                       </TableCell>
-                      <TableCell component="th" id={labelId} scope="row" padding="none">
+                      <TableCell
+                        component="th"
+                        id={labelId}
+                        scope="row"
+                        padding="none"
+                      >
                         {row.name}
                       </TableCell>
                       <TableCell align="right">{row.price}</TableCell>
@@ -389,4 +413,4 @@ export const Dashboard = () => {
       />
     </div>
   );
-}
+};
