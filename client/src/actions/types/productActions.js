@@ -1,5 +1,9 @@
 import axios from 'axios';
+<<<<<<< HEAD
 import { ADMIN_GET_PRODUCTS, ALL_PRODUCTS, GET_PRODUCT_DETAIL, ADMIN_SELECT_PRODUCTS, ADMIN_SELECT_DELETED_PRODUCTS } from '../names';
+=======
+import { ALL_PRODUCTS, GET_PRODUCT_DETAIL, CURENT_PAGE,SEARCH_STATE } from '../names';
+>>>>>>> origin/develop
 import { 
   GET_PRODUCTS_ENDPOINT,
   CREATE_PRODUCT_ENDPOINT,
@@ -20,6 +24,7 @@ export function getProductDetail(id) {
   }
 }
 
+<<<<<<< HEAD
 
 export function getAllProducts(query) {
   return async function(dispatch) {
@@ -28,10 +33,31 @@ export function getAllProducts(query) {
       return dispatch({ type: ALL_PRODUCTS, payload: response.data });
     } catch(e) {
       console.log('actions/types/getAllProducts-Error:',e);
+=======
+export function searchProducts(pageNumber, name) {
+  if(name){
+    return async function(dispatch) {
+      try {
+          const response = await axios.get(`${GET_PRODUCTS_ENDPOINT}?pageNumber=${pageNumber}&name=${name}`);   
+          return dispatch({ type: ALL_PRODUCTS, payload: response.data });
+      } catch(e) {
+        console.log('actions/types/productActions/searchProducts-Error:',e);
+      }
+    }
+  } else {
+    return async function(dispatch) {
+      try {
+          const response = await axios.get(`${GET_PRODUCTS_ENDPOINT}?pageNumber=${pageNumber}`);    
+          return dispatch({ type: ALL_PRODUCTS, payload: response.data });
+      } catch(e) {
+        console.log('actions/types/productActions/searchProducts-Error:',e);
+      }
+>>>>>>> origin/develop
     }
   }
 }
 
+<<<<<<< HEAD
 export function getAdminProducts() {
   return async function(dispatch) {
     try {
@@ -76,3 +102,11 @@ export function updateProducts(id){
 }
 
 
+=======
+export function currentPageAction(page){
+  return ({type:CURENT_PAGE, payload:page})
+}
+export function searchProductsAction (state){
+  return ({type:SEARCH_STATE, payload:state})
+}
+>>>>>>> origin/develop
