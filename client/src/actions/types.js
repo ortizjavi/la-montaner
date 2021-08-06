@@ -59,11 +59,15 @@ export function getCategories() {
   }
 }
 
-export function deleteCategories(id) {
+export function deleteCategories(category) {
   return async function(dispatch) {
     try {
-        const response = await axios.delete(`${ADMIN_CATEGORY_ENDPOINT}/${id}`); 
-        return dispatch({ type: DELETE_CATEGORY, payload: response.data.id });
+        const response = await axios({
+           method: 'delete',
+           url: `${ADMIN_CATEGORY_ENDPOINT}`,
+           data: category
+        });
+        return dispatch({ type: DELETE_CATEGORY, payload: response.data._id });
     } catch(e) {
       
     }

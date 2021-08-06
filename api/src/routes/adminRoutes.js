@@ -11,9 +11,9 @@ const { deleteProduct } = require('../controllers/Admin/Products/deleteProduct')
 
 router.get('/category', getCategories);
 router.post('/category', createCategory);
-router.delete('/category/:id', deleteCategories);
+router.delete('/category', deleteCategories);
 router.put('/product', updateProduct);
 router.post('/product', createProduct);
-router.delete('/product', deleteProduct);
+router.delete('/product/:id', deleteProduct);
 
 module.exports=router;

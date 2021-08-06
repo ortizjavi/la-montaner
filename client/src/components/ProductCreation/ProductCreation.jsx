@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useState, useEffect, forwardRef } from "react";
+import { useSelector } from "react-redux";
 import { Link } from 'react-router-dom';
 import TextField from "@material-ui/core/TextField";
 import { makeStyles } from "@material-ui/core/styles";
@@ -16,11 +17,12 @@ const useStyles = makeStyles((theme) => ({
 export default function ProductCreation() {
   const [loadingImg, setLoadingImg] = useState(false);
   const [image, setImage] = useState([]);
-
+  const categories = useSelector(state => state.allCategories);
   const [createProduct, setCreateProduct] = useState({
     name: "",
     category: {
       name: "",
+      _id: ""
     },
     img: [],
     price: 0,
@@ -55,9 +57,7 @@ export default function ProductCreation() {
   const handleCategoryChange = (e) => {
     setCreateProduct({
       ...createProduct,
-      category: {
-        name: e.target.value,
-      },
+      category: categories.find(cat => cat.name === e.target.value),
     });
   };
   const contentPC = useStyles();

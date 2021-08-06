@@ -23,10 +23,10 @@ export default function CategoryCreator() {
     alert('Categoría creada con éxito')
     setState("");
   }
-
-  const handleClick = (id, name) => {
-    dispatch(deleteCategories(id))
-    alert(`Categoría ${name.toUpperCase()} eliminada`)
+  
+  const handleClick = (category) => {
+    dispatch(deleteCategories(category))
+    alert(`Categoría ${category.name.toUpperCase()} eliminada`)
   };
 
 
@@ -48,10 +48,9 @@ export default function CategoryCreator() {
 
         {categories?.map((category, i) => (
           <li className="category-bullet" key={i}> {category.name.toUpperCase()}
-            {fixedCategories.includes(category.name.toLowerCase()) ? null :
-              <button className="delete-btn" onClick={() => handleClick(category._id, category.name)}>X</button>}
+          {fixedCategories.includes(category.name.toLowerCase())? null :
+          <button className="delete-btn" onClick={() => handleClick(category)}>X</button>}
           </li>
-
         ))}
       </ul>
     </div>
