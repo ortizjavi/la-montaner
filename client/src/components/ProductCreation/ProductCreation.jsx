@@ -1,11 +1,11 @@
 import axios from "axios";
-import React, { useState, useEffect, forwardRef } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import Input from "@material-ui/core/Input";
 import TextField from "@material-ui/core/TextField";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
-import { styled } from "@material-ui/core/styles";
+import AddIcon from "@material-ui/icons/Add";
 import Button from "@material-ui/core/Button";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
   },
   formControl: {
     margin: theme.spacing(1),
-    width: "100%",
+    width: "85%",
   },
   chips: {
     display: "flex",
@@ -40,6 +40,10 @@ const useStyles = makeStyles((theme) => ({
   images: {
     display: "none",
   },
+  add: {
+    width: "auto",
+    alignSelf: "center",
+  },
 }));
 const MenuProps = {
   PaperProps: {
@@ -49,9 +53,10 @@ const MenuProps = {
   },
 };
 export default function ProductCreation() {
-  const [loadingImg, setLoadingImg] = useState(false);
+  const [addCategory, setAddCategory] = useState(false);
   const theme = useTheme();
   const [image, setImage] = useState([]);
+  const [newCategory, setNewCategory] = useState([]);
   const allCategories = useSelector((state) => state.allCategories);
   const [createProduct, setCreateProduct] = useState({
     name: "",
@@ -73,9 +78,12 @@ export default function ProductCreation() {
           : theme.typography.fontWeightMedium,
     };
   }
-
+  const addNewCategory = async () => {
+    setAddCategory(!addCategory);
+  };
   const handleSubmit = async (e) => {
     e.preventDefault();
+    createProduct.categories.push(newCategory);
     try {
       /* await setCreateProduct({ ...createProduct, img: image }); */
       let post = await axios.post("http://localhost:3001/admin/product", {
@@ -93,6 +101,9 @@ export default function ProductCreation() {
       ...createProduct,
       [e.target.name]: e.target.value,
     });
+  };
+  const handleInputCategory = (e) => {
+    setNewCategory(e.target.value);
   };
   const handleCategoryChange = (e) => {
     setCreateProduct({
@@ -132,45 +143,7 @@ export default function ProductCreation() {
         <button>Home</button>{" "}
       </Link>
       <h2>Crear Nuevo Producto</h2>
-      <form className={contentPC.root} onSubmit={handleSubmit}>
-        {/* <TextField
-          id="outlined-helperText"
-          label="Categoria"
-          name="category"
-          defaultValue=""
-          helperText="*"
-          variant="outlined"
-          onChange={handleCategoryChange}
-        /> */}
-        <FormControl className={contentPC.formControl}>
-          <InputLabel id="demo-mutiple-chip-label">Categorias</InputLabel>
-          <Select
-            labelId="demo-mutiple-chip-label"
-            id="demo-mutiple-chip"
-            multiple
-            value={createProduct.categories}
-            onChange={handleCategoryChange}
-            input={<Input id="select-multiple-chip" />}
-            renderValue={(selected) => (
-              <div className={contentPC.chips}>
-                {selected.map((value) => (
-                  <Chip key={value} label={value} className={contentPC.chip} />
-                ))}
-              </div>
-            )}
-            MenuProps={MenuProps}
-          >
-            {allCategories.map((i) => (
-              <MenuItem
-                key={i._id}
-                value={i.name}
-                tyle={getStyles(i.name, createProduct.categories, theme)}
-              >
-                {i.name}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
+      <form className={contentPC.root}>
         <TextField
           id="outlined-helperText"
           name="name"
@@ -180,6 +153,60 @@ export default function ProductCreation() {
           variant="outlined"
           onChange={handleInputChange}
         />
+        <div className="categoryContent">
+          <FormControl className={contentPC.formControl}>
+            <InputLabel id="demo-mutiple-chip-label">Categorias</InputLabel>
+            <Select
+              labelId="demo-mutiple-chip-label"
+              id="demo-mutiple-chip"
+              multiple
+              value={createProduct.categories}
+              onChange={handleCategoryChange}
+              input={<Input id="select-multiple-chip" />}
+              renderValue={(selected) => (
+                <div className={contentPC.chips}>
+                  {selected.map((value) => (
+                    <Chip
+                      key={value}
+                      label={value}
+                      className={contentPC.chip}
+                    />
+                  ))}
+                </div>
+              )}
+              MenuProps={MenuProps}
+            >
+              {allCategories.map((i) => (
+                <MenuItem
+                  key={i.name}
+                  value={i.name}
+                  tyle={getStyles(i.name, createProduct.categories, theme)}
+                >
+                  {i.name}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+          <Button
+            variant="contained"
+            color="secondary"
+            className={contentPC.add}
+            onClick={addNewCategory}
+          >
+            <AddIcon />
+          </Button>
+          {addCategory && (
+            <TextField
+              id="outlined-helperText"
+              label="Categoria"
+              name="category"
+              defaultValue=""
+              helperText="*"
+              variant="outlined"
+              onChange={handleInputCategory}
+            />
+          )}
+        </div>
         <div className="images">
           <label htmlFor="contained-button-file" color="primary">
             <Input
@@ -287,7 +314,12 @@ export default function ProductCreation() {
           variant="outlined"
           onChange={handleInputChange}
         />
-        <Button variant="contained" color="primary" type="submit">
+        <Button
+          variant="contained"
+          color="primary"
+          type="submit"
+          onClick={handleSubmit}
+        >
           Crear
         </Button>
       </form>

@@ -22,10 +22,6 @@
     margin: auto
 }
 
-.contentPC button {
-    margin-left: 90%;
-}
-
 .inputFile {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -91,23 +87,8 @@
     flex-wrap: wrap;
 }
 
-.main div {
-    height: 100%;
-    width: 20%;
-}
-
-.color1 {
-    background-color: #022E1A
-}
-
-.color2 {
-    background-color: #C88E34
-}
-
-.color3 {
-    background-color: #008037
-}
-
-.color4 {
-    background-color: #022E1A
+.categoryContent {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
 }
