@@ -4,12 +4,16 @@ import {
   CREATE_CATEGORY,
   GET_CATEGORIES,
   DELETE_CATEGORY,
+  CURENT_PAGE,
+  SEARCH_STATE,
 } from '../actions/names';
 
 const initialState = {
   allProducts: [],
   productDetail: {},
   allCategories: [],
+  currentPage: 1,
+  searchProdustsState:'',
 }
 
 const rootReducer = (state = initialState, action) => {
@@ -27,6 +31,8 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         allCategories: state.allCategories.filter((category) => category._id !== action.payload)
       };
+    case CURENT_PAGE: return { ...state, currentPage: action.payload };
+    case SEARCH_STATE: return { ...state, searchProdustsState: action.payload };
     default: return state;
   }
 }

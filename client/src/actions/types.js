@@ -5,7 +5,6 @@ import {
   ALL_PRODUCTS,
   CREATE_CATEGORY,
   GET_CATEGORIES,
-  DELETE_CATEGORY
 } from './names';
 
 import { 
@@ -53,21 +52,6 @@ export function getCategories() {
     try {
         const response = await axios.get(`${ADMIN_CATEGORY_ENDPOINT}`);
         return dispatch({ type: GET_CATEGORIES, payload: response.data });
-    } catch(e) {
-      
-    }
-  }
-}
-
-export function deleteCategories(category) {
-  return async function(dispatch) {
-    try {
-        const response = await axios({
-           method: 'delete',
-           url: `${ADMIN_CATEGORY_ENDPOINT}`,
-           data: category
-        });
-        return dispatch({ type: DELETE_CATEGORY, payload: response.data._id });
     } catch(e) {
       
     }

@@ -2,22 +2,35 @@ const Product = require('../../models/Product');
 
 module.exports = {
   searchProducts: async (req, res, next) => {
-    if(req.query.name){
+    let ProductsPerPage = 8;
+    let pageNumber = req.query.pageNumber;
+    let page = Math.max(0, pageNumber);
+    if (req.query.name){ //si se hace una búsqueda, se manda name por query
       try {
           const name = req.query.name
           const regex = new RegExp(`${name}+`, 'i') // i for case insensitive
           const product = await Product.find({name: {$regex: regex}})
-          return res.json(product);
+                                        .limit(ProductsPerPage)
+                                        .skip(ProductsPerPage * page)
+                                        .sort({
+                                            name: 'asc'
+                                        })
+          const productLength = (await Product.find({name: {$regex: regex}})).length
+          return res.json([productLength, product]);
         } catch (error) {
           console.log(error);
         }
-    } else {
-      try {
-        const product = await Product.find()
-        return res.json(product);
-      } catch (error) {
-        console.log(error);
-      }
+    } else { //si no se hace búsqueda se mandan todos los productos(dependiendo ProductsPerPage)
+      const product = await Product.find()
+                                        .limit(ProductsPerPage)
+                                        .skip(ProductsPerPage * page)
+                                        .sort({
+                                            name: 'asc'
+                                        })
+      const productLength = await (await Product.find()).length                      
+          return res.json([productLength, product]);
     }
+      
   }
 }
+
