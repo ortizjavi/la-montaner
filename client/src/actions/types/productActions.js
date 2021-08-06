@@ -68,7 +68,7 @@ export function deleteProducts(id) {
   return async function (dispatch) {
     try {
       await axios.delete(`${ADMIN_GET_PRODUCTS_ENDPOINT}/${id}`);
-      return dispatch({ type: ADMIN_SELECT_DELETED_PRODUCTS });
+      return dispatch({ type: ADMIN_SELECT_DELETED_PRODUCTS, payload: [] });
     } catch (error) {
       console.log(error);
     }

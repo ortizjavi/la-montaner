@@ -154,14 +154,12 @@ const EnhancedTableToolbar = (props) => {
 
   const seleccionados = useSelector((state) => state.selectedAdminProducts);
 
-  const handleDelete = (e) => {
+  const handleDelete = () => {
     seleccionados.forEach((i) => dispatch(deleteProducts(i)));
     dispatch(getAdminProducts());
     alert("Eliminados");
   };
-  const handleEdit = () => {
-    const seleccionado = seleccionados[0];
-  };
+
   useEffect(() => {
     dispatch(getAdminProducts());
   }, [dispatch]);
@@ -179,7 +177,7 @@ const EnhancedTableToolbar = (props) => {
           variant="subtitle1"
           component="div"
         >
-          {numSelected} seleccionados
+          {seleccionados.length} seleccionados
         </Typography>
       ) : (
         <Typography

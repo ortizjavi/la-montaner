@@ -133,6 +133,15 @@ export default function ProductCreation() {
       </Link>
       <h2>Crear Nuevo Producto</h2>
       <form className={contentPC.root} onSubmit={handleSubmit}>
+        {/* <TextField
+          id="outlined-helperText"
+          label="Categoria"
+          name="category"
+          defaultValue=""
+          helperText="*"
+          variant="outlined"
+          onChange={handleCategoryChange}
+        /> */}
         <FormControl className={contentPC.formControl}>
           <InputLabel id="demo-mutiple-chip-label">Categorias</InputLabel>
           <Select
@@ -171,15 +180,6 @@ export default function ProductCreation() {
           variant="outlined"
           onChange={handleInputChange}
         />
-        {/* <TextField
-          id="outlined-helperText"
-          label="Categoria"
-          name="category"
-          defaultValue=""
-          helperText="*"
-          variant="outlined"
-          onChange={handleCategoryChange}
-        /> */}
         <div className="images">
           <label htmlFor="contained-button-file" color="primary">
             <Input

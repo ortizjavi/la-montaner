@@ -37,9 +37,10 @@ const rootReducer = (state = initialState, action) => {
     case ADMIN_GET_PRODUCTS:
       return { ...state, adminProducts: action.payload };
     case ADMIN_SELECT_PRODUCTS:
+      console.log(action.payload);
       return { ...state, selectedAdminProducts: action.payload };
     case ADMIN_SELECT_DELETED_PRODUCTS:
-      return { ...state, selectedAdminProducts: [] };
+      return { ...state };
     case CURENT_PAGE:
       return { ...state, currentPage: action.payload };
     case SEARCH_STATE:
