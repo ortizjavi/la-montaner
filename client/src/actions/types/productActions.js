@@ -7,6 +7,7 @@ import {
   CURENT_PAGE,
   SEARCH_STATE,
   ADMIN_SELECT_DELETED_PRODUCTS,
+  ADMIN_CLEAR_SELECT
 } from "../names";
 import {
   GET_PRODUCTS_ENDPOINT,
@@ -64,27 +65,38 @@ export function selectedProducts(id) {
   };
 }
 
+/* export function clearSelectedProducts() {
+  return async function (dispatch) {
+    try {
+      return dispatch({ type: ADMIN_CLEAR_SELECT });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+} */
+
 export function deleteProducts(id) {
   return async function (dispatch) {
     try {
       await axios.delete(`${ADMIN_GET_PRODUCTS_ENDPOINT}/${id}`);
-      return dispatch({ type: ADMIN_SELECT_DELETED_PRODUCTS });
+      return dispatch({ type: ADMIN_SELECT_DELETED_PRODUCTS});
     } catch (error) {
       console.log(error);
     }
   };
 }
 
-export function updateProducts(id) {
-  return async function (dispatch) {
+export function updateProducts(id, producto) {
+  return async function () {
     try {
-      await axios.put(`${ADMIN_GET_PRODUCTS_ENDPOINT}/${id}`);
-      return dispatch({ type: ADMIN_SELECT_PRODUCTS, payload: id });
+      const resp = await axios.put(`${ADMIN_GET_PRODUCTS_ENDPOINT}/${id}`, producto);
+      return resp.json();
     } catch (error) {
       console.log(error);
     }
   };
 }
+
 export function searchProducts(pageNumber, name) {
   if (name) {
     return async function (dispatch) {

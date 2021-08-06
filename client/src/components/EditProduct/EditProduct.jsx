@@ -1,11 +1,13 @@
 import axios from "axios";
 import React, { useState, useEffect, forwardRef } from "react";
-import { Link } from "react-router-dom";
+import {useDispatch, useSelector} from 'react-redux';
+import { Link, useParams } from "react-router-dom";
 import TextField from "@material-ui/core/TextField";
 import { makeStyles } from "@material-ui/core/styles";
 import { styled } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import "./EditProduct.css";
+import {getProductDetail, updateProducts} from '../../actions/types/productActions'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -24,47 +26,48 @@ const Input = styled("input")({
   display: "none",
 });
 export default function EditProduct(props) {
+
+  const dispatch = useDispatch();
+  const { id } = useParams();
+  console.log(id)
+  const productoId = useSelector((state) => state.productDetail);
+  useEffect(() => {
+    dispatch(getProductDetail(id));
+  }, [id, dispatch])
+
   const [loadingImg, setLoadingImg] = useState(false);
   const [image, setImage] = useState([]);
 
-  const [createProduct, setCreateProduct] = useState({
-    name: "",
+  const [updateProduct, setUpdateProduct] = useState({
+    name: '',
     category: {
       name: "",
     },
     img: [],
-    price: 0,
-    stock: 0,
-    abv: 0,
-    ibu: 0,
+    price: '',
+    stock: '',
+    abv: '',
+    ibu: '',
     description: "",
     volumen: 0,
     others: "",
   });
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      /* await setCreateProduct({ ...createProduct, img: image }); */
-      console.log(createProduct);
-      let post = await axios.post("http://localhost:3001/admin/product", {
-        ...createProduct,
-        img: image,
-      });
-      console.log(post);
-      /* setTimeout(() => (document.location.href = HOME), 1000); */
-    } catch (err) {
-      console.log(err);
-    }
+    dispatch(updateProducts(id, {
+      ...updateProduct,
+      img:image
+    })) 
   };
   const handleInputChange = (e) => {
-    setCreateProduct({
-      ...createProduct,
+    setUpdateProduct({
+      ...updateProduct,
       [e.target.name]: e.target.value,
     });
   };
   const handleCategoryChange = (e) => {
-    setCreateProduct({
-      ...createProduct,
+    setUpdateProduct({
+      ...updateProduct,
       category: {
         name: e.target.value,
       },
@@ -109,9 +112,9 @@ export default function EditProduct(props) {
       <form className={contentPC.root} onSubmit={handleSubmit}>
         <TextField
           id="outlined-helperText"
-          name="name"
-          label="Nombre"
-          defaultValue=""
+          name="name" 
+          placeholder="Nombre"
+          defaultValue={productoId.name}
           helperText="*"
           variant="outlined"
           onChange={handleInputChange}
@@ -149,6 +152,7 @@ export default function EditProduct(props) {
         <TextField
           id="outlined-number"
           label="Precio"
+          defaultValue= {productoId.price}
           name="price"
           InputProps={{ inputProps: { min: 0, max: 999999999 } }}
           type="number"
@@ -161,6 +165,7 @@ export default function EditProduct(props) {
         <TextField
           id="outlined-number"
           label="abv"
+          value= {productoId.abv}
           name="abv"
           type="number"
           InputProps={{ inputProps: { min: 0, max: 100 } }}
@@ -173,6 +178,7 @@ export default function EditProduct(props) {
         <TextField
           id="outlined-number"
           label="ibu"
+          value= {productoId.ibu}
           type="number"
           name="ibu"
           InputProps={{ inputProps: { min: 0, max: 100 } }}
@@ -186,6 +192,7 @@ export default function EditProduct(props) {
         <TextField
           id="outlined-number"
           label="Stock"
+          value= {productoId.stock}
           type="number"
           InputProps={{ inputProps: { min: 0, max: 999999999 } }}
           name="stock"
@@ -199,8 +206,10 @@ export default function EditProduct(props) {
         <TextField
           width={300}
           id="outlined-multiline-static"
-          label="Descripcion"
+          //label="Descripcion"
           name="description"
+          placeholder="Descripcion"
+          value= {productoId.description}
           multiline
           rows={4}
           defaultValue=""
@@ -211,6 +220,7 @@ export default function EditProduct(props) {
           id="outlined-number"
           label="Volumen"
           type="number"
+          value= {productoId.volumen}
           InputProps={{ inputProps: { min: 0, max: 99999 } }}
           name="volumen"
           min="1"
@@ -223,8 +233,9 @@ export default function EditProduct(props) {
         />
         <TextField
           id="outlined-multiline-static"
-          label="Otros"
+          placeholder="Otros"
           name="others"
+          value= {productoId.others}
           multiline
           rows={2}
           defaultValue=""

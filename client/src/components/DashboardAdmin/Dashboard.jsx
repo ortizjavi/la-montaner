@@ -156,7 +156,9 @@ const EnhancedTableToolbar = (props) => {
 
   const handleDelete = (e) => {
     seleccionados.forEach((i) => dispatch(deleteProducts(i)));
+    console.log(seleccionados)
     dispatch(getAdminProducts());
+    console.log(seleccionados)
     alert("Eliminados");
   };
   const handleEdit = () => {
@@ -164,12 +166,13 @@ const EnhancedTableToolbar = (props) => {
   };
   useEffect(() => {
     dispatch(getAdminProducts());
-  }, [dispatch]);
+    console.log(seleccionados)
+  }, [dispatch, seleccionados]);
 
   return (
     <Toolbar
       className={clsx(classes.root, {
-        [classes.highlight]: numSelected > 0,
+        [classes.highlight]: seleccionados.length > 0,
       })}
     >
       {seleccionados.length > 0 ? (
@@ -179,7 +182,7 @@ const EnhancedTableToolbar = (props) => {
           variant="subtitle1"
           component="div"
         >
-          {numSelected} seleccionados
+          {seleccionados.length} seleccionados
         </Typography>
       ) : (
         <Typography
@@ -202,7 +205,9 @@ const EnhancedTableToolbar = (props) => {
           {seleccionados.length === 1 && (
             <Tooltip title="Delete">
               <IconButton aria-label="delete">
+                <Link to={"/home/admin/editProduct/"+seleccionados}>
                 <CreateSharpIcon />
+                </Link>
               </IconButton>
             </Tooltip>
           )}

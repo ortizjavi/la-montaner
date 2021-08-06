@@ -1,12 +1,13 @@
 import axios from "axios";
 import React, { useState, useEffect, forwardRef } from "react";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import TextField from "@material-ui/core/TextField";
 import { makeStyles } from "@material-ui/core/styles";
 import { styled } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import "./ProductCreation.css";
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -24,25 +25,30 @@ const useStyles = makeStyles((theme) => ({
 const Input = styled("input")({
   display: "none",
 });
+
+
+
 export default function ProductCreation() {
+
   const [loadingImg, setLoadingImg] = useState(false);
   const [image, setImage] = useState([]);
   const categories = useSelector((state) => state.allCategories);
   const [createProduct, setCreateProduct] = useState({
     name: "",
-    category: {
-      name: "",
-      _id: "",
-    },
-    img: [],
-    price: 0,
-    stock: 0,
-    abv: 0,
-    ibu: 0,
-    description: "",
-    volumen: 0,
-    others: "",
+      category: {
+        name: "",
+        _id: "",
+      },
+      img: [],
+      price: 0,
+      stock: 0,
+      abv: 0,
+      ibu: 0,
+      description: "",
+      volumen: 0,
+      others: "",
   });
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {

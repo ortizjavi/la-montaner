@@ -9,6 +9,8 @@ import {
   DELETE_CATEGORY,
   CURENT_PAGE,
   SEARCH_STATE,
+  ADMIN_CLEAR_SELECT,
+  ADMIN_SELECT_UPDATED_PRODUCTS,
 } from "../actions/names";
 
 const initialState = {
@@ -19,6 +21,7 @@ const initialState = {
   selectedAdminProducts: [],
   currentPage: 1,
   searchProdustsState: "",
+  activeProduct: null
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -40,6 +43,8 @@ const rootReducer = (state = initialState, action) => {
       return { ...state, selectedAdminProducts: action.payload };
     case ADMIN_SELECT_DELETED_PRODUCTS:
       return { ...state, selectedAdminProducts: [] };
+    /* case ADMIN_CLEAR_SELECT:
+      return { ...state, selectedAdminProducts: [] }; */
     case CURENT_PAGE:
       return { ...state, currentPage: action.payload };
     case SEARCH_STATE:
