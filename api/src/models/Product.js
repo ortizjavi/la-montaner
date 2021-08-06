@@ -7,8 +7,8 @@ const ProductSchema = Schema({
     required: true,
   },
 
-  category: {
-    type: schema,
+  categories: {
+    type: [schema],
     required: true,
   },
 
