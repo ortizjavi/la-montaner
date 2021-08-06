@@ -3,12 +3,16 @@ import {
   ALL_PRODUCTS,
   CREATE_CATEGORY,
   GET_CATEGORIES,
+  CURENT_PAGE,
+  SEARCH_STATE,
 } from '../actions/names';
 
 const initialState = {
   allProducts: [],
   productDetail: {},
   allCategories: [],
+  currentPage: 1,
+  searchProdustsState:'',
 }
 
 const rootReducer = (state = initialState, action) => {
@@ -17,6 +21,8 @@ const rootReducer = (state = initialState, action) => {
     case ALL_PRODUCTS: return { ...state, allProducts: action.payload };
     case CREATE_CATEGORY: return { ...state, allCategories: state.allCategories.concat(action.payload)};
     case GET_CATEGORIES: return { ...state, allCategories: action.payload };
+    case CURENT_PAGE: return { ...state, currentPage: action.payload };
+    case SEARCH_STATE: return { ...state, searchProdustsState: action.payload };
     default: return state;
   }
 }
