@@ -10,7 +10,7 @@ module.exports = {
   		Product.find({  categories:   { id }})
   		.then(response => {
   			console.log(response);
-  			res.json({ _id : "123" });
+  			res.json({ id });
     	});
 
   		/*Product.updateMany({  categories:   { _id: id }}, { $pull : {categories: {_id: id}} })
