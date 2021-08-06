@@ -62,8 +62,8 @@ export function getCategories() {
 export function deleteCategories(id) {
   return async function(dispatch) {
     try {
-        const response = await axios.delete(`${ADMIN_CATEGORY_ENDPOINT}/${id}`);
-        return dispatch({ type: DELETE_CATEGORY, payload: response.data._id });
+        const response = await axios.delete(`${ADMIN_CATEGORY_ENDPOINT}/${id}`); 
+        return dispatch({ type: DELETE_CATEGORY, payload: response.data.id });
     } catch(e) {
       
     }
