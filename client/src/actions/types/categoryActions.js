@@ -1,5 +1,11 @@
 import axios from 'axios';
-import { GET_CATEGORIES, CREATE_CATEGORY, DELETE_CATEGORY } from '../names';
+
+import { 
+  GET_CATEGORIES,
+  CREATE_CATEGORY,
+  DELETE_CATEGORY,
+} from '../names';
+
 import { ADMIN_CATEGORY_ENDPOINT } from '../../utils/endpoints';
 
 export function createCategory(name) {
