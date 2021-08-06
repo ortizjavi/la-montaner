@@ -54,6 +54,7 @@ const MenuProps = {
 };
 export default function ProductCreation() {
   const [addCategory, setAddCategory] = useState(false);
+  const [loadingImg, setLoadingImg] = useState(false);
   const theme = useTheme();
   const [image, setImage] = useState([]);
   const [newCategory, setNewCategory] = useState([]);
