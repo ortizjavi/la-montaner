@@ -1,66 +1,59 @@
 import React, { useEffect }  from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import{ Link } from 'react-router-dom';
 import {  searchProducts,  } from '../../actions/types/productActions.js';
-import Pagination from '../Pagination/Pagination';
-import SearchBar from '../SearchBar/SearchBar';
-import Loading from '../Loading/Loading.js';
+import NavBar from '../Navbar/NavBar';
+import Sidebar from '../Sidebar/Sidebar';
+import ShowProducts from '../ShowProducts/ShowProducts';
+import './Home.css';
+
 
 export default function Home() {
   const dispatch = useDispatch();
   const currentPage = useSelector(state => state.currentPage)
   const searchState = useSelector(state => state.searchProdustsState)
   const allProducts = useSelector( state => state.allProducts)
-
+  var sort = 'asc'
+  
   useEffect(()=>{
-    dispatch(searchProducts(currentPage-1))
+    dispatch(searchProducts(sort, currentPage-1))
   },[])
 
   useEffect(() => {
     if(allProducts[0]>8){ 
-      dispatch(searchProducts(currentPage-1));
+      dispatch(searchProducts(sort, currentPage-1));
     }
   }, [currentPage])
   
   useEffect(() =>{
     if(searchState.length>=2){
-      dispatch(searchProducts(0, searchState))
+      dispatch(searchProducts(sort, 0, searchState))
     }else{
-    dispatch(searchProducts(currentPage-1))
+    dispatch(searchProducts(sort, currentPage-1))
     }
   },[searchState])
+
+  const handleSort = (param) => {
+    sort = param;
+    dispatch(searchProducts(sort, currentPage-1))
+  }
+  console.log(allProducts[1])
   
   return (
     <div>
-      <SearchBar/>
-      <div>
-          <section className="items-container">
-            {
-                allProducts.length ?
-                allProducts[0]>0 ?
-                <>
-                  {
-                    allProducts[1].map( item =>
-                      <div className='product_container' key={item._id}>
-                          <Link className='link' to={`/home/${item?._id}`}>{item?.name}</Link>
-                              <br></br>
-                              <Link className='' to={`/home/${item?._id}`}>
-                                  <picture className='image_contain'>
-                                      <img className="item_image" src={item?.img} alt="Imagen de Birra" />
-                                  </picture>
-                          </Link>
-                      </div>
-                    )
-                  } 
-                  {allProducts[0] > 8 && <Pagination response={allProducts[0]}/>}
-                </>
-                :
-                    <h2> 😢 No hay productos que coincidan</h2>
-                :
-                  <Loading/>
-            }
-          </section>
+      <NavBar/>
+      <div className='Home-filter'>
+        Ordenar: 
+        <button className='home-button' onClick={() => handleSort('asc')}> A-Z </button>
+        <button className='home-button' onClick={() => handleSort('desc')}> Z-A </button>
       </div>
+      <main className='home-main'>
+          <section>
+            <Sidebar/>
+          </section>
+          <section className="items-container">
+            <ShowProducts allProducts={allProducts}/>
+          </section>
+      </main>
     </div>
   )
 }

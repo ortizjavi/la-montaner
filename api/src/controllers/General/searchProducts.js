@@ -2,6 +2,8 @@ const Product = require('../../models/Product');
 
 module.exports = {
   searchProducts: async (req, res, next) => {
+    let sort = req.query.sort
+    console.log(sort)
     let ProductsPerPage = 8;
     let pageNumber = req.query.pageNumber;
     let page = Math.max(0, pageNumber);
@@ -13,7 +15,7 @@ module.exports = {
                                         .limit(ProductsPerPage)
                                         .skip(ProductsPerPage * page)
                                         .sort({
-                                            name: 'asc'
+                                            name: sort
                                         })
           const productLength = (await Product.find({name: {$regex: regex}})).length
           return res.json([productLength, product]);
@@ -25,7 +27,7 @@ module.exports = {
                                         .limit(ProductsPerPage)
                                         .skip(ProductsPerPage * page)
                                         .sort({
-                                            name: 'asc'
+                                            name: sort
                                         })
       const productLength = await (await Product.find()).length                      
           return res.json([productLength, product]);
