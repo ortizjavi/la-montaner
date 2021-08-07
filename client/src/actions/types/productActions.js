@@ -7,11 +7,10 @@ import {
   CURENT_PAGE,
   SEARCH_STATE,
   ADMIN_SELECT_DELETED_PRODUCTS,
-  ADMIN_CLEAR_SELECT
+  ADMIN_CLEAR_SELECT,
 } from "../names";
 
-
-import { 
+import {
   GET_PRODUCTS_ENDPOINT,
   CREATE_PRODUCT_ENDPOINT,
   UPDATE_PRODUCT_ENDPOINT,
@@ -91,7 +90,10 @@ export function deleteProducts(id) {
 export function updateProducts(id, producto) {
   return async function () {
     try {
-      const resp = await axios.put(`${ADMIN_GET_PRODUCTS_ENDPOINT}/${id}`, producto);
+      const resp = await axios.put(
+        `${ADMIN_GET_PRODUCTS_ENDPOINT}/${id}`,
+        producto
+      );
       return resp.json();
     } catch (error) {
       console.log(error);
@@ -99,45 +101,27 @@ export function updateProducts(id, producto) {
   };
 }
 
-<<<<<<< HEAD
-export function searchProducts(pageNumber, name) {
+export function searchProducts(sort, pageNumber, name) {
   if (name) {
     return async function (dispatch) {
       try {
         const response = await axios.get(
-          `${GET_PRODUCTS_ENDPOINT}?pageNumber=${pageNumber}&name=${name}`
+          `${GET_PRODUCTS_ENDPOINT}?pageNumber=${pageNumber}&sort=${sort}&name=${name}`
         );
         return dispatch({ type: ALL_PRODUCTS, payload: response.data });
       } catch (e) {
         console.log("actions/types/productActions/searchProducts-Error:", e);
-=======
-export function searchProducts(sort, pageNumber, name) {
-  if(name){
-    return async function(dispatch) {
-      try {
-          const response = await axios.get(`${GET_PRODUCTS_ENDPOINT}?pageNumber=${pageNumber}&sort=${sort}&name=${name}`);   
-          return dispatch({ type: ALL_PRODUCTS, payload: response.data });
-      } catch(e) {
-        console.log('actions/types/productActions/searchProducts-Error:',e);
->>>>>>> origin/develop
       }
     };
   } else {
     return async function (dispatch) {
       try {
-<<<<<<< HEAD
         const response = await axios.get(
-          `${GET_PRODUCTS_ENDPOINT}?pageNumber=${pageNumber}`
+          `${GET_PRODUCTS_ENDPOINT}?pageNumber=${pageNumber}&sort=${sort}`
         );
         return dispatch({ type: ALL_PRODUCTS, payload: response.data });
       } catch (e) {
         console.log("actions/types/productActions/searchProducts-Error:", e);
-=======
-          const response = await axios.get(`${GET_PRODUCTS_ENDPOINT}?pageNumber=${pageNumber}&sort=${sort}`);    
-          return dispatch({ type: ALL_PRODUCTS, payload: response.data });
-      } catch(e) {
-        console.log('actions/types/productActions/searchProducts-Error:',e);
->>>>>>> origin/develop
       }
     };
   }
