@@ -26,7 +26,7 @@ const theme = createTheme({
       light: "#008037",
       main: "#022E1A",
       dark: "#1b5e20",
-      contrastText: "#000",
+      contrastText: "#fff",
     },
   },
 });
@@ -49,7 +49,11 @@ export default function App() {
             path="/home/admin/productCreation"
             component={ProductCreation}
           />
-          <Route exact path="/home/admin/editProduct/:id" component={EditProduct} />
+          <Route
+            exact
+            path="/home/admin/editProduct/:id"
+            component={EditProduct}
+          />
 
           <Route
             exact
