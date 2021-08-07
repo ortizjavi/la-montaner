@@ -1,0 +1,44 @@
+/* Home
+      #C88E34 linea search
+      #CB9D57 panel
+      #008037 button comprar
+      #3F4A45 iconos login carrito
+      #022E1A footer  */
+
+      .Home-filter{
+            display: flex;
+            justify-content: flex-end;
+            padding-right: 5rem;
+            font-size: 1.2rem;
+      }
+      .home-main{
+            display: flex;
+            
+      }
+
+      .items-container{
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-evenly;
+            margin: 0 6rem;
+        
+      }
+      .home-button{
+            font-size: 1.2rem;
+            background: none;
+            color: grey;
+            border: none;
+            outline: none;
+            margin-left: 1rem;
+            margin-bottom: 3rem;
+
+      }
+      .home-button:hover {
+            background: rgba(119, 103, 80, 0.1);
+            border-radius: 80px;
+           
+            font-size: 1.4rem;
+            margin-left: 0.68rem;
+            margin-bottom: 2.8rem;
+
+      }

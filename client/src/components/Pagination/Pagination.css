@@ -14,19 +14,19 @@ font-size_narvar: #828282;
 font-size_narvar:rgb(130,130,130); */
 
 
-.container{
+/* .container{
     display: flex;
     justify-content:space-around;
     flex-wrap: wrap;
     margin-top: 40px;
     height: 100%;
     max-height: 100%;
-}
+} */
 
 .pagination{
     display: flex;
     justify-content: center;
-    padding-top: 100px;
+    padding-top: 20px;
 }
 .pagination  ul{
       list-style: none;
