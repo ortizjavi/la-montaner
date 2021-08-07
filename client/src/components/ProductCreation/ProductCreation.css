@@ -92,3 +92,8 @@
     flex-wrap: wrap;
     margin-bottom: 10px;
 }
+
+.progressBar {
+    grid-column-start: 1;
+    grid-column-end: 3;
+}

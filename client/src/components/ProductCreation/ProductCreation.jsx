@@ -12,6 +12,7 @@ import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import InputLabel from "@material-ui/core/InputLabel";
 import Chip from "@material-ui/core/Chip";
+import LinearProgress from "@material-ui/core/LinearProgress";
 import "./ProductCreation.css";
 
 const useStyles = makeStyles((theme) => ({
@@ -54,7 +55,7 @@ const MenuProps = {
 };
 export default function ProductCreation() {
   const [addCategory, setAddCategory] = useState(false);
-  const [loadingImg, setLoadingImg] = useState(false);
+  const [loadingImg, setLoadingImg] = useState(0);
   const theme = useTheme();
   const [image, setImage] = useState([]);
   const [newCategory, setNewCategory] = useState([]);
@@ -126,9 +127,18 @@ export default function ProductCreation() {
       await axios
         .post(
           "https://api.cloudinary.com/v1_1/la-montanes/image/upload",
-          images
+          images,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+            onUploadProgress(e) {
+              setLoadingImg(Math.round((e.loaded * 100) / e.total));
+            },
+          }
         )
         .then((res) => {
+          setLoadingImg(0);
           setImage((imgs) => [...imgs, res.data.secure_url]);
           console.log(res.data.secure_url);
           console.log(image);
@@ -227,6 +237,13 @@ export default function ProductCreation() {
               Sube tus imagenes
             </Button>
           </label>
+          {loadingImg > 0 && (
+            <LinearProgress
+              variant="determinate"
+              value={loadingImg}
+              className="progressBar"
+            />
+          )}
           {image && image.map((i) => <img key={i} src={i} alt="" />)}
         </div>
 
