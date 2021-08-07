@@ -156,14 +156,13 @@ const EnhancedTableToolbar = (props) => {
 
   const handleDelete = () => {
     seleccionados.forEach((i) => dispatch(deleteProducts(i)));
-    console.log(seleccionados);
     dispatch(getAdminProducts());
     alert("Eliminados");
   };
 
-  useEffect(() => {
-    dispatch(getAdminProducts());
-  }, [dispatch, seleccionados]);
+   useEffect(() => {
+      dispatch(getAdminProducts());
+  }, [ dispatch, seleccionados]);
 
   return (
     <Toolbar
@@ -190,7 +189,6 @@ const EnhancedTableToolbar = (props) => {
           Productos - La Montañes
         </Typography>
       )}
-
       {seleccionados.length > 0 ? (
         <div>
           <Tooltip title="Delete">
@@ -262,13 +260,13 @@ export const Dashboard = () => {
 
   useEffect(() => {
     dispatch(getAdminProducts());
-  }, [dispatch]);
+    if (seleccionados.length) {
+      dispatch(selectedProducts(selected));
+    } else {
+      setSelected([]);
+    } 
+  }, [seleccionados]);
 
-  /* useEffect(() => {
-    if(!seleccionados.length){
-      
-    }
-  }, [seleccionados]) */
 
   productos.forEach((p) => {
     let fila = createData(p._id, p.name, p.price, p.stock);
@@ -298,14 +296,6 @@ export const Dashboard = () => {
     setSelected([]);
   };
 
-  useEffect(() => {
-    if (selected.length) {
-      dispatch(selectedProducts(selected));
-    } else {
-      setSelected([]);
-    }
-  }, [dispatch]);
-
   const handleClick = (event, _id) => {
     const selectedIndex = selected.indexOf(_id);
     let newSelected = [];
@@ -322,7 +312,7 @@ export const Dashboard = () => {
         selected.slice(selectedIndex + 1)
       );
     }
-    console.log(newSelected);
+    dispatch(selectedProducts(newSelected))
     setSelected(newSelected);
   };
 
