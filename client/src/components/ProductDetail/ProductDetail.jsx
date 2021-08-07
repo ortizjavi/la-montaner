@@ -24,7 +24,7 @@ export default function ProductDetail() {
     dispatch(getProductDetail(id));
     setTimeout(() => {
 			setLoading(false);
-		}, 2000);
+		}, 1500);
   }, [id, dispatch]);
   
   //console.log('components/ProductDetail:', detail,'id:',id)
