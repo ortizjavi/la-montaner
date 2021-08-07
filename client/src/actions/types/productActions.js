@@ -56,10 +56,10 @@ export function getAdminProducts() {
   };
 }
 
-export function selectedProducts(id) {
+export function selectedProducts(selected) {
   return async function (dispatch) {
     try {
-      return dispatch({ type: ADMIN_SELECT_PRODUCTS, payload: id });
+      return dispatch({ type: ADMIN_SELECT_PRODUCTS, payload: selected });
     } catch (error) {
       console.log(error);
     }
@@ -79,8 +79,10 @@ export function selectedProducts(id) {
 export function deleteProducts(id) {
   return async function (dispatch) {
     try {
-      await axios.delete(`${ADMIN_GET_PRODUCTS_ENDPOINT}/${id}`);
-      return dispatch({ type: ADMIN_SELECT_DELETED_PRODUCTS, payload: [] });
+      for (let i = 0; i < id.length; i++) {
+        await axios.delete(ADMIN_GET_PRODUCTS_ENDPOINT + "/" + id[i]);
+      }
+      return dispatch({ type: ADMIN_SELECT_DELETED_PRODUCTS });
     } catch (error) {
       console.log(error);
     }
