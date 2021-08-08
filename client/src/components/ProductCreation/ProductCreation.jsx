@@ -13,6 +13,10 @@ import Select from "@material-ui/core/Select";
 import InputLabel from "@material-ui/core/InputLabel";
 import Chip from "@material-ui/core/Chip";
 import LinearProgress from "@material-ui/core/LinearProgress";
+import Card from '@material-ui/core/Card';
+import CardActionArea from '@material-ui/core/CardActionArea';
+import CardActions from '@material-ui/core/CardActions';
+import CardMedia from '@material-ui/core/CardMedia';
 import "./ProductCreation.css";
 
 const useStyles = makeStyles((theme) => ({
@@ -44,6 +48,9 @@ const useStyles = makeStyles((theme) => ({
   add: {
     width: "auto",
     alignSelf: "center",
+  },
+  card: {
+    maxWidth: 345,
   },
 }));
 const MenuProps = {
@@ -154,6 +161,11 @@ export default function ProductCreation() {
     }
   };
 
+  const deleteImage = (e, i) => {
+    e.preventDefault()
+    setImage(image.filter(j => j !== i))
+  }
+
   return (
     <div className="contentPC">
       <Link to="/home">
@@ -167,18 +179,19 @@ export default function ProductCreation() {
           name="name"
           label="Nombre"
           defaultValue=""
-          helperText="*"
+          helperText="* Campo requerido"
           variant="outlined"
           onChange={handleInputChange}
         />
         <div className="categoryContent">
-          <FormControl className={contentPC.formControl}>
+          <FormControl className={contentPC.formControl} noValidate autoComplete="off">
             <InputLabel id="demo-mutiple-chip-label">Categorias</InputLabel>
             <Select
               labelId="demo-mutiple-chip-label"
               id="demo-mutiple-chip"
               multiple
               value={createProduct.categories}
+              helperText="* Campo requerido"
               onChange={handleCategoryChange}
               input={<Input id="select-multiple-chip" />}
               renderValue={(selected) => (
@@ -240,6 +253,7 @@ export default function ProductCreation() {
               component="span"
               className={contentPC.button}
               color="primary"
+              helperText="* Campo requerido"
             >
               Sube tus imagenes
             </Button>
@@ -251,7 +265,24 @@ export default function ProductCreation() {
               className="progressBar"
             />
           )}
-          {image && image.map((i) => <img key={i} src={i} alt="" />)}
+          {
+            image && image.map((i) => 
+          <Card className={contentPC.card}>
+            <CardActionArea>
+              <CardMedia
+                component="img"
+                alt="Imagen la Montañes"
+                height="140"
+                src={i}
+                key= {i}
+              />
+            </CardActionArea>
+            <CardActions>
+            <Button size="small" color="primary" onClick={(e)=> deleteImage(e,i)}>
+              Eliminar
+              </Button>
+            </CardActions>
+         </Card>)}
         </div>
 
         <TextField
@@ -260,6 +291,7 @@ export default function ProductCreation() {
           name="price"
           InputProps={{ inputProps: { min: 0, max: 999999999 } }}
           type="number"
+          helperText="* Campo requerido"
           InputLabelProps={{
             shrink: true,
           }}
@@ -297,6 +329,7 @@ export default function ProductCreation() {
           type="number"
           InputProps={{ inputProps: { min: 0, max: 999999999 } }}
           name="stock"
+          helperText="* Campo requerido"
           min="1"
           InputLabelProps={{
             shrink: true,
@@ -309,6 +342,7 @@ export default function ProductCreation() {
           id="outlined-multiline-static"
           label="Descripcion"
           name="description"
+          helperText="* Campo requerido"
           multiline
           rows={4}
           defaultValue=""

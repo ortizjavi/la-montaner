@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from "react-redux";
 import Input from "@material-ui/core/Input";
 import TextField from "@material-ui/core/TextField";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
-import AddIcon from "@material-ui/icons/Add";
 import Button from "@material-ui/core/Button";
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -74,7 +73,6 @@ export default function EditProduct() {
   const productoId = useSelector((state) => state.productDetail);
 
   useEffect(() => {
-    console.log(productoId)
     if(productoId && productoId.hasOwnProperty('categories')) {
       setCreateProduct({ 
         ...productoId,
@@ -106,12 +104,7 @@ export default function EditProduct() {
   });
   if(!productoId){return <div>Buscando producto...</div>}
   
-  let { img, categories } = productoId;
-  console.log(productoId);
-  console.log(productoId.categories);
-
-  
-  
+  let { img, categories } = productoId; 
 
   function getStyles(name, personName, theme) {
     return {
@@ -124,15 +117,18 @@ export default function EditProduct() {
   
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log('CLICK!!!');
+    /* categories: allCategories.filter(c => createProduct.categories.includes(c.name)), */
     try {
-      updateProducts(id,{
+      await axios.put('http://localhost:3001/admin/product/'+id,{
         ...createProduct,
-        img: image,
+        img: image
       })
     } catch (err) {
       console.log(err);
     }
   };
+
   const handleInputChange = (e) => {
     setCreateProduct({
       ...createProduct,
@@ -189,13 +185,13 @@ export default function EditProduct() {
         <button>Home</button>{" "}
       </Link>
       <h2>Editar Producto</h2>
-      <form className={contentPC.root}>
+      <form className={contentPC.root} noValidate autoComplete="off">
         <TextField
           id="outlined-helperText"
           name="name"
           label="Nombre"
-          placeholder={productoId.name}
-          helperText="*"
+          defaultValue={productoId.name}
+          helperText="* Campo requerido"
           variant="outlined"
           onChange={handleInputChange}
         />
@@ -208,6 +204,7 @@ export default function EditProduct() {
               id="demo-mutiple-chip"
               value={createProduct.categories}
               defaultValue={categories}
+              helperText="* Campo requerido"
               onChange={handleCategoryChange}
               input={<Input id="select-multiple-chip" />}
               renderValue={(selected) => (
@@ -243,6 +240,7 @@ export default function EditProduct() {
               id="contained-button-file"
               inputProps={{ multiple: true }}
               type="file"
+              helperText="* Campo requerido"
               onChange={uploadImage}
             />
             <Button
@@ -278,13 +276,12 @@ export default function EditProduct() {
               Eliminar
               </Button>
             </CardActions>
-         </Card>
-         )}
-          {/* //{img && img.map((i) => <img key={i} src={i} alt="" />)} */}
+         </Card>)}
         </div>
         <TextField
           id="outlined-number"
           label="Precio"
+          helperText="* Campo requerido"
           name="price"
           placeholder={productoId.price}
           InputProps={{ inputProps: { min: 0, max: 999999999 } }}
@@ -326,6 +323,7 @@ export default function EditProduct() {
           id="outlined-number"
           label="Stock"
           placeholder={productoId.stock}
+          helperText="* Campo requerido"
           type="number"
           InputProps={{ inputProps: { min: 0, max: 999999999 } }}
           name="stock"
@@ -341,6 +339,7 @@ export default function EditProduct() {
           id="outlined-multiline-static"
           //label="Descripcion"
           name="description"
+          helperText="* Campo requerido"
           defaultValue={productoId.description}
           multiline
           rows={4}
