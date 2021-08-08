@@ -22,7 +22,7 @@ export default function ProductDetail() {
     dispatch(getProductDetail(id));
     setTimeout(() => {
       setLoading(false);
-    }, 1500);
+    }, 1000);
   }, [id, dispatch]);
 
   console.log("components/ProductDetail:", detail);
