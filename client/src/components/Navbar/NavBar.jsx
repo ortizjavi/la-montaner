@@ -6,7 +6,7 @@ import SearchBar from '../SearchBar/SearchBar';
 import PersonIcon from '@material-ui/icons/Person';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import SvgIcon from '@material-ui/core/SvgIcon';
-import {  filterProductsCategory,  } from '../../actions/types/productActions.js';
+import {  searchProducts,filterProductsCategory,  } from '../../actions/types/productActions.js';
 
 function NavBar() {
     const [category, setCategory] = useState('')
@@ -21,15 +21,14 @@ function NavBar() {
   }
 
  
-
   useEffect(() => {
     if(allProducts[0]>8){ 
-      dispatch(filterProductsCategory(sort, currentPage-1));
+      dispatch(searchProducts(sort, currentPage-1));
     }
-  }, [currentPage])
+  }, [currentPage]) 
   
   
-/*  */
+
 
     function HomeIcon(props) {
         return (
