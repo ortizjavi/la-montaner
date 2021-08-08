@@ -14,6 +14,7 @@
     width: 12rem;
     margin: 10px;
 }
+
 .sp-link{
     text-decoration: none;
     font-family: sans-serif;
@@ -23,7 +24,10 @@
     max-height: 40px;
     cursor: pointer;
 }
-
+.sp-name{
+    cursor:no-drop;
+    opacity: 0.3;
+}
 .link:hover{
     background:rgba(119, 103, 80, 0.1);
     border-radius: 4px;
