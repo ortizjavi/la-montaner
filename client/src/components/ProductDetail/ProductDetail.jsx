@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { getProductDetail } from "../../actions/types/productActions";
 import Loading from "../Loading/Loading.js";
 import "./ProductDetail.css";
+import Footer from "../Footer/Footer";
 
 //Slider
 import styles from "react-responsive-carousel/lib/styles/carousel.min.css";
@@ -21,34 +22,43 @@ export default function ProductDetail() {
     dispatch(getProductDetail(id));
     setTimeout(() => {
       setLoading(false);
-    }, 1500);
+    }, 1000);
   }, [id, dispatch]);
 
   console.log("components/ProductDetail:", detail);
 
   const handleClick = () => {
-    console.log("producto agregado correctamente");
+    alert("producto agregado correctamente");
   };
+
+  const handleBuyProduct = () => {
+    alert("gracias por comprar nuestros productos");
+  };
+
 
   return (
     <>
-      <Link to="/home">
-        {" "}
-      </Link>
+      <Link to="/home"> </Link>
       {loading ? (
         <Loading />
       ) : (
         <div className="detail_style">
           <div className="general_container">
             <div className="detail-img">
-              <Carousel>
-              <div className="slide_image">
-              <img src={detail.img[0]} alt={detail.name} />
-              </div>
-              <div className="slide_image">
-                <img src={detail.img[1]} alt="product2" />
+              {detail.img.length > 1 ? (
+                <Carousel>
+                  <div className="slide_image">
+                    <img src={detail.img[0]} alt={detail.name} />
+                  </div>
+                  <div className="slide_image">
+                    <img src={detail.img[1]} alt="product2" />
+                  </div>
+                </Carousel>
+              ) : (
+                <div className="slide_image">
+                  <img src={detail.img[0]} alt={detail.name} />
                 </div>
-              </Carousel>
+              )}
             </div>
 
             <div className="detail_description">
@@ -76,7 +86,7 @@ export default function ProductDetail() {
                   </div>
                 )}
                 <div className="detail_button">
-                  <button >COMPRAR</button>
+                  <button onClick={() => handleBuyProduct()}>COMPRAR</button>
                 </div>
 
                 <div className="detail_info_description">
@@ -88,6 +98,9 @@ export default function ProductDetail() {
           </div>
         </div>
       )}
+      <div className="details_footer">
+        <Footer />
+      </div>
     </>
   );
 }
