@@ -8,7 +8,8 @@ import {
   SEARCH_STATE,
   ADMIN_SELECT_DELETED_PRODUCTS,
   ADMIN_CLEAR_SELECT,
-} from "../names";
+  FILTER_PRODUCTS_CATEGORY
+} from '../names';
 
 import {
   GET_PRODUCTS_ENDPOINT,
@@ -129,8 +130,21 @@ export function searchProducts(sort, pageNumber, name) {
   }
 }
 
-export function currentPageAction(page) {
-  return { type: CURENT_PAGE, payload: page };
+export function filterProductsCategory(sort, pageNumber, category) {
+  if(category){
+    return async function(dispatch) {
+      try {
+          const response = await axios.get(`${GET_PRODUCTS_ENDPOINT}?pageNumber=${pageNumber}&sort=${sort}&categories=${category}`);   
+          return dispatch({ type: FILTER_PRODUCTS_CATEGORY, payload: response.data });
+      } catch(e) {
+        console.log('actions/types/productActions/searchProducts-Error:',e);
+      }
+    }
+  } 
+}
+
+export function currentPageAction(page){
+  return ({type:CURENT_PAGE, payload:page})
 }
 export function searchProductsAction(state) {
   return { type: SEARCH_STATE, payload: state };

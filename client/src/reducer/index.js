@@ -11,7 +11,8 @@ import {
   SEARCH_STATE,
   ADMIN_CLEAR_SELECT,
   ADMIN_SELECT_UPDATED_PRODUCTS,
-} from "../actions/names";
+  FILTER_PRODUCTS_CATEGORY
+} from '../actions/names';
 
 const initialState = {
   allProducts: [],
@@ -46,12 +47,10 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         selectedAdminProducts: [],
       };
-    case CURENT_PAGE:
-      return { ...state, currentPage: action.payload };
-    case SEARCH_STATE:
-      return { ...state, searchProdustsState: action.payload };
-    default:
-      return state;
+    case CURENT_PAGE: return { ...state, currentPage: action.payload };
+    case SEARCH_STATE: return { ...state, searchProdustsState: action.payload };
+    case FILTER_PRODUCTS_CATEGORY: return { ...state, allProducts: action.payload };
+    default: return state;
   }
 };
 
