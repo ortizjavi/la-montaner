@@ -96,6 +96,9 @@ export default function ProductCreation() {
       /* await setCreateProduct({ ...createProduct, img: image }); */
       let post = await axios.post("http://localhost:3001/admin/product", {
         ...createProduct,
+        categories: allCategories.filter((c) =>
+          createProduct.categories.includes(c.name)
+        ),
         img: image,
       });
       console.log(post);
@@ -114,10 +117,11 @@ export default function ProductCreation() {
     setNewCategory(e.target.value);
   };
   const handleCategoryChange = (e) => {
-    setCreateProduct({
-      ...createProduct,
+    console.log(e.target.value);
+    setCreateProduct((prev) => ({
+      ...prev,
       categories: e.target.value,
-    });
+    }));
     console.log(createProduct.categories);
   };
   const contentPC = useStyles();
