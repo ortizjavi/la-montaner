@@ -67,16 +67,6 @@ export function selectedProducts(selected) {
   };
 }
 
-/* export function clearSelectedProducts() {
-  return async function (dispatch) {
-    try {
-      return dispatch({ type: ADMIN_CLEAR_SELECT });
-    } catch (error) {
-      console.log(error);
-    }
-  };
-} */
-
 export function deleteProducts(id) {
   return async function (dispatch) {
     try {
@@ -97,7 +87,7 @@ export function updateProducts(id, producto) {
         `${ADMIN_GET_PRODUCTS_ENDPOINT}/${id}`,
         producto
       );
-      return resp.json();
+      return (resp.data);
     } catch (error) {
       console.log(error);
     }

@@ -30,7 +30,7 @@ router.post("/category", createCategory);
 
 router.get("/product", getAdminProduct);
 router.delete("/category", deleteCategories);
-router.put("/product", updateProduct);
+router.put("/product/:id", updateProduct);
 router.post("/product", createProduct);
 router.delete("/product/:id", deleteProduct);
 

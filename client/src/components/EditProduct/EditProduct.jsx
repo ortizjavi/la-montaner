@@ -78,19 +78,16 @@ export default function EditProduct() {
     if(productoId && productoId.hasOwnProperty('categories')) {
       setCreateProduct({ 
         ...productoId,
-        name: productoId.name,
         categories: productoId.categories.map(c => c.name)
       } )
+      setImage(img)
     }
   }, [productoId, dispatch])
   
 
-  
-  const [addCategory, setAddCategory] = useState(false);
   const [loadingImg, setLoadingImg] = useState(0);
   const theme = useTheme();
   const [image, setImage] = useState([]);
-  const [newCategory, setNewCategory] = useState([]);
   const allCategories = useSelector((state) => state.allCategories);
 
   const contentPC = useStyles();
@@ -124,17 +121,14 @@ export default function EditProduct() {
           : theme.typography.fontWeightMedium,
     };
   }
-  const addNewCategory = async () => {
-    setAddCategory(!addCategory);
-  };
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
-    createProduct.categories.push(newCategory);
     try {
-      dispatch(updateProducts(id,{
+      updateProducts(id,{
         ...createProduct,
         img: image,
-      })) 
+      })
     } catch (err) {
       console.log(err);
     }
@@ -144,9 +138,6 @@ export default function EditProduct() {
       ...createProduct,
       [e.target.name]: e.target.value,
     });
-  };
-  const handleInputCategory = (e) => {
-    setNewCategory(e.target.value);
   };
   const handleCategoryChange = (e) => {
     setCreateProduct({
@@ -185,6 +176,11 @@ export default function EditProduct() {
         .catch((err) => console.log(err));
     }
   };
+
+  const deleteImage = (e, i) => {
+    e.preventDefault()
+    setImage(image.filter(j => j !== i))
+  }
 
   return (
     <div className="contentPC">
@@ -238,25 +234,6 @@ export default function EditProduct() {
               ))}
             </Select>
           </FormControl>
-          <Button
-            variant="contained"
-            color="secondary"
-            className={contentPC.add}
-            onClick={addNewCategory}
-          >
-            <AddIcon />
-          </Button>
-          {addCategory && (
-            <TextField
-              id="outlined-helperText"
-              label="Categoria"
-              name="category"
-              defaultValue=""
-              helperText="*"
-              variant="outlined"
-              onChange={handleInputCategory}
-            />
-          )}
         </div>
         <div className="images">
           <label htmlFor="contained-button-file" color="primary">
@@ -285,7 +262,7 @@ export default function EditProduct() {
             />
           )}
           {
-            img && img.map((i) => 
+            image && image.map((i) => 
           <Card className={contentPC.card}>
             <CardActionArea>
               <CardMedia
@@ -297,7 +274,7 @@ export default function EditProduct() {
               />
             </CardActionArea>
             <CardActions>
-            <Button size="small" color="primary">
+            <Button size="small" color="primary" onClick={(e)=> deleteImage(e,i)}>
               Eliminar
               </Button>
             </CardActions>
