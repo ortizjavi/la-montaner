@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { getProductDetail } from "../../actions/types/productActions";
 import Loading from "../Loading/Loading.js";
 import "./ProductDetail.css";
+import Footer from "../Footer/Footer";
 
 //Slider
 import styles from "react-responsive-carousel/lib/styles/carousel.min.css";
@@ -88,6 +89,7 @@ export default function ProductDetail() {
           </div>
         </div>
       )}
+      <div className="details_footer"><Footer /></div>
     </>
   );
 }
