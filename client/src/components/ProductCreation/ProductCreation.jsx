@@ -13,6 +13,7 @@ import Select from "@material-ui/core/Select";
 import InputLabel from "@material-ui/core/InputLabel";
 import Chip from "@material-ui/core/Chip";
 import LinearProgress from "@material-ui/core/LinearProgress";
+import swal from "sweetalert";
 import "./ProductCreation.css";
 
 const useStyles = makeStyles((theme) => ({
@@ -54,11 +55,9 @@ const MenuProps = {
   },
 };
 export default function ProductCreation() {
-  const [addCategory, setAddCategory] = useState(false);
   const [loadingImg, setLoadingImg] = useState(0);
   const theme = useTheme();
   const [image, setImage] = useState([]);
-  const [newCategory, setNewCategory] = useState([]);
   const allCategories = useSelector((state) => state.allCategories);
   const [createProduct, setCreateProduct] = useState({
     name: "",
@@ -80,27 +79,27 @@ export default function ProductCreation() {
           : theme.typography.fontWeightMedium,
     };
   }
-  const addNewCategory = async () => {
-    setAddCategory(!addCategory);
-  };
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      if (newCategory.length > 0) {
-        let postC = await axios.post("http://localhost:3001/admin/category", {
-          name: newCategory,
-        });
-        createProduct.categories.push(newCategory);
-        console.log(postC);
-      }
+      swal({
+        title: "Producto Creado!",
+        text: `${createProduct.name} se ha añadido con exito!`,
+        icon: "success",
+      });
       /* await setCreateProduct({ ...createProduct, img: image }); */
       let post = await axios.post("http://localhost:3001/admin/product", {
         ...createProduct,
-        categories: allCategories.filter(c => createProduct.categories.includes(c.name)),
+        categories: allCategories.filter((c) =>
+          createProduct.categories.includes(c.name)
+        ),
         img: image,
       });
       console.log(post);
-      /* setTimeout(() => (document.location.href = HOME), 1000); */
+      setTimeout(
+        () => (document.location.href = "http://localhost:3000/admin"),
+        3000
+      );
     } catch (err) {
       console.log(err);
     }
@@ -111,14 +110,12 @@ export default function ProductCreation() {
       [e.target.name]: e.target.value,
     });
   };
-  const handleInputCategory = (e) => {
-    setNewCategory(e.target.value);
-  };
   const handleCategoryChange = (e) => {
-    setCreateProduct({
-      ...createProduct,
+    console.log(e.target.value);
+    setCreateProduct((prev) => ({
+      ...prev,
       categories: e.target.value,
-    });
+    }));
     console.log(createProduct.categories);
   };
   const contentPC = useStyles();
@@ -161,11 +158,13 @@ export default function ProductCreation() {
         <button>Home</button>{" "}
       </Link>
       <h2>Crear Nuevo Producto</h2>
-      <form className={contentPC.root}>
+      <form className={contentPC.root} onSubmit={handleSubmit}>
         <TextField
           id="outlined-helperText"
           name="name"
           label="Nombre"
+          isRequired="true"
+          required
           defaultValue=""
           helperText="*"
           variant="outlined"
@@ -173,11 +172,14 @@ export default function ProductCreation() {
         />
         <div className="categoryContent">
           <FormControl className={contentPC.formControl}>
-            <InputLabel id="demo-mutiple-chip-label">Categorias</InputLabel>
+            <InputLabel id="demo-mutiple-chip-label" required>
+              Categorias
+            </InputLabel>
             <Select
               labelId="demo-mutiple-chip-label"
               id="demo-mutiple-chip"
               multiple
+              required
               value={createProduct.categories}
               onChange={handleCategoryChange}
               input={<Input id="select-multiple-chip" />}
@@ -205,31 +207,13 @@ export default function ProductCreation() {
               ))}
             </Select>
           </FormControl>
-          <Button
-            variant="contained"
-            color="secondary"
-            className={contentPC.add}
-            onClick={addNewCategory}
-          >
-            <AddIcon />
-          </Button>
-          {addCategory && (
-            <TextField
-              id="outlined-helperText"
-              label="Categoria"
-              name="category"
-              defaultValue=""
-              helperText="*"
-              variant="outlined"
-              onChange={handleInputCategory}
-            />
-          )}
         </div>
         <div className="images">
           <label htmlFor="contained-button-file" color="primary">
             <Input
               className={contentPC.images}
               accept="image/*"
+              required
               id="contained-button-file"
               inputProps={{ multiple: true }}
               type="file"
@@ -257,6 +241,7 @@ export default function ProductCreation() {
         <TextField
           id="outlined-number"
           label="Precio"
+          required
           name="price"
           InputProps={{ inputProps: { min: 0, max: 999999999 } }}
           type="number"
@@ -308,6 +293,7 @@ export default function ProductCreation() {
           width={300}
           id="outlined-multiline-static"
           label="Descripcion"
+          required
           name="description"
           multiline
           rows={4}
@@ -339,12 +325,7 @@ export default function ProductCreation() {
           variant="outlined"
           onChange={handleInputChange}
         />
-        <Button
-          variant="contained"
-          color="primary"
-          type="submit"
-          onClick={handleSubmit}
-        >
+        <Button variant="contained" color="primary" type="submit">
           Crear
         </Button>
       </form>
