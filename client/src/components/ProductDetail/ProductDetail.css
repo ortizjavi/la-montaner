@@ -64,6 +64,11 @@
   text-align: left;
 }
 
+.detail-render h3{
+  font-size: 29px;
+  font-weight: 600;
+}
+
 .detail_info_description p {
   font-size: 25px;
   text-align: left;
