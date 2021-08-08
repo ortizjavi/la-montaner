@@ -21,6 +21,7 @@ import "./EditProduct.css";
 import {
   getProductDetail,
   updateProducts,
+  clearProductDetail
 } from "../../actions/types/productActions";
 
 const useStyles = makeStyles((theme) => ({
@@ -64,6 +65,7 @@ const MenuProps = {
     },
   },
 };
+
 export default function EditProduct() {
   const dispatch = useDispatch();
   const { id } = useParams();
@@ -73,26 +75,9 @@ export default function EditProduct() {
   }, [id, dispatch]);
   const productoId = useSelector((state) => state.productDetail);
 
-  useEffect(() => {
-    console.log(productoId)
-    if(productoId && productoId.hasOwnProperty('categories')) {
-      setCreateProduct({ 
-        ...productoId,
-        categories: productoId.categories.map(c => c.name)
-      } )
-      setImage(img)
-    }
-  }, [productoId, dispatch])
-  
 
-  const [loadingImg, setLoadingImg] = useState(0);
-  const theme = useTheme();
-  const [image, setImage] = useState([]);
-  const allCategories = useSelector((state) => state.allCategories);
 
-  const contentPC = useStyles();
-
-  const [createProduct, setCreateProduct] = useState({
+  let state = {
     name: "",
     categories: [],
     img: [],
@@ -103,29 +88,71 @@ export default function EditProduct() {
     description: "",
     volumen: 0,
     others: "",
-  });
-  if(!productoId){return <div>Buscando producto...</div>}
-  
-  let { img, categories } = productoId;
-  console.log(productoId);
-  console.log(productoId.categories);
+  }
+
+
+  if (productoId && productoId._id){
+    return <EditProductChild producto={{...productoId}} defaultState={state}/>;
+  } 
+
+  return <div> No hay productos </div>
+
+}
+
+const getProps = (producto) => {
+  return {
+    name: producto.name,
+    categories: producto.categories.map(cat => cat.name),
+    img: producto.img,
+    price: producto.price,
+    stock: producto.stock,
+    abv: producto.abv,
+    ibu: producto.ibu,
+    description: producto.description,
+    volumen: producto.volumen,
+    others: producto.others,
+  }
+}
+
+function EditProductChild({producto, defaultState}) {
+  console.log('producto',producto);
+  const [loadingImg, setLoadingImg] = useState(0);
+  const theme = useTheme();
+  const [image, setImage] = useState([]);
+  const [bool, setBool] = useState(false);
+  const allCategories = useSelector((state) => state.allCategories);
+  const dispatch = useDispatch();
+
+  const contentPC = useStyles();
+
+  const [createProduct, setCreateProduct] = useState(getProps(producto));
 
   
-  
+  let { img, categories } = producto;
+/*  console.log(producto);
+  console.log(producto.categories);*/
 
-  function getStyles(name, personName, theme) {
+  useEffect(() => {
+    return () => {
+      dispatch(clearProductDetail());
+      setCreateProduct(defaultState);
+
+    }
+  }, [])
+
+  /*function getStyles(name, personName, theme) {
     return {
       fontWeight:
         personName.indexOf(name) === -1
           ? theme.typography.fontWeightRegular
           : theme.typography.fontWeightMedium,
     };
-  }
+  }*/
   
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      updateProducts(id,{
+      updateProducts(producto._id,{
         ...createProduct,
         img: image,
       })
@@ -194,7 +221,8 @@ export default function EditProduct() {
           id="outlined-helperText"
           name="name"
           label="Nombre"
-          placeholder={productoId.name}
+          placeholder={producto.name}
+          defaultValue={createProduct.name}
           helperText="*"
           variant="outlined"
           onChange={handleInputChange}
@@ -207,7 +235,7 @@ export default function EditProduct() {
               labelId="demo-mutiple-chip-label"
               id="demo-mutiple-chip"
               value={createProduct.categories}
-              defaultValue={categories}
+              defaultValue={producto.categories}
               onChange={handleCategoryChange}
               input={<Input id="select-multiple-chip" />}
               renderValue={(selected) => (
@@ -227,7 +255,7 @@ export default function EditProduct() {
                 <MenuItem
                   key={i.name}
                   value={i.name}
-                  tyle={getStyles(i.name, createProduct.categories, theme)}
+                  // tyle={getStyles(i.name, createProduct.categories, theme)}
                 >
                   {i.name}
                 </MenuItem>
@@ -286,7 +314,8 @@ export default function EditProduct() {
           id="outlined-number"
           label="Precio"
           name="price"
-          placeholder={productoId.price}
+          placeholder={producto.price.toString()}
+          defaultValue={createProduct.price}
           InputProps={{ inputProps: { min: 0, max: 999999999 } }}
           type="number"
           InputLabelProps={{
@@ -299,7 +328,8 @@ export default function EditProduct() {
           id="outlined-number"
           label="abv"
           name="abv"
-          placeholder={productoId.abv}
+          placeholder={producto.abv ? producto.abv.toString() : ''}
+          defaultValue={createProduct.abv}
           type="number"
           InputProps={{ inputProps: { min: 0, max: 100 } }}
           InputLabelProps={{
@@ -311,7 +341,8 @@ export default function EditProduct() {
         <TextField
           id="outlined-number"
           label="ibu"
-          placeholder={productoId.ibu}
+          placeholder={producto.ibu ? producto.ibu.toString() : ''}
+          defaultValue={createProduct.ibu}
           type="number"
           name="ibu"
           InputProps={{ inputProps: { min: 0, max: 100 } }}
@@ -325,7 +356,8 @@ export default function EditProduct() {
         <TextField
           id="outlined-number"
           label="Stock"
-          placeholder={productoId.stock}
+          placeholder={producto.stock.toString()}
+          defaultValue={createProduct.stock}
           type="number"
           InputProps={{ inputProps: { min: 0, max: 999999999 } }}
           name="stock"
@@ -341,7 +373,8 @@ export default function EditProduct() {
           id="outlined-multiline-static"
           //label="Descripcion"
           name="description"
-          defaultValue={productoId.description}
+          placeholder={producto.description}
+          defaultValue={createProduct.description}
           multiline
           rows={4}
           variant="outlined"
@@ -351,7 +384,8 @@ export default function EditProduct() {
           id="outlined-number"
           label="Volumen"
           type="number"
-          placeholder={productoId.volumen}
+          placeholder={producto.volumen.toString()}
+          defaultValue={createProduct.volumen}
           InputProps={{ inputProps: { min: 0, max: 99999 } }}
           name="volumen"
           min="1"
@@ -368,7 +402,8 @@ export default function EditProduct() {
           name="others"
           multiline
           rows={2}
-          placeholder={productoId.others}
+          placeholder={producto.others}
+          defaultValue={createProduct.others}
           variant="outlined"
           onChange={handleInputChange}
         />

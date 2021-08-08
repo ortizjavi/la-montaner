@@ -7,7 +7,6 @@ import {
   CURENT_PAGE,
   SEARCH_STATE,
   ADMIN_SELECT_DELETED_PRODUCTS,
-  ADMIN_CLEAR_SELECT,
   FILTER_PRODUCTS_CATEGORY,
 } from "../names";
 
@@ -143,4 +142,9 @@ export function currentPageAction(page) {
 }
 export function searchProductsAction(state) {
   return { type: SEARCH_STATE, payload: state };
+}
+
+
+export function clearProductDetail() {
+  return { type: GET_PRODUCT_DETAIL, payload: {}};
 }
