@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
-import {useDispatch, useSelector} from 'react-redux';
+import { useDispatch, useSelector } from "react-redux";
 import Input from "@material-ui/core/Input";
 import TextField from "@material-ui/core/TextField";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
@@ -14,7 +14,10 @@ import InputLabel from "@material-ui/core/InputLabel";
 import Chip from "@material-ui/core/Chip";
 import LinearProgress from "@material-ui/core/LinearProgress";
 import "./EditProduct.css";
-import {getProductDetail, updateProducts} from '../../actions/types/productActions';
+import {
+  getProductDetail,
+  updateProducts,
+} from "../../actions/types/productActions";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -55,21 +58,19 @@ const MenuProps = {
   },
 };
 export default function EditProduct() {
-
   const dispatch = useDispatch();
   const { id } = useParams();
 
-  const productoId = useSelector((state) => state.productDetail);
-
-  const {img, categories} = productoId;
-
-  const productoCategorias = productoId.categories[0];
-
   useEffect(() => {
     dispatch(getProductDetail(id));
-    console.log(productoId.categories[0])
-  }, [id, dispatch])
+  }, [id, dispatch]);
+  const productoId = useSelector((state) => state.productDetail);
 
+  let { img, categories } = productoId;
+  console.log(productoId);
+  console.log(productoId.categories);
+
+  const productoCategorias = productoId.categories[0];
 
   const [addCategory, setAddCategory] = useState(false);
   const [loadingImg, setLoadingImg] = useState(0);
@@ -79,7 +80,7 @@ export default function EditProduct() {
   const allCategories = useSelector((state) => state.allCategories);
   const [createProduct, setCreateProduct] = useState({
     name: "",
-    categories: productoCategorias,
+    categories: [],
     img: [],
     price: 0,
     stock: 0,
@@ -189,11 +190,10 @@ export default function EditProduct() {
               labelId="demo-mutiple-chip-label"
               id="demo-mutiple-chip"
               value={createProduct.categories}
-              defaultValue = {categories}
+              defaultValue={categories}
               onChange={handleCategoryChange}
               input={<Input id="select-multiple-chip" />}
-              renderValue={
-                (selected) => (
+              renderValue={(selected) => (
                 <div className={contentPC.chips}>
                   {selected.map((value) => (
                     <Chip
