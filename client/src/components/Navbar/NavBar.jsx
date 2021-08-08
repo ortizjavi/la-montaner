@@ -57,11 +57,21 @@ function NavBar() {
             <nav>
                 <ul >
                     <li className="list-item">
-                    <input className={`${category.vertodos ? "actived" : 'Nav-button'}`} type="button" value="Ver Todos" onClick={() => handleAllProducts('vertodos')}/>
-                    <input className={`${category.cervezas ? "actived" : 'Nav-button'}`}  type="button" value="Cervezas" onClick={() => handleSort('cervezas')}/>
-                    <input className={`${category.conservas ? "actived" : 'Nav-button'}`}  type="button" value="Conservas" onClick={()=> handleSort('conservas')}/>
-                    <input className={`${category.merchandising ? "actived" : 'Nav-button'}`} type="button" value="Merchadising" onClick={()=> handleSort('merchandising')}/>
-                    <input className={`${category.otros ? "actived" : 'Nav-button'}`} type="button" value="Otros" onClick={()=> handleSort('otros')}/>
+                      <NavLink to='/home'>
+                        <input className={`${category.vertodos ? "actived" : 'Nav-button'}`} type="button" value="Ver Todos" onClick={() => handleAllProducts('vertodos')}/>
+                      </NavLink>
+                      <NavLink to='/home'>
+                        <input className={`${category.cervezas ? "actived" : 'Nav-button'}`}  type="button" value="Cervezas" onClick={() => handleSort('cervezas')}/>
+                      </NavLink>
+                      <NavLink to='/home'>
+                         <input className={`${category.conservas ? "actived" : 'Nav-button'}`}  type="button" value="Conservas" onClick={()=> handleSort('conservas')}/>
+                      </NavLink>
+                      <NavLink to='/home'>
+                        <input className={`${category.merchandising ? "actived" : 'Nav-button'}`} type="button" value="Merchadising" onClick={()=> handleSort('merchandising')}/>
+                      </NavLink>
+                      <NavLink to='/home'>
+                         <input className={`${category.otros ? "actived" : 'Nav-button'}`} type="button" value="Otros" onClick={()=> handleSort('otros')}/>
+                      </NavLink>  
                     </li>
                 </ul>
             </nav>
