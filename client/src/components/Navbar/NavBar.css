@@ -19,6 +19,7 @@
 
 .nb-img{
     margin-left: 2rem;
+    cursor: pointer;
 }
 
 .list-item {
@@ -39,15 +40,11 @@
     outline: none;
     font-size: 1.2rem;
     margin-left: 2rem;
+    cursor: pointer;
 }
 
 
 .Nav-button:hover{
-    /* font-size: 1.4rem;
-    margin-left: 1.7rem; */
-
-    /* border-bottom: 2px solid #C88E34; */
-    /* padding-right: 3px; */
     background: rgba(119, 103, 80, 0.1);
     border-radius: 10px;
 
@@ -60,12 +57,10 @@
     background: rgba(200,142,52, 0.5);
 }
 
-
-
 .nav-personicon{
     background: white;
     border: none;
-
+    cursor: pointer;
 }
 .nav-personicon:hover{
     background: rgba(119, 103, 80, 0.1);
