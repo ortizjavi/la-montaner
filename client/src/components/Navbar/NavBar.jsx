@@ -16,14 +16,14 @@ function NavBar() {
     const allProducts = useSelector( state => state.allProducts)
    
    const handleSort= (param) => {
-
-    dispatch(filterProductsCategory(sort,currentPage-1, param))
+     
+    dispatch(filterProductsCategory(sort,0, param))
   }
 
  
   useEffect(() => {
     if(allProducts[0]>8){ 
-      dispatch(searchProducts(sort, currentPage-1));
+      dispatch(searchProducts(sort, currentPage));
     }
   }, [currentPage]) 
   
