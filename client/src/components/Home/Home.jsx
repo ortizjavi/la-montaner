@@ -36,7 +36,7 @@ export default function Home() {
     sort = param;
     dispatch(searchProducts(sort, currentPage-1))
   }
-  console.log(allProducts[1])
+  
   
   return (
     <div>

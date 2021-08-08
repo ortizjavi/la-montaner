@@ -44,14 +44,25 @@
     cursor: pointer;
 }
 
-
 .Nav-button:hover{
     background: rgba(119, 103, 80, 0.1);
     border-radius: 50px;
     border-bottom: 2px solid #C88E34;
-
-
 }
+.Nav-button:active{
+background: #C88E34; 
+}
+.actived{
+    background: none;
+    color: grey;
+    font-weight: 600;
+    border: none;
+    outline: none;
+    border-bottom: #C88E34 solid 3px ;
+    font-size: 1.2rem;
+    margin-left: 2rem;
+}
+
 .Nav-button.active {
     height: auto;
     font-size: 1.4rem;
