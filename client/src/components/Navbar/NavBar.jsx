@@ -1,18 +1,35 @@
 import React,{useState, useEffect} from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import './NavBar.css';
 import { NavLink } from 'react-router-dom';
 import SearchBar from '../SearchBar/SearchBar';
 import PersonIcon from '@material-ui/icons/Person';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import SvgIcon from '@material-ui/core/SvgIcon';
-
+import {  filterProductsCategory,  } from '../../actions/types/productActions.js';
 
 function NavBar() {
     const [category, setCategory] = useState('')
+    const dispatch = useDispatch();
+    const currentPage = useSelector(state => state.currentPage)
+    var sort = 'asc'
+    const allProducts = useSelector( state => state.allProducts)
+   
+   const handleSort= (param) => {
+     
+    dispatch(filterProductsCategory(sort,currentPage-1, param))
+  }
 
-    useEffect(()=>{
-        console.log('Navbar/category: ',category)
-    },[category])
+ 
+
+  useEffect(() => {
+    if(allProducts[0]>8){ 
+      dispatch(filterProductsCategory(sort, currentPage-1));
+    }
+  }, [currentPage])
+  
+  
+/*  */
 
     function HomeIcon(props) {
         return (
@@ -31,10 +48,10 @@ function NavBar() {
             <nav>
                 <ul >
                     <li className="list-item">
-                    <input className='Nav-button' type="button" value="Cervezas" onClick={()=> setCategory('cervezas')}/>
-                    <input className='Nav-button' type="button" value="Conservas" onClick={()=> setCategory('conservas')}/>
-                    <input className='Nav-button' type="button" value="Merchadising" onClick={()=> setCategory('merchandising')}/>
-                    <input className='Nav-button' type="button" value="Otros" onClick={()=> setCategory('otros')}/>
+                    <input className='Nav-button' type="button" value="Cervezas" onClick={() => handleSort('cervezas')}/>
+                    <input className='Nav-button' type="button" value="Conservas" onClick={()=> handleSort('conservas')}/>
+                    <input className='Nav-button' type="button" value="Merchadising" onClick={()=> handleSort('merchandising')}/>
+                    <input className='Nav-button' type="button" value="Otros" onClick={()=> handleSort('otros')}/>
                     </li>
                 </ul>
             </nav>

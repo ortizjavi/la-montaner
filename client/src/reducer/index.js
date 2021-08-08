@@ -6,6 +6,7 @@ import {
   DELETE_CATEGORY,
   CURENT_PAGE,
   SEARCH_STATE,
+  FILTER_PRODUCTS_CATEGORY
 } from '../actions/names';
 
 const initialState = {
@@ -33,6 +34,7 @@ const rootReducer = (state = initialState, action) => {
       };
     case CURENT_PAGE: return { ...state, currentPage: action.payload };
     case SEARCH_STATE: return { ...state, searchProdustsState: action.payload };
+    case FILTER_PRODUCTS_CATEGORY: return { ...state, allProducts: action.payload };
     default: return state;
   }
 }

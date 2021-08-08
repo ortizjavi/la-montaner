@@ -5,6 +5,7 @@ export const CREATE_PRODUCT = 'CREATE_PRODUCT';
 export const UPDATE_PRODUCT = 'UPDATE_PRODUCT';
 export const DELETE_PRODUCT = 'DELETE_PRODUCT';
 export const ALL_PRODUCTS = 'ALL_PRODUCTS';
+export const FILTER_PRODUCTS_CATEGORY ='FILTER_PRODUCTS_CATEGORY'
 
 // category action names
 export const GET_CATEGORIES = 'GET_CATEGORIES';

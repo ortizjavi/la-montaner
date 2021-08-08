@@ -8,6 +8,7 @@ import {
   DELETE_PRODUCT,
   CURENT_PAGE,
   SEARCH_STATE,
+  FILTER_PRODUCTS_CATEGORY
 } from '../names';
 
 import { 
@@ -48,6 +49,19 @@ export function searchProducts(sort, pageNumber, name) {
       }
     }
   }
+}
+
+export function filterProductsCategory(sort, pageNumber, category) {
+  if(category){
+    return async function(dispatch) {
+      try {
+          const response = await axios.get(`${GET_PRODUCTS_ENDPOINT}?pageNumber=${pageNumber}&sort=${sort}&categories=${category}`);   
+          return dispatch({ type: FILTER_PRODUCTS_CATEGORY, payload: response.data });
+      } catch(e) {
+        console.log('actions/types/productActions/searchProducts-Error:',e);
+      }
+    }
+  } 
 }
 
 export function currentPageAction(page){
