@@ -17,6 +17,7 @@ import InputLabel from "@material-ui/core/InputLabel";
 import Chip from "@material-ui/core/Chip";
 import LinearProgress from "@material-ui/core/LinearProgress";
 import "./EditProduct.css";
+import swal from "sweetalert";
 import {
   getProductDetail,
   updateProducts,
@@ -120,10 +121,19 @@ export default function EditProduct() {
     console.log('CLICK!!!');
     /* categories: allCategories.filter(c => createProduct.categories.includes(c.name)), */
     try {
+      swal({
+        title: "Producto Editado!",
+        text: `${createProduct.name} se ha editado con exito!`,
+        icon: "success",
+      });
       await axios.put('http://localhost:3001/admin/product/'+id,{
         ...createProduct,
         img: image
       })
+      setTimeout(
+        () => (document.location.href = "http://localhost:3000/admin"),
+        3000
+      );
     } catch (err) {
       console.log(err);
     }

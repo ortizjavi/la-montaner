@@ -70,7 +70,7 @@ export function selectedProducts(selected) {
 export function deleteProducts(id) {
   return async function (dispatch) {
     try {
-        await axios.delete(ADMIN_GET_PRODUCTS_ENDPOINT + "/" + id);
+      await axios.delete(ADMIN_GET_PRODUCTS_ENDPOINT + "/" + id);
       return dispatch({ type: ADMIN_SELECT_DELETED_PRODUCTS });
     } catch (error) {
       console.log(error);
@@ -86,8 +86,7 @@ export function updateProducts(_id, producto) {
         `${ADMIN_GET_PRODUCTS_ENDPOINT}/${_id}`,
         producto
       );
-      console.log(resp.data)
-      return (resp.data);
+      return resp.data;
     } catch (error) {
       console.log(error);
     }
