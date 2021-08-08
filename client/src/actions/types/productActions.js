@@ -7,7 +7,6 @@ import {
   CURENT_PAGE,
   SEARCH_STATE,
   ADMIN_SELECT_DELETED_PRODUCTS,
-  ADMIN_CLEAR_SELECT,
   FILTER_PRODUCTS_CATEGORY,
 } from "../names";
 
@@ -79,19 +78,19 @@ export function deleteProducts(id) {
 };
 
 
-export function updateProducts(_id, producto) {
-  return async function(){
+export async function updateProducts(id, producto) {
     try {
       const resp = await axios.put(
-        `${ADMIN_GET_PRODUCTS_ENDPOINT}/${_id}`,
+        `${ADMIN_GET_PRODUCTS_ENDPOINT}/${id}`,
         producto
       );
+      console.log(resp.data)
       return resp.data;
     } catch (error) {
       console.log(error);
     }
-  };
-}
+  }
+
 
 export function searchProducts(sort, pageNumber, name) {
   if (name) {
@@ -142,4 +141,9 @@ export function currentPageAction(page) {
 }
 export function searchProductsAction(state) {
   return { type: SEARCH_STATE, payload: state };
+}
+
+
+export function clearProductDetail() {
+  return { type: GET_PRODUCT_DETAIL, payload: {}};
 }
