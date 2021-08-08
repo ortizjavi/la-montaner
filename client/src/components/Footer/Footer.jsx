@@ -34,17 +34,17 @@ const Footer = ()=>{
             <div>
                 <h4 className='footer-h4'>Seguinos</h4>
                 <div>
-                <NavLink className='footer-icon' to={'/'}>
+                  <a className='footer-icon' href='https://www.instagram.com/lamontanes/' target='_blank'>
                     <InstagramIcon style={{ fontSize: 40 }} color="" />
-                </NavLink>
-                <NavLink className='footer-icon' to={'/'}>
+                  </a>
+                  <a className='footer-icon' href='https://www.facebook.com/pablo.alisio' target='_blank'>
                     <FacebookIcon style={{ fontSize: 40 }} color=""/>
-                </NavLink>
+                  </a>
                 </div>
             </div>
             <div>
                 <a className='footer-icon-w' href={WHATSAPP_LINK} target="_blank">
-                        <WhatsAppIcon style={{ fontSize: 60 }} />
+                    <WhatsAppIcon style={{ fontSize: 60 }} />
                 </a>
             </div>
         </div>
