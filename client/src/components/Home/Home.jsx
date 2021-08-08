@@ -2,10 +2,9 @@ import React, { useEffect }  from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {  searchProducts,  } from '../../actions/types/productActions.js';
 import NavBar from '../Navbar/NavBar';
-import Sidebar from '../Sidebar/Sidebar';
+import Filters from '../Filters/Fiters.jsx';
 import ShowProducts from '../ShowProducts/ShowProducts';
 import './Home.css';
-
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -48,7 +47,7 @@ export default function Home() {
       </div>
       <main className='home-main'>
           <section>
-            <Sidebar/>
+            <Filters />
           </section>
           <section className="items-container">
             <ShowProducts allProducts={allProducts}/>
