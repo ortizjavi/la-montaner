@@ -85,17 +85,19 @@ export default function ProductCreation() {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
-    createProduct.categories.push(newCategory);
     try {
+      if (newCategory.length > 0) {
+        let postC = await axios.post("http://localhost:3001/admin/category", {
+          name: newCategory,
+        });
+        createProduct.categories.push(newCategory);
+        console.log(postC);
+      }
       /* await setCreateProduct({ ...createProduct, img: image }); */
-      let postC = await axios.post("http://localhost:3001/admin/category", {
-        name: newCategory,
-      });
       let post = await axios.post("http://localhost:3001/admin/product", {
         ...createProduct,
         img: image,
       });
-      console.log(postC);
       console.log(post);
       /* setTimeout(() => (document.location.href = HOME), 1000); */
     } catch (err) {

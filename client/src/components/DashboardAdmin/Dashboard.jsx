@@ -160,9 +160,9 @@ const EnhancedTableToolbar = (props) => {
     alert("Eliminados");
   };
 
-   useEffect(() => {
-      dispatch(getAdminProducts());
-  }, [ dispatch, seleccionados]);
+  useEffect(() => {
+    dispatch(getAdminProducts());
+  }, [dispatch, seleccionados]);
 
   return (
     <Toolbar
@@ -264,9 +264,8 @@ export const Dashboard = () => {
       dispatch(selectedProducts(selected));
     } else {
       setSelected([]);
-    } 
+    }
   }, [seleccionados]);
-
 
   productos.forEach((p) => {
     let fila = createData(p._id, p.name, p.price, p.stock);
@@ -280,7 +279,6 @@ export const Dashboard = () => {
   const [page, setPage] = useState(0);
   const [dense, setDense] = useState(false);
   const [rowsPerPage, setRowsPerPage] = useState(5);
-
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === "asc";
     setOrder(isAsc ? "desc" : "asc");
@@ -299,7 +297,6 @@ export const Dashboard = () => {
   const handleClick = (event, _id) => {
     const selectedIndex = selected.indexOf(_id);
     let newSelected = [];
-
     if (selectedIndex === -1) {
       newSelected = newSelected.concat(selected, _id);
     } else if (selectedIndex === 0) {
@@ -312,7 +309,7 @@ export const Dashboard = () => {
         selected.slice(selectedIndex + 1)
       );
     }
-    dispatch(selectedProducts(newSelected))
+    dispatch(selectedProducts(newSelected));
     setSelected(newSelected);
   };
 
@@ -412,6 +409,8 @@ export const Dashboard = () => {
         control={<Switch checked={dense} onChange={handleChangeDense} />}
         label="Dense padding"
       />
+      <p>{seleccionados.length}</p>
+      <p>{selected.length}</p>
     </div>
   );
 };
