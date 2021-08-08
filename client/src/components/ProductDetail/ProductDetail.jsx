@@ -28,7 +28,7 @@ export default function ProductDetail() {
   console.log("components/ProductDetail:", detail);
 
   const handleClick = () => {
-    console.log("producto agregado correctamente");
+    alert("producto agregado correctamente");
   };
 
   return (
