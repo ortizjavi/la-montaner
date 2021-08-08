@@ -1,9 +1,9 @@
-const Product = require('../../../models/Product');
+const Product = require("../../../models/Product");
 
 module.exports = {
   createProduct: async (req, res, next) => {
-    console.log('routerProducts.post:',req.body);
-    req.body.categories = [req.body.category];
+    console.log("routerProducts.post:", req.body);
+    req.body.categories = [req.body.categories];
     const product = new Product(req.body);
     //name, category, img, price, stock, abv, ibu, description, volumen, others
 
@@ -20,5 +20,5 @@ module.exports = {
         ok: false,
       });
     }
-  }
-}
+  },
+};

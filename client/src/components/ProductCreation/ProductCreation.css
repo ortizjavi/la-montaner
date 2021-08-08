@@ -1,17 +1,99 @@
-.contentPC{
-    display:grid;
+:root {
+    --color-bg-btn: #9875F3;
+    --color-bg-btn-hover: #4D1FC6;
+    --color-shadow-btn-active: rgba(0, 0, 0, .3);
+    --color-border-field: rgb(200, 200, 200);
+}
+
+.contentPC {
+    display: grid;
     margin: 10% auto;
-    border:1px solid #000;
+    border: 1px solid #000;
     width: 70%;
     border-radius: 15px;
 }
-.contentPC h2{
+
+.contentPC h2 {
     text-align: center;
 }
-.contentPC form{
+
+.contentPC form {
     width: 70%;
     margin: auto
 }
-.contentPC button{
-    margin-left: 90%;
+
+.inputFile {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: end;
+    -ms-flex-pack: end;
+    justify-content: flex-end;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin-top: 10px;
+}
+
+.inputFileInput {
+    color: #9875F3;
+}
+
+.inputFileBtn {
+    height: 34px;
+    padding: 6px 12px;
+    border-radius: 17px;
+    background-color: var(--color-bg-btn);
+    color: white;
+    width: 170px;
+    text-align: center;
+    line-height: 22px;
+    cursor: pointer;
+}
+
+.inputFileBtn:hover {
+    background-color: var(--color-bg-btn-hover);
+}
+
+.inputFileBtn:active {
+    -webkit-box-shadow: 0 3px 5px var(--color-shadow-btn-active) inset;
+    box-shadow: 0 3px 5px var(--color-shadow-btn-active) inset;
+}
+
+.images {
+    display: grid;
+    justify-content: center;
+    width: 100%;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: 50px;
+}
+
+.images label {
+    margin: 0 auto;
+    grid-column-start: 1;
+    grid-column-end: 3;
+}
+
+.images img {
+    width: 100%;
+    max-height: 200px;
+    object-fit: cover;
+}
+
+.main {
+    background-color: #ad1;
+    width: 100%;
+    height: 100px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.categoryContent {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+}
+
+.progressBar {
+    grid-column-start: 1;
+    grid-column-end: 3;
 }
