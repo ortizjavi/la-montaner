@@ -7,6 +7,10 @@ import TextField from "@material-ui/core/TextField";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import AddIcon from "@material-ui/icons/Add";
 import Button from "@material-ui/core/Button";
+import Card from '@material-ui/core/Card';
+import CardActionArea from '@material-ui/core/CardActionArea';
+import CardActions from '@material-ui/core/CardActions';
+import CardMedia from '@material-ui/core/CardMedia';
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
@@ -48,6 +52,9 @@ const useStyles = makeStyles((theme) => ({
   add: {
     width: "auto",
     alignSelf: "center",
+  },
+  card: {
+    maxWidth: 345,
   },
 }));
 const MenuProps = {
@@ -124,15 +131,10 @@ export default function EditProduct() {
     e.preventDefault();
     createProduct.categories.push(newCategory);
     try {
-      /* await setCreateProduct({ ...createProduct, img: image }); */
-      let postC = await axios.post("http://localhost:3001/admin/category", {
-        name: newCategory,
-      });
       dispatch(updateProducts(id,{
         ...createProduct,
         img: image,
       })) 
-      /* setTimeout(() => (document.location.href = HOME), 1000); */
     } catch (err) {
       console.log(err);
     }
@@ -196,7 +198,7 @@ export default function EditProduct() {
           id="outlined-helperText"
           name="name"
           label="Nombre"
-          defaultValue={productoId.name}
+          placeholder={productoId.name}
           helperText="*"
           variant="outlined"
           onChange={handleInputChange}
@@ -282,13 +284,32 @@ export default function EditProduct() {
               className="progressBar"
             />
           )}
-          {img && img.map((i) => <img key={i} src={i} alt="" />)}
+          {
+            img && img.map((i) => 
+          <Card className={contentPC.card}>
+            <CardActionArea>
+              <CardMedia
+                component="img"
+                alt="Imagen la Montañes"
+                height="140"
+                src={i}
+                key= {i}
+              />
+            </CardActionArea>
+            <CardActions>
+            <Button size="small" color="primary">
+              Eliminar
+              </Button>
+            </CardActions>
+         </Card>
+         )}
+          {/* //{img && img.map((i) => <img key={i} src={i} alt="" />)} */}
         </div>
         <TextField
           id="outlined-number"
           label="Precio"
           name="price"
-          defaultValue={productoId.price}
+          placeholder={productoId.price}
           InputProps={{ inputProps: { min: 0, max: 999999999 } }}
           type="number"
           InputLabelProps={{
@@ -299,9 +320,9 @@ export default function EditProduct() {
         />
         <TextField
           id="outlined-number"
-          //label="abv"
+          label="abv"
           name="abv"
-          defaultValue={productoId.abv}
+          placeholder={productoId.abv}
           type="number"
           InputProps={{ inputProps: { min: 0, max: 100 } }}
           InputLabelProps={{
@@ -312,8 +333,8 @@ export default function EditProduct() {
         />
         <TextField
           id="outlined-number"
-          //label="ibu"
-          defaultValue={productoId.ibu}
+          label="ibu"
+          placeholder={productoId.ibu}
           type="number"
           name="ibu"
           InputProps={{ inputProps: { min: 0, max: 100 } }}
@@ -326,8 +347,8 @@ export default function EditProduct() {
         />
         <TextField
           id="outlined-number"
-          //label="Stock"
-          defaultValue={productoId.stock}
+          label="Stock"
+          placeholder={productoId.stock}
           type="number"
           InputProps={{ inputProps: { min: 0, max: 999999999 } }}
           name="stock"
@@ -353,7 +374,7 @@ export default function EditProduct() {
           id="outlined-number"
           label="Volumen"
           type="number"
-          defaultValue={productoId.volumen}
+          placeholder={productoId.volumen}
           InputProps={{ inputProps: { min: 0, max: 99999 } }}
           name="volumen"
           min="1"
@@ -370,7 +391,7 @@ export default function EditProduct() {
           name="others"
           multiline
           rows={2}
-          defaultValue={productoId.others}
+          placeholder={productoId.others}
           variant="outlined"
           onChange={handleInputChange}
         />
