@@ -28,6 +28,7 @@ import {
   selectedProducts,
 } from "../../actions/types/productActions";
 import { Link } from "react-router-dom";
+import CategoryIcon from '@material-ui/icons/Category';
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -199,7 +200,7 @@ const EnhancedTableToolbar = (props) => {
           {seleccionados.length === 1 && (
             <Tooltip title="Delete">
               <IconButton aria-label="delete">
-                <Link to={"/home/admin/editProduct/" + seleccionados}>
+                <Link to={"/admin/editProduct/" + seleccionados}>
                   <CreateSharpIcon />
                 </Link>
               </IconButton>
@@ -207,13 +208,22 @@ const EnhancedTableToolbar = (props) => {
           )}
         </div>
       ) : (
+        <div>
         <Tooltip title="Crear Producto">
           <IconButton aria-label="filter list">
-            <Link to="/home/admin/productCreation">
+            <Link to="/admin/productCreation">
               <AddCircleRoundedIcon />
             </Link>
           </IconButton>
         </Tooltip>
+        <Tooltip title="Categorias">
+        <IconButton aria-label="filter list">
+          <Link to="/admin/categoryCreation">
+            <CategoryIcon />
+          </Link>
+        </IconButton>
+      </Tooltip>
+      </div>
       )}
     </Toolbar>
   );
@@ -409,8 +419,6 @@ export const Dashboard = () => {
         control={<Switch checked={dense} onChange={handleChangeDense} />}
         label="Dense padding"
       />
-      <p>{seleccionados.length}</p>
-      <p>{selected.length}</p>
     </div>
   );
 };
