@@ -1,13 +1,20 @@
 import axios from "axios";
-import React, { useState, useEffect, forwardRef } from "react";
-import {useDispatch, useSelector} from 'react-redux';
+import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
+import {useDispatch, useSelector} from 'react-redux';
+import Input from "@material-ui/core/Input";
 import TextField from "@material-ui/core/TextField";
-import { makeStyles } from "@material-ui/core/styles";
-import { styled } from "@material-ui/core/styles";
+import { makeStyles, useTheme } from "@material-ui/core/styles";
+import AddIcon from "@material-ui/icons/Add";
 import Button from "@material-ui/core/Button";
+import MenuItem from "@material-ui/core/MenuItem";
+import FormControl from "@material-ui/core/FormControl";
+import Select from "@material-ui/core/Select";
+import InputLabel from "@material-ui/core/InputLabel";
+import Chip from "@material-ui/core/Chip";
+import LinearProgress from "@material-ui/core/LinearProgress";
 import "./EditProduct.css";
-import {getProductDetail, updateProducts} from '../../actions/types/productActions'
+import {getProductDetail, updateProducts} from '../../actions/types/productActions';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -21,57 +28,110 @@ const useStyles = makeStyles((theme) => ({
   button: {
     color: "#fff",
   },
+  formControl: {
+    margin: theme.spacing(1),
+    width: "85%",
+  },
+  chips: {
+    display: "flex",
+    flexWrap: "wrap",
+  },
+  chip: {
+    margin: 2,
+  },
+  images: {
+    display: "none",
+  },
+  add: {
+    width: "auto",
+    alignSelf: "center",
+  },
 }));
-const Input = styled("input")({
-  /* display: "none", */
-});
-export default function EditProduct(props) {
+const MenuProps = {
+  PaperProps: {
+    style: {
+      width: 250,
+    },
+  },
+};
+export default function EditProduct() {
 
   const dispatch = useDispatch();
   const { id } = useParams();
-  console.log(id)
+
   const productoId = useSelector((state) => state.productDetail);
+
+  const {img, categories} = productoId;
+
+  const productoCategorias = productoId.categories[0];
+
   useEffect(() => {
     dispatch(getProductDetail(id));
+    console.log(productoId.categories[0])
   }, [id, dispatch])
 
-  const [loadingImg, setLoadingImg] = useState(false);
-  const [image, setImage] = useState([]);
 
-  const [updateProduct, setUpdateProduct] = useState({
-    name: '',
-    category: {
-      name: "",
-    },
+  const [addCategory, setAddCategory] = useState(false);
+  const [loadingImg, setLoadingImg] = useState(0);
+  const theme = useTheme();
+  const [image, setImage] = useState([]);
+  const [newCategory, setNewCategory] = useState([]);
+  const allCategories = useSelector((state) => state.allCategories);
+  const [createProduct, setCreateProduct] = useState({
+    name: "",
+    categories: productoCategorias,
     img: [],
-    price: '',
-    stock: '',
-    abv: '',
-    ibu: '',
+    price: 0,
+    stock: 0,
+    abv: 0,
+    ibu: 0,
     description: "",
     volumen: 0,
     others: "",
   });
+  function getStyles(name, personName, theme) {
+    return {
+      fontWeight:
+        personName.indexOf(name) === -1
+          ? theme.typography.fontWeightRegular
+          : theme.typography.fontWeightMedium,
+    };
+  }
+  const addNewCategory = async () => {
+    setAddCategory(!addCategory);
+  };
   const handleSubmit = async (e) => {
     e.preventDefault();
-    dispatch(updateProducts(id, {
-      ...updateProduct,
-      img:image
-    })) 
+    createProduct.categories.push(newCategory);
+    try {
+      /* await setCreateProduct({ ...createProduct, img: image }); */
+      let postC = await axios.post("http://localhost:3001/admin/category", {
+        name: newCategory,
+      });
+      let post = await axios.post("http://localhost:3001/admin/product", {
+        ...createProduct,
+        img: image,
+      });
+      /* setTimeout(() => (document.location.href = HOME), 1000); */
+    } catch (err) {
+      console.log(err);
+    }
   };
   const handleInputChange = (e) => {
-    setUpdateProduct({
-      ...updateProduct,
+    setCreateProduct({
+      ...createProduct,
       [e.target.name]: e.target.value,
     });
   };
+  const handleInputCategory = (e) => {
+    setNewCategory(e.target.value);
+  };
   const handleCategoryChange = (e) => {
-    setUpdateProduct({
-      ...updateProduct,
-      category: {
-        name: e.target.value,
-      },
+    setCreateProduct({
+      ...createProduct,
+      categories: e.target.value,
     });
+    console.log(createProduct.categories);
   };
   const contentPC = useStyles();
 
@@ -86,20 +146,22 @@ export default function EditProduct(props) {
       await axios
         .post(
           "https://api.cloudinary.com/v1_1/la-montanes/image/upload",
-          images
+          images,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+            onUploadProgress(e) {
+              setLoadingImg(Math.round((e.loaded * 100) / e.total));
+            },
+          }
         )
         .then((res) => {
+          setLoadingImg(0);
           setImage((imgs) => [...imgs, res.data.secure_url]);
-          console.log(res.data.secure_url);
         })
         .catch((err) => console.log(err));
     }
-    console.log(image);
-    /* files.map((i) => {
-    }); */
-    setLoadingImg(true);
-
-    setLoadingImg(false);
   };
 
   return (
@@ -108,32 +170,80 @@ export default function EditProduct(props) {
         {" "}
         <button>Home</button>{" "}
       </Link>
-      <h2>Edita tu producto</h2>
-      <form className={contentPC.root} onSubmit={handleSubmit}>
+      <h2>Editar Producto</h2>
+      <form className={contentPC.root}>
         <TextField
           id="outlined-helperText"
-          name="name" 
-          placeholder="Nombre"
+          name="name"
+          label="Nombre"
           defaultValue={productoId.name}
           helperText="*"
           variant="outlined"
           onChange={handleInputChange}
         />
-        <TextField
-          id="outlined-helperText"
-          label="Categoria"
-          name="category"
-          defaultValue=""
-          helperText="*"
-          variant="outlined"
-          onChange={handleCategoryChange}
-        />
+        <div className="categoryContent">
+          <FormControl className={contentPC.formControl}>
+            <InputLabel id="demo-mutiple-chip-label">Categorias</InputLabel>
+            <Select
+              multiple
+              labelId="demo-mutiple-chip-label"
+              id="demo-mutiple-chip"
+              value={createProduct.categories}
+              defaultValue = {categories}
+              onChange={handleCategoryChange}
+              input={<Input id="select-multiple-chip" />}
+              renderValue={
+                (selected) => (
+                <div className={contentPC.chips}>
+                  {selected.map((value) => (
+                    <Chip
+                      key={value}
+                      label={value}
+                      className={contentPC.chip}
+                    />
+                  ))}
+                </div>
+              )}
+              MenuProps={MenuProps}
+            >
+              {allCategories.map((i) => (
+                <MenuItem
+                  key={i.name}
+                  value={i.name}
+                  tyle={getStyles(i.name, createProduct.categories, theme)}
+                >
+                  {i.name}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+          <Button
+            variant="contained"
+            color="secondary"
+            className={contentPC.add}
+            onClick={addNewCategory}
+          >
+            <AddIcon />
+          </Button>
+          {addCategory && (
+            <TextField
+              id="outlined-helperText"
+              label="Categoria"
+              name="category"
+              defaultValue=""
+              helperText="*"
+              variant="outlined"
+              onChange={handleInputCategory}
+            />
+          )}
+        </div>
         <div className="images">
           <label htmlFor="contained-button-file" color="primary">
             <Input
+              className={contentPC.images}
               accept="image/*"
               id="contained-button-file"
-              multiple
+              inputProps={{ multiple: true }}
               type="file"
               onChange={uploadImage}
             />
@@ -146,14 +256,20 @@ export default function EditProduct(props) {
               Sube tus imagenes
             </Button>
           </label>
-          {image && image.map((i) => <img src={i} alt="" />)}
+          {loadingImg > 0 && (
+            <LinearProgress
+              variant="determinate"
+              value={loadingImg}
+              className="progressBar"
+            />
+          )}
+          {img && img.map((i) => <img key={i} src={i} alt="" />)}
         </div>
-
         <TextField
           id="outlined-number"
           label="Precio"
-          defaultValue= {productoId.price}
           name="price"
+          defaultValue={productoId.price}
           InputProps={{ inputProps: { min: 0, max: 999999999 } }}
           type="number"
           InputLabelProps={{
@@ -165,8 +281,8 @@ export default function EditProduct(props) {
         <TextField
           id="outlined-number"
           label="abv"
-          value= {productoId.abv}
           name="abv"
+          defaultValue={productoId.abv}
           type="number"
           InputProps={{ inputProps: { min: 0, max: 100 } }}
           InputLabelProps={{
@@ -178,7 +294,7 @@ export default function EditProduct(props) {
         <TextField
           id="outlined-number"
           label="ibu"
-          value= {productoId.ibu}
+          defaultValue={productoId.ibu}
           type="number"
           name="ibu"
           InputProps={{ inputProps: { min: 0, max: 100 } }}
@@ -192,7 +308,7 @@ export default function EditProduct(props) {
         <TextField
           id="outlined-number"
           label="Stock"
-          value= {productoId.stock}
+          defaultValue={productoId.stock}
           type="number"
           InputProps={{ inputProps: { min: 0, max: 999999999 } }}
           name="stock"
@@ -206,13 +322,11 @@ export default function EditProduct(props) {
         <TextField
           width={300}
           id="outlined-multiline-static"
-          //label="Descripcion"
+          label="Descripcion"
           name="description"
-          placeholder="Descripcion"
-          value= {productoId.description}
+          defaultValue={productoId.description}
           multiline
           rows={4}
-          defaultValue=""
           variant="outlined"
           onChange={handleInputChange}
         />
@@ -220,7 +334,7 @@ export default function EditProduct(props) {
           id="outlined-number"
           label="Volumen"
           type="number"
-          value= {productoId.volumen}
+          defaultValue={productoId.volumen}
           InputProps={{ inputProps: { min: 0, max: 99999 } }}
           name="volumen"
           min="1"
@@ -233,17 +347,21 @@ export default function EditProduct(props) {
         />
         <TextField
           id="outlined-multiline-static"
-          placeholder="Otros"
+          label="Otros"
           name="others"
-          value= {productoId.others}
           multiline
           rows={2}
-          defaultValue=""
+          defaultValue={productoId.others}
           variant="outlined"
           onChange={handleInputChange}
         />
-        <Button variant="contained" color="primary" type="submit">
-          Crear
+        <Button
+          variant="contained"
+          color="primary"
+          type="submit"
+          onClick={handleSubmit}
+        >
+          Editar
         </Button>
       </form>
     </div>
