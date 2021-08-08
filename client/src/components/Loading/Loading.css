@@ -1,12 +1,6 @@
 .loading_container{
-    background-color: green;
-    padding-top: 300px;
-}
-
-.loading_style{
-display:flex;
-justify-content: center;
-align-items: center;
-padding-top: 130px;
-padding-left: 300px;
+    height: calc(100vh - 13rem - 130px);
+    display:flex;
+    justify-content: center;
+    align-items: center;
 }
