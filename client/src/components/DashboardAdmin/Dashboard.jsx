@@ -409,8 +409,6 @@ export const Dashboard = () => {
         control={<Switch checked={dense} onChange={handleChangeDense} />}
         label="Dense padding"
       />
-      <p>{seleccionados.length}</p>
-      <p>{selected.length}</p>
     </div>
   );
 };

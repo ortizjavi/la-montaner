@@ -66,18 +66,28 @@ export default function EditProduct() {
   }, [id, dispatch]);
   const productoId = useSelector((state) => state.productDetail);
 
-  let { img, categories } = productoId;
-  console.log(productoId);
-  console.log(productoId.categories);
+  useEffect(() => {
+    console.log(productoId)
+    if(productoId && productoId.hasOwnProperty('categories')) {
+      setCreateProduct({ 
+        ...productoId,
+        name: productoId.name,
+        categories: productoId.categories.map(c => c.name)
+      } )
+    }
+  }, [productoId, dispatch])
+  
 
-  const productoCategorias = productoId.categories[0];
-
+  
   const [addCategory, setAddCategory] = useState(false);
   const [loadingImg, setLoadingImg] = useState(0);
   const theme = useTheme();
   const [image, setImage] = useState([]);
   const [newCategory, setNewCategory] = useState([]);
   const allCategories = useSelector((state) => state.allCategories);
+
+  const contentPC = useStyles();
+
   const [createProduct, setCreateProduct] = useState({
     name: "",
     categories: [],
@@ -90,6 +100,15 @@ export default function EditProduct() {
     volumen: 0,
     others: "",
   });
+  if(!productoId){return <div>Buscando producto...</div>}
+  
+  let { img, categories } = productoId;
+  console.log(productoId);
+  console.log(productoId.categories);
+
+  
+  
+
   function getStyles(name, personName, theme) {
     return {
       fontWeight:
@@ -109,10 +128,10 @@ export default function EditProduct() {
       let postC = await axios.post("http://localhost:3001/admin/category", {
         name: newCategory,
       });
-      let post = await axios.post("http://localhost:3001/admin/product", {
+      dispatch(updateProducts(id,{
         ...createProduct,
         img: image,
-      });
+      })) 
       /* setTimeout(() => (document.location.href = HOME), 1000); */
     } catch (err) {
       console.log(err);
@@ -134,7 +153,7 @@ export default function EditProduct() {
     });
     console.log(createProduct.categories);
   };
-  const contentPC = useStyles();
+
 
   const uploadImage = async (e) => {
     const files = e.target.files;
@@ -280,7 +299,7 @@ export default function EditProduct() {
         />
         <TextField
           id="outlined-number"
-          label="abv"
+          //label="abv"
           name="abv"
           defaultValue={productoId.abv}
           type="number"
@@ -293,7 +312,7 @@ export default function EditProduct() {
         />
         <TextField
           id="outlined-number"
-          label="ibu"
+          //label="ibu"
           defaultValue={productoId.ibu}
           type="number"
           name="ibu"
@@ -307,7 +326,7 @@ export default function EditProduct() {
         />
         <TextField
           id="outlined-number"
-          label="Stock"
+          //label="Stock"
           defaultValue={productoId.stock}
           type="number"
           InputProps={{ inputProps: { min: 0, max: 999999999 } }}
@@ -322,7 +341,7 @@ export default function EditProduct() {
         <TextField
           width={300}
           id="outlined-multiline-static"
-          label="Descripcion"
+          //label="Descripcion"
           name="description"
           defaultValue={productoId.description}
           multiline
