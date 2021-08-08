@@ -15,8 +15,8 @@ const ShowProducts = ({allProducts}) => {
     for(let i = 0; i < diff; i++){
       allProducts[1].push({
         _id: i,
-        img: ["https://live.staticflickr.com/65535/51357138820_5d67c34fa6_m.jpg"],
-        name: 'Cerveza en Proceso de Creación'
+        img: [],
+        name: 'Cerveza en Proceso de Creación',
       })
     }
   }
@@ -41,15 +41,15 @@ const ShowProducts = ({allProducts}) => {
                               <NavLink className='' to={`/home/${item?._id}`}>
                                   <div className='image_contain'>
                                     {
-                                     validaURLs(item.img[0]) ?
+                                      validaURLs(item.img[0])  ?
                                       <img className="item_image" src={item?.img[0]} alt="" />
                                       :
-                                      <img className="item_image" src="https://live.staticflickr.com/65535/51357138820_5d67c34fa6_m.jpg" alt="" />
-
+                                      <img className="item_image" style={{opacity: 0.1}} src="https://live.staticflickr.com/65535/51357138820_5d67c34fa6_m.jpg" alt="" />
                                     }
                                   </div>
                           </NavLink>
                           <button className='sp-button' onClick={()=>alert('Buena desición')}>Comprar</button>
+                      
                       </div>
                     )
                   } 

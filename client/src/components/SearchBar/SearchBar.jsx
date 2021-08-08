@@ -13,6 +13,7 @@ export default function Search() {
 
     useEffect(() => {
             dispatch(searchProductsAction(state.product))
+            return ()=> searchProductsAction('')
     }, [state])
 
     const handleChange = (event) => {
