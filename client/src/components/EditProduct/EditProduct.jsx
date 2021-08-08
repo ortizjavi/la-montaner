@@ -1,7 +1,7 @@
 import axios from "axios";
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import React, { useState, useEffect } from "react";
+import { Link, useParams } from "react-router-dom";
+import {useDispatch, useSelector} from 'react-redux';
 import Input from "@material-ui/core/Input";
 import TextField from "@material-ui/core/TextField";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
@@ -13,7 +13,8 @@ import Select from "@material-ui/core/Select";
 import InputLabel from "@material-ui/core/InputLabel";
 import Chip from "@material-ui/core/Chip";
 import LinearProgress from "@material-ui/core/LinearProgress";
-import "./ProductCreation.css";
+import "./EditProduct.css";
+import {getProductDetail, updateProducts} from '../../actions/types/productActions';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -53,7 +54,23 @@ const MenuProps = {
     },
   },
 };
-export default function ProductCreation() {
+export default function EditProduct() {
+
+  const dispatch = useDispatch();
+  const { id } = useParams();
+
+  const productoId = useSelector((state) => state.productDetail);
+
+  const {img, categories} = productoId;
+
+  const productoCategorias = productoId.categories[0];
+
+  useEffect(() => {
+    dispatch(getProductDetail(id));
+    console.log(productoId.categories[0])
+  }, [id, dispatch])
+
+
   const [addCategory, setAddCategory] = useState(false);
   const [loadingImg, setLoadingImg] = useState(0);
   const theme = useTheme();
@@ -62,7 +79,7 @@ export default function ProductCreation() {
   const allCategories = useSelector((state) => state.allCategories);
   const [createProduct, setCreateProduct] = useState({
     name: "",
-    categories: [],
+    categories: productoCategorias,
     img: [],
     price: 0,
     stock: 0,
@@ -85,20 +102,16 @@ export default function ProductCreation() {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
+    createProduct.categories.push(newCategory);
     try {
-      if (newCategory.length > 0) {
-        let postC = await axios.post("http://localhost:3001/admin/category", {
-          name: newCategory,
-        });
-        createProduct.categories.push(newCategory);
-        console.log(postC);
-      }
       /* await setCreateProduct({ ...createProduct, img: image }); */
+      let postC = await axios.post("http://localhost:3001/admin/category", {
+        name: newCategory,
+      });
       let post = await axios.post("http://localhost:3001/admin/product", {
         ...createProduct,
         img: image,
       });
-      console.log(post);
       /* setTimeout(() => (document.location.href = HOME), 1000); */
     } catch (err) {
       console.log(err);
@@ -146,8 +159,6 @@ export default function ProductCreation() {
         .then((res) => {
           setLoadingImg(0);
           setImage((imgs) => [...imgs, res.data.secure_url]);
-          console.log(res.data.secure_url);
-          console.log(image);
         })
         .catch((err) => console.log(err));
     }
@@ -159,13 +170,13 @@ export default function ProductCreation() {
         {" "}
         <button>Home</button>{" "}
       </Link>
-      <h2>Crear Nuevo Producto</h2>
+      <h2>Editar Producto</h2>
       <form className={contentPC.root}>
         <TextField
           id="outlined-helperText"
           name="name"
           label="Nombre"
-          defaultValue=""
+          defaultValue={productoId.name}
           helperText="*"
           variant="outlined"
           onChange={handleInputChange}
@@ -174,13 +185,15 @@ export default function ProductCreation() {
           <FormControl className={contentPC.formControl}>
             <InputLabel id="demo-mutiple-chip-label">Categorias</InputLabel>
             <Select
+              multiple
               labelId="demo-mutiple-chip-label"
               id="demo-mutiple-chip"
-              multiple
               value={createProduct.categories}
+              defaultValue = {categories}
               onChange={handleCategoryChange}
               input={<Input id="select-multiple-chip" />}
-              renderValue={(selected) => (
+              renderValue={
+                (selected) => (
                 <div className={contentPC.chips}>
                   {selected.map((value) => (
                     <Chip
@@ -250,13 +263,13 @@ export default function ProductCreation() {
               className="progressBar"
             />
           )}
-          {image && image.map((i) => <img key={i} src={i} alt="" />)}
+          {img && img.map((i) => <img key={i} src={i} alt="" />)}
         </div>
-
         <TextField
           id="outlined-number"
           label="Precio"
           name="price"
+          defaultValue={productoId.price}
           InputProps={{ inputProps: { min: 0, max: 999999999 } }}
           type="number"
           InputLabelProps={{
@@ -269,6 +282,7 @@ export default function ProductCreation() {
           id="outlined-number"
           label="abv"
           name="abv"
+          defaultValue={productoId.abv}
           type="number"
           InputProps={{ inputProps: { min: 0, max: 100 } }}
           InputLabelProps={{
@@ -280,6 +294,7 @@ export default function ProductCreation() {
         <TextField
           id="outlined-number"
           label="ibu"
+          defaultValue={productoId.ibu}
           type="number"
           name="ibu"
           InputProps={{ inputProps: { min: 0, max: 100 } }}
@@ -293,6 +308,7 @@ export default function ProductCreation() {
         <TextField
           id="outlined-number"
           label="Stock"
+          defaultValue={productoId.stock}
           type="number"
           InputProps={{ inputProps: { min: 0, max: 999999999 } }}
           name="stock"
@@ -308,9 +324,9 @@ export default function ProductCreation() {
           id="outlined-multiline-static"
           label="Descripcion"
           name="description"
+          defaultValue={productoId.description}
           multiline
           rows={4}
-          defaultValue=""
           variant="outlined"
           onChange={handleInputChange}
         />
@@ -318,6 +334,7 @@ export default function ProductCreation() {
           id="outlined-number"
           label="Volumen"
           type="number"
+          defaultValue={productoId.volumen}
           InputProps={{ inputProps: { min: 0, max: 99999 } }}
           name="volumen"
           min="1"
@@ -334,7 +351,7 @@ export default function ProductCreation() {
           name="others"
           multiline
           rows={2}
-          defaultValue=""
+          defaultValue={productoId.others}
           variant="outlined"
           onChange={handleInputChange}
         />
@@ -344,7 +361,7 @@ export default function ProductCreation() {
           type="submit"
           onClick={handleSubmit}
         >
-          Crear
+          Editar
         </Button>
       </form>
     </div>

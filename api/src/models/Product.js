@@ -8,7 +8,8 @@ const ProductSchema = Schema({
   },
 
   categories: {
-    type: [schema],
+    type: Schema.Types.Array,
+    ref: "Category",
     required: true,
   },
 
