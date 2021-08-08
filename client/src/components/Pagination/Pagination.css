@@ -32,6 +32,7 @@ font-size_narvar:rgb(130,130,130); */
       list-style: none;
       padding: 0px;
       display: flex;
+      height: 2.5rem;
 }
   
 .pagination ul  li{
