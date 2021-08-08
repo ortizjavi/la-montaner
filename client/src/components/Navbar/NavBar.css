@@ -1,5 +1,5 @@
 .navbar {
-    height: 5rem;
+    height: 4rem;
     width: 100%;
     top: 0;
     left: 0;
@@ -8,9 +8,9 @@
     align-items: center;
     padding: 0 20px;
     box-sizing: border-box;
-    margin-top: 20px;
+    margin-top: 15px;
     padding-right: 5rem;
-    margin-bottom: 2.5rem;
+    margin-bottom: 2rem;
 }
 
 .navbar nav {
@@ -30,6 +30,7 @@
     align-items: center;
     margin-right: 5rem;
     margin-top: 2.1rem;
+    cursor: pointer;
 }
 
 .Nav-button {
@@ -46,7 +47,8 @@
 
 .Nav-button:hover{
     background: rgba(119, 103, 80, 0.1);
-    border-radius: 10px;
+    border-radius: 50px;
+    border-bottom: 2px solid #C88E34;
 
 
 }
@@ -54,7 +56,7 @@
     height: auto;
     font-size: 1.4rem;
     margin-left: 1.7rem;
-    background: rgba(200,142,52, 0.5);
+    background:#C88E34;
 }
 
 .nav-personicon{

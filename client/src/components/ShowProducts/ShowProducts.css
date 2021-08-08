@@ -34,26 +34,13 @@
     margin-top: 2px;
     min-height: inherit;
 }
-
-.image_contain{
-   
-    background-image: url("https://live.staticflickr.com/65535/51357138820_5d67c34fa6_m.jpg");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 6rem;
-    background-position-x: 50%;
-}
 .item_image{
     width: 80%;
     height: 13rem;
     margin-left: 10%;
     object-fit: scale-down;
     
-    background-image: url("https://live.staticflickr.com/65535/51357138820_5d67c34fa6_m.jpg");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 6rem;
-    background-position-x: 50%;
+  
 
 }
 .sp-button{
