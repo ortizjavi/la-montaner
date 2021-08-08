@@ -1,5 +1,5 @@
 import './CategoryCreation.css';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { createCategory, deleteCategories } from '../../actions/types/categoryActions';
 import { fixedCategories } from '../../utils/endpoints.js'
@@ -26,8 +26,8 @@ export default function CategoryCreator() {
   }
 
   const handleClick = (category) => {
-    dispatch(deleteCategories(category))
     alert(`Categoría ${category.name.toUpperCase()} eliminada`)
+    dispatch(deleteCategories(category)) 
   };
 
 

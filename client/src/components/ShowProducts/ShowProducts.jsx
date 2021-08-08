@@ -15,8 +15,9 @@ const ShowProducts = ({allProducts}) => {
     for(let i = 0; i < diff; i++){
       allProducts[1].push({
         _id: i,
-        img: ["https://live.staticflickr.com/65535/51357138820_5d67c34fa6_m.jpg"],
-        name: 'Cerveza en Proceso de Creación'
+        img: [],
+        name: 'Producto en Proceso de Creación',
+        noExist:true,
       })
     }
   }
@@ -34,6 +35,19 @@ const ShowProducts = ({allProducts}) => {
                 <>
                   {
                     allProducts[1].map( item =>
+                      <>
+                      { item.noExist ?
+                         <div className='sp-product_container' key={item._id}>
+                         <div className='sp-link sp-name'>
+                           <h5 className='link-name'>Producto en Proceso de Creación</h5>
+                         </div>
+                             <div>
+                                 <div className='image_contain'>
+                                     <img className="item_image" style={{opacity: 0.1}} src="https://live.staticflickr.com/65535/51357138820_5d67c34fa6_m.jpg" alt="" />
+                                 </div>
+                         </div>
+                     </div>
+                        :
                       <div className='sp-product_container' key={item._id}>
                           <NavLink className='sp-link' to={`/home/${item?._id}`}>
                             <h5 className='link-name'>{item?.name}</h5>
@@ -41,16 +55,17 @@ const ShowProducts = ({allProducts}) => {
                               <NavLink className='' to={`/home/${item?._id}`}>
                                   <div className='image_contain'>
                                     {
-                                     validaURLs(item.img[0]) ?
+                                      validaURLs(item.img[0])  ?
                                       <img className="item_image" src={item?.img[0]} alt="" />
                                       :
-                                      <img className="item_image" src="https://live.staticflickr.com/65535/51357138820_5d67c34fa6_m.jpg" alt="" />
-
+                                      <img className="item_image" style={{opacity: 0.1}} src="https://live.staticflickr.com/65535/51357138820_5d67c34fa6_m.jpg" alt="Producto" onerror="this.style.display='none'" />
                                     }
                                   </div>
                           </NavLink>
                           <button className='sp-button' onClick={()=>alert('Buena desición')}>Comprar</button>
                       </div>
+                      }
+                      </>
                     )
                   } 
                   {allProducts[0] > 8 && <Pagination response={allProducts[0]}/>}

@@ -22,7 +22,7 @@ export default function ProductDetail() {
     dispatch(getProductDetail(id));
     setTimeout(() => {
       setLoading(false);
-    }, 1500);
+    }, 1000);
   }, [id, dispatch]);
 
   console.log("components/ProductDetail:", detail);
@@ -31,32 +31,41 @@ export default function ProductDetail() {
     alert("producto agregado correctamente");
   };
 
+  const handleBuyProduct = () => {
+    alert("gracias por comprar nuestros productos");
+  };
+
+
   return (
     <>
-      <Link to="/home">
-        {" "}
-      </Link>
+      <Link to="/home"> </Link>
       {loading ? (
         <Loading />
       ) : (
         <div className="detail_style">
           <div className="general_container">
             <div className="detail-img">
-              <Carousel>
-              <div className="slide_image">
-              <img src={detail.img[0]} alt={detail.name} />
-              </div>
-              <div className="slide_image">
-                <img src={detail.img[1]} alt="product2" />
+              {detail.img.length > 1 ? (
+                <Carousel>
+                  <div className="slide_image">
+                    <img src={detail.img[0]} alt={detail.name} />
+                  </div>
+                  <div className="slide_image">
+                    <img src={detail.img[1]} alt="product2" />
+                  </div>
+                </Carousel>
+              ) : (
+                <div className="slide_image">
+                  <img src={detail.img[0]} alt={detail.name} />
                 </div>
-              </Carousel>
+              )}
             </div>
 
             <div className="detail_description">
               <div className="detail-render">
                 <h2>{detail.name}</h2>
                 <p className="detail_stars">⭐⭐⭐⭐⭐</p>
-                <h3>Categoría: {detail.categories.name}</h3>
+                <h3>Categoría: {detail.categories[0].name}</h3>
                 <div className="detail-price">
                   <h3 className="detail_price">Precio: ${detail.price} </h3>
                 </div>
@@ -77,7 +86,7 @@ export default function ProductDetail() {
                   </div>
                 )}
                 <div className="detail_button">
-                  <button >COMPRAR</button>
+                  <button onClick={() => handleBuyProduct()}>COMPRAR</button>
                 </div>
 
                 <div className="detail_info_description">
@@ -89,7 +98,9 @@ export default function ProductDetail() {
           </div>
         </div>
       )}
-      <div className="details_footer"><Footer /></div>
+      <div className="details_footer">
+        <Footer />
+      </div>
     </>
   );
 }

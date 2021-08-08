@@ -6,7 +6,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import SvgIcon from '@material-ui/core/SvgIcon';
 
 
-export default function Search() {
+export default function SearchBar() {
     const dispatch = useDispatch();
     const allProducts = useSelector( state => state.allProducts)
     const [state, setState] = useState({product: ""})
@@ -27,14 +27,18 @@ export default function Search() {
           </SvgIcon>
         );
       }
+     
+
 
     return(
         <div>
             <form className="form-container" >
                 <label >     
-                    <input list="product" multiple value={state.product} className='input_search' autoComplete='off' placeholder='Buscar Productos' name="product" onChange={handleChange} />
+                    <input list="product" multiple value={state.product} className='input_search' 
+                    autoComplete='off' placeholder='Buscar Productos' name="product" 
+                    onChange={(e)=>handleChange(e)} />
                 </label>   
-                <datalist  id="product" multiple  >
+                <datalist  id="product" multiple >
                     {
                         state.product.length >=2 ?
                         allProducts[1].map( (t, key) => (
@@ -43,7 +47,6 @@ export default function Search() {
                         :
                             <option/>
                     }  
-                
                 </datalist>
                 <button className='nav-personicon' onClick={()=> alert('Qué te puedo decir.. Falta el preventDefaul()!!')}>
                     <SearchIcon style={{ fontSize: 40,color:'#66D040' }} />
