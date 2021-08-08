@@ -1,8 +1,8 @@
 import React,{useState, useEffect} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import './NavBar.css';
-import { NavLink } from 'react-router-dom';
-import Search from '../SearchBar/SearchBar';
+import { Link, NavLink } from 'react-router-dom';
+import SearchBar from '../SearchBar/SearchBar';
 import PersonIcon from '@material-ui/icons/Person';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import SvgIcon from '@material-ui/core/SvgIcon';
@@ -53,7 +53,7 @@ function NavBar() {
             <NavLink to='/home' className='nav-personicon'>
               <img className='nb-img'  src="https://live.staticflickr.com/65535/51361173217_49de2674c3_m.jpg" alt="Montañez Logo"/>
             </NavLink>
-            <Search/>
+            <SearchBar/>
             <nav>
                 <ul >
                     <li className="list-item">
@@ -65,9 +65,11 @@ function NavBar() {
                     </li>
                 </ul>
             </nav>
-                <button className='nav-personicon' onClick={()=> alert('Che como vaz!🚀')}>
+                <Link to='/admin'>
+                  <button className='nav-personicon'>
                     <PersonIcon style={{ fontSize: 40 }}  />
-                </button>
+                  </button>
+                </Link>
                 <button className='nav-personicon' onClick={()=> alert('Yo... Re-bien!!😎')}>
                     <ShoppingCartIcon style={{ fontSize: 40 }} />
                 </button>

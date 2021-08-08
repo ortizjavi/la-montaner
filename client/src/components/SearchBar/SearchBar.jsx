@@ -6,7 +6,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import SvgIcon from '@material-ui/core/SvgIcon';
 
 
-export default function Search() {
+export default function SearchBar() {
     const dispatch = useDispatch();
     const allProducts = useSelector( state => state.allProducts)
     const [state, setState] = useState({product: ""})
