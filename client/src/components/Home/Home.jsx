@@ -4,6 +4,7 @@ import {  searchProducts,  } from '../../actions/types/productActions.js';
 import NavBar from '../Navbar/NavBar';
 import Filters from '../Filters/Fiters.jsx';
 import ShowProducts from '../ShowProducts/ShowProducts';
+import Footer from '../Footer/Footer';
 import './Home.css';
 
 export default function Home() {
@@ -53,6 +54,9 @@ export default function Home() {
             <ShowProducts allProducts={allProducts}/>
           </section>
       </main>
+      <footer>
+          <Footer/>
+      </footer>
     </div>
   )
 }

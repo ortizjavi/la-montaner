@@ -4,49 +4,59 @@
 .sp-product_container{
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     border: solid grey 2px;
     border-radius: 5px;
-    width: 20%;
-    min-height: 40%;
-    min-width: 15vw;
+    /* min-height: 15rem;
+    max-height: 15rem; */
+    height: 18rem;
+    width: 12rem;
     margin: 10px;
 }
-.link{
-    display: inline-table;
+.sp-link{
     text-decoration: none;
-    /* background: var(--color-button); */
     font-family: sans-serif;
     color:grey;
     border-radius: 4px;
-    width: 70%;
-    margin: 5px;
-    height: 1rem;
-    padding-top: 5px;
     text-align: center;
+    max-height: 40px;
+    cursor: pointer;
 }
 
 .link:hover{
     background:rgba(119, 103, 80, 0.1);
     border-radius: 4px;
 }
+.link-name{
+    padding: 0;
+    margin: 0;
+    margin-top: 2px;
+    min-height: inherit;
+}
 .item_image{
     width: 80%;
-    height: 14rem;
+    height: 13rem;
     margin-left: 10%;
     object-fit: scale-down;
+    
+  
+
 }
 .sp-button{
     background: rgb(43,149,89);
     color: white;
     border-radius: 3px;
     border: none;
-    width: 70%;
-    height: 3vh;
+    width: 7rem;
+    height: 27px;
     margin-bottom: 1rem;
+    cursor: pointer;
 }
+.sp-button:hover{
+    background: #C88E34;
 
+}
 /* .item_image:hover{
     object-fit: cover;
     border: solid 1px #f5cb5c;

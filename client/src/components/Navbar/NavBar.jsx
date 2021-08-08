@@ -16,7 +16,7 @@ function NavBar() {
     const allProducts = useSelector( state => state.allProducts)
    
    const handleSort= (param) => {
-     
+
     dispatch(filterProductsCategory(sort,currentPage-1, param))
   }
 
