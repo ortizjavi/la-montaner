@@ -96,9 +96,13 @@ export default function ProductCreation() {
       /* await setCreateProduct({ ...createProduct, img: image }); */
       let post = await axios.post("http://localhost:3001/admin/product", {
         ...createProduct,
+<<<<<<< HEAD
         categories: allCategories.filter((c) =>
           createProduct.categories.includes(c.name)
         ),
+=======
+        categories: allCategories.filter(c => createProduct.categories.includes(c.name)),
+>>>>>>> 6014ebcfae0a4765918946bd6f437087195e2920
         img: image,
       });
       console.log(post);

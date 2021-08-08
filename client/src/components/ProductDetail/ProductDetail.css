@@ -99,6 +99,9 @@
     transform: translateY(3px);
   }
 
+.details_footer{
+  padding-top: 115px;
+}  
 .carousel .slide{
     height: 70vh;
     width: 30vh;

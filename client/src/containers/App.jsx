@@ -42,15 +42,15 @@ export default function App() {
       <Route exact path="/home" component={Home} />
       <Route exact path="/home/:id" component={NavBar} />
       <Switch>
-        <Route exact path="/home/admin" component={Dashboard}></Route>
+        <Route exact path="/admin" component={Dashboard}></Route>
         <Route
           exact
-          path="/home/admin/productCreation"
+          path="/admin/productCreation"
           component={ProductCreation}
         />
         <Route
           exact
-          path="/home/admin/editProduct/:id"
+          path="/admin/editProduct/:id"
           component={EditProduct}
         />
         <Route
