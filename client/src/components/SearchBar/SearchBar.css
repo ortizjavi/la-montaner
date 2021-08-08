@@ -1,10 +1,10 @@
 
 .form-container {
-    margin-top: 2vh;
+    margin-top: 3px;
     display: flex;
     align-items: center;
     padding-left: 30px;
-    height: 5vw;
+    height: 20px;
     flex-wrap: nowrap;
     align-content: flex-end;
 }
@@ -16,7 +16,7 @@
     font-size: 16px;
     height: 20px;
     padding: 0 20px;
-    width: 12vw;
+    width: 13vw;
     outline: none;
     margin-left: 10px;
     margin-top: 8px;

@@ -8,6 +8,7 @@ import {
   SEARCH_STATE,
   ADMIN_SELECT_DELETED_PRODUCTS,
   ADMIN_CLEAR_SELECT,
+  FILTER_PRODUCTS_CATEGORY,
 } from "../names";
 
 import {
@@ -122,6 +123,24 @@ export function searchProducts(sort, pageNumber, name) {
           `${GET_PRODUCTS_ENDPOINT}?pageNumber=${pageNumber}&sort=${sort}`
         );
         return dispatch({ type: ALL_PRODUCTS, payload: response.data });
+      } catch (e) {
+        console.log("actions/types/productActions/searchProducts-Error:", e);
+      }
+    };
+  }
+}
+
+export function filterProductsCategory(sort, pageNumber, category) {
+  if (category) {
+    return async function (dispatch) {
+      try {
+        const response = await axios.get(
+          `${GET_PRODUCTS_ENDPOINT}?pageNumber=${pageNumber}&sort=${sort}&categories=${category}`
+        );
+        return dispatch({
+          type: FILTER_PRODUCTS_CATEGORY,
+          payload: response.data,
+        });
       } catch (e) {
         console.log("actions/types/productActions/searchProducts-Error:", e);
       }

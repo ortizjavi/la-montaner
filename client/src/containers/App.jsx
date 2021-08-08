@@ -9,10 +9,9 @@ import ProductCreation from "../components/ProductCreation/ProductCreation";
 import CategoryCreation from "../components/CategoryCreation/CategoryCreation";
 import { getCategories } from "../actions/types/categoryActions.js";
 import { createTheme, ThemeProvider } from "@material-ui/core/styles";
-import green from "@material-ui/core/colors/green";
-import lightGreen from "@material-ui/core/colors/lightGreen";
 import { Dashboard } from "../components/DashboardAdmin/Dashboard";
 import EditProduct from "../components/EditProduct/EditProduct";
+import NavBar from "../components/Navbar/NavBar";
 
 const theme = createTheme({
   palette: {
@@ -63,6 +62,9 @@ export default function App() {
           <Route exact path="/home/:id" component={ProductDetail} />
         </Switch>
       </ThemeProvider>
+      <Route exact path="/" component={Landing} />
+      <Route exact path="/home" component={Home} />
+      <Route exact path="/home/:id" component={NavBar} />
     </div>
   );
 }

@@ -9,8 +9,7 @@ import {
   DELETE_CATEGORY,
   CURENT_PAGE,
   SEARCH_STATE,
-  ADMIN_CLEAR_SELECT,
-  ADMIN_SELECT_UPDATED_PRODUCTS,
+  FILTER_PRODUCTS_CATEGORY,
 } from "../actions/names";
 
 const initialState = {
@@ -50,6 +49,8 @@ const rootReducer = (state = initialState, action) => {
       return { ...state, currentPage: action.payload };
     case SEARCH_STATE:
       return { ...state, searchProdustsState: action.payload };
+    case FILTER_PRODUCTS_CATEGORY:
+      return { ...state, allProducts: action.payload };
     default:
       return state;
   }

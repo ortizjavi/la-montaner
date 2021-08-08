@@ -46,7 +46,7 @@ export default function Search() {
                 
                 </datalist>
                 <button className='nav-personicon' onClick={()=> alert('Qué te puedo decir.. Falta el preventDefaul()!!')}>
-                    <SearchIcon style={{ fontSize: 40 }} color="primary" />
+                    <SearchIcon style={{ fontSize: 40,color:'#66D040' }} />
                 </button>
             </form>
         </div>
