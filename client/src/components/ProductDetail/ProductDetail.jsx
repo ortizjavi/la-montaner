@@ -34,7 +34,6 @@ export default function ProductDetail() {
     <>
       <Link to="/home">
         {" "}
-        <button>Back to home</button>{" "}
       </Link>
       {loading ? (
         <Loading />
