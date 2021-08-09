@@ -56,7 +56,7 @@ module.exports = {
             $facet: {
               paginatedResult: [
                 { $match: query },
-                { $sort : sort },
+                /* { $sort : sort }, */
                 { $skip: ProductsPerPage * page },
                 { $limit: ProductsPerPage }
               ],
@@ -68,7 +68,7 @@ module.exports = {
           }])
 
         // const productLength = product.length;
-        return res.json([queries.totalCount.totalCount, queries.paginatedResult]);
+        return res.json([queries[0].totalCount[0].totalCount, queries[0].paginatedResult]);
       } catch (error) {
         console.log(error);
       }
