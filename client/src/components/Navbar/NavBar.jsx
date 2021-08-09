@@ -27,11 +27,11 @@ function NavBar() {
       setCategory({...initialCategories, [state]: true})
     }
 
-    // useEffect(() => {
-    //   if(allProducts[0]>8){ 
-    //     dispatch(searchProducts(sort, currentPage));
-    //   }
-    // },[])
+    useEffect(() => {
+      if(allProducts[0]>8){ 
+        dispatch(searchProducts(sort, currentPage));
+      }
+    },[])
 
     useEffect(() => {
       if(allProducts[0]>8){ 
@@ -39,7 +39,7 @@ function NavBar() {
       }
     }, [currentPage]) 
   
-  
+    console.log('Se renderizo el navbar/ allproducts',allProducts)
     function HomeIcon(props) {
         return (
           <SvgIcon {...props}>
