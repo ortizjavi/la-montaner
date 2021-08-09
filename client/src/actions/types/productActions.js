@@ -92,7 +92,7 @@ export async function updateProducts(id, producto) {
   }
 
 
-export function searchProducts(sort, pageNumber, name) {
+export function searchProducts(sort, pageNumber, name, category) {
   if (name) {
     return async function (dispatch) {
       try {
@@ -107,10 +107,17 @@ export function searchProducts(sort, pageNumber, name) {
   } else {
     return async function (dispatch) {
       try {
-        const response = await axios.get(
-          `${GET_PRODUCTS_ENDPOINT}?pageNumber=${pageNumber}&sort=${sort}`
-        );
-        return dispatch({ type: ALL_PRODUCTS, payload: response.data });
+        if(category){
+          const response = await axios.get(
+            `${GET_PRODUCTS_ENDPOINT}?pageNumber=${pageNumber}&sort=${sort}&categories=${category}`
+          );
+          return dispatch({ type: ALL_PRODUCTS, payload: response.data });
+        }else{
+          const response = await axios.get(
+            `${GET_PRODUCTS_ENDPOINT}?pageNumber=${pageNumber}&sort=${sort}`
+          );
+          return dispatch({ type: ALL_PRODUCTS, payload: response.data });
+          }
       } catch (e) {
         console.log("actions/types/productActions/searchProducts-Error:", e);
       }
