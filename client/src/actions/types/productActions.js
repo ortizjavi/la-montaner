@@ -7,7 +7,6 @@ import {
   CURENT_PAGE,
   SEARCH_STATE,
   ADMIN_SELECT_DELETED_PRODUCTS,
-  ADMIN_CLEAR_SELECT,
   FILTER_PRODUCTS_CATEGORY,
 } from "../names";
 
@@ -70,29 +69,28 @@ export function selectedProducts(selected) {
 export function deleteProducts(id) {
   return async function (dispatch) {
     try {
-      for (let i = 0; i < id.length; i++) {
-        await axios.delete(ADMIN_GET_PRODUCTS_ENDPOINT + "/" + id[i]);
-      }
+      await axios.delete(ADMIN_GET_PRODUCTS_ENDPOINT + "/" + id);
       return dispatch({ type: ADMIN_SELECT_DELETED_PRODUCTS });
     } catch (error) {
       console.log(error);
     }
-  };
-}
+  }
+};
 
-export function updateProducts(id, producto) {
-  return async function () {
+
+export async function updateProducts(id, producto) {
     try {
       const resp = await axios.put(
         `${ADMIN_GET_PRODUCTS_ENDPOINT}/${id}`,
         producto
       );
-      return (resp.data);
+      console.log(resp.data)
+      return resp.data;
     } catch (error) {
       console.log(error);
     }
-  };
-}
+  }
+
 
 export function searchProducts(sort, pageNumber, name) {
   if (name) {
@@ -143,4 +141,9 @@ export function currentPageAction(page) {
 }
 export function searchProductsAction(state) {
   return { type: SEARCH_STATE, payload: state };
+}
+
+
+export function clearProductDetail() {
+  return { type: GET_PRODUCT_DETAIL, payload: {}};
 }

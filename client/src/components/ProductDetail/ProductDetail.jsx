@@ -65,7 +65,7 @@ export default function ProductDetail() {
               <div className="detail-render">
                 <h2>{detail.name}</h2>
                 <p className="detail_stars">⭐⭐⭐⭐⭐</p>
-                <h3>Categoría: {detail.categories.name}</h3>
+                <h3>Categoría: {detail.categories[0].name}</h3>
                 <div className="detail-price">
                   <h3 className="detail_price">Precio: ${detail.price} </h3>
                 </div>
