@@ -20,6 +20,8 @@ module.exports = {
                                         .sort({
                                             name: sort
                                         })
+
+
           const productLength = (await Product.find({name: {$regex: regex}})).length
           return res.json([productLength, product]);
         } catch (error) {
@@ -46,14 +48,27 @@ module.exports = {
     
       try {
         const name = req.query.categories
-        const product = await Product.find({'categories.name': name})
-          .sort({
-            name: req.query.sort
-          })
-          .skip(ProductsPerPage * page)
-          .limit(ProductsPerPage)
-        const productLength = product.length;
-        return res.json([productLength, product]);
+        const query = {'categories.name': name};
+        const sort = {
+           name: req.query.sort
+        }
+        const queries = await Product.aggregate([{
+            $facet: {
+              paginatedResult: [
+                { $match: query },
+                { $sort : sort },
+                { $skip: ProductsPerPage * page },
+                { $limit: ProductsPerPage }
+              ],
+              totalCount: [
+                { $match: query },
+                { $count: 'totalCount' }
+              ]
+            }
+          }])
+
+        // const productLength = product.length;
+        return res.json([queries.totalCount.totalCount, queries.paginatedResult]);
       } catch (error) {
         console.log(error);
       }
