@@ -43,10 +43,14 @@
     height: 13rem;
     margin-left: 10%;
     object-fit: scale-down;
-    
-  
-
 }
+
+.item_price {
+  margin-left: 40%;
+  padding-bottom: 10px;
+  text-decoration: none;
+}
+
 .sp-button{
     background: rgb(43,149,89);
     color: white;
