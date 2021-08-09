@@ -50,13 +50,13 @@ module.exports = {
         const name = req.query.categories
         const query = {'categories.name': name};
         const sort = {
-           name: req.query.sort
+          name: req.query.sort === 'asc' ? 1 : -1
         }
         const queries = await Product.aggregate([{
             $facet: {
               paginatedResult: [
                 { $match: query },
-                { $sort : sort },
+                 { $sort : sort  },  
                 { $skip: ProductsPerPage * page },
                 { $limit: ProductsPerPage }
               ],
@@ -66,9 +66,12 @@ module.exports = {
               ]
             }
           }])
-
+              
         // const productLength = product.length;
-        return res.json([queries.totalCount.totalCount, queries.paginatedResult]);
+        return res.json([
+          queries[0].totalCount.length ? queries[0].totalCount[0].totalCount : 0, 
+          queries[0].paginatedResult]
+         );
       } catch (error) {
         console.log(error);
       }
