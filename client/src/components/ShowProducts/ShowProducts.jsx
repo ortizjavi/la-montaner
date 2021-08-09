@@ -61,6 +61,7 @@ const ShowProducts = ({allProducts}) => {
                                       <img className="item_image" style={{opacity: 0.1}} src="https://live.staticflickr.com/65535/51357138820_5d67c34fa6_m.jpg" alt="Producto" onerror="this.style.display='none'" />
                                     }
                                   </div>
+                                <div className='item_price'>${item?.price}</div>
                           </NavLink>
                           <button className='sp-button' onClick={()=>alert('Buena desición')}>Comprar</button>
                       </div>

@@ -22,6 +22,8 @@ import Switch from "@material-ui/core/Switch";
 import DeleteIcon from "@material-ui/icons/Delete";
 import CreateSharpIcon from "@material-ui/icons/CreateSharp";
 import AddCircleRoundedIcon from "@material-ui/icons/AddCircleRounded";
+import swal from "sweetalert";
+import HomeIcon from '@material-ui/icons/Home';
 import {
   getAdminProducts,
   deleteProducts,
@@ -158,7 +160,10 @@ const EnhancedTableToolbar = (props) => {
   const handleDelete = () => {
     seleccionados.forEach((i) => dispatch(deleteProducts(i)));
     dispatch(getAdminProducts());
-    alert("Eliminados");
+    swal({
+      title: "Producto Eliminado!",
+      icon: "success",
+    });
   };
 
   useEffect(() => {
@@ -419,6 +424,11 @@ export const Dashboard = () => {
         control={<Switch checked={dense} onChange={handleChangeDense} />}
         label="Dense padding"
       />
+      <IconButton >
+                <Link to={"/home"}>
+                  <HomeIcon />
+                </Link>
+        </IconButton>
     </div>
   );
 };
