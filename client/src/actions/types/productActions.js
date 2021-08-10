@@ -123,12 +123,12 @@ export function addCartProduct(productId) {
       payload: {
         id: data._id,
         name: data.name,
-        image: data.image[0],
+        image: data.img[0],
         price: data.price,
         stock: data.stock,
       }
     })
-    localStorage.setItem('cart', JSON.stringify(getState()));
+    localStorage.setItem('cart', JSON.stringify(getState().rootReducer.cartProducts));
   }
 }
 
