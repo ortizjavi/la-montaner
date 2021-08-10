@@ -22,3 +22,6 @@ export const CURENT_PAGE = "CURENT_PAGE";
 
 // search action name
 export const SEARCH_STATE = "SEARCH_STATE";
+
+// get max price of all products
+export const GET_MAX_PRICE = "GET_MAX_PRICE"

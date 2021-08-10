@@ -8,6 +8,7 @@ import {
   SEARCH_STATE,
   ADMIN_SELECT_DELETED_PRODUCTS,
   FILTER_PRODUCTS_CATEGORY,
+  GET_MAX_PRICE,
 } from "../names";
 
 import {
@@ -143,6 +144,21 @@ export function filterProductsCategory(sort, pageNumber, category) {
   }
 }
 
+export function filterProducts (data, sort, pageNumber) {
+  if (data) {
+    return async function (dispatch) {
+      try {
+        const response = await axios.get(
+          `${GET_PRODUCTS_ENDPOINT}?pageNumber=${pageNumber}&sort=${sort}&${Object.keys(data)}=${Object.values(data)}`
+        );
+        return dispatch({ type: ALL_PRODUCTS, payload: response.data });
+      } catch (e) {
+        console.log("actions/types/productActions/filterProducts-Error:", e);
+      }
+    }
+  }
+}
+
 export function currentPageAction(page) {
   return { type: CURENT_PAGE, payload: page };
 }
@@ -153,4 +169,21 @@ export function searchProductsAction(state) {
 
 export function clearProductDetail() {
   return { type: GET_PRODUCT_DETAIL, payload: {}};
+}
+export function getMaximumPrice(price) {
+  if (price) {
+    return async function (dispatch) {
+      try {
+        const response = await axios.get(
+          `${GET_PRODUCTS_ENDPOINT}?price=giveMeHigherPrice`
+        );
+        return dispatch({
+          type: GET_MAX_PRICE,
+          payload: response.data[0].price,
+        });
+      } catch (e) {
+        console.log("actions/types/productActions/getMaximumPrice-Error:", e);
+      }
+    };
+  }
 }

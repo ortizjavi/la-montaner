@@ -147,21 +147,31 @@ function EditProductChild({producto, defaultState}) {
     console.log('CLICK!!!');
     try {
       swal({
-        title: "Producto Editado!",
-        text: `${createProduct.name} se ha editado con exito!`,
-        icon: "success",
-      });
-      updateProducts(producto._id,{
-        ...createProduct,
-        categories: allCategories.filter((c) =>
-          createProduct.categories.includes(c.name)
-        ),
-        img: image
+        title: 'Estas seguro que quieres editar este producto?',
+        icon: 'warning',
+        buttons: true,
+        dangerMode: true,
+      }).then((willDelete) => {
+        if (willDelete) {
+          swal(
+            `${createProduct.name} fue editado!`,{
+              icon: 'success'
+            })
+            updateProducts(producto._id,{
+              ...createProduct,
+              categories: allCategories.filter((c) =>
+                createProduct.categories.includes(c.name)
+              ),
+              img: image
+            })
+            setTimeout(
+              () => (document.location.href = "http://localhost:3000/admin"),
+              3000
+            );
+        }else{
+          return swal('Tu producto esta a salvo :)')
+        }
       })
-      setTimeout(
-        () => (document.location.href = "http://localhost:3000/admin"),
-        3000
-      );
     } catch (err) {
       console.log(err);
     }
