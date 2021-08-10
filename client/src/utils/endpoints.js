@@ -4,6 +4,7 @@ export const ADMIN_SERVER = `${SERVER}/admin`;
 
 // endpoints de las categorias
 export const ADMIN_CATEGORY = `${ADMIN_SERVER}/category`;
+
 // endpoints de producto
 export const GET_PRODUCTS = `${SERVER}`;
 export const ADMIN_GET_PRODUCTS = `${ADMIN_SERVER}/product`;
