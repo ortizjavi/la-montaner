@@ -1,5 +1,5 @@
 require('dotenv').config();
-const User = require('../models/Users/User');
+const User = require('../../../models/Users/User');
 const { SALT_ROUNDS, TOKEN_SECRET } = process.env;
 
 module.exports = (req, res, next) => {
