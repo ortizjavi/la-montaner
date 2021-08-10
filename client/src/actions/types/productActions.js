@@ -1,36 +1,12 @@
 import axios from "axios";
-import {
-  ADMIN_GET_PRODUCTS,
-  ALL_PRODUCTS,
-  GET_PRODUCT_DETAIL,
-  ADMIN_SELECT_PRODUCTS,
-  CURENT_PAGE,
-  CURENT_CATEGORY,
-  SEARCH_STATE,
-  ADMIN_SELECT_DELETED_PRODUCTS,
-  FILTER_PRODUCTS_CATEGORY,
-  GET_MAX_PRICE,
-  ADD_CART_PRODUCT,
-  DELETE_CART_PRODUCT,
-  DELETE_CART_ALL,
-} from "../names";
-
-import {
-  GET_PRODUCTS_ENDPOINT,
-  CREATE_PRODUCT_ENDPOINT,
-  UPDATE_PRODUCT_ENDPOINT,
-  DELETE_PRODUCT_ENDPOINT,
-  ADMIN_GET_PRODUCTS_ENDPOINT,
-} from "../../utils/endpoints";
+import * as actionTypes from "../names";
+import * as endpoints from "../../utils/endpoints";
 
 export function getProductDetail(id) {
   return async function (dispatch) {
     try {
-      const productDetail = await axios.get(`${GET_PRODUCTS_ENDPOINT}/${id}`);
-      return dispatch({
-        type: GET_PRODUCT_DETAIL,
-        payload: productDetail.data,
-      });
+      const productDetail = await axios.get(`${endpoints.GET_PRODUCTS}/${id}`);
+      return dispatch({ type: actionTypes.GET_PRODUCT_DETAIL, payload: productDetail.data });
     } catch (e) {
       console.log(e);
     }
@@ -40,10 +16,8 @@ export function getProductDetail(id) {
 export function getAllProducts(query) {
   return async function (dispatch) {
     try {
-      const response = await axios.get(
-        `${GET_PRODUCTS_ENDPOINT}?name=${query}`
-      );
-      return dispatch({ type: ALL_PRODUCTS, payload: response.data });
+      const response = await axios.get( `${endpoints.GET_PRODUCTS}?name=${query}`);
+      return dispatch({ type: actionTypes.ALL_PRODUCTS, payload: response.data });
     } catch (e) {
       console.log("actions/types/getAllProducts-Error:", e);
     }
@@ -53,8 +27,8 @@ export function getAllProducts(query) {
 export function getAdminProducts() {
   return async function (dispatch) {
     try {
-      const res = await axios.get(`${ADMIN_GET_PRODUCTS_ENDPOINT}`);
-      return dispatch({ type: ADMIN_GET_PRODUCTS, payload: res.data });
+      const res = await axios.get(`${endpoints.ADMIN_GET_PRODUCTS}`);
+      return dispatch({ type: actionTypes.ADMIN_GET_PRODUCTS, payload: res.data });
     } catch (error) {
       console.log(error);
     }
@@ -64,7 +38,7 @@ export function getAdminProducts() {
 export function selectedProducts(selected) {
   return async function (dispatch) {
     try {
-      return dispatch({ type: ADMIN_SELECT_PRODUCTS, payload: selected });
+      return dispatch({ type: actionTypes.ADMIN_SELECT_PRODUCTS, payload: selected });
     } catch (error) {
       console.log(error);
     }
@@ -74,8 +48,8 @@ export function selectedProducts(selected) {
 export function deleteProducts(id) {
   return async function (dispatch) {
     try {
-      await axios.delete(ADMIN_GET_PRODUCTS_ENDPOINT + "/" + id);
-      return dispatch({ type: ADMIN_SELECT_DELETED_PRODUCTS });
+      await axios.delete(`${endpoints.ADMIN_GET_PRODUCTS}/${id}`);
+      return dispatch({ type: actionTypes.ADMIN_SELECT_DELETED_PRODUCTS });
     } catch (error) {
       console.log(error);
     }
@@ -85,10 +59,7 @@ export function deleteProducts(id) {
 
 export async function updateProducts(id, producto) {
     try {
-      const resp = await axios.put(
-        `${ADMIN_GET_PRODUCTS_ENDPOINT}/${id}`,
-        producto
-      );
+      const resp = await axios.put( `${endpoints.ADMIN_GET_PRODUCTS}/${id}`, producto);
       console.log(resp.data)
       return resp.data;
     } catch (error) {
@@ -103,10 +74,8 @@ export function searchProducts({sort, pageNumber, name,category}) {
     console.log('deltro del if name',name,'category',category, 'pageNumber',pageNumber)
     return async function (dispatch) {
       try {
-        const response = await axios.get(
-          `${GET_PRODUCTS_ENDPOINT}?pageNumber=${pageNumber}&sort=${sort}&name=${name}`
-        );
-        return dispatch({ type: ALL_PRODUCTS, payload: response.data });
+        const response = await axios.get( `${endpoints.GET_PRODUCTS}?pageNumber=${pageNumber}&sort=${sort}&name=${name}`);
+        return dispatch({ type: actionTypes.ALL_PRODUCTS, payload: response.data });
       } catch (e) {
         console.log("actions/types/productActions/searchProducts-Error:", e);
       }
@@ -127,10 +96,8 @@ export function searchProducts({sort, pageNumber, name,category}) {
     }else{
     return async function (dispatch) {
       try {
-        const response = await axios.get(
-          `${GET_PRODUCTS_ENDPOINT}?pageNumber=${pageNumber}&sort=${sort}&categories=${category}`
-        );
-        return dispatch({ type: ALL_PRODUCTS, payload: response.data });
+        const response = await axios.get( `${endpoints.GET_PRODUCTS}?pageNumber=${pageNumber}&sort=${sort}&categories=${category}`);
+        return dispatch({ type: actionTypes.ALL_PRODUCTS, payload: response.data });
       } catch (e) {
         console.log("actions/types/productActions/searchProducts-Error:", e);
       }
@@ -142,13 +109,8 @@ export function filterProductsCategory(sort, pageNumber, category) {
   if (category) {
     return async function (dispatch) {
       try {
-        const response = await axios.get(
-          `${GET_PRODUCTS_ENDPOINT}?pageNumber=${pageNumber}&sort=${sort}&categories=${category}`
-        );
-        return dispatch({
-          type: FILTER_PRODUCTS_CATEGORY,
-          payload: response.data,
-        });
+        const response = await axios.get( `${endpoints.GET_PRODUCTS}?pageNumber=${pageNumber}&sort=${sort}&categories=${category}`);
+        return dispatch({ type: actionTypes.FILTER_PRODUCTS_CATEGORY, payload: response.data });
       } catch (e) {
         console.log("actions/types/productActions/searchProducts-Error:", e);
       }
@@ -172,18 +134,17 @@ export function filterProducts (data, sort, pageNumber) {
 }
 
 export function currentPageAction(page) {
-  return { type: CURENT_PAGE, payload: page };
+  return { type: actionTypes.CURENT_PAGE, payload: page };
 }
 export function selectCategoryAction(page) {
-  return { type: CURENT_CATEGORY, payload: page };
+  return { type: actionTypes.CURENT_CATEGORY, payload: page };
 }
 export function searchProductsAction(state) {
-  return { type: SEARCH_STATE, payload: state };
+  return { type: actionTypes.SEARCH_STATE, payload: state };
 }
 
-
 export function clearProductDetail() {
-  return { type: GET_PRODUCT_DETAIL, payload: {}};
+  return { type: actionTypes.GET_PRODUCT_DETAIL, payload: {}};
 }
 export function getMaximumPrice(price) {
   if (price) {
@@ -201,15 +162,34 @@ export function getMaximumPrice(price) {
       }
     };
   }
-
-export function addCartProduct(product) {
-  return { type: ADD_CART_PRODUCT, payload: product };
+}
+export function addCartProduct(productId) {
+  return async function (dispatch, getState) {
+    const { data } = await axios.get(`${endpoints.GET_PRODUCTS}/${productId}`);
+    dispatch({ 
+      type: actionTypes.ADD_CART_PRODUCT,
+      payload: {
+        id: data._id,
+        name: data.name,
+        image: data.img[0],
+        price: data.price,
+        stock: data.stock,
+      }
+    })
+    localStorage.setItem('cart', JSON.stringify(getState().rootReducer.cartProducts));
+  }
 }
 
 export function deleteCartProduct(productId) {
-  return { type: DELETE_CART_PRODUCT, payload: productId };
+  return async function (dispatch, getState) {
+    dispatch({ type: actionTypes.DELETE_CART_PRODUCT, payload: productId });
+    localStorage.setItem('cart', JSON.stringify(getState().rootReducer.cartProducts));
+  }
 }
 
 export function deleteCartAll() {
-  return { type: DELETE_CART_ALL };
+  return async function (dispatch, getState) {
+    dispatch({ type: actionTypes.DELETE_CART_ALL });
+    localStorage.setItem('cart', JSON.stringify(getState().rootReducer.cartProducts));
+  }
 }
