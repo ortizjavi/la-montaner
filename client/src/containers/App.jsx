@@ -7,11 +7,12 @@ import Landing from "../components/Landing/Landing";
 import ProductDetail from "../components/ProductDetail/ProductDetail";
 import ProductCreation from "../components/ProductCreation/ProductCreation";
 import CategoryCreation from "../components/CategoryCreation/CategoryCreation";
+import Pay from "../components/Pay/Pay";
+import EditProduct from "../components/EditProduct/EditProduct";
+import NavBar from "../components/Navbar/NavBar";
 import { getCategories } from "../actions/types/categoryActions.js";
 import { createTheme, ThemeProvider } from "@material-ui/core/styles";
 import { Dashboard } from "../components/DashboardAdmin/Dashboard";
-import EditProduct from "../components/EditProduct/EditProduct";
-import NavBar from "../components/Navbar/NavBar";
 
 const theme = createTheme({
   palette: {
@@ -50,6 +51,7 @@ export default function App() {
             component={ProductCreation}
           />
           <Route exact path="/admin/editProduct/:id" component={EditProduct} />
+          <Route exact path="/home/products/pay" component={Pay} />
           <Route
             exact
             path="/admin/categoryCreation"
