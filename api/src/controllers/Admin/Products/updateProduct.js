@@ -5,7 +5,6 @@ module.exports = {
     const { id } = req.params;
     const update = { ...req.body }
     try {
-        //const productoEncontrado = await Product.findById(productId);
         const productoActualizado = await Product.findByIdAndUpdate(id, update,{new:true})
         res.json({
             ok: true,

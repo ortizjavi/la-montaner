@@ -42,20 +42,21 @@ export default function ProductDetail() {
       {loading ? (
         <Loading />
       ) : (
-        <div className="detail_style">
           <div className="general_container">
             <div className="detail-img">
               {detail.img.length > 1 ? (
-                <Carousel>
-                  <div className="slide_image">
+                <div className="container_carousel_atr">
+                <Carousel className="carousel_atr">
+                  <div>
                     <img src={detail.img[0]} alt={detail.name} />
                   </div>
-                  <div className="slide_image">
+                  <div>
                     <img src={detail.img[1]} alt="product2" />
                   </div>
                 </Carousel>
+                </div>
               ) : (
-                <div className="slide_image">
+                <div className="slide-image">
                   <img src={detail.img[0]} alt={detail.name} />
                 </div>
               )}
@@ -65,7 +66,9 @@ export default function ProductDetail() {
               <div className="detail-render">
                 <h2>{detail.name}</h2>
                 <p className="detail_stars">⭐⭐⭐⭐⭐</p>
-                <h3>Categoría: {detail.categories.name}</h3>
+                { detail.categories[0] &&
+                <h3>Categoría: {detail.categories[0].name}</h3>
+                }
                 <div className="detail-price">
                   <h3 className="detail_price">Precio: ${detail.price} </h3>
                 </div>
@@ -88,15 +91,14 @@ export default function ProductDetail() {
                 <div className="detail_button">
                   <button onClick={() => handleBuyProduct()}>COMPRAR</button>
                 </div>
-
                 <div className="detail_info_description">
                   <h3>Info del producto:</h3>
                   <p>{detail.description}</p>
                 </div>
+               
               </div>
             </div>
           </div>
-        </div>
       )}
       <div className="details_footer">
         <Footer />

@@ -22,6 +22,8 @@ import Switch from "@material-ui/core/Switch";
 import DeleteIcon from "@material-ui/icons/Delete";
 import CreateSharpIcon from "@material-ui/icons/CreateSharp";
 import AddCircleRoundedIcon from "@material-ui/icons/AddCircleRounded";
+import swal from "sweetalert";
+import HomeIcon from '@material-ui/icons/Home';
 import {
   getAdminProducts,
   deleteProducts,
@@ -29,6 +31,7 @@ import {
 } from "../../actions/types/productActions";
 import { Link } from "react-router-dom";
 import CategoryIcon from '@material-ui/icons/Category';
+import './dashboard.css';
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -81,16 +84,13 @@ function EnhancedTableHead(props) {
     onRequestSort(event, property);
   };
 
+  
+
   return (
     <TableHead>
       <TableRow>
         <TableCell padding="checkbox">
-          <Checkbox
-            indeterminate={numSelected > 0 && numSelected < rowCount}
-            checked={rowCount > 0 && numSelected === rowCount}
-            onChange={onSelectAllClick}
-            inputProps={{ "aria-label": "select all desserts" }}
-          />
+          
         </TableCell>
         {headCells.map((headCell) => (
           <TableCell
@@ -136,12 +136,12 @@ const useToolbarStyles = makeStyles((theme) => ({
   highlight:
     theme.palette.type === "light"
       ? {
-          color: theme.palette.secondary.main,
-          backgroundColor: lighten(theme.palette.secondary.light, 0.85),
+          color: theme.palette.success.dark,
+          backgroundColor: lighten(theme.palette.success.dark, 0.85),
         }
       : {
           color: theme.palette.text.primary,
-          backgroundColor: theme.palette.secondary.dark,
+          backgroundColor: theme.palette.success.dark,
         },
   title: {
     flex: "1 1 100%",
@@ -156,9 +156,23 @@ const EnhancedTableToolbar = (props) => {
   const seleccionados = useSelector((state) => state.selectedAdminProducts);
 
   const handleDelete = () => {
-    seleccionados.forEach((i) => dispatch(deleteProducts(i)));
-    dispatch(getAdminProducts());
-    alert("Eliminados");
+    swal({
+      title: 'Estas seguro que quieres eliminarlo?',
+      icon: 'warning',
+      buttons: true,
+      dangerMode: true,
+    }).then((willDelete) => {
+      if (willDelete) {
+        swal(
+          'Tu producto fue eliminado',{
+            icon: 'success'
+          })
+          seleccionados.forEach((i) => dispatch(deleteProducts(i)));
+          dispatch(getAdminProducts());
+      }else{
+        return swal('Tu producto esta a salvo :)')
+      }
+    })
   };
 
   useEffect(() => {
@@ -187,7 +201,14 @@ const EnhancedTableToolbar = (props) => {
           id="tableTitle"
           component="div"
         >
-          Productos - La Montañes
+          <Link to={"/home"}  styles={{textDecoration:'none'}}>
+          {'Productos - La Montañes'}
+          </Link>
+          <IconButton >
+                <Link to={"/home"}>
+                  <HomeIcon />
+                </Link>
+        </IconButton>
         </Typography>
       )}
       {seleccionados.length > 0 ? (
@@ -295,15 +316,6 @@ export const Dashboard = () => {
     setOrderBy(property);
   };
 
-  const handleSelectAllClick = (event) => {
-    if (event.target.checked) {
-      const newSelecteds = rows.map((n) => n._id);
-      setSelected(newSelecteds);
-      return;
-    }
-    setSelected([]);
-  };
-
   const handleClick = (event, _id) => {
     const selectedIndex = selected.indexOf(_id);
     let newSelected = [];
@@ -352,13 +364,12 @@ export const Dashboard = () => {
             size={dense ? "small" : "medium"}
             aria-label="enhanced table"
           >
-            <EnhancedTableHead
+             <EnhancedTableHead
               classes={classes}
               numSelected={selected.length}
               order={order}
               orderBy={orderBy}
-              onSelectAllClick={handleSelectAllClick}
-              onRequestSort={handleRequestSort}
+             onRequestSort={handleRequestSort}
               rowCount={rows.length}
             />
             <TableBody>
@@ -372,8 +383,8 @@ export const Dashboard = () => {
                     <TableRow
                       hover
                       onClick={(event) => handleClick(event, row._id)}
-                      role="checkbox"
-                      aria-checked={isItemSelected}
+                      role="checkbox" 
+                      aria-checked={isItemSelected} 
                       tabIndex={-1}
                       key={row._id}
                       selected={isItemSelected}
@@ -419,6 +430,7 @@ export const Dashboard = () => {
         control={<Switch checked={dense} onChange={handleChangeDense} />}
         label="Dense padding"
       />
+      
     </div>
   );
 };

@@ -1,38 +1,62 @@
 .general_container {
-  width: 85%;
-  max-height: 750px;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  border-radius: 8px;
+  display: flex;
   font-size: 15px;
-  padding-top: 30px;
-  padding-left: 30px;
+  text-align: center;
 }
 
 .detail-img {
+  height: 100%;
+  width: 80%;
+  flex-basis: 40%;
   margin: auto;
-  padding-right: 20px;
+  display: flex;
+  flex-direction: column;
 }
-.detail-img img {
-  max-height: 700px;
-  object-fit: scale-down;
+
+.slide-image{
+  height: 50%;
+  width: 90%;
+}
+
+.container_carousel_atr{
+  height: 70%;
+  width: 80%;
+  margin: 0 auto;
+}
+
+.carousel_atr{
+  height: 40%;
+}
+
+.slide-image img {
+  width: inherit;
+  max-width: 100%;
+  max-height: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 .detail_description {
-  max-height: 750px;
-  background-color: #ffffff;
   text-align: center;
-  border-radius: 0px 8px 8px 0px;
+  height: 100%;
+  width: auto;
+  margin: 0 auto;
+  flex-basis: 60%;
+}
+.detail-render{
+  height: 100%;
+  font-size: 1.5rem;
 }
 
 .detail_description h2 {
-  font-size: 70px;
   color: #bd842f;
+  height: 80%;
 }
 
-.detail_price {
+.detail-price {
   font-size: 30px;
   color: #2e436f;
+  height: 10%;
 }
 
 .detail_stock input {
@@ -40,6 +64,7 @@
   outline: none;
   border-radius: 4px;
   padding: 4px;
+  height: 10%;
 }
 
 .detail_stock button {
@@ -54,9 +79,6 @@
   height: 28px;
 }
 
-.detail_info_description {
-  padding-top: 10px;
-}
 
 .detail_info_description h3 {
   padding-top: 10px;
@@ -64,6 +86,14 @@
   text-align: left;
 }
 
+.detail-render h3{
+  font-size: 29px;
+  font-weight: 600;
+}
+
+.detail_info_description{
+  height: 25%;
+}
 .detail_info_description p {
   font-size: 25px;
   text-align: left;
@@ -71,7 +101,7 @@
 
 .detail_stars {
   font-size: 26px;
-  padding-bottom: 10px;
+  height: 10%;
 }
 
 .detail_button{
@@ -98,26 +128,23 @@
     outline: 0;
     transform: translateY(3px);
   }
+ 
+.carousel{
+    height: 60%;
+  }
 
-.details_footer{
-  padding-top: 115px;
-}  
+.carousel .carousel-slider{
+  width: 80%;
+}
+
 .carousel .slide{
-    height: 70vh;
-    width: 30vh;
-    object-fit: scale-down;
+  margin: auto!important;
 }
 
 .carousel .slide img{
     max-height: 100%;
     width: auto;
     object-fit: scale-down;
-}
-
-.slide_image{
-    margin: 0 auto;
-    height: 100%;
-    width: 100%;
 }
 
 .carousel .carousel-status {
@@ -145,8 +172,6 @@
   font-size: 1.1rem;
   border: none;
   border-radius: 4px;
-  margin-top: 4px;
-  height: 8rem !important;
 }
 
 .carousel.carousel-slider .control-arrow {
@@ -154,20 +179,14 @@
   color: rgb(8, 5, 211) !important;
   font-size: 26px;
   bottom: 0;
-  margin-top: 300px !important;
-  padding: 5px;
+  /* margin-top: 300px !important;
+  padding: 5px; */
   display: table-cell !important;
   vertical-align: middle !important;
 }
 
-.carousel .thumbs {
-  transition: all 0.15s ease-in;
-  transition-duration: 0.15s;
-  transform: translate3d(0, 0, 0);
-  position: relative;
-  list-style: none;
-  white-space: nowrap;
-  text-align: center !important;
+.carousel .thumbs-wrapper {
+margin: 0!important;
 }
 
 .carousel .control-dots {
@@ -176,7 +195,6 @@
   margin: 0 !important;
   padding: 0;
   text-align: center;
-  width: 100% !important;
   z-index: 1;
   background-color: rgba(160, 160, 160, 0.425) !important;
 }
@@ -192,56 +210,8 @@
     height: 10px!important;
     cursor: pointer;
     display: inline-block;
-    margin: 0 8px;
 }
 
-@media only screen and (max-width:1200px) {
-    .carousel {
-        height: 80vh;
-    }
-    .carousel .slide img {
-        margin: 10vh auto;
-        width: 100vw;
-    }
+.carousel-root{
+  max-height: 100%;
 }
-
-@media only screen and (max-width:900px) {
-    .carousel {
-        height: 80vh;
-    }
-    .carousel .slide img {
-        margin: 10vh auto;
-        width: 100vw;
-    }
-}
-
-@media only screen and (max-width:800px) {
-    .carousel {
-        height: 80vh;
-    }
-    .carousel .slide img {
-        margin: 10vh auto;
-        width: 100vw;
-    }
-}
-
-@media only screen and (max-width:700px) {
-    .carousel {
-        height: 70vh;
-    }
-    .carousel .slide img {
-        margin: 10vh auto;
-        width: 100vw;
-    }
-}
-
-@media only screen and (max-width:600px) {
-    .carousel {
-        height: 70vh;
-    }
-    .carousel .slide img {
-        margin: 10vh auto;
-        width: 100vw;
-    }
-}
-

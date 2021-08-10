@@ -36,6 +36,8 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         allCategories: state.allCategories.concat(action.payload),
       };
+      case DELETE_CATEGORY:
+      return { ...state, allCategories: state.allCategories.filter(cat => cat._id !== action.payload) };
     case GET_CATEGORIES:
       return { ...state, allCategories: action.payload };
     case ADMIN_GET_PRODUCTS:

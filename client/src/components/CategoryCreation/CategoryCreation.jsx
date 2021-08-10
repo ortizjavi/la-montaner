@@ -1,8 +1,12 @@
 import './CategoryCreation.css';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { createCategory, deleteCategories } from '../../actions/types/categoryActions';
-import { fixedCategories } from '../../utils/endpoints.js'
+import { fixedCategories } from '../../utils/endpoints.js';
+import { Link } from "react-router-dom";
+import swal from "sweetalert";
+import ArrowBackSharpIcon from '@material-ui/icons/ArrowBackSharp';
+import IconButton from "@material-ui/core/IconButton";
 
 export default function CategoryCreator() {
   const dispatch = useDispatch();
@@ -18,16 +22,38 @@ export default function CategoryCreator() {
   const handleSubmit = (event) => {
     event.preventDefault();
     if (categories.filter(cat => cat.name === state).length) {
-      return alert('No puedes crear dos categorías con el mismo nombre!')
+      return swal({
+        title: "Categoria existente",
+        text: 'No puedes crear dos categorías con el mismo nombre!',
+        icon: "error",
+      });
+      //alert('No puedes crear dos categorías con el mismo nombre!')
     }
     dispatch(createCategory(state))
-    alert('Categoría creada con éxito!')
-    setState("");
+    setState("")
+    return swal({
+      title: "Categoria creada con exito!",
+      icon: "success",
+      })
   }
 
   const handleClick = (category) => {
-    dispatch(deleteCategories(category))
-    alert(`Categoría ${category.name.toUpperCase()} eliminada`)
+    swal({
+      title: 'Estas seguro que quieres eliminarlo?',
+      icon: 'warning',
+      buttons: true,
+      dangerMode: true,
+    }).then((willDelete) => {
+      if (willDelete) {
+        swal(
+          'Tu categoria fue eliminada',{
+            icon: 'success'
+          })
+          dispatch(deleteCategories(category)) 
+      }else{
+        return swal('Tu categoria esta a salvo :)')
+      }
+    })
   };
 
 
@@ -47,6 +73,11 @@ export default function CategoryCreator() {
           </li>
         ))}
       </ul>
+      <IconButton >
+                <Link to={"/admin"}>
+                  <ArrowBackSharpIcon />
+                </Link>
+      </IconButton>
     </div>
   )
 };
