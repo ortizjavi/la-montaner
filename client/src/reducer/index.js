@@ -26,15 +26,15 @@ const rootReducer = (state = initialState, action) => {
     case actionTypes.SEARCH_STATE: return { ...state, searchProdustsState: action.payload };
     case actionTypes.FILTER_PRODUCTS_CATEGORY: return { ...state, allProducts: action.payload };
     case actionTypes.ADD_CART_PRODUCT: 
-      const product = action.payload;
-      const existItem = state.cartProducts.find((p) => p.id === product.id);
+      const newProduct = action.payload;
+      const existItem = state.cartProducts.find((p) => p.id === newProduct.id);
 
       if (existItem) {
-        return { ...state, cartProducts: state.cartProducts.map((p) => p.id === product.id ? product : p) };
+        return { ...state, cartProducts: state.cartProducts.map((currentProduct) => currentProduct.id === newProduct.id ? newProduct : currentProduct) };
       } else {
-        return { ...state, cartProducts: [...state.cartProducts, product] };
+        return { ...state, cartProducts: [...state.cartProducts, newProduct] };
       }
-    case actionTypes.DELETE_CART_PRODUCT: return { ...state, cartProducts: state.cartProducts.filter((product) => product.id !== action.paylaod) };
+    case actionTypes.DELETE_CART_PRODUCT: return { ...state, cartProducts: state.cartProducts.filter((currentProduct) => currentProduct.id !== action.paylaod) };
     case actionTypes.DELETE_CART_ALL: return { ...state, cartProducts: [] };
     default: return state;
   }
