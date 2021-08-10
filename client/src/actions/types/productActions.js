@@ -140,5 +140,8 @@ export function deleteCartProduct(productId) {
 }
 
 export function deleteCartAll() {
-  return { type: actionTypes.DELETE_CART_ALL };
+  return async function (dispatch, getState) {
+    dispatch({ type: actionTypes.DELETE_CART_ALL });
+    localStorage.setItem('cart', JSON.stringify(getState().rootReducer.cartProducts));
+  }
 }
