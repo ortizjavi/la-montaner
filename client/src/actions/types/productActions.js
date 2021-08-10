@@ -5,6 +5,7 @@ import {
   GET_PRODUCT_DETAIL,
   ADMIN_SELECT_PRODUCTS,
   CURENT_PAGE,
+  CURENT_CATEGORY,
   SEARCH_STATE,
   ADMIN_SELECT_DELETED_PRODUCTS,
   FILTER_PRODUCTS_CATEGORY,
@@ -93,8 +94,10 @@ export async function updateProducts(id, producto) {
   }
 
 
-export function searchProducts(sort, pageNumber, name, category) {
+export function searchProducts({sort, pageNumber, name,category}) {
+  console.log('Al actionsearch llega',sort, pageNumber, name,category)
   if (name) {
+    console.log('deltro del if name',name,'category',category, 'pageNumber',pageNumber)
     return async function (dispatch) {
       try {
         const response = await axios.get(
@@ -106,26 +109,32 @@ export function searchProducts(sort, pageNumber, name, category) {
       }
     };
   } else {
+    console.log('deltro del else name',name,'category',category,'pageNumber',pageNumber)
+    if(category ==='vertodos' || !category){
+        return async function (dispatch) {
+          try {
+            const response = await axios.get(
+              `${GET_PRODUCTS_ENDPOINT}?pageNumber=${pageNumber}&sort=${sort}`
+            );
+            return dispatch({ type: ALL_PRODUCTS, payload: response.data });
+          } catch (e) {
+            console.log("actions/types/productActions/searchProducts-Error:", e);
+          }
+        }
+    }else{
     return async function (dispatch) {
       try {
-        if(category){
-          const response = await axios.get(
-            `${GET_PRODUCTS_ENDPOINT}?pageNumber=${pageNumber}&sort=${sort}&categories=${category}`
-          );
-          return dispatch({ type: ALL_PRODUCTS, payload: response.data });
-        }else{
-          const response = await axios.get(
-            `${GET_PRODUCTS_ENDPOINT}?pageNumber=${pageNumber}&sort=${sort}`
-          );
-          return dispatch({ type: ALL_PRODUCTS, payload: response.data });
-          }
+        const response = await axios.get(
+          `${GET_PRODUCTS_ENDPOINT}?pageNumber=${pageNumber}&sort=${sort}&categories=${category}`
+        );
+        return dispatch({ type: ALL_PRODUCTS, payload: response.data });
       } catch (e) {
         console.log("actions/types/productActions/searchProducts-Error:", e);
       }
     };
   }
 }
-
+}
 export function filterProductsCategory(sort, pageNumber, category) {
   if (category) {
     return async function (dispatch) {
@@ -161,6 +170,9 @@ export function filterProducts (data, sort, pageNumber) {
 
 export function currentPageAction(page) {
   return { type: CURENT_PAGE, payload: page };
+}
+export function selectCategoryAction(page) {
+  return { type: CURENT_CATEGORY, payload: page };
 }
 export function searchProductsAction(state) {
   return { type: SEARCH_STATE, payload: state };

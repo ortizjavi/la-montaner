@@ -12,41 +12,22 @@ import ClearIcon from '@material-ui/icons/Clear';
 export default function SearchBar() {
     const dispatch = useDispatch();
     const allProducts = useSelector( state => state.allProducts)
+    const currentCategoryState = useSelector( state => state.currentCategoryState)
+
     const [state, setState] = useState({product: "", icono:true,})
 
-    // useEffect(() => {
-    //     if(state.product.length>=2){
-    //         dispatch(searchProductsAction(state.product))
-    //     }
-    // }, [state])
 
-    // const handleChange = event => {
-    //     event.preventDefault();
-    //     if(event.target.value<=2){
-    //         setState({ ...state, [event.target.name]: event.target.value});
-    //     }else{
-    //         setState({ ...state, [event.target.name]: event.target.value, icono:!state.icono  });
-
-    //     }
-    //  }
-    // const handleSubmit =event => {
-    //     event.preventDefault();
-    //     if(state.product.length){
-    //         if(state.icono){
-    //             dispatch(searchProductsAction(state.product))
-    //             setState({ ...state, icono:!state.icono });
-    //         }else{
-    //             setState({ ...state, product:"", icono:!state.icono });
-    //         }   
-    //     }
-    // } 
     useEffect(() => {
             dispatch(searchProductsAction(state.product))
     }, [state.product])
 
+    // useEffect(() =>{
+    //     setState({product: "", icono:true,})
+    // },[currentCategoryState])
+
     const handleChange = event => {
         event.preventDefault();
-        let bool= event.target.value.length>0;
+        let bool= event.target.value.length>1;
         if(event.target.value.length <=2){
             setState({ ...state, [event.target.name]: event.target.value,  icono:!bool });
         }else{
@@ -57,12 +38,9 @@ export default function SearchBar() {
     const handleSubmit =event => {
         event.preventDefault();
         if(state.product.length){
-            if(state.icono){
-                // dispatch(searchProductsAction(state.product))
-                // setState({ ...state, icono:!state.icono });
-            }else{
+            if(!state.icono){
                 setState({ ...state, product:"", icono:!state.icono });
-            }   
+            }  
         }
     } 
     function HomeIcon(props) {

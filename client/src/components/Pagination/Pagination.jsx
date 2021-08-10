@@ -1,5 +1,5 @@
 import React, {useEffect} from "react";
-import { useDispatch} from "react-redux"
+import { useDispatch, useSelector} from "react-redux"
 
 import createPagination from "./createPagination";
 import {currentPageAction} from "../../actions/types/productActions";
@@ -7,10 +7,21 @@ import "./Pagination.css";
 
 export default function Pagination({response}) {
   const dispatch = useDispatch()
-  const [currentPage, setCurrentPage] = React.useState(1);
+  const currentInit = useSelector(state => state.currentPage)
+  const currentCategoryState = useSelector( state => state.currentCategoryState)
+
+
+  const [currentPage, setCurrentPage] = React.useState(currentInit);
+
   useEffect(()=>{
     dispatch(currentPageAction(currentPage))    
   },[currentPage])
+  
+  
+  useEffect(() => {
+    console.log('Pagination/paginaactual:',currentPage,'categoria', currentCategoryState)
+    setCurrentPage(1)  
+  },[currentCategoryState])
 
   const { pagination } = createPagination({
     numberOfArticles: response,
@@ -19,8 +30,8 @@ export default function Pagination({response}) {
     currentPage
   });
 
-
   const handleClick = page => setCurrentPage(page);
+
   return (
     
     <div className="pagination">

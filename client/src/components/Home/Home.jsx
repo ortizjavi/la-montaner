@@ -1,6 +1,6 @@
 import React, { useEffect, useState }  from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {  searchProducts, filterProducts, getMaximumPrice } from '../../actions/types/productActions.js';
+import {  searchProducts, selectCategoryAction,currentPageAction, filterProducts, getMaximumPrice } from '../../actions/types/productActions.js';
 import NavBar from '../Navbar/NavBar';
 import Filters from '../Filters/Fiters.jsx';
 import ShowProducts from '../ShowProducts/ShowProducts';
@@ -12,7 +12,7 @@ export default function Home() {
   const currentPage = useSelector(state => state.currentPage)
   const searchState = useSelector(state => state.searchProdustsState)
   const allProducts = useSelector( state => state.allProducts)
-
+  const currentCategoryState = useSelector( state => state.currentCategoryState)
   const maxPrice = useSelector(state => state.maxPrice)
   let maxPrice1 = Math.ceil(maxPrice * (1/3))
   let maxPrice2 = Math.ceil(maxPrice * (2/3))
@@ -22,22 +22,35 @@ export default function Home() {
 
   
   useEffect(()=>{
-    dispatch(searchProducts(sort, currentPage-1))
-    dispatch(getMaximumPrice('price'))
+    let param = {sort, pageNumber: currentPage-1, name: searchState, category:currentCategoryState }
+    dispatch(searchProducts(param))
   },[])
+
+  useEffect(()=>{
+    let param = {sort, pageNumber: 0, name: searchState, category:currentCategoryState }
+    dispatch(currentPageAction(1))    
+    const act =() => dispatch(searchProducts(param))
+    act()
+  },[currentCategoryState])
 
   useEffect(() => {
     if(allProducts[0]>8){ 
-      dispatch(searchProducts(sort, currentPage-1));
-
+    let param = {sort, pageNumber: currentPage-1, name: searchState, category:currentCategoryState }
+      dispatch(searchProducts(param));
     }
   }, [currentPage])
   
   useEffect(() =>{
+    dispatch(currentPageAction(1))    
+
     if(searchState.length>=2){
-      dispatch(searchProducts(sort, 0, searchState))
-    }else{
-    dispatch(searchProducts(sort, currentPage-1))
+      //current page arcodeado si la respuesta es mas de paginado no busca
+      dispatch(selectCategoryAction('vertodos'))
+      let param = {sort, pageNumber: currentPage-1, name: searchState, category:'vertodos' }
+      dispatch(searchProducts(param))
+     } else{
+      let param = {sort, pageNumber: currentPage-1, name:'', category:currentCategoryState }
+    dispatch(searchProducts(param))
     }
   },[searchState])
 

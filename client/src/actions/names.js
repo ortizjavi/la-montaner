@@ -23,5 +23,12 @@ export const CURENT_PAGE = "CURENT_PAGE";
 // search action name
 export const SEARCH_STATE = "SEARCH_STATE";
 
+<<<<<<< Updated upstream
 // get max price of all products
 export const GET_MAX_PRICE = "GET_MAX_PRICE"
+=======
+//  category action
+export const CURENT_CATEGORY = "CURENT_CATEGORY";
+
+
+>>>>>>> Stashed changes

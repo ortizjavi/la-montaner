@@ -64,6 +64,9 @@ font-size_narvar:rgb(130,130,130); */
   
 .pagination ul  li.active{
           background: #66D040;
+          font-weight: 700;
+        font-size: 1.3rem;
+
         }
 .pagination ul  li.disabled{
           background: rgb(43,149,89,0.1);
