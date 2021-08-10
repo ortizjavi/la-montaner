@@ -12,6 +12,7 @@ import {
   ADMIN_CLEAR_SELECT,
   ADMIN_SELECT_UPDATED_PRODUCTS,
   FILTER_PRODUCTS_CATEGORY,
+  GET_MAX_PRICE,
 } from "../actions/names";
 
 const initialState = {
@@ -23,6 +24,7 @@ const initialState = {
   currentPage: 1,
   searchProdustsState: "",
   activeProduct: null,
+  maxPrice: "",
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -55,6 +57,8 @@ const rootReducer = (state = initialState, action) => {
       return { ...state, searchProdustsState: action.payload };
     case FILTER_PRODUCTS_CATEGORY:
       return { ...state, allProducts: action.payload };
+    case GET_MAX_PRICE:
+      return { ...state, maxPrice: action.payload }
     default:
       return state;
   }
