@@ -9,9 +9,12 @@ import {
   DELETE_CATEGORY,
   CURENT_PAGE,
   SEARCH_STATE,
+  ADD_CART_PRODUCT,
+  DELETE_CART_PRODUCT,
   ADMIN_CLEAR_SELECT,
   ADMIN_SELECT_UPDATED_PRODUCTS,
   FILTER_PRODUCTS_CATEGORY,
+  DELETE_CART_ALL,
 } from "../actions/names";
 
 const initialState = {
@@ -19,6 +22,7 @@ const initialState = {
   productDetail: {},
   allCategories: [],
   adminProducts: [],
+  cartProducts: [],
   selectedAdminProducts: [],
   currentPage: 1,
   searchProdustsState: "",
@@ -55,6 +59,9 @@ const rootReducer = (state = initialState, action) => {
       return { ...state, searchProdustsState: action.payload };
     case FILTER_PRODUCTS_CATEGORY:
       return { ...state, allProducts: action.payload };
+    case ADD_CART_PRODUCT: return { ...state, cartProducts: state.cartProducts.concat(action.payload) };
+    case DELETE_CART_PRODUCT: return { ...state, cartProducts: state.cartProducts.filter((product) => product.id !== action.paylaod) };
+    case DELETE_CART_ALL: return { ...state, cartProducts: [] };
     default:
       return state;
   }
