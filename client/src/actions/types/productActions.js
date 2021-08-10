@@ -8,6 +8,9 @@ import {
   SEARCH_STATE,
   ADMIN_SELECT_DELETED_PRODUCTS,
   FILTER_PRODUCTS_CATEGORY,
+  ADD_CART_PRODUCT,
+  DELETE_CART_PRODUCT,
+  DELETE_CART_ALL,
 } from "../names";
 
 import {
@@ -146,4 +149,16 @@ export function searchProductsAction(state) {
 
 export function clearProductDetail() {
   return { type: GET_PRODUCT_DETAIL, payload: {}};
+}
+
+export function addCartProduct(product) {
+  return { type: ADD_CART_PRODUCT, payload: product };
+}
+
+export function deleteCartProduct(productId) {
+  return { type: DELETE_CART_PRODUCT, payload: productId };
+}
+
+export function deleteCartAll() {
+  return { type: DELETE_CART_ALL };
 }
