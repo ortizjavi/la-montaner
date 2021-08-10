@@ -1,7 +1,6 @@
 const Product = require('../../../models/Product');
 
-module.exports = {
-  updateProduct: async (req, res, next) => {
+module.exports = async (req, res, next) => {
     const { id } = req.params;
     const update = { ...req.body }
     try {
@@ -16,5 +15,5 @@ module.exports = {
             ok: false
         })
     }
-  }
 }
+
