@@ -37,31 +37,27 @@ export default function App() {
   }, []);
 
   return (
-    <div>
-      <Route exact path="/" component={Landing} />
-      <Route exact path="/home" component={Home} />
-      <Route exact path="/home/:id" component={NavBar} />
-      <Switch>
-        <ThemeProvider theme={theme}>
-        <Route exact path="/admin" component={Dashboard}></Route>
-        <Route
-          exact
-          path="/admin/productCreation"
-          component={ProductCreation}
-        />
-        <Route
-          exact
-          path="/admin/editProduct/:id"
-          component={EditProduct}
-        />
-        <Route
-          exact
-          path="/admin/categoryCreation"
-          component={CategoryCreation}
-        />
-        </ThemeProvider>
-        <Route exact path="/home/:id" component={ProductDetail} />
-      </Switch>
-    </div>
+    <ThemeProvider theme={theme}>
+      <div>
+        <Route exact path="/" component={Landing} />
+        <Route exact path="/home" component={Home} />
+        <Route exact path="/home/:id" component={NavBar} />
+        <Switch>
+          <Route exact path="/admin" component={Dashboard}></Route>
+          <Route
+            exact
+            path="/admin/productCreation"
+            component={ProductCreation}
+          />
+          <Route exact path="/admin/editProduct/:id" component={EditProduct} />
+          <Route
+            exact
+            path="/admin/categoryCreation"
+            component={CategoryCreation}
+          />
+          <Route exact path="/home/:id" component={ProductDetail} />
+        </Switch>
+      </div>
+    </ThemeProvider>
   );
 }
