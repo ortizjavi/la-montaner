@@ -27,7 +27,7 @@ const rootReducer = (state = initialState, action) => {
     case actionTypes.FILTER_PRODUCTS_CATEGORY: return { ...state, allProducts: action.payload };
     case actionTypes.ADD_CART_PRODUCT: 
       const newProduct = action.payload;
-      const existItem = state.cartProducts.find((p) => p.id === newProduct.id);
+      const existItem = state.cartProducts.find((product) => product.id === newProduct.id);
 
       if (existItem) {
         return { ...state, cartProducts: state.cartProducts.map((currentProduct) => currentProduct.id === newProduct.id ? newProduct : currentProduct) };
