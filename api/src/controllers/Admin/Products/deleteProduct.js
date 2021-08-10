@@ -1,7 +1,6 @@
 const Product = require('../../../models/Product');
 
-module.exports = {
-  deleteProduct: async (req, res, next) => {
+module.exports = async (req, res, next) => {
     const { id } = req.params;
     try {
         await Product.findByIdAndDelete(id)
@@ -14,5 +13,4 @@ module.exports = {
             ok: false
         })
     }
-  }
 }
