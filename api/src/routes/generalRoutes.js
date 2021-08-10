@@ -8,6 +8,6 @@ const { payProducts } = require("../controllers/General/payProducts");
 
 router.get("/", searchProducts);
 router.get("/:id", getProductDetail);
-router.post("/pay", payProducts);
+router.post("/products/pay", payProducts);
 
 module.exports = router;
