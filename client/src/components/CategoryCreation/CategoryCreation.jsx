@@ -5,7 +5,7 @@ import { createCategory, deleteCategories } from '../../actions/types/categoryAc
 import { fixedCategories } from '../../utils/endpoints.js';
 import { Link } from "react-router-dom";
 import swal from "sweetalert";
-import HomeIcon from '@material-ui/icons/Home';
+import ArrowBackSharpIcon from '@material-ui/icons/ArrowBackSharp';
 import IconButton from "@material-ui/core/IconButton";
 
 export default function CategoryCreator() {
@@ -35,20 +35,25 @@ export default function CategoryCreator() {
       title: "Categoria creada con exito!",
       icon: "success",
       })
-      setTimeout(
-        () => (document.location.href = "http://localhost:3000/admin"),
-        3000
-      );
   }
 
   const handleClick = (category) => {
     swal({
-      title: "Categoria eliminada!",
-      text: `Categoría ${category.name.toUpperCase()} eliminada`,
-      icon: "success",
+      title: 'Estas seguro que quieres eliminarlo?',
+      icon: 'warning',
+      buttons: true,
+      dangerMode: true,
+    }).then((willDelete) => {
+      if (willDelete) {
+        swal(
+          'Tu categoria fue eliminada',{
+            icon: 'success'
+          })
+          dispatch(deleteCategories(category)) 
+      }else{
+        return swal('Tu categoria esta a salvo :)')
+      }
     })
-    //alert(`Categoría ${category.name.toUpperCase()} eliminada`)
-    dispatch(deleteCategories(category)) 
   };
 
 
@@ -70,7 +75,7 @@ export default function CategoryCreator() {
       </ul>
       <IconButton >
                 <Link to={"/admin"}>
-                  <HomeIcon />
+                  <ArrowBackSharpIcon />
                 </Link>
       </IconButton>
     </div>
