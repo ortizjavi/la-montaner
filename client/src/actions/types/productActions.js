@@ -133,7 +133,10 @@ export function addCartProduct(productId) {
 }
 
 export function deleteCartProduct(productId) {
-  return { type: actionTypes.DELETE_CART_PRODUCT, payload: productId };
+  return async function (dispatch, getState) {
+    dispatch({ type: actionTypes.DELETE_CART_PRODUCT, payload: productId });
+    localStorage.setItem('cart', JSON.stringify(getState().rootReducer.cartProducts));
+  }
 }
 
 export function deleteCartAll() {
