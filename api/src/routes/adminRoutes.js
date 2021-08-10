@@ -3,35 +3,27 @@ const { Router } = require("express");
 const router = Router();
 
 const {
-  createCategory,
-} = require("../controllers/Admin/Category/createCategory");
-const {
   getCategories,
-} = require("../controllers/Admin/Category/getCategories");
-const {
-  getAdminProduct,
-} = require("../controllers/Admin/Products/getProducts");
+  createCategory,
+  deleteCategory
+} = require("../controllers/Admin/Categories");
 
 const {
-  deleteCategories,
-} = require("../controllers/Admin/Category/deleteCategories");
-const {
+  getProducts,
   createProduct,
-} = require("../controllers/Admin/Products/createProduct");
-const {
   updateProduct,
-} = require("../controllers/Admin/Products/updateProduct");
-const {
-  deleteProduct,
-} = require("../controllers/Admin/Products/deleteProduct");
+  deleteProduct
+} = require("../controllers/Admin/Products");
 
+// Categories
 router.get("/category", getCategories);
 router.post("/category", createCategory);
-
-router.get("/product", getAdminProduct);
-router.delete("/category", deleteCategories);
-router.put("/product/:id", updateProduct);
+router.delete("/category", deleteCategory);
+// Products
+router.get("/product", getProducts);
 router.post("/product", createProduct);
+router.put("/product/:id", updateProduct);
 router.delete("/product/:id", deleteProduct);
+
 
 module.exports = router;

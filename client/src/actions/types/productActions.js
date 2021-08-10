@@ -10,6 +10,9 @@ import {
   ADMIN_SELECT_DELETED_PRODUCTS,
   FILTER_PRODUCTS_CATEGORY,
   GET_MAX_PRICE,
+  ADD_CART_PRODUCT,
+  DELETE_CART_PRODUCT,
+  DELETE_CART_ALL,
 } from "../names";
 
 import {
@@ -198,4 +201,15 @@ export function getMaximumPrice(price) {
       }
     };
   }
+
+export function addCartProduct(product) {
+  return { type: ADD_CART_PRODUCT, payload: product };
+}
+
+export function deleteCartProduct(productId) {
+  return { type: DELETE_CART_PRODUCT, payload: productId };
+}
+
+export function deleteCartAll() {
+  return { type: DELETE_CART_ALL };
 }

@@ -10,10 +10,13 @@ import {
   CURENT_PAGE,
   CURENT_CATEGORY,
   SEARCH_STATE,
+  ADD_CART_PRODUCT,
+  DELETE_CART_PRODUCT,
   ADMIN_CLEAR_SELECT,
   ADMIN_SELECT_UPDATED_PRODUCTS,
   FILTER_PRODUCTS_CATEGORY,
   GET_MAX_PRICE,
+  DELETE_CART_ALL,
 } from "../actions/names";
 
 const initialState = {
@@ -21,6 +24,7 @@ const initialState = {
   productDetail: {},
   allCategories: [],
   adminProducts: [],
+  cartProducts: [],
   selectedAdminProducts: [],
   currentPage: 1,
   searchProdustsState: "",
@@ -63,6 +67,9 @@ const rootReducer = (state = initialState, action) => {
       return { ...state, allProducts: action.payload };
     case GET_MAX_PRICE:
       return { ...state, maxPrice: action.payload }
+    case ADD_CART_PRODUCT: return { ...state, cartProducts: state.cartProducts.concat(action.payload) };
+    case DELETE_CART_PRODUCT: return { ...state, cartProducts: state.cartProducts.filter((product) => product.id !== action.paylaod) };
+    case DELETE_CART_ALL: return { ...state, cartProducts: [] };
     default:
       return state;
   }
