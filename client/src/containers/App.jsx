@@ -42,6 +42,7 @@ export default function App() {
       <Route exact path="/home" component={Home} />
       <Route exact path="/home/:id" component={NavBar} />
       <Switch>
+        <ThemeProvider theme={theme}>
         <Route exact path="/admin" component={Dashboard}></Route>
         <Route
           exact
@@ -58,6 +59,7 @@ export default function App() {
           path="/admin/categoryCreation"
           component={CategoryCreation}
         />
+        </ThemeProvider>
         <Route exact path="/home/:id" component={ProductDetail} />
       </Switch>
     </div>
