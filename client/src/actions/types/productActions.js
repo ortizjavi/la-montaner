@@ -164,7 +164,7 @@ export function clearProductDetail() {
 //   }
 // }
 export function addCartProduct(productId) {
-  return async function (dispatch, getState) {
+  return async function (dispatch) {
     const { data } = await axios.get(`${endpoints.GET_PRODUCTS}/${productId}`);
     dispatch({ 
       type: actionTypes.ADD_CART_PRODUCT,
@@ -180,13 +180,13 @@ export function addCartProduct(productId) {
 }
 
 export function deleteCartProduct(productId) {
-  return async function (dispatch, getState) {
+  return async function (dispatch) {
     dispatch({ type: actionTypes.DELETE_CART_PRODUCT, payload: productId });
   }
 }
 
 export function deleteCartAll() {
-  return async function (dispatch, getState) {
+  return async function (dispatch) {
     dispatch({ type: actionTypes.DELETE_CART_ALL });
   }
 }
