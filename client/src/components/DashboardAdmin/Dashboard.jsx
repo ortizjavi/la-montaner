@@ -153,7 +153,7 @@ const EnhancedTableToolbar = (props) => {
   const classes = useToolbarStyles();
   var { numSelected } = props;
 
-  const seleccionados = useSelector((state) => state.selectedAdminProducts);
+  const seleccionados = useSelector((state) => state.root.selectedAdminProducts);
 
   const handleDelete = () => {
     swal({
@@ -286,8 +286,8 @@ export const Dashboard = () => {
 
   const rows = [];
 
-  const productos = useSelector((state) => state.adminProducts);
-  const seleccionados = useSelector((state) => state.selectedAdminProducts);
+  const productos = useSelector((state) => state.root.adminProducts);
+  const seleccionados = useSelector((state) => state.root.selectedAdminProducts);
 
   useEffect(() => {
     dispatch(getAdminProducts());

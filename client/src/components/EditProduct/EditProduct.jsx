@@ -73,7 +73,7 @@ export default function EditProduct() {
   useEffect(() => {
     dispatch(getProductDetail(id));
   }, [id, dispatch]);
-  const productoId = useSelector((state) => state.productDetail);
+  const productoId = useSelector((state) => state.root.productDetail);
 
 
 
@@ -120,7 +120,7 @@ function EditProductChild({producto, defaultState}) {
   const theme = useTheme();
   const [image, setImage] = useState([]);
   const [bool, setBool] = useState(false);
-  const allCategories = useSelector((state) => state.allCategories);
+  const allCategories = useSelector((state) => state.root.allCategories);
   const dispatch = useDispatch();
 
   const contentPC = useStyles();

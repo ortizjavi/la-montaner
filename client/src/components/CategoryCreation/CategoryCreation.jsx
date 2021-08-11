@@ -10,7 +10,7 @@ import IconButton from "@material-ui/core/IconButton";
 
 export default function CategoryCreator() {
   const dispatch = useDispatch();
-  const categories = useSelector(state => state.allCategories)
+  const categories = useSelector(state => state.root.allCategories)
   const [state, setState] = useState("")
 
 
