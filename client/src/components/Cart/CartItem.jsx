@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import DeleteIcon from '@material-ui/icons/Delete';
 
 const CartItem = ({ item, qtyChangeHandler, removeHandler }) => {
+
   return (
     <div className="cartitem">
       <div className="cartitem__image">

@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import swal from "sweetalert";
 import NavBar from '../Navbar/NavBar.jsx';
 import Footer from '../Footer/Footer.jsx';
 
@@ -25,7 +26,22 @@ const Cart = () => {
   };
 
   const removeFromCartHandler = (id) => {
-    dispatch(deleteCartProduct(id));
+      swal({
+        title: 'Estas seguro que quieres eliminar este producto?',
+        icon: 'warning',
+        buttons: true,
+        dangerMode: true,
+      }).then((willDelete) => {
+        if (willDelete) {
+          swal(
+            'Tu producto fue eliminada',{
+              icon: 'success'
+            })
+            dispatch(deleteCartProduct(id)); 
+        }else{
+          return swal('Tu producto sigue en el carrito :)')
+        }
+      })
   };
 
   const getCartCount = () => {
