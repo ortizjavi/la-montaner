@@ -2,11 +2,13 @@ import React from 'react';
 import './Authentication.css'
 import GoogleLogin from 'react-google-login';
 import FacebookLogin from 'react-facebook-login'
+import { loginWithGoogle } from "../../actions/types/authActions";
 
 export default function ExternAuthentication() {
 
     const responseGoogle = (response) => {
         console.log(response)
+        loginWithGoogle(response.tokenId);
     }
 
     const responseFacebook = (response) => {
