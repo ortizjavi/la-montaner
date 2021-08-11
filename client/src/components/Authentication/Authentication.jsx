@@ -1,19 +1,23 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import './Authentication.css'
 import GoogleLogin from 'react-google-login';
 import FacebookLogin from 'react-facebook-login'
 import { loginWithGoogle,loginWithFacebook } from "../../actions/types/authActions";
 
 export default function ExternAuthentication() {
+    const dispatch = useDispatch();
 
     const responseGoogle = (response) => {
         console.log(response)
-        loginWithGoogle(response.tokenId);
+        dispatch(loginWithGoogle(response.tokenId))
     }
 
     const responseFacebook = (response) => {
         console.log(response);
-        loginWithFacebook(response.accessToken)
+        console.log(response.accessToken);
+        if (response.accessToken)
+            dispatch(loginWithFacebook(response.accessToken))
     }
 
   
