@@ -14,9 +14,9 @@ function NavBar() {
     const currentCategoryState = useSelector( state => state.currentCategoryState)
 
     const dispatch = useDispatch();
-    const currentPage = useSelector(state => state.currentPage)
+    const currentPage = useSelector(state => state.root.currentPage)
     var sort = 'asc'
-    const allProducts = useSelector( state => state.allProducts)
+    const allProducts = useSelector( state => state.root.allProducts)
 
     const[state, setState] = useState('vertodos')
    

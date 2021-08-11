@@ -5,7 +5,6 @@ const initialState = {
   productDetail: {},
   allCategories: [],
   adminProducts: [],
-  cartProducts: [],
   selectedAdminProducts: [],
   currentPage: 1,
   searchProdustsState: "",
@@ -29,19 +28,8 @@ const rootReducer = (state = initialState, action) => {
     case actionTypes.GET_MAX_PRICE: return { ...state, maxPrice: action.payload[0].price };
     case actionTypes.FILTER_PRODUCTS_CATEGORY: return { ...state, allProducts: action.payload };
     case actionTypes.CURENT_CATEGORY: return { ...state, currentCategoryState: action.payload };
-    case actionTypes.GET_MAX_PRICE: return { ...state, maxPrice: action.payload }
+    //case actionTypes.GET_MAX_PRICE: return { ...state, maxPrice: action.payload };
 
-    case actionTypes.ADD_CART_PRODUCT: 
-      const newProduct = action.payload;
-      const existItem = state.cartProducts.find((product) => product.id === newProduct.id);
-
-      if (existItem) {
-        return { ...state, cartProducts: state.cartProducts.map((currentProduct) => currentProduct.id === newProduct.id ? newProduct : currentProduct) };
-      } else {
-        return { ...state, cartProducts: [...state.cartProducts, newProduct] };
-      }
-    case actionTypes.DELETE_CART_PRODUCT: return { ...state, cartProducts: state.cartProducts.filter((currentProduct) => currentProduct.id !== action.paylaod) };
-    case actionTypes.DELETE_CART_ALL: return { ...state, cartProducts: [] };
     default: return state;
   }
 };
