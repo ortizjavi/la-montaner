@@ -54,9 +54,7 @@ const ShowProducts = ({allProducts}) => {
                   </div>
                 ) : (
                   <div className="sp-product_container" key={item._id}>
-                    <NavLink className="sp-link" to={`/home/${item?._id}`}>
-                      <h5 className="link-name">{item?.name}</h5>
-                    </NavLink>
+                    
                     <NavLink className="" to={`/home/${item?._id}`}>
                       <div className="image_contain">
                         {validaURLs(item.img[0]) ? (
@@ -74,12 +72,15 @@ const ShowProducts = ({allProducts}) => {
                             onError="this.style.display='none'"
                           />
                         )}
+
                       </div>
-                      <div className="item_price">${item?.price}</div>
+                        <hr></hr>
+                        <h5 className="link-name">{item?.name}</h5>
+                        <h4 className="item_price">${item?.price}</h4>
                       {
                         item.stock > 0 ? 
-                        (<div>Tenemos en stock!</div>)
-                        : (<div>No tenemos stock</div>)
+                        (<h6 className='sp-h6'>Tenemos en stock!</h6>)
+                        : (<h6 className='sp-h6'>No tenemos stock</h6>)
                       }
                     </NavLink>
                     <button

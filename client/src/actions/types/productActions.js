@@ -119,6 +119,8 @@ export function filterProductsCategory(sort, pageNumber, category) {
 }
 
 export function filterProducts (data, sort, pageNumber) {
+  console.log('Action/data: ',data)
+
   if (data) {
     return async function (dispatch) {
       try {
@@ -146,23 +148,7 @@ export function searchProductsAction(state) {
 export function clearProductDetail() {
   return { type: actionTypes.GET_PRODUCT_DETAIL, payload: {}};
 }
-// export function getMaximumPrice(price) {
-//   if (price) {
-//     return async function (dispatch) {
-//       try {
-//         const response = await axios.get(
-//           `${GET_PRODUCTS_ENDPOINT}?price=giveMeHigherPrice`
-//         );
-//         return dispatch({
-//           type: GET_MAX_PRICE,
-//           payload: response.data[0].price,
-//         });
-//       } catch (e) {
-//         console.log("actions/types/productActions/getMaximumPrice-Error:", e);
-//       }
-//     };
-//   }
-// }
+
 export function addCartProduct(productId, stockSelected) {
   return async function (dispatch) {
     const { data } = await axios.get(`${endpoints.GET_PRODUCTS}/${productId}`);
