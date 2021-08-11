@@ -12,6 +12,7 @@ import { createTheme, ThemeProvider } from "@material-ui/core/styles";
 import { Dashboard } from "../components/DashboardAdmin/Dashboard";
 import EditProduct from "../components/EditProduct/EditProduct";
 import NavBar from "../components/Navbar/NavBar";
+import Cart from "../components/Cart/Cart";
 
 const theme = createTheme({
   palette: {
@@ -56,6 +57,7 @@ export default function App() {
             component={CategoryCreation}
           />
           <Route exact path="/home/:id" component={ProductDetail} />
+          <Route exact path="/cart" component={Cart} />
         </Switch>
       </div>
     </ThemeProvider>
