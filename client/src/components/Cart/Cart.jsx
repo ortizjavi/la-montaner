@@ -45,12 +45,12 @@ const Cart = () => {
   };
 
   const getCartCount = () => {
-    return cartItems.reduce((qty, item) => Number(item.stock) + qty, 0);
+    return cartItems.reduce((stockSelected, item) => Number(item.stockSelected) + stockSelected, 0);
   };
 
   const getCartSubTotal = () => {
     return cartItems
-      .reduce((price, item) => price + item.price * item.stock, 0)
+      .reduce((price, item) => price + item.price * item.stockSelected, 0)
       .toFixed(2);
   };
 
