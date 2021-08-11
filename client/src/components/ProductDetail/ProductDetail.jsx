@@ -15,7 +15,7 @@ import { Carousel } from "react-responsive-carousel";
 
 export default function ProductDetail({match, history}) {
   const { id } = useParams();
-  const detail = useSelector((state) => state.productDetail);
+  const detail = useSelector((state) => state.root.productDetail);
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(true);
   const [count, setCount] = useState(1);

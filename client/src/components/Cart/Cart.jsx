@@ -13,11 +13,12 @@ import { addCartProduct, deleteCartProduct } from "../../actions/types/productAc
 
 const Cart = () => {
   const dispatch = useDispatch();
-  const cart = useSelector((state) => state.cartProducts);
+  const cart = useSelector((state) => state.cart);
+  const { cartItems } = cart;
 
   useEffect(() => {
-      window.localStorage.setItem(`cart`, JSON.stringify(cart))
-  }, [cart]);
+      window.localStorage.setItem(`cart`, JSON.stringify(cartItems))
+  }, [cartItems]);
 
   const qtyChangeHandler = (id, qty) => {
     dispatch(addCartProduct(id, qty));
@@ -28,11 +29,11 @@ const Cart = () => {
   };
 
   const getCartCount = () => {
-    return cart.reduce((qty, item) => Number(item.stock) + qty, 0);
+    return cartItems.reduce((qty, item) => Number(item.stock) + qty, 0);
   };
 
   const getCartSubTotal = () => {
-    return cart
+    return cartItems
       .reduce((price, item) => price + item.price * item.stock, 0)
       .toFixed(2);
   };
@@ -44,12 +45,12 @@ const Cart = () => {
         <div className="cartscreen__left">
           <h2>Carrito de compras</h2>
 
-          {cart.length === 0 ? (
+          {cartItems.length === 0 ? (
             <div>
-              Tu carrito esta vacio <Link to="/">Volver atras</Link>
+              Tu carrito esta vacio <Link to="/home">Volver atras</Link>
             </div>
           ) : (
-            cart.map((item) => (
+            cartItems.map((item) => (
               <CartItem
                 key={item.product}
                 item={item}
