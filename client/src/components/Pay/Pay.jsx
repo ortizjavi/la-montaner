@@ -1,8 +1,6 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-
-const FORM_ID = "payment-form";
+import React from "react";
+import Button from "@material-ui/core/Button";
 
 export default function Product() {
   const paga = async (e) => {
@@ -13,11 +11,19 @@ export default function Product() {
       price: 100,
     });
     console.log(response);
+    window.location.href = response.data.response.init_point;
   };
   return (
     <div>
       <form>
-        <button onClick={paga}>paga boludo</button>
+        <Button
+          variant="contained"
+          color="primary"
+          disableElevation
+          onClick={paga}
+        >
+          Paga Boludo
+        </Button>
       </form>
     </div>
   );

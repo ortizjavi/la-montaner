@@ -4,12 +4,12 @@ import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Input from "@material-ui/core/Input";
 import TextField from "@material-ui/core/TextField";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
-import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
-import CardActions from '@material-ui/core/CardActions';
-import CardMedia from '@material-ui/core/CardMedia';
+import Card from "@material-ui/core/Card";
+import CardActionArea from "@material-ui/core/CardActionArea";
+import CardActions from "@material-ui/core/CardActions";
+import CardMedia from "@material-ui/core/CardMedia";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
@@ -21,7 +21,7 @@ import swal from "sweetalert";
 import {
   getProductDetail,
   updateProducts,
-  clearProductDetail
+  clearProductDetail,
 } from "../../actions/types/productActions";
 
 const useStyles = makeStyles((theme) => ({
@@ -75,8 +75,6 @@ export default function EditProduct() {
   }, [id, dispatch]);
   const productoId = useSelector((state) => state.productDetail);
 
-
-
   let state = {
     name: "",
     categories: [],
@@ -88,21 +86,21 @@ export default function EditProduct() {
     description: "",
     volumen: 0,
     others: "",
+  };
+
+  if (productoId && productoId._id) {
+    return (
+      <EditProductChild producto={{ ...productoId }} defaultState={state} />
+    );
   }
 
-
-  if (productoId && productoId._id){
-    return <EditProductChild producto={{...productoId}} defaultState={state}/>;
-  } 
-
-  return <div> No hay productos </div>
-
+  return <div> No hay productos </div>;
 }
 
 const getProps = (producto) => {
   return {
     name: producto.name,
-    categories: producto.categories.map(cat => cat.name),
+    categories: producto.categories.map((cat) => cat.name),
     img: producto.img,
     price: producto.price,
     stock: producto.stock,
@@ -111,15 +109,13 @@ const getProps = (producto) => {
     description: producto.description,
     volumen: producto.volumen,
     others: producto.others,
-  }
-}
+  };
+};
 
-function EditProductChild({producto, defaultState}) {
-  console.log('producto',producto);
+function EditProductChild({ producto, defaultState }) {
+  console.log("producto", producto);
   const [loadingImg, setLoadingImg] = useState(0);
-  const theme = useTheme();
   const [image, setImage] = useState([]);
-  const [bool, setBool] = useState(false);
   const allCategories = useSelector((state) => state.allCategories);
   const dispatch = useDispatch();
 
@@ -127,9 +123,7 @@ function EditProductChild({producto, defaultState}) {
 
   const [createProduct, setCreateProduct] = useState(getProps(producto));
 
-  
-  let { img, categories } = producto;
-/*  console.log(producto);
+  /*  console.log(producto);
   console.log(producto.categories);*/
 
   useEffect(() => {
@@ -137,41 +131,38 @@ function EditProductChild({producto, defaultState}) {
     return () => {
       dispatch(clearProductDetail());
       setCreateProduct(defaultState);
+    };
+  }, []);
 
-    }
-  }, [])
-
-  
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('CLICK!!!');
+    console.log("CLICK!!!");
     try {
       swal({
-        title: 'Estas seguro que quieres editar este producto?',
-        icon: 'warning',
+        title: "Estas seguro que quieres editar este producto?",
+        icon: "warning",
         buttons: true,
         dangerMode: true,
       }).then((willDelete) => {
         if (willDelete) {
-          swal(
-            `${createProduct.name} fue editado!`,{
-              icon: 'success'
-            })
-            updateProducts(producto._id,{
-              ...createProduct,
-              categories: allCategories.filter((c) =>
-                createProduct.categories.includes(c.name)
-              ),
-              img: image
-            })
-            setTimeout(
-              () => (document.location.href = "http://localhost:3000/admin"),
-              3000
-            );
-        }else{
-          return swal('Tu producto esta a salvo :)')
+          swal(`${createProduct.name} fue editado!`, {
+            icon: "success",
+          });
+          updateProducts(producto._id, {
+            ...createProduct,
+            categories: allCategories.filter((c) =>
+              createProduct.categories.includes(c.name)
+            ),
+            img: image,
+          });
+          setTimeout(
+            () => (document.location.href = "http://localhost:3000/admin"),
+            3000
+          );
+        } else {
+          return swal("Tu producto esta a salvo :)");
         }
-      })
+      });
     } catch (err) {
       console.log(err);
     }
@@ -190,7 +181,6 @@ function EditProductChild({producto, defaultState}) {
     });
     console.log(createProduct.categories);
   };
-
 
   const uploadImage = async (e) => {
     const files = e.target.files;
@@ -222,9 +212,9 @@ function EditProductChild({producto, defaultState}) {
   };
 
   const deleteImage = (e, i) => {
-    e.preventDefault()
-    setImage(image.filter(j => j !== i))
-  }
+    e.preventDefault();
+    setImage(image.filter((j) => j !== i));
+  };
 
   return (
     <div className="contentPC">
@@ -307,24 +297,29 @@ function EditProductChild({producto, defaultState}) {
               className="progressBar"
             />
           )}
-          {
-            image && image.map((i) => 
-          <Card className={contentPC.card}>
-            <CardActionArea>
-              <CardMedia
-                component="img"
-                alt="Imagen la Montañes"
-                height="140"
-                src={i}
-                key= {i}
-              />
-            </CardActionArea>
-            <CardActions>
-            <Button size="small" color="primary" onClick={(e)=> deleteImage(e,i)}>
-              Eliminar
-              </Button>
-            </CardActions>
-         </Card>)}
+          {image &&
+            image.map((i) => (
+              <Card className={contentPC.card}>
+                <CardActionArea>
+                  <CardMedia
+                    component="img"
+                    alt="Imagen la Montañes"
+                    height="140"
+                    src={i}
+                    key={i}
+                  />
+                </CardActionArea>
+                <CardActions>
+                  <Button
+                    size="small"
+                    color="primary"
+                    onClick={(e) => deleteImage(e, i)}
+                  >
+                    Eliminar
+                  </Button>
+                </CardActions>
+              </Card>
+            ))}
         </div>
         <TextField
           id="outlined-number"
@@ -345,7 +340,7 @@ function EditProductChild({producto, defaultState}) {
           id="outlined-number"
           label="abv"
           name="abv"
-          placeholder={producto.abv ? producto.abv.toString() : ''}
+          placeholder={producto.abv ? producto.abv.toString() : ""}
           defaultValue={createProduct.abv}
           type="number"
           InputProps={{ inputProps: { min: 0, max: 100 } }}
@@ -358,7 +353,7 @@ function EditProductChild({producto, defaultState}) {
         <TextField
           id="outlined-number"
           label="ibu"
-          placeholder={producto.ibu ? producto.ibu.toString() : ''}
+          placeholder={producto.ibu ? producto.ibu.toString() : ""}
           defaultValue={createProduct.ibu}
           type="number"
           name="ibu"
@@ -376,7 +371,7 @@ function EditProductChild({producto, defaultState}) {
           placeholder={producto.stock.toString()}
           defaultValue={createProduct.stock}
           type="number"
-          InputProps={{ inputProps: { min: 0, max: 999999999 } }}
+          InputProps={{ inputProps: { min: 1, max: 999999999 } }}
           name="stock"
           min="1"
           InputLabelProps={{

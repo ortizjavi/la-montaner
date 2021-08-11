@@ -10,17 +10,27 @@ module.exports = {
   payProducts: async (req, res) => {
     try {
       let preference = {
+        back_urls: {
+          success: "http://localhost:3000/home/pay/success",
+          failure: "http://localhost:3000/home/pay/failure",
+          pending: "http://localhost:3000/home/pay/pending",
+        },
+        auto_return: "approved",
         items: [
           {
             title: req.body.name,
             unit_price: req.body.price,
             quantity: 8,
           },
+          {
+            title: "Montaner Toy",
+            unit_price: 999,
+            quantity: 1,
+          },
         ],
       };
-      console.log("ahi voy");
       const wii = await mercadopago.preferences.create(preference);
-      console.log(wii);
+      res.send(wii);
     } catch (err) {
       console.log(err);
     }

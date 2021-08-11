@@ -14,6 +14,9 @@ import { getCategories } from "../actions/types/categoryActions.js";
 import { createTheme, ThemeProvider } from "@material-ui/core/styles";
 import { Dashboard } from "../components/DashboardAdmin/Dashboard";
 import Cart from "../components/Cart/Cart";
+import Success from "../components/PayState/Success";
+import Pending from "../components/PayState/Pending";
+import Failure from "../components/PayState/Failure";
 
 const theme = createTheme({
   palette: {
@@ -51,8 +54,11 @@ export default function App() {
             path="/admin/productCreation"
             component={ProductCreation}
           />
-          <Route exact path="/admin/editProduct/:id" component={EditProduct}/>
+          <Route exact path="/admin/editProduct/:id" component={EditProduct} />
           <Route exact path="/home/products/pay" component={Pay} />
+          <Route exact path="/home/pay/success" component={Success} />
+          <Route exact path="/home/pay/pending" component={Pending} />
+          <Route exact path="/home/pay/failure" component={Failure} />
           <Route
             exact
             path="/admin/categoryCreation"
