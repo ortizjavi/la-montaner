@@ -73,7 +73,7 @@ export default function EditProduct() {
   useEffect(() => {
     dispatch(getProductDetail(id));
   }, [id, dispatch]);
-  const productoId = useSelector((state) => state.productDetail);
+  const productoId = useSelector((state) => state.root.productDetail);
 
   let state = {
     name: "",

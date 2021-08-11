@@ -11,34 +11,45 @@ import { searchProducts,filterProductsCategory, searchProductsAction, selectCate
 function NavBar() {
     let initialCategories = {vertodos:false,cervezas:false,conservas:false,merchandising:false,otros:false}
     const [category, setCategory] = useState(initialCategories)
+    const currentCategoryState = useSelector( state => state.currentCategoryState)
+
     const dispatch = useDispatch();
-    const currentPage = useSelector(state => state.currentPage)
+    const currentPage = useSelector(state => state.root.currentPage)
     var sort = 'asc'
-    const allProducts = useSelector( state => state.allProducts)
+    const allProducts = useSelector( state => state.root.allProducts)
+
+    const[state, setState] = useState('vertodos')
    
-   const handleSort= (param) => {
-      dispatch(filterProductsCategory(sort,0, param))
-      setCategory({...initialCategories, [param]: true})
-    }
+  //  const handleSort= (param) => {
+  //     dispatch(filterProductsCategory(sort,0, param))
+  //     setCategory({...initialCategories, [param]: true})
+  //   }
 
-    const handleAllProducts = (state)=>{
-      dispatch(searchProducts(sort, currentPage-1));
-      setCategory({...initialCategories, [state]: true})
-    }
+  //   const handleAllProducts = (state)=>{
+  //     dispatch(searchProducts(sort, currentPage-1));
+  //     setCategory({...initialCategories, [state]: true})
+  //   }
 
-    // useEffect(() => {
-    //   if(allProducts[0]>8){ 
-    //     dispatch(searchProducts(sort, currentPage));
-    //   }
-    // },[])
 
-    useEffect(() => {
-      if(allProducts[0]>8){ 
-        dispatch(searchProducts(sort, currentPage-1));
-      }
-    }, [currentPage]) 
+  //   useEffect(() => {
+  //     if(allProducts[0]>8){ 
+  //       dispatch(searchProducts(sort, currentPage));
+  //     }
+  //   },[])
+
+  //   useEffect(() => {
+  //     if(allProducts[0]>8){ 
+  //       dispatch(searchProducts(sort, currentPage-1));
+  //     }
+  //   }, [currentPage]) 
+
+    useEffect(()=> {
+      dispatch(selectCategoryAction(state))
+      dispatch(searchProductsAction(''))
+//toca preguntar si ek search tiene estado
+    },[state])
   
-  
+    console.log('Se renderizo el navbar/ allproducts',allProducts)
     function HomeIcon(props) {
         return (
           <SvgIcon {...props}>
@@ -54,13 +65,23 @@ function NavBar() {
             </NavLink>
             <SearchBar/>
             <nav>
-                <ul >
+                <ul>
                     <li className="list-item">
-                    <input className={`${category.vertodos ? "actived" : 'Nav-button'}`} type="button" value="Ver Todos" onClick={() => handleAllProducts('vertodos')}/>
-                    <input className={`${category.cervezas ? "actived" : 'Nav-button'}`}  type="button" value="Cervezas" onClick={() => handleSort('cervezas')}/>
-                    <input className={`${category.conservas ? "actived" : 'Nav-button'}`}  type="button" value="Conservas" onClick={()=> handleSort('conservas')}/>
-                    <input className={`${category.merchandising ? "actived" : 'Nav-button'}`} type="button" value="Merchadising" onClick={()=> handleSort('merchandising')}/>
-                    <input className={`${category.otros ? "actived" : 'Nav-button'}`} type="button" value="Otros" onClick={()=> handleSort('otros')}/>
+                      <NavLink to='/home'>
+                        <input className={`${currentCategoryState ==='vertodos' ? "actived" : 'Nav-button'}`} type="button" value="Ver Todos" onClick={() => setState('vertodos')}/>
+                      </NavLink>
+                      <NavLink to='/home'>
+                        <input className={`${currentCategoryState==='cervezas' ? "actived" : 'Nav-button'}`}  type="button" value="Cervezas" onClick={() => setState('cervezas')}/>
+                      </NavLink>
+                      <NavLink to='/home'>
+                         <input className={`${currentCategoryState==='conservas' ? "actived" : 'Nav-button'}`}  type="button" value="Conservas" onClick={()=> setState('conservas')}/>
+                      </NavLink>
+                      <NavLink to='/home'>
+                        <input className={`${currentCategoryState ==='merchandising' ? "actived" : 'Nav-button'}`} type="button" value="Merchadising" onClick={()=> setState('merchandising')}/>
+                      </NavLink>
+                      <NavLink to='/home'>
+                         <input className={`${currentCategoryState ==='otros' ? "actived" : 'Nav-button'}`} type="button" value="Otros" onClick={()=> setState('otros')}/>
+                      </NavLink>  
                     </li>
                 </ul>
             </nav>

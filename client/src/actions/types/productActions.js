@@ -68,8 +68,10 @@ export async function updateProducts(id, producto) {
   }
 
 
-export function searchProducts(sort, pageNumber, name) {
+export function searchProducts({sort, pageNumber, name,category}) {
+  console.log('Al actionsearch llega',sort, pageNumber, name,category)
   if (name) {
+    console.log('deltro del if name',name,'category',category, 'pageNumber',pageNumber)
     return async function (dispatch) {
       try {
         const response = await axios.get( `${endpoints.GET_PRODUCTS}?pageNumber=${pageNumber}&sort=${sort}&name=${name}`);
@@ -79,9 +81,22 @@ export function searchProducts(sort, pageNumber, name) {
       }
     };
   } else {
+    if(category ==='vertodos' || !category){
+      console.log('deltro del else name',name,'category',category,'pageNumber',pageNumber,'sort',sort)
+        return async function (dispatch) {
+          try {
+            const response = await axios.get(
+              `${endpoints.GET_PRODUCTS}?pageNumber=${pageNumber}&sort=${sort}`
+            );
+            return dispatch({ type: actionTypes.ALL_PRODUCTS, payload: response.data });
+          } catch (e) {
+            console.log("actions/types/productActions/searchProducts-Error:", e);
+          }
+        }
+    }else{
     return async function (dispatch) {
       try {
-        const response = await axios.get( `${endpoints.GET_PRODUCTS}?pageNumber=${pageNumber}&sort=${sort}`);
+        const response = await axios.get( `${endpoints.GET_PRODUCTS}?pageNumber=${pageNumber}&sort=${sort}&categories=${category}`);
         return dispatch({ type: actionTypes.ALL_PRODUCTS, payload: response.data });
       } catch (e) {
         console.log("actions/types/productActions/searchProducts-Error:", e);
@@ -89,7 +104,7 @@ export function searchProducts(sort, pageNumber, name) {
     };
   }
 }
-
+}
 export function filterProductsCategory(sort, pageNumber, category) {
   if (category) {
     return async function (dispatch) {
@@ -103,10 +118,27 @@ export function filterProductsCategory(sort, pageNumber, category) {
   }
 }
 
+export function filterProducts (data, sort, pageNumber) {
+  if (data) {
+    return async function (dispatch) {
+      try {
+        const response = await axios.get(
+          `${endpoints.GET_PRODUCTS}?pageNumber=${pageNumber}&sort=${sort}&${Object.keys(data)}=${Object.values(data)}`
+        );
+        return dispatch({ type: actionTypes.ALL_PRODUCTS, payload: response.data });
+      } catch (e) {
+        console.log("actions/types/productActions/filterProducts-Error:", e);
+      }
+    }
+  }
+}
+
 export function currentPageAction(page) {
   return { type: actionTypes.CURENT_PAGE, payload: page };
 }
-
+export function selectCategoryAction(page) {
+  return { type: actionTypes.CURENT_CATEGORY, payload: page };
+}
 export function searchProductsAction(state) {
   return { type: actionTypes.SEARCH_STATE, payload: state };
 }
@@ -114,7 +146,23 @@ export function searchProductsAction(state) {
 export function clearProductDetail() {
   return { type: actionTypes.GET_PRODUCT_DETAIL, payload: {}};
 }
-
+// export function getMaximumPrice(price) {
+//   if (price) {
+//     return async function (dispatch) {
+//       try {
+//         const response = await axios.get(
+//           `${GET_PRODUCTS_ENDPOINT}?price=giveMeHigherPrice`
+//         );
+//         return dispatch({
+//           type: GET_MAX_PRICE,
+//           payload: response.data[0].price,
+//         });
+//       } catch (e) {
+//         console.log("actions/types/productActions/getMaximumPrice-Error:", e);
+//       }
+//     };
+//   }
+// }
 export function addCartProduct(productId) {
   return async function (dispatch, getState) {
     const { data } = await axios.get(`${endpoints.GET_PRODUCTS}/${productId}`);
@@ -140,5 +188,35 @@ export function deleteCartProduct(productId) {
 export function deleteCartAll() {
   return async function (dispatch, getState) {
     dispatch({ type: actionTypes.DELETE_CART_ALL });
+  }
+}
+
+export function getMaximumPrice (price) {
+  if (price) {
+    return async function (dispatch) {
+      try {
+        const response = await axios.get(
+          `${endpoints.GET_PRODUCTS}?price=GiveMeMaxPrice`
+        );
+        return dispatch({ type: actionTypes.GET_MAX_PRICE, payload: response.data });
+      } catch (e) {
+        console.log("actions/types/productActions/getMaximumPrice-Error:", e);
+      }
+    }
+  }
+}
+
+export function filterByPrice (filter, pageNumber) {
+  if (filter) {
+    return async function (dispatch) {
+      try {
+        const response = await axios.get(
+          `${endpoints.GET_PRODUCTS}?pageNumber=${pageNumber}&priceSort=${filter}`
+        );
+        return dispatch({ type: actionTypes.ALL_PRODUCTS, payload: response.data });
+      } catch (e) {
+        console.log("actions/types/productActions/filterByPrice-Error:", e);
+      }
+    }
   }
 }

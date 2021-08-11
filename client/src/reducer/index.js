@@ -5,11 +5,12 @@ const initialState = {
   productDetail: {},
   allCategories: [],
   adminProducts: [],
-  cartProducts: [],
   selectedAdminProducts: [],
   currentPage: 1,
   searchProdustsState: "",
   activeProduct: null,
+  maxPrice: "",
+  currentCategoryState :'vertodos',
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -24,18 +25,11 @@ const rootReducer = (state = initialState, action) => {
     case actionTypes.ADMIN_SELECT_DELETED_PRODUCTS: return { ...state, selectedAdminProducts: [] };
     case actionTypes.CURENT_PAGE: return { ...state, currentPage: action.payload };
     case actionTypes.SEARCH_STATE: return { ...state, searchProdustsState: action.payload };
+    case actionTypes.GET_MAX_PRICE: return { ...state, maxPrice: action.payload[0].price };
     case actionTypes.FILTER_PRODUCTS_CATEGORY: return { ...state, allProducts: action.payload };
-    case actionTypes.ADD_CART_PRODUCT: 
-      const newProduct = action.payload;
-      const existItem = state.cartProducts.find((product) => product.id === newProduct.id);
+    case actionTypes.CURENT_CATEGORY: return { ...state, currentCategoryState: action.payload };
+    //case actionTypes.GET_MAX_PRICE: return { ...state, maxPrice: action.payload };
 
-      if (existItem) {
-        return { ...state, cartProducts: state.cartProducts.map((currentProduct) => currentProduct.id === newProduct.id ? newProduct : currentProduct) };
-      } else {
-        return { ...state, cartProducts: [...state.cartProducts, newProduct] };
-      }
-    case actionTypes.DELETE_CART_PRODUCT: return { ...state, cartProducts: state.cartProducts.filter((currentProduct) => currentProduct.id !== action.paylaod) };
-    case actionTypes.DELETE_CART_ALL: return { ...state, cartProducts: [] };
     default: return state;
   }
 };

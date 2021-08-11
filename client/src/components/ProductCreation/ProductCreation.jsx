@@ -64,7 +64,7 @@ export default function ProductCreation() {
   const [loadingImg, setLoadingImg] = useState(0);
   const theme = useTheme();
   const [image, setImage] = useState([]);
-  const allCategories = useSelector((state) => state.allCategories);
+  const allCategories = useSelector((state) => state.root.allCategories);
   const [createProduct, setCreateProduct] = useState({
     name: "",
     categories: [],
