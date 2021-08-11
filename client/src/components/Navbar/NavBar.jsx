@@ -6,7 +6,11 @@ import SearchBar from '../SearchBar/SearchBar';
 import PersonIcon from '@material-ui/icons/Person';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import SvgIcon from '@material-ui/core/SvgIcon';
-import { searchProducts,filterProductsCategory, searchProductsAction, selectCategoryAction } from '../../actions/types/productActions.js';
+import ExternAuthentication from '../Authentication/Authentication';
+import { searchProducts,
+         filterProductsCategory, 
+         searchProductsAction, 
+         selectCategoryAction } from '../../actions/types/productActions.js';
 
 function NavBar() {
     let initialCategories = {vertodos:false,cervezas:false,conservas:false,merchandising:false,otros:false}
@@ -64,6 +68,7 @@ function NavBar() {
                     </li>
                 </ul>
             </nav>
+            <ExternAuthentication/>
                 <Link to='/admin'>
                   <button className='nav-personicon'>
                     <PersonIcon style={{ fontSize: 40 }}  />

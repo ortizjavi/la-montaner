@@ -12,14 +12,16 @@ export default function ExternAuthentication() {
     const responseFacebook = (response) => {
         console.log(response);
     }
+
+  
     return (
         <div>
+            <br></br>
             <FacebookLogin
-                appId="1088597931155576"
-                autoLoad={true}
+                appId="594981481671722"
+                autoLoad={false}
                 fields="name,email,picture"
-                onClick={responseFacebook}
-                callback={responseFacebook} />,
+                callback={responseFacebook} />, 
             <GoogleLogin
                 clientId="185256781467-8t9jr2l450gsbuev5d12bs463280d0c4.apps.googleusercontent.com"
                 buttonText="Google Login"
