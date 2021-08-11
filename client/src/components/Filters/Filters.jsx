@@ -1,5 +1,4 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 import './Filters.css';
 
 export default function Filters(props) {
