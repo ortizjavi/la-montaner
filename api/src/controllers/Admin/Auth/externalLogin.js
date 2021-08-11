@@ -7,13 +7,13 @@ const crypto = require('crypto');
 
 
 const mapFacebookProperties = ({data}) => {
-	return {
-		...data,
-		given_name: data.first_name,
-		family_name: data.last_name,
-		picture: data.picture.data.url,
-		email_verified: false
-	}
+    return {
+        ...data,
+        given_name: data.first_name,
+        family_name: data.last_name,
+        picture: data.picture.data.url,
+        email_verified: false
+    }
 }
 
 const googleLogin = (googleToken) => {

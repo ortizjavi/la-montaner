@@ -9,13 +9,12 @@ export default function ExternAuthentication() {
     const dispatch = useDispatch();
 
     const responseGoogle = (response) => {
-        console.log(response)
+        
         dispatch(loginWithGoogle(response.tokenId))
     }
 
     const responseFacebook = (response) => {
-        console.log(response);
-        console.log(response.accessToken);
+        
         if (response.accessToken)
             dispatch(loginWithFacebook(response.accessToken))
     }
