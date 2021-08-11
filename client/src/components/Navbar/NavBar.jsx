@@ -18,7 +18,7 @@ function NavBar() {
     var sort = 'asc'
     const allProducts = useSelector( state => state.allProducts)
 
-    const[state, setState] = useState('')
+    const[state, setState] = useState('vertodos')
    
   //  const handleSort= (param) => {
   //     dispatch(filterProductsCategory(sort,0, param))

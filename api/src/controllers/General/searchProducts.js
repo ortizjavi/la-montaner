@@ -14,6 +14,9 @@ module.exports = {
     if(req.query.price){
       return getMaxPrice(req,res,next);
     }
+    if(req.query.priceSort){
+      return getPriceSort(req,res,next);
+    }
     
     let sort = req.query.sort
     let ProductsPerPage = 8;
@@ -136,4 +139,23 @@ module.exports = {
           } catch (error) {
             console.log(error);
           }
+  }
+
+  const getPriceSort = async (req, res, next) => {
+    let ProductsPerPage = 8;
+    let pageNumber = req.query.pageNumber;
+    let page = Math.max(0, pageNumber);
+      try {
+          const prices = req.query.priceSort.split(',')
+          const product = await Product.find( { $and: [ { price: { $gte: prices[0] } }, { price: { $lte: prices[1] } } ] } )
+                                        .limit(ProductsPerPage)
+                                        .skip(ProductsPerPage * page)
+                                        .sort({
+                                            price: 1
+                                        })
+          const productLength = (await Product.find({ $and: [ { price: { $gte: prices[0] } }, { price: { $lte: prices[1] } } ] })).length
+          return res.json([productLength, product]);
+        } catch (error) {
+          console.log(error);
+        }
   }

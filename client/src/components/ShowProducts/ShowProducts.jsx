@@ -76,6 +76,11 @@ const ShowProducts = ({allProducts}) => {
                         )}
                       </div>
                       <div className="item_price">${item?.price}</div>
+                      {
+                        item.stock > 0 ? 
+                        (<div>Tenemos en stock!</div>)
+                        : (<div>No tenemos stock</div>)
+                      }
                     </NavLink>
                     <button
                       className="sp-button"

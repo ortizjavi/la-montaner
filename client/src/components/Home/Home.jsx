@@ -1,25 +1,23 @@
 import React, { useEffect, useState }  from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {  searchProducts, selectCategoryAction,currentPageAction, filterProducts, getMaximumPrice } from '../../actions/types/productActions.js';
+import {  searchProducts, filterProducts, getMaximumPrice, filterByPrice, selectCategoryAction,currentPageAction,searchProductsAction } from '../../actions/types/productActions.js';
 import NavBar from '../Navbar/NavBar';
-import Filters from '../Filters/Fiters.jsx';
+import Filters from '../Filters/Filters.jsx';
 import ShowProducts from '../ShowProducts/ShowProducts';
 import Footer from '../Footer/Footer';
 import './Home.css';
 
 export default function Home() {
+
   const dispatch = useDispatch();
   const currentPage = useSelector(state => state.currentPage)
   const searchState = useSelector(state => state.searchProdustsState)
   const allProducts = useSelector( state => state.allProducts)
   const currentCategoryState = useSelector( state => state.currentCategoryState)
-  const maxPrice = useSelector(state => state.maxPrice)
-  let maxPrice1 = Math.ceil(maxPrice * (1/3))
-  let maxPrice2 = Math.ceil(maxPrice * (2/3))
-
-
+  const maxPrice3 = useSelector(state => state.maxPrice)
+  const maxPrice1 = Math.ceil(maxPrice3 * (1/3))
+  const maxPrice2 = Math.ceil(maxPrice3 * (2/3))
   var sort = 'asc'
-
   
   useEffect(()=>{
     let param = {sort, pageNumber: currentPage-1, name: searchState, category:currentCategoryState }
@@ -27,6 +25,7 @@ export default function Home() {
   },[])
 
   useEffect(()=>{
+    if(currentCategoryState !== 'vertodos') dispatch(searchProductsAction(''))
     let param = {sort, pageNumber: 0, name: searchState, category:currentCategoryState }
     dispatch(currentPageAction(1))    
     const act =() => dispatch(searchProducts(param))
@@ -42,7 +41,6 @@ export default function Home() {
   
   useEffect(() =>{
     dispatch(currentPageAction(1))    
-
     if(searchState.length>=2){
       //current page arcodeado si la respuesta es mas de paginado no busca
       dispatch(selectCategoryAction('vertodos'))
@@ -66,9 +64,17 @@ export default function Home() {
       dispatch(filterProducts(data, sort, currentPage-1))
     }
   }
-
-  const handlePriceSort = () => {
-
+  var range = []
+  const handlePriceSort = (e) => {
+    if(e.target.value === '') {
+      dispatch(searchProducts(sort, currentPage-1))
+    } else {
+      // var range = []
+      if(e.target.value === 'range1') range = [0, maxPrice1]
+      if(e.target.value === 'range2') range = [maxPrice1+1, maxPrice2] 
+      if(e.target.value === 'range3') range = [maxPrice2+1, maxPrice3]
+      dispatch(filterByPrice(range, currentPage-1))
+    }
   }
 
   return (
@@ -80,11 +86,11 @@ export default function Home() {
         <button className='home-button' onClick={() => handleSort('desc')}> Z-A </button>
         <li className='list_sidebar-li'>
           <select className='select-sidebar' name="price"  onChange={handlePriceSort}>
-            <option id='none' value='none'>Quitar filtro</option>
+            <option id='none' value=''>Quitar filtro</option>
             <option value="" disabled selected hidden>Precio</option>
             <option id='range1' value='range1'>0 - {maxPrice1}</option>
             <option id='range2' value='range2'>{maxPrice1+1} - {maxPrice2}</option>
-            <option id='range3' value='range3'>{maxPrice2+1} - {maxPrice}</option>
+            <option id='range3' value='range3'>{maxPrice2+1} - {maxPrice3}</option>
           </select>
         </li>
     {/* <div className="slider-wrapper">

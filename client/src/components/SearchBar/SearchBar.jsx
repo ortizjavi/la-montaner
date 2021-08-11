@@ -20,10 +20,12 @@ export default function SearchBar() {
     useEffect(() => {
             dispatch(searchProductsAction(state.product))
     }, [state.product])
-
-    // useEffect(() =>{
-    //     setState({product: "", icono:true,})
-    // },[currentCategoryState])
+   
+    useEffect(() => {
+        if(currentCategoryState !== 'vertodos'){
+            setState({product: "", icono:true,})
+        }
+    }, [currentCategoryState])
 
     const handleChange = event => {
         event.preventDefault();
@@ -60,7 +62,7 @@ export default function SearchBar() {
                     onChange={(e)=>handleChange(e)} />
                 </label>   
                 <datalist  id="product" multiple >
-                    {
+                    {   
                         state.product.length >=2 ?
                         allProducts[1].map( (t, key) => (
                             <NavLink  to={`/home/${t._id}`}>

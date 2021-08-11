@@ -7,16 +7,18 @@ import Loading from "../Loading/Loading.js";
 import "./ProductDetail.css";
 import Footer from "../Footer/Footer";
 
+import { addCartProduct } from '../../actions/types/productActions';
+
 //Slider
 import styles from "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
 
-export default function ProductDetail() {
+export default function ProductDetail({match, history}) {
   const { id } = useParams();
   const detail = useSelector((state) => state.productDetail);
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(true);
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState(1);
 
   useEffect(() => {
     dispatch(getProductDetail(id));
@@ -25,14 +27,14 @@ export default function ProductDetail() {
     }, 1000);
   }, [id, dispatch]);
 
-  console.log("components/ProductDetail:", detail);
-
+  //console.log("components/ProductDetail:", detail);
   const handleClick = () => {
     alert("producto agregado correctamente");
   };
 
   const handleBuyProduct = () => {
-    alert("gracias por comprar nuestros productos");
+    dispatch(addCartProduct(detail._id));
+    history.push(`/cart`);
   };
 
 
@@ -89,7 +91,7 @@ export default function ProductDetail() {
                   </div>
                 )}
                 <div className="detail_button">
-                  <button onClick={() => handleBuyProduct()}>COMPRAR</button>
+                  <Link to="/cart"><button type="button" onClick={handleBuyProduct}>COMPRAR</button></Link>
                 </div>
                 <div className="detail_info_description">
                   <h3>Info del producto:</h3>

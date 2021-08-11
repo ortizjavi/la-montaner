@@ -86,9 +86,9 @@ export function searchProducts({sort, pageNumber, name,category}) {
         return async function (dispatch) {
           try {
             const response = await axios.get(
-              `${GET_PRODUCTS_ENDPOINT}?pageNumber=${pageNumber}&sort=${sort}`
+              `${endpoints.GET_PRODUCTS}?pageNumber=${pageNumber}&sort=${sort}`
             );
-            return dispatch({ type: ALL_PRODUCTS, payload: response.data });
+            return dispatch({ type: actionTypes.ALL_PRODUCTS, payload: response.data });
           } catch (e) {
             console.log("actions/types/productActions/searchProducts-Error:", e);
           }
@@ -123,9 +123,9 @@ export function filterProducts (data, sort, pageNumber) {
     return async function (dispatch) {
       try {
         const response = await axios.get(
-          `${GET_PRODUCTS_ENDPOINT}?pageNumber=${pageNumber}&sort=${sort}&${Object.keys(data)}=${Object.values(data)}`
+          `${endpoints.GET_PRODUCTS}?pageNumber=${pageNumber}&sort=${sort}&${Object.keys(data)}=${Object.values(data)}`
         );
-        return dispatch({ type: ALL_PRODUCTS, payload: response.data });
+        return dispatch({ type: actionTypes.ALL_PRODUCTS, payload: response.data });
       } catch (e) {
         console.log("actions/types/productActions/filterProducts-Error:", e);
       }
@@ -146,23 +146,23 @@ export function searchProductsAction(state) {
 export function clearProductDetail() {
   return { type: actionTypes.GET_PRODUCT_DETAIL, payload: {}};
 }
-export function getMaximumPrice(price) {
-  if (price) {
-    return async function (dispatch) {
-      try {
-        const response = await axios.get(
-          `${GET_PRODUCTS_ENDPOINT}?price=giveMeHigherPrice`
-        );
-        return dispatch({
-          type: GET_MAX_PRICE,
-          payload: response.data[0].price,
-        });
-      } catch (e) {
-        console.log("actions/types/productActions/getMaximumPrice-Error:", e);
-      }
-    };
-  }
-}
+// export function getMaximumPrice(price) {
+//   if (price) {
+//     return async function (dispatch) {
+//       try {
+//         const response = await axios.get(
+//           `${GET_PRODUCTS_ENDPOINT}?price=giveMeHigherPrice`
+//         );
+//         return dispatch({
+//           type: GET_MAX_PRICE,
+//           payload: response.data[0].price,
+//         });
+//       } catch (e) {
+//         console.log("actions/types/productActions/getMaximumPrice-Error:", e);
+//       }
+//     };
+//   }
+// }
 export function addCartProduct(productId) {
   return async function (dispatch, getState) {
     const { data } = await axios.get(`${endpoints.GET_PRODUCTS}/${productId}`);
@@ -176,20 +176,47 @@ export function addCartProduct(productId) {
         stock: data.stock,
       }
     })
-    localStorage.setItem('cart', JSON.stringify(getState().rootReducer.cartProducts));
   }
 }
 
 export function deleteCartProduct(productId) {
   return async function (dispatch, getState) {
     dispatch({ type: actionTypes.DELETE_CART_PRODUCT, payload: productId });
-    localStorage.setItem('cart', JSON.stringify(getState().rootReducer.cartProducts));
   }
 }
 
 export function deleteCartAll() {
   return async function (dispatch, getState) {
     dispatch({ type: actionTypes.DELETE_CART_ALL });
-    localStorage.setItem('cart', JSON.stringify(getState().rootReducer.cartProducts));
+  }
+}
+
+export function getMaximumPrice (price) {
+  if (price) {
+    return async function (dispatch) {
+      try {
+        const response = await axios.get(
+          `${endpoints.GET_PRODUCTS}?price=GiveMeMaxPrice`
+        );
+        return dispatch({ type: actionTypes.GET_MAX_PRICE, payload: response.data[1] });
+      } catch (e) {
+        console.log("actions/types/productActions/getMaximumPrice-Error:", e);
+      }
+    }
+  }
+}
+
+export function filterByPrice (filter, pageNumber) {
+  if (filter) {
+    return async function (dispatch) {
+      try {
+        const response = await axios.get(
+          `${endpoints.GET_PRODUCTS}?pageNumber=${pageNumber}&priceSort=${filter}`
+        );
+        return dispatch({ type: actionTypes.ALL_PRODUCTS, payload: response.data });
+      } catch (e) {
+        console.log("actions/types/productActions/filterByPrice-Error:", e);
+      }
+    }
   }
 }

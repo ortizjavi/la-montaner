@@ -6,7 +6,7 @@ export const ADMIN_CLEAR_SELECT = "ADMIN_CLEAR_SELECT";
 export const ADMIN_PRODUCT_SET_ACTIVE = "ADMIN_PRODUCT_SET_ACTIVE";
 
 // product action names
-export const GET_PRODUCTS = "GET_PRODCUTS";
+export const GET_PRODUCTS = "GET_PRODUCTS";
 export const GET_PRODUCT_DETAIL = "GET_PRODUCT_DETAIL";
 export const CREATE_PRODUCT = "CREATE_PRODUCT";
 export const UPDATE_PRODUCT = "UPDATE_PRODUCT";
