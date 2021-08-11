@@ -2,6 +2,7 @@ const Product = require('../../models/Product');
 
 module.exports = {
   searchProducts: async (req, res, next) => {
+    console.log('controler/showproducs/query: ', req.query)
     if(req.query.categories){
       return filterProductsCategories(req,res,next);
     }
