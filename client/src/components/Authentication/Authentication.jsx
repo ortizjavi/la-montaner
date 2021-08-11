@@ -2,7 +2,7 @@ import React from 'react';
 import './Authentication.css'
 import GoogleLogin from 'react-google-login';
 import FacebookLogin from 'react-facebook-login'
-import { loginWithGoogle } from "../../actions/types/authActions";
+import { loginWithGoogle,loginWithFacebook } from "../../actions/types/authActions";
 
 export default function ExternAuthentication() {
 
@@ -13,6 +13,7 @@ export default function ExternAuthentication() {
 
     const responseFacebook = (response) => {
         console.log(response);
+        loginWithFacebook(response.accessToken)
     }
 
   
@@ -23,6 +24,7 @@ export default function ExternAuthentication() {
                 appId="594981481671722"
                 autoLoad={false}
                 fields="name,email,picture"
+                onClick={responseFacebook}
                 callback={responseFacebook} />, 
             <GoogleLogin
                 clientId="185256781467-8t9jr2l450gsbuev5d12bs463280d0c4.apps.googleusercontent.com"

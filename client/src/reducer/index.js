@@ -10,6 +10,7 @@ const initialState = {
   currentPage: 1,
   searchProdustsState: "",
   activeProduct: null,
+  users : {}
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -36,6 +37,8 @@ const rootReducer = (state = initialState, action) => {
       }
     case actionTypes.DELETE_CART_PRODUCT: return { ...state, cartProducts: state.cartProducts.filter((currentProduct) => currentProduct.id !== action.paylaod) };
     case actionTypes.DELETE_CART_ALL: return { ...state, cartProducts: [] };
+    case actionTypes.LOGIN_USER_GOOGLE: return { ...state, users: action.paylaod };
+    case actionTypes.LOGIN_USER_FACEBOOK: return { ...state, users: action.paylaod };
     default: return state;
   }
 };

@@ -29,3 +29,8 @@ export const SEARCH_STATE = "SEARCH_STATE";
 export const ADD_CART_PRODUCT = 'ADD_CART_PRODUCT';
 export const DELETE_CART_PRODUCT = 'DELETE_CART_PRODUCT';
 export const DELETE_CART_ALL = 'DELETE_CART_ALL';
+
+
+//login action names
+export const LOGIN_USER_GOOGLE = 'LOGIN_USER';
+export const LOGIN_USER_FACEBOOK = 'LOGIN_USER_FACEBOOK';
