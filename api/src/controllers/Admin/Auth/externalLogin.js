@@ -6,12 +6,12 @@ const signJWT = require('../../../utils/signJWT');
 const crypto = require('crypto');
 
 
-const mapFacebookProperties = (obj) => {
+const mapFacebookProperties = ({data}) => {
 	return {
-		...obj,
-		given_name: obj.first_name,
-		family_name: obj.last_name,
-		picture: obj.picture.data.url,
+		...data,
+		given_name: data.first_name,
+		family_name: data.last_name,
+		picture: data.picture.data.url,
 		email_verified: false
 	}
 }
