@@ -90,9 +90,11 @@ function NavBar() {
                     <PersonIcon style={{ fontSize: 40 }}  />
                   </button>
                 </Link>
-                <button className='nav-personicon' onClick={()=> alert('Yo... Re-bien!!😎')}>
+                <Link to="/cart">
+                  <button className='nav-personicon'>
                     <ShoppingCartIcon style={{ fontSize: 40 }} />
-                </button>
+                  </button>
+                </Link>
             
         </header>
 
