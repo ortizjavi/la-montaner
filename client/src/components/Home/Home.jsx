@@ -15,6 +15,7 @@ export default function Home() {
   const allProducts = useSelector( state => state.allProducts)
   const currentCategoryState = useSelector( state => state.currentCategoryState)
   const maxPrice3 = useSelector(state => state.maxPrice)
+  const [rangePrice, setRangePrice] = useState('')
   const maxPrice1 = Math.ceil(maxPrice3 * (1/3))
   const maxPrice2 = Math.ceil(maxPrice3 * (2/3))
   var sort = 'asc'
@@ -34,6 +35,10 @@ export default function Home() {
   },[currentCategoryState])
 
   useEffect(() => {
+    if(rangePrice){
+      console.log('Home/range',rangePrice)
+      return dispatch(filterByPrice(rangePrice, currentPage-1))
+    }
     if(allProducts[0]>8){ 
     let param = {sort, pageNumber: currentPage-1, name: searchState, category:currentCategoryState }
       dispatch(searchProducts(param));
@@ -66,6 +71,7 @@ export default function Home() {
       dispatch(filterProducts(data, sort, currentPage-1))
     }
   }
+  
   var range = []
   const handlePriceSort = (e) => {
     if(e.target.value === '') {
@@ -76,10 +82,11 @@ export default function Home() {
       if(e.target.value === 'range1') range = [0, maxPrice1]
       if(e.target.value === 'range2') range = [maxPrice1+1, maxPrice2] 
       if(e.target.value === 'range3') range = [maxPrice2+1, maxPrice3]
-      dispatch(filterByPrice(range, currentPage-1))
+      dispatch(filterByPrice(range, 0))
+      setRangePrice(range)
+
     }
   }
-  console.log('Home/max-price', maxPrice3)
   return (
     <div>
       <NavBar/>
