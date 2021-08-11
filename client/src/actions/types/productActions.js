@@ -119,6 +119,8 @@ export function filterProductsCategory(sort, pageNumber, category) {
 }
 
 export function filterProducts (data, sort, pageNumber) {
+  console.log('Action/data: ',data)
+
   if (data) {
     return async function (dispatch) {
       try {

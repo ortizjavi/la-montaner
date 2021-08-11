@@ -1,13 +1,13 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './Filters.css';
 
 export default function Filters(props) {
  
   const handleFilterStyles = (event) => {
     const data = {[event.target.name]: event.target.value}
-    props.onChangeFilter(data)
+    // setFilter(data)
+    if( data )  props.onChangeFilter(data)
   }
-
   return (
     <navigator className="sidebar-container">
         <div className='sidebar-title'>
@@ -19,7 +19,7 @@ export default function Filters(props) {
           <div>
             <ul className="list-sidebar">
               <li className='list_sidebar-li'>
-                <select className='select-sidebar' name="estilos" onChange={handleFilterStyles}>
+                <select className='select-sidebar' value='Estilos' name="estilos" onChange={handleFilterStyles}>
                   <option id='none' value='none'>Todos los estilos</option>
                   <option value="" disabled selected hidden>Estilos de cerveza</option>
                   <option id='American' value='American'>American west coast IPA</option>
@@ -30,8 +30,9 @@ export default function Filters(props) {
                   <option id='Milk' value='Milk'>Milk stout</option>
                 </select> 
               </li>
+                <h5>{Object.values(props.leftFilter)[0]}</h5>
               <li className='list_sidebar-li'>
-                <select className='select-sidebar' name="volumen"  onChange={handleFilterStyles}>
+                <select className='select-sidebar' value='Volumen' name="volumen"  onChange={handleFilterStyles}>
                   <option id='none' value='none'>Todos los Volumenes</option>
                   <option value="" disabled selected hidden>Volumen</option>
                   <option id='0.5' value='0.5'>500 ml</option>
