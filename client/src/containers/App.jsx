@@ -57,7 +57,7 @@ export default function App() {
             component={CategoryCreation}
           />
           <Route exact path="/home/:id" component={ProductDetail} />
-          <Route exact path="/home/cart" component={Cart} />
+          <Route exact path="/cart" component={Cart} />
         </Switch>
       </div>
     </ThemeProvider>
