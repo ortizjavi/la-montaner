@@ -39,6 +39,5 @@ export const ADD_CART_INPROGRESS = 'ADD_CART_INPROGRESS';
 export const ADD_CART_COMPLETED = 'ADD_CART_COMPLETED';
 
 //login action names
-export const LOGIN_USER_GOOGLE = 'LOGIN_USER';
-export const LOGIN_USER_FACEBOOK = 'LOGIN_USER_FACEBOOK';
+export const LOGIN_USER = 'LOGIN_USER';
 
