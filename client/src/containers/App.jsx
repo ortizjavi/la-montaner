@@ -2,13 +2,14 @@ import "./App.css";
 import React, { useEffect } from "react";
 import { Route, Switch } from "react-router";
 import { useDispatch } from "react-redux";
+import { createTheme, ThemeProvider } from "@material-ui/core/styles";
+import { getCategories } from "../actions/types/categoryActions.js";
+import { loadUserSession } from "../actions/types/authActions.js";
 import Home from "../components/Home/Home";
 import Landing from "../components/Landing/Landing";
 import ProductDetail from "../components/ProductDetail/ProductDetail";
 import ProductCreation from "../components/ProductCreation/ProductCreation";
 import CategoryCreation from "../components/CategoryCreation/CategoryCreation";
-import { getCategories } from "../actions/types/categoryActions.js";
-import { createTheme, ThemeProvider } from "@material-ui/core/styles";
 import { Dashboard } from "../components/DashboardAdmin/Dashboard";
 import EditProduct from "../components/EditProduct/EditProduct";
 import NavBar from "../components/Navbar/NavBar";
@@ -35,6 +36,7 @@ export default function App() {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getCategories());
+    dispatch(loadUserSession());
   }, []);
 
   return (
