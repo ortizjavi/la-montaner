@@ -16,7 +16,7 @@ export default function Filters(props) {
           <picture>
             <img className='sidebar-img' src="https://live.staticflickr.com/65535/51362991144_97764de6d9_m.jpg" alt="Vaso de Cerveza" />
           </picture>
-          <h1>NUESTRA <br></br> CERVEZAS </h1>
+          <h1>NUESTRAS <br></br> CERVEZAS </h1>
         </div>
           <div>
             <ul className="list-sidebar">

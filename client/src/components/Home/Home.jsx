@@ -22,6 +22,7 @@ export default function Home() {
   useEffect(()=>{
     let param = {sort, pageNumber: currentPage-1, name: searchState, category:currentCategoryState }
     dispatch(searchProducts(param))
+    dispatch(getMaximumPrice('price'))
   },[])
 
   useEffect(()=>{
@@ -52,14 +53,15 @@ export default function Home() {
     }
   },[searchState])
 
-  const handleSort = (param) => {
-    sort = param;
-    dispatch(searchProducts(sort, currentPage-1))
+  const handleSort = (paramsort) => {
+    let param = {sort:paramsort, pageNumber: currentPage-1, name:'', category:currentCategoryState }
+    dispatch(searchProducts(param))
   }
   
   const onChangeFilter = (data) => {
     if(Object.values(data)[0] === 'none'){
-      dispatch(searchProducts(sort, currentPage-1))
+      let param = {sort, pageNumber: currentPage-1, name:'', category:currentCategoryState }
+      dispatch(searchProducts(param))
     }else{
       dispatch(filterProducts(data, sort, currentPage-1))
     }
@@ -67,7 +69,8 @@ export default function Home() {
   var range = []
   const handlePriceSort = (e) => {
     if(e.target.value === '') {
-      dispatch(searchProducts(sort, currentPage-1))
+      let param = {sort, pageNumber: currentPage-1, name:'', category:currentCategoryState }
+      dispatch(searchProducts(param))
     } else {
       // var range = []
       if(e.target.value === 'range1') range = [0, maxPrice1]
@@ -76,7 +79,7 @@ export default function Home() {
       dispatch(filterByPrice(range, currentPage-1))
     }
   }
-
+  console.log('Home/max-price', maxPrice3)
   return (
     <div>
       <NavBar/>

@@ -81,8 +81,8 @@ export function searchProducts({sort, pageNumber, name,category}) {
       }
     };
   } else {
-    console.log('deltro del else name',name,'category',category,'pageNumber',pageNumber)
     if(category ==='vertodos' || !category){
+      console.log('deltro del else name',name,'category',category,'pageNumber',pageNumber,'sort',sort)
         return async function (dispatch) {
           try {
             const response = await axios.get(
