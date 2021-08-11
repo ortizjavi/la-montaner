@@ -3,8 +3,6 @@ import './Filters.css';
 
 export default function Filters(props) {
  
-
-
   const handleFilterStyles = (event) => {
     const data = {[event.target.name]: event.target.value}
     props.onChangeFilter(data)

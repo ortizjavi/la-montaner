@@ -146,23 +146,7 @@ export function searchProductsAction(state) {
 export function clearProductDetail() {
   return { type: actionTypes.GET_PRODUCT_DETAIL, payload: {}};
 }
-// export function getMaximumPrice(price) {
-//   if (price) {
-//     return async function (dispatch) {
-//       try {
-//         const response = await axios.get(
-//           `${GET_PRODUCTS_ENDPOINT}?price=giveMeHigherPrice`
-//         );
-//         return dispatch({
-//           type: GET_MAX_PRICE,
-//           payload: response.data[0].price,
-//         });
-//       } catch (e) {
-//         console.log("actions/types/productActions/getMaximumPrice-Error:", e);
-//       }
-//     };
-//   }
-// }
+
 export function addCartProduct(productId) {
   return async function (dispatch, getState) {
     const { data } = await axios.get(`${endpoints.GET_PRODUCTS}/${productId}`);

@@ -21,7 +21,7 @@ export default function Home() {
   var sort = 'asc'
   
   useEffect(()=>{
-    let param = {sort, pageNumber: currentPage-1, name: searchState, category:currentCategoryState }
+    let param = {sort, pageNumber: 0, name: searchState, category:currentCategoryState }
     dispatch(searchProducts(param))
     dispatch(getMaximumPrice('price'))
   },[])
@@ -68,7 +68,8 @@ export default function Home() {
       let param = {sort, pageNumber: currentPage-1, name:'', category:currentCategoryState }
       dispatch(searchProducts(param))
     }else{
-      dispatch(filterProducts(data, sort, currentPage-1))
+    let param = {sort, pageNumber: currentPage-1, name:data, category:currentCategoryState }
+      dispatch(filterProducts(param))
     }
   }
   
