@@ -13,6 +13,7 @@ import NavBar from "../components/Navbar/NavBar";
 import { getCategories } from "../actions/types/categoryActions.js";
 import { createTheme, ThemeProvider } from "@material-ui/core/styles";
 import { Dashboard } from "../components/DashboardAdmin/Dashboard";
+import Cart from "../components/Cart/Cart";
 
 const theme = createTheme({
   palette: {
@@ -50,7 +51,7 @@ export default function App() {
             path="/admin/productCreation"
             component={ProductCreation}
           />
-          <Route exact path="/admin/editProduct/:id" component={EditProduct} />
+          <Route exact path="/admin/editProduct/:id" component={EditProduct}/>
           <Route exact path="/home/products/pay" component={Pay} />
           <Route
             exact
@@ -58,6 +59,7 @@ export default function App() {
             component={CategoryCreation}
           />
           <Route exact path="/home/:id" component={ProductDetail} />
+          <Route exact path="/cart" component={Cart} />
         </Switch>
       </div>
     </ThemeProvider>
