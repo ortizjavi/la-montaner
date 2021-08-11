@@ -4,13 +4,14 @@ import Pagination from "../Pagination/Pagination";
 import Loading from "../Loading/Loading.js";
 import "./ShowProducts.css";
 
-const ShowProducts = ({ allProducts }) => {
-  const articlesPerPage = 8;
-  const diff = articlesPerPage - (allProducts[0] % articlesPerPage);
 
-  if (diff && allProducts[1].length < 8) {
-    const newElements = Array(diff).fill({});
-    for (let i = 0; i < diff; i++) {
+const ShowProducts = ({allProducts}) => {
+
+  const articlesPerPage=8;
+  const diff = articlesPerPage - allProducts[0]%articlesPerPage;
+
+  if(diff && allProducts[1].length<8){
+    for(let i = 0; i < diff; i++){
       allProducts[1].push({
         _id: i,
         img: [],
@@ -75,6 +76,11 @@ const ShowProducts = ({ allProducts }) => {
                         )}
                       </div>
                       <div className="item_price">${item?.price}</div>
+                      {
+                        item.stock > 0 ? 
+                        (<div>Tenemos en stock!</div>)
+                        : (<div>No tenemos stock</div>)
+                      }
                     </NavLink>
                     <button
                       className="sp-button"
