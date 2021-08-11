@@ -163,7 +163,7 @@ export function clearProductDetail() {
 //     };
 //   }
 // }
-export function addCartProduct(productId) {
+export function addCartProduct(productId, stockSelected) {
   return async function (dispatch) {
     const { data } = await axios.get(`${endpoints.GET_PRODUCTS}/${productId}`);
     dispatch({ 
@@ -174,6 +174,7 @@ export function addCartProduct(productId) {
         image: data.img[0],
         price: data.price,
         stock: data.stock,
+        stockSelected,
       }
     })
   }
