@@ -47,7 +47,7 @@ const Cart = () => {
 
           {cartItems.length === 0 ? (
             <div>
-              Tu carrito esta vacio <Link to="/">Volver atras</Link>
+              Tu carrito esta vacio <Link to="/home">Volver atras</Link>
             </div>
           ) : (
             cartItems.map((item) => (
