@@ -1,5 +1,4 @@
 .cartscreen {
-    display: flex;
     max-width: 1300px;
     margin: 2rem auto;
   }
@@ -25,6 +24,7 @@
   .cartscreen__right div {
     border-bottom: 1px solid rgba(0, 0, 0, 0.2);
     padding: 1rem;
+    text-align: center;
   }
   
   .cartscreen__info p {
@@ -41,7 +41,7 @@
   
   .cartscreen__right div button {
     padding: 10px 17px;
-    width: 100%;
+    width: 30%;
     background: #171717;
     color: #f4f4f4;
     border: 1px solid #171717;

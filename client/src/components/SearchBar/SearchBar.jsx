@@ -11,8 +11,8 @@ import ClearIcon from '@material-ui/icons/Clear';
 
 export default function SearchBar() {
     const dispatch = useDispatch();
-    const allProducts = useSelector( state => state.allProducts)
-    const currentCategoryState = useSelector( state => state.currentCategoryState)
+    const allProducts = useSelector( state => state.root.allProducts)
+    const currentCategoryState = useSelector( state => state.root.currentCategoryState)
 
     const [state, setState] = useState({product: "", icono:true,})
 

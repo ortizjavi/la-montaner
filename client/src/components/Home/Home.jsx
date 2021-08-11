@@ -10,10 +10,10 @@ import './Home.css';
 export default function Home() {
 
   const dispatch = useDispatch();
-  const currentPage = useSelector(state => state.currentPage)
-  const searchState = useSelector(state => state.searchProdustsState)
-  const allProducts = useSelector( state => state.allProducts)
-  const currentCategoryState = useSelector( state => state.currentCategoryState)
+  const currentPage = useSelector(state => state.root.currentPage)
+  const searchState = useSelector(state => state.root.searchProdustsState)
+  const allProducts = useSelector( state => state.root.allProducts)
+  const currentCategoryState = useSelector( state => state.root.currentCategoryState)
   const maxPrice3 = useSelector(state => state.maxPrice)
   const [rangePrice, setRangePrice] = useState('')
   const maxPrice1 = Math.ceil(maxPrice3 * (1/3))
