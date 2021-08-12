@@ -3,8 +3,8 @@ import thunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
 //Root Reducer + Cart Reducer
-import cartReducer from "../reducer/cartReducers";
-import rootReducer from '../reducer/index';
+import cartReducer from "./reducer/cartReducers";
+import rootReducer from './reducer/index';
 
 const middleware = [thunk];
 

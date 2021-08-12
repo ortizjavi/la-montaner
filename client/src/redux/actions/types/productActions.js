@@ -1,6 +1,6 @@
 import axios from "axios";
 import * as actionTypes from "../names";
-import * as endpoints from "../../utils/endpoints";
+import * as endpoints from "../../../utils/endpoints";
 
 export function getProductDetail(id) {
   return async function (dispatch) {
@@ -119,6 +119,8 @@ export function filterProductsCategory(sort, pageNumber, category) {
 }
 
 export function filterProducts (data, sort, pageNumber) {
+  console.log('Action/data: ',data)
+
   if (data) {
     return async function (dispatch) {
       try {
@@ -146,25 +148,9 @@ export function searchProductsAction(state) {
 export function clearProductDetail() {
   return { type: actionTypes.GET_PRODUCT_DETAIL, payload: {}};
 }
-// export function getMaximumPrice(price) {
-//   if (price) {
-//     return async function (dispatch) {
-//       try {
-//         const response = await axios.get(
-//           `${GET_PRODUCTS_ENDPOINT}?price=giveMeHigherPrice`
-//         );
-//         return dispatch({
-//           type: GET_MAX_PRICE,
-//           payload: response.data[0].price,
-//         });
-//       } catch (e) {
-//         console.log("actions/types/productActions/getMaximumPrice-Error:", e);
-//       }
-//     };
-//   }
-// }
-export function addCartProduct(productId) {
-  return async function (dispatch, getState) {
+
+export function addCartProduct(productId, stockSelected) {
+  return async function (dispatch) {
     const { data } = await axios.get(`${endpoints.GET_PRODUCTS}/${productId}`);
     dispatch({ 
       type: actionTypes.ADD_CART_PRODUCT,
@@ -174,19 +160,20 @@ export function addCartProduct(productId) {
         image: data.img[0],
         price: data.price,
         stock: data.stock,
+        stockSelected,
       }
     })
   }
 }
 
 export function deleteCartProduct(productId) {
-  return async function (dispatch, getState) {
+  return async function (dispatch) {
     dispatch({ type: actionTypes.DELETE_CART_PRODUCT, payload: productId });
   }
 }
 
 export function deleteCartAll() {
-  return async function (dispatch, getState) {
+  return async function (dispatch) {
     dispatch({ type: actionTypes.DELETE_CART_ALL });
   }
 }

@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import swal from "sweetalert";
 import NavBar from '../Navbar/NavBar.jsx';
 import Footer from '../Footer/Footer.jsx';
 
@@ -9,7 +10,7 @@ import CartItem from "./CartItem.jsx";
 import './Cart.css';
 
 // Actions
-import { addCartProduct, deleteCartProduct } from "../../actions/types/productActions";
+import { addCartProduct, deleteCartProduct } from "../../redux/actions/types/productActions";
 
 const Cart = () => {
   const dispatch = useDispatch();
@@ -25,16 +26,31 @@ const Cart = () => {
   };
 
   const removeFromCartHandler = (id) => {
-    dispatch(deleteCartProduct(id));
+      swal({
+        title: 'Estas seguro que quieres eliminar este producto?',
+        icon: 'warning',
+        buttons: true,
+        dangerMode: true,
+      }).then((willDelete) => {
+        if (willDelete) {
+          swal(
+            'Tu producto fue eliminada',{
+              icon: 'success'
+            })
+            dispatch(deleteCartProduct(id)); 
+        }else{
+          return swal('Tu producto sigue en el carrito :)')
+        }
+      })
   };
 
   const getCartCount = () => {
-    return cartItems.reduce((qty, item) => Number(item.stock) + qty, 0);
+    return cartItems.reduce((stockSelected, item) => Number(item.stockSelected) + stockSelected, 0);
   };
 
   const getCartSubTotal = () => {
     return cartItems
-      .reduce((price, item) => price + item.price * item.stock, 0)
+      .reduce((price, item) => price + item.price * item.stockSelected, 0)
       .toFixed(2);
   };
 
@@ -47,7 +63,7 @@ const Cart = () => {
 
           {cartItems.length === 0 ? (
             <div>
-              Tu carrito esta vacio <Link to="/">Volver atras</Link>
+              Tu carrito esta vacio <Link to="/home">Volver atras</Link>
             </div>
           ) : (
             cartItems.map((item) => (
