@@ -180,7 +180,6 @@ export function getMaximumPrice (price) {
         const response = await axios.get(
           `${endpoints.GET_PRODUCTS}?price=GiveMeMaxPrice`
         );
-        console.log(response.data)
         return dispatch({ type: actionTypes.GET_MAX_PRICE, payload: response.data });
       } catch (e) {
         console.log("actions/types/productActions/getMaximumPrice-Error:", e);

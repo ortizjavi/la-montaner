@@ -1,6 +1,6 @@
 import React, { useEffect, useState }  from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {  searchProducts, filterProducts, getMaximumPrice, filterByPrice, selectCategoryAction,currentPageAction,searchProductsAction } from '../../redux/actions/types/productActions.js';
+import {  searchProducts, filterProducts, getMaximumPrice, filterByPrice, selectCategoryAction,currentPageAction,searchProductsAction } from '../../actions/types/productActions.js';
 import NavBar from '../Navbar/NavBar';
 import Filters from '../Filters/Filters.jsx';
 import ShowProducts from '../ShowProducts/ShowProducts';
@@ -18,21 +18,21 @@ export default function Home() {
   const [rangePrice, setRangePrice] = useState('')
   const [leftFilter, setLeftFilter] = useState('')
 
-  const [sort, setSort] = useState('')
+  const [sort, setSort] = useState('asc')
   const maxPrice1 = Math.ceil(maxPrice3 * (1/3))
   const maxPrice2 = Math.ceil(maxPrice3 * (2/3))
+  // var sort = 'asc'
+
   
   useEffect(()=>{
     let param = {sort, pageNumber: 0, name: searchState, category:currentCategoryState }
-    console.log('Home/useEfect:', param)
     dispatch(searchProducts(param))
     dispatch(getMaximumPrice('price'))
-  },[dispatch])
+  },[])
 
   useEffect(()=>{
     setRangePrice('')
     setLeftFilter('') 
-    setSort('')
     if(currentCategoryState !== 'vertodos') dispatch(searchProductsAction(''))
     let param = {sort, pageNumber: 0, name: searchState, category:currentCategoryState }
     dispatch(currentPageAction(1))    
@@ -41,12 +41,14 @@ export default function Home() {
   },[currentCategoryState])
 
   useEffect(() => {
+      
       if(leftFilter) return dispatch(filterProducts(leftFilter, sort, currentPage-1))
       if(rangePrice){
       return dispatch(filterByPrice(rangePrice, currentPage-1))
+      
     }
     if(allProducts[0]>8){ 
-      let param = {sort, pageNumber: currentPage-1, name: searchState, category:currentCategoryState }
+    let param = {sort, pageNumber: currentPage-1, name: searchState, category:currentCategoryState }
       dispatch(searchProducts(param));
     }
   }, [currentPage])
@@ -55,76 +57,83 @@ export default function Home() {
     dispatch(currentPageAction(1))   
     setRangePrice('')
     setLeftFilter('') 
-    setSort('')
     if(searchState.length>=2){
+      //current page arcodeado si la respuesta es mas de paginado no busca
       dispatch(selectCategoryAction('vertodos'))
       let param = {sort, pageNumber: currentPage-1, name: searchState, category:'vertodos' }
       dispatch(searchProducts(param))
-      } else{
+     } else{
       let param = {sort, pageNumber: currentPage-1, name:'', category:currentCategoryState }
     dispatch(searchProducts(param))
     }
   },[searchState])
 
   const handleSort = (paramsort) => {
-    setLeftFilter('')
-    setRangePrice('')
     setSort(paramsort)
-    // dispatch(selectCategoryAction(''))
     let param = {sort:paramsort, pageNumber: currentPage-1, name:'', category:currentCategoryState }
     dispatch(searchProducts(param))
   }
   
   const onChangeFilter = (data) => {
+    if(data === 'clearFilter') console.log('clearFilter')
     setRangePrice('')
-    setSort('')
-    // dispatch(selectCategoryAction(''))
     setLeftFilter(data)
-    if(Object.values(data)[0] === 'none'){
-      let param = {sort, pageNumber: currentPage-1, name:'', category:currentCategoryState }
-      dispatch(searchProducts(param))
-    }else{
+    // if(Object.values(data)[0] === 'none'){
+    //   let param = {sort, pageNumber: currentPage-1, name:'', category:currentCategoryState }
+    //   dispatch(searchProducts(param))
+    // }else{
       dispatch(filterProducts(data, sort, 0))
-    }
+    // }
   }
+  const clearFilter = () => {
+    setLeftFilter('')
+    let param = {sort, pageNumber: 0, name: searchState, category:currentCategoryState }
+    dispatch(searchProducts(param))
+  }
+  
+  var range = []
   
   const handlePriceSort = (e) => {
-    e.preventDefault()
     setLeftFilter('')
-    setSort('')
     dispatch(currentPageAction(1))
-    // dispatch(selectCategoryAction(''))
-    let range = []
-    if(e.target.value === 'range1') range = [0, maxPrice1]
-    if(e.target.value === 'range2') range = [maxPrice1+1, maxPrice2] 
-    if(e.target.value === 'range3') range = [maxPrice2+1, maxPrice3]
-    setRangePrice(range)
-    dispatch(filterByPrice(range, 0))
+
+
+    if(e.target.value === '') {
+      let param = {sort, pageNumber: currentPage-1, name:'', category:currentCategoryState }
+      dispatch(searchProducts(param))
+    } else {
+      // var range = []
+      dispatch(selectCategoryAction(''))
+      dispatch(currentPageAction(1))
+      if(e.target.value === 'range1') range = [0, maxPrice1]
+      if(e.target.value === 'range2') range = [maxPrice1+1, maxPrice2] 
+      if(e.target.value === 'range3') range = [maxPrice2+1, maxPrice3]
+      dispatch(filterByPrice(range, 0))
+      setRangePrice(range)
+    }
   }
-  console.log('Home/allProduc',allProducts)
-  
   return (
     <div>
       <NavBar/>
       <div className='Home-filter'>
         Ordenar: 
-        <button className={`${sort ==='asc' ? "actived" : 'home-button'}`} onClick={() => handleSort('asc')}> A-Z </button>
-        <button className={`${sort ==='desc' ? "actived" : 'home-button'}`} onClick={() => handleSort('desc')}> Z-A </button>
+        <button className={`${sort ==='asc' ? "actived" : 'Nav-button'}`} onClick={() => handleSort('asc')}> A-Z </button>
+        <button className={`${sort ==='desc' ? "actived" : 'Nav-button'}`} onClick={() => handleSort('desc')}> Z-A </button>
         <li className='list_sidebar-li'>
-          <select className='select-home' name="price" value='Precio' onChange={(e) =>handlePriceSort(e)}>
-            <option id='none' value='Precio'>Filtar por Precio</option>
-            <option id='range1' onFocus={handleSort} value='range1'>$0 - ${maxPrice1}</option>
-            <option id='range2' value='range2'>${maxPrice1+1} - ${maxPrice2}</option>
-            <option id='range3' value='range3'>${maxPrice2+1} - ${maxPrice3}</option>
+          
+          <select className='select-sidebar' name="price" value='Precio' onChange={handlePriceSort}>
+            <option id='none' value=''>Filtar por Precio</option>
+            <option value="" disabled selected hidden>Precio</option>
+            <option id='range1' value='range1'>$ 0 - $ {maxPrice1}</option>
+            <option id='range2' value='range2'>$ {maxPrice1+1} - $ {maxPrice2}</option>
+            <option id='range3' value='range3'>$ {maxPrice2+1} - $ {maxPrice3}</option>
           </select>
         </li>
-        <div className='home-range'>
-          { rangePrice[1] && <h5 >{`$${rangePrice[0]} - $${rangePrice[1]}`}</h5> }
-        </div>
+      { rangePrice[1] && <h5>{`$ ${rangePrice[0]} - $ ${rangePrice[1]}`}</h5> }
       </div>
       <main className='home-main'>
           <section>
-            <Filters  onChangeFilter={(e) => { onChangeFilter(e) }} leftFilter={leftFilter} />
+            <Filters  onChangeFilter={(e) => { onChangeFilter(e) }} clearFilter={clearFilter} leftFilter={leftFilter} />
           </section>
           <section className="items-container">
             <ShowProducts allProducts={allProducts}/>
