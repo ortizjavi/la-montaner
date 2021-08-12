@@ -6,7 +6,6 @@ export function login(payload) {
   return async function(dispatch){
     try {
       const response = await axios.post(`${endpoints.AUTH_LOGIN}`, payload);
-      setAuthDefaulHeaders(response.data.token)
       return dispatch({
          type: actionTypes.LOGIN_USER, 
          payload: setUserSession(response.data)
@@ -19,6 +18,7 @@ export function login(payload) {
 
 function setUserSession(data){
   const { token, ...userProps } = data;
+  setAuthDefaulHeaders(token);
   localStorage.setItem('session', JSON.stringify({ token }))
   return userProps;
 }

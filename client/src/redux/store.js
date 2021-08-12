@@ -19,6 +19,7 @@ const reducer = combineReducers({
   session: sessionReducer
 });
 
+console.log(session);
 
 const initialState = {
   session,
