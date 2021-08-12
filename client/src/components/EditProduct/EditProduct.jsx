@@ -22,7 +22,7 @@ import {
   getProductDetail,
   updateProducts,
   clearProductDetail
-} from "../../actions/types/productActions";
+} from "../../redux/actions/types/productActions";
 
 const useStyles = makeStyles((theme) => ({
   root: {

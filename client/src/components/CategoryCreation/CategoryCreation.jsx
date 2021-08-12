@@ -1,7 +1,7 @@
 import './CategoryCreation.css';
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { createCategory, deleteCategories } from '../../actions/types/categoryActions';
+import { createCategory, deleteCategories } from '../../redux/actions/types/categoryActions';
 import { fixedCategories } from '../../utils/endpoints.js';
 import { Link } from "react-router-dom";
 import swal from "sweetalert";

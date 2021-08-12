@@ -2,7 +2,7 @@ import React, {useEffect} from "react";
 import { useDispatch, useSelector} from "react-redux"
 
 import createPagination from "./createPagination";
-import {currentPageAction} from "../../actions/types/productActions";
+import {currentPageAction} from "../../redux/actions/types/productActions";
 import "./Pagination.css";
 
 export default function Pagination({response}) {
