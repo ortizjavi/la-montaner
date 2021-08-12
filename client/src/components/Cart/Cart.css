@@ -51,6 +51,19 @@
   .cartscreen__right div button:hover {
     opacity: 0.9;
   }
+
+  .back-btn {
+    border: 1px solid black;
+    border-style: ridge;
+    padding: 5px;
+    border-radius: 5px
+  }
+
+  .back-btn:hover {
+    background-color: black;
+    color: white;
+    cursor: pointer;
+  }
   
   @media (max-width: 1320px) {
     .cartscreen {
