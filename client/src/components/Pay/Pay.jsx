@@ -7,8 +7,6 @@ export default function Product() {
     e.preventDefault();
     const response = await axios.post("http://localhost:3001/products/pay", {
       locale: "es-AR",
-      name: "pepito",
-      price: 100,
     });
     console.log(response);
     window.location.href = response.data.response.init_point;

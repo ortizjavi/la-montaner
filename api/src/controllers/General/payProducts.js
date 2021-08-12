@@ -5,10 +5,15 @@ mercadopago.configure({
   access_token:
     "TEST-7665548571999255-081017-8db4487dcda48e5cc676f0d587b05af6-13063487",
 });
+//Tabla de ordenes de compra
+const Order = require('../../models/Orders');
+const Cart = require('../../models/Cart');
 
 module.exports = {
   payProducts: async (req, res) => {
+    const compra = req.body.compra
     try {
+
       let preference = {
         back_urls: {
           success: "http://localhost:3000/home/pay/success",
@@ -16,60 +21,38 @@ module.exports = {
           pending: "http://localhost:3000/home/pay/pending",
         },
         auto_return: "approved",
-        items: [
-          {
-            title: req.body.name,
-            unit_price: req.body.price,
-            quantity: 8,
-          },
-          {
-            title: "Montaner Toy",
-            unit_price: 999,
-            quantity: 1,
-          },
-        ],
+        items: compra,
+
       };
       const wii = await mercadopago.preferences.create(preference);
-      res.send(wii);
+      res.json(wii);
     } catch (err) {
       console.log(err);
     }
-
-    /* const ids = req.body;
-    const productsCopy = await repository.read();
-
-    let preference = {
-      items: ["producto"],
-      back_urls: {
-        success: "http://localhost:3000/feedback",
-        failure: "http://localhost:3000/feedback",
-        pending: "http://localhost:3000/feedback",
-      },
-      auto_return: "approved",
-    };
-
-    let error = false;
-    ids.forEach((id) => {
-      const product = productsCopy.find((p) => p.id === id);
-      if (product.stock > 0) {
-        product.stock--;
-        preference.items.push({
-          title: product.name,
-          unit_price: product.price,
-          quantity: 1,
-        });
-      } else {
-        error = true;
-      }
-    });
-
-    if (error) {
-      res.send("Sin stock").statusCode(400);
-    } else {
-      const response = await mercadopago.preferences.create(preference);
-      const preferenceId = response.body.id;
-      await repository.write(productsCopy);
-      res.send({ preferenceId });
-    }*/
   },
+
+  getPayProducts: async(req,res) => {
+    const {id} =req.params;
+    try {
+      const compra = await Order.findById(id);
+
+      const carrito = await Cart.findById(compra.cart);
+
+      let compra2= [];
+      for(let i=0; i<carrito.producto.length; i++){
+        let title = carrito.producto[i].name;
+        let unit_price = carrito.producto[i].price;
+        let quantity = carrito.quantity[i];
+        compra2.push({title, unit_price,quantity})
+      }
+      res.json({
+        compra2
+      });
+    } catch (error) {
+      console.log(error)
+      res.json({
+        ok: false
+      })
+    }
+  }
 };
