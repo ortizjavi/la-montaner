@@ -16,7 +16,8 @@ router.post("/login",
 	},
  	authenticateToken,
  	function(req, res, next){
- 		res.json({ user: req.user, token: req.body.token })
+ 		const { password, ...userProps } = req.user._doc;
+ 		res.json({ ...userProps, token: req.body.token })
  	}
 );
 router.post("/register", register);
