@@ -10,6 +10,7 @@ export function login(payloadKey = null, payloadValue = null) {
     }
     try {
       const response = await axios.post(`${endpoints.AUTH_LOGIN}`, payload);
+      setAuthDefaulHeaders(response.data.token)
       return dispatch({
          type: actionTypes.LOGIN_USER, 
          payload: setUserSession(response.data)
@@ -31,7 +32,11 @@ export function loadUserSession() {
     let session = JSON.parse(localStorage.getItem('userSession'));
     if (session.user){
       dispatch({ type: actionTypes.LOGIN_USER, payload: session.user });
+      setAuthDefaulHeaders(session.token)
     }
   }
 }
 
+function setAuthDefaulHeaders (token) {
+  axios.defaults.headers.common['authorization'] = token;
+}
