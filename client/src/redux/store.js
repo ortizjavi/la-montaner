@@ -1,7 +1,7 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
-
+import { login } from './actions/types/authActions';
 //Root Reducer + Cart Reducer
 import { 
   cartItemsInLocalStorage,
@@ -19,6 +19,7 @@ const reducer = combineReducers({
   session: sessionReducer
 });
 
+
 const initialState = {
   session,
   cart: {
@@ -31,5 +32,10 @@ const store = createStore(
   initialState,
   composeWithDevTools(applyMiddleware(...middleware))
 );
+
+if (session.token){
+  store.dispatch(login({ token : session.token }));
+}
+
 
 export default store;

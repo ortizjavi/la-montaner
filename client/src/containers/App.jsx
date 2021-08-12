@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import { Route, Switch } from "react-router";
 import { useDispatch } from "react-redux";
 import { createTheme, ThemeProvider } from "@material-ui/core/styles";
-import { getCategories } from "../actions/types/categoryActions.js";
+import { getCategories } from "../redux/actions/types/categoryActions.js";
 import Home from "../components/Home/Home";
 import Landing from "../components/Landing/Landing";
 import ProductDetail from "../components/ProductDetail/ProductDetail";
