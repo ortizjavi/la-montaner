@@ -3,9 +3,6 @@ const User = require('../../../models/Users/User');
 const externalLogin = require('./externalLogin');
 const signJWT = require('../../../utils/signJWT');
 
-
-
-
 module.exports = (req, res, next) => {
 	if (req.body.google || req.body.facebook){
 		return externalLogin(req, res, next);
