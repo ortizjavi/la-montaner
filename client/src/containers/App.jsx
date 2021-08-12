@@ -1,7 +1,7 @@
 import "./App.css";
 import React, { useEffect } from "react";
 import { Route, Switch } from "react-router";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { createTheme, ThemeProvider } from "@material-ui/core/styles";
 import { getCategories } from "../redux/actions/types/categoryActions.js";
 import Home from "../components/Home/Home";
@@ -17,7 +17,7 @@ import Cart from "../components/Cart/Cart";
 import Success from "../components/PayState/Success";
 import Pending from "../components/PayState/Pending";
 import Failure from "../components/PayState/Failure";
-import PrivateRouteUser from '../components/PrivateRoute/PrivateRouteUser' 
+import PrivateRoute from '../components/PrivateRoute/PrivateRoute' 
 
 const theme = createTheme({
   palette: {
@@ -49,8 +49,13 @@ export default function App() {
         <Route exact path="/home" component={Home} />
         <Route exact path="/home/:id" component={NavBar} />
         <Switch>
-          <PrivateRouteUser exact path='/dashboard' component={Dashboard}/>
-          <Route exact path="/dashboard" component={Dashboard}></Route>
+          <PrivateRoute 
+            exact 
+            path='/dashboard' 
+            component={Dashboard} 
+            roles={['ADMIN']}
+          />
+          {/*<Route exact path="/dashboard" component={Dashboard}></Route>*/}
           <Route
             exact
             path="/admin/productCreation"

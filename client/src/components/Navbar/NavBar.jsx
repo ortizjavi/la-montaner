@@ -85,7 +85,7 @@ function NavBar() {
         </Button>
       </div>
       <ExternAuthentication />
-      <Link to='/admin'>
+      <Link to='/dashboard'>
         <button className='nav-personicon'>
           <PersonIcon style={{ fontSize: 40 }} />
         </button>
@@ -95,9 +95,7 @@ function NavBar() {
           <ShoppingCartIcon style={{ fontSize: 40 }} />
         </button>
       </Link>
-
     </header>
-
   );
 };
 
