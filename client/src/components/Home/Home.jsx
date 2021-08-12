@@ -101,8 +101,6 @@ export default function Home() {
     setRangePrice(range)
     dispatch(filterByPrice(range, 0))
   }
-  console.log('Home/allProduc',allProducts)
-  
   return (
     <div>
       <NavBar/>
