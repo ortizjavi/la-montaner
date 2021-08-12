@@ -3,13 +3,13 @@ import thunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
 //Root Reducer + Cart Reducer
-import cartReducer from "../reducer/cartReducers";
-import sessionReducer from "../reducer/sessionReducer";
-import rootReducer from '../reducer/index';
 import { 
   cartItemsInLocalStorage,
-  userSession
+  session
 } from '../utils/localStorage' 
+import cartReducer from "./reducer/cartReducers";
+import rootReducer from './reducer/index';
+import sessionReducer from "./reducer/sessionReducer";
 
 const middleware = [thunk];
 
@@ -20,10 +20,7 @@ const reducer = combineReducers({
 });
 
 const initialState = {
-  session: {
-    user: userSession.user,
-    token: userSession.token
-  },
+  session,
   cart: {
     cartItems: cartItemsInLocalStorage,
   },
