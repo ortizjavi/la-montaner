@@ -1,4 +1,5 @@
 import './Filters.css';
+import { useDispatch } from 'react-redux';
 import {selectCategoryAction} from '../../redux/actions/types/productActions';
 
 export default function Filters(props) {
