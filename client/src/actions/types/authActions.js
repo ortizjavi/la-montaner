@@ -22,13 +22,13 @@ export function login(payloadKey = null, payloadValue = null) {
 
 function setUserSession(data){
   const { token, ...userProps } = data;
-  sessionStorage.setItem('userSession', JSON.stringify({ token, user: userProps }))
+  localStorage.setItem('userSession', JSON.stringify({ token, user: userProps }))
   return userProps;
 }
 
 export function loadUserSession() {
   return async function(dispatch){  
-    let session = JSON.parse(sessionStorage.getItem('userSession'));
+    let session = JSON.parse(localStorage.getItem('userSession'));
     if (session.user){
       dispatch({ type: actionTypes.LOGIN_USER, payload: session.user });
     }

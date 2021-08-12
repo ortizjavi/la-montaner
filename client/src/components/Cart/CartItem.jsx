@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import DeleteIcon from '@material-ui/icons/Delete';
 
 const CartItem = ({ item, qtyChangeHandler, removeHandler }) => {
+
   return (
     <div className="cartitem">
       <div className="cartitem__image">
@@ -13,7 +14,7 @@ const CartItem = ({ item, qtyChangeHandler, removeHandler }) => {
       </Link>
       <p className="cartitem__price">${item.price}</p>
       <select
-        value={item.stock}
+        value={item.stockSelected}
         onChange={(e) => qtyChangeHandler(item.id, e.target.value)}
         className="cartItem__select"
       >

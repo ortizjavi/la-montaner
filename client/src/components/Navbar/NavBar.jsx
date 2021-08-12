@@ -24,28 +24,6 @@ function NavBar() {
 
     const[state, setState] = useState('vertodos')
    
-  //  const handleSort= (param) => {
-  //     dispatch(filterProductsCategory(sort,0, param))
-  //     setCategory({...initialCategories, [param]: true})
-  //   }
-
-  //   const handleAllProducts = (state)=>{
-  //     dispatch(searchProducts(sort, currentPage-1));
-  //     setCategory({...initialCategories, [state]: true})
-  //   }
-
-
-  //   useEffect(() => {
-  //     if(allProducts[0]>8){ 
-  //       dispatch(searchProducts(sort, currentPage));
-  //     }
-  //   },[])
-
-  //   useEffect(() => {
-  //     if(allProducts[0]>8){ 
-  //       dispatch(searchProducts(sort, currentPage-1));
-  //     }
-  //   }, [currentPage]) 
 
     useEffect(()=> {
       dispatch(selectCategoryAction(state))
@@ -95,9 +73,11 @@ function NavBar() {
                     <PersonIcon style={{ fontSize: 40 }}  />
                   </button>
                 </Link>
-                <button className='nav-personicon' onClick={()=> alert('Yo... Re-bien!!😎')}>
+                <Link to="/cart">
+                  <button className='nav-personicon'>
                     <ShoppingCartIcon style={{ fontSize: 40 }} />
-                </button>
+                  </button>
+                </Link>
             
         </header>
 
