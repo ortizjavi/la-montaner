@@ -61,13 +61,13 @@ export default function SearchBar() {
                     autoComplete='off' placeholder='Buscar Productos' name="product" 
                     onChange={(e)=>handleChange(e)} />
                 </label>   
-                <datalist  id="product" multiple >
+                <datalist className='sb-option'  id="product" multiple >
                     {   
                         state.product.length >=2 ?
                         allProducts[1].map( (t, key) => (
-                            <NavLink  to={`/home/${t._id}`}>
-                                <option key={key} value={t.name} />  
-                            </NavLink>
+                            // <NavLink className='sb-option' to={`/home/${t._id}`}>
+                                <option className='sb-option'  key={key} value={t.name} />  
+                            //</NavLink> 
                         ))
                         :
                             <option/>

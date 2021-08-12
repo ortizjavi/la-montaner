@@ -30,6 +30,10 @@ export default function Filters(props) {
                   <option id='Milk' value='Milk'>Milk stout</option>
                 </select> 
               </li>
+            
+              <div className={`${Object.values(props.leftFilter)[0]? "filter-result" : 'none'}`}>
+                <h5>{Object.values(props.leftFilter)[0]}</h5>
+              </div>
               <li className='list_sidebar-li'>
                 <select className='select-sidebar' value='Volumen' name="volumen"  onChange={handleFilterStyles}>
                   <option id='none' value='none'>Todos los Volumenes</option>
