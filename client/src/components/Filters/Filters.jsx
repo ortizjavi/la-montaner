@@ -1,8 +1,10 @@
 import React, {useState} from 'react';
+import { useDispatch } from 'react-redux';
 import './Filters.css';
+import {selectCategoryAction} from '../../redux/actions/types/productActions';
 
 export default function Filters(props) {
- 
+  const dispatch = useDispatch()
   const handleFilterStyles = (event) => {
     const data = {[event.target.name]: event.target.value}
     // setFilter(data)
@@ -30,6 +32,10 @@ export default function Filters(props) {
                   <option id='Milk' value='Milk'>Milk stout</option>
                 </select> 
               </li>
+            
+              <div className={`${Object.values(props.leftFilter)[0]? "filter-result" : 'none'}`}>
+                <h5>{Object.values(props.leftFilter)[0]}</h5>
+              </div>
               <li className='list_sidebar-li'>
                 <select className='select-sidebar' value='Volumen' name="volumen"  onChange={handleFilterStyles}>
                   <option id='none' value='none'>Todos los Volumenes</option>
@@ -54,7 +60,7 @@ export default function Filters(props) {
                 <p> *** </p>
                 }
             </ul>
-
+                <button onClick={() => dispatch(selectCategoryAction(''))}>Borrar Filtros</button>
           </div>
           <h4 className='sb-h4'>Las mejores cervezas  de <br></br> Cordoba</h4>
     </navigator>

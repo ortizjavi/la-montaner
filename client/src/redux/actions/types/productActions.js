@@ -173,6 +173,7 @@ export function deleteCartAll() {
 }
 
 export function getMaximumPrice (price) {
+  console.log('action/getmaxprice: ', price)
   if (price) {
     return async function (dispatch) {
       try {
