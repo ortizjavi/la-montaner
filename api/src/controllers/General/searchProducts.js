@@ -2,7 +2,6 @@ const Product = require('../../models/Product');
 
 module.exports = {
   searchProducts: async (req, res, next) => {
-    console.log('controler/showproducs/query: ', req.query)
     if(req.query.categories){
       return filterProductsCategories(req,res,next);
     }
@@ -151,9 +150,9 @@ module.exports = {
           const product = await Product.find( { $and: [ { price: { $gte: prices[0] } }, { price: { $lte: prices[1] } } ] } )
                                         .limit(ProductsPerPage)
                                         .skip(ProductsPerPage * page)
-                                        .sort({
-                                            price: 1
-                                        })
+                                        // .sort({
+                                        //     price: 1
+                                        // })
           const productLength = (await Product.find({ $and: [ { price: { $gte: prices[0] } }, { price: { $lte: prices[1] } } ] })).length
           return res.json([productLength, product]);
         } catch (error) {

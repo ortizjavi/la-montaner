@@ -26,7 +26,6 @@ font-size_narvar:rgb(130,130,130); */
 .pagination{
     display: flex;
     justify-content: center;
-    padding-top: 20px;
 }
 .pagination  ul{
       list-style: none;

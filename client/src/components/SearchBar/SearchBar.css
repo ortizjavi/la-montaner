@@ -22,6 +22,12 @@
     margin-top: 8px;
 }
 
+
+.sb-option{
+    background-color: black;
+    /* filter: invert(100%); */
+}
+
 .input_search:hover{
     font-size: 18px;
 }
