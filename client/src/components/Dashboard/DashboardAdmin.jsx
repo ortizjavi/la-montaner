@@ -23,15 +23,15 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import CreateSharpIcon from "@material-ui/icons/CreateSharp";
 import AddCircleRoundedIcon from "@material-ui/icons/AddCircleRounded";
 import swal from "sweetalert";
-import HomeIcon from '@material-ui/icons/Home';
+import HomeIcon from "@material-ui/icons/Home";
 import {
   getAdminProducts,
   deleteProducts,
   selectedProducts,
 } from "../../redux/actions/types/productActions";
 import { Link } from "react-router-dom";
-import CategoryIcon from '@material-ui/icons/Category';
-import './dashboard.css';
+import CategoryIcon from "@material-ui/icons/Category";
+import "./dashboard.css";
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -71,27 +71,15 @@ const headCells = [
 ];
 
 function EnhancedTableHead(props) {
-  const {
-    classes,
-    onSelectAllClick,
-    order,
-    orderBy,
-    numSelected,
-    rowCount,
-    onRequestSort,
-  } = props;
+  const { classes, order, orderBy, onRequestSort } = props;
   const createSortHandler = (property) => (event) => {
     onRequestSort(event, property);
   };
 
-  
-
   return (
     <TableHead>
       <TableRow>
-        <TableCell padding="checkbox">
-          
-        </TableCell>
+        <TableCell padding="checkbox"></TableCell>
         {headCells.map((headCell) => (
           <TableCell
             key={headCell.id}
@@ -151,28 +139,26 @@ const useToolbarStyles = makeStyles((theme) => ({
 const EnhancedTableToolbar = (props) => {
   const dispatch = useDispatch();
   const classes = useToolbarStyles();
-  var { numSelected } = props;
 
   const seleccionados = useSelector((state) => state.root.selectedAdminProducts);
 
   const handleDelete = () => {
     swal({
-      title: 'Estas seguro que quieres eliminarlo?',
-      icon: 'warning',
+      title: "Estas seguro que quieres eliminarlo?",
+      icon: "warning",
       buttons: true,
       dangerMode: true,
     }).then((willDelete) => {
       if (willDelete) {
-        swal(
-          'Tu producto fue eliminado',{
-            icon: 'success'
-          })
-          seleccionados.forEach((i) => dispatch(deleteProducts(i)));
-          dispatch(getAdminProducts());
-      }else{
-        return swal('Tu producto esta a salvo :)')
+        swal("Tu producto fue eliminado", {
+          icon: "success",
+        });
+        seleccionados.forEach((i) => dispatch(deleteProducts(i)));
+        dispatch(getAdminProducts());
+      } else {
+        return swal("Tu producto esta a salvo :)");
       }
-    })
+    });
   };
 
   useEffect(() => {
@@ -201,14 +187,14 @@ const EnhancedTableToolbar = (props) => {
           id="tableTitle"
           component="div"
         >
-          <Link to={"/home"}  styles={{textDecoration:'none'}}>
-          {'Productos - La Montañes'}
+          <Link to={"/home"} styles={{ textDecoration: "none" }}>
+            {"Productos - La Montañes"}
           </Link>
-          <IconButton >
-                <Link to={"/home"}>
-                  <HomeIcon />
-                </Link>
-        </IconButton>
+          <IconButton>
+            <Link to={"/home"}>
+              <HomeIcon />
+            </Link>
+          </IconButton>
         </Typography>
       )}
       {seleccionados.length > 0 ? (
@@ -230,21 +216,21 @@ const EnhancedTableToolbar = (props) => {
         </div>
       ) : (
         <div>
-        <Tooltip title="Crear Producto">
-          <IconButton aria-label="filter list">
-            <Link to="/admin/productCreation">
-              <AddCircleRoundedIcon />
-            </Link>
-          </IconButton>
-        </Tooltip>
-        <Tooltip title="Categorias">
-        <IconButton aria-label="filter list">
-          <Link to="/admin/categoryCreation">
-            <CategoryIcon />
-          </Link>
-        </IconButton>
-      </Tooltip>
-      </div>
+          <Tooltip title="Crear Producto">
+            <IconButton aria-label="filter list">
+              <Link to="/admin/productCreation">
+                <AddCircleRoundedIcon />
+              </Link>
+            </IconButton>
+          </Tooltip>
+          <Tooltip title="Categorias">
+            <IconButton aria-label="filter list">
+              <Link to="/admin/categoryCreation">
+                <CategoryIcon />
+              </Link>
+            </IconButton>
+          </Tooltip>
+        </div>
       )}
     </Toolbar>
   );
@@ -364,12 +350,12 @@ const Dashboard = () => {
             size={dense ? "small" : "medium"}
             aria-label="enhanced table"
           >
-             <EnhancedTableHead
+            <EnhancedTableHead
               classes={classes}
               numSelected={selected.length}
               order={order}
               orderBy={orderBy}
-             onRequestSort={handleRequestSort}
+              onRequestSort={handleRequestSort}
               rowCount={rows.length}
             />
             <TableBody>
@@ -383,8 +369,8 @@ const Dashboard = () => {
                     <TableRow
                       hover
                       onClick={(event) => handleClick(event, row._id)}
-                      role="checkbox" 
-                      aria-checked={isItemSelected} 
+                      role="checkbox"
+                      aria-checked={isItemSelected}
                       tabIndex={-1}
                       key={row._id}
                       selected={isItemSelected}
@@ -430,7 +416,6 @@ const Dashboard = () => {
         control={<Switch checked={dense} onChange={handleChangeDense} />}
         label="Dense padding"
       />
-      
     </div>
   );
 };

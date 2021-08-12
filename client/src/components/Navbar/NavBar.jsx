@@ -9,6 +9,7 @@ import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import SvgIcon from '@material-ui/core/SvgIcon';
 import { searchProducts, filterProductsCategory, searchProductsAction, selectCategoryAction } from '../../redux/actions/types/productActions.js';
 import { ModalDialog } from '../ModalDialog/ModalDialog.jsx'
+import ExternAuthentication from '../Authentication'
 
 function NavBar() {
   let initialCategories = { vertodos: false, cervezas: false, conservas: false, merchandising: false, otros: false }
@@ -91,7 +92,8 @@ function NavBar() {
         </Button>
         <ModalDialog open={open} handleClose={handleClose} />
       </div>
-      <Link to='/admin'>
+      <ExternAuthentication />
+      <Link to='/dashboard'>
         <button className='nav-personicon'>
           <PersonIcon style={{ fontSize: 40 }} />
         </button>
@@ -101,9 +103,7 @@ function NavBar() {
           <ShoppingCartIcon style={{ fontSize: 40 }} />
         </button>
       </Link>
-
     </header>
-
   );
 };
 
