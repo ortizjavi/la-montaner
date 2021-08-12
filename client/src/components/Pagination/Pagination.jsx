@@ -19,7 +19,6 @@ export default function Pagination({response}) {
   
   
   useEffect(() => {
-    console.log('Pagination/paginaactual:',currentPage,'categoria', currentCategoryState)
     setCurrentPage(1)  
   },[currentCategoryState])
 

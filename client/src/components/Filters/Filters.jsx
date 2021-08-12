@@ -30,17 +30,29 @@ export default function Filters(props) {
                   <option id='Milk' value='Milk'>Milk stout</option>
                 </select> 
               </li>
-                <h5>{Object.values(props.leftFilter)[0]}</h5>
               <li className='list_sidebar-li'>
                 <select className='select-sidebar' value='Volumen' name="volumen"  onChange={handleFilterStyles}>
                   <option id='none' value='none'>Todos los Volumenes</option>
                   <option value="" disabled selected hidden>Volumen</option>
-                  <option id='0.5' value='0.5'>500 ml</option>
+                  <option id='0.5' value='0.5'>500 cc</option>
                   <option id='1' value='1'>1 litro</option>
                   <option id='20' value='20'>20 litros</option>
                   <option id='50' value='50'>50 litros</option>
                 </select>
               </li>
+                {
+                Object.values(props?.leftFilter)[0] === 'American' ? <p>American west coast IPA</p> :
+                Object.values(props.leftFilter)[0] === 'Golden' ? <p>Golden Ale</p> :
+                Object.values(props.leftFilter)[0] === 'Honey' ? <p>Honey Beer</p> :
+                Object.values(props.leftFilter)[0] === 'Session' ? <p>Session Ipa</p> :
+                Object.values(props.leftFilter)[0] === 'Scotish' ? <p>Scotish (Welcome to Mars)</p> :
+                Object.values(props.leftFilter)[0] === 'Milk' ? <p>Milk stout</p> :
+                Object.values(props.leftFilter)[0] === '0.5' ? <p>500 cc</p> :
+                Object.values(props.leftFilter)[0] === '1' ? <p>1 litro</p> :
+                Object.values(props.leftFilter)[0] === '20' ? <p>20 litros</p> :
+                Object.values(props.leftFilter)[0] === '50' ? <p>50 litros</p> :
+                <p> *** </p>
+                }
             </ul>
 
           </div>

@@ -28,7 +28,6 @@ const rootReducer = (state = initialState, action) => {
     case actionTypes.GET_MAX_PRICE: return { ...state, maxPrice: action.payload[0].price };
     case actionTypes.FILTER_PRODUCTS_CATEGORY: return { ...state, allProducts: action.payload };
     case actionTypes.CURENT_CATEGORY: return { ...state, currentCategoryState: action.payload };
-    //case actionTypes.GET_MAX_PRICE: return { ...state, maxPrice: action.payload };
 
     default: return state;
   }

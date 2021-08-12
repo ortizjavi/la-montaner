@@ -27,7 +27,6 @@ function NavBar() {
 //toca preguntar si ek search tiene estado
     },[state])
   
-    console.log('Se renderizo el navbar/ allproducts',allProducts)
     function HomeIcon(props) {
         return (
           <SvgIcon {...props}>

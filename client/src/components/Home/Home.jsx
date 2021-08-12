@@ -14,7 +14,7 @@ export default function Home() {
   const searchState = useSelector(state => state.root.searchProdustsState)
   const allProducts = useSelector( state => state.root.allProducts)
   const currentCategoryState = useSelector( state => state.root.currentCategoryState)
-  const maxPrice3 = useSelector(state => state.maxPrice)
+  const maxPrice3 = useSelector(state => state.root.maxPrice)
   const [rangePrice, setRangePrice] = useState('')
   const [leftFilter, setLeftFilter] = useState('')
 
@@ -22,6 +22,8 @@ export default function Home() {
   const maxPrice1 = Math.ceil(maxPrice3 * (1/3))
   const maxPrice2 = Math.ceil(maxPrice3 * (2/3))
   // var sort = 'asc'
+
+  console.log('maxPrice es: ', maxPrice3)
   
   useEffect(()=>{
     let param = {sort, pageNumber: 0, name: searchState, category:currentCategoryState }
@@ -43,7 +45,6 @@ export default function Home() {
       
       if(leftFilter) return dispatch(filterProducts(leftFilter, sort, currentPage-1))
       if(rangePrice){
-      console.log('Home/range',rangePrice)
       return dispatch(filterByPrice(rangePrice, currentPage-1))
       
     }
@@ -106,7 +107,6 @@ export default function Home() {
       setRangePrice(range)
     }
   }
-  console.log('Home/rangeprice: ',rangePrice[0])
   return (
     <div>
       <NavBar/>
@@ -119,13 +119,13 @@ export default function Home() {
           <select className='select-sidebar' name="price" value='Precio' onChange={handlePriceSort}>
             <option id='none' value=''>Filtar por Precio</option>
             <option value="" disabled selected hidden>Precio</option>
-            <option id='range1' value='range1'>0 - {maxPrice1}</option>
-            <option id='range2' value='range2'>{maxPrice1+1} - {maxPrice2}</option>
-            <option id='range3' value='range3'>{maxPrice2+1} - {maxPrice3}</option>
+            <option id='range1' value='range1'>$ 0 - $ {maxPrice1}</option>
+            <option id='range2' value='range2'>$ {maxPrice1+1} - $ {maxPrice2}</option>
+            <option id='range3' value='range3'>$ {maxPrice2+1} - $ {maxPrice3}</option>
           </select>
         </li>
     
-      { rangePrice[1] && <h5>{`${rangePrice[0]} - ${rangePrice[1]}`}</h5> }
+      { rangePrice[1] && <h5>{`$ ${rangePrice[0]} - $ ${rangePrice[1]}`}</h5> }
       </div>
       <main className='home-main'>
           <section>
