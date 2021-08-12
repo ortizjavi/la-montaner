@@ -36,16 +36,6 @@ export function logout(){
 }
 
 
-export function loadUserSession() {
-  return async function(dispatch){  
-    let session = JSON.parse(localStorage.getItem('userSession'));
-    if (session.user){
-      dispatch({ type: actionTypes.LOGIN_USER, payload: session.user });
-      setAuthDefaulHeaders(session.token)
-    }
-  }
-}
-
 function setAuthDefaulHeaders (token) {
   axios.defaults.headers.common['authorization'] = token;
 }

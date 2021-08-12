@@ -9,17 +9,15 @@ export default function ExternAuthentication() {
     const dispatch = useDispatch();
 
     const responseGoogle = (response) => {
-        
         dispatch(login('google', response.tokenId))
     }
 
     const responseFacebook = (response) => {
-        
         if (response.accessToken)
-            dispatch(login('facebook', response.accessToken))
+        dispatch(login('facebook', response.accessToken))
     }
 
-  
+
     return (
         <div>
             <br></br>
@@ -28,7 +26,7 @@ export default function ExternAuthentication() {
                 autoLoad={false}
                 fields="name,email,picture"
                 onClick={responseFacebook}
-                callback={responseFacebook} />, 
+                callback={responseFacebook} />,
             <GoogleLogin
                 clientId="185256781467-8t9jr2l450gsbuev5d12bs463280d0c4.apps.googleusercontent.com"
                 buttonText="Google Login"

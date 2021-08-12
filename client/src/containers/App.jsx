@@ -4,7 +4,6 @@ import { Route, Switch } from "react-router";
 import { useDispatch } from "react-redux";
 import { createTheme, ThemeProvider } from "@material-ui/core/styles";
 import { getCategories } from "../actions/types/categoryActions.js";
-import { loadUserSession } from "../actions/types/authActions.js";
 import Home from "../components/Home/Home";
 import Landing from "../components/Landing/Landing";
 import ProductDetail from "../components/ProductDetail/ProductDetail";
@@ -14,6 +13,7 @@ import { Dashboard } from "../components/DashboardAdmin/Dashboard";
 import EditProduct from "../components/EditProduct/EditProduct";
 import NavBar from "../components/Navbar/NavBar";
 import Cart from "../components/Cart/Cart";
+import PrivateRouteUser from '../components/PrivateRoute/PrivateRouteUser' 
 
 const theme = createTheme({
   palette: {
@@ -36,7 +36,6 @@ export default function App() {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getCategories());
-    dispatch(loadUserSession());
   }, []);
 
   return (
@@ -46,6 +45,7 @@ export default function App() {
         <Route exact path="/home" component={Home} />
         <Route exact path="/home/:id" component={NavBar} />
         <Switch>
+          <PrivateRouteUser exact path='/dashboard' component={EditProduct}/>
           <Route exact path="/admin" component={Dashboard}></Route>
           <Route
             exact

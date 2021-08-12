@@ -5,6 +5,10 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 //Root Reducer + Cart Reducer
 import cartReducer from "../reducer/cartReducers";
 import rootReducer from '../reducer/index';
+import { 
+  cartItemsInLocalStorage,
+  userSession
+} from '../utils/localStorage' 
 
 const middleware = [thunk];
 
@@ -13,11 +17,15 @@ const reducer = combineReducers({
   root: rootReducer,
 });
 
-const cartItemsInLocalStorage = localStorage.getItem("cart")
-  ? JSON.parse(localStorage.getItem("cart"))
-  : [];
+
+
+
+
 
 const initialState = {
+  route: {
+    user: userSession.user ? userSession.user : {}
+  },
   cart: {
     cartItems: cartItemsInLocalStorage,
   },
