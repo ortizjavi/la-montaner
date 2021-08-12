@@ -10,7 +10,6 @@ export default function Product() {
       name: "pepito",
       price: 100,
     });
-    console.log(response);
     window.location.href = response.data.response.init_point;
   };
   return (
