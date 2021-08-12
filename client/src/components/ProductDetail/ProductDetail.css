@@ -2,12 +2,13 @@
   display: flex;
   background-color:white;
   text-align: center;
+  max-width: 100vh;
+  margin: auto;
 }
 
 .productscreen__left {
   display: flex;
   flex-basis: 20%;
-  margin: auto;
 }
 
 .left__image {
@@ -119,40 +120,57 @@
 
 
 /* Slider */
-  .slider {
-    position: relative;
-    height: 80vh;
-    display: flex;
-    align-items: center;
-  }
-  
-  .image {
-    width: 400px;
-    height: 500px;
-    border-radius: 10px;
-    object-fit: contain;
-  }
-  
-  .right-arrow {
-    position: absolute;
-    top: 50%;
-    right: 20px;
-    font-size: 2.5rem!important;
-    color: rgb(44, 44, 44);
-    z-index: 10;
-    cursor: pointer;
-    user-select: none;
-  }
-  
-  .left-arrow {
-    position: absolute;
-    top: 50%;
-    left: 20px;
-    font-size: 2.5rem!important;
-    color: rgb(44, 44, 44);
-    z-index: 10;
-    cursor: pointer;
-    user-select: none;
-  }
+.slider {
+  position: relative;
+  height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.image {
+  width: 500px;
+  height: 500px;
+  border-radius: 10px;
+}
+
+.imageSlide{
+  width: 300px;
+  height: 450px;
+  border-radius: 10px;
+}
+
+.right-arrow {
+  position: absolute;
+  top: 50%;
+  right: 50px;
+  font-size: 2rem;
+  color: rgb(94, 91, 91);
+  z-index: 10;
+  cursor: pointer;
+  user-select: none;
+}
+
+.left-arrow {
+  position: absolute;
+  top: 50%;
+  left: 50px;
+  font-size: 2rem;
+  color: rgb(94, 91, 91);
+  z-index: 10;
+  cursor: pointer;
+  user-select: none;
+}
+
+.slide {
+  opacity: 0;
+  transition-duration: 1s ease;
+}
+
+.slide.active {
+  opacity: 1;
+  transition-duration: 1s;
+  transform: scale(1.08);
+}
   
   

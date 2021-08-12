@@ -91,8 +91,8 @@ export default function ProductDetail({ match, history }) {
                 })}
               </section>
             ) : (
-              <div className={"slide active"}>
-                  <img src={detail.img} alt="beerImage" className="image"/>
+              <div className="slide.active">
+                  <img src={detail.img} alt="beerImage" className="imageSlide"/>
                     </div>
             )}
             </div>
@@ -113,7 +113,7 @@ export default function ProductDetail({ match, history }) {
               <p>
                 Stock:
                 <span>
-                  {detail.stock > 0 ? "In Stock" : "Out of Stock"}
+                  {detail.stock > 0 ? "disponible" : "no disponible"}
                 </span>
               </p>
               <p>
