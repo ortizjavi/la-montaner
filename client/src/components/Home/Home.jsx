@@ -70,6 +70,7 @@ export default function Home() {
     setLeftFilter('')
     setRangePrice('')
     setSort(paramsort)
+    // dispatch(selectCategoryAction(''))
     let param = {sort:paramsort, pageNumber: currentPage-1, name:'', category:currentCategoryState }
     dispatch(searchProducts(param))
   }
@@ -77,6 +78,7 @@ export default function Home() {
   const onChangeFilter = (data) => {
     setRangePrice('')
     setSort('')
+    // dispatch(selectCategoryAction(''))
     setLeftFilter(data)
     if(Object.values(data)[0] === 'none'){
       let param = {sort, pageNumber: currentPage-1, name:'', category:currentCategoryState }
@@ -86,13 +88,12 @@ export default function Home() {
     }
   }
   
-  
   const handlePriceSort = (e) => {
     e.preventDefault()
     setLeftFilter('')
     setSort('')
     dispatch(currentPageAction(1))
-    dispatch(selectCategoryAction(''))
+    // dispatch(selectCategoryAction(''))
     let range = []
     if(e.target.value === 'range1') range = [0, maxPrice1]
     if(e.target.value === 'range2') range = [maxPrice1+1, maxPrice2] 

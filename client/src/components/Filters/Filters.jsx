@@ -1,8 +1,10 @@
 import React, {useState} from 'react';
+import { useDispatch } from 'react-redux';
 import './Filters.css';
+import {selectCategoryAction} from '../../redux/actions/types/productActions';
 
 export default function Filters(props) {
- 
+  const dispatch = useDispatch()
   const handleFilterStyles = (event) => {
     const data = {[event.target.name]: event.target.value}
     // setFilter(data)
@@ -58,7 +60,7 @@ export default function Filters(props) {
                 <p> *** </p>
                 }
             </ul>
-
+                <button onClick={() => dispatch(selectCategoryAction(''))}>Borrar Filtros</button>
           </div>
           <h4 className='sb-h4'>Las mejores cervezas  de <br></br> Cordoba</h4>
     </navigator>
