@@ -7,21 +7,27 @@ import SearchBar from '../SearchBar/SearchBar';
 import PersonIcon from '@material-ui/icons/Person';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import SvgIcon from '@material-ui/core/SvgIcon';
-import ExternAuthentication from '../Authentication/Authentication';
 import { searchProducts, filterProductsCategory, searchProductsAction, selectCategoryAction } from '../../redux/actions/types/productActions.js';
+import { ModalDialog } from '../ModalDialog/ModalDialog.jsx'
 
 function NavBar() {
-    let initialCategories = {vertodos:false,cervezas:false,conservas:false,merchandising:false,otros:false}
-    const [category, setCategory] = useState(initialCategories)
-    const currentCategoryState = useSelector( state => state.root.currentCategoryState)
-
+  let initialCategories = { vertodos: false, cervezas: false, conservas: false, merchandising: false, otros: false }
+  const [category, setCategory] = useState(initialCategories)
+  const currentCategoryState = useSelector(state => state.root.currentCategoryState)
   const dispatch = useDispatch();
   const currentPage = useSelector(state => state.root.currentPage)
   var sort = 'asc'
   const allProducts = useSelector(state => state.root.allProducts)
-
   const [state, setState] = useState('vertodos')
-
+  
+  // local state for ModalDialog and Button
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   useEffect(() => {
     dispatch(selectCategoryAction(state))
@@ -38,20 +44,20 @@ function NavBar() {
     );
   }
 
-    useEffect(()=> {
-      dispatch(selectCategoryAction(state))
-      dispatch(searchProductsAction(''))
-//toca preguntar si ek search tiene estado
-    },[state])
-  
-    function HomeIcon(props) {
-        return (
-          <SvgIcon {...props}>
-            <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
-          </SvgIcon>
-        );
-      }
-   
+  useEffect(() => {
+    dispatch(selectCategoryAction(state))
+    dispatch(searchProductsAction(''))
+    //toca preguntar si ek search tiene estado
+  }, [state])
+
+  function HomeIcon(props) {
+    return (
+      <SvgIcon {...props}>
+        <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
+      </SvgIcon>
+    );
+  }
+
   return (
     <header className="navbar">
       <NavLink to='/home' className='nav-personicon'>
@@ -80,11 +86,11 @@ function NavBar() {
         </ul>
       </nav>
       <div>
-        <Button variant="contained" color="primary" >
-          Signup or SignIn MADAFAKAAAA
+        <Button variant="contained" color="primary" onClick={handleOpen} >
+          Signin
         </Button>
+        <ModalDialog open={open} handleClose={handleClose} />
       </div>
-      <ExternAuthentication />
       <Link to='/admin'>
         <button className='nav-personicon'>
           <PersonIcon style={{ fontSize: 40 }} />
