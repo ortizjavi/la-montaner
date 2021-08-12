@@ -62,7 +62,7 @@ function NavBar() {
         <ul>
           <li className="list-item">
             <NavLink to='/home'>
-              <input className={`${currentCategoryState === 'vertodos' ? "actived" : 'Nav-button'}`} type="button" value="Ver Todos" onClick={() => setState('vertodos')} />
+              <input className={`${currentCategoryState === 'vertodos' ? 'Nav-vertodos' : "actived-vertodos" }`} type="button" value="Ver Todos" onClick={() => setState('vertodos')} />
             </NavLink>
             <NavLink to='/home'>
               <input className={`${currentCategoryState === 'cervezas' ? "actived" : 'Nav-button'}`} type="button" value="Cervezas" onClick={() => setState('cervezas')} />

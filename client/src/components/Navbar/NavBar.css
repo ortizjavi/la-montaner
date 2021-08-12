@@ -50,8 +50,31 @@
     border-bottom: 2px solid #C88E34;
     box-sizing: border-box;
 }
+
 .Nav-button:active{
 background: #C88E34; 
+}
+
+.Nav-vertodos {
+    display: none;
+}
+
+.actived-vertodos {
+    background: none;
+    color: grey;
+    font-weight: 400;
+    border: none;
+    outline: none;
+    font-size: 1.2rem;
+    margin-left: 2rem;
+    cursor: pointer;
+}
+
+.actived-vertodos:hover {
+    background: rgba(119, 103, 80, 0.1);
+    border-radius: 50px;
+    border-bottom: 2px solid #C88E34;
+    box-sizing: border-box;
 }
 .actived{
     background: none;
