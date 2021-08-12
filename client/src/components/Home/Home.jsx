@@ -1,6 +1,6 @@
 import React, { useEffect, useState }  from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {  searchProducts, filterProducts, getMaximumPrice, filterByPrice, selectCategoryAction,currentPageAction,searchProductsAction } from '../../actions/types/productActions.js';
+import {  searchProducts, filterProducts, getMaximumPrice, filterByPrice, selectCategoryAction,currentPageAction,searchProductsAction } from '../../redux/actions/types/productActions.js';
 import NavBar from '../Navbar/NavBar';
 import Filters from '../Filters/Filters.jsx';
 import ShowProducts from '../ShowProducts/ShowProducts';

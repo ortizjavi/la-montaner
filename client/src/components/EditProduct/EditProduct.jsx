@@ -21,8 +21,8 @@ import swal from "sweetalert";
 import {
   getProductDetail,
   updateProducts,
-  clearProductDetail,
-} from "../../actions/types/productActions";
+  clearProductDetail
+} from "../../redux/actions/types/productActions";
 
 const useStyles = makeStyles((theme) => ({
   root: {

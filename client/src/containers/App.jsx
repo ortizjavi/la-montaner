@@ -10,7 +10,7 @@ import CategoryCreation from "../components/CategoryCreation/CategoryCreation";
 import Pay from "../components/Pay/Pay";
 import EditProduct from "../components/EditProduct/EditProduct";
 import NavBar from "../components/Navbar/NavBar";
-import { getCategories } from "../actions/types/categoryActions.js";
+import { getCategories } from "../redux/actions/types/categoryActions";
 import { createTheme, ThemeProvider } from "@material-ui/core/styles";
 import { Dashboard } from "../components/DashboardAdmin/Dashboard";
 import Cart from "../components/Cart/Cart";
