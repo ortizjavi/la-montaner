@@ -28,7 +28,7 @@ import {
   getAdminProducts,
   deleteProducts,
   selectedProducts,
-} from "../../actions/types/productActions";
+} from "../../redux/actions/types/productActions";
 import { Link } from "react-router-dom";
 import CategoryIcon from '@material-ui/icons/Category';
 import './dashboard.css';

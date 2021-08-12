@@ -2,12 +2,12 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
 import { Link } from "react-router-dom";
-import { getProductDetail } from "../../actions/types/productActions";
+import { getProductDetail } from "../../redux/actions/types/productActions";
 import Loading from "../Loading/Loading.js";
 import "./ProductDetail.css";
 import Footer from "../Footer/Footer";
 
-import { addCartProduct } from '../../actions/types/productActions';
+import { addCartProduct } from '../../redux/actions/types/productActions';
 
 //Slider
 import styles from "react-responsive-carousel/lib/styles/carousel.min.css";

@@ -3,7 +3,7 @@ import { useDispatch, useSelector} from 'react-redux';
 import{ NavLink } from 'react-router-dom';
 
 import './SearchBar.css';
-import { searchProductsAction } from '../../actions/types/productActions.js';
+import { searchProductsAction } from '../../redux/actions/types/productActions.js';
 import SearchIcon from '@material-ui/icons/Search';
 import SvgIcon from '@material-ui/core/SvgIcon';
 import ClearIcon from '@material-ui/icons/Clear';

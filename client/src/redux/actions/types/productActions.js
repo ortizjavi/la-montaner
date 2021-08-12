@@ -1,6 +1,6 @@
 import axios from "axios";
 import * as actionTypes from "../names";
-import * as endpoints from "../../utils/endpoints";
+import * as endpoints from "../../../utils/endpoints";
 
 export function getProductDetail(id) {
   return async function (dispatch) {
