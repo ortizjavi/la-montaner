@@ -12,10 +12,29 @@ const userSchema = new Schema({
     type: String,
     required: true,
   },
+  name: {
+    type: String,
+    required: true,
+  },
+  family_name: {
+    type: String,
+    required: true,
+  },
+  given_name: {
+    type: String,
+    required: true,
+  },
+  picture: {
+    type: String
+  },
   role: {
   	type: String,
   	required: true,
   	default: ROLE.USER
+  },
+  verified: {
+    type: Boolean,
+    required: true
   }
 });
 
