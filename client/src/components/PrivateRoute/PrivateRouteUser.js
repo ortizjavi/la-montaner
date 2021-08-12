@@ -3,7 +3,7 @@ import {useSelector} from 'react-redux'
 
 const PrivateRouteUser = ({component : Component, ...rest}) => {
     
-    const user = useSelector(state => state.root.user)
+    const user = useSelector(state => state.session.user)
     
     return (
         <Route {...rest}>{user.role ? <Component/> : <Redirect to='/admin/categoryCreation'/>}</Route>
