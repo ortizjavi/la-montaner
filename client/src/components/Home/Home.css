@@ -9,7 +9,10 @@
             display: flex;
             justify-content: flex-end;
             padding-right: 5rem;
-            font-size: 1.2rem;
+            font-size: 1rem;
+            color: grey;
+            height: 2rem;
+            margin-bottom: 1rem;
       }
       .home-main{
             display: flex;
@@ -24,21 +27,58 @@
             min-height: 50rem;
       }
       .home-button{
-            font-size: 1.2rem;
+            margin-left: 1rem;
             background: none;
             color: grey;
+            font-weight: 400;
             border: none;
             outline: none;
-            margin-left: 1rem;
-            margin-bottom: 3rem;
+            font-size: 1rem;
+            cursor: pointer;
 
       }
       .home-button:hover {
             background: rgba(119, 103, 80, 0.1);
-            border-radius: 80px;
-           
-            font-size: 1.4rem;
-            margin-left: 0.68rem;
-            margin-bottom: 2.8rem;
-
+            border-radius: 50px;
+            border-bottom: 2px solid #C88E34;
+            box-sizing: border-box;
       }
+      .select-sidebar, option {
+      margin-right: -3rem;
+      color:white;
+      width: 11rem;
+      height: 2rem;
+      border: none;
+      border-radius: 5px;
+       font-size: 1rem;
+      background: #CB9D57;
+      margin-bottom: 3rem;
+      cursor: pointer;
+}
+.select-home{
+      color: grey;
+      font-size: 1rem;
+      border: none;
+      background-color: white;
+      cursor: pointer;
+}
+.select-sidebar option:hover{
+    color: white;
+    background: black;
+}
+.home-range{
+      background: #CB9D57;
+      color:white;
+      padding: 3px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      margin-left: 2rem;
+      font-size: 1rem;
+      align-items: flex-end;
+      box-shadow: 0 0 1px 0 gray;
+
+}
+.home-range h5{
+font-size: 1rem;
+}

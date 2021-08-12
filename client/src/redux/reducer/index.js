@@ -9,14 +9,13 @@ const initialState = {
   currentPage: 1,
   searchProdustsState: "",
   activeProduct: null,
-  user: {},
   maxPrice: "",
   currentCategoryState :'vertodos',
 };
 
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
-    case actionTypes.GET_PRODUCT_DETAIL: return { ...state, productDetail: action.payload };
+   case actionTypes.GET_PRODUCT_DETAIL: return { ...state, productDetail: action.payload };
     case actionTypes.ALL_PRODUCTS: return { ...state, allProducts: action.payload };
     case actionTypes.CREATE_CATEGORY: return { ...state, allCategories: state.allCategories.concat(action.payload) };
     case actionTypes.DELETE_CATEGORY: return { ...state, allCategories: state.allCategories.filter(cat => cat._id !== action.payload) };
@@ -30,7 +29,6 @@ const rootReducer = (state = initialState, action) => {
     case actionTypes.FILTER_PRODUCTS_CATEGORY: return { ...state, allProducts: action.payload };
     case actionTypes.CURENT_CATEGORY: return { ...state, currentCategoryState: action.payload };
     //case actionTypes.GET_MAX_PRICE: return { ...state, maxPrice: action.payload };
-    case actionTypes.LOGIN_USER: return { ...state, user: action.payload };
     default: return state;
   }
 };

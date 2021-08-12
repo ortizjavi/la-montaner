@@ -12,7 +12,7 @@ import { searchProducts,filterProductsCategory, searchProductsAction, selectCate
 function NavBar() {
     let initialCategories = {vertodos:false,cervezas:false,conservas:false,merchandising:false,otros:false}
     const [category, setCategory] = useState(initialCategories)
-    const currentCategoryState = useSelector( state => state.currentCategoryState)
+    const currentCategoryState = useSelector( state => state.root.currentCategoryState)
 
     const dispatch = useDispatch();
     const currentPage = useSelector(state => state.root.currentPage)
@@ -28,7 +28,6 @@ function NavBar() {
 //toca preguntar si ek search tiene estado
     },[state])
   
-    console.log('Se renderizo el navbar/ allproducts',allProducts)
     function HomeIcon(props) {
         return (
           <SvgIcon {...props}>
