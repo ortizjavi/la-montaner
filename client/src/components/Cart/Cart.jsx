@@ -10,7 +10,7 @@ import CartItem from "./CartItem.jsx";
 import './Cart.css';
 
 // Actions
-import { addCartProduct, deleteCartProduct } from "../../actions/types/productActions";
+import { addCartProduct, deleteCartProduct } from "../../redux/actions/types/productActions";
 
 const Cart = () => {
   const dispatch = useDispatch();
