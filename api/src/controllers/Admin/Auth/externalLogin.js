@@ -55,7 +55,7 @@ module.exports = (req, res, next) => {
 	})
 	.then((user) => {
 		const { password, _id, ...userProps } = user._doc;
-		signJWT(_id).then(() => {
+		signJWT(_id).then((token) => {
 			res.status(200).json({ ...userProps, _id, token });
 		}).catch((err) => {
 			console.error(err);

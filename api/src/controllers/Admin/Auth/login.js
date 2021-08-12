@@ -17,7 +17,7 @@ module.exports = (req, res, next) => {
 			if (!isEqual) //pass invalid
 				return res.status(400).send('Invalid user or password');
 			// create JWT
-			signJWT(_id).then(() => {
+			signJWT(_id).then((token) => {
 				res.status(200).json({ ...userProps, _id, token });
 			}).catch((err) => {
 				console.error(err);
