@@ -60,7 +60,6 @@ export function deleteProducts(id) {
 export async function updateProducts(id, producto) {
     try {
       const resp = await axios.put( `${endpoints.ADMIN_GET_PRODUCTS}/${id}`, producto);
-      console.log(resp.data)
       return resp.data;
     } catch (error) {
       console.log(error);
@@ -69,9 +68,7 @@ export async function updateProducts(id, producto) {
 
 
 export function searchProducts({sort, pageNumber, name,category}) {
-  console.log('Al actionsearch llega',sort, pageNumber, name,category)
   if (name) {
-    console.log('deltro del if name',name,'category',category, 'pageNumber',pageNumber)
     return async function (dispatch) {
       try {
         const response = await axios.get( `${endpoints.GET_PRODUCTS}?pageNumber=${pageNumber}&sort=${sort}&name=${name}`);
@@ -82,7 +79,6 @@ export function searchProducts({sort, pageNumber, name,category}) {
     };
   } else {
     if(category ==='vertodos' || !category){
-      console.log('deltro del else name',name,'category',category,'pageNumber',pageNumber,'sort',sort)
         return async function (dispatch) {
           try {
             const response = await axios.get(
@@ -119,8 +115,6 @@ export function filterProductsCategory(sort, pageNumber, category) {
 }
 
 export function filterProducts (data, sort, pageNumber) {
-  console.log('Action/data: ',data)
-
   if (data) {
     return async function (dispatch) {
       try {
@@ -179,6 +173,7 @@ export function deleteCartAll() {
 }
 
 export function getMaximumPrice (price) {
+  console.log('action/getmaxprice: ', price)
   if (price) {
     return async function (dispatch) {
       try {

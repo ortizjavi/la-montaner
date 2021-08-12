@@ -7,8 +7,8 @@ import "./Pagination.css";
 
 export default function Pagination({response}) {
   const dispatch = useDispatch()
-  const currentInit = useSelector(state => state.currentPage)
-  const currentCategoryState = useSelector( state => state.currentCategoryState)
+  const currentInit = useSelector(state => state.root.currentPage)
+  const currentCategoryState = useSelector( state => state.root.currentCategoryState)
 
 
   const [currentPage, setCurrentPage] = React.useState(currentInit);
@@ -19,7 +19,6 @@ export default function Pagination({response}) {
   
   
   useEffect(() => {
-    console.log('Pagination/paginaactual:',currentPage,'categoria', currentCategoryState)
     setCurrentPage(1)  
   },[currentCategoryState])
 
