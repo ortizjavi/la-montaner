@@ -27,6 +27,15 @@ function setUserSession(data){
   return userProps;
 }
 
+export function logout(){
+  localStorage.removeItem('userSession');
+  return { 
+    type: actionTypes.LOGIN_USER, 
+    payload: {}
+  }
+}
+
+
 export function loadUserSession() {
   return async function(dispatch){  
     let session = JSON.parse(localStorage.getItem('userSession'));
