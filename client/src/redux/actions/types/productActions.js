@@ -13,17 +13,27 @@ export function getProductDetail(id) {
   };
 }
 
-export function getAllProducts(query) {
+// export function getAllProducts(query) {
+//   return async function (dispatch) {
+//     try {
+//       const response = await axios.get( `${endpoints.GET_PRODUCTS}?name=${query}`);
+//       return dispatch({ type: actionTypes.ALL_PRODUCTS, payload: response.data });
+//     } catch (e) {
+//       console.log("actions/types/getAllProducts-Error:", e);
+//     }
+//   };
+// }
+
+export function getAllProductsAutocomplete(query) {
   return async function (dispatch) {
     try {
       const response = await axios.get( `${endpoints.GET_PRODUCTS}?name=${query}`);
-      return dispatch({ type: actionTypes.ALL_PRODUCTS, payload: response.data });
+      return dispatch({ type: actionTypes.ALL_PRODUCTS_AUTOCOMPLETE, payload: response.data });
     } catch (e) {
       console.log("actions/types/getAllProducts-Error:", e);
     }
   };
 }
-
 export function getAdminProducts() {
   return async function (dispatch) {
     try {
