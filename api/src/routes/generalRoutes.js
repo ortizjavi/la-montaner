@@ -10,9 +10,9 @@ const { payProducts, getPayProducts } = require("../controllers/General/payProdu
 
 router.get("/", searchProducts);
 router.get("/:id", getProductDetail);
-router.post("/products/pay/", payProducts);
-router.get("/products/pay/:id", getPayProducts);
-router.post("/products/order", createOrder);
+router.post("/product/pay", payProducts);
+//router.get("/products/pay/:id", getPayProducts);
+router.post("/product/order", createOrder);
 router.post("/products/cart", createCart);
 
 module.exports = router;

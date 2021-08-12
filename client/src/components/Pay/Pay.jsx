@@ -1,16 +1,17 @@
-import axios from "axios";
+import {orderPay, orderStatus} from '../../redux/actions/types/productActions';
+import {useDispatch} from 'react-redux';
 import React from "react";
 import Button from "@material-ui/core/Button";
 
-export default function Product() {
-  const paga = async (e) => {
+export default function Pay({cart}) {
+
+  const dispatch = useDispatch()
+  const handlePay = (e) => {
     e.preventDefault();
-    const response = await axios.post("http://localhost:3001/products/pay", {
-      locale: "es-AR",
-    });
-    console.log(response);
-    window.location.href = response.data.response.init_point;
-  };
+    console.log(cart);
+    dispatch(orderStatus(cart));
+    orderPay(cart);
+  }
   return (
     <div>
       <form>
@@ -18,9 +19,9 @@ export default function Product() {
           variant="contained"
           color="primary"
           disableElevation
-          onClick={paga}
+          onClick={handlePay}
         >
-          Paga Boludo
+          Paga!
         </Button>
       </form>
     </div>

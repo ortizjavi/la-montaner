@@ -5,8 +5,7 @@ const {CartSchema} = require("./Cart")
 const OrderSchema = Schema({
     
     cart: {
-        type: Schema.Types.ObjectId,
-        ref: 'Cart',
+        type: Schema.Types.Array,
         required: true
     },
 
