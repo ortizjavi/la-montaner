@@ -45,8 +45,8 @@ export default function App() {
         <Route exact path="/home" component={Home} />
         <Route exact path="/home/:id" component={NavBar} />
         <Switch>
-          <PrivateRouteUser exact path='/dashboard' component={EditProduct}/>
-          <Route exact path="/admin" component={Dashboard}></Route>
+          <PrivateRouteUser exact path='/dashboard' component={Dashboard}/>
+          <Route exact path="/dashboard" component={Dashboard}></Route>
           <Route
             exact
             path="/admin/productCreation"
