@@ -1,4 +1,4 @@
-import { DashboardAdmin } from "./DashboardAdmin";
+import DashboardAdmin from "./DashboardAdmin";
 
 
 const Dashboard = () => {
