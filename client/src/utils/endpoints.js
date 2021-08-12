@@ -2,6 +2,10 @@
 export const SERVER = 'http://localhost:3001';
 export const ADMIN_SERVER = `${SERVER}/admin`;
 
+// endpoints de la auth
+export const AUTH_LOGIN = `${SERVER}/login`;
+export const AUTH_REGiSTER = `${SERVER}/register`;
+
 // endpoints de las categorias
 export const ADMIN_CATEGORY = `${ADMIN_SERVER}/category`;
 
