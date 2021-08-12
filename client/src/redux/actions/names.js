@@ -12,6 +12,7 @@ export const CREATE_PRODUCT = "CREATE_PRODUCT";
 export const UPDATE_PRODUCT = "UPDATE_PRODUCT";
 export const DELETE_PRODUCT = "DELETE_PRODUCT";
 export const ALL_PRODUCTS = "ALL_PRODUCTS";
+export const ALL_PRODUCTS_AUTOCOMPLETE = "ALL_PRODUCTS_AUTOCOMPLETE";
 export const FILTER_PRODUCTS_CATEGORY = "FILTER_PRODUCTS_CATEGORY";
 
 // category action names
@@ -39,4 +40,7 @@ export const ADD_CART_INPROGRESS = 'ADD_CART_INPROGRESS';
 export const ADD_CART_COMPLETED = 'ADD_CART_COMPLETED';
 export const ORDER_PAY = 'ORDER_PAY';
 export const ORDER_STATUS = 'ORDER_STATUS';
+
+//login action names
+export const LOGIN_USER = 'LOGIN_USER';
 

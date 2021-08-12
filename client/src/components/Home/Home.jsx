@@ -14,24 +14,25 @@ export default function Home() {
   const searchState = useSelector(state => state.root.searchProdustsState)
   const allProducts = useSelector( state => state.root.allProducts)
   const currentCategoryState = useSelector( state => state.root.currentCategoryState)
-  const maxPrice3 = useSelector(state => state.maxPrice)
+  const maxPrice3 = useSelector(state => state.root.maxPrice)
   const [rangePrice, setRangePrice] = useState('')
   const [leftFilter, setLeftFilter] = useState('')
 
-  const [sort, setSort] = useState('asc')
+  const [sort, setSort] = useState('')
   const maxPrice1 = Math.ceil(maxPrice3 * (1/3))
   const maxPrice2 = Math.ceil(maxPrice3 * (2/3))
-  // var sort = 'asc'
   
   useEffect(()=>{
     let param = {sort, pageNumber: 0, name: searchState, category:currentCategoryState }
+    console.log('Home/useEfect:', param)
     dispatch(searchProducts(param))
     dispatch(getMaximumPrice('price'))
-  },[])
+  },[dispatch])
 
   useEffect(()=>{
     setRangePrice('')
     setLeftFilter('') 
+    setSort('')
     if(currentCategoryState !== 'vertodos') dispatch(searchProductsAction(''))
     let param = {sort, pageNumber: 0, name: searchState, category:currentCategoryState }
     dispatch(currentPageAction(1))    
@@ -40,15 +41,12 @@ export default function Home() {
   },[currentCategoryState])
 
   useEffect(() => {
-      
       if(leftFilter) return dispatch(filterProducts(leftFilter, sort, currentPage-1))
       if(rangePrice){
-      console.log('Home/range',rangePrice)
       return dispatch(filterByPrice(rangePrice, currentPage-1))
-      
     }
     if(allProducts[0]>8){ 
-    let param = {sort, pageNumber: currentPage-1, name: searchState, category:currentCategoryState }
+      let param = {sort, pageNumber: currentPage-1, name: searchState, category:currentCategoryState }
       dispatch(searchProducts(param));
     }
   }, [currentPage])
@@ -57,25 +55,30 @@ export default function Home() {
     dispatch(currentPageAction(1))   
     setRangePrice('')
     setLeftFilter('') 
+    setSort('')
     if(searchState.length>=2){
-      //current page arcodeado si la respuesta es mas de paginado no busca
       dispatch(selectCategoryAction('vertodos'))
       let param = {sort, pageNumber: currentPage-1, name: searchState, category:'vertodos' }
       dispatch(searchProducts(param))
-     } else{
+      } else{
       let param = {sort, pageNumber: currentPage-1, name:'', category:currentCategoryState }
     dispatch(searchProducts(param))
     }
   },[searchState])
 
   const handleSort = (paramsort) => {
+    setLeftFilter('')
+    setRangePrice('')
     setSort(paramsort)
+    // dispatch(selectCategoryAction(''))
     let param = {sort:paramsort, pageNumber: currentPage-1, name:'', category:currentCategoryState }
     dispatch(searchProducts(param))
   }
   
   const onChangeFilter = (data) => {
     setRangePrice('')
+    setSort('')
+    // dispatch(selectCategoryAction(''))
     setLeftFilter(data)
     if(Object.values(data)[0] === 'none'){
       let param = {sort, pageNumber: currentPage-1, name:'', category:currentCategoryState }
@@ -85,47 +88,39 @@ export default function Home() {
     }
   }
   
-  var range = []
-  
   const handlePriceSort = (e) => {
+    e.preventDefault()
     setLeftFilter('')
+    setSort('')
     dispatch(currentPageAction(1))
-
-
-    if(e.target.value === '') {
-      let param = {sort, pageNumber: currentPage-1, name:'', category:currentCategoryState }
-      dispatch(searchProducts(param))
-    } else {
-      // var range = []
-      dispatch(selectCategoryAction(''))
-      dispatch(currentPageAction(1))
-      if(e.target.value === 'range1') range = [0, maxPrice1]
-      if(e.target.value === 'range2') range = [maxPrice1+1, maxPrice2] 
-      if(e.target.value === 'range3') range = [maxPrice2+1, maxPrice3]
-      dispatch(filterByPrice(range, 0))
-      setRangePrice(range)
-    }
+    // dispatch(selectCategoryAction(''))
+    let range = []
+    if(e.target.value === 'range1') range = [0, maxPrice1]
+    if(e.target.value === 'range2') range = [maxPrice1+1, maxPrice2] 
+    if(e.target.value === 'range3') range = [maxPrice2+1, maxPrice3]
+    setRangePrice(range)
+    dispatch(filterByPrice(range, 0))
   }
-  console.log('Home/rangeprice: ',rangePrice[0])
+  console.log('Home/allProduc',allProducts)
+  
   return (
     <div>
       <NavBar/>
       <div className='Home-filter'>
         Ordenar: 
-        <button className={`${sort ==='asc' ? "actived" : 'Nav-button'}`} onClick={() => handleSort('asc')}> A-Z </button>
-        <button className={`${sort ==='desc' ? "actived" : 'Nav-button'}`} onClick={() => handleSort('desc')}> Z-A </button>
+        <button className={`${sort ==='asc' ? "actived" : 'home-button'}`} onClick={() => handleSort('asc')}> A-Z </button>
+        <button className={`${sort ==='desc' ? "actived" : 'home-button'}`} onClick={() => handleSort('desc')}> Z-A </button>
         <li className='list_sidebar-li'>
-          
-          <select className='select-sidebar' name="price" value='Precio' onChange={handlePriceSort}>
-            <option id='none' value=''>Filtar por Precio</option>
-            <option value="" disabled selected hidden>Precio</option>
-            <option id='range1' value='range1'>0 - {maxPrice1}</option>
-            <option id='range2' value='range2'>{maxPrice1+1} - {maxPrice2}</option>
-            <option id='range3' value='range3'>{maxPrice2+1} - {maxPrice3}</option>
+          <select className='select-home' name="price" value='Precio' onChange={(e) =>handlePriceSort(e)}>
+            <option id='none' value='Precio'>Filtar por Precio</option>
+            <option id='range1' onFocus={handleSort} value='range1'>$0 - ${maxPrice1}</option>
+            <option id='range2' value='range2'>${maxPrice1+1} - ${maxPrice2}</option>
+            <option id='range3' value='range3'>${maxPrice2+1} - ${maxPrice3}</option>
           </select>
         </li>
-    
-      { rangePrice[1] && <h5>{`${rangePrice[0]} - ${rangePrice[1]}`}</h5> }
+        <div className='home-range'>
+          { rangePrice[1] && <h5 >{`$${rangePrice[0]} - $${rangePrice[1]}`}</h5> }
+        </div>
       </div>
       <main className='home-main'>
           <section>

@@ -7,7 +7,6 @@ mercadopago.configure({
 });
 //Tabla de ordenes de compra
 const Order = require('../../models/Orders');
-const Cart = require('../../models/Cart');
 
 module.exports = {
   payProducts: async (req, res) => {

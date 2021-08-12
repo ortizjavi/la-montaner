@@ -1,5 +1,4 @@
 const { Schema, model } = require("mongoose");
-const {CartSchema} = require("./Cart")
 
 
 const OrderSchema = Schema({

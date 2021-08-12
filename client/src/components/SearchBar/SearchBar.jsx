@@ -3,7 +3,7 @@ import { useDispatch, useSelector} from 'react-redux';
 import{ NavLink } from 'react-router-dom';
 
 import './SearchBar.css';
-import { searchProductsAction } from '../../redux/actions/types/productActions.js';
+import { searchProductsAction, getAllProductsAutocomplete } from '../../redux/actions/types/productActions.js';
 import SearchIcon from '@material-ui/icons/Search';
 import SvgIcon from '@material-ui/core/SvgIcon';
 import ClearIcon from '@material-ui/icons/Clear';
@@ -12,13 +12,15 @@ import ClearIcon from '@material-ui/icons/Clear';
 export default function SearchBar() {
     const dispatch = useDispatch();
     const allProducts = useSelector( state => state.root.allProducts)
+    const allProductsAutocomplete = useSelector( state => state.root.allProductsAutocomplete)
     const currentCategoryState = useSelector( state => state.root.currentCategoryState)
 
     const [state, setState] = useState({product: "", icono:true,})
+    const [searched, setSearched] = useState('')
 
 
     useEffect(() => {
-            dispatch(searchProductsAction(state.product))
+            dispatch(getAllProductsAutocomplete(state.product))
     }, [state.product])
    
     useEffect(() => {
@@ -34,14 +36,16 @@ export default function SearchBar() {
             setState({ ...state, [event.target.name]: event.target.value,  icono:!bool });
         }else{
             setState({ ...state, [event.target.name]: event.target.value, icono:!bool  });
-            dispatch(searchProductsAction(state.product))
+            // dispatch(searchProductsAction(state.product))
         }
      }
-    const handleSubmit =event => {
+    const handleSubmit = event => {
         event.preventDefault();
         if(state.product.length){
             if(!state.icono){
+                setSearched(state.product)
                 setState({ ...state, product:"", icono:!state.icono });
+                dispatch(searchProductsAction(state.product))
             }  
         }
     } 
@@ -61,13 +65,13 @@ export default function SearchBar() {
                     autoComplete='off' placeholder='Buscar Productos' name="product" 
                     onChange={(e)=>handleChange(e)} />
                 </label>   
-                <datalist  id="product" multiple >
+                <datalist className='sb-option'  id="product" multiple >
                     {   
                         state.product.length >=2 ?
-                        allProducts[1].map( (t, key) => (
-                            <NavLink  to={`/home/${t._id}`}>
-                                <option key={key} value={t.name} />  
-                            </NavLink>
+                        allProductsAutocomplete[1]?.map( (t, key) => (
+                            // <NavLink className='sb-option' to={`/home/${t._id}`}>
+                                <option className='sb-option'  key={key} value={t.name} />  
+                            //</NavLink> 
                         ))
                         :
                             <option/>
@@ -84,6 +88,15 @@ export default function SearchBar() {
                         <ClearIcon style={{ fontSize: 40,color:'#66D040' }} />
                     </button>
                 }
+                {
+                    searched.length > 0 ?
+                    <div>
+                        <p>{searched}</p>
+                        <button onClick={(e) => handleSubmit('')}>x</button>
+                    </div>:
+                    <p>{searched}</p>
+                }
+                
             </form>
         </div>
     );
