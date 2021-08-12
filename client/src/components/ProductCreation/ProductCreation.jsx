@@ -5,7 +5,6 @@ import { useSelector } from "react-redux";
 import Input from "@material-ui/core/Input";
 import TextField from "@material-ui/core/TextField";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
-import AddIcon from "@material-ui/icons/Add";
 import Button from "@material-ui/core/Button";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
@@ -13,10 +12,10 @@ import Select from "@material-ui/core/Select";
 import InputLabel from "@material-ui/core/InputLabel";
 import Chip from "@material-ui/core/Chip";
 import LinearProgress from "@material-ui/core/LinearProgress";
-import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
-import CardActions from '@material-ui/core/CardActions';
-import CardMedia from '@material-ui/core/CardMedia';
+import Card from "@material-ui/core/Card";
+import CardActionArea from "@material-ui/core/CardActionArea";
+import CardActions from "@material-ui/core/CardActions";
+import CardMedia from "@material-ui/core/CardMedia";
 import swal from "sweetalert";
 import "./ProductCreation.css";
 
@@ -159,9 +158,9 @@ export default function ProductCreation() {
   };
 
   const deleteImage = (e, i) => {
-    e.preventDefault()
-    setImage(image.filter(j => j !== i))
-  }
+    e.preventDefault();
+    setImage(image.filter((j) => j !== i));
+  };
 
   return (
     <div className="contentPC">
@@ -249,24 +248,29 @@ export default function ProductCreation() {
               className="progressBar"
             />
           )}
-          {
-            image && image.map((i) => 
-          <Card className={contentPC.card}>
-            <CardActionArea>
-              <CardMedia
-                component="img"
-                alt="Imagen la Montañes"
-                height="140"
-                src={i}
-                key= {i}
-              />
-            </CardActionArea>
-            <CardActions>
-            <Button size="small" color="primary" onClick={(e)=> deleteImage(e,i)}>
-              Eliminar
-              </Button>
-            </CardActions>
-         </Card>)}
+          {image &&
+            image.map((i) => (
+              <Card className={contentPC.card}>
+                <CardActionArea>
+                  <CardMedia
+                    component="img"
+                    alt="Imagen la Montañes"
+                    height="140"
+                    src={i}
+                    key={i}
+                  />
+                </CardActionArea>
+                <CardActions>
+                  <Button
+                    size="small"
+                    color="primary"
+                    onClick={(e) => deleteImage(e, i)}
+                  >
+                    Eliminar
+                  </Button>
+                </CardActions>
+              </Card>
+            ))}
         </div>
 
         <TextField
