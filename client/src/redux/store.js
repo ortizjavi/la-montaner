@@ -22,7 +22,9 @@ const reducer = combineReducers({
 console.log(session);
 
 const initialState = {
-  session,
+  session: {
+    user : {}
+  },
   cart: {
     cartItems: cartItemsInLocalStorage,
   },
