@@ -15,6 +15,7 @@ import DashboardAdmin from "../components/Dashboard/DashboardAdmin";
 import EditProduct from "../components/EditProduct/EditProduct";
 import NavBar from "../components/Navbar/NavBar";
 import Cart from "../components/Cart/Cart";
+import Wishlist from '../components/Wishlist/Wishlist';
 import Success from "../components/PayState/Success";
 import Pending from "../components/PayState/Pending";
 import Failure from "../components/PayState/Failure";
@@ -74,6 +75,7 @@ export default function App() {
           />
           <Route exact path="/home/:id" component={ProductDetail} />
           <Route exact path="/cart" component={Cart} />
+          <Route exact path="/wishlist" component={Wishlist} />
         </div>
         <Switch>
           
