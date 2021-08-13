@@ -226,7 +226,7 @@ export async function orderPay(cart) {
 }
 
 
-export  function orderStatus(cart) {
+export function orderStatus(cart) {
   return async function(dispatch){
   try {
     const resp = await axios.post(`${endpoints.ORDER_STATUS}`, {cart});
@@ -237,3 +237,22 @@ export  function orderStatus(cart) {
   }
 }
 }
+
+export function addFavProducts(id){
+  return function(dispatch){
+      return dispatch({
+        type: actionTypes.ADD_FAV_PRODUCT,
+        payload: id,
+      })
+    }
+}
+
+export function removeFavProduct(id){
+  return function(dispatch){
+    return dispatch({
+      type: actionTypes.DELETE_FAV_PRODUCT,
+      payload: id,
+    })
+  }
+}
+

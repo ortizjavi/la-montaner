@@ -5,7 +5,8 @@ import { login } from './actions/types/authActions';
 //Root Reducer + Cart Reducer
 import { 
   cartItemsInLocalStorage,
-  session
+  session,
+  wishlistItemsInLocalStorage,
 } from '../utils/localStorage' 
 import cartReducer from "./reducer/cartReducers";
 import rootReducer from './reducer/index';
@@ -26,6 +27,9 @@ const initialState = {
   cart: {
     cartItems: cartItemsInLocalStorage,
   },
+  root: {
+    wishlist: wishlistItemsInLocalStorage
+  }
 };
 
 const store = createStore(
@@ -37,6 +41,5 @@ const store = createStore(
 if (session.token){
   store.dispatch(login({ token : session.token }));
 }
-
 
 export default store;
