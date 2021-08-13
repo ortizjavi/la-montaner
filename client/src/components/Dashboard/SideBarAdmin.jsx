@@ -22,7 +22,7 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import { Link } from "react-router-dom";
 import Dashboard from './DashboardAdmin';
 import CategoryCreator from '../CategoryCreation/CategoryCreation';
-
+import OrdersAdmin from '../AdminOrders/AdminOrders'
 
 const drawerWidth = 240;
 
@@ -176,7 +176,7 @@ export default function SideBarAdmin() {
               <ListItemText primary='Categorias' />
             </ListItem>
             <ListItem>
-              <ListItemIcon><IconButton><StoreIcon onClick={handleButton} value='ordenes'/></IconButton></ListItemIcon>
+              <ListItemIcon><IconButton onClick={(e) => handleButton(e, 'ordenes')} value='ordenes'><StoreIcon/></IconButton></ListItemIcon>
               <ListItemText primary='Ordenes' />
             </ListItem>
             <ListItem>
@@ -192,7 +192,9 @@ export default function SideBarAdmin() {
         ?(<Dashboard/> ) 
         : button === 'categorias'
         ? <CategoryCreator/>
-        : <div>Tarjetas</div>
+        : button === 'ordenes'
+        ? <OrdersAdmin/>
+        :<div>Tarjetitas</div>
         }
     </main>
     </div>
