@@ -1,6 +1,6 @@
 import * as actionTypes from "../actions/names";
 
-const INDEX_INITIAL_STATE = {
+const initialState = {
   allProducts: [],
   allProductsAutocomplete: [],
   productDetail: {},
@@ -12,10 +12,9 @@ const INDEX_INITIAL_STATE = {
   activeProduct: null,
   maxPrice: "",
   currentCategoryState :'vertodos',
-  wishlist: [],
 };
 
-const rootReducer = (state = INDEX_INITIAL_STATE, action) => {
+const rootReducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.GET_PRODUCT_DETAIL: return { ...state, productDetail: action.payload };
     case actionTypes.ALL_PRODUCTS: return { ...state, allProducts: action.payload};
@@ -32,12 +31,6 @@ const rootReducer = (state = INDEX_INITIAL_STATE, action) => {
     case actionTypes.FILTER_PRODUCTS_CATEGORY: return { ...state, allProducts: action.payload };
     case actionTypes.CURENT_CATEGORY: return { ...state, currentCategoryState: action.payload };
     //case actionTypes.GET_MAX_PRICE: return { ...state, maxPrice: action.payload };
-    case actionTypes.ADD_FAV_PRODUCT:
-      const newFav = state.allProducts.find(product => product.id === action.payload);
-      return { ...state, wishlist: state.wishlist.concat(newFav) };
-    case actionTypes.DELETE_FAV_PRODUCT: 
-    const favDelete = state.allProducts.filter(product => product.id !== action.payload);
-    return {...state, wishlist: favDelete}
     default: return state;
   }
 };
