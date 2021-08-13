@@ -247,7 +247,7 @@ export function addFavProducts(id){
           payload: {
             id: data._id,
             name: data.name,
-            img: data.img[0],
+            image: data.img[0],
             price: data.price,
           }
         })
