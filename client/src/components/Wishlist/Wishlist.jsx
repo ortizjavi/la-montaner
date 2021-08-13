@@ -1,11 +1,22 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from 'react-router-dom';
+import { removeFavProduct } from '../../redux/actions/types/productActions';
 import './Wishlist.css';
 
 export default function Wishlist() {
+  const dispatch = useDispatch();
   const wishlist = useSelector((state) => state.wishlist);
   const { wishlistItems } = wishlist;
+
+  useEffect(() => {
+    window.localStorage.setItem('wishlist', JSON.stringify(wishlistItems));
+  }, [wishlistItems]);
+
+  const handleRemove = (id) => {
+    dispatch(removeFavProduct(id));
+    window.localStorage.setItem('wishlist', JSON.stringify(wishlistItems));
+  }
 
   return (
     <div className='root_container'>
@@ -17,6 +28,9 @@ export default function Wishlist() {
         ) : (
           wishlistItems.map((product) => (
             <div className='product_container'>
+              <div className='delete_btn_container'>
+                <button onClick={() => handleRemove(product.id)}>Delete</button>
+              </div>
               <div className='image_container'>
                 <Link to={`/home/${product.id}`}>
                   <img className='product_image' src={product.img} alt="product"/>
