@@ -21,7 +21,7 @@ export default function Wishlist() {
     <div className='root_container'>
       {
         wishlistItems.length === 0 ? (
-          <div>
+          <div className='no_product_container'>
             <h3>No tienes productos favoritos.</h3>
           </div>
         ) : (
