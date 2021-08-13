@@ -9,10 +9,14 @@ import Landing from "../components/Landing/Landing";
 import ProductDetail from "../components/ProductDetail/ProductDetail";
 import ProductCreation from "../components/ProductCreation/ProductCreation";
 import CategoryCreation from "../components/CategoryCreation/CategoryCreation";
+import Pay from "../components/Pay/Pay";
 import Dashboard from "../components/Dashboard/Dashboard";
 import EditProduct from "../components/EditProduct/EditProduct";
 import NavBar from "../components/Navbar/NavBar";
 import Cart from "../components/Cart/Cart";
+import Success from "../components/PayState/Success";
+import Pending from "../components/PayState/Pending";
+import Failure from "../components/PayState/Failure";
 import PrivateRouteUser from '../components/PrivateRoute/PrivateRouteUser' 
 
 const theme = createTheme({
@@ -53,6 +57,10 @@ export default function App() {
             component={ProductCreation}
           />
           <Route exact path="/admin/editProduct/:id" component={EditProduct} />
+          <Route exact path="/home/products/pay" component={Pay} />
+          <Route exact path="/home/pay/success" component={Success} />
+          <Route exact path="/home/pay/pending" component={Pending} />
+          <Route exact path="/home/pay/failure" component={Failure} />
           <Route
             exact
             path="/admin/categoryCreation"

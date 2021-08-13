@@ -1,0 +1,31 @@
+.psContend {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+
+.psContend img {
+    height: 80%;
+    text-align: center;
+    margin: auto;
+    border-radius: 20px
+}
+
+.psContend h2 {
+    font-size: 40px
+}
+
+.psContend p {
+    font-size: 20px
+}
+
+.success {
+    color: #047e28
+}
+
+.failure {
+    color: rgb(233, 36, 36)
+}

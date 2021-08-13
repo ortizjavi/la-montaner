@@ -16,4 +16,8 @@ export const CREATE_PRODUCT = `${ADMIN_SERVER}/product`;
 export const UPDATE_PRODUCT = `${ADMIN_SERVER}/product`;
 export const DELETE_PRODUCT = `${ADMIN_SERVER}/product`;
 
+//endpoint de compras
+export const ORDER_PAY = `${SERVER}/product/pay`;
+export const ORDER_STATUS = `${SERVER}/product/order`;
+
 export const fixedCategories = ['cervezas', 'conservas', 'merchandising', 'otros']
