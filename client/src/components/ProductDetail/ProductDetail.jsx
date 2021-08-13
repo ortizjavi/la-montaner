@@ -20,8 +20,6 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 
 export default function ProductDetail({ match, history }) {
   const { id } = useParams();
-  const root = useSelector((state) => state.root);
-  const { wishlist } = root;
   
   const detail = useSelector((state) => state.root.productDetail);
   //const fav = wishlist.find(product => product.id === id);
@@ -37,6 +35,10 @@ export default function ProductDetail({ match, history }) {
   const cart = useSelector((state) => state.cart);
   const { cartItems } = cart;
 
+  //wishlist
+  const wishlist = useSelector((state) => state.wishlist);
+  const { wishItems } = wishlist;
+
   //slider states
   const [current, setCurrent] = useState(0);
   const length = detail?.img?.length;
@@ -49,8 +51,8 @@ export default function ProductDetail({ match, history }) {
   }, [id, dispatch, match]);
 
   useEffect(() => {
-    window.localStorage.setItem(`wishlist`, JSON.stringify(wishlist))  
-  }, [wishlist])
+    window.localStorage.setItem('wishlist', JSON.stringify(wishItems));
+  }, [wishItems])
 
   //console.log("components/ProductDetail:", detail);
   const addToCartHandler  = () => {
@@ -72,12 +74,12 @@ export default function ProductDetail({ match, history }) {
 
   const handleRemoveFav = () => {
     console.log('funcion de removeFav')
-    dispatch(removeFavProduct(detail._id));
+    dispatch(removeFavProduct(id));
   }
 
   const handleAddFav = () => {
     console.log("funcion de add fav")
-    dispatch(addFavProducts(detail._id));
+    dispatch(addFavProducts(id));
   }
 
   return (
@@ -125,10 +127,9 @@ export default function ProductDetail({ match, history }) {
             <div className="productscreen__right">
             <div className="detail_info">
               <p className="detail__name">{detail.name}</p>
-              
-                   <button onClick={handleRemoveFav}> <FavoriteIcon /> </button>
+                <button onClick={handleRemoveFav}> <FavoriteIcon /> </button>  
+                <button onClick={handleAddFav}> <FavoriteBorderIcon /> </button>
                   
-                   <button onClick={handleAddFav}> <FavoriteBorderIcon /> </button>
 
                   
               
