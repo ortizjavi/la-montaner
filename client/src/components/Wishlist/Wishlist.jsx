@@ -21,8 +21,8 @@ export default function Wishlist() {
     <div className='root_container'>
       {
         wishlistItems.length === 0 ? (
-          <div className='no_product_container'>
-            <h3 className='no_product_msg'>No tienes productos favoritos</h3>
+          <div>
+            <h3>No tienes productos favoritos</h3>
           </div>
         ) : (
           wishlistItems.map((product) => (
@@ -32,7 +32,7 @@ export default function Wishlist() {
               </div>
               <div className='image_container'>
                 <Link to={`/home/${product.id}`}>
-                  <img className='product_image' src={product.img} alt="product"/>
+                  <img className='product_image' src={product.image} alt="product"/>
                 </Link>
               </div>
               <h5 className='product_name'>{product.name}</h5>
