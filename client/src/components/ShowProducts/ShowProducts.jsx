@@ -55,7 +55,7 @@ const ShowProducts = ({allProducts}) => {
                 ) : (
                   <div className="sp-product_container" key={item._id}>
                     
-                    <NavLink className="" to={`/home/${item?._id}`}>
+                    <NavLink className="sp-link" to={`/home/${item?._id}`}>
                       <div className="image_contain">
                         {validaURLs(item.img[0]) ? (
                           <img
@@ -87,7 +87,7 @@ const ShowProducts = ({allProducts}) => {
                       className="sp-button"
                       onClick={() => alert("Buena desición")}
                     >
-                      Comprar
+                      Agregar al Carrito
                     </button>
                   </div>
                 )}

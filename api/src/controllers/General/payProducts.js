@@ -7,12 +7,13 @@ mercadopago.configure({
 });
 //Tabla de ordenes de compra
 const Order = require('../../models/Orders');
-const Cart = require('../../models/Cart');
 
 module.exports = {
   payProducts: async (req, res) => {
-    const compra = req.body.compra
+
+    const cartItems = req.body.compra
     try {
+
 
       let preference = {
         back_urls: {
@@ -21,9 +22,18 @@ module.exports = {
           pending: "http://localhost:3000/home/pay/pending",
         },
         auto_return: "approved",
-        items: compra,
+        items: []
 
+        
       };
+
+      for(let i=0; i<cartItems.length; i++){
+        let title = cartItems[i].name;
+        let unit_price = cartItems[i].price;
+        let cantidad = parseInt(cartItems[i].stockSelected);
+        let quantity = cantidad;
+        preference.items.push({title, unit_price,quantity})
+      }
       const wii = await mercadopago.preferences.create(preference);
       res.json(wii);
     } catch (err) {
@@ -31,8 +41,8 @@ module.exports = {
     }
   },
 
-  getPayProducts: async(req,res) => {
-    const {id} =req.params;
+  /* getPayProducts: async(req,res) => {
+    const product =req.params;
     try {
       const compra = await Order.findById(id);
 
@@ -54,5 +64,5 @@ module.exports = {
         ok: false
       })
     }
-  }
+  } */
 };

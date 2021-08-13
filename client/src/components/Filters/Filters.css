@@ -30,6 +30,25 @@
     border: none;
     background: #CB9D57;
 }
+
+.filter-result{
+    background: white;
+    color: #CB9D57 ;
+    height: 1.5rem;
+    width: 6rem;
+    margin-bottom: 2rem;
+    border-radius: 10px;
+    padding: 3px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 2rem;
+    font-size: 1rem;
+    align-items: center;
+    box-shadow: 0 0 1px 0 gray;
+
+}
+
 .sb-h4{
     color: white;
     margin-top: 18%;

@@ -264,7 +264,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export const Dashboard = () => {
+const Dashboard = () => {
   const dispatch = useDispatch();
   function createData(_id, name, price, stock) {
     return { _id, name, price, stock };
@@ -419,3 +419,5 @@ export const Dashboard = () => {
     </div>
   );
 };
+
+export default Dashboard;

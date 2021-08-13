@@ -48,6 +48,7 @@
     background: rgba(119, 103, 80, 0.1);
     border-radius: 50px;
     border-bottom: 2px solid #C88E34;
+    box-sizing: border-box;
 }
 .Nav-button:active{
 background: #C88E34; 

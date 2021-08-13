@@ -7,104 +7,136 @@ import Loading from "../Loading/Loading.js";
 import "./ProductDetail.css";
 import Footer from "../Footer/Footer";
 
-import { addCartProduct } from '../../redux/actions/types/productActions';
+import { addCartProduct } from "../../redux/actions/types/productActions";
 
-//Slider
-import styles from "react-responsive-carousel/lib/styles/carousel.min.css";
-import { Carousel } from "react-responsive-carousel";
+//Slider2
+//import { BsChevronLeft, BsChevronCompactRight } from "react-icons/fa";
+import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
+import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 
-export default function ProductDetail({match, history}) {
+export default function ProductDetail({ match, history }) {
   const { id } = useParams();
   const detail = useSelector((state) => state.root.productDetail);
   const dispatch = useDispatch();
+  const [qty, setQty] = useState(1);
   const [loading, setLoading] = useState(true);
   const [count, setCount] = useState(1);
+
+  //cart
+  const cart = useSelector((state) => state.cart);
+  const { cartItems } = cart;
+
+  //slider states
+  const [current, setCurrent] = useState(0);
+  const length = detail?.img?.length;
 
   useEffect(() => {
     dispatch(getProductDetail(id));
     setTimeout(() => {
       setLoading(false);
     }, 1000);
-  }, [id, dispatch]);
+  }, [id, dispatch, match]);
 
   //console.log("components/ProductDetail:", detail);
-  const handleClick = () => {
-    alert("producto agregado correctamente");
-  };
-
-  const handleBuyProduct = () => {
-    dispatch(addCartProduct(detail._id));
+  const addToCartHandler  = () => {
+    dispatch(addCartProduct(detail._id, qty));
     history.push(`/cart`);
   };
 
+  const nextSlide = () => {
+    setCurrent(current === length - 1 ? 0 : current + 1);
+  };
+
+  const prevSlide = () => {
+    setCurrent(current === 0 ? length - 1 : current - 1);
+  };
+
+  if (!Array.isArray(detail.img) || detail.img.length <= 0) {
+    return null;
+  }
 
   return (
-    <>
-      <Link to="/home"> </Link>
+    <div>
       {loading ? (
         <Loading />
       ) : (
-          <div className="general_container">
-            <div className="detail-img">
-              {detail.img.length > 1 ? (
-                <div className="container_carousel_atr">
-                <Carousel className="carousel_atr">
-                  <div>
-                    <img src={detail.img[0]} alt={detail.name} />
-                  </div>
-                  <div>
-                    <img src={detail.img[1]} alt="product2" />
-                  </div>
-                </Carousel>
-                </div>
-              ) : (
-                <div className="slide-image">
-                  <img src={detail.img[0]} alt={detail.name} />
-                </div>
-              )}
-            </div>
-
-            <div className="detail_description">
-              <div className="detail-render">
-                <h2>{detail.name}</h2>
-                <p className="detail_stars">⭐⭐⭐⭐⭐</p>
-                { detail.categories[0] &&
-                <h3>Categoría: {detail.categories[0].name}</h3>
-                }
-                <div className="detail-price">
-                  <h3 className="detail_price">Precio: ${detail.price} </h3>
-                </div>
-                {detail.stock < 1 ? (
-                  <div className="detail-btn">
-                    <h3>SIN STOCK</h3>
-                  </div>
-                ) : (
-                  <div className="detail_stock">
-                    <input
-                      type="number"
-                      min={1}
-                      max={detail.stock}
-                      value={count}
-                      onChange={(e) => setCount(e.target.value)}
-                    />
-                    <button onClick={() => handleClick()}>AGREGAR</button>
-                  </div>
-                )}
-                <div className="detail_button">
-                  <Link to="/cart"><button type="button" onClick={handleBuyProduct}>COMPRAR</button></Link>
-                </div>
-                <div className="detail_info_description">
-                  <h3>Info del producto:</h3>
-                  <p>{detail.description}</p>
-                </div>
-               
-              </div>
+        <div className="productscreen">
+          <div className="productscreen__left">
+            <div className="left__image">
+            {detail.img.length > 1 ? (
+              <section className="slider">
+                <ArrowBackIosIcon
+                  className="left-arrow"
+                  onClick={prevSlide}
+                />
+                <ArrowForwardIosIcon
+                  className="right-arrow"
+                  onClick={nextSlide}
+                />
+                {detail.img.map((slide, index) => {
+                  return (
+                    <div
+                      className={index === current ? "slide active" : "slide"}
+                      key={index}
+                    >
+                      {index === current && (
+                        <img
+                          src={slide}
+                          alt="beerImage"
+                          className="image"
+                        />
+                      )}
+                    </div>
+                  );
+                })}
+              </section>
+            ) : (
+              <div className="slide.active">
+                  <img src={detail.img} alt="beerImage" className="imageSlide"/>
+                    </div>
+            )}
             </div>
           </div>
+            <div className="productscreen__right">
+            <div className="detail_info">
+              <p className="detail__name">{detail.name}</p>
+              <p className="detail_stars">⭐⭐⭐⭐⭐</p>
+              <p>Descripción: {detail.description}</p>
+            </div>
+            
+          <div>
+            <div className="right__info">
+              <p>
+                Precio:
+                <span>${detail.price}</span>
+              </p>
+              <p>
+                Stock:
+                <span>
+                  {detail.stock > 0 ? "disponible" : "no disponible"}
+                </span>
+              </p>
+              <p>
+                Cantidad
+                <select value={qty} onChange={(e) => setQty(e.target.value)}>
+                {[...Array(detail.stock).keys()].map((x) => (
+          <option key={x + 1} value={x + 1}>
+            {x + 1}
+          </option>
+        ))}
+                </select>
+              </p>
+              <p>
+                <button type="button" onClick={addToCartHandler}>
+                  Agregar al carrito
+                </button>
+              </p>
+            </div>
+          </div>
+          </div>
+        </div>
       )}
-      <div className="details_footer">
-        <Footer />
-      </div>
-    </>
+      <Footer />
+    </div>
   );
-}
+};

@@ -8,9 +8,12 @@ import Footer from '../Footer/Footer.jsx';
 // Components
 import CartItem from "./CartItem.jsx";
 import './Cart.css';
+import Pay from '../Pay/Pay';
 
 // Actions
 import { addCartProduct, deleteCartProduct } from "../../redux/actions/types/productActions";
+
+
 
 const Cart = () => {
   const dispatch = useDispatch();
@@ -63,7 +66,7 @@ const Cart = () => {
 
           {cartItems.length === 0 ? (
             <div>
-              Tu carrito esta vacio <Link to="/home">Volver atras</Link>
+              Tu carrito esta vacio <Link to="/home" className='back-btn'>Volver atras</Link>
             </div>
           ) : (
             cartItems.map((item) => (
@@ -83,7 +86,7 @@ const Cart = () => {
             <p>${getCartSubTotal()}</p>
           </div>
           <div>
-            <button>ir a pagar</button>
+            <Pay cart={cartItems}/>
           </div>
         </div>
       </div>
