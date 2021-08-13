@@ -1,37 +1,41 @@
 .sidebar-container{
     /* margin-top: -4rem; */
-    background: #CB9D57;
+    background: white;
     width: 16rem;
     height: 32rem;
     margin-left: 2rem;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     box-sizing: border-box;
 }
 
 .sidebar-title{
     display: flex;
     font-size: 0.9rem;
-    color: white;
+    color: #CB9D57;
+    padding-bottom: 1rem;
 }
 .sidebar-img{
     width: 40px;
     margin: 2.5em 1rem;
+    
 }
-.list-sidebar{
-}
+/* .list-sidebar{
+    
+} */
 .list_sidebar-li {
     list-style: none;
     color: white;
     font-size: 1.4rem;
     font-weight: 400;
     margin: 0;
-
+    align-items: flex-start;
+    padding-right: 8rem;
 }
 .select-sidebar{
     border: none;
-    background: #CB9D57;
+    background: white;
 }
 
 .filter-result{
