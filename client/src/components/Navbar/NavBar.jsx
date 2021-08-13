@@ -4,9 +4,11 @@ import './NavBar.css';
 import { Link, NavLink } from 'react-router-dom';
 import SearchBar from '../SearchBar/SearchBar';
 import PersonIcon from '@material-ui/icons/Person';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import SvgIcon from '@material-ui/core/SvgIcon';
 import { searchProductsAction, selectCategoryAction } from '../../redux/actions/types/productActions.js';
+import { logout } from '../../redux/actions/types/authActions.js';
 
 
 
@@ -97,6 +99,11 @@ function NavBar(props) {
           <ShoppingCartIcon style={{ fontSize: 40 }} />
         </button>
       </Link>
+      {isUser ? 
+        <button className='nav-personicon' onClick={(e) => dispatch(logout())}>
+          <ExitToAppIcon style={{ fontSize: 40 }} />
+        </button>
+      : null}
     </header>
   );
 };

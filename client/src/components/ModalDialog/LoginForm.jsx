@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useHistory } from "react-router-dom";
+import { useSelector } from 'react-redux';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import ExternAuthentication from '../Authentication/Authentication';
@@ -8,29 +10,28 @@ const LoginForm = ({ handleClose }) => {
     const [lastName, setLastName] = useState('');
     const[email, setEmail] = useState('');
     const[password, setPassword] = useState('');
-    
+    const user = useSelector(state => state.session.user);
+    const history = useHistory();
+
     const handleSubmit = (event) => {
         event.preventDefault();
         console.log(firstName, lastName, email, password);
         handleClose();
     }
 
+    useEffect(() => {
+      if (user){
+        const isUser = user.role;
+        const isAdmin = user.role && user.role === 'ADMIN';
+        isAdmin ? history.push('/admin') : history.push('/dashboard');
+        if (!isUser){
+          history.push('/login');
+        }
+      }
+    }, [user])
+
     return (
         <form  onSubmit={handleSubmit}>
-          <TextField
-            label="First Name"
-            variant="filled"
-            required
-            value={firstName}
-            onChange={e => setFirstName(e.target.value)}
-          />
-          <TextField
-            label="Last Name"
-            variant="filled"
-            required
-            value={lastName}
-            onChange={e => setLastName(e.target.value)}
-          />
           <TextField
             label="Email"
             variant="filled"
