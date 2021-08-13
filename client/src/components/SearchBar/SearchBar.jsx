@@ -20,10 +20,11 @@ export default function SearchBar() {
 
 
     useEffect(() => {
-            dispatch(getAllProductsAutocomplete(state.product))
+        dispatch(getAllProductsAutocomplete(state.product))
     }, [state.product])
    
     useEffect(() => {
+        setSearched('')
         if(currentCategoryState !== 'vertodos'){
             setState({product: "", icono:true,})
         }
@@ -58,7 +59,8 @@ export default function SearchBar() {
     }
 
     return(
-        <div>
+        <div className='sb-container'>
+            <div>
             <form className="form-container" >
                 <label >     
                     <input list="product" multiple value={state.product} className='input_search' 
@@ -77,7 +79,10 @@ export default function SearchBar() {
                             <option/>
                     }  
                 </datalist>
-                {
+                    <button className='nav-personicon' onClick={(e) => handleSubmit(e)}>
+                        <SearchIcon style={{ fontSize: 40,color:'#66D040' }} />
+                    </button>
+                {/* {
                     state.icono ?
                     <button className='nav-personicon'>
                         <SearchIcon style={{ fontSize: 40,color:'#66D040' }} />
@@ -87,17 +92,21 @@ export default function SearchBar() {
                     <button className='nav-personicon'  onClick={(e) => handleSubmit(e)}>
                         <ClearIcon style={{ fontSize: 40,color:'#66D040' }} />
                     </button>
-                }
+                } */}
+                </form>
+                </div>
+                <div>
                 {
                     searched.length > 0 ?
-                    <div>
-                        <p>{searched}</p>
-                        <button onClick={(e) => handleSubmit('')}>x</button>
+                    <div className='sb-result-container'>
+                        <span className='sb-result'>{`Búsquela realizada por:  ${searched}`}</span>
+                        <button className='nav-personicon' onClick={(e) => setSearched('')}>
+                            <ClearIcon style={{ fontSize: 20,color:'#66D040' }} />
+                        </button>
                     </div>:
                     <p>{searched}</p>
                 }
-                
-            </form>
+                </div>
         </div>
     );
 };
