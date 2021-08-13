@@ -22,7 +22,6 @@ export default function ProductDetail({ match, history }) {
   const { id } = useParams();
   
   const detail = useSelector((state) => state.root.productDetail);
-  //const fav = wishlist.find(product => product.id === id);
 
   const dispatch = useDispatch();
 
@@ -38,6 +37,7 @@ export default function ProductDetail({ match, history }) {
   //wishlist
   const wishlist = useSelector((state) => state.wishlist);
   const { wishlistItems } = wishlist;
+  const fav = wishlistItems.find(product => product.id === id);
 
   //slider states
   const [current, setCurrent] = useState(0);
@@ -54,7 +54,6 @@ export default function ProductDetail({ match, history }) {
     window.localStorage.setItem('wishlist', JSON.stringify(wishlistItems));
   }, [wishlistItems])
 
-  //console.log("components/ProductDetail:", detail);
   const addToCartHandler  = () => {
     dispatch(addCartProduct(detail._id, qty));
     history.push(`/cart`);
@@ -126,15 +125,16 @@ export default function ProductDetail({ match, history }) {
           </div>
             <div className="productscreen__right">
             <div className="detail_info">
+              <div className="name_fav_detail">
               <p className="detail__name">{detail.name}</p>
-                <button onClick={handleRemoveFav}> <FavoriteIcon /> </button>  
-                <button onClick={handleAddFav}> <FavoriteBorderIcon /> </button>
-                  
-
-                  
               
-
-
+               {
+                 fav ?
+                <FavoriteIcon onClick={handleRemoveFav} className="detail_fav" />
+                :
+                <FavoriteBorderIcon onClick={handleAddFav} className="detail_fav" />
+               }
+               </div>                               
               <p className="detail_stars">⭐⭐⭐⭐⭐</p>
               <p>Descripción: {detail.description}</p>
             </div>

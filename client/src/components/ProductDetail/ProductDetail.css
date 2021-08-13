@@ -117,7 +117,24 @@
   }
 }
 
+.MuiSvgIcon-root {
+font-size: 2rem!important;
+width: 3em!important;
+}
 
+.detail_fav{
+	color: #ee362e;
+}
+
+.detail_fav :hover {
+  cursor: pointer;
+  transform: scale(1.2);
+  transition: 0.5s;
+}
+
+.detail_fav :active {
+  transform: scale(0.9);
+}
 
 /* Slider */
 .slider {
