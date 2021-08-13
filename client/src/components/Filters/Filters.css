@@ -1,11 +1,13 @@
 .sidebar-container{
-    margin-top: -4rem;
+    /* margin-top: -4rem; */
     background: #CB9D57;
     width: 16rem;
     height: 32rem;
     margin-left: 2rem;
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
+    box-sizing: border-box;
 }
 
 .sidebar-title{
@@ -17,16 +19,17 @@
     width: 40px;
     margin: 2.5em 1rem;
 }
+.list-sidebar{
+}
 .list_sidebar-li {
-    padding-left: 10%;
     list-style: none;
     color: white;
     font-size: 1.4rem;
     font-weight: 400;
+    margin: 0;
 
 }
 .select-sidebar{
-    margin: 10% 0;
     border: none;
     background: #CB9D57;
 }
@@ -34,18 +37,25 @@
 .filter-result{
     background: white;
     color: #CB9D57 ;
-    height: 1.5rem;
-    width: 6rem;
-    margin-bottom: 2rem;
+    height: 1.2rem;
+    width: 7rem;
     border-radius: 10px;
     padding: 3px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    margin-left: 2rem;
+    margin-left: 6rem;
     font-size: 1rem;
-    align-items: center;
-    box-shadow: 0 0 1px 0 gray;
+}
+.sidebar-buton{
+    display: none;
+    background:  #CB9D57;
+    color: white;
+    height: 1.5rem;
+    width: 7rem;
+    border-radius: 10px;
+    padding: 3px;
+    margin-left: 6rem;
+    font-size: 1rem;
+    border: none;
+    cursor: pointer;
 
 }
 

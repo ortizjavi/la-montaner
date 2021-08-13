@@ -1,16 +1,19 @@
 .navbar {
-    height: 4rem;
+    height: 7rem;
     width: 100%;
     top: 0;
     left: 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 20px;
+    padding-top: 1rem;
     box-sizing: border-box;
     margin-top: 15px;
     padding-right: 5rem;
-    margin-bottom: 2rem;
+    /* border-bottom: solid gray 0.5px; */
+    box-shadow: 0 0 3px 0 gray;
+
+
 }
 
 .navbar nav {
@@ -41,27 +44,64 @@
     outline: none;
     font-size: 1.2rem;
     margin-left: 2rem;
+    width: 8rem;
     cursor: pointer;
 }
 
 .Nav-button:hover{
-    background: rgba(119, 103, 80, 0.1);
+    /* background: rgba(119, 103, 80, 0.1);
     border-radius: 50px;
     border-bottom: 2px solid #C88E34;
-    box-sizing: border-box;
+    width: 10rem;
+    box-sizing: border-box; */
+    color: #66D040;
+
 }
-.Nav-button:active{
+
+/* .Nav-button:active{
 background: #C88E34; 
+box-sizing: border-box;
+width: 10rem;
+} */
+
+.Nav-vertodos {
+    opacity: 0;
+    width: 10rem;
+}
+
+.actived-vertodos {
+    background: none;
+    color: grey;
+    font-weight: 400;
+    width: 10rem;
+    border: none;
+    outline: none;
+    font-size: 1.2rem;
+    margin-left: 2rem;
+    cursor: pointer;
+}
+
+.actived-vertodos:hover {
+    /* background: rgba(119, 103, 80, 0.1);
+    border-radius: 50px;
+    border-bottom: 2px solid #C88E34;
+    box-sizing: border-box; */
+    color: #66D040;
+
 }
 .actived{
     background: none;
     color: grey;
-    font-weight: 600;
+    /* font-weight: 600; */
     border: none;
     outline: none;
-    border-bottom: #C88E34 solid 3px ;
+    /* border-bottom: #C88E34 solid 3px ; */
+    border-bottom: #C88E34 solid 1px ;
+    border-top: #C88E34 solid 1px ;
     font-size: 1.2rem;
-    margin-left: 2rem;
+    width: 8rem;
+    /* font-size: 1.2rem; */
+    /* margin-left: 2rem; */
 }
 
 .Nav-button.active {
@@ -80,6 +120,17 @@ background: #C88E34;
     background: rgba(119, 103, 80, 0.1);
     border-radius: 40px;
     
+}
+.nav-selec{
+    background: none;
+    color: grey;
+    font-weight: 400;
+    border: none;
+    outline: none;
+    font-size: 1.2rem;
+    margin-left: 2rem;
+    width: 10rem;
+    cursor: pointer;
 }
 
 

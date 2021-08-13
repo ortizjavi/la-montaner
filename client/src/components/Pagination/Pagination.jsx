@@ -12,6 +12,7 @@ export default function Pagination({response}) {
 
 
   const [currentPage, setCurrentPage] = React.useState(currentInit);
+  // const [currentPage, setCurrentPage] = React.useState(1);
 
   useEffect(()=>{
     dispatch(currentPageAction(currentPage))    
