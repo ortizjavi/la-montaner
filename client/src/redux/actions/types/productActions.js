@@ -226,7 +226,7 @@ export async function orderPay(cart) {
 }
 
 
-export  function orderStatus(cart) {
+export function orderStatus(cart) {
   return async function(dispatch){
   try {
     const resp = await axios.post(`${endpoints.ORDER_STATUS}`, {cart});
@@ -237,3 +237,29 @@ export  function orderStatus(cart) {
   }
 }
 }
+
+export function addFavProducts(id){
+  return async function(dispatch){
+      try {
+        const { data } = await axios.get(`${endpoints.GET_PRODUCTS}/${id}`)
+        dispatch({ 
+          type: actionTypes.ADD_FAV_PRODUCT,
+          payload: {
+            id: data._id,
+            name: data.name,
+            img: data.img[0],
+            price: data.price,
+          }
+        })
+      } catch(e) {
+        console.log(e)
+      }
+    }
+}
+
+export function removeFavProduct(id){
+  return async function(dispatch){
+    return dispatch({ type: actionTypes.DELETE_FAV_PRODUCT, payload: id })
+  }
+}
+
