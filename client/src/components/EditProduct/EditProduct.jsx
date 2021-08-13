@@ -113,18 +113,14 @@ const getProps = (producto) => {
 };
 
 function EditProductChild({ producto, defaultState }) {
-  console.log("producto", producto);
   const [loadingImg, setLoadingImg] = useState(0);
   const [image, setImage] = useState([]);
-  const allCategories = useSelector((state) => state.allCategories);
+  const allCategories = useSelector((state) => state.root.allCategories);
   const dispatch = useDispatch();
 
   const contentPC = useStyles();
 
   const [createProduct, setCreateProduct] = useState(getProps(producto));
-
-  /*  console.log(producto);
-  console.log(producto.categories);*/
 
   useEffect(() => {
     setImage(producto.img);
@@ -136,7 +132,6 @@ function EditProductChild({ producto, defaultState }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("CLICK!!!");
     try {
       swal({
         title: "Estas seguro que quieres editar este producto?",
@@ -190,7 +185,9 @@ function EditProductChild({ producto, defaultState }) {
       images.append("file", files[i]);
       console.log(i.name);
       images.append("upload_preset", "laMontanes");
-      await axios
+      const instance = axios.create();
+      delete instance.defaults.headers.common['authorization'];
+      await instance
         .post(
           "https://api.cloudinary.com/v1_1/la-montanes/image/upload",
           images,
@@ -247,7 +244,7 @@ function EditProductChild({ producto, defaultState }) {
               input={<Input id="select-multiple-chip" />}
               renderValue={(selected) => (
                 <div className={contentPC.chips}>
-                  {selected.map((value) => (
+                  {selected?.map((value) => (
                     <Chip
                       key={value}
                       label={value}
@@ -258,11 +255,10 @@ function EditProductChild({ producto, defaultState }) {
               )}
               MenuProps={MenuProps}
             >
-              {allCategories.map((i) => (
+              {allCategories?.map((i) => (
                 <MenuItem
                   key={i.name}
                   value={i.name}
-                  // tyle={getStyles(i.name, createProduct.categories, theme)}
                 >
                   {i.name}
                 </MenuItem>

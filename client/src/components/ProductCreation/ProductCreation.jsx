@@ -134,7 +134,9 @@ export default function ProductCreation() {
       images.append("file", files[i]);
       console.log(i.name);
       images.append("upload_preset", "laMontanes");
-      await axios
+      const instance = axios.create();
+      delete instance.defaults.headers.common['authorization'];
+      await instance
         .post(
           "https://api.cloudinary.com/v1_1/la-montanes/image/upload",
           images,
