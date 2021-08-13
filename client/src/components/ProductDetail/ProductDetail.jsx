@@ -37,7 +37,7 @@ export default function ProductDetail({ match, history }) {
 
   //wishlist
   const wishlist = useSelector((state) => state.wishlist);
-  const { wishItems } = wishlist;
+  const { wishlistItems } = wishlist;
 
   //slider states
   const [current, setCurrent] = useState(0);
@@ -51,8 +51,8 @@ export default function ProductDetail({ match, history }) {
   }, [id, dispatch, match]);
 
   useEffect(() => {
-    window.localStorage.setItem('wishlist', JSON.stringify(wishItems));
-  }, [wishItems])
+    window.localStorage.setItem('wishlist', JSON.stringify(wishlistItems));
+  }, [wishlistItems])
 
   //console.log("components/ProductDetail:", detail);
   const addToCartHandler  = () => {
