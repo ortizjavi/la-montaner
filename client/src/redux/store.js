@@ -34,7 +34,7 @@ const initialState = {
     cartItems: cartItemsInLocalStorage,
   },
   wishlist: {
-    wishItems: wishlistItemsInLocalStorage,
+    wishlistItems: wishlistItemsInLocalStorage,
   }
 };
 

@@ -36,10 +36,9 @@ export default function ProductDetail({ match, history }) {
 
   //wishlist
   const wishlist = useSelector((state) => state.wishlist);
-  const { wishItems } = wishlist;
-  const fav = wishItems.find(product => product.id === id);
-
-
+  const { wishlistItems } = wishlist;
+  const fav = wishlistItems.find(product => product.id === id);
+  
   //slider states
   const [current, setCurrent] = useState(0);
   const length = detail?.img?.length;
@@ -52,9 +51,8 @@ export default function ProductDetail({ match, history }) {
   }, [id, dispatch, match]);
 
   useEffect(() => {
-    window.localStorage.setItem('wishlist', JSON.stringify(wishItems));
-    console.log(wishItems);
-  }, [wishItems])
+    window.localStorage.setItem('wishlist', JSON.stringify(wishlistItems));
+  }, [wishlistItems])
 
   //console.log("components/ProductDetail:", detail);
   const addToCartHandler  = () => {
