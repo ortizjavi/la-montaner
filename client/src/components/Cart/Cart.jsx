@@ -2,8 +2,6 @@ import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import swal from "sweetalert";
-import NavBar from '../Navbar/NavBar.jsx';
-import Footer from '../Footer/Footer.jsx';
 
 // Components
 import CartItem from "./CartItem.jsx";
@@ -59,7 +57,6 @@ const Cart = () => {
 
   return (
     <>
-    <NavBar />
       <div className="cartscreen">
         <div className="cartscreen__left">
           <h2>Carrito de compras</h2>
@@ -90,7 +87,6 @@ const Cart = () => {
           </div>
         </div>
       </div>
-      <Footer />
     </>
   );
 };
