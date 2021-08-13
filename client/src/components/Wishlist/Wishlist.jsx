@@ -22,7 +22,7 @@ export default function Wishlist() {
       {
         wishlistItems.length === 0 ? (
           <div>
-            <h3>No tienes productos favoritos</h3>
+            <h3>No tienes productos favoritos.</h3>
           </div>
         ) : (
           wishlistItems.map((product) => (
