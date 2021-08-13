@@ -1,12 +1,12 @@
 import React from 'react';
 import Dialog from '@material-ui/core/Dialog';
-import { Form } from './Form'
+import LoginForm from './LoginForm'
 
  export const ModalDialog = ({ open, handleClose }) => {
 
     return (
         <Dialog open={open} handleClose={handleClose}>
-            <Form handleClose={handleClose} />
+            <LoginForm handleClose={handleClose} />
         </Dialog>
     )
 }

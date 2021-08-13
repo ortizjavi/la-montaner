@@ -3,7 +3,7 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import ExternAuthentication from '../Authentication/Authentication';
 
-export const Form = ({ handleClose }) => {
+const LoginForm = ({ handleClose }) => {
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const[email, setEmail] = useState('');
@@ -59,5 +59,7 @@ export const Form = ({ handleClose }) => {
         </form>
       );
     };
+
+ export default LoginForm;
     
 
