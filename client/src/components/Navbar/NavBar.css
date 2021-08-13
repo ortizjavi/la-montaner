@@ -117,10 +117,21 @@ width: 10rem;
     cursor: pointer;
 }
 .nav-personicon:hover{
-    background: rgba(119, 103, 80, 0.1);
-    border-radius: 40px;
-    
+    cursor: pointer;
+    transform: scale(1.2);
+    transition: 0.5s;
 }
+
+.fav-icon-nav{
+    color: #000000;
+}
+
+.fav-icon-nav:hover {
+    cursor: pointer;
+    transform: scale(1.2);
+    transition: 0.5s;
+  }
+
 .nav-selec{
     background: none;
     color: grey;
