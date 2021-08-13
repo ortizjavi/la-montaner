@@ -5,21 +5,26 @@ import { login } from './actions/types/authActions';
 //Root Reducer + Cart Reducer
 import { 
   cartItemsInLocalStorage,
-  session
+  wishlistItemsInLocalStorage,
+  session,
 } from '../utils/localStorage' 
+
 import cartReducer from "./reducer/cartReducers";
 import rootReducer from './reducer/index';
+import wishlistReducer from './reducer/wishlistReducer';
 import sessionReducer from "./reducer/sessionReducer";
 
 const middleware = [thunk];
 
 const reducer = combineReducers({
   cart: cartReducer,
+  wishlist: wishlistReducer,
   root: rootReducer,
   session: sessionReducer
 });
 
 console.log(session);
+
 
 const initialState = {
   session: {
@@ -28,6 +33,9 @@ const initialState = {
   cart: {
     cartItems: cartItemsInLocalStorage,
   },
+  wishlist: {
+    wishItems: wishlistItemsInLocalStorage,
+  }
 };
 
 const store = createStore(
@@ -39,6 +47,5 @@ const store = createStore(
 if (session.token){
   store.dispatch(login({ token : session.token }));
 }
-
 
 export default store;
