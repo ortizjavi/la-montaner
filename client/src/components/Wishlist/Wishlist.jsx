@@ -3,19 +3,19 @@ import { useSelector } from "react-redux";
 
 export default function Wishlist() {
   const wishlist = useSelector((state) => state.wishlist);
-  const { wishItems } = wishlist;
+  const { wishlistItems } = wishlist;
 
   return (
     <div>
       {
-        wishItems.length === 0 ? (
+        wishlistItems.length === 0 ? (
           <div>No tienes productos favoritos</div>
         ) : (
-          wishItems.map((product) => (
+          wishlistItems.map((product) => (
             <div>
               <h3>{product.name}</h3>
               <img src={product.img} alt="product"/>
-              <span>Price: ${product.price}</span>
+              <h4>Price: ${product.price}</h4>
             </div>
           ))
         )
