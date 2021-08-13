@@ -8,14 +8,20 @@
       .Home-filter{
             display: flex;
             justify-content: flex-end;
-            padding-right: 5rem;
             font-size: 1rem;
             color: grey;
             height: 2rem;
             margin-bottom: 1rem;
       }
+      .home-nav{
+            position: fixed;
+            background-color: white;
+            z-index: 99;
+            width: 100%;
+      }
       .home-main{
             display: flex;
+            margin-top: 12rem;
             
       }
 
@@ -43,6 +49,17 @@
             border-bottom: 2px solid #C88E34;
             box-sizing: border-box;
       }
+      .home-list{
+      margin-top: 9rem;
+      list-style: none;
+      color: white;
+      font-size: 1.2rem;
+      font-weight: 300;
+
+      }
+      .home-range{
+            margin-top:7.5rem ;
+      }
       .select-sidebar, option {
       margin-right: -3rem;
       color:white;
@@ -61,24 +78,56 @@
       border: none;
       background-color: white;
       cursor: pointer;
+      height: 2rem;
+}
+.select-home::-webkit-calendar-picker-indicator {
+      border: none;
+      border-bottom: solid #CB9D57 1px;
 }
 .select-sidebar option:hover{
     color: white;
     background: black;
 }
 .home-range{
-      background: #CB9D57;
-      color:white;
+      /* background: #CB9D57; */
+      /* color:white; */
+      color: grey;
       padding: 3px;
       display: flex;
+      margin-top: 9.5rem;
       flex-direction: column;
       justify-content: center;
       margin-left: 2rem;
       font-size: 1rem;
-      align-items: flex-end;
-      box-shadow: 0 0 1px 0 gray;
+      align-items:flex-start;
+      width: 16rem;
+      box-sizing: border-box;
+      /* box-shadow: 0 0 1px 0 gray; */
 
 }
 .home-range h5{
 font-size: 1rem;
+}
+
+.home-personicon{
+      background: white;     
+      margin-top: 8.7rem;
+      border: none;
+      cursor: pointer;
+}
+.home-sidebar-container{
+     
+    /* margin-top: -4rem; */
+    background: #CB9D57;
+    width: 16rem;
+    height: 32rem;
+    margin-left: 2rem;
+    
+    background-image: url("https://turismoenargentina.com.ar/wp-content/uploads/2020/09/Valle-de-Paravachasca-Cordoba-Turismo-en-Argentina-4.jpg" );
+    background-repeat: no-repeat;
+    object-fit: contain;
+    object-position: top center;  
+}
+.home-img{
+      width: 100%;
 }

@@ -24,16 +24,8 @@ function NavBar(props) {
   const currentPage = useSelector(state => state.root.currentPage)
   var sort = 'asc'
   const allProducts = useSelector(state => state.root.allProducts)
-  const [state, setState] = useState('vertodos')
-  
-  // local state for ModalDialog and Button
-  const [open, setOpen] = useState(false);
-  const handleOpen = () => {
-    setOpen(true);
-  };
-  const handleClose = () => {
-    setOpen(false);
-  };
+
+  const [state, setState] = useState(currentCategoryState)
 
   useEffect(() => {
     dispatch(selectCategoryAction(state))
@@ -50,20 +42,25 @@ function NavBar(props) {
     );
   }
 
-  useEffect(() => {
-    dispatch(selectCategoryAction(state))
-    dispatch(searchProductsAction(''))
-    //toca preguntar si ek search tiene estado
-  }, [state])
 
-  function HomeIcon(props) {
-    return (
-      <SvgIcon {...props}>
-        <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
-      </SvgIcon>
-    );
-  }
-
+    useEffect(()=> {
+      dispatch(selectCategoryAction(state))
+      dispatch(searchProductsAction(''))
+//toca preguntar si ek search tiene estado
+    },[state])
+  
+    const handleCategory = (e) =>{
+      e.preventDefault()
+      setState(e.target.value)
+    }
+    function HomeIcon(props) {
+        return (
+          <SvgIcon {...props}>
+            <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
+          </SvgIcon>
+        );
+      }
+   
   return (
     <header className="navbar">
       <NavLink to='/home' className='nav-personicon'>
@@ -72,17 +69,30 @@ function NavBar(props) {
       <SearchBar />
       { !props.admin ?
       <nav>
-        <ul>
+        <ul className='nav-ul'>
+          {/* <li className="list-item">
+          <select className='nav-selec' name="category" value='' onChange={(e) =>handleCategory(e)}>
+            <option id='none' value='Precio'>Categorias:</option>
+            {state !== 'vertodos' && <option id='range1'  value='vertodos'>Ver Todas</option>}
+            <option id='range2' value='cervezas'>Cervezas</option>
+            <option id='range3' value='conservas'>Conservas</option>
+            <option id='range3' value='merchandising'>Merchandasing</option>
+            <option id='range3' value='otros'>Otros</option>
+          </select>
+          </li>
+          <div>
+          { state && <div className='actived'>{`${state !=='vertodos' ? state.toUpperCase() : '  '}`}</div> }
+          </div> */}
           <li className="list-item">
             <NavLink to='/home'>
-              <input className={`${currentCategoryState === 'vertodos' ? "actived" : 'Nav-button'}`} type="button" value="Ver Todos" onClick={() => setState('vertodos')} />
+              <input className={`${currentCategoryState === 'vertodos' ? 'Nav-vertodos' : "actived-vertodos" }`} type="button" value="Ver Todos" onClick={() => setState('vertodos')} />
             </NavLink>
             <NavLink to='/home'>
               <input className={`${currentCategoryState === 'cervezas' ? "actived" : 'Nav-button'}`} type="button" value="Cervezas" onClick={() => setState('cervezas')} />
             </NavLink>
-            <NavLink to='/home'>
+            {/* <NavLink to='/home'>
               <input className={`${currentCategoryState === 'conservas' ? "actived" : 'Nav-button'}`} type="button" value="Conservas" onClick={() => setState('conservas')} />
-            </NavLink>
+            </NavLink> */}
             <NavLink to='/home'>
               <input className={`${currentCategoryState === 'merchandising' ? "actived" : 'Nav-button'}`} type="button" value="Merchadising" onClick={() => setState('merchandising')} />
             </NavLink>

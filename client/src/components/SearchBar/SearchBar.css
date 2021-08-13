@@ -28,9 +28,9 @@
     /* filter: invert(100%); */
 }
 
-.input_search:hover{
+/* .input_search:hover{
     font-size: 18px;
-}
+} */
 .disabled{
     background: #e8eddf;
     pointer-events: none;
@@ -40,3 +40,15 @@
     filter:invert(1)
     opacity(0.01)
   }
+.sb-result-container{
+    margin-top: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: grey;
+    border: grey solid 1px;
+    width: 25rem;
+    height: 2rem;
+    border-radius: 30px;
+    padding: 0 1rem;
+}

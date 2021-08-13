@@ -47,7 +47,6 @@ const ROLE = {
 export default function App() {
   const dispatch = useDispatch();
   const location = useLocation();
-  console.log(location);
   useEffect(() => {
     dispatch(getCategories());
   }, [dispatch]);
