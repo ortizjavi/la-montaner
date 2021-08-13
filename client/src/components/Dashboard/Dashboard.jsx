@@ -5,6 +5,9 @@ const Dashboard = () => {
 	return (
 		<div className="dashboard-container">
 			<SideBar/>
+			<div>
+				USER DASHBOARD
+			</div>
 		</div>
 	)
 }
