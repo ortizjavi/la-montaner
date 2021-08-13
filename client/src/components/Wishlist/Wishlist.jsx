@@ -1,5 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import { Link } from 'react-router-dom';
 import './Wishlist.css';
 
 export default function Wishlist() {
@@ -17,7 +18,9 @@ export default function Wishlist() {
           wishlistItems.map((product) => (
             <div className='product_container'>
               <div className='image_container'>
-                <img className='product_image' src={product.img} alt="product"/>
+                <Link to={`/home/${product.id}`}>
+                  <img className='product_image' src={product.img} alt="product"/>
+                </Link>
               </div>
               <h5 className='product_name'>{product.name}</h5>
               <h4 className='product_price'>${product.price}</h4>
