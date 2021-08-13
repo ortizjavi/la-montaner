@@ -38,7 +38,6 @@ export default function ProductDetail({ match, history }) {
   const wishlist = useSelector((state) => state.wishlist);
   const { wishlistItems } = wishlist;
   const fav = wishlistItems.find(product => product.id === id);
-  
   //slider states
   const [current, setCurrent] = useState(0);
   const length = detail?.img?.length;
@@ -54,7 +53,6 @@ export default function ProductDetail({ match, history }) {
     window.localStorage.setItem('wishlist', JSON.stringify(wishlistItems));
   }, [wishlistItems])
 
-  //console.log("components/ProductDetail:", detail);
   const addToCartHandler  = () => {
     dispatch(addCartProduct(detail._id, qty));
     history.push(`/cart`);
