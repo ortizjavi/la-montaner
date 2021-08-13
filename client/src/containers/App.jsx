@@ -18,9 +18,10 @@ import Cart from "../components/Cart/Cart";
 import Success from "../components/PayState/Success";
 import Pending from "../components/PayState/Pending";
 import Failure from "../components/PayState/Failure";
-import PrivateRoute from '../components/PrivateRoute/PrivateRoute' 
+import PrivateRoute from "../components/PrivateRoute/PrivateRoute";
 import LoginForm from "../components/ModalDialog/LoginForm";
-import Footer from '../components/Footer/Footer';
+import Footer from "../components/Footer/Footer";
+import CardsAdmin from "../components/CardsAdmin/CardsAdmin";
 
 const theme = createTheme({
   palette: {
@@ -40,9 +41,9 @@ const theme = createTheme({
 });
 
 const ROLE = {
-  USER: 'USER',
-  ADMIN: 'ADMIN'
-}
+  USER: "USER",
+  ADMIN: "ADMIN",
+};
 
 export default function App() {
   const dispatch = useDispatch();
@@ -55,32 +56,27 @@ export default function App() {
     <ThemeProvider theme={theme}>
       <div className="body-container">
         <Route exact path="/" component={Landing} />
-        {
-          location.pathname !== '/'  && 
-          !location.pathname.startsWith('/admin') ? <NavBar/> : null
-        }
+        {location.pathname !== "/" &&
+        !location.pathname.startsWith("/admin") ? (
+          <NavBar />
+        ) : null}
         <div className="main-container">
           <Route exact path="/home" component={Home} />
-          <PrivateRoute 
-            exact 
-            path='/dashboard' 
-            component={Dashboard} 
+          <PrivateRoute
+            exact
+            path="/dashboard"
+            component={Dashboard}
             roles={[ROLE.USER]}
           />
-          <Route
-            exact
-            path="/login"
-            component={LoginForm}
-          />
+          <Route exact path="/login" component={LoginForm} />
           <Route exact path="/home/:id" component={ProductDetail} />
           <Route exact path="/cart" component={Cart} />
         </div>
         <Switch>
-          
-          <PrivateRoute 
-            exact 
-            path='/admin' 
-            component={DashboardAdmin} 
+          <PrivateRoute
+            exact
+            path="/admin"
+            component={DashboardAdmin}
             roles={[ROLE.ADMIN]}
           />
           <Route
@@ -88,7 +84,8 @@ export default function App() {
             path="/admin/productCreation"
             component={ProductCreation}
           />
-          
+          <Route exact path="/admin/tarjetas" component={CardsAdmin} />
+
           <Route exact path="/admin/editProduct/:id" component={EditProduct} />
           <Route exact path="/home/products/pay" component={Pay} />
           <Route exact path="/home/pay/success" component={Success} />
@@ -100,10 +97,10 @@ export default function App() {
             component={CategoryCreation}
           />
         </Switch>
-        {
-          location.pathname !== '/'  && 
-          !location.pathname.startsWith('/admin') ? <Footer/> : null
-        }
+        {location.pathname !== "/" &&
+        !location.pathname.startsWith("/admin") ? (
+          <Footer />
+        ) : null}
       </div>
     </ThemeProvider>
   );

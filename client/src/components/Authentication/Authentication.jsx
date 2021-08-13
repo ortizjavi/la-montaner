@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import "./Authentication.css";
 import GoogleLogin from "react-google-login";
-import FacebookLogin from "react-facebook-login";
+/* import FacebookLogin from "react-facebook-login"; */
 import { login } from "../../redux/actions/types/authActions";
 
 export default function ExternAuthentication() {
@@ -20,13 +20,13 @@ export default function ExternAuthentication() {
   return (
     <div>
       <br></br>
-      <FacebookLogin
+      {/* <FacebookLogin
         appId="594981481671722"
         autoLoad={false}
         fields="name,email,picture"
         onClick={responseFacebook}
         callback={responseFacebook}
-      />
+      /> */}
       ,
       <GoogleLogin
         clientId="185256781467-8t9jr2l450gsbuev5d12bs463280d0c4.apps.googleusercontent.com"
