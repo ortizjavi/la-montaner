@@ -33,7 +33,6 @@ export default function Filters(props) {
                   <option id='Milk' value='Milk'>Milk stout</option>
                 </select> 
               </li>
-                <h5>{Object.values(props.leftFilter)[0]}</h5>
               <li className='list_sidebar-li'>
                 <select className='select-sidebar' value='Volumen' name="volumen"  onChange={handleFilterStyles}>
                   <option id='none' value='none'>Todos los Volumenes</option>
@@ -45,7 +44,9 @@ export default function Filters(props) {
                 </select>
               </li>
             </ul>
-            <button onClick={() => dispatch(selectCategoryAction(''))}>Borrar Filtros</button>
+            <h5 className='filter-result'>{Object.values(props.leftFilter)[0]}</h5>
+
+            <button className='sidebar-buton' onClick={() => dispatch(selectCategoryAction(''))}>Borrar Filtros</button>
           </div>
           <h4 className='sb-h4'>Las mejores cervezas  de <br></br> Cordoba</h4>
     </navigator>

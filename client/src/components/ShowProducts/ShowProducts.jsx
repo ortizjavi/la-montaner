@@ -36,11 +36,7 @@ const ShowProducts = ({allProducts}) => {
               <>
                 {item.noExist ? (
                   <div className="sp-product_container" key={item._id}>
-                    <div className="sp-link sp-name">
-                      <h5 className="link-name">
-                        Producto en Proceso de Creación
-                      </h5>
-                    </div>
+      
                     <div>
                       <div className="image_contain">
                         <img
@@ -50,6 +46,12 @@ const ShowProducts = ({allProducts}) => {
                           alt=""
                         />
                       </div>
+                    </div>
+                    <div className="sp-link sp-name">
+                      <h5 className="link-name">
+                        Producto en Proceso de Creación
+                      </h5>
+                      <hr></hr>
                     </div>
                   </div>
                 ) : (
@@ -74,7 +76,6 @@ const ShowProducts = ({allProducts}) => {
                         )}
 
                       </div>
-                        <hr></hr>
                         <h5 className="link-name">{item?.name}</h5>
                         <h4 className="item_price">${item?.price}</h4>
                       {

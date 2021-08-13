@@ -20,7 +20,7 @@ function NavBar() {
   var sort = 'asc'
   const allProducts = useSelector(state => state.root.allProducts)
 
-  const [state, setState] = useState('vertodos')
+  const [state, setState] = useState(currentCategoryState)
 
 
   useEffect(() => {
@@ -44,6 +44,10 @@ function NavBar() {
 //toca preguntar si ek search tiene estado
     },[state])
   
+    const handleCategory = (e) =>{
+      e.preventDefault()
+      setState(e.target.value)
+    }
     function HomeIcon(props) {
         return (
           <SvgIcon {...props}>
@@ -59,7 +63,20 @@ function NavBar() {
       </NavLink>
       <SearchBar />
       <nav>
-        <ul>
+        <ul className='nav-ul'>
+          {/* <li className="list-item">
+          <select className='nav-selec' name="category" value='' onChange={(e) =>handleCategory(e)}>
+            <option id='none' value='Precio'>Categorias:</option>
+            {state !== 'vertodos' && <option id='range1'  value='vertodos'>Ver Todas</option>}
+            <option id='range2' value='cervezas'>Cervezas</option>
+            <option id='range3' value='conservas'>Conservas</option>
+            <option id='range3' value='merchandising'>Merchandasing</option>
+            <option id='range3' value='otros'>Otros</option>
+          </select>
+          </li>
+          <div>
+          { state && <div className='actived'>{`${state !=='vertodos' ? state.toUpperCase() : '  '}`}</div> }
+          </div> */}
           <li className="list-item">
             <NavLink to='/home'>
               <input className={`${currentCategoryState === 'vertodos' ? 'Nav-vertodos' : "actived-vertodos" }`} type="button" value="Ver Todos" onClick={() => setState('vertodos')} />
@@ -67,9 +84,9 @@ function NavBar() {
             <NavLink to='/home'>
               <input className={`${currentCategoryState === 'cervezas' ? "actived" : 'Nav-button'}`} type="button" value="Cervezas" onClick={() => setState('cervezas')} />
             </NavLink>
-            <NavLink to='/home'>
+            {/* <NavLink to='/home'>
               <input className={`${currentCategoryState === 'conservas' ? "actived" : 'Nav-button'}`} type="button" value="Conservas" onClick={() => setState('conservas')} />
-            </NavLink>
+            </NavLink> */}
             <NavLink to='/home'>
               <input className={`${currentCategoryState === 'merchandising' ? "actived" : 'Nav-button'}`} type="button" value="Merchadising" onClick={() => setState('merchandising')} />
             </NavLink>
@@ -79,12 +96,12 @@ function NavBar() {
           </li>
         </ul>
       </nav>
-      <div>
-        <Button variant="contained" color="primary" >
+      {/* <div>
+        <Button variant="contained" color="primary"  >
           Signup or SignIn MADAFAKAAAA
         </Button>
       </div>
-      <ExternAuthentication />
+      <ExternAuthentication /> */}
       <Link to='/admin'>
         <button className='nav-personicon'>
           <PersonIcon style={{ fontSize: 40 }} />

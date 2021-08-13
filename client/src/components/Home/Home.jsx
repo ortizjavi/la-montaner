@@ -6,6 +6,9 @@ import Filters from '../Filters/Filters.jsx';
 import ShowProducts from '../ShowProducts/ShowProducts';
 import Footer from '../Footer/Footer';
 import './Home.css';
+import ClearIcon from '@material-ui/icons/Clear';
+
+
 
 export default function Home() {
 
@@ -66,14 +69,6 @@ export default function Home() {
     }
   },[searchState])
 
-  const handleSort = (paramsort) => {
-    setLeftFilter('')
-    setRangePrice('')
-    setSort(paramsort)
-    // dispatch(selectCategoryAction(''))
-    let param = {sort:paramsort, pageNumber: currentPage-1, name:'', category:currentCategoryState }
-    dispatch(searchProducts(param))
-  }
   
   const onChangeFilter = (data) => {
     setRangePrice('')
@@ -88,11 +83,27 @@ export default function Home() {
     }
   }
   
+  // const handleSort = (paramsort) => {
+  //   setLeftFilter('')
+  //   setRangePrice('')
+  //   setSort(paramsort)
+  //   // dispatch(selectCategoryAction(''))
+  //   let param = {sort:paramsort, pageNumber: currentPage-1, name:'', category:currentCategoryState }
+  //   dispatch(searchProducts(param))
+  // }
+
   const handlePriceSort = (e) => {
     e.preventDefault()
     setLeftFilter('')
+    // dispatch(currentPageAction(1))
+    // dispatch(selectCategoryAction('vertodos') )
+    if(e.target.value === 'asc' || e.target.value === 'desc' ){
+      setRangePrice('')
+      setSort(e.target.value)
+      let param = {sort:e.target.value, pageNumber: currentPage-1, name:'', category:currentCategoryState }
+      dispatch(searchProducts(param))
+    }else{
     setSort('')
-    dispatch(currentPageAction(1))
     // dispatch(selectCategoryAction(''))
     let range = []
     if(e.target.value === 'range1') range = [0, maxPrice1]
@@ -100,29 +111,49 @@ export default function Home() {
     if(e.target.value === 'range3') range = [maxPrice2+1, maxPrice3]
     setRangePrice(range)
     dispatch(filterByPrice(range, 0))
+    }
   }
+
   return (
     <div>
-      <NavBar/>
+      <div className='home-nav'>
+        <NavBar/>
+      </div>
       <div className='Home-filter'>
-        Ordenar: 
-        <button className={`${sort ==='asc' ? "actived" : 'home-button'}`} onClick={() => handleSort('asc')}> A-Z </button>
-        <button className={`${sort ==='desc' ? "actived" : 'home-button'}`} onClick={() => handleSort('desc')}> Z-A </button>
-        <li className='list_sidebar-li'>
+       
+        {/* <button className={`${sort ==='asc' ? "actived" : 'home-button'}`} onClick={() => handleSort('asc')}> A-Z </button>
+        <button className={`${sort ==='desc' ? "actived" : 'home-button'}`} onClick={() => handleSort('desc')}> Z-A </button> */}
+        <li className='home-list'>
           <select className='select-home' name="price" value='Precio' onChange={(e) =>handlePriceSort(e)}>
-            <option id='none' value='Precio'>Filtar por Precio</option>
-            <option id='range1' onFocus={handleSort} value='range1'>$0 - ${maxPrice1}</option>
-            <option id='range2' value='range2'>${maxPrice1+1} - ${maxPrice2}</option>
-            <option id='range3' value='range3'>${maxPrice2+1} - ${maxPrice3}</option>
+            <option id='none' value='Precio'>Ordenar por:</option>
+            <option id='range1'  value='range1'>Precio entre: $0 - ${maxPrice1}</option>
+            <option id='range2' value='range2'>Precio entre: ${maxPrice1+1} - ${maxPrice2}</option>
+            <option id='range3' value='range3'>Precio entre: ${maxPrice2+1} - ${maxPrice3}</option>
+            <option id='range3' value='asc'>Nombre: A - Z</option>
+            <option id='range3' value='desc'>Nombre: Z - A</option>
           </select>
         </li>
         <div className='home-range'>
-          { rangePrice[1] && <h5 >{`$${rangePrice[0]} - $${rangePrice[1]}`}</h5> }
+          { rangePrice[1] && <h5 >{`Rango de Precios: $${rangePrice[0]} - $${rangePrice[1]}`}</h5> }
+          { sort && <h5 >{`Ordenado: ${sort ==='asc' ? 'A - Z' : 'Z - A'}`}</h5> }
         </div>
+        <button className='home-personicon' onClick={(e) => handlePriceSort(e)}>
+          {(rangePrice[1] || sort)  &&<ClearIcon style={{ fontSize: 30,color:'#66D040' }} />}
+        </button>
       </div>
       <main className='home-main'>
           <section>
-            <Filters  onChangeFilter={(e) => { onChangeFilter(e) }} leftFilter={leftFilter} />
+            {
+              currentCategoryState ==='cervezas' ?
+              <Filters  onChangeFilter={(e) => { onChangeFilter(e) }} leftFilter={leftFilter} />
+              :
+              <div className="home-sidebar-container">
+                <picture>
+                  <img className='home-img' src="https://live.staticflickr.com/65535/51361173217_49de2674c3_m.jpg" alt="Vaso de Cerveza" />
+                </picture>
+               
+              </div>
+            }
           </section>
           <section className="items-container">
             <ShowProducts allProducts={allProducts}/>
