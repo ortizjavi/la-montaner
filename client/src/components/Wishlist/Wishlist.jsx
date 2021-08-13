@@ -23,13 +23,13 @@ export default function Wishlist() {
       {
         wishlistItems.length === 0 ? (
           <div className='no_product_container'>
-            <h2 className='no_product_msg'>No tienes productos favoritos</h2>
+            <h3 className='no_product_msg'>No tienes productos favoritos</h3>
           </div>
         ) : (
           wishlistItems.map((product) => (
             <div className='product_container'>
               <div className='delete_btn_container'>
-                <button onClick={() => handleRemove(product.id)}>Delete</button>
+                <button className='delete_btn' onClick={() => handleRemove(product.id)}>Delete</button>
               </div>
               <div className='image_container'>
                 <Link to={`/home/${product.id}`}>

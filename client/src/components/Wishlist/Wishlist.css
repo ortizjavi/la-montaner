@@ -4,6 +4,10 @@
   align-items: center;
 }
 
+.no_product_container {
+  margin-top: 20px;
+}
+
 .product_container {
   display: flex;
   flex-direction: column;
@@ -20,6 +24,22 @@
 
 .product_container:hover {
   box-shadow: 0 0 5px 0 gray;
+}
+
+.delete_btn_container {
+  margin-top: 10px;
+  margin-left: 100px;
+}
+
+.delete_btn {
+  background-color: black;
+  border-radius: 3px;
+  color: white;
+}
+
+.delete_btn:hover {
+  background-color: rgb(43,149,89);
+  cursor: pointer;
 }
 
 .image_link {
