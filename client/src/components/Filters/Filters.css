@@ -22,25 +22,30 @@
     
 }
 /* .list-sidebar{
-    
 } */
 .list_sidebar-li {
     list-style: none;
-    color: white;
     font-size: 1.4rem;
     font-weight: 400;
     margin: 0;
     align-items: flex-start;
     padding-right: 8rem;
 }
-.select-sidebar{
-    border: none;
-    background: white;
+.select-sidebar, option {
+    margin-right: -3rem;
+    color:gray;
+    width: 11rem;
+    height: 2rem;
+    border-color: gray;
+    border-radius: 5px;
+     font-size: 1rem;
+    margin-bottom: 3rem;
+    cursor: pointer;
 }
 
 .filter-result{
     background: white;
-    color: #CB9D57 ;
+    /* color: #CB9D57 ; */
     height: 1.2rem;
     width: 7rem;
     border-radius: 10px;
@@ -50,7 +55,7 @@
 }
 .sidebar-buton{
     display: none;
-    background:  #CB9D57;
+    /* background:  #CB9D57; */
     color: white;
     height: 1.5rem;
     width: 7rem;
