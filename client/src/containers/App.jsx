@@ -18,7 +18,7 @@ import Success from "../components/PayState/Success";
 import Pending from "../components/PayState/Pending";
 import Failure from "../components/PayState/Failure";
 import PrivateRoute from '../components/PrivateRoute/PrivateRoute' 
-
+import {Form} from "../components/ModalDialog/Form";
 const theme = createTheme({
   palette: {
     primary: {
@@ -53,13 +53,18 @@ export default function App() {
             exact 
             path='/dashboard' 
             component={Dashboard} 
-            roles={['ADMIN']}
+            roles={['USER']}
           />
           {/*<Route exact path="/dashboard" component={Dashboard}></Route>*/}
           <Route
             exact
             path="/admin/productCreation"
             component={ProductCreation}
+          />
+          <Route
+            exact
+            path="/home/login"
+            component={Form}
           />
           <Route exact path="/admin/editProduct/:id" component={EditProduct} />
           <Route exact path="/home/products/pay" component={Pay} />
