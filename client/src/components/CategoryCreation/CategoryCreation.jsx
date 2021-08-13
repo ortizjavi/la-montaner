@@ -74,7 +74,7 @@ export default function CategoryCreator() {
         ))}
       </ul>
       <IconButton >
-                <Link to={"/admin"}>
+                <Link to={"/dashboard"}>
                   <ArrowBackSharpIcon />
                 </Link>
       </IconButton>

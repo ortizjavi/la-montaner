@@ -38,5 +38,5 @@ function setAuthDefaulHeaders(token) {
 }
 
 function deleteAuthDefaultHeaders() {
-  delete axios.default.headers.common['authorization'];
+  delete axios.defaults.headers.common['authorization'];
 }
