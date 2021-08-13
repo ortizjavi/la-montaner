@@ -14,6 +14,9 @@ import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { getOrders } from '../../redux/actions/types/productActions';
 
 const useRowStyles = makeStyles({
   root: {
@@ -30,7 +33,7 @@ function createData(Detalle,Usuario, Fecha, Precio,Estado ) {
     Fecha,
     Precio,
     Estado,
-    history: [
+    Orden: [
       { date: '2020-01-05', customerId: '11091700', amount: 3 },
       { date: '2020-01-02', customerId: 'Anonymous', amount: 1 },
     ],
@@ -63,19 +66,18 @@ function Row(props) {
           <Collapse in={open} timeout="auto" unmountOnExit>
             <Box margin={1}>
               <Typography variant="h6" gutterBottom component="div">
-                History
+                Orden
               </Typography>
               <Table size="small" aria-label="purchases">
                 <TableHead>
                   <TableRow>
-                    <TableCell>Date</TableCell>
-                    <TableCell>Customer</TableCell>
-                    <TableCell align="right">Amount</TableCell>
-                    <TableCell align="right">Total price ($)</TableCell>
+                    <TableCell>Producto</TableCell>
+                    <TableCell>Cantidad</TableCell>
+                    <TableCell align="right">Total($)</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {row.history.map((historyRow) => (
+                  {row.Orden.map((historyRow) => (
                     <TableRow key={historyRow.date}>
                       <TableCell component="th" scope="row">
                         {historyRow.date}
@@ -115,15 +117,20 @@ Row.propTypes = {
   }).isRequired,
 };
 
-const rows = [
-  createData('Frozen yoghurt', "12/08/2021" ,"Rocio", 24, 'Creada'),
-  createData('Ice cream sandwich', "12/08/2021" ,"Lucas", 9.0, 'Creada'),
-  createData('Eclair', "12/08/2021" ,"Balta", 16.0,'Creada'),
-  createData('Cupcake', "12/08/2021" ,"Javi", 3.7, 'Creada'),
-  createData('Gingerbread', "12/08/2021" ,"William", 16.0, 'Creada'),
-];
 
 export default function OrdersAdmin() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getOrders())
+  }, [dispatch])
+
+  const ordenes = useSelector(state => state.cart.orders);
+  
+  const rows = ordenes.map(o => 
+    createData(o.cart[0].name,o.createdAt, 24, o.status) 
+    );
+
   return (
     <TableContainer component={Paper}>
       <Table aria-label="collapsible table">

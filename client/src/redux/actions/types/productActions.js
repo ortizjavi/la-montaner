@@ -237,3 +237,15 @@ export  function orderStatus(cart) {
   }
 }
 }
+
+export  function getOrders() {
+  return async function(dispatch){
+  try {
+    const resp = await axios.get(`${endpoints.ORDER_STATUS}`);
+    console.log(resp.data);
+    return dispatch({type: actionTypes.GET_ORDERS, payload: resp.data});
+  } catch (error) {
+    console.log(error);
+  }
+}
+}
