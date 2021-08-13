@@ -1,10 +1,8 @@
 import React, { useEffect, useState }  from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {  searchProducts, filterProducts, getMaximumPrice, filterByPrice, selectCategoryAction,currentPageAction,searchProductsAction } from '../../redux/actions/types/productActions.js';
-import NavBar from '../Navbar/NavBar';
 import Filters from '../Filters/Filters.jsx';
 import ShowProducts from '../ShowProducts/ShowProducts';
-import Footer from '../Footer/Footer';
 import './Home.css';
 
 export default function Home() {
@@ -105,7 +103,6 @@ export default function Home() {
   
   return (
     <div>
-      <NavBar/>
       <div className='Home-filter'>
         Ordenar: 
         <button className={`${sort ==='asc' ? "actived" : 'home-button'}`} onClick={() => handleSort('asc')}> A-Z </button>
@@ -130,9 +127,6 @@ export default function Home() {
             <ShowProducts allProducts={allProducts}/>
           </section>
       </main>
-      <footer>
-          <Footer/>
-      </footer>
     </div>
   )
 }

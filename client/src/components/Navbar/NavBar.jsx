@@ -11,10 +11,15 @@ import { searchProducts, filterProductsCategory, searchProductsAction, selectCat
 import { ModalDialog } from '../ModalDialog/ModalDialog.jsx'
 
 
-function NavBar() {
-  let initialCategories = { vertodos: false, cervezas: false, conservas: false, merchandising: false, otros: false }
+function NavBar(props) {
+  let initialCategories = {vertodos:false,cervezas:false,conservas:false,merchandising:false,otros:false}
   const [category, setCategory] = useState(initialCategories)
-  const currentCategoryState = useSelector(state => state.root.currentCategoryState)
+  const currentCategoryState = useSelector( state => state.root.currentCategoryState)
+  const user = useSelector( state => state.session.user)
+
+  const isUser = user && user.role;
+  const isAdmin = user && user.role && user.role === 'ADMIN';
+  
   const dispatch = useDispatch();
   const currentPage = useSelector(state => state.root.currentPage)
   var sort = 'asc'
@@ -65,6 +70,7 @@ function NavBar() {
         <img className='nb-img' src="https://live.staticflickr.com/65535/51361173217_49de2674c3_m.jpg" alt="Montañez Logo" />
       </NavLink>
       <SearchBar />
+      { !props.admin ?
       <nav>
         <ul>
           <li className="list-item">
@@ -86,7 +92,9 @@ function NavBar() {
           </li>
         </ul>
       </nav>
-      <Link to='/dashboard'>
+
+      : null }
+      <Link to={isUser ? isAdmin ? '/admin' : '/dashboard' : '/login'}>
         <button className='nav-personicon'>
           <PersonIcon style={{ fontSize: 40 }} />
         </button>

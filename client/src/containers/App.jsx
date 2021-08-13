@@ -1,6 +1,6 @@
 import "./App.css";
 import React, { useEffect } from "react";
-import { Route, Switch } from "react-router";
+import { Route, Switch, useLocation } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { createTheme, ThemeProvider } from "@material-ui/core/styles";
 import { getCategories } from "../redux/actions/types/categoryActions.js";
@@ -11,6 +11,7 @@ import ProductCreation from "../components/ProductCreation/ProductCreation";
 import CategoryCreation from "../components/CategoryCreation/CategoryCreation";
 import Pay from "../components/Pay/Pay";
 import Dashboard from "../components/Dashboard/Dashboard";
+import DashboardAdmin from "../components/Dashboard/DashboardAdmin";
 import EditProduct from "../components/EditProduct/EditProduct";
 import NavBar from "../components/Navbar/NavBar";
 import Cart from "../components/Cart/Cart";
@@ -18,7 +19,9 @@ import Success from "../components/PayState/Success";
 import Pending from "../components/PayState/Pending";
 import Failure from "../components/PayState/Failure";
 import PrivateRoute from '../components/PrivateRoute/PrivateRoute' 
-import {Form} from "../components/ModalDialog/Form";
+import LoginForm from "../components/ModalDialog/LoginForm";
+import Footer from '../components/Footer/Footer';
+
 const theme = createTheme({
   palette: {
     primary: {
@@ -36,36 +39,57 @@ const theme = createTheme({
   },
 });
 
+const ROLE = {
+  USER: 'USER',
+  ADMIN: 'ADMIN'
+}
+
 export default function App() {
   const dispatch = useDispatch();
+  const location = useLocation();
+  console.log(location);
   useEffect(() => {
     dispatch(getCategories());
-  }, []);
+  }, [dispatch]);
 
   return (
     <ThemeProvider theme={theme}>
-      <div>
+      <div className="body-container">
         <Route exact path="/" component={Landing} />
-        <Route exact path="/home" component={Home} />
-        <Route exact path="/home/:id" component={NavBar} />
-        <Switch>
+        {
+          location.pathname !== '/'  && 
+          !location.pathname.startsWith('/admin') ? <NavBar/> : null
+        }
+        <div className="main-container">
+          <Route exact path="/home" component={Home} />
           <PrivateRoute 
             exact 
             path='/dashboard' 
             component={Dashboard} 
-            roles={['USER']}
+            roles={[ROLE.USER]}
           />
-          {/*<Route exact path="/dashboard" component={Dashboard}></Route>*/}
+          <Route
+            exact
+            path="/login"
+            component={LoginForm}
+          />
+          <Route exact path="/home/:id" component={ProductDetail} />
+          <Route exact path="/cart" component={Cart} />
+        </div>
+        <Switch>
+          
+          <PrivateRoute 
+            exact 
+            path='/admin' 
+            component={DashboardAdmin} 
+            roles={[ROLE.ADMIN]}
+          />
           <Route
             exact
             path="/admin/productCreation"
             component={ProductCreation}
           />
-          <Route
-            exact
-            path="/home/login"
-            component={Form}
-          />
+          
           <Route exact path="/admin/editProduct/:id" component={EditProduct} />
           <Route exact path="/home/products/pay" component={Pay} />
           <Route exact path="/home/pay/success" component={Success} />
@@ -76,9 +100,11 @@ export default function App() {
             path="/admin/categoryCreation"
             component={CategoryCreation}
           />
-          <Route exact path="/home/:id" component={ProductDetail} />
-          <Route exact path="/cart" component={Cart} />
         </Switch>
+        {
+          location.pathname !== '/'  && 
+          !location.pathname.startsWith('/admin') ? <Footer/> : null
+        }
       </div>
     </ThemeProvider>
   );

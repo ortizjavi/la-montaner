@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 import { getProductDetail } from "../../redux/actions/types/productActions";
 import Loading from "../Loading/Loading.js";
 import "./ProductDetail.css";
-import Footer from "../Footer/Footer";
 
 import { addCartProduct } from "../../redux/actions/types/productActions";
 
@@ -136,7 +135,6 @@ export default function ProductDetail({ match, history }) {
           </div>
         </div>
       )}
-      <Footer />
     </div>
   );
 };

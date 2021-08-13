@@ -3,3 +3,13 @@ a{
     color: #022E1A ;
 
 }
+
+.dashboard-container {
+	display: flex;
+	flex-direction: row;
+}
+
+
+.dashboard-container:nth-child(1){
+	color: red;
+}

@@ -11,7 +11,7 @@ const PrivateRoute = ({component : Component, roles, ...rest}) => {
         <Route {...rest}>
         { roles.includes(user.role) ? 
 			<Component/> : 
-			<Redirect to='/admin/categoryCreation'/>
+			<Redirect to='/login'/>
 		}
         </Route>
     )
