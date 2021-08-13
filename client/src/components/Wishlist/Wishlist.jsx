@@ -15,7 +15,6 @@ export default function Wishlist() {
 
   const handleRemove = (id) => {
     dispatch(removeFavProduct(id));
-    window.localStorage.setItem('wishlist', JSON.stringify(wishlistItems));
   }
 
   return (
