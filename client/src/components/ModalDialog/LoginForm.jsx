@@ -6,7 +6,7 @@ import Button from '@material-ui/core/Button';
 import ExternAuthentication from '../Authentication/Authentication';
 import './LoginForm.css';
 
-const LoginForm = ({ handleClose }) => {
+const LoginForm = () => {
   
     const[email, setEmail] = useState('');
     const[password, setPassword] = useState('');
@@ -15,7 +15,7 @@ const LoginForm = ({ handleClose }) => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        handleClose();
+       
     }
 
     useEffect(() => {

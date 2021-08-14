@@ -14,7 +14,7 @@ const userSchema = new Schema({
   },
   name: {
     type: String,
-    required: true,
+    required: false,
   },
   family_name: {
     type: String,
@@ -34,7 +34,7 @@ const userSchema = new Schema({
   },
   verified: {
     type: Boolean,
-    required: true
+    required: false
   }
 });
 
