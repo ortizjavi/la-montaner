@@ -1,17 +1,65 @@
-.facebookBtn{
-    display:flex;
-    flex-direction:row;
-    align-items:center;
-    justify-content: space-between;
-    width: 18vw;
-    height:20vh;
-    margin-left: 12%;
+
+.external-login-button button {
+    font-family: IBMPlexSans,sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: .5px;
+    line-height: 32px;
+    color: #fff;
+    display: inline-block;
+    border: none;
+    border-radius: 4px;
+    text-align: center;
+    background: #0079d3;
+    text-transform: uppercase;
+    cursor: pointer;
+    line-height: unset;
+    min-height: 35px;
+    max-width: 30vw;
+    width: auto;
+    min-width: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    background-color: #fff;
+    color: #0079d3;
+    border: 1px solid #0079d3;
+    display: block;
+    height: auto;
+    margin: 8px 10px;
+    padding: 12px 28px;
+    width: 100%;
+    padding-left: 45px;
+
+}
+.external-login-button {
+    margin: 0 20px;
 }
 
-.gooleBtn{
-    margin-left:22%;
-    width:15vw;
-    height:5vh;
-    margin-top:-5%;
-    
+.external-login-button button :first-child{
+    padding: 0px 20px;
+}
+
+.fb-btn{
+    position: relative;
+}
+
+.fb-btn button {
+    text-align: right;
+}
+
+.login-fb-icon {
+    position: absolute;
+    z-index: 3;
+    color: #0079d3;
+    pointer-events: none;
+    left: 0px;
+    top: 12px;
+}
+
+.external-login-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
