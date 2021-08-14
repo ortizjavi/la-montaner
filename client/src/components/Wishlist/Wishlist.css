@@ -17,7 +17,7 @@
 }
 
 .back-home-btn:hover {
-  background-color: #047e28;
+  background-color: rgb(43,149,89);
   color: white;
   transition: 0.25s;
   cursor: pointer;
@@ -49,16 +49,14 @@
 
 .delete_btn {
   background-color: white;
-  color: black;
-  border: 1px solid black;
-  padding: 5px;
-  border-radius: 4px;
+  color: rgb(170, 0, 0);
+  width: 30%;
+  border: 0px;
 }
 
 .delete_btn:hover {
-  background-color: red;
-  color: white;
-  transition: 0.25s;
+  transform: scale(1.1);
+  transition: 0.55s;
   cursor: pointer;
 }
 
