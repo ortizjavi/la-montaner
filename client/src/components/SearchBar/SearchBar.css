@@ -41,14 +41,16 @@
     opacity(0.01)
   }
 .sb-result-container{
-    margin-top: 2rem;
+    margin-top: 0.2rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    color: grey;
-    border: grey solid 1px;
-    width: 25rem;
+    /* color: grey;
+    border: grey solid 1px; */
+    width: 18rem;
     height: 2rem;
-    border-radius: 30px;
+    color: gray;
+    font-style: italic;
+    /* border-radius: 30px; */
     padding: 0 1rem;
 }

@@ -60,7 +60,7 @@
       .home-range{
             margin-top:7.5rem ;
       }
-      .select-sidebar, option {
+      /* .select-sidebar, option {
       margin-right: -3rem;
       color:white;
       width: 11rem;
@@ -71,7 +71,7 @@
       background: #CB9D57;
       margin-bottom: 3rem;
       cursor: pointer;
-}
+} */
 .select-home{
       color: grey;
       font-size: 1rem;
