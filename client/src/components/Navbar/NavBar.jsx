@@ -7,6 +7,7 @@ import PersonIcon from '@material-ui/icons/Person';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import SvgIcon from '@material-ui/core/SvgIcon';
+import FavoriteIcon from '@material-ui/icons/Favorite';
 import { searchProductsAction, selectCategoryAction } from '../../redux/actions/types/productActions.js';
 import { logout } from '../../redux/actions/types/authActions.js';
 
@@ -93,6 +94,9 @@ function NavBar(props) {
         <button className='nav-personicon'>
           <PersonIcon style={{ fontSize: 40 }} />
         </button>
+      </Link>
+      <Link to="/wishlist">
+          <FavoriteIcon className='fav-icon-nav'/>
       </Link>
       <Link to="/cart">
         <button className='nav-personicon'>
