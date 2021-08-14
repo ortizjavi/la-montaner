@@ -66,21 +66,23 @@ export default function App() {
             component={DashboardAdmin} 
             roles={[ROLE.ADMIN]}
           />
-          <Route
+          <PrivateRoute
             exact
             path="/admin/productCreation"
             component={ProductCreation}
+            roles={[ROLE.ADMIN]}
           />
-          
-          <Route exact path="/admin/editProduct/:id" component={EditProduct} />
-          <Route exact path="/home/products/pay" component={Pay} />
-          <Route exact path="/home/pay/success" component={Success} />
-          <Route exact path="/home/pay/pending" component={Pending} />
-          <Route exact path="/home/pay/failure" component={Failure} />
-          <Route
+          <PrivateRoute
+            exact
+            path="/admin/editProduct/:id"
+            component={EditProduct}
+            roles={[ROLE.ADMIN]}
+          />
+          <PrivateRoute
             exact
             path="/admin/categoryCreation"
             component={CategoryCreation}
+            roles={[ROLE.ADMIN]}
           />
         </Switch>
         {
@@ -96,6 +98,10 @@ export default function App() {
                component={Dashboard} 
                roles={[ROLE.USER]}
              />
+              <Route exact path="/home/products/pay" component={Pay} />
+              <Route exact path="/home/pay/success" component={Success} />
+              <Route exact path="/home/pay/pending" component={Pending} />
+              <Route exact path="/home/pay/failure" component={Failure} />
              <Route
                exact
                path="/login"
