@@ -1,0 +1,17 @@
+.facebookBtn{
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content: space-between;
+    width: 18vw;
+    height:20vh;
+    margin-left: 12%;
+}
+
+.gooleBtn{
+    margin-left:24%;
+    width:15vw;
+    height:5vh;
+    margin-top:-5%;
+    
+}

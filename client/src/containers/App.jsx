@@ -22,6 +22,7 @@ import Failure from "../components/PayState/Failure";
 import PrivateRoute from '../components/PrivateRoute/PrivateRoute' 
 import LoginForm from "../components/ModalDialog/LoginForm";
 import Footer from '../components/Footer/Footer';
+import AboutPage from '../components/About/About';
 
 const theme = createTheme({
   palette: {
@@ -55,30 +56,9 @@ export default function App() {
   return (
     <ThemeProvider theme={theme}>
       <div className="body-container">
-        <Route exact path="/" component={Landing} />
-        {
-          location.pathname !== '/'  && 
-          !location.pathname.startsWith('/admin') ? <NavBar/> : null
-        }
-        <div className="main-container">
-          <Route exact path="/home" component={Home} />
-          <PrivateRoute 
-            exact 
-            path='/dashboard' 
-            component={Dashboard} 
-            roles={[ROLE.USER]}
-          />
-          <Route
-            exact
-            path="/login"
-            component={LoginForm}
-          />
-          <Route exact path="/home/:id" component={ProductDetail} />
-          <Route exact path="/cart" component={Cart} />
-          <Route exact path="/wishlist" component={Wishlist} />
-        </div>
+
         <Switch>
-          
+          <Route exact path="/" component={Landing} />          
           <PrivateRoute 
             exact 
             path='/admin' 
@@ -104,7 +84,29 @@ export default function App() {
         </Switch>
         {
           location.pathname !== '/'  && 
-          !location.pathname.startsWith('/admin') ? <Footer/> : null
+          !location.pathname.startsWith('/admin') ?
+        <>
+        <NavBar/>
+          <div className="main-container">
+             <Route exact path="/home" component={Home} />
+             <PrivateRoute 
+               exact 
+               path='/dashboard' 
+               component={Dashboard} 
+               roles={[ROLE.USER]}
+             />
+             <Route
+               exact
+               path="/login"
+               component={LoginForm}
+             />
+             <Route exact path="/home/:id" component={ProductDetail} />
+             <Route exact path="/cart" component={Cart} />
+             <Route exact path="/wishlist" component={Wishlist} />
+           </div>
+         <Footer/>
+         </>
+          : null
         }
       </div>
     </ThemeProvider>

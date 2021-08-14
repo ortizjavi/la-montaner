@@ -1,4 +1,8 @@
 const { Router } = require("express");
+const { 
+	authenticateToken,
+	authAdmin
+} = require('../middlewares/auth');
 
 const router = Router();
 
@@ -17,13 +21,13 @@ const {
 
 // Categories
 router.get("/category", getCategories);
-router.post("/category", createCategory);
-router.delete("/category", deleteCategory);
+router.post("/category", authenticateToken, authAdmin, createCategory);
+router.delete("/category", authenticateToken, authAdmin, deleteCategory);
 // Products
 router.get("/product", getProducts);
-router.post("/product", createProduct);
-router.put("/product/:id", updateProduct);
-router.delete("/product/:id", deleteProduct);
+router.post("/product", authenticateToken, authAdmin, createProduct);
+router.put("/product/:id", authenticateToken, authAdmin, updateProduct);
+router.delete("/product/:id", authenticateToken, authAdmin, deleteProduct);
 
 
 module.exports = router;

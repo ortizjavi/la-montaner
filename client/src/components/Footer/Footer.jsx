@@ -21,7 +21,7 @@ const Footer = ()=>{
     return(
         <div className='footer-container'>
             <div >
-                <NavLink className='footer-h4-l' to={'/'}>
+                <NavLink className='footer-h4-l' to={'/about'}>
                     <h4> Sobre Nosotros </h4>
                 </NavLink>    
                 <NavLink className='footer-h4-l' to={'/'}>
