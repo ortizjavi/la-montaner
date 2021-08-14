@@ -36,7 +36,7 @@
 }
 .select-sidebar, option {
     margin-right: -3rem;
-    color:gray;
+    color:black;
     width: 11rem;
     height: 2rem;
     border-color: gray;
@@ -44,18 +44,26 @@
     font-size: 0.9rem;
     margin-bottom: 1rem;
     cursor: pointer;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+
 }
 
-.filter-result{
+.select-sidebar:hover {
+    background-color: rgb(236, 233, 233);
+    box-shadow: 0.5px 0.5px;
+}
+
+/* .filter-result{
     background: white;
-    /* color: #CB9D57 ; */
+    color: #CB9D57 ;
     height: 1.2rem;
     width: 7rem;
     border-radius: 10px;
     padding: 3px;
     margin-left: 6rem;
     font-size: 1rem;
-}
+} */
 .sidebar-buton{
     display: none;
     /* background:  #CB9D57; */
@@ -77,8 +85,10 @@
     align-items: center;
 }
 .container-select-result p {
-    margin-block: 1rem;
     font-style: italic;
+    margin-top: 0.1rem;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
 }
 
 .sb-h4{
