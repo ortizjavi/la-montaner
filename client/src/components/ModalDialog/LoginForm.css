@@ -1,0 +1,29 @@
+.title{
+    color: grey;
+    font-weight: 400;
+    border: none;
+    outline: none;
+    font-size: 1.2rem;
+    margin-bottom:5%;
+    margin-left: 2rem;
+    width: 20rem;
+}
+
+
+
+.formStyles {
+    max-width: 330px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    background: white;
+    margin-top: 1%;
+}
+
+.btnStyles {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    padding: 30px;
+}

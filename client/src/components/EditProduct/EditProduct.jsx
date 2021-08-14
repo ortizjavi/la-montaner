@@ -116,7 +116,7 @@ function EditProductChild({ producto, defaultState }) {
   console.log("producto", producto);
   const [loadingImg, setLoadingImg] = useState(0);
   const [image, setImage] = useState([]);
-  const allCategories = useSelector((state) => state.allCategories);
+  const allCategories = useSelector((state) => state.root.allCategories);
   const dispatch = useDispatch();
 
   const contentPC = useStyles();
@@ -185,12 +185,16 @@ function EditProductChild({ producto, defaultState }) {
   const uploadImage = async (e) => {
     const files = e.target.files;
     const images = new FormData();
+
+    const axiosInstance = axios.create();
+    delete axiosInstance.defaults.headers.common['authorization']
+
     for (let i = 0; i < files.length; i++) {
       console.log(files[i]);
       images.append("file", files[i]);
       console.log(i.name);
       images.append("upload_preset", "laMontanes");
-      await axios
+      await axiosInstance
         .post(
           "https://api.cloudinary.com/v1_1/la-montanes/image/upload",
           images,
