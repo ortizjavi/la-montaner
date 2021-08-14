@@ -51,9 +51,6 @@ const LoginForm = ({ handleClose }) => {
           />
           
           <div className='btnStyles'>
-            <Button variant="contained" onClick={handleClose}>
-              Cancelar
-            </Button>
             <Button type="submit" variant="contained" color="primary">
               Acceder
             </Button>

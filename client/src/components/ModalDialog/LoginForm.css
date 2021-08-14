@@ -27,3 +27,8 @@
     justify-content: space-around;
     padding: 30px;
 }
+
+.btnStyles button {
+    width: 25vw;
+    border-radius: 999px
+}
