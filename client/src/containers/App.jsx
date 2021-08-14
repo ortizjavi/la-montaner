@@ -100,6 +100,7 @@ export default function App() {
              />
              <Route exact path="/home/:id" component={ProductDetail} />
              <Route exact path="/cart" component={Cart} />
+             <Route exact path="/wishlist" component={Wishlist} />
            </div>
          <Footer/>
          </>
