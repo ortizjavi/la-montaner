@@ -16,7 +16,7 @@
 }
 
 .back-home-btn:hover {
-  background-color: black;
+  background-color: #047e28;
   color: white;
   transition: 0.25s;
   cursor: pointer;
@@ -33,6 +33,7 @@
   margin: 5px 10px;
   margin-top: 20px;
   margin-left: 20px;
+  padding: 10px;
   position: relative;
 } 
 
@@ -42,17 +43,21 @@
 
 .delete_btn_container {
   margin-top: 10px;
-  margin-left: 100px;
+  margin-left: 110px;
 }
 
 .delete_btn {
-  background-color: black;
-  border-radius: 3px;
-  color: white;
+  background-color: white;
+  color: black;
+  border: 1px solid black;
+  padding: 5px;
+  border-radius: 4px;
 }
 
 .delete_btn:hover {
-  background-color: rgb(43,149,89);
+  background-color: red;
+  color: white;
+  transition: 0.25s;
   cursor: pointer;
 }
 
