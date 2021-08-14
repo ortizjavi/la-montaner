@@ -51,17 +51,17 @@ font-size_narvar:rgb(130,130,130); */
           margin-right: 0px;
         }
   
-.pagination ul  li:not(.active):not(.disabled){
+.pagination ul  li:not(.active-p):not(.disabled){
           cursor: pointer;
         }
-.pagination ul  li:not(.active):not(.disabled):hover{
+.pagination ul  li:not(.active-p):not(.disabled):hover{
           background: rgb(43,149,89,0.7);
         }
-.pagination ul  li:not(.active):not(.disabled):active{
+.pagination ul  li:not(.active-p):not(.disabled):active{
           background: #cfdbd5;
         }
   
-.pagination ul  li.active{
+.pagination ul  li.active-p{
           background: #66D040;
           font-weight: 700;
         font-size: 1.3rem;

@@ -1,8 +1,4 @@
-a{
-    text-decoration: none;
-    color: #022E1A ;
 
-}
 
 .dashboard-container {
 	min-height: inherit;
@@ -12,14 +8,39 @@ a{
 	justify-content: center;
 	align-items: center;
 	text-align: center;
+	background: rgba(245, 245, 245, 1);
 }
 
 
 .dashboard-container div:first-child{
-	flex-basis: 30%;
+	flex-basis: 25%;
 }
 
 .dashboard-container div:nth-child(2){
-	color: red;
-	flex-basis: 70%;
+	flex-basis: 60%;
+	width: 100%;
+	height: 100%;
 }
+.dashboard-section{
+	height: 20vh;
+	border: solid 1px grey;
+}
+
+.dashboard-main{
+	margin-top: 5%;
+	flex-basis: 60%;
+	height: 40vh;
+	border: solid 1px gray;
+	background: white;
+}
+
+.table{
+	padding-top: 1rem;
+	padding-left: 1rem;
+    width: 100%;
+    text-align: left;
+  }
+  .table td {
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
