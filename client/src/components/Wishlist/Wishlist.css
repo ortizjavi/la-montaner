@@ -5,7 +5,21 @@
 }
 
 .no_product_container {
-  margin-top: 20px;
+  margin-top: 10px;
+}
+
+.back-home-btn {
+  margin-left: 65px;
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 5px
+}
+
+.back-home-btn:hover {
+  background-color: black;
+  color: white;
+  transition: 0.25s;
+  cursor: pointer;
 }
 
 .product_container {
