@@ -102,7 +102,7 @@ export default function App() {
              />
              <Route exact path="/home/:id" component={ProductDetail} />
              <Route exact path="/cart" component={Cart} />
-             <Route exct path="/wishlist" component={Wishlist} />
+             <Route exact path="/wishlist" component={Wishlist} />
            </div>
          <Footer/>
          </>

@@ -1,11 +1,26 @@
 .root_container {
   display: flex;
+  flex-flow: row wrap;
   justify-content: space-evenly;
   align-items: center;
 }
 
 .no_product_container {
-  margin-top: 20px;
+  margin-top: 10px;
+}
+
+.back-home-btn {
+  margin-left: 65px;
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 5px
+}
+
+.back-home-btn:hover {
+  background-color: #047e28;
+  color: white;
+  transition: 0.25s;
+  cursor: pointer;
 }
 
 .product_container {
@@ -19,6 +34,7 @@
   margin: 5px 10px;
   margin-top: 20px;
   margin-left: 20px;
+  padding: 10px;
   position: relative;
 } 
 
@@ -28,17 +44,21 @@
 
 .delete_btn_container {
   margin-top: 10px;
-  margin-left: 100px;
+  margin-left: 110px;
 }
 
 .delete_btn {
-  background-color: black;
-  border-radius: 3px;
-  color: white;
+  background-color: white;
+  color: black;
+  border: 1px solid black;
+  padding: 5px;
+  border-radius: 4px;
 }
 
 .delete_btn:hover {
-  background-color: rgb(43,149,89);
+  background-color: red;
+  color: white;
+  transition: 0.25s;
   cursor: pointer;
 }
 
