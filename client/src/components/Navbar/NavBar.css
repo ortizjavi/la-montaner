@@ -1,7 +1,7 @@
 
 .navbar {
     height: 8rem;
-    width: 100%;
+    width: 100vw;
     top: 0;
     left: 0;
     display: flex;
@@ -29,14 +29,14 @@
 }
 
 .list-item {
-    margin: 0;
-    display: flex;
     height: 100%;
-    width: auto;
-    align-items: center;
-    margin-right: 5rem;
-    margin-top: 2.1rem;
+    width: 25%;
     cursor: pointer;
+    list-style: none;
+}
+
+.active {
+    width: 100%;
 }
 
 .Nav-button {
@@ -46,8 +46,7 @@
     border: none;
     outline: none;
     font-size: 1.2rem;
-    margin-left: 2rem;
-    width: 8rem;
+    width: 100%;
     cursor: pointer;
 }
 
@@ -70,17 +69,16 @@ width: 10rem;
 .Nav-vertodos {
     opacity: 0;
     width: 10rem;
+    display: none;
 }
 
 .actived-vertodos {
     background: none;
     color: grey;
     font-weight: 400;
-    width: 10rem;
     border: none;
     outline: none;
     font-size: 1.2rem;
-    margin-left: 2rem;
     cursor: pointer;
 }
 
@@ -102,7 +100,7 @@ width: 10rem;
     border-bottom: #C88E34 solid 1px ;
     border-top: #C88E34 solid 1px ;
     font-size: 1.2rem;
-    width: 8rem;
+    width: 100%;
     /* font-size: 1.2rem; */
     /* margin-left: 2rem; */
 }
@@ -110,7 +108,6 @@ width: 10rem;
 .Nav-button.active {
     height: auto;
     font-size: 1.4rem;
-    margin-left: 1.7rem;
     background:#C88E34;
 }
 
@@ -118,7 +115,13 @@ width: 10rem;
     background: white;
     border: none;
     cursor: pointer;
+    width: 20%;
 }
+
+.nav-personicon svg {
+    width: 100% !important;
+}
+
 .nav-personicon:hover{
     cursor: pointer;
     transform: scale(1.2);
@@ -133,7 +136,39 @@ width: 10rem;
     cursor: pointer;
     transform: scale(1.2);
     transition: 0.5s;
-  }
+}
+
+.nav-ul {
+    width: 100%;
+    padding-inline-start: 0;
+        margin: 0;
+    display: flex;
+        align-items: center;
+    margin-top: 2.1rem;
+}
+
+.nav-container {
+    width: 40%;
+}
+
+.nav-icon {
+    width: auto;
+    padding: 0 20px;
+}
+
+.nav-icon button {
+    width: 100%;
+}
+.nav-icon svg {
+    width: 100% !important;
+    transition: none;
+}
+
+.nav-icons-container {
+    width: 25%;
+    display: flex;
+    justify-content: flex-end;
+}
 
 .nav-selec{
     background: none;
