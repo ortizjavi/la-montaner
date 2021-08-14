@@ -67,7 +67,6 @@ export default function SearchBar() {
 
     return(
         <div className='sb-container'>
-            <div>
             <form className="form-container" >
                 <label >     
                     <input list="product" multiple value={state.product} className='input_search' 
@@ -101,7 +100,6 @@ export default function SearchBar() {
                     </button>
                 } */}
                 </form>
-                </div>
                 <div>
                 {
                     searched.length > 0 ?
