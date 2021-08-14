@@ -55,7 +55,7 @@ function NavBar(props) {
       </NavLink>
       <SearchBar />
       {!props.admin ?
-        <nav>
+        <nav className='nav-container'>
           <ul className='nav-ul'>
             {/* <li className="list-item">
           <select className='nav-selec' name="category" value='' onChange={(e) =>handleCategory(e)}>
@@ -74,40 +74,50 @@ function NavBar(props) {
               <NavLink to='/home'>
                 <input className={`${currentCategoryState === 'vertodos' ? 'Nav-vertodos' : "actived-vertodos"}`} type="button" value="Ver Todos" onClick={() => setState('vertodos')} />
               </NavLink>
+            </li>
+            <li className="list-item">
               <NavLink to='/home'>
                 <input className={`${currentCategoryState === 'cervezas' ? "actived" : 'Nav-button'}`} type="button" value="Cervezas" onClick={() => setState('cervezas')} />
               </NavLink>
+            </li>
               {/* <NavLink to='/home'>
               <input className={`${currentCategoryState === 'conservas' ? "actived" : 'Nav-button'}`} type="button" value="Conservas" onClick={() => setState('conservas')} />
             </NavLink> */}
+            <li className="list-item">
             <NavLink to='/home'>
               <input className={`${currentCategoryState === 'merchandising' ? "actived" : 'Nav-button'}`} type="button" value="Merchadising" onClick={() => setState('merchandising')} />
             </NavLink>
+            </li>
+            <li className="list-item">
             <NavLink to='/home'>
               <input className={`${currentCategoryState === 'otros' ? "actived" : 'Nav-button'}`} type="button" value="Otros" onClick={() => setState('otros')} />
             </NavLink>
-          </li>
+            </li>
         </ul>
       </nav>
         : null}
-      <Link to={isUser ? isAdmin ? '/admin' : '/dashboard' : '/login'}>
+      <div className='nav-icons-container'>
+      <Link to={isUser ? isAdmin ? '/admin' : '/dashboard' : '/login'} className='nav-icon'>
         <button className='nav-personicon'>
           <PersonIcon style={{ fontSize: 40 }} />
         </button>
       </Link>
-      <Link to="/wishlist">
+      <Link to="/wishlist" className='nav-icon'>
           <FavoriteIcon className='fav-icon-nav'/>
       </Link>
-      <Link to="/cart">
+      <Link to="/cart" className='nav-icon'>
         <button className='nav-personicon'>
           <ShoppingCartIcon style={{ fontSize: 40 }} />
         </button>
       </Link>
-      {isUser ? 
-        <button className='nav-personicon' onClick={(e) => dispatch(logout())}>
-          <ExitToAppIcon style={{ fontSize: 40 }} />
-        </button>
+      {isUser ?
+        <div className='nav-icon'>
+          <button className='nav-personicon' onClick={(e) => dispatch(logout())}>
+            <ExitToAppIcon style={{ fontSize: 40 }} />
+          </button>
+        </div>
       : null}
+      </div>
     </header>
   );
 };
