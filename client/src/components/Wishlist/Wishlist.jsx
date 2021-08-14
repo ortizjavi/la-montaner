@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from 'react-router-dom';
+import DeleteIcon from '@material-ui/icons/Delete';
 import { removeFavProduct } from '../../redux/actions/types/productActions';
 import './Wishlist.css';
 
@@ -29,7 +30,7 @@ export default function Wishlist() {
           wishlistItems.map((product) => (
             <div className='product_container'>
               <div className='delete_btn_container'>
-                <button className='delete_btn' onClick={() => handleRemove(product.id)}>Eliminar</button>
+                <button className='delete_btn' onClick={() => handleRemove(product.id)}> <DeleteIcon/> </button>
               </div>
               <div className='image_container'>
                 <Link to={`/home/${product.id}`}>
