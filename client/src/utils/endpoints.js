@@ -4,7 +4,7 @@ export const ADMIN_SERVER = `${SERVER}/admin`;
 
 // endpoints de la auth
 export const AUTH_LOGIN = `${SERVER}/login`;
-export const AUTH_REGiSTER = `${SERVER}/register`;
+export const AUTH_REGISTER = `${SERVER}/register`;
 
 // endpoints de las categorias
 export const ADMIN_CATEGORY = `${ADMIN_SERVER}/category`;

@@ -25,6 +25,7 @@ import Footer from "../components/Footer/Footer";
 import SideBarAdmin from "../components/Dashboard/SideBarAdmin";
 import AboutPage from "../components/About/About";
 import Accordion from "../components/About/FAQ";
+import RegisterForm from "../components/ModalDialog/RegisterForm";
 
 const theme = createTheme({
   palette: {
@@ -102,6 +103,7 @@ export default function App() {
               <Route exact path="/home/pay/pending" component={Pending} />
               <Route exact path="/home/pay/failure" component={Failure} />
               <Route exact path="/login" component={LoginForm} />
+              <Route exact path="/register" component={RegisterForm} />
               <Route exact path="/home/:id" component={ProductDetail} />
               <Route exact path="/cart" component={Cart} />
               <Route exact path="/wishlist" component={Wishlist} />
