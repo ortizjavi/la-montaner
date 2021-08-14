@@ -1,12 +1,20 @@
 import DashboardAdmin from "./DashboardAdmin";
 import SideBar from "../SideBar/SideBar";
+import DataUser from "./DataUser";
+import DashTable from "./DashTable";
+
 
 const Dashboard = () => {
+
 	return (
 		<div className="dashboard-container">
 			<SideBar/>
 			<div>
-				USER DASHBOARD
+				<DataUser />
+			<main className='dashboard-main'>
+				<DashTable/>	
+
+			</main>
 			</div>
 		</div>
 	)
