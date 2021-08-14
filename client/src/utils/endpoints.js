@@ -19,7 +19,7 @@ export const DELETE_PRODUCT = `${ADMIN_SERVER}/product`;
 //endpoint de compras
 export const ORDER_PAY = `${SERVER}/product/pay`;
 export const ORDER_STATUS = `${SERVER}/product/order`;
-export const GET_USERS = `${ADMIN_SERVER}/users`;
+export const GET_USERS = `${ADMIN_SERVER}/usersList`;
 
 export const fixedCategories = [
   "cervezas",

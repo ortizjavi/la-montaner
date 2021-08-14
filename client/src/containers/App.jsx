@@ -24,6 +24,7 @@ import LoginForm from "../components/ModalDialog/LoginForm";
 import Footer from "../components/Footer/Footer";
 import SideBarAdmin from "../components/Dashboard/SideBarAdmin";
 import AboutPage from "../components/About/About";
+import Accordion from "../components/About/FAQ";
 
 const theme = createTheme({
   palette: {
@@ -65,10 +66,11 @@ export default function App() {
             component={SideBarAdmin}
             roles={[ROLE.ADMIN]}
           />
-          <Route
+          <PrivateRoute
             exact
             path="/admin/productCreation"
             component={ProductCreation}
+            roles={[ROLE.ADMIN]}
           />
 
           <Route exact path="/admin/editProduct/:id" component={EditProduct} />
@@ -76,10 +78,17 @@ export default function App() {
           <Route exact path="/home/pay/success" component={Success} />
           <Route exact path="/home/pay/pending" component={Pending} />
           <Route exact path="/home/pay/failure" component={Failure} />
-          <Route
+          <PrivateRoute
+            exact
+            path="/admin/editProduct/:id"
+            component={EditProduct}
+            roles={[ROLE.ADMIN]}
+          />
+          <PrivateRoute
             exact
             path="/admin/categoryCreation"
             component={CategoryCreation}
+            roles={[ROLE.ADMIN]}
           />
         </Switch>
         {location.pathname !== "/" &&
@@ -94,17 +103,19 @@ export default function App() {
                 component={Dashboard}
                 roles={[ROLE.USER]}
               />
+              <Route exact path="/home/products/pay" component={Pay} />
+              <Route exact path="/home/pay/success" component={Success} />
+              <Route exact path="/home/pay/pending" component={Pending} />
+              <Route exact path="/home/pay/failure" component={Failure} />
               <Route exact path="/login" component={LoginForm} />
               <Route exact path="/home/:id" component={ProductDetail} />
               <Route exact path="/cart" component={Cart} />
               <Route exact path="/wishlist" component={Wishlist} />
+              <Route exact path="/about" component={AboutPage} />
+              <Route exact path="/faq" component={Accordion} />
             </div>
             <Footer />
           </>
-        ) : null}
-        {location.pathname !== "/" &&
-        !location.pathname.startsWith("/admin") ? (
-          <Footer />
         ) : null}
       </div>
     </ThemeProvider>

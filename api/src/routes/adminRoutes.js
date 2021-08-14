@@ -9,13 +9,19 @@ const {
   deleteCategory,
 } = require("../controllers/Admin/Categories");
 
-const { getUsers } = require("../controllers/Admin/Users/users");
+const { getUsersList } = require("../controllers/Admin/Users/users");
 const {
   getProducts,
   createProduct,
   updateProduct,
   deleteProduct,
 } = require("../controllers/Admin/Products");
+
+const {
+  newAdmin,
+  getUsers,
+  deleteUser,
+} = require("../controllers/Admin/Admin");
 
 // Categories
 router.get("/category", getCategories);
@@ -27,6 +33,10 @@ router.post("/product", authenticateToken, authAdmin, createProduct);
 router.put("/product/:id", authenticateToken, authAdmin, updateProduct);
 router.delete("/product/:id", authenticateToken, authAdmin, deleteProduct);
 // Users
-router.get("/users", getUsers);
+router.get("/usersList", getUsersList);
+// Admin
+router.post("/new", authenticateToken, authAdmin, newAdmin);
+router.get("/users", authenticateToken, authAdmin, getUsers);
+router.delete("/users", authenticateToken, authAdmin, deleteUser);
 
 module.exports = router;

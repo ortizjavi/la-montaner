@@ -3,10 +3,18 @@
     margin-top: 3px;
     display: flex;
     align-items: center;
-    padding-left: 30px;
     height: 20px;
     flex-wrap: nowrap;
     align-content: flex-end;
+    width: 100%;
+}
+
+.form-container label {
+    width: 80%;
+}
+
+.sb-container {
+    width: 25%;
 }
 
 
@@ -16,7 +24,7 @@
     font-size: 16px;
     height: 20px;
     padding: 0 20px;
-    width: 13vw;
+    width: 100%;
     outline: none;
     margin-left: 10px;
     margin-top: 8px;
@@ -39,16 +47,19 @@
 .input_search::-webkit-calendar-picker-indicator {
     filter:invert(1)
     opacity(0.01)
-  }
+}
+
 .sb-result-container{
-    margin-top: 2rem;
+    margin-top: 0.2rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    color: grey;
-    border: grey solid 1px;
-    width: 25rem;
+    /* color: grey;
+    border: grey solid 1px; */
+    width: 18rem;
     height: 2rem;
-    border-radius: 30px;
+    color: gray;
+    font-style: italic;
+    /* border-radius: 30px; */
     padding: 0 1rem;
 }

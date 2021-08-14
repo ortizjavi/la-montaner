@@ -84,6 +84,8 @@
     color: #3d3d3d;
 }
 
+/* responsive */
+
 @media screen and (max-width:768){
     .container-about{
     width: 80%;
