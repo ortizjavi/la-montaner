@@ -47,6 +47,20 @@
     transform: scale(1.1);
 }
 
-.cardsAdmin div:hover~.cardsAdmin {
+.cardsAdmin .cardsAdmin div:hover {
     background-color: black;
+}
+
+.cardsAdmin div:focus, .cardsAdmin div:hover {
+    outline: 0;
+    color: #fff;
+    background-color: #047E28;
+    transition: color 1s ease;
+    transition: background-color 1s ease;
+    cursor: pointer;
+    -webkit-transition: all 1s ease 0s;
+    -moz-transition: all 1s ease 0s;
+    -ms-transition: all 1s ease 0s;
+    -o-transition: all 1s ease 0s;
+    transition: all 1s ease 0s
 }

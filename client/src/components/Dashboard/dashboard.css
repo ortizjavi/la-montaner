@@ -1,7 +1,6 @@
-a{
-    text-decoration: none;
-    color: #022E1A ;
-
+a {
+	text-decoration: none;
+	color: #022E1A;
 }
 
 .dashboard-container {
@@ -14,17 +13,19 @@ a{
 	text-align: center;
 }
 
-
-.dashboard-container div:first-child{
+.dashboard-container div:first-child {
 	flex-basis: 30%;
 }
 
-.dashboard-container div:nth-child(2){
+.dashboard-container div:nth-child(2) {
 	color: red;
 	flex-basis: 70%;
 }
 
 .beer {
+	font-size: 25px;
+}
 
-	font-size:25px;
+.iconSB {
+	width: 50px;
 }
