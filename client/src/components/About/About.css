@@ -1,0 +1,126 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400&display=swap');
+
+.section-about{
+    font-family: 'Poppins', sans-serif;
+    width: 100%;
+    min-height: 100vh;
+    background-color: #ddd;
+}
+
+.container-about{
+    width: 80%;
+    display: block;
+    margin: auto;
+    padding-top: 100px;
+}
+
+.content-section{
+    float:left;
+    width: 55%;
+}
+
+.image-section{
+    float: right;
+    width: 40%;
+}
+
+.image-section img{
+   width: 100%;
+   height: auto;
+}
+
+.content-section .title-about{
+    text-transform: uppercase;
+    font-size: 28px;
+}
+
+.content-section .content h3{
+    margin-top: 20px;
+    color: #5d5d5d;
+    font-size: 25px;
+}
+
+.content-section .content p{
+    margin-top: 10px;
+    font-family: sans-serif;
+    font-size: 20px;
+    line-height: 1.5;
+}
+
+.content_p{
+    font-style: italic;
+    font-weight: 550;
+}
+
+.content-section .content .button_about{
+    margin-top: 60px;
+}
+
+.content-section .content .button_about a{
+    background-color: #3d3d3d;
+    padding: 12px 40px;
+    text-decoration: none;
+    color: #fff;
+    font-size: 20px;
+    letter-spacing: 1.5px;
+}
+
+.content-section .content .button_about a:hover{
+    background-color: #a52a2a;
+    color: #fff;
+}
+
+.content-section .social{
+    margin: 40px 40px;
+}
+
+.social_icons{
+    color: #a52a2a;
+    font-size: 55px!important;
+    padding: 20px 30px;
+}
+
+.social_icons:hover{
+    color: #3d3d3d;
+}
+
+@media screen and (max-width:768){
+    .container-about{
+    width: 80%;
+    display: block;
+    margin: auto;
+    padding-top: 50px;
+    }
+    .content-section{
+        float:none;
+        width: 100%;
+        display: block;
+        margin: auto;
+    }
+    .image-section{
+        float: none;
+        width: 100%;
+        display: block;
+        margin: auto;
+    }
+    .image-section img{
+        width: 100%;
+        height: auto;
+        display: block;
+        margin: auto;
+    }
+    .content-section .title-about{
+        text-align: center;
+        font-size: 19px;
+    }
+    .content-section .content .button_about{
+       text-align: center;
+    }
+    .content-section .content .button_about a{
+        padding: 9px 30px;
+    }
+    .content-section .social{
+        text-align: center;
+    }
+}
+
