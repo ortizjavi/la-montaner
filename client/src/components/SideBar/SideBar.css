@@ -1,0 +1,39 @@
+.sidebar-container{
+    width: 16rem;
+    height: 60vh;
+    margin-left: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    box-sizing: border-box;
+    border: 1px grey solid;
+    justify-content: flex-start;
+    background: white;
+}
+.sidebar-title{
+    padding: 5%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+.sidebar-title h3 {
+    margin-left: 1rem;
+}
+.sidebar-section{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    box-sizing: border-box;
+    padding: 10%;
+    justify-content: space-evenly;
+
+}
+.sidebar-navlink{
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+.sidebar-navlink span{
+    padding-left: 1rem;
+}

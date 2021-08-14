@@ -57,7 +57,7 @@ function NavBar(props) {
       {!props.admin ?
         <nav className='nav-container'>
           <ul className='nav-ul'>
-            {/* <li className="list-item">
+            <li className="list-item">
           <select className='nav-selec' name="category" value='' onChange={(e) =>handleCategory(e)}>
             <option id='none' value='Precio'>Categorias:</option>
             {state !== 'vertodos' && <option id='range1'  value='vertodos'>Ver Todas</option>}
@@ -67,22 +67,24 @@ function NavBar(props) {
             <option id='range3' value='otros'>Otros</option>
           </select>
           </li>
-          <div>
-          { state && <div className='actived'>{`${state !=='vertodos' ? state.toUpperCase() : '  '}`}</div> }
+          { state && <div className='' style={{marginLeft: 70}}>{`${state !=='vertodos' ? state.toUpperCase() : '  '}`}</div> }
+          {/* <div>
           </div> */}
-            <li className="list-item">
+            {/* <li className="list-item">
               <NavLink to='/home'>
                 <input className={`${currentCategoryState === 'vertodos' ? 'Nav-vertodos' : "actived-vertodos"}`} type="button" value="Ver Todos" onClick={() => setState('vertodos')} />
               </NavLink>
             </li>
             <li className="list-item">
-              <NavLink to='/home'>
-                <input className={`${currentCategoryState === 'cervezas' ? "actived" : 'Nav-button'}`} type="button" value="Cervezas" onClick={() => setState('cervezas')} />
-              </NavLink>
+            <NavLink to='/home'>
+            <input className={`${currentCategoryState === 'cervezas' ? "actived" : 'Nav-button'}`} type="button" value="Cervezas" onClick={() => setState('cervezas')} />
+            </NavLink>
             </li>
-              {/* <NavLink to='/home'>
-              <input className={`${currentCategoryState === 'conservas' ? "actived" : 'Nav-button'}`} type="button" value="Conservas" onClick={() => setState('conservas')} />
-            </NavLink> */}
+            <li className="list-item">
+            <NavLink to='/home'>
+            <input className={`${currentCategoryState === 'conservas' ? "actived" : 'Nav-button'}`} type="button" value="Conservas" onClick={() => setState('conservas')} />
+            </NavLink> 
+            </li>
             <li className="list-item">
             <NavLink to='/home'>
               <input className={`${currentCategoryState === 'merchandising' ? "actived" : 'Nav-button'}`} type="button" value="Merchadising" onClick={() => setState('merchandising')} />
@@ -92,7 +94,7 @@ function NavBar(props) {
             <NavLink to='/home'>
               <input className={`${currentCategoryState === 'otros' ? "actived" : 'Nav-button'}`} type="button" value="Otros" onClick={() => setState('otros')} />
             </NavLink>
-            </li>
+            </li>*/}
         </ul>
       </nav>
         : null}
@@ -125,3 +127,6 @@ function NavBar(props) {
 export default NavBar;
 
 
+     {/* <NavLink to='/home'>
+              <input className={`${currentCategoryState === 'conservas' ? "actived" : 'Nav-button'}`} type="button" value="Conservas" onClick={() => setState('conservas')} />
+            </NavLink> */}
