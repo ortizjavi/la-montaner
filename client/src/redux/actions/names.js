@@ -43,6 +43,7 @@ export const ADD_CART_COMPLETED = 'ADD_CART_COMPLETED';
 export const ORDER_PAY = 'ORDER_PAY';
 export const ORDER_STATUS = 'ORDER_STATUS';
 
-//login action names
+//login/register action names
 export const LOGIN_USER = 'LOGIN_USER';
+export const REGISTER_USER = 'REGISTER_USER';
 

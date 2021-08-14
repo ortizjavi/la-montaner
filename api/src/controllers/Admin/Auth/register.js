@@ -9,7 +9,8 @@ module.exports = (req, res, next) => {
 		User.create({
 			...req.body,
 			password : hashed,
-			role: undefined
+			role: undefined,
+			verified: false
 		}).then(() => {
 			res.send('Ok');
 		}).catch((err) => {

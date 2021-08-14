@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from "react-router-dom";
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import ExternAuthentication from '../Authentication/Authentication';
 import './LoginForm.css';
+import { Link } from 'react-router-dom'
+import { login } from "../../redux/actions/types/authActions";
 
-const LoginForm = ({ handleClose }) => {
-  
+const LoginForm = () => {
+    const dispatch = useDispatch()
     const[email, setEmail] = useState('');
     const[password, setPassword] = useState('');
     const user = useSelector(state => state.session.user);
@@ -15,7 +17,7 @@ const LoginForm = ({ handleClose }) => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        handleClose();
+       dispatch(login({email, password}))
     }
 
     useEffect(() => {
@@ -50,13 +52,13 @@ const LoginForm = ({ handleClose }) => {
           />
           
           <div className='btnStyles'>
-            <Button variant="contained" onClick={handleClose}>
-              Cancel
-            </Button>
             <Button type="submit" variant="contained" color="primary">
-              Signup
+              Acceder
             </Button>
             </div>
+            <div className={'title'}>¿No tienes cuenta?  
+             <Link to={'/register'}> Regístrate</Link>
+            </div> 
             <div>
             <ExternAuthentication />
             </div>
