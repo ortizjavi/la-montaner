@@ -44,7 +44,7 @@ export default function Pagination({response}) {
         </li>
         {pagination.map(page => (
           <li
-            className={`${currentPage === page && "active"}`}
+            className={`${currentPage === page && "active-p"}`}
             onClick={handleClick.bind(null, page)}
           >
             {page}
