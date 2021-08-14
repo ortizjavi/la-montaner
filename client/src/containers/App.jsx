@@ -22,6 +22,7 @@ import Failure from "../components/PayState/Failure";
 import PrivateRoute from '../components/PrivateRoute/PrivateRoute' 
 import LoginForm from "../components/ModalDialog/LoginForm";
 import Footer from '../components/Footer/Footer';
+import AboutPage from '../components/About/About';
 
 const theme = createTheme({
   palette: {
@@ -55,6 +56,7 @@ export default function App() {
   return (
     <ThemeProvider theme={theme}>
       <div className="body-container">
+
         <Switch>
           <Route exact path="/" component={Landing} />          
           <PrivateRoute 
@@ -100,6 +102,7 @@ export default function App() {
              />
              <Route exact path="/home/:id" component={ProductDetail} />
              <Route exact path="/cart" component={Cart} />
+             <Route exct path="/wishlist" component={Wishlist} />
            </div>
          <Footer/>
          </>
