@@ -31,6 +31,7 @@ const LoginForm = ({ handleClose }) => {
 
     return (
         <form className={'formStyles'} onSubmit={handleSubmit}>
+          <div className={'title'}>¿Ya tenés cuenta con nosotros?</div>
           <div className={'title'}>Ingresá tu email y tu contraseña</div>
           <TextField
             label="Email"
@@ -51,10 +52,10 @@ const LoginForm = ({ handleClose }) => {
           
           <div className='btnStyles'>
             <Button variant="contained" onClick={handleClose}>
-              Cancel
+              Cancelar
             </Button>
             <Button type="submit" variant="contained" color="primary">
-              Signup
+              Acceder
             </Button>
             </div>
             <div>

@@ -24,7 +24,7 @@ export default function ExternAuthentication() {
             <div className={'gooleBtn'}>
             <GoogleLogin
                 clientId="185256781467-8t9jr2l450gsbuev5d12bs463280d0c4.apps.googleusercontent.com"
-                buttonText="Login with Google"
+                buttonText="Acceder con Google"
                 onSuccess={responseGoogle}
                 onFailure={responseGoogle}
                 cookiePolicy={'single_host_origin'}
@@ -32,6 +32,7 @@ export default function ExternAuthentication() {
             </div>
             <div className={'facebookBtn'}>
             <FacebookLogin
+            login_text={"Acceder con Facebook"}
                 appId="594981481671722"
                 autoLoad={false}
                 fields="name,email,picture"
