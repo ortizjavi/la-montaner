@@ -17,7 +17,7 @@
 }
 
 .back-home-btn:hover {
-  background-color: #047e28;
+  background-color: rgb(43,149,89);
   color: white;
   transition: 0.25s;
   cursor: pointer;
