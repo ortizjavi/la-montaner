@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from "react-router-dom";
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import ExternAuthentication from '../Authentication/Authentication';
 import './LoginForm.css';
+import { Link } from 'react-router-dom'
+import { login } from "../../redux/actions/types/authActions";
 
 const LoginForm = () => {
-  
+    const dispatch = useDispatch()
     const[email, setEmail] = useState('');
     const[password, setPassword] = useState('');
     const user = useSelector(state => state.session.user);
@@ -15,7 +17,7 @@ const LoginForm = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-       
+       dispatch(login({email, password}))
     }
 
     useEffect(() => {
@@ -31,7 +33,6 @@ const LoginForm = () => {
 
     return (
         <form className={'formStyles'} onSubmit={handleSubmit}>
-          <div className={'title'}>¿Ya tenés cuenta con nosotros?</div>
           <div className={'title'}>Ingresá tu email y tu contraseña</div>
           <TextField
             label="Email"
@@ -55,6 +56,9 @@ const LoginForm = () => {
               Acceder
             </Button>
             </div>
+            <div className={'title'}>¿No tienes cuenta?  
+             <Link to={'/register'}> Regístrate</Link>
+            </div> 
             <div>
             <ExternAuthentication />
             </div>
