@@ -180,6 +180,10 @@ function EditProductChild({ producto, defaultState }) {
   const uploadImage = async (e) => {
     const files = e.target.files;
     const images = new FormData();
+
+    const axiosInstance = axios.create();
+    delete axiosInstance.defaults.headers.common['authorization']
+
     for (let i = 0; i < files.length; i++) {
       console.log(files[i]);
       images.append("file", files[i]);

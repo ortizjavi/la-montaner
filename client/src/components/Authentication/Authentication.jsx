@@ -17,24 +17,27 @@ export default function ExternAuthentication() {
       dispatch(login({ facebook: response.accessToken }));
   };
 
-  return (
-    <div>
-      <br></br>
-      {/* <FacebookLogin
-        appId="594981481671722"
-        autoLoad={false}
-        fields="name,email,picture"
-        onClick={responseFacebook}
-        callback={responseFacebook}
-      /> */}
-      ,
-      <GoogleLogin
-        clientId="185256781467-8t9jr2l450gsbuev5d12bs463280d0c4.apps.googleusercontent.com"
-        buttonText="Google Login"
-        onSuccess={responseGoogle}
-        onFailure={responseGoogle}
-        cookiePolicy={"single_host_origin"}
-      />
-    </div>
-  );
+
+    return (
+        <div >
+            <br></br>
+            <div className={'gooleBtn'}>
+            <GoogleLogin
+                clientId="185256781467-8t9jr2l450gsbuev5d12bs463280d0c4.apps.googleusercontent.com"
+                buttonText="Login with Google"
+                onSuccess={responseGoogle}
+                onFailure={responseGoogle}
+                cookiePolicy={'single_host_origin'}
+            />
+            </div>
+            <div className={'facebookBtn'}>
+            {/* <FacebookLogin
+                appId="594981481671722"
+                autoLoad={false}
+                fields="name,email,picture"
+                onClick={responseFacebook}
+                callback={responseFacebook} /> */},
+                </div>
+        </div>
+    )
 }

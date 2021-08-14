@@ -129,14 +129,16 @@ export default function ProductCreation() {
   const uploadImage = async (e) => {
     const files = e.target.files;
     const images = new FormData();
+
+    const axiosInstance = axios.create();
+    delete axiosInstance.defaults.headers.common['authorization']
+
     for (let i = 0; i < files.length; i++) {
       console.log(files[i]);
       images.append("file", files[i]);
       console.log(i.name);
       images.append("upload_preset", "laMontanes");
-      const instance = axios.create();
-      delete instance.defaults.headers.common['authorization'];
-      await instance
+      await axiosInstance
         .post(
           "https://api.cloudinary.com/v1_1/la-montanes/image/upload",
           images,

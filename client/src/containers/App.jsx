@@ -15,6 +15,7 @@ import DashboardAdmin from "../components/Dashboard/DashboardAdmin";
 import EditProduct from "../components/EditProduct/EditProduct";
 import NavBar from "../components/Navbar/NavBar";
 import Cart from "../components/Cart/Cart";
+import Wishlist from '../components/Wishlist/Wishlist';
 import Success from "../components/PayState/Success";
 import Pending from "../components/PayState/Pending";
 import Failure from "../components/PayState/Failure";
@@ -23,6 +24,7 @@ import LoginForm from "../components/ModalDialog/LoginForm";
 import Footer from '../components/Footer/Footer';
 import SideBarAdmin from "../components/Dashboard/SideBarAdmin";
 import CardsAdmin from "../components/CardsAdmin/CardsAdmin";
+import AboutPage from '../components/About/About';
 
 const theme = createTheme({
   palette: {
@@ -56,28 +58,13 @@ export default function App() {
   return (
     <ThemeProvider theme={theme}>
       <div className="body-container">
-        <Route exact path="/" component={Landing} />
-        {location.pathname !== "/" &&
-        !location.pathname.startsWith("/admin") ? (
-          <NavBar />
-        ) : null}
-        <div className="main-container">
-          <Route exact path="/home" component={Home} />
-          <PrivateRoute
-            exact
-            path="/dashboard"
-            component={Dashboard}
-            roles={[ROLE.USER]}
-          />
-          <Route exact path="/login" component={LoginForm} />
-          <Route exact path="/home/:id" component={ProductDetail} />
-          <Route exact path="/cart" component={Cart} />
-        </div>
+
         <Switch>
-          <PrivateRoute
-            exact
-            path="/admin"
-            component={SideBarAdmin}
+          <Route exact path="/" component={Landing} />          
+          <PrivateRoute 
+            exact 
+            path='/admin' 
+            component={SideBarAdmin} 
             roles={[ROLE.ADMIN]}
           />
           <Route
@@ -118,8 +105,9 @@ export default function App() {
              />
              <Route exact path="/home/:id" component={ProductDetail} />
              <Route exact path="/cart" component={Cart} />
+             <Route exact path="/wishlist" component={Wishlist} />
            </div>
-           <Footer/>
+         <Footer/>
          </>
           : null
         }

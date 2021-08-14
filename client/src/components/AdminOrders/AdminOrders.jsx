@@ -127,8 +127,8 @@ export default function OrdersAdmin() {
 
   const ordenes = useSelector(state => state.cart.orders);
   
-  const rows = ordenes.map(o => 
-    createData(o.cart[0].name,o.createdAt, 24, o.status) 
+  const rows = ordenes?.map(o => 
+    createData(o.cart[0].name,o.createdAt, 24,200, o.status) 
     );
 
   return (
@@ -145,7 +145,7 @@ export default function OrdersAdmin() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
+          {rows?.map((row) => (
             <Row key={row.name} row={row} />
           ))}
         </TableBody>
