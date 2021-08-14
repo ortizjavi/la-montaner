@@ -5,7 +5,6 @@ import NavBar from "../Navbar/NavBar";
 export default function Failure() {
   return (
     <div>
-      <NavBar />
       <div className="psContend">
         <h2 className="failure">Compra fallida</h2>
         <img

@@ -5,7 +5,6 @@ import NavBar from "../Navbar/NavBar";
 export default function Success() {
   return (
     <div>
-      <NavBar />
       <div className="psContend">
         <h2 className="success">Compra satisfactoria</h2>
         <img

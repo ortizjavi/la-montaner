@@ -4,7 +4,6 @@ import NavBar from "../Navbar/NavBar";
 export default function Pending() {
   return (
     <div>
-      <NavBar />
       <div className="psContend">
         <h2 className="success">Pago en Proceso...</h2>
         <img
