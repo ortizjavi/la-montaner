@@ -4,10 +4,10 @@ import { useSelector } from 'react-redux';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import ExternAuthentication from '../Authentication/Authentication';
+import './LoginForm.css';
 
 const LoginForm = ({ handleClose }) => {
-    const [firstName, setFirstName] = useState('');
-    const [lastName, setLastName] = useState('');
+  
     const[email, setEmail] = useState('');
     const[password, setPassword] = useState('');
     const user = useSelector(state => state.session.user);
@@ -15,7 +15,6 @@ const LoginForm = ({ handleClose }) => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        console.log(firstName, lastName, email, password);
         handleClose();
     }
 
@@ -31,7 +30,8 @@ const LoginForm = ({ handleClose }) => {
     }, [user])
 
     return (
-        <form  onSubmit={handleSubmit}>
+        <form className={'formStyles'} onSubmit={handleSubmit}>
+          <div className={'title'}>Ingresá tu email y tu contraseña</div>
           <TextField
             label="Email"
             variant="filled"
@@ -48,15 +48,19 @@ const LoginForm = ({ handleClose }) => {
             value={password}
             onChange={e => setPassword(e.target.value)}
           />
-          <div>
+          
+          <div className='btnStyles'>
             <Button variant="contained" onClick={handleClose}>
               Cancel
             </Button>
             <Button type="submit" variant="contained" color="primary">
               Signup
             </Button>
+            </div>
+            <div>
             <ExternAuthentication />
-          </div>
+            </div>
+          
         </form>
       );
     };

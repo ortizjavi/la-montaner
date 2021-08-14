@@ -34,7 +34,7 @@ export function logout(){
 
 
 function setAuthDefaulHeaders(token) {
-  axios.defaults.headers.common['authorization'] = token;
+  axios.defaults.headers.common['authorization'] = `Bearer ${token}`;
 }
 
 function deleteAuthDefaultHeaders() {

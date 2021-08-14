@@ -60,8 +60,9 @@
   }
 
   .back-btn:hover {
-    background-color: black;
+    background-color: rgb(43,149,89);
     color: white;
+    transition: 0.25s;
     cursor: pointer;
   }
   

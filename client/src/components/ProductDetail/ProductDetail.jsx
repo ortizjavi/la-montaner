@@ -6,17 +6,26 @@ import { getProductDetail } from "../../redux/actions/types/productActions";
 import Loading from "../Loading/Loading.js";
 import "./ProductDetail.css";
 
-import { addCartProduct } from "../../redux/actions/types/productActions";
+
+import { addCartProduct, addFavProducts, removeFavProduct} from "../../redux/actions/types/productActions";
 
 //Slider2
 //import { BsChevronLeft, BsChevronCompactRight } from "react-icons/fa";
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 
+//Favs
+import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
+import FavoriteIcon from '@material-ui/icons/Favorite';
+
 export default function ProductDetail({ match, history }) {
   const { id } = useParams();
+  
   const detail = useSelector((state) => state.root.productDetail);
+
   const dispatch = useDispatch();
+
+  //local states
   const [qty, setQty] = useState(1);
   const [loading, setLoading] = useState(true);
   const [count, setCount] = useState(1);
@@ -25,6 +34,10 @@ export default function ProductDetail({ match, history }) {
   const cart = useSelector((state) => state.cart);
   const { cartItems } = cart;
 
+  //wishlist
+  const wishlist = useSelector((state) => state.wishlist);
+  const { wishlistItems } = wishlist;
+  const fav = wishlistItems.find(product => product.id === id);
   //slider states
   const [current, setCurrent] = useState(0);
   const length = detail?.img?.length;
@@ -36,7 +49,10 @@ export default function ProductDetail({ match, history }) {
     }, 1000);
   }, [id, dispatch, match]);
 
-  //console.log("components/ProductDetail:", detail);
+  useEffect(() => {
+    window.localStorage.setItem('wishlist', JSON.stringify(wishlistItems));
+  }, [wishlistItems])
+
   const addToCartHandler  = () => {
     dispatch(addCartProduct(detail._id, qty));
     history.push(`/cart`);
@@ -52,6 +68,16 @@ export default function ProductDetail({ match, history }) {
 
   if (!Array.isArray(detail.img) || detail.img.length <= 0) {
     return null;
+  }
+
+  const handleRemoveFav = () => {
+    console.log('funcion de removeFav')
+    dispatch(removeFavProduct(id));
+  }
+
+  const handleAddFav = () => {
+    console.log("funcion de add fav")
+    dispatch(addFavProducts(id));
   }
 
   return (
@@ -98,7 +124,16 @@ export default function ProductDetail({ match, history }) {
           </div>
             <div className="productscreen__right">
             <div className="detail_info">
+              <div className="name_fav_detail">
               <p className="detail__name">{detail.name}</p>
+              
+               {
+                 fav ?
+                <FavoriteIcon onClick={handleRemoveFav} className="detail_fav" />
+                :
+                <FavoriteBorderIcon onClick={handleAddFav} className="detail_fav" />
+               }
+               </div>                               
               <p className="detail_stars">⭐⭐⭐⭐⭐</p>
               <p>Descripción: {detail.description}</p>
             </div>
