@@ -15,16 +15,17 @@ import DashboardAdmin from "../components/Dashboard/DashboardAdmin";
 import EditProduct from "../components/EditProduct/EditProduct";
 import NavBar from "../components/Navbar/NavBar";
 import Cart from "../components/Cart/Cart";
-import Wishlist from '../components/Wishlist/Wishlist';
+import Wishlist from "../components/Wishlist/Wishlist";
 import Success from "../components/PayState/Success";
 import Pending from "../components/PayState/Pending";
 import Failure from "../components/PayState/Failure";
-import PrivateRoute from '../components/PrivateRoute/PrivateRoute' 
+import PrivateRoute from "../components/PrivateRoute/PrivateRoute";
 import LoginForm from "../components/ModalDialog/LoginForm";
-import Footer from '../components/Footer/Footer';
-import AboutPage from '../components/About/About';
-import Accordion from '../components/About/FAQ';
-import RegisterForm from '../components/ModalDialog/RegisterForm';
+import Footer from "../components/Footer/Footer";
+import SideBarAdmin from "../components/Dashboard/SideBarAdmin";
+import AboutPage from "../components/About/About";
+import Accordion from "../components/About/FAQ";
+import RegisterForm from "../components/ModalDialog/RegisterForm";
 
 const theme = createTheme({
   palette: {
@@ -44,9 +45,9 @@ const theme = createTheme({
 });
 
 const ROLE = {
-  USER: 'USER',
-  ADMIN: 'ADMIN'
-}
+  USER: "USER",
+  ADMIN: "ADMIN",
+};
 
 export default function App() {
   const dispatch = useDispatch();
@@ -58,13 +59,12 @@ export default function App() {
   return (
     <ThemeProvider theme={theme}>
       <div className="body-container">
-
         <Switch>
-          <Route exact path="/" component={Landing} />          
-          <PrivateRoute 
-            exact 
-            path='/admin' 
-            component={DashboardAdmin} 
+          <Route exact path="/" component={Landing} />
+          <PrivateRoute
+            exact
+            path="/admin"
+            component={SideBarAdmin}
             roles={[ROLE.ADMIN]}
           />
           <PrivateRoute
@@ -86,39 +86,33 @@ export default function App() {
             roles={[ROLE.ADMIN]}
           />
         </Switch>
-        {
-          location.pathname !== '/'  && 
-          !location.pathname.startsWith('/admin') ?
-        <>
-        <NavBar/>
-          <div className="main-container">
-             <Route exact path="/home" component={Home} />
-             <PrivateRoute 
-               exact 
-               path='/dashboard' 
-               component={Dashboard} 
-               roles={[ROLE.USER]}
-             />
+        {location.pathname !== "/" &&
+        !location.pathname.startsWith("/admin") ? (
+          <>
+            <NavBar />
+            <div className="main-container">
+              <Route exact path="/home" component={Home} />
+              <PrivateRoute
+                exact
+                path="/dashboard"
+                component={Dashboard}
+                roles={[ROLE.USER]}
+              />
               <Route exact path="/home/products/pay" component={Pay} />
               <Route exact path="/home/pay/success" component={Success} />
               <Route exact path="/home/pay/pending" component={Pending} />
               <Route exact path="/home/pay/failure" component={Failure} />
-             <Route
-               exact
-               path="/login"
-               component={LoginForm}
-             />
-             <Route exact path="/register" component={RegisterForm} />
-             <Route exact path="/home/:id" component={ProductDetail} />
-             <Route exact path="/cart" component={Cart} />
-             <Route exact path="/wishlist" component={Wishlist} />
-             <Route exact path="/about" component={AboutPage} />
-             <Route exact path="/faq" component={Accordion} />
-           </div>
-         <Footer/>
-         </>
-          : null
-        }
+              <Route exact path="/login" component={LoginForm} />
+              <Route exact path="/register" component={RegisterForm} />
+              <Route exact path="/home/:id" component={ProductDetail} />
+              <Route exact path="/cart" component={Cart} />
+              <Route exact path="/wishlist" component={Wishlist} />
+              <Route exact path="/about" component={AboutPage} />
+              <Route exact path="/faq" component={Accordion} />
+            </div>
+            <Footer />
+          </>
+        ) : null}
       </div>
     </ThemeProvider>
   );

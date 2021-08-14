@@ -19,6 +19,10 @@ const OrderSchema = Schema({
         type: Schema.Types.ObjectId,
         ref: 'User'
     },
-});
+    date: {
+        type: String,
+        trim: true ,
+    },
+},{timestamps: true});
 
 module.exports = model('Order', OrderSchema);
