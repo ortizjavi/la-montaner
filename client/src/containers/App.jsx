@@ -72,12 +72,6 @@ export default function App() {
             component={ProductCreation}
             roles={[ROLE.ADMIN]}
           />
-
-          <Route exact path="/admin/editProduct/:id" component={EditProduct} />
-          <Route exact path="/home/products/pay" component={Pay} />
-          <Route exact path="/home/pay/success" component={Success} />
-          <Route exact path="/home/pay/pending" component={Pending} />
-          <Route exact path="/home/pay/failure" component={Failure} />
           <PrivateRoute
             exact
             path="/admin/editProduct/:id"
