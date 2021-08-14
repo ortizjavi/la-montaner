@@ -56,7 +56,7 @@
 }
 
 .delete_btn:hover {
-  background-color: red;
+  background-color: rgb(170, 0, 0);
   color: white;
   transition: 0.25s;
   cursor: pointer;
