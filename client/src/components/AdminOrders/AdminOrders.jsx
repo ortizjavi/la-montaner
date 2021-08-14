@@ -1,42 +1,39 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/core/styles';
-import Box from '@material-ui/core/Box';
-import Collapse from '@material-ui/core/Collapse';
-import IconButton from '@material-ui/core/IconButton';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Typography from '@material-ui/core/Typography';
-import Paper from '@material-ui/core/Paper';
-import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
-import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
-import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
-import { getOrders } from '../../redux/actions/types/productActions';
+import React from "react";
+import PropTypes from "prop-types";
+import { makeStyles } from "@material-ui/core/styles";
+import Box from "@material-ui/core/Box";
+import Collapse from "@material-ui/core/Collapse";
+import IconButton from "@material-ui/core/IconButton";
+import Table from "@material-ui/core/Table";
+import TableBody from "@material-ui/core/TableBody";
+import TableCell from "@material-ui/core/TableCell";
+import TableContainer from "@material-ui/core/TableContainer";
+import TableHead from "@material-ui/core/TableHead";
+import TableRow from "@material-ui/core/TableRow";
+import Typography from "@material-ui/core/Typography";
+import Paper from "@material-ui/core/Paper";
+import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
+import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { getOrders } from "../../redux/actions/types/productActions";
 
 const useRowStyles = makeStyles({
   root: {
-    '& > *': {
-      borderBottom: 'unset',
+    "& > *": {
+      borderBottom: "unset",
     },
   },
 });
 
-function createData(Detalle,Usuario, Fecha, Precio,Estado ) {
+function createData(Detalle, Usuario, Fecha, Precio, Estado, Orden) {
   return {
     Detalle,
     Usuario,
     Fecha,
     Precio,
     Estado,
-    Orden: [
-      { date: '2020-01-05', customerId: '11091700', amount: 3 },
-      { date: '2020-01-02', customerId: 'Anonymous', amount: 1 },
-    ],
+    Orden,
   };
 }
 
@@ -49,7 +46,11 @@ function Row(props) {
     <React.Fragment>
       <TableRow className={classes.root}>
         <TableCell>
-          <IconButton aria-label="expand row" size="small" onClick={() => setOpen(!open)}>
+          <IconButton
+            aria-label="expand row"
+            size="small"
+            onClick={() => setOpen(!open)}
+          >
             {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
           </IconButton>
         </TableCell>
@@ -71,21 +72,30 @@ function Row(props) {
               <Table size="small" aria-label="purchases">
                 <TableHead>
                   <TableRow>
-                    <TableCell>Producto</TableCell>
-                    <TableCell>Cantidad</TableCell>
-                    <TableCell align="right">Total($)</TableCell>
+                    <TableCell>
+                      <b>Producto</b>
+                    </TableCell>
+                    <TableCell>
+                      <b>Precio</b>
+                    </TableCell>
+                    <TableCell>
+                      <b>Cantidad</b>
+                    </TableCell>
+                    <TableCell align="center">
+                      <b>Total($)</b>
+                    </TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
                   {row.Orden.map((historyRow) => (
                     <TableRow key={historyRow.date}>
                       <TableCell component="th" scope="row">
-                        {historyRow.date}
+                        {historyRow.name}
                       </TableCell>
-                      <TableCell>{historyRow.customerId}</TableCell>
-                      <TableCell align="right">{historyRow.amount}</TableCell>
-                      <TableCell align="right">
-                        {Math.round(historyRow.amount * row.price * 100) / 100}
+                      <TableCell>{historyRow.price}</TableCell>
+                      <TableCell>{historyRow.stockSelected}</TableCell>
+                      <TableCell align="center">
+                        {historyRow.stockSelected * historyRow.price}
                       </TableCell>
                     </TableRow>
                   ))}
@@ -109,7 +119,7 @@ Row.propTypes = {
         amount: PropTypes.number.isRequired,
         customerId: PropTypes.string.isRequired,
         date: PropTypes.string.isRequired,
-      }),
+      })
     ).isRequired,
     name: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
@@ -117,19 +127,38 @@ Row.propTypes = {
   }).isRequired,
 };
 
-
 export default function OrdersAdmin() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getOrders())
-  }, [dispatch])
+    dispatch(getOrders());
+  }, [dispatch]);
 
-  const ordenes = useSelector(state => state.cart.orders);
-  
-  const rows = ordenes?.map(o => 
-    createData(o.cart[0].name,o.createdAt, 24,200, o.status) 
+  const ordenes = useSelector((state) => state.cart.orders);
+
+  const rows = ordenes?.map((o) => {
+    let subtotal = 0;
+    o.cart.forEach((i) => {
+      subtotal += i.price * i.stockSelected;
+    });
+    console.log(subtotal);
+    let orden = o.cart.map((i) => {
+      return {
+        date: o.createdAt,
+        name: i.name,
+        price: i.price,
+        stockSelected: i.stockSelected,
+      };
+    });
+    return createData(
+      o.cart[0].name,
+      o.createdAt.slice(0, 10),
+      "Montaner",
+      subtotal,
+      o.status,
+      orden
     );
+  });
 
   return (
     <TableContainer component={Paper}>
@@ -137,11 +166,21 @@ export default function OrdersAdmin() {
         <TableHead>
           <TableRow>
             <TableCell />
-            <TableCell>Detalle</TableCell>
-            <TableCell align="right">Usuario</TableCell>
-            <TableCell align="right">Fecha</TableCell>
-            <TableCell align="right">Precio</TableCell>
-            <TableCell align="right">Estado</TableCell>
+            <TableCell>
+              <b>Detalle</b>
+            </TableCell>
+            <TableCell align="right">
+              <b>Usuario</b>
+            </TableCell>
+            <TableCell align="right">
+              <b>Fecha</b>
+            </TableCell>
+            <TableCell align="right">
+              <b>Precio</b>
+            </TableCell>
+            <TableCell align="right">
+              <b>Estado</b>
+            </TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
