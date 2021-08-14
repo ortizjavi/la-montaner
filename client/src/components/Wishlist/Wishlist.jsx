@@ -33,7 +33,7 @@ export default function Wishlist() {
               </div>
               <div className='image_container'>
                 <Link to={`/home/${product.id}`}>
-                  <img className='product_image' src={product.image} alt="product"/>
+                  <img className='product_image' src={product.img} alt="product"/>
                 </Link>
               </div>
               <h5 className='product_name'>{product.name}</h5>

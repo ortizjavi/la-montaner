@@ -38,7 +38,6 @@ export default function ProductDetail({ match, history }) {
   const wishlist = useSelector((state) => state.wishlist);
   const { wishlistItems } = wishlist;
   const fav = wishlistItems.find(product => product.id === id);
-
   //slider states
   const [current, setCurrent] = useState(0);
   const length = detail?.img?.length;

@@ -21,7 +21,7 @@ const AboutPage = () => {
                         </p>
                         <p className="content_p">Nos encontramos en Villa Paravachasca, Córdoba, Argentina.</p>
                     <div className="button_about">
-                        <a href='https://www.instagram.com/lamontanes/' target='_blank'>Leer Mas</a>
+                        <a href='https://www.instagram.com/lamontanes/' target='_blank'>Ver mas</a>
                     </div>
                     </div>
                     <div className='social'>
