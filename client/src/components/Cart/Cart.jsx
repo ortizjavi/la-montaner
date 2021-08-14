@@ -63,7 +63,7 @@ const Cart = () => {
 
           {cartItems.length === 0 ? (
             <div>
-              Tu carrito esta vacio <Link to="/home" className='back-btn'>Volver atras</Link>
+              Tu carrito esta vacio. <Link to="/home" className='back-btn'>Volver a la tienda</Link>
             </div>
           ) : (
             cartItems.map((item) => (
