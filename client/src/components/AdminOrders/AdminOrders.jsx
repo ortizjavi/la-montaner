@@ -135,7 +135,6 @@ export default function OrdersAdmin() {
   }, [dispatch]);
 
   const ordenes = useSelector((state) => state.cart.orders);
-
   const rows = ordenes?.map((o) => {
     let subtotal = 0;
     o.cart.forEach((i) => {

@@ -23,6 +23,7 @@ import { Link } from "react-router-dom";
 import Dashboard from "./DashboardAdmin";
 import CategoryCreator from "../CategoryCreation/CategoryCreation";
 import OrdersAdmin from "../AdminOrders/AdminOrders";
+import UsersTable from "../UsersTable/UsersTable";
 
 const drawerWidth = 240;
 
@@ -234,7 +235,7 @@ export default function SideBarAdmin() {
         ) : button === "ordenes" ? (
           <OrdersAdmin />
         ) : button === "usuarios" ? (
-          <div>Usuarios</div>
+          <UsersTable />
         ) : (
           <div className="cardsAdmin">
             <div onClick={(e) => handleButton(e, "productos")}>
