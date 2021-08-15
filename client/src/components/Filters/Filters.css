@@ -1,4 +1,4 @@
-.sidebar-container{
+.filters-container{
     /* margin-top: -4rem; */
     background: white;
     width: 16rem;
@@ -10,13 +10,13 @@
     box-sizing: border-box;
 }
 
-.sidebar-title{
+.filters-title{
     display: flex;
     font-size: 0.9rem;
     color: #CB9D57;
     padding-bottom: 1rem;
 }
-.sidebar-img{
+.filters-img{
     width: 40px;
     margin: 2.5em 1rem;
     
@@ -52,6 +52,10 @@
 .select-sidebar:hover {
     background-color: rgb(236, 233, 233);
     box-shadow: 0.5px 0.5px;
+}
+.select-filters{
+    border: none;
+    background: #CB9D57;
 }
 
 /* .filter-result{

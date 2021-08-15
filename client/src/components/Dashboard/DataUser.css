@@ -1,0 +1,12 @@
+.dataUser-container{
+    margin-top: 1vh;
+    padding: 1vh;
+    display: flex;
+    justify-content: space-evenly;
+    border: solid 1px grey;
+    background: white;
+}
+.dataUser-section{
+    display: flex;
+    justify-content: space-evenly;
+}
