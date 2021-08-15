@@ -1,7 +1,7 @@
 import React from 'react';
 import './Footer.css';
 import { NavLink } from 'react-router-dom';
-import {WHATSAPP_LINK} from '../../utils/constans';
+import {WHATSAPP_LINK} from '../../utils/constants';
 import InstagramIcon from '@material-ui/icons/Instagram';
 import FacebookIcon from '@material-ui/icons/Facebook';
 import WhatsAppIcon from '@material-ui/icons/WhatsApp';
