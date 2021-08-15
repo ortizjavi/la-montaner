@@ -19,13 +19,13 @@ import * as endpoints from '../../../utils/endpoints';
 export function register(payload) {
   return async function(dispatch){
     try {
-      const response = await axios.post('http://localhost:3001/register', payload);
+      const response = await axios.post(`${endpoints.AUTH_REGISTER}`, payload);
       return dispatch({
          type: actionTypes.REGISTER_USER, 
          payload: response.data
       });
     } catch(e) {
-      console.log(e);
+     console.log(e)
     }
   }
 }
