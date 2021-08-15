@@ -1,11 +1,15 @@
 import React from 'react';
 import './Footer.css';
 import { NavLink } from 'react-router-dom';
-import {WHATSAPP_LINK} from '../../utils/constans';
-import InstagramIcon from '@material-ui/icons/Instagram';
-import FacebookIcon from '@material-ui/icons/Facebook';
-import WhatsAppIcon from '@material-ui/icons/WhatsApp';
 import SvgIcon from '@material-ui/core/SvgIcon';
+import {WHATSAPP_LINK} from '../../utils/constans';
+import WhatsAppIcon from '@material-ui/icons/WhatsApp';
+
+//icons
+import MailOutlineIcon from '@material-ui/icons/MailOutline';
+import { FaFacebookF } from "react-icons/fa";
+import { FaInstagram } from "react-icons/fa";
+import { FaWhatsapp } from "react-icons/fa";
 
 
 const Footer = ()=>{
@@ -19,33 +23,46 @@ const Footer = ()=>{
       }
 
     return(
-        <div className='footer-container'>
-            <div >
-                <NavLink className='footer-h4-l' to={'/about'}>
-                    <h4> Sobre Nosotros </h4>
-                </NavLink>    
-                <NavLink className='footer-h4-l' to={'/faq'}>
-                    <h4> Preguntas Frecuentes</h4>
-                </NavLink>    
-            </div>
-            <div className='footer-i'>
-                <i>Valle de Paravachasca, Cordoba </i>
-            </div>
-            <div>
-                <h4 className='footer-h4'>Seguinos</h4>
-                <div>
-                  <a className='footer-icon' href='https://www.instagram.com/lamontanes/' target='_blank'>
-                    <InstagramIcon style={{ fontSize: 40 }} color="" />
-                  </a>
-                  <a className='footer-icon' href='https://www.facebook.com/pablo.alisio' target='_blank'>
-                    <FacebookIcon style={{ fontSize: 40 }} color=""/>
-                  </a>
+        <div>
+            <div className="container-footer">
+              <div className="row-footer">
+
+              <div className="footer-col">
+                <h4 className="footer-title">La Montañés </h4>
+                <ul>
+                  <NavLink className='footer-navLink' to={'/about'}><li><a href="#">sobre nosotros</a></li></NavLink>
+                  <NavLink className='footer-navLink' to={'/home'}><li><a href="#">nuestras cervezas</a></li></NavLink>
+                  <li>Valle de Paravachasca, Córdoba</li>
+                </ul>
+              </div>
+              <div className="footer-col">
+                <h4>Preguntas Frecuentes </h4>
+                <ul>
+                <NavLink to={'/faq'}> <li><a href="#">FAQ</a></li> </NavLink>
+                </ul>
+              </div>
+              <div className="footer-col">
+                <h4>Contactanos </h4>
+                <ul>
+                  <li>montaner@gmail.com</li>
+                  <li><a href={WHATSAPP_LINK} target="_blank"><FaWhatsapp /> +12312343</a></li>
+                </ul>
+              </div>
+              <div className="footer-col">
+              <div class="social-links">
+                <h4>Seguinos </h4>
+                <ul>
+                  <li><a href="https://www.facebook.com/pablo.alisio" target='_blank'><FaFacebookF /></a></li>
+                  <li><a href="https://www.instagram.com/lamontanes/" target='_blank'><FaInstagram /></a></li>
+                </ul>
                 </div>
-            </div>
-            <div>
-                <a className='footer-icon-w' href={WHATSAPP_LINK} target="_blank">
-                    <WhatsAppIcon style={{ fontSize: 60 }} />
-                </a>
+              </div>
+              {/* <div className="footer-col">
+                 <a className='footer-icon-w' href={WHATSAPP_LINK} target="_blank">
+                    <WhatsAppIcon style={{ fontSize: 160 }} />
+                 </a>
+             </div> */}
+              </div>             
             </div>
         </div>
     )
