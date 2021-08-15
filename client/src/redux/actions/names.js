@@ -4,6 +4,7 @@ export const ADMIN_SELECT_PRODUCTS = "ADMIN_SELECT_PRODUCTS";
 export const ADMIN_SELECT_DELETED_PRODUCTS = "ADMIN_SELECT_DELETED_PRODUCTS";
 export const ADMIN_CLEAR_SELECT = "ADMIN_CLEAR_SELECT";
 export const ADMIN_PRODUCT_SET_ACTIVE = "ADMIN_PRODUCT_SET_ACTIVE";
+export const GET_USERS = "GET_USERS";
 
 // product action names
 export const GET_PRODUCTS = "GET_PRODUCTS";
@@ -32,18 +33,18 @@ export const SEARCH_STATE = "SEARCH_STATE";
 export const CURENT_CATEGORY = "CURENT_CATEGORY";
 
 // get max price of all products
-export const GET_MAX_PRICE = "GET_MAX_PRICE"
+export const GET_MAX_PRICE = "GET_MAX_PRICE";
 
 // shopping cart action names
-export const ADD_CART_PRODUCT = 'ADD_CART_PRODUCT';
-export const DELETE_CART_PRODUCT = 'DELETE_CART_PRODUCT';
-export const DELETE_CART_ALL = 'DELETE_CART_ALL';
-export const ADD_CART_INPROGRESS = 'ADD_CART_INPROGRESS';
-export const ADD_CART_COMPLETED = 'ADD_CART_COMPLETED';
-export const ORDER_PAY = 'ORDER_PAY';
-export const ORDER_STATUS = 'ORDER_STATUS';
+export const ADD_CART_PRODUCT = "ADD_CART_PRODUCT";
+export const DELETE_CART_PRODUCT = "DELETE_CART_PRODUCT";
+export const DELETE_CART_ALL = "DELETE_CART_ALL";
+export const ADD_CART_INPROGRESS = "ADD_CART_INPROGRESS";
+export const ADD_CART_COMPLETED = "ADD_CART_COMPLETED";
+export const ORDER_PAY = "ORDER_PAY";
+export const ORDER_STATUS = "ORDER_STATUS";
+export const GET_ORDERS = "GET_ORDERS";
 
 //login/register action names
-export const LOGIN_USER = 'LOGIN_USER';
-export const REGISTER_USER = 'REGISTER_USER';
-
+export const LOGIN_USER = "LOGIN_USER";
+export const REGISTER_USER = "REGISTER_USER";
