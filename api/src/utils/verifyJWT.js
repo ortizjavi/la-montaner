@@ -4,7 +4,7 @@ const { TOKEN_SECRET } = process.env;
 
 module.exports = (token) => {
 	return new Promise((resolve, reject) => {
-		jwt.sign(
+		jwt.verify(
 			token,
 			TOKEN_SECRET,
 			function(err, user){

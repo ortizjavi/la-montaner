@@ -3,7 +3,7 @@ const ROLE = require('../models/Users/Role')
 const verifyJWT = require('../utils/verifyJWT');
 
 const getUserById = (id) => {
-	return User.findById(id);
+	return User.findById(id).orFail();
 }
 
 const authRole  = (role) => {
