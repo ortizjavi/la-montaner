@@ -1,6 +1,12 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import TextField from '@material-ui/core/TextField';
+import IconButton from '@material-ui/core/IconButton';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import Visibility from '@material-ui/icons/Visibility';
+import VisibilityOff from '@material-ui/icons/VisibilityOff';
+import FilledInput from '@material-ui/core/FilledInput';
+import InputLabel from '@material-ui/core/InputLabel';
 import { register } from '../../redux/actions/types/authActions'
 import Button from '@material-ui/core/Button';
 import ExternAuthentication from '../Authentication/Authentication';
@@ -14,10 +20,29 @@ const RegisterForm = () => {
         family_name: '',
         email: '',
         password: '',
-        name: ''
+        name: '',
+        showPassword: false,
     })
+    const [checkPassword, setCheckPassword] = useState({
+        checkPassword:'',
+        showCheckPassword: false,
+    })
+    
 
-    const [checkPassword, setCheckPassword] = useState('')
+    function handleClickShowPassword() {
+        setCheckPassword({
+            ...checkPassword,
+            showCheckPassword: !checkPassword.showCheckPassword
+        })
+        setInput({
+                ...input, 
+                showPassword: !input.showPassword
+            })
+    };
+    
+    function handleMouseDownPassword(e) {
+        e.preventDefault();
+    };
 
     function handleChangePassword(event) {
         event.preventDefault();
@@ -45,7 +70,7 @@ const RegisterForm = () => {
             <div className='fields'>
                 <TextField
                     label="Nombre"
-                    variant="filled"
+                    variant="outlined"
                     name="given_name"
                     required
                     value={input.given_name}
@@ -53,7 +78,7 @@ const RegisterForm = () => {
                 />
                 <TextField
                     label="Apellido"
-                    variant="filled"
+                    variant="outlined"
                     name="family_name"
                     required
                     value={input.family_name}
@@ -61,30 +86,56 @@ const RegisterForm = () => {
                 />
                 <TextField
                     label="Email"
-                    variant="filled"
+                    variant="outlined"
                     name="email"
                     required
                     value={input.email}
                     onChange={handleInputChange}
                 />
-                <TextField
+                <InputLabel htmlFor="filled-adornment-password">Password</InputLabel>
+                <FilledInput
+                
                     label="Contraseña"
-                    variant="filled"
-                    type="password"
+                    variant="outlined"
+                    type={input.showPassword ? 'text' : 'password' }
                     name="password"
                     required
                     value={input.password}
                     onChange={handleInputChange}
+                    endAdornment={
+                        <InputAdornment position="end">
+                          <IconButton
+                            aria-label="toggle password visibility"
+                            onClick={handleClickShowPassword}
+                            edge="end"
+                          >
+                            {input.showPassword ? <Visibility /> : <VisibilityOff />}
+                          </IconButton>
+                        </InputAdornment>
+                    }
                 />
                 <p>Ingresa nuevamente tu contraseña</p>
-                <TextField
+                <FilledInput
+                
                     label="Contraseña"
-                    variant="filled"
-                    type="password"
+                    variant="outlined"
+                    type={checkPassword.showCheckPassword ? 'text' : 'password'}
                     name="checkPassword"
                     required
-                    value={checkPassword}
+                    value={checkPassword.checkPassword}
                     onChange={handleChangePassword}
+                    endAdornment={
+                        <InputAdornment position="end">
+                          <IconButton
+                            aria-label="toggle password visibility"
+                            onClick={handleClickShowPassword}
+                            onMouseDown={handleMouseDownPassword}
+                            edge="end"
+                          >
+                            {checkPassword.checkPassword ? <Visibility /> : <VisibilityOff />}
+                          </IconButton>
+                        </InputAdornment>
+                    }
                 />
                 <div className='btnStylesRegister'>
                     <Button type="submit" variant="contained" color="primary" >
