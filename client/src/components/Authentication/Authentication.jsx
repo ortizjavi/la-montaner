@@ -6,7 +6,12 @@ import FacebookLogin from "react-facebook-login";
 import FacebookIcon from "@material-ui/icons/Facebook";
 import { login } from "../../redux/actions/types/authActions";
 
-export default function ExternAuthentication() {
+export default function ExternAuthentication(props) {
+
+  const googleBtnTitle = props.register ? 'Continuar con Google' 
+                                        : 'Acceder con Google';
+  const facebookBtnTitle = props.register ? 'Continuar con Facebook' 
+                                        : 'Acceder con Facebook';
   const dispatch = useDispatch();
 
   const responseGoogle = (response) => {
@@ -24,7 +29,7 @@ export default function ExternAuthentication() {
       <div className="external-login-button">
         <GoogleLogin
           clientId="185256781467-8t9jr2l450gsbuev5d12bs463280d0c4.apps.googleusercontent.com"
-          buttonText="Acceder con Google"
+          buttonText={googleBtnTitle}
           onSuccess={responseGoogle}
           onFailure={responseGoogle}
           cookiePolicy={"single_host_origin"}
@@ -33,7 +38,7 @@ export default function ExternAuthentication() {
       <div className="external-login-button fb-btn">
         <FacebookIcon className="login-fb-icon" />
         <FacebookLogin
-          textButton="Acceder con Facebook"
+          textButton={facebookBtnTitle}
           appId="594981481671722"
           autoLoad={false}
           fields="name,email,picture"
