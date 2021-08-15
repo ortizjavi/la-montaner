@@ -30,32 +30,41 @@ function NavBar(props) {
   const [state, setState] = useState(currentCategoryState)
 
 
-    useEffect(()=> {
-      dispatch(selectCategoryAction(state))
-      dispatch(searchProductsAction(''))
+  useEffect(()=> {
+    dispatch(selectCategoryAction(state))
+    dispatch(searchProductsAction(''))
 //toca preguntar si ek search tiene estado
-    },[state])
-  
-    const handleCategory = (e) =>{
-      e.preventDefault()
-      setState(e.target.value)
+  },[state])
+
+  const handleCategory = (e) =>{
+    e.preventDefault()
+    setState(e.target.value)
+  }
+ 
+  function HomeIcon(props) {
+      return (
+        <SvgIcon {...props}>
+          <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
+        </SvgIcon>
+      );
     }
-    function HomeIcon(props) {
-        return (
-          <SvgIcon {...props}>
-            <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
-          </SvgIcon>
-        );
-      }
+
+    window.addEventListener('scroll', function () {
+      var header = document.querySelector('header');
+      header.classList.toggle('sticky', window.scrollY > 0)
+    })
    
   return (
-    <header className="navbar">
+    <header 
+    className="navbar"
+    >
       <NavLink to='/home' className='nav-personicon'>
         <img className='nb-img' src="https://live.staticflickr.com/65535/51361173217_49de2674c3_m.jpg" alt="Montañez Logo" />
       </NavLink>
       <SearchBar />
+
       {!props.admin ?
-        <nav>
+        <nav className='nav-container-categories'>
           <ul className='nav-ul'>
             {/* <li className="list-item">
           <select className='nav-selec' name="category" value='' onChange={(e) =>handleCategory(e)}>

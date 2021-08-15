@@ -1,22 +1,38 @@
 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 .navbar {
-    height: 8rem;
+    /* height: 8rem; */
     width: 100%;
+
     top: 0;
     left: 0;
+
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-top: 1rem;
-    box-sizing: border-box;
+    padding: 10px 1px;
+    /* padding-top: 1rem; */
+
+    /* box-sizing: border-box; */
     /* margin-top: 15px; */
-    padding-right: 5rem;
+    /* padding-right: 5rem; */
     /* border-bottom: solid gray 0.5px; */
     /* box-shadow: 0 0 3px 0 gray; */
+
     position: fixed;
-    background-color: white;
+    transition: 0.6s;
+    background-color: #022E1A;
     z-index: 1;
 
+}
+
+.sticky {
+    padding: 0.5px 1px;
 }
 
 .navbar nav {
@@ -26,6 +42,12 @@
 .nb-img{
     margin-left: 2rem;
     cursor: pointer;
+    background-color: #022E1A;
+}
+
+.nav-container-categories {
+    background-color:#022E1A;
+    width: 50%;
 }
 
 .list-item {
@@ -47,7 +69,7 @@
     outline: none;
     font-size: 1.2rem;
     margin-left: 2rem;
-    width: 8rem;
+    /* width: 8rem; */
     cursor: pointer;
 }
 
@@ -69,7 +91,7 @@ width: 10rem;
 
 .Nav-vertodos {
     opacity: 0;
-    width: 10rem;
+    /* width: 10rem; */
 }
 
 .actived-vertodos {
@@ -115,18 +137,20 @@ width: 10rem;
 }
 
 .nav-personicon{
-    background: white;
+    background-color:#022E1A;
     border: none;
     cursor: pointer;
 }
 .nav-personicon:hover{
     cursor: pointer;
-    transform: scale(1.2);
+    /* transform: scale(1.2); */
     transition: 0.5s;
 }
 
 .fav-icon-nav{
     color: #000000;
+    padding-right: 0.1rem;
+    padding-left: 0.1rem;
 }
 
 .fav-icon-nav:hover {
