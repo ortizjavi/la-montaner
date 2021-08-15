@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import TextField from '@material-ui/core/TextField';
 import { register } from '../../redux/actions/types/authActions'
 import Button from '@material-ui/core/Button';
+import ExternAuthentication from '../Authentication/Authentication';
 import './LoginForm.css';
 
 const RegisterForm = () => {
@@ -15,6 +16,7 @@ const RegisterForm = () => {
         password: '',
         name: ''
     })
+
     const [checkPassword, setCheckPassword] = useState('')
 
     function handleChangePassword(event) {
@@ -89,6 +91,7 @@ const RegisterForm = () => {
                         Registrarse
                     </Button>
                 </div>
+                <ExternAuthentication register/>
             </div>
         </form>
     )

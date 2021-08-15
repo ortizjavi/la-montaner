@@ -21,13 +21,8 @@ const LoginForm = () => {
     }
 
     useEffect(() => {
-      if (user){
-        const isUser = user.role;
-        const isAdmin = user.role && user.role === 'ADMIN';
-        isAdmin ? history.push('/admin') : history.push('/dashboard');
-        if (!isUser){
-          history.push('/login');
-        }
+      if (user.role){
+        history.push('/home');
       }
     }, [user])
 
@@ -60,7 +55,7 @@ const LoginForm = () => {
              <Link to={'/register'}> Regístrate</Link>
             </div> 
             <div>
-            <ExternAuthentication />
+            <ExternAuthentication/>
             </div>
           
         </form>
