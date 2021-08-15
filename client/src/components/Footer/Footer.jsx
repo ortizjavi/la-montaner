@@ -2,7 +2,7 @@ import React from 'react';
 import './Footer.css';
 import { NavLink } from 'react-router-dom';
 import SvgIcon from '@material-ui/core/SvgIcon';
-import {WHATSAPP_LINK} from '../../utils/constans';
+import {WHATSAPP_LINK} from '../../utils/constants';
 import WhatsAppIcon from '@material-ui/icons/WhatsApp';
 
 //icons

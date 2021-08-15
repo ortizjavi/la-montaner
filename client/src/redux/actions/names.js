@@ -48,3 +48,4 @@ export const GET_ORDERS = "GET_ORDERS";
 //login/register action names
 export const LOGIN_USER = "LOGIN_USER";
 export const REGISTER_USER = "REGISTER_USER";
+export const REGISTER_FAILED = "REGISTER_FAILED";
