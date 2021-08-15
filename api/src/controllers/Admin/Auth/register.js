@@ -4,7 +4,7 @@ const { SALT_ROUNDS, TOKEN_SECRET } = process.env;
 
 
 module.exports = (req, res, next) => {
-	const { email, password } = req.body;
+	const { name, email, password } = req.body;
 	User.hashPassword(password, Number(SALT_ROUNDS)).then((hashed) => {
 		User.create({
 			...req.body,
@@ -12,7 +12,7 @@ module.exports = (req, res, next) => {
 			role: undefined,
 			verified: false
 		}).then(() => {
-			res.send('Ok');
+			res.send(`${name}`);
 		}).catch((err) => {
 			res.status(400).send('User already exists')
 		})
