@@ -11,10 +11,12 @@ module.exports = (req, res, next) => {
 			password : hashed,
 			role: undefined,
 			verified: false
-		}).then(() => {
-			res.send(`${name}`);
-		}).catch((err) => {
-			res.status(400).send('User already exists')
+		}, (err, user) => {
+			if (err) {
+				return res.status(400).send(err);
+			}
+			const { password, ...userProps } = user._doc;
+			return res.json(userProps);
 		})
 	})
 	
