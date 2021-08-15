@@ -1,8 +1,6 @@
-require('dotenv').config();
-const jwt = require('jsonwebtoken');
-const { TOKEN_SECRET } = process.env;
 const User = require('../models/Users/User');
 const ROLE = require('../models/Users/Role')
+const verifyJWT = require('../utils/verifyJWT');
 
 const getUserById = (id) => {
 	return User.findById(id);
@@ -21,20 +19,15 @@ const authRole  = (role) => {
 const authenticateToken = (req, res, next) => {
 	const auth = req.headers['authorization'];
 	let token = auth && auth.split(' ')[1];
-	token = token || req.body.token;
 	if (!token){
 		return res.sendStatus(401);
 	}
-	jwt.verify(
-		token,
-		TOKEN_SECRET,
-		(err, user) => {
-			console.error(err);
-			if (err) return res.sendStatus(403); // jwt expired
+	verifyJWT(token).then((user) => {
 			// valid token, save user in request
 			getUserById(user._id)
 			.then((user) => {
 				req.user = user;
+				if (user.reset) return res.status(420);
 				next(); 
 			})
 			.catch((err) => {
@@ -42,7 +35,10 @@ const authenticateToken = (req, res, next) => {
 				.json({ message : 'Error, usuario no encontrado' });
 			})
 		}
-	)
+	).catch(err => {
+		console.error(err);
+		if (err) return res.sendStatus(403); // jwt expired
+	})
 }
 
 
