@@ -1,6 +1,6 @@
 const login = require('./login');
 const register = require('./register');
-const register = require('./resetPassword');
+const resetPassword = require('./resetPassword');
 
 
 module.exports = {
