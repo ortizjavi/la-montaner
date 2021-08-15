@@ -20,10 +20,3 @@ export const DELETE_PRODUCT = `${ADMIN_SERVER}/product`;
 export const ORDER_PAY = `${SERVER}/product/pay`;
 export const ORDER_STATUS = `${SERVER}/product/order`;
 export const GET_USERS = `${ADMIN_SERVER}/usersList`;
-
-export const fixedCategories = [
-  "cervezas",
-  "conservas",
-  "merchandising",
-  "otros",
-];
