@@ -25,7 +25,11 @@ export function register(payload) {
          payload: response.data
       });
     } catch(e) {
-     console.log(e)
+     
+      return dispatch({
+        type: actionTypes.REGISTER_FAILED, 
+        payload: e.response.data
+     });
     }
   }
 }
