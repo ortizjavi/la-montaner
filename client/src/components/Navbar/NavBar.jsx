@@ -95,8 +95,10 @@ function NavBar(props) {
       </nav>
       <div className='nav-icons-container'>
       <Link to='/login' className='nav-icon'>
-        <button className='nav-personicon'>
-          <PersonIcon style={{ fontSize: 40 }} />
+        <button className='nav-personicon'>{user && user.picture ? 
+        <img className='imgStyle' src={user.picture} alt="imagen de usuario" width="30" height="30" ></img> 
+        : <PersonIcon style={{ fontSize: 40 }} />}
+         
         </button>
       </Link>
       <Link to="/wishlist" className='nav-icon'>
