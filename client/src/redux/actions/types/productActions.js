@@ -274,7 +274,10 @@ export async function orderPay(cart) {
 export function orderStatus(cart, user) {
   return async function (dispatch) {
     try {
-      const resp = await axios.post(`${endpoints.ORDER_STATUS}`, { cart, user });
+      const resp = await axios.post(`${endpoints.ORDER_STATUS}`, {
+        cart,
+        user,
+      });
       console.log(resp.data);
       return dispatch({ type: actionTypes.ORDER_STATUS, payload: resp.data });
     } catch (error) {
@@ -286,9 +289,10 @@ export function orderStatus(cart, user) {
 export function updateStatus(id, estado) {
   return async function (dispatch) {
     try {
-      const resp = await axios.put(`${endpoints.ORDER_STATUS}/${id}`, { status:estado});
+      const resp = await axios.put(`${endpoints.ORDER_STATUS}/${id}`, {
+        status: estado,
+      });
       console.log(resp.data);
-      return dispatch({ type: actionTypes.ORDER_STATUS, payload: resp.data });
     } catch (error) {
       console.log(error);
     }
