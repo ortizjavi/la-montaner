@@ -144,7 +144,7 @@ export default function Home() {
               :
               <div className="home-sidebar-container">
                 <picture>
-                  <img className='home-img' src="https://live.staticflickr.com/65535/51361173217_49de2674c3_m.jpg" alt="Vaso de Cerveza" />
+                  <img className='home-img' src="https://res.cloudinary.com/la-montanes/image/upload/v1629064219/sideBar_1_lvi8gq.png" alt="Vaso de Cerveza" />
                 </picture>
                
               </div>

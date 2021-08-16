@@ -48,7 +48,7 @@ function NavBar(props) {
   return (
     <header className="navbar">
       <NavLink to='/home' className='nav-personicon'>
-        <img className='nb-img' src="https://live.staticflickr.com/65535/51361173217_49de2674c3_m.jpg" alt="Montañez Logo" />
+        <img className='nb-img' src="https://res.cloudinary.com/la-montanes/image/upload/v1629134641/logopng_qbilvd.png" alt="Montañez Logo" />
       </NavLink>
       <SearchBar />
         <nav className='nav-container'>
@@ -95,25 +95,25 @@ function NavBar(props) {
       </nav>
       <div className='nav-icons-container'>
       <Link to='/login' className='nav-icon'>
-        <button className='nav-personicon'>{user && user.picture ? 
+        {user && user.picture ? 
         <img className='imgStyle' src={user.picture} alt="imagen de usuario" width="30" height="30" ></img> 
-        : <PersonIcon style={{ fontSize: 40 }} />}
+        : <PersonIcon className='nav-personicon' style={{ fontSize: 40 }} />}
          
-        </button>
+  
       </Link>
       <Link to="/wishlist" className='nav-icon'>
           <FavoriteIcon className='fav-icon-nav'/>
       </Link>
       <Link to="/cart" className='nav-icon'>
-        <button className='nav-personicon'>
-          <ShoppingCartIcon style={{ fontSize: 40 }} />
-        </button>
+        
+          <ShoppingCartIcon className='nav-personicon' style={{ fontSize: 40 }} />
+        
       </Link>
       {isUser ?
         <div className='nav-icon'>
-          <button className='nav-personicon' onClick={(e) => dispatch(logout())}>
-            <ExitToAppIcon style={{ fontSize: 40 }} />
-          </button>
+          
+            <ExitToAppIcon className='nav-personicon' onClick={(e) => dispatch(logout())} style={{ fontSize: 40 }} />
+        
         </div>
       : null}
       </div>

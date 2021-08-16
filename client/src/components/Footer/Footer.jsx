@@ -44,8 +44,8 @@ const Footer = ()=>{
               <div className="footer-col">
                 <h4>Contactanos </h4>
                 <ul>
-                  <li>montaner@gmail.com</li>
-                  <li><a href={WHATSAPP_LINK} target="_blank"><FaWhatsapp /> +12312343</a></li>
+                  <li>lamontanes@gmail.com</li>
+                  <li><a href={WHATSAPP_LINK} target="_blank"><FaWhatsapp /> +54 9 351 599-2780</a></li>
                 </ul>
               </div>
               <div className="footer-col">
