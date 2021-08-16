@@ -20,7 +20,8 @@
 
 .input_search{
     border: none;
-    border-bottom: 2px solid #C88E34;
+    background-color: #dcdcdc1a;
+    border-bottom: 2px solid #a52a2a;
     font-size: 16px;
     height: 20px;
     padding: 0 20px;
@@ -28,6 +29,10 @@
     outline: none;
     margin-left: 10px;
     margin-top: 8px;
+}
+
+.input_search::active{
+    border: none;
 }
 
 

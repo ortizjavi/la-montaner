@@ -85,9 +85,9 @@ export default function SearchBar() {
                             <option/>
                     }  
                 </datalist>
-                    <button className='nav-personicon' onClick={(e) => handleSubmit(e)}>
-                        <SearchIcon style={{ fontSize: 40,color:'#66D040' }} />
-                    </button>
+                
+                        <SearchIcon className='nav-personicon' onClick={(e) => handleSubmit(e)} style={{ fontSize: 40,color:'#24262b' }} />
+                
                 {/* {
                     state.icono ?
                     <button className='nav-personicon'>
