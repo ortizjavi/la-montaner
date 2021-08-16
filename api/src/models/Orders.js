@@ -17,12 +17,14 @@ const OrderSchema = Schema({
 
     user: {
         type: Schema.Types.ObjectId,
-        ref: 'User'
+        ref: 'User',
+        required: true
     },
     date: {
         type: String,
         trim: true ,
     },
+
 },{timestamps: true});
 
 module.exports = model('Order', OrderSchema);

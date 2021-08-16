@@ -16,7 +16,7 @@ import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { getOrders, updateStatus } from "../../redux/actions/types/productActions";
+import { getOrders, updateStatus, getUsers } from "../../redux/actions/types/productActions";
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -145,9 +145,9 @@ function Row(props) {
 
 Row.propTypes = {
   row: PropTypes.shape({
-    calories: PropTypes.number.isRequired,
-    carbs: PropTypes.number.isRequired,
-    fat: PropTypes.number.isRequired,
+    calories: PropTypes.number,
+    carbs: PropTypes.number,
+    fat: PropTypes.number,
     history: PropTypes.arrayOf(
       PropTypes.shape({
         amount: PropTypes.number.isRequired,
@@ -165,17 +165,19 @@ export default function OrdersAdmin() {
   const dispatch = useDispatch();
 
   const ordenes = useSelector((state) => state.cart.orders);
+  const users = useSelector((state) => state.cart.users);
 
   useEffect(() => {
     dispatch(getOrders());
+    dispatch(getUsers());
   }, [dispatch]);
-
+  
   const rows = ordenes?.map((o) => {
+    const usuario = users?.find(us => us._id === o.user);
     let subtotal = 0;
     o.cart.forEach((i) => {
       subtotal += i.price * i.stockSelected;
     });
-    console.log(subtotal);
     let orden = o.cart.map((i) => {
       return {
         date: o.createdAt,
@@ -187,7 +189,7 @@ export default function OrdersAdmin() {
     return createData(
       o.cart[0].name,
       o.createdAt.slice(0, 10),
-      "Montaner",
+      usuario.name,
       subtotal,
       o.status,
       orden,
