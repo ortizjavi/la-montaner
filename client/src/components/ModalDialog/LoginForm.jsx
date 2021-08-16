@@ -13,6 +13,7 @@ const LoginForm = () => {
     const[email, setEmail] = useState('');
     const[password, setPassword] = useState('');
     const user = useSelector(state => state.session.user);
+    const registerFailed = useSelector(state => state.session.user);
     const history = useHistory();
 
     const handleSubmit = (event) => {
@@ -21,13 +22,11 @@ const LoginForm = () => {
     }
 
     useEffect(() => {
-      if (user){
-        const isUser = user.role;
-        const isAdmin = user.role && user.role === 'ADMIN';
-        isAdmin ? history.push('/admin') : history.push('/dashboard');
-        if (!isUser){
-          history.push('/login');
+      if (user.role){
+        if(user.reset){
+          return history.push('/reset')
         }
+        history.push('/home');
       }
     }, [user])
 
@@ -60,7 +59,7 @@ const LoginForm = () => {
              <Link to={'/register'}> Regístrate</Link>
             </div> 
             <div>
-            <ExternAuthentication />
+            <ExternAuthentication/>
             </div>
           
         </form>

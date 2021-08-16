@@ -21,6 +21,7 @@ const {
   newAdmin,
   getUsers,
   deleteUser,
+  resetUser
 } = require("../controllers/Admin/Admin");
 
 // Categories
@@ -38,5 +39,6 @@ router.get("/usersList", getUsersList);
 router.post("/new", authenticateToken, authAdmin, newAdmin);
 router.get("/users", authenticateToken, authAdmin, getUsers);
 router.delete("/users", authenticateToken, authAdmin, deleteUser);
+router.put("/users", authenticateToken, authAdmin, resetUser);
 
 module.exports = router;

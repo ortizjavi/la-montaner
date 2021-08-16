@@ -2,7 +2,7 @@ import './CategoryCreation.css';
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { createCategory, deleteCategories } from '../../redux/actions/types/categoryActions';
-import { fixedCategories } from '../../utils/endpoints.js';
+import { FIXED_CATEGORIES } from '../../utils/constants.js';
 import { Link } from "react-router-dom";
 import swal from "sweetalert";
 import ArrowBackSharpIcon from '@material-ui/icons/ArrowBackSharp';
@@ -68,7 +68,7 @@ export default function CategoryCreator() {
         <br />
         {categories?.map((category, i) => (
           <li className="category-bullet" key={i}> {category.name.toUpperCase()}
-            {fixedCategories.includes(category.name.toLowerCase()) ? null :
+            {FIXED_CATEGORIES.includes(category.name.toLowerCase()) ? null :
               <button className="delete-btn" onClick={() => handleClick(category)}>X</button>}
           </li>
         ))}

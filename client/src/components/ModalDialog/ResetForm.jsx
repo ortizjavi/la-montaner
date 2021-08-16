@@ -1,45 +1,34 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from "react-router-dom";
-import TextField from '@material-ui/core/TextField';
-import IconButton from '@material-ui/core/IconButton';
+import Button from '@material-ui/core/Button';
+import FilledInput from '@material-ui/core/FilledInput';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
-import FilledInput from '@material-ui/core/FilledInput';
-import { register } from '../../redux/actions/types/authActions'
-import Button from '@material-ui/core/Button';
-import ExternAuthentication from '../Authentication/Authentication';
-import './LoginForm.css';
+import IconButton from '@material-ui/core/IconButton';
+import { resetPassword } from '../../redux/actions/types/authActions'
 
-
-const RegisterForm = () => {
-    const dispatch = useDispatch()
-    const history = useHistory();
-    const registerFailed = useSelector(state => state.session.registerFailed);
+const ResetForm = () => {
     const user = useSelector(state => state.session.user);
+    const dispatch= useDispatch();
+    const history = useHistory();
     const [error, setError] = useState('')
     const [input, setInput] = useState({
-        given_name: '',
-        family_name: '',
-        email: '',
+        oldPassword:'',
         password: '',
-        name: '',
         showPassword: false,
     })
     const [checkPassword, setCheckPassword] = useState({
         checkPassword: '',
         showCheckPassword: false,
     })
-
     function handleClickShowCheckPassword() {
         setCheckPassword({
             ...checkPassword,
             showCheckPassword: !checkPassword.showCheckPassword
         })
     }
-
-
     function handleClickShowPassword() {
         setInput({
             ...input,
@@ -67,55 +56,44 @@ const RegisterForm = () => {
     }
 
     function handleSubmit(event) {
-     event.preventDefault();
-        (checkPassword.checkPassword && checkPassword.checkPassword !== input.password) ? 
-        setError('Las contraseñas no coinciden') : 
-        dispatch(register({ ...input, name: `${input.given_name} ${input.family_name}` }))
+        event.preventDefault();
+        (checkPassword.checkPassword && checkPassword.checkPassword === input.password) ?
+         dispatch(resetPassword({oldPassword: input.oldPassword, password : input.password})) :   
+        setError('Las contraseñas no coinciden')        
     }
 
     useEffect(() => {
-      if(registerFailed) 
-      setError(registerFailed);
-  
-    }, [registerFailed])
-
-    useEffect(() => {
-        if(user.name){ 
-            alert('bienvesz')
-            history.push('/home');
-      }
+        if(!user.reset) 
+        history.push('/home')
     }, [user])
+
 
     return (
         <form className={'registerForm'} onSubmit={handleSubmit}>
             <div className='fields'>
-                <TextField
-                    label="Nombre"
+            <FilledInput
+                    placeholder="Antigua Contraseña"
                     variant="filled"
-                    name="given_name"
+                    type={input.showPassword ? 'text' : 'password'}
+                    name="oldPassword"
                     required
-                    value={input.given_name}
+                    value={input.oldPassword}
                     onChange={handleInputChange}
-                />
-                <TextField
-                    label="Apellido"
-                    variant="filled"
-                    name="family_name"
-                    required
-                    value={input.family_name}
-                    onChange={handleInputChange}
-                />
-                <TextField
-                    label="Email"
-                    variant="filled"
-                    name="email"
-                    required
-                    value={input.email}
-                    onChange={handleInputChange}
+                    endAdornment={
+                        <InputAdornment position="end" >
+                            <IconButton
+                                aria-label="toggle password visibility"
+                                onClick={handleClickShowPassword}
+                                edge="end"
+                            >
+                                {input.showPassword ? <Visibility /> : <VisibilityOff />}
+                            </IconButton>
+                        </InputAdornment>
+                    }
                 />
 
                 <FilledInput
-                    label="Contraseña"
+                    placeholder="Nueva Contraseña"
                     variant="filled"
                     type={input.showPassword ? 'text' : 'password'}
                     name="password"
@@ -159,13 +137,12 @@ const RegisterForm = () => {
                 {error ? <span>{error}</span> : null}
                 <div className='btnStylesRegister'>
                     <Button type="submit" variant="contained" color="primary" >
-                        Registrarse
+                        Cambiar Contraseña
                     </Button>
                 </div>
-                <ExternAuthentication register />
+
             </div>
         </form>
     )
 }
-
-export default RegisterForm;
+export default ResetForm;

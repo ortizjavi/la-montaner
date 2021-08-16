@@ -19,16 +19,34 @@ import * as endpoints from '../../../utils/endpoints';
 export function register(payload) {
   return async function(dispatch){
     try {
-      const response = await axios.post('http://localhost:3001/register', payload);
+      const response = await axios.post(`${endpoints.AUTH_REGISTER}`, payload);
       return dispatch({
          type: actionTypes.REGISTER_USER, 
+         payload: response.data
+      });
+    } catch(e) {
+     
+      return dispatch({
+        type: actionTypes.REGISTER_FAILED, 
+        payload: e.response.data
+     });
+    }
+  }
+}
+
+export function resetPassword(payload) {
+  return async function(dispatch){
+    try {
+      const response = await axios.put(`${endpoints.AUTH_RESET}`, payload);
+      return dispatch({
+         type: actionTypes.RESET_PASSWORD, 
          payload: response.data
       });
     } catch(e) {
       console.log(e);
     }
   }
-}
+} 
 
 function setUserSession(data){
   const { token, ...userProps } = data;
