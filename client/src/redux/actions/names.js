@@ -5,6 +5,8 @@ export const ADMIN_SELECT_DELETED_PRODUCTS = "ADMIN_SELECT_DELETED_PRODUCTS";
 export const ADMIN_CLEAR_SELECT = "ADMIN_CLEAR_SELECT";
 export const ADMIN_PRODUCT_SET_ACTIVE = "ADMIN_PRODUCT_SET_ACTIVE";
 export const GET_USERS = "GET_USERS";
+export const DELETE_USER = "DELETE_USER";
+export const RESET_USER = "RESET_USER";
 
 // product action names
 export const GET_PRODUCTS = "GET_PRODUCTS";

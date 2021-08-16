@@ -25,7 +25,7 @@ import CategoryCreator from "../CategoryCreation/CategoryCreation";
 import OrdersAdmin from "../AdminOrders/AdminOrders";
 import UsersTable from "../UsersTable/UsersTable";
 import { useDispatch, useSelector } from "react-redux";
-import { getAdminProducts, getOrders, getUsers } from "../../redux/actions/types/productActions";
+import { getAdminProducts, getOrders, getUsers } from "../../redux/actions/types/adminActions";
 import { getCategories } from "../../redux/actions/types/categoryActions";
 
 const drawerWidth = 240;
@@ -112,8 +112,8 @@ export default function SideBarAdmin() {
 
   const productos = useSelector(state => state.root.adminProducts)
   const categorias = useSelector(state => state.root.allCategories)
-  const orders = useSelector((state) => state.cart.orders);
-  const users = useSelector((state) => state.cart.users); 
+  const orders = useSelector((state) => state.admin.orders);
+  const users = useSelector((state) => state.admin.users); 
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -131,7 +131,6 @@ export default function SideBarAdmin() {
 
   return (
     <div className={classes.root}>
-      <CssBaseline />
       <AppBar
         position="fixed"
         className={clsx(classes.appBar, {

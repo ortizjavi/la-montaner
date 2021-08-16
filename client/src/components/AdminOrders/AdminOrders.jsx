@@ -16,7 +16,7 @@ import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { getOrders, updateStatus, getUsers } from "../../redux/actions/types/productActions";
+import { getOrders, updateStatus, getUsers } from "../../redux/actions/types/adminActions";
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
