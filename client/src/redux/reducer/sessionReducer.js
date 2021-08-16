@@ -2,7 +2,8 @@ import * as actionTypes from "../actions/names";
 
 const SESSION_INITIAL_STATE = {
   user: {},
-  registerFailed: ''
+  registerFailed: '',
+  loginFailed:''
 };
 
 const sessionReducer = (state = SESSION_INITIAL_STATE, action) => {
@@ -22,6 +23,11 @@ const sessionReducer = (state = SESSION_INITIAL_STATE, action) => {
         ...state,
         registerFailed: action.payload,
       };
+      case actionTypes.LOGIN_FAILED:
+        return {
+          ...state,
+          loginFailed: action.payload,
+        };
       case actionTypes.RESET_PASSWORD:
       return {
         ...state,

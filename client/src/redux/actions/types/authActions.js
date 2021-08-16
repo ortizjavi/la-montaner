@@ -2,64 +2,67 @@ import axios from 'axios';
 import * as actionTypes from '../names';
 import * as endpoints from '../../../utils/endpoints';
 
- export function login(payload) {
-  return async function(dispatch){
+export function login(payload) {
+  return async function (dispatch) {
     try {
       const response = await axios.post(`${endpoints.AUTH_LOGIN}`, payload);
       return dispatch({
-         type: actionTypes.LOGIN_USER, 
-         payload: setUserSession(response.data)
+        type: actionTypes.LOGIN_USER,
+        payload: setUserSession(response.data)
       });
-    } catch(e) {
-      console.log(e);
+    } catch (e) {
+      return dispatch({
+        type: actionTypes.LOGIN_FAILED,
+        payload: e.response.data
+      });
     }
   }
-} 
+}
 
 export function register(payload) {
-  return async function(dispatch){
+  return async function (dispatch) {
     try {
       const response = await axios.post(`${endpoints.AUTH_REGISTER}`, payload);
       return dispatch({
-         type: actionTypes.REGISTER_USER, 
-         payload: response.data
+        type: actionTypes.REGISTER_USER,
+        payload: response.data
       });
-    } catch(e) {
-     
+    } catch (e) {
+
       return dispatch({
-        type: actionTypes.REGISTER_FAILED, 
+        type: actionTypes.REGISTER_FAILED,
         payload: e.response.data
-     });
+      });
     }
   }
 }
 
 export function resetPassword(payload) {
-  return async function(dispatch){
+  return async function (dispatch) {
     try {
       const response = await axios.put(`${endpoints.AUTH_RESET}`, payload);
       return dispatch({
-         type: actionTypes.RESET_PASSWORD, 
-         payload: response.data
+        type: actionTypes.RESET_PASSWORD,
+        payload: response.data
       });
-    } catch(e) {
+    } catch (e) {
       console.log(e);
     }
   }
-} 
+}
 
-function setUserSession(data){
+function setUserSession(data) {
   const { token, ...userProps } = data;
   setAuthDefaulHeaders(token);
   localStorage.setItem('session', JSON.stringify({ token }))
   return userProps;
 }
 
-export function logout(){
+export function logout() {
   localStorage.removeItem('session');
   deleteAuthDefaultHeaders();
-  return { 
-    type: actionTypes.LOGIN_USER, 
+  return {
+    type: actionTypes.LOGIN_USER,
     payload: {}
   }
 }

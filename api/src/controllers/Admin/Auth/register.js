@@ -13,7 +13,7 @@ module.exports = (req, res, next) => {
 			verified: false
 		}, (err, user) => {
 			if (err) {
-				return res.status(400).send(err);
+				return res.status(400).send('Ese usuario ya existe!');
 			}
 			const { password, ...userProps } = user._doc;
 			return res.json(userProps);

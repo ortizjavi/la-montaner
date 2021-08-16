@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import TextField from '@material-ui/core/TextField';
 import IconButton from '@material-ui/core/IconButton';
 import InputAdornment from '@material-ui/core/InputAdornment';
@@ -67,10 +67,12 @@ const RegisterForm = () => {
     }
 
     function handleSubmit(event) {
+        
      event.preventDefault();
         (checkPassword.checkPassword && checkPassword.checkPassword !== input.password) ? 
         setError('Las contraseñas no coinciden') : 
         dispatch(register({ ...input, name: `${input.given_name} ${input.family_name}` }))
+        console.log(registerFailed)
     }
 
     useEffect(() => {
@@ -79,15 +81,11 @@ const RegisterForm = () => {
   
     }, [registerFailed])
 
-    useEffect(() => {
-        if(user.name){ 
-            alert('bienvesz')
-            history.push('/home');
-      }
-    }, [user])
+
 
     return (
         <form className={'registerForm'} onSubmit={handleSubmit}>
+            <div className={'title'}>Ingresá tus datos y registrate</div>
             <div className='fields'>
                 <TextField
                     label="Nombre"
@@ -156,7 +154,10 @@ const RegisterForm = () => {
                         </InputAdornment>
                     }
                 />
-                {error ? <span>{error}</span> : null}
+                {error ? <span className='errorMsg'>{error}</span> : null}
+                <div className={'title'}>¿Ya tienes cuenta?  
+             <Link to={'/login'}> Acceder</Link>
+            </div> 
                 <div className='btnStylesRegister'>
                     <Button type="submit" variant="contained" color="primary" >
                         Registrarse
