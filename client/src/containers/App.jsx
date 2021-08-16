@@ -28,7 +28,7 @@ import AboutPage from "../components/About/About";
 import Accordion from "../components/About/FAQ";
 import RegisterForm from "../components/ModalDialog/RegisterForm";
 import ResetForm from "../components/ModalDialog/ResetForm";
-import { ROLE } from '../utils/constants';
+import { ROLE } from "../utils/constants";
 
 const theme = createTheme({
   palette: {
@@ -96,7 +96,7 @@ export default function App() {
                 component={Dashboard}
                 roles={[ROLE.USER]}
               />
-                <PrivateRoute
+              <PrivateRoute
                 exact
                 path="/reset"
                 component={ResetForm}
@@ -106,16 +106,8 @@ export default function App() {
               <Route exact path="/home/pay/success" component={Success} />
               <Route exact path="/home/pay/pending" component={Pending} />
               <Route exact path="/home/pay/failure" component={Failure} />
-              <PublicRoute
-                exact
-                path="/login"
-                component={LoginForm}
-              />
-              <PublicRoute
-                exact
-                path="/register"
-                component={RegisterForm}
-              />
+              <PublicRoute exact path="/login" component={LoginForm} />
+              <PublicRoute exact path="/register" component={RegisterForm} />
               <Route exact path="/home/:id" component={ProductDetail} />
               <Route exact path="/cart" component={Cart} />
               <Route exact path="/wishlist" component={Wishlist} />

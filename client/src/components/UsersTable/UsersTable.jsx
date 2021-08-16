@@ -8,9 +8,10 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TablePagination from "@material-ui/core/TablePagination";
 import TableRow from "@material-ui/core/TableRow";
+import Button from "@material-ui/core/Button";
 import { useDispatch, useSelector } from "react-redux";
 import { getUsers } from "../../redux/actions/types/productActions";
-
+import "./UsersTable.css";
 const columns = [
   {
     id: "density",
@@ -28,15 +29,15 @@ const columns = [
     format: (value) => value.toLocaleString("en-US"),
   },
   {
-    id: "size",
-    label: "Verificado",
+    id: "actions",
+    label: "Acciones",
     minWidth: 170,
     align: "center",
   },
 ];
 
-function createData(name, code, population, size, density) {
-  return { name, code, population, size, density };
+function createData(name, code, population, density, actions) {
+  return { name, code, population, density, actions };
 }
 
 const useStyles = makeStyles({
@@ -57,13 +58,7 @@ export default function UsersTable() {
 
   const users = useSelector((state) => state.cart.users);
   const rows = users?.map((o) => {
-    return createData(
-      o.name,
-      o.role,
-      o.email,
-      o.verified.toString(),
-      o.picture
-    );
+    return createData(o.name, o.role, o.email, o.picture, "actions");
   });
   const classes = useStyles();
   const [page, setPage] = React.useState(0);
@@ -76,6 +71,15 @@ export default function UsersTable() {
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(+event.target.value);
     setPage(0);
+  };
+  const deleteUser = () => {
+    console.log("eliminar");
+  };
+  const admin = () => {
+    console.log("sos admin");
+  };
+  const resetPassword = () => {
+    console.log("revisa tu correo");
   };
 
   return (
@@ -109,6 +113,32 @@ export default function UsersTable() {
                             column.format(value)
                           ) : value && value.length > 40 ? (
                             <img src={value} alt="user" height="50px" />
+                          ) : value === "actions" ? (
+                            <>
+                              <Button
+                                variant="contained"
+                                color="primary"
+                                className="botonUT"
+                                onClick={resetPassword}
+                              >
+                                Resetaer contraseña
+                              </Button>
+                              <Button
+                                variant="contained"
+                                color="secondary"
+                                className="botonUT"
+                                onClick={admin}
+                              >
+                                Hacer Admin
+                              </Button>
+                              <Button
+                                variant="contained"
+                                className="eliminar"
+                                onClick={deleteUser}
+                              >
+                                Eliminar
+                              </Button>
+                            </>
                           ) : (
                             value
                           )}
