@@ -1,11 +1,15 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import Pagination from "../Pagination/Pagination";
 import Loading from "../Loading/Loading.js";
 import "./ShowProducts.css";
+import swal from "sweetalert";
 
+import { addCartProduct } from "../../redux/actions/types/productActions";
 
 const ShowProducts = ({allProducts}) => {
+  const dispatch = useDispatch();
 
   const articlesPerPage=8;
   const diff = articlesPerPage - allProducts[0]%articlesPerPage;
@@ -26,6 +30,15 @@ const ShowProducts = ({allProducts}) => {
       /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+(?:png|jpg|jpeg|gif|svg)+$/;
     return re.test(url);
   }
+
+  const addToCartHandler  = (id) => {
+    swal({
+      title: "producto agregado al carrito",
+      icon: "success",
+      button: "ok",
+    });
+    dispatch(addCartProduct(id, "1"));
+  };
 
   return (
     <>
@@ -86,7 +99,7 @@ const ShowProducts = ({allProducts}) => {
                     </NavLink>
                     <button
                       className="sp-button"
-                      onClick={() => alert("Buena desición")}
+                      onClick={() => addToCartHandler(item._id)}
                     >
                       Agregar al Carrito
                     </button>
