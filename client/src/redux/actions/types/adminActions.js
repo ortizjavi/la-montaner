@@ -56,7 +56,8 @@ export function getOrders() {
 export function deleteUser(user) {
   return async function (dispatch) {
     try {
-      const resp = await axios.post(`${endpoints.DELETE_USER}`, { email : user.email });
+      console.log(user);
+      const resp = await axios.delete(`${endpoints.DELETE_USER}`, { email : user.email });
       return dispatch({ type: actionTypes.DELETE_USER, payload: user._id });
     } catch (error) {
       console.log(error);
