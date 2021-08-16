@@ -30,30 +30,44 @@ const Footer = ()=>{
               <div className="footer-col">
                 <h4 className="footer-title">La Montañés </h4>
                 <ul>
-                  <NavLink className='footer-navLink' to={'/about'}><li><a href="#">sobre nosotros</a></li></NavLink>
-                  <NavLink className='footer-navLink' to={'/home'}><li><a href="#">nuestras cervezas</a></li></NavLink>
+                  <NavLink className='footer-navLink' to={'/about'}><li><a href="#" rel='noopener noreferrer'>sobre nosotros</a></li></NavLink>
+                  <NavLink className='footer-navLink' to={'/home'}><li><a href="#" rel='noopener noreferrer'>nuestras cervezas</a></li></NavLink>
                   <li>Valle de Paravachasca, Córdoba</li>
                 </ul>
               </div>
               <div className="footer-col">
                 <h4>Preguntas Frecuentes </h4>
                 <ul>
-                <NavLink to={'/faq'}> <li><a href="#">FAQ</a></li> </NavLink>
+                <NavLink to={'/faq'}> <li><a href="#" rel='noopener noreferrer'>FAQ</a></li> </NavLink>
                 </ul>
               </div>
               <div className="footer-col">
                 <h4>Contactanos </h4>
                 <ul>
                   <li>lamontanes@gmail.com</li>
-                  <li><a href={WHATSAPP_LINK} target="_blank"><FaWhatsapp /> +54 9 351 599-2780</a></li>
+                  <li><a href={WHATSAPP_LINK} target="_blank" rel='noopener noreferrer'><FaWhatsapp /> +54 9 351 599-2780</a></li>
                 </ul>
               </div>
               <div className="footer-col">
               <div class="social-links">
                 <h4>Seguinos </h4>
                 <ul>
-                  <li><a href="https://www.facebook.com/pablo.alisio" target='_blank'><FaFacebookF /></a></li>
-                  <li><a href="https://www.instagram.com/lamontanes/" target='_blank'><FaInstagram /></a></li>
+                  <li><a 
+                        href="https://www.facebook.com/pablo.alisio" 
+                        target='_blank' 
+                        rel='noopener noreferrer'
+                        >
+                         <FaFacebookF />
+                       </a>
+                  </li>
+                  <li><a 
+                        href="https://www.instagram.com/lamontanes/" 
+                        target='_blank'
+                        rel='noopener noreferrer'
+                        >
+                         <FaInstagram />
+                        </a>
+                  </li>
                 </ul>
                 </div>
               </div>
