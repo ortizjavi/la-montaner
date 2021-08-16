@@ -22,13 +22,32 @@ const AboutPage = () => {
                         </p>
                         <p className="content_p">Nos encontramos en Valle de Paravachasca, Córdoba, Argentina.</p>
                     <div className="button_about">
-                        <a href='https://www.instagram.com/lamontanes/' target='_blank'>Ver mas</a>
+                        <a 
+                         href='https://www.instagram.com/lamontanes/' 
+                         target='_blank' 
+                         rel='noopener noreferrer'
+                        >
+                         Ver mas
+                        </a>
                     </div>
                     </div>
                     <div className='social'>
                     <p>Seguinos en nuestras redes!</p>
-                        <a href="https://www.facebook.com/pablo.alisio" target='_blank'><FacebookIcon className="social_icons"/></a>
-                        <a href='https://www.instagram.com/lamontanes/' target='_blank'><InstagramIcon className="social_icons"/></a>
+                        <a 
+                         href="https://www.facebook.com/pablo.alisio" 
+                         target='_blank' 
+                         rel='noopener noreferrer'
+                        >
+                         <FacebookIcon className="social_icons"/>
+                        </a>
+
+                        <a 
+                         href='https://www.instagram.com/lamontanes/' 
+                         target='_blank' 
+                         rel='noopener noreferrer'
+                        >
+                         <InstagramIcon className="social_icons"/>
+                        </a>
                     </div>
                 </div>
                 <div className="image-section">
