@@ -44,12 +44,12 @@
     width: 30%;
     background: #171717;
     color: #f4f4f4;
-    border: 1px solid #171717;
     cursor: pointer;
   }
   
   .cartscreen__right div button:hover {
     opacity: 0.9;
+    background-color: #686868;
   }
 
   .back-btn {
@@ -62,7 +62,6 @@
   }
 
   .back-btn:hover {
-    background-color: rgb(43,149,89);
     color: white;
     transition: 0.25s;
     cursor: pointer;
