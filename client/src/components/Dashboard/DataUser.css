@@ -10,3 +10,10 @@
     display: flex;
     justify-content: space-evenly;
 }
+.du-link{
+	text-decoration: none;
+	color: #022E1A;
+}
+.du-image{
+    border-radius: 40px;
+}

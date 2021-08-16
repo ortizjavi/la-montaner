@@ -1,7 +1,3 @@
-a {
-	text-decoration: none;
-	color: #022E1A;
-}
 
 .dashboard-container {
 	min-height: inherit;
@@ -19,7 +15,6 @@ a {
 }
 
 .dashboard-container div:nth-child(2) {
-	color: red;
 	flex-basis: 70%;
 }
 
@@ -121,14 +116,3 @@ a {
 	background: white;
 }
 
-.table {
-	padding-top: 1rem;
-	padding-left: 1rem;
-	width: 100%;
-	text-align: left;
-}
-
-.table td {
-	padding-top: 10px;
-	padding-bottom: 10px;
-}

@@ -1,29 +1,40 @@
 import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { FaEye } from 'react-icons/fa';
+import { getOrders } from '../../redux/actions/types/adminActions';
+import './DashTable.css';
 
 
-const Tabla = (props) =>{ 
+const Tabla = () =>{ 
+  const dispatch = useDispatch()
 
-    const ponerFilas = () => props.usuarios.map( (orden, key) => (
-          <tr key={ orden.id }>
+  const ordenes = useSelector((state) => state.cart.orders);
+
+  if(!ordenes){
+      dispatch(getOrders())
+  }
+  // const respuesta = ordenes?.find(o => o.user === usuario._id);
+
+    const ponerFilas = () => ordenes?.map( (orden, key) => (
+          <tr className='dt-tr' key={ orden._id }>
             <td>
-              { orden.name}
+              { orden.cart[0].name}
             </td>
             <td>
-              { orden.date}
+              { orden.createdAt}
             </td>
             <td>
-              { orden.state}
+              { orden.status}
             </td>
             <td>
-              { orden.pay}
+              {/* { orden.pay} */}
             </td>
             <td>
-              { orden.send}
+              {/* { orden.send} */}
             </td>
             <td>
-              { orden.total}
+              {/* { orden.total} */}
             </td>
             <td>
                 <Link to={ `/dashboard` }>
@@ -48,7 +59,7 @@ const Tabla = (props) =>{
                 <th>
                     Estado
                 </th>
-                <th>
+                {/* <th>
                     Pago
                 </th>
                 <th>
@@ -56,10 +67,10 @@ const Tabla = (props) =>{
                 </th>
                 <th>
                     Total
-                </th>
+                </th> */}
             </thead>
-            <tbody>
-                {/* { ponerFilas() } */}
+            <tbody className='dt-tbody'>
+                { ponerFilas() }
             </tbody>
         </table>
     </div>
