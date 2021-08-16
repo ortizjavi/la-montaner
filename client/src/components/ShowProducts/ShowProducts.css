@@ -10,8 +10,8 @@
     border-radius: 5px;
     /* min-height: 15rem;
     max-height: 15rem; */
-    height: 18rem;
-    width: 12rem;
+    height: 19rem;
+    width: 13rem;
     margin: 5px 10px;
     position: relative;
 }
@@ -69,32 +69,18 @@
 }
 .sp-button{
     bottom: 0;
-    opacity: 0;
-    background: rgb(43,149,89);
+    background: #24262b;
     color: white;
     border-radius: 3px;
     border: none;
+    border-bottom: 2px;
     width: 8rem;
     height: 27px;
     cursor: pointer;
-    /* position: absolute; */
     top:-40px;
 }
 .sp-button:hover{
-    background: white;
-    font-size: 20px;
-    /* color: #C88E34; */
-    color: grey;
-    opacity: 1;
-    bottom: 0;
-    width: 100%;
-    height: 20%;
-    /* border-bottom: 2px solid #C88E34; */
-    /* box-shadow: 0 0 5px 0 #66D040;; */
-    color: #66D040;
-
+    
+    background: #686868;
 }
-/* .item_image:hover{
-    object-fit: cover;
-    border: solid 1px #f5cb5c;
-} */
+

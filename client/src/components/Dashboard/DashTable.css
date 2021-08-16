@@ -1,0 +1,28 @@
+.table {
+	padding-top: 1rem;
+	padding-left: 1rem;
+	width: 100%;
+    display:block;
+
+}
+.table thead{
+    display: flex;
+    justify-content: space-around;
+}
+.table td {
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+.dt-tbody{
+	margin-top: 1rem;
+	height: 30vh;
+	display:block;
+	overflow-y: scroll;
+}
+.dt-tbody td{
+	padding-left: 3px;
+}
+.dt-tr{
+	margin-left: 1rem;
+
+}
