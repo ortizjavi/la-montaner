@@ -22,6 +22,11 @@ const sessionReducer = (state = SESSION_INITIAL_STATE, action) => {
         ...state,
         registerFailed: action.payload,
       };
+      case actionTypes.RESET_PASSWORD:
+      return {
+        ...state,
+        user: action.payload,
+      };
     default: return state;
   }
 };
