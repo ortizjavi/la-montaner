@@ -27,6 +27,7 @@ import SideBarAdmin from "../components/Dashboard/SideBarAdmin";
 import AboutPage from "../components/About/About";
 import Accordion from "../components/About/FAQ";
 import RegisterForm from "../components/ModalDialog/RegisterForm";
+import ResetForm from "../components/ModalDialog/ResetForm";
 import { ROLE } from '../utils/constants';
 
 const theme = createTheme({
@@ -93,6 +94,12 @@ export default function App() {
                 exact
                 path="/dashboard"
                 component={Dashboard}
+                roles={[ROLE.USER]}
+              />
+                <PrivateRoute
+                exact
+                path="/reset"
+                component={ResetForm}
                 roles={[ROLE.USER]}
               />
               <Route exact path="/home/products/pay" component={Pay} />

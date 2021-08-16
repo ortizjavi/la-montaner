@@ -5,7 +5,7 @@ const verifyJWT = require('../../../utils/verifyJWT');
 
 
 module.exports = (req, res, next) => {
-	const { old_password, password, email } = req.body;
+	const { oldPassword, password } = req.body;
 	const authHeader = req.headers['authorization'];
 	const token = authHeader && authHeader.split(' ')[1]
 
@@ -17,17 +17,17 @@ module.exports = (req, res, next) => {
 		return User.findById(user._id).orFail();
 	})
 	.then(user => {
-		User.comparePassword(old_password, user.password)
+		User.comparePassword(oldPassword, user.password)
 		.then(isEqual => {
-			if (isEqual) return res.sendStatus(406);
+			if (!isEqual) return res.sendStatus(406);
 			User.hashPassword(password, Number(SALT_ROUNDS))
 			.then((hashed) => {
 				User.updateOne(
-					{ email : user.email }, 
+					user, 
 					{ $set : { password : hashed, reset : false } }
 				).then(() => {
 					const { password, ...userProps } = user._doc;
-					res.status(200).json({ ...userProps });
+					res.status(200).json({ ...userProps, reset : false });
 				});
 			})
 		})

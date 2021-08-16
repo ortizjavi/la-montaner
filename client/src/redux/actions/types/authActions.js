@@ -34,6 +34,20 @@ export function register(payload) {
   }
 }
 
+export function resetPassword(payload) {
+  return async function(dispatch){
+    try {
+      const response = await axios.put(`${endpoints.AUTH_RESET}`, payload);
+      return dispatch({
+         type: actionTypes.RESET_PASSWORD, 
+         payload: response.data
+      });
+    } catch(e) {
+      console.log(e);
+    }
+  }
+} 
+
 function setUserSession(data){
   const { token, ...userProps } = data;
   setAuthDefaulHeaders(token);

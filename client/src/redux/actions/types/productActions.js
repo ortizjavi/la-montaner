@@ -294,6 +294,20 @@ export function getOrders() {
     }
   };
 }
+
+export function updateStatus(id, estado) {
+  return async function () {
+    try {
+      const resp = await axios.put(`${endpoints.ORDER_STATUS}/${id}`, {
+        status: estado,
+      });
+      console.log(resp.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+
 export function getUsers() {
   return async function (dispatch) {
     try {

@@ -2,17 +2,34 @@ import {
   orderPay,
   orderStatus,
 } from "../../redux/actions/types/productActions";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import React from "react";
 import Button from "@material-ui/core/Button";
+import {useHistory} from "react-router-dom";
+import swal from "sweetalert";
 
 export default function Pay({ cart }) {
   const dispatch = useDispatch();
+  const history = useHistory();
+  const usuario = useSelector((state) => state.session.user);
+
   const handlePay = (e) => {
     e.preventDefault();
     console.log(cart);
-    dispatch(orderStatus(cart));
-    orderPay(cart);
+    console.log(usuario._id)
+
+    if(!usuario.role){
+      swal({
+        title: 'Por favor inicia sesion',
+        icon: 'warning'
+        })
+        history.push("/login")
+    }
+    else{
+      dispatch(orderStatus(cart, usuario._id));
+      orderPay(cart);
+    }
+    
   };
   return (
     <div>

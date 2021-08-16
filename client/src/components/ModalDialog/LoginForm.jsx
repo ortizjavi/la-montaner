@@ -23,6 +23,9 @@ const LoginForm = () => {
 
     useEffect(() => {
       if (user.role){
+        if(user.reset){
+          return history.push('/reset')
+        }
         history.push('/home');
       }
     }, [user])
