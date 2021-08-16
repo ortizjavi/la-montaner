@@ -45,7 +45,7 @@
 
 .btnStylesRegister button {
     margin-top: 5%;
-    margin-left: 10%;
+    margin-left: 28%;
     width: 10vw;
     border-radius: 999px
 }
@@ -54,4 +54,12 @@
     justify-content:space-around;
     flex-direction:column;
 
+}
+.errorMsg{
+    margin-left:25%;
+    color:red;
+}
+.errorMsgReg{
+    margin-left:12%;
+    color:red;
 }

@@ -35,7 +35,7 @@ font-size_narvar:rgb(130,130,130); */
 }
   
 .pagination ul  li{
-        background: rgb(43,149,89);
+        background-color: #24262b;
         padding: 10px 15px;
         margin-right: 4px;
         border-radius: 4px;
@@ -55,20 +55,21 @@ font-size_narvar:rgb(130,130,130); */
           cursor: pointer;
         }
 .pagination ul  li:not(.active-p):not(.disabled):hover{
-          background: rgb(43,149,89,0.7);
+        background: #686868;
         }
 .pagination ul  li:not(.active-p):not(.disabled):active{
           background: #cfdbd5;
         }
   
 .pagination ul  li.active-p{
-          background: #66D040;
+          
+          background-color: #a52a2a;
           font-weight: 700;
         font-size: 1.3rem;
 
         }
 .pagination ul  li.disabled{
-          background: rgb(43,149,89,0.1);
+          background: rgb(43,149,89,0);
           pointer-events: none;
         }
       
