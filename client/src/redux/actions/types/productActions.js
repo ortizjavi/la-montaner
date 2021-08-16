@@ -271,12 +271,27 @@ export async function orderPay(cart) {
   }
 }
 
-export function orderStatus(cart) {
+export function orderStatus(cart, user) {
   return async function (dispatch) {
     try {
-      const resp = await axios.post(`${endpoints.ORDER_STATUS}`, { cart });
+      const resp = await axios.post(`${endpoints.ORDER_STATUS}`, {
+        cart,
+        user,
+      }); 
+      return  dispatch({ type: actionTypes.ORDER_STATUS, payload: resp.data });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+
+export function updateStatus(id, estado) {
+  return async function () {
+    try {
+      const resp = await axios.put(`${endpoints.ORDER_STATUS}/${id}`, {
+        status: estado,
+      });
       console.log(resp.data);
-      return dispatch({ type: actionTypes.ORDER_STATUS, payload: resp.data });
     } catch (error) {
       console.log(error);
     }
@@ -287,18 +302,17 @@ export function getOrders() {
   return async function (dispatch) {
     try {
       const resp = await axios.get(`${endpoints.ORDER_STATUS}`);
-      console.log(resp.data);
       return dispatch({ type: actionTypes.GET_ORDERS, payload: resp.data });
     } catch (error) {
       console.log(error);
     }
   };
 }
+
 export function getUsers() {
   return async function (dispatch) {
     try {
       const resp = await axios.get(`${endpoints.GET_USERS}`);
-      console.log(resp.data);
       return dispatch({ type: actionTypes.GET_USERS, payload: resp.data });
     } catch (error) {
       console.log(error);

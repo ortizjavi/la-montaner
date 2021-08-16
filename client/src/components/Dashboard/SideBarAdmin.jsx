@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import clsx from "clsx";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
@@ -24,6 +24,9 @@ import Dashboard from "./DashboardAdmin";
 import CategoryCreator from "../CategoryCreation/CategoryCreation";
 import OrdersAdmin from "../AdminOrders/AdminOrders";
 import UsersTable from "../UsersTable/UsersTable";
+import { useDispatch, useSelector } from "react-redux";
+import { getAdminProducts, getOrders, getUsers } from "../../redux/actions/types/productActions";
+import { getCategories } from "../../redux/actions/types/categoryActions";
 
 const drawerWidth = 240;
 
@@ -90,10 +93,27 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function SideBarAdmin() {
+
+  const dispatch = useDispatch()
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
   const [button, setButton] = React.useState("");
+
+  useEffect(() => {
+    dispatch(getAdminProducts())
+    dispatch(getCategories())
+  }, [dispatch])
+
+  useEffect(() => {
+    dispatch(getOrders())
+    dispatch(getUsers())
+  }, [dispatch])
+
+  const productos = useSelector(state => state.root.adminProducts)
+  const categorias = useSelector(state => state.root.allCategories)
+  const orders = useSelector((state) => state.cart.orders);
+  const users = useSelector((state) => state.cart.users); 
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -240,22 +260,22 @@ export default function SideBarAdmin() {
           <div className="cardsAdmin">
             <div onClick={(e) => handleButton(e, "productos")}>
               <IoBeer />
-              <h2>99</h2>
+              <h2>{productos?.length}</h2> 
               <h3>Productos</h3>
             </div>
             <div onClick={(e) => handleButton(e, "categorias")}>
               <CategoryIcon />
-              <h2>99</h2>
+              <h2>{categorias?.length}</h2>
               <h3>Categorias</h3>
             </div>
             <div onClick={(e) => handleButton(e, "ordenes")}>
               <StoreIcon />
-              <h2>99</h2>
+              <h2>{orders?.length}</h2>
               <h3>Ordenes</h3>
             </div>
             <div onClick={(e) => handleButton(e, "usuarios")}>
               <AccountCircleIcon />
-              <h2>99</h2>
+              <h2>{users?.length}</h2>
               <h3>Usuarios</h3>
             </div>
           </div>

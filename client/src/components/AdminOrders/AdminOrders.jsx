@@ -16,17 +16,25 @@ import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { getOrders } from "../../redux/actions/types/productActions";
+import { getOrders, updateStatus, getUsers } from "../../redux/actions/types/productActions";
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
 
-const useRowStyles = makeStyles({
+const useRowStyles = makeStyles((theme) => ({
   root: {
     "& > *": {
       borderBottom: "unset",
     },
   },
-});
+  formControl: {
+    margin: theme.spacing(0.5),
+    minWidth: 150,
+    textAlign: "left"
+  },
+}));
 
-function createData(Detalle, Usuario, Fecha, Precio, Estado, Orden) {
+function createData(Detalle, Usuario, Fecha, Precio, Estado, Orden, id) {
   return {
     Detalle,
     Usuario,
@@ -34,13 +42,25 @@ function createData(Detalle, Usuario, Fecha, Precio, Estado, Orden) {
     Precio,
     Estado,
     Orden,
+    id
   };
 }
 
 function Row(props) {
+
+  const dispatch = useDispatch();
   const { row } = props;
   const [open, setOpen] = React.useState(false);
   const classes = useRowStyles();
+  
+  const [estado, setEstado] = React.useState(row.Estado);
+
+
+  const handleChange = (event) => {
+    event.preventDefault()
+    setEstado(event.target.value);
+    dispatch (updateStatus(row.id, event.target.value));
+  };
 
   return (
     <React.Fragment>
@@ -60,7 +80,21 @@ function Row(props) {
         <TableCell align="right">{row.Fecha}</TableCell>
         <TableCell align="right">{row.Usuario}</TableCell>
         <TableCell align="right">{row.Precio}</TableCell>
-        <TableCell align="right">{row.Estado}</TableCell>
+        <TableCell align="right">
+      <FormControl className={classes.formControl}>
+        <Select
+          labelId="demo-controlled-open-select-label"
+          id="demo-controlled-open-select"
+          value={estado}
+          onChange={handleChange}
+        >
+          <MenuItem value={'Creada'}>Creada</MenuItem>
+          <MenuItem value={'Procesando'}>Procesando</MenuItem>
+          <MenuItem value={'Cancelada'}>Cancelada</MenuItem>
+          <MenuItem value={'Completa'}>Completa</MenuItem>
+        </Select>
+      </FormControl>
+      </TableCell>
       </TableRow>
       <TableRow>
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
@@ -111,9 +145,9 @@ function Row(props) {
 
 Row.propTypes = {
   row: PropTypes.shape({
-    calories: PropTypes.number.isRequired,
-    carbs: PropTypes.number.isRequired,
-    fat: PropTypes.number.isRequired,
+    calories: PropTypes.number,
+    carbs: PropTypes.number,
+    fat: PropTypes.number,
     history: PropTypes.arrayOf(
       PropTypes.shape({
         amount: PropTypes.number.isRequired,
@@ -123,24 +157,27 @@ Row.propTypes = {
     ).isRequired,
     name: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
-    protein: PropTypes.number.isRequired,
+    estado: PropTypes.string.isRequired
   }).isRequired,
 };
 
 export default function OrdersAdmin() {
   const dispatch = useDispatch();
 
+  const ordenes = useSelector((state) => state.cart.orders);
+  const users = useSelector((state) => state.cart.users);
+
   useEffect(() => {
     dispatch(getOrders());
+    dispatch(getUsers());
   }, [dispatch]);
-
-  const ordenes = useSelector((state) => state.cart.orders);
+  
   const rows = ordenes?.map((o) => {
+    const usuario = users?.find(us => us._id === o.user);
     let subtotal = 0;
     o.cart.forEach((i) => {
       subtotal += i.price * i.stockSelected;
     });
-    console.log(subtotal);
     let orden = o.cart.map((i) => {
       return {
         date: o.createdAt,
@@ -152,10 +189,11 @@ export default function OrdersAdmin() {
     return createData(
       o.cart[0].name,
       o.createdAt.slice(0, 10),
-      "Montaner",
+      usuario.name,
       subtotal,
       o.status,
-      orden
+      orden,
+      o._id
     );
   });
 
@@ -184,7 +222,7 @@ export default function OrdersAdmin() {
         </TableHead>
         <TableBody>
           {rows?.map((row) => (
-            <Row key={row.name} row={row} />
+            <Row key={row.name} row={row}/>
           ))}
         </TableBody>
       </Table>

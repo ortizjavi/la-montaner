@@ -26,5 +26,20 @@ module.exports = {
         } catch (error) {
             console.log(error)
         }
+    },
+    updateOrders: async (req,res) => {
+        const { id } = req.params;
+        const update= {...req.body}
+        try {
+            const newOrder = await Order.findByIdAndUpdate(id, update,{new:true})
+
+            res.json({
+                ok: true,
+                orders: newOrder
+            })
+        } catch (error) {
+            console.log(error)
+            res.json({ok: false})
+        }
     }
 }
