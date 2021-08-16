@@ -220,7 +220,10 @@ width: 10rem;
     cursor: pointer;
 } 
 
-
+.imgStyle{
+    border-radius: 80%;
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+}
 
 
 

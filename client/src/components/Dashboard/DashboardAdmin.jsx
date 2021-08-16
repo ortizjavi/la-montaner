@@ -23,14 +23,12 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import CreateSharpIcon from "@material-ui/icons/CreateSharp";
 import AddCircleRoundedIcon from "@material-ui/icons/AddCircleRounded";
 import swal from "sweetalert";
-import HomeIcon from "@material-ui/icons/Home";
 import {
   getAdminProducts,
   deleteProducts,
   selectedProducts,
 } from "../../redux/actions/types/productActions";
 import { Link } from "react-router-dom";
-import CategoryIcon from "@material-ui/icons/Category";
 import "./dashboard.css";
 
 function descendingComparator(a, b, orderBy) {
@@ -187,14 +185,7 @@ const EnhancedTableToolbar = (props) => {
           id="tableTitle"
           component="div"
         >
-          <Link to={"/home"} styles={{ textDecoration: "none" }}>
-            {"Productos - La Montañes"}
-          </Link>
-          <IconButton>
-            <Link to={"/home"}>
-              <HomeIcon />
-            </Link>
-          </IconButton>
+          Productos
         </Typography>
       )}
       {seleccionados.length > 0 ? (
@@ -220,13 +211,6 @@ const EnhancedTableToolbar = (props) => {
             <IconButton aria-label="filter list">
               <Link to="/admin/productCreation">
                 <AddCircleRoundedIcon />
-              </Link>
-            </IconButton>
-          </Tooltip>
-          <Tooltip title="Categorias">
-            <IconButton aria-label="filter list">
-              <Link to="/admin/categoryCreation">
-                <CategoryIcon />
               </Link>
             </IconButton>
           </Tooltip>

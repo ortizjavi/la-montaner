@@ -11,8 +11,6 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import { searchProductsAction, selectCategoryAction } from '../../redux/actions/types/productActions.js';
 import { logout } from '../../redux/actions/types/authActions.js';
 
-
-
 function NavBar(props) {
   let initialCategories = { vertodos: false, cervezas: false, conservas: false, merchandising: false, otros: false }
   const [category, setCategory] = useState(initialCategories)
@@ -20,7 +18,6 @@ function NavBar(props) {
   const user = useSelector(state => state.session.user)
 
   const isUser = user && user.role;
-  const isAdmin = user && user.role && user.role === 'ADMIN';
 
   const dispatch = useDispatch();
   const currentPage = useSelector(state => state.root.currentPage)
@@ -62,13 +59,9 @@ function NavBar(props) {
         <img className='nb-img' src="https://live.staticflickr.com/65535/51361173217_49de2674c3_m.jpg" alt="Montañez Logo" />
       </NavLink>
       <SearchBar />
-
       {!props.admin ?
-<<<<<<< HEAD
+
         <nav className='nav-container-categories'>
-=======
-        <nav className='nav-container'>
->>>>>>> 719b9af86ad7df076d1729afc7ccd40f398726d1
           <ul className='nav-ul'>
             <li className="list-item">
           <select className='nav-selec' name="category" value='' onChange={(e) =>handleCategory(e)}>
@@ -110,11 +103,12 @@ function NavBar(props) {
             </li>*/}
         </ul>
       </nav>
-        : null}
       <div className='nav-icons-container'>
-      <Link to={isUser ? isAdmin ? '/admin' : '/dashboard' : '/login'} className='nav-icon'>
-        <button className='nav-personicon'>
-          <PersonIcon style={{ fontSize: 40 }} />
+      <Link to='/login' className='nav-icon'>
+        <button className='nav-personicon'>{user && user.picture ? 
+        <img className='imgStyle' src={user.picture} alt="imagen de usuario" width="30" height="30" ></img> 
+        : <PersonIcon style={{ fontSize: 40 }} />}
+         
         </button>
       </Link>
       <Link to="/wishlist" className='nav-icon'>

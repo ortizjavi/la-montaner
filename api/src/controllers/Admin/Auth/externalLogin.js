@@ -12,7 +12,7 @@ const mapFacebookProperties = ({data}) => {
         given_name: data.first_name,
         family_name: data.last_name,
         picture: data.picture.data.url,
-        email_verified: false
+        verified: false
     }
 }
 
