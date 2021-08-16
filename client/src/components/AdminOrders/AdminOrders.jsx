@@ -166,12 +166,10 @@ export default function OrdersAdmin() {
 
   const ordenes = useSelector((state) => state.admin.orders);
   const users = useSelector((state) => state.admin.users);
-
   useEffect(() => {
     dispatch(getOrders());
     dispatch(getUsers());
   }, [dispatch]);
-  
   const rows = ordenes?.map((o) => {
     const usuario = users?.find(us => us._id === o.user);
     let subtotal = 0;
@@ -186,10 +184,11 @@ export default function OrdersAdmin() {
         stockSelected: i.stockSelected,
       };
     });
+    let name = usuario ? usuario.name : 'Rocio Juarez';
     return createData(
       o.cart[0].name,
       o.createdAt.slice(0, 10),
-      usuario.name,
+      name,
       subtotal,
       o.status,
       orden,
