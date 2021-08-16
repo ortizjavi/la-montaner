@@ -68,7 +68,7 @@ export function deleteUser(user) {
 export function resetUser(user) {
   return async function (dispatch) {
     try {
-      const resp = await axios.post(`${endpoints.RESET_USER}`, { email : user.email });
+      const resp = await axios.put(`${endpoints.RESET_USER}`, { email : user.email });
       return dispatch({ type: actionTypes.RESET_USER, payload: resp });
     } catch (error) {
       console.log(error);
