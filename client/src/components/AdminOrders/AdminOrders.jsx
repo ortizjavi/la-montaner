@@ -164,8 +164,8 @@ Row.propTypes = {
 export default function OrdersAdmin() {
   const dispatch = useDispatch();
 
-  const ordenes = useSelector((state) => state.cart.orders);
-  const users = useSelector((state) => state.cart.users);
+  const ordenes = useSelector((state) => state.admin.orders);
+  const users = useSelector((state) => state.admin.users);
 
   useEffect(() => {
     dispatch(getOrders());
