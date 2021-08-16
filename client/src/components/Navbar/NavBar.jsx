@@ -10,7 +10,6 @@ import SvgIcon from '@material-ui/core/SvgIcon';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import { searchProductsAction, selectCategoryAction } from '../../redux/actions/types/productActions.js';
 import { logout } from '../../redux/actions/types/authActions.js';
-import logoLanding from "../../img/logoLanding.png";
 
 function NavBar(props) {
   let initialCategories = { vertodos: false, cervezas: false, conservas: false, merchandising: false, otros: false }
@@ -28,42 +27,31 @@ function NavBar(props) {
   const [state, setState] = useState(currentCategoryState)
 
 
-  useEffect(()=> {
-    dispatch(selectCategoryAction(state))
-    dispatch(searchProductsAction(''))
+    useEffect(()=> {
+      dispatch(selectCategoryAction(state))
+      dispatch(searchProductsAction(''))
 //toca preguntar si ek search tiene estado
-  },[state])
-
-  const handleCategory = (e) =>{
-    e.preventDefault()
-    setState(e.target.value)
-  }
- 
-  function HomeIcon(props) {
-      return (
-        <SvgIcon {...props}>
-          <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
-        </SvgIcon>
-      );
+    },[state])
+  
+    const handleCategory = (e) =>{
+      e.preventDefault()
+      setState(e.target.value)
     }
-
-    window.addEventListener('scroll', function () {
-      var header = document.querySelector('header');
-      header.classList.toggle('sticky', window.scrollY > 0)
-    })
+    function HomeIcon(props) {
+        return (
+          <SvgIcon {...props}>
+            <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
+          </SvgIcon>
+        );
+      }
    
   return (
-    <header 
-    className="navbar"
-    >
+    <header className="navbar">
       <NavLink to='/home' className='nav-personicon'>
-        <img className='nb-img' src={logoLanding} alt="Montañez Logo" />
+        <img className='nb-img' src="https://live.staticflickr.com/65535/51361173217_49de2674c3_m.jpg" alt="Montañez Logo" />
       </NavLink>
       <SearchBar />
-      {!props.admin ?
-
-        <nav className='nav-container-categories'>
-            <h3 className='nav-title'>Nuestros Productos</h3>
+        <nav className='nav-container'>
           <ul className='nav-ul'>
             <li className="list-item">
           <select className='nav-selec' name="category" value='' onChange={(e) =>handleCategory(e)}>
@@ -104,7 +92,7 @@ function NavBar(props) {
             </NavLink>
             </li>*/}
         </ul>
-      </nav> : null}
+      </nav>
       <div className='nav-icons-container'>
       <Link to='/login' className='nav-icon'>
         <button className='nav-personicon'>{user && user.picture ? 

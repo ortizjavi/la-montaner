@@ -8,11 +8,10 @@
       .Home-filter{
             display: flex;
             justify-content: flex-end;
-            align-items: center;
             font-size: 1rem;
             color: grey;
-            height: 4rem;
-            padding-block: 3rem;
+            height: 2rem;
+            margin-bottom: 1rem;
       }
       .home-nav{
             position: fixed;
@@ -87,16 +86,15 @@
       /* background: #CB9D57; */
       /* color:white; */
       color: grey;
-      font-style: italic;
-      /* padding: 3px; */
+      padding: 3px;
       display: flex;
       /* margin-top: 9.5rem; */
       flex-direction: column;
       justify-content: center;
-      margin-left: 0.5rem;
+      margin-left: 2rem;
       font-size: 1rem;
       align-items:flex-start;
-      /* width: 16rem; */
+      width: 16rem;
       box-sizing: border-box;
       /* box-shadow: 0 0 1px 0 gray; */
 
