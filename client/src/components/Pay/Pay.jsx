@@ -40,7 +40,7 @@ export default function Pay({ cart }) {
           disableElevation
           onClick={handlePay}
         >
-          Paga!
+          Ir a pagar
         </Button>
       </form>
     </div>
