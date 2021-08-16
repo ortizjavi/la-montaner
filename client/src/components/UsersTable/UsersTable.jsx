@@ -10,7 +10,12 @@ import TablePagination from "@material-ui/core/TablePagination";
 import TableRow from "@material-ui/core/TableRow";
 import Button from "@material-ui/core/Button";
 import { useDispatch, useSelector } from "react-redux";
-import { getUsers } from "../../redux/actions/types/productActions";
+import { 
+  getUsers, 
+  deleteUser, 
+  newAdmin, 
+  resetUser
+} from "../../redux/actions/types/adminActions";
 import "./UsersTable.css";
 const columns = [
   {
@@ -36,8 +41,8 @@ const columns = [
   },
 ];
 
-function createData(name, code, population, density, actions) {
-  return { name, code, population, density, actions };
+function createData(_id, name, code, population, density, actions) {
+  return { _id, name, code, population, density, actions };
 }
 
 const useStyles = makeStyles({
@@ -56,9 +61,9 @@ export default function UsersTable() {
     dispatch(getUsers());
   }, [dispatch]);
 
-  const users = useSelector((state) => state.cart.users);
+  const users = useSelector((state) => state.admin.users);
   const rows = users?.map((o) => {
-    return createData(o.name, o.role, o.email, o.picture, "actions");
+    return createData(o._id, o.name, o.role, o.email, o.picture, "actions");
   });
   const classes = useStyles();
   const [page, setPage] = React.useState(0);
@@ -72,15 +77,23 @@ export default function UsersTable() {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
-  const deleteUser = () => {
+
+  const handleDelete = (row) => {
     console.log("eliminar");
+    dispatch(deleteUser(getUser(row)))
   };
-  const admin = () => {
+  const handleAdmin = (row) => {
     console.log("sos admin");
+    dispatch(newAdmin(getUser(row)))
   };
-  const resetPassword = () => {
+  const handleReset = (row) => {
     console.log("revisa tu correo");
+    dispatch(resetUser(getUser(row)))
   };
+
+  function getUser(row){
+    return users.find(user => user._id == row._id);
+  }
 
   return (
     <Paper className={classes.root}>
@@ -119,22 +132,22 @@ export default function UsersTable() {
                                 variant="contained"
                                 color="primary"
                                 className="botonUT"
-                                onClick={resetPassword}
+                                onClick={() => handleReset(row)}
                               >
-                                Resetaer contraseña
+                                Resetear contraseña
                               </Button>
                               <Button
                                 variant="contained"
                                 color="secondary"
                                 className="botonUT"
-                                onClick={admin}
+                                onClick={() => handleAdmin(row)}
                               >
                                 Hacer Admin
                               </Button>
                               <Button
                                 variant="contained"
                                 className="eliminar"
-                                onClick={deleteUser}
+                                onClick={() => handleDelete(row)}
                               >
                                 Eliminar
                               </Button>
