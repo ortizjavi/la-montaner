@@ -64,11 +64,7 @@ function NavBar(props) {
       <SearchBar />
 
       {!props.admin ?
-<<<<<<< HEAD
         <nav className='nav-container-categories'>
-=======
-        <nav className='nav-container'>
->>>>>>> 719b9af86ad7df076d1729afc7ccd40f398726d1
           <ul className='nav-ul'>
             <li className="list-item">
           <select className='nav-selec' name="category" value='' onChange={(e) =>handleCategory(e)}>
