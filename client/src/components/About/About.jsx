@@ -20,7 +20,7 @@ const AboutPage = () => {
                         <p> Nuestros principios son promover una economía justa y solidaria, centrada en la valorización del ser humano y no en la priorización del capital.
                         Consumiendo productos locales no sólo contribuimos a mejorar la economía local sino que también ayudamos al medio ambiente y fomentamos las relaciones sociales dentro de la comunidad. 
                         </p>
-                        <p className="content_p">Nos encontramos en Villa Paravachasca, Córdoba, Argentina.</p>
+                        <p className="content_p">Nos encontramos en Valle de Paravachasca, Córdoba, Argentina.</p>
                     <div className="button_about">
                         <a href='https://www.instagram.com/lamontanes/' target='_blank'>Ver mas</a>
                     </div>
