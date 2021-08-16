@@ -59,7 +59,6 @@ function NavBar(props) {
         <img className='nb-img' src="https://live.staticflickr.com/65535/51361173217_49de2674c3_m.jpg" alt="Montañez Logo" />
       </NavLink>
       <SearchBar />
-      {!props.admin ?
 
         <nav className='nav-container-categories'>
           <ul className='nav-ul'>
