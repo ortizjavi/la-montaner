@@ -287,7 +287,7 @@ export function orderStatus(cart, user) {
 }
 
 export function updateStatus(id, estado) {
-  return async function (dispatch) {
+  return async function () {
     try {
       const resp = await axios.put(`${endpoints.ORDER_STATUS}/${id}`, {
         status: estado,
