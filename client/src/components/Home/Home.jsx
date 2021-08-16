@@ -129,8 +129,8 @@ export default function Home() {
           </select>
         </li>
         <div className='home-range'>
-          { rangePrice[1] && <h5 >{`Rango de Precios: $${rangePrice[0]} - $${rangePrice[1]}`}</h5> }
-          { sort && <h5 >{`Ordenado: ${sort ==='asc' ? 'A - Z' : 'Z - A'}`}</h5> }
+          { rangePrice[1] && <p >{`Rango de Precios: $${rangePrice[0]} - $${rangePrice[1]}`}</p> }
+          { sort && <p >{`Ordenado: ${sort ==='asc' ? 'A - Z' : 'Z - A'}`}</p> }
         </div>
         <button className='home-personicon' onClick={(e) => handlePriceSort(e)}>
           {(rangePrice[1] || sort)  &&<ClearIcon style={{ fontSize: 30,color:'#66D040' }} />}
