@@ -24,10 +24,10 @@ import CreateSharpIcon from "@material-ui/icons/CreateSharp";
 import AddCircleRoundedIcon from "@material-ui/icons/AddCircleRounded";
 import swal from "sweetalert";
 import {
-  getAdminProducts,
   deleteProducts,
   selectedProducts,
 } from "../../redux/actions/types/productActions";
+import { getAdminProducts } from "../../redux/actions/types/adminActions"
 import { Link } from "react-router-dom";
 import "./dashboard.css";
 

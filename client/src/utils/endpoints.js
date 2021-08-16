@@ -20,4 +20,7 @@ export const DELETE_PRODUCT = `${ADMIN_SERVER}/product`;
 //endpoint de compras
 export const ORDER_PAY = `${SERVER}/product/pay`;
 export const ORDER_STATUS = `${SERVER}/product/order`;
-export const GET_USERS = `${ADMIN_SERVER}/usersList`;
+export const GET_USERS = `${ADMIN_SERVER}/users`;
+export const DELETE_USER = `${ADMIN_SERVER}/users`;
+export const RESET_USER = `${ADMIN_SERVER}/users`;
+export const NEW_ADMIN = `${ADMIN_SERVER}/new`;

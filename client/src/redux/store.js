@@ -10,6 +10,7 @@ import {
 } from "../utils/localStorage";
 
 import cartReducer from "./reducer/cartReducers";
+import adminReducer from "./reducer/adminReducer";
 import rootReducer from "./reducer/index";
 import wishlistReducer from "./reducer/wishlistReducer";
 import sessionReducer from "./reducer/sessionReducer";
@@ -21,6 +22,7 @@ const reducer = combineReducers({
   wishlist: wishlistReducer,
   root: rootReducer,
   session: sessionReducer,
+  admin: adminReducer,
 });
 
 console.log(session);

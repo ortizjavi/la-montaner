@@ -42,19 +42,6 @@ export function getAllProductsAutocomplete(query) {
     }
   };
 }
-export function getAdminProducts() {
-  return async function (dispatch) {
-    try {
-      const res = await axios.get(`${endpoints.ADMIN_GET_PRODUCTS}`);
-      return dispatch({
-        type: actionTypes.ADMIN_GET_PRODUCTS,
-        payload: res.data,
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  };
-}
 
 export function selectedProducts(selected) {
   return async function (dispatch) {
@@ -285,40 +272,7 @@ export function orderStatus(cart, user) {
   };
 }
 
-export function updateStatus(id, estado) {
-  return async function () {
-    try {
-      const resp = await axios.put(`${endpoints.ORDER_STATUS}/${id}`, {
-        status: estado,
-      });
-      console.log(resp.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-}
 
-export function getOrders() {
-  return async function (dispatch) {
-    try {
-      const resp = await axios.get(`${endpoints.ORDER_STATUS}`);
-      return dispatch({ type: actionTypes.GET_ORDERS, payload: resp.data });
-    } catch (error) {
-      console.log(error);
-    }
-  };
-}
-
-export function getUsers() {
-  return async function (dispatch) {
-    try {
-      const resp = await axios.get(`${endpoints.GET_USERS}`);
-      return dispatch({ type: actionTypes.GET_USERS, payload: resp.data });
-    } catch (error) {
-      console.log(error);
-    }
-  };
-}
 export function addFavProducts(id) {
   return async function (dispatch) {
     try {

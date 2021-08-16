@@ -2,8 +2,6 @@ import * as actionTypes from "../actions/names";
 
 const CART_INITIAL_STATE = {
   cartItems: [],
-  orders: [],
-  users: [],
 };
 
 const cartReducer = (state = CART_INITIAL_STATE, action) => {
@@ -33,12 +31,6 @@ const cartReducer = (state = CART_INITIAL_STATE, action) => {
       };
     case actionTypes.DELETE_CART_ALL:
       return { ...state, cartItems: [] };
-    case actionTypes.ORDER_STATUS:
-      return { ...state, orders: action.payload };
-    case actionTypes.GET_ORDERS:
-      return { ...state, orders: action.payload };
-    case actionTypes.GET_USERS:
-      return { ...state, users: action.payload };
     default:
       return state;
   }
