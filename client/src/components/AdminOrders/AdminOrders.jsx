@@ -170,11 +170,8 @@ export default function OrdersAdmin() {
     dispatch(getOrders());
     dispatch(getUsers());
   }, [dispatch]);
-  console.log(ordenes);
   const rows = ordenes?.map((o) => {
-    console.log(users);
     const usuario = users?.find(us => us._id === o.user);
-    console.log(usuario);
     let subtotal = 0;
     o.cart.forEach((i) => {
       subtotal += i.price * i.stockSelected;
