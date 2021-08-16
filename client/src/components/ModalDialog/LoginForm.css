@@ -40,6 +40,7 @@
     flex-direction: column;
     background: white;
     margin-top: 1%;
+    
 }
 
 .btnStylesRegister button {
@@ -47,4 +48,10 @@
     margin-left: 10%;
     width: 10vw;
     border-radius: 999px
+}
+.fields{
+    display:flex;
+    justify-content:space-around;
+    flex-direction:column;
+
 }

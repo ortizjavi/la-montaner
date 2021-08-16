@@ -27,7 +27,6 @@ module.exports = {
             console.log(error)
         }
     },
-
     updateOrders: async (req,res) => {
         const { id } = req.params;
         const update= {...req.body}

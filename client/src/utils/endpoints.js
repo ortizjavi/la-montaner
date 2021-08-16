@@ -5,6 +5,7 @@ export const ADMIN_SERVER = `${SERVER}/admin`;
 // endpoints de la auth
 export const AUTH_LOGIN = `${SERVER}/login`;
 export const AUTH_REGISTER = `${SERVER}/register`;
+export const AUTH_RESET = `${SERVER}/user/reset`
 
 // endpoints de las categorias
 export const ADMIN_CATEGORY = `${ADMIN_SERVER}/category`;
@@ -20,10 +21,3 @@ export const DELETE_PRODUCT = `${ADMIN_SERVER}/product`;
 export const ORDER_PAY = `${SERVER}/product/pay`;
 export const ORDER_STATUS = `${SERVER}/product/order`;
 export const GET_USERS = `${ADMIN_SERVER}/usersList`;
-
-export const fixedCategories = [
-  "cervezas",
-  "conservas",
-  "merchandising",
-  "otros",
-];

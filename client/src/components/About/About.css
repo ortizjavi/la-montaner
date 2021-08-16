@@ -5,6 +5,7 @@
     width: 100%;
     min-height: 100vh;
     background-color: #ddd;
+    display: flex;
 }
 
 .container-about{
@@ -25,8 +26,8 @@
 }
 
 .image-section img{
-   width: 100%;
-   height: auto;
+   width: 80%;
+   max-height: 50vh;
 }
 
 .content-section .title-about{
@@ -58,7 +59,7 @@
 
 .content-section .content .button_about a{
     background-color: #3d3d3d;
-    padding: 12px 40px;
+    padding: 12px 30px;
     text-decoration: none;
     color: #fff;
     font-size: 20px;
@@ -71,18 +72,25 @@
 }
 
 .content-section .social{
-    margin: 40px 40px;
+    padding: 20px;
+    display: flex;
+    margin: 20px;
+}
+
+.social .MuiSvgIcon-root{
+    padding-left: 20px;
+    width: 2rem!important;
 }
 
 .social_icons{
     color: #a52a2a;
-    font-size: 55px!important;
-    padding: 20px 30px;
+    font-size: 35px!important;
 }
 
 .social_icons:hover{
     color: #3d3d3d;
 }
+
 
 /* responsive */
 

@@ -1,18 +1,17 @@
-import {Redirect, Route} from 'react-router'
-import {useSelector} from 'react-redux'
+import { Redirect, Route } from 'react-router'
+import { useSelector } from 'react-redux'
 
-const PrivateRoute = ({component : Component, roles, ...rest}) => {
-    
+const PrivateRoute = ({ component: Component, roles, ...rest }) => {
     const user = useSelector(state => state.session.user)
-    if (!user){
-    	return <div></div>;
-    }
+    console.log(user.reset)
     return (
+
         <Route {...rest}>
-        { roles.includes(user.role) ? 
-			<Component/> : 
-			<Redirect to='/login'/>
-		}
+            {user.reset && rest.path !== '/reset' ? <Redirect to='/reset' /> :
+                roles.includes(user.role) ?
+                    <Component /> :
+                    <Redirect to='/login' />
+            }
         </Route>
     )
 }

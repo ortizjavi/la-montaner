@@ -20,12 +20,15 @@ import Success from "../components/PayState/Success";
 import Pending from "../components/PayState/Pending";
 import Failure from "../components/PayState/Failure";
 import PrivateRoute from "../components/PrivateRoute/PrivateRoute";
+import PublicRoute from "../components/PublicRoute/PublicRoute";
 import LoginForm from "../components/ModalDialog/LoginForm";
 import Footer from "../components/Footer/Footer";
 import SideBarAdmin from "../components/Dashboard/SideBarAdmin";
 import AboutPage from "../components/About/About";
 import Accordion from "../components/About/FAQ";
 import RegisterForm from "../components/ModalDialog/RegisterForm";
+import ResetForm from "../components/ModalDialog/ResetForm";
+import { ROLE } from '../utils/constants';
 
 const theme = createTheme({
   palette: {
@@ -43,11 +46,6 @@ const theme = createTheme({
     },
   },
 });
-
-const ROLE = {
-  USER: "USER",
-  ADMIN: "ADMIN",
-};
 
 export default function App() {
   const dispatch = useDispatch();
@@ -98,12 +96,26 @@ export default function App() {
                 component={Dashboard}
                 roles={[ROLE.USER]}
               />
+                <PrivateRoute
+                exact
+                path="/reset"
+                component={ResetForm}
+                roles={[ROLE.USER]}
+              />
               <Route exact path="/home/products/pay" component={Pay} />
               <Route exact path="/home/pay/success" component={Success} />
               <Route exact path="/home/pay/pending" component={Pending} />
               <Route exact path="/home/pay/failure" component={Failure} />
-              <Route exact path="/login" component={LoginForm} />
-              <Route exact path="/register" component={RegisterForm} />
+              <PublicRoute
+                exact
+                path="/login"
+                component={LoginForm}
+              />
+              <PublicRoute
+                exact
+                path="/register"
+                component={RegisterForm}
+              />
               <Route exact path="/home/:id" component={ProductDetail} />
               <Route exact path="/cart" component={Cart} />
               <Route exact path="/wishlist" component={Wishlist} />
