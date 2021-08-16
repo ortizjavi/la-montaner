@@ -92,6 +92,8 @@ width: 10rem;
 .Nav-vertodos {
     opacity: 0;
     /* width: 10rem; */
+    width: 10rem;
+    display: none;
 }
 
 .actived-vertodos {
