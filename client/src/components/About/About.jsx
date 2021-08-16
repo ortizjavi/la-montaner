@@ -3,6 +3,7 @@ import './About.css';
 import FacebookIcon from '@material-ui/icons/Facebook';
 import InstagramIcon from '@material-ui/icons/Instagram';
 import aboutImg from "../../img/laMontanes.png";
+import beerPinta from "../../img/beerPinta.png";
 
 const AboutPage = () => {
 
@@ -25,12 +26,14 @@ const AboutPage = () => {
                     </div>
                     </div>
                     <div className='social'>
+                    <p>Seguinos en nuestras redes!</p>
                         <a href="https://www.facebook.com/pablo.alisio" target='_blank'><FacebookIcon className="social_icons"/></a>
                         <a href='https://www.instagram.com/lamontanes/' target='_blank'><InstagramIcon className="social_icons"/></a>
                     </div>
                 </div>
                 <div className="image-section">
                     <img src={aboutImg} alt="beerImage"/>
+                    <img src={beerPinta} alt="beerImage"/>
                 </div>
             </div>
             

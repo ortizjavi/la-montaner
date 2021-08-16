@@ -1,10 +1,10 @@
 // endpoints del back
-export const SERVER = 'http://localhost:3001';
+export const SERVER = "http://localhost:3001";
 export const ADMIN_SERVER = `${SERVER}/admin`;
 
 // endpoints de la auth
 export const AUTH_LOGIN = `${SERVER}/login`;
-export const AUTH_REGiSTER = `${SERVER}/register`;
+export const AUTH_REGISTER = `${SERVER}/register`;
 
 // endpoints de las categorias
 export const ADMIN_CATEGORY = `${ADMIN_SERVER}/category`;
@@ -19,5 +19,4 @@ export const DELETE_PRODUCT = `${ADMIN_SERVER}/product`;
 //endpoint de compras
 export const ORDER_PAY = `${SERVER}/product/pay`;
 export const ORDER_STATUS = `${SERVER}/product/order`;
-
-export const fixedCategories = ['cervezas', 'conservas', 'merchandising', 'otros']
+export const GET_USERS = `${ADMIN_SERVER}/usersList`;

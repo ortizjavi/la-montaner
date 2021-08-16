@@ -12,6 +12,7 @@ const initialState = {
   activeProduct: null,
   maxPrice: "",
   currentCategoryState :'vertodos',
+ 
 };
 
 const rootReducer = (state = initialState, action) => {

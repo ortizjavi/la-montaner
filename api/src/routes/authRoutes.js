@@ -3,7 +3,8 @@ const router = Router();
 const { authenticateToken } = require('../middlewares/auth');
 const {
   login,
-  register
+  register,
+  resetPassword
 } = require("../controllers/Admin/Auth");
 
 // Auth
@@ -12,6 +13,7 @@ router.post("/login",
 		if (!req.body.token){
 			return login(req, res, next);
 		}
+		req.headers['authorization'] = `Bearer ${req.body.token}`;
 		next();
 	},
  	authenticateToken,
@@ -21,5 +23,7 @@ router.post("/login",
  	}
 );
 router.post("/register", register);
+
+router.put("/user/reset", resetPassword);
 
 module.exports = router;

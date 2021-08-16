@@ -2,7 +2,7 @@ import axios from 'axios';
 import * as actionTypes from '../names';
 import * as endpoints from '../../../utils/endpoints';
 
-export function login(payload) {
+ export function login(payload) {
   return async function(dispatch){
     try {
       const response = await axios.post(`${endpoints.AUTH_LOGIN}`, payload);
@@ -12,6 +12,24 @@ export function login(payload) {
       });
     } catch(e) {
       console.log(e);
+    }
+  }
+} 
+
+export function register(payload) {
+  return async function(dispatch){
+    try {
+      const response = await axios.post(`${endpoints.AUTH_REGISTER}`, payload);
+      return dispatch({
+         type: actionTypes.REGISTER_USER, 
+         payload: response.data
+      });
+    } catch(e) {
+     
+      return dispatch({
+        type: actionTypes.REGISTER_FAILED, 
+        payload: e.response.data
+     });
     }
   }
 }
