@@ -28,7 +28,7 @@ const Cart = () => {
       swal({
         title: 'Estas seguro que quieres eliminar este producto?',
         icon: 'warning',
-        buttons: true,
+        buttons: ['Cancelar', true],
         dangerMode: true,
       }).then((willDelete) => {
         if (willDelete) {
@@ -97,7 +97,7 @@ const Cart = () => {
         </div>
 
         <div className='cartDeleteAll_container'>
-          <button className='cartDeleteAll_btn' onClick={() => removeAllHandler()}>Vaciar el carrito</button>
+          <button className='cartDeleteAll_btn' onClick={() => removeAllHandler()}>Vaciar carrito</button>
         </div>
 
         <div className="cartscreen__right">
