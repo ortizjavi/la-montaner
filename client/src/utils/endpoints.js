@@ -1,5 +1,5 @@
 // endpoints del back
-export const SERVER = "http://localhost:3001";
+export const SERVER = "https://la-montaner.herokuapp.com";
 export const ADMIN_SERVER = `${SERVER}/admin`;
 
 // endpoints de la auth
