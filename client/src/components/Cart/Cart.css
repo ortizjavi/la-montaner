@@ -54,7 +54,6 @@
 
   .back-btn {
     border: 1px solid black;
-    border-style: ridge;
     padding: 5px;
     border-radius: 5px;
     text-decoration: none;
@@ -62,8 +61,30 @@
   }
 
   .back-btn:hover {
+    background-color: green;
     color: white;
     transition: 0.25s;
+    cursor: pointer;
+  }
+
+  .cartDeleteAll_container {
+    position: absolute;
+    top: 180px;
+    right: 67px;
+  }
+
+  .cartDeleteAll_btn {
+    background-color: white;
+    font-size: 15px;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 7px;
+  }
+
+  .cartDeleteAll_btn:hover {
+    background-color: green;
+    transition: 0.25s;
+    color: white;
     cursor: pointer;
   }
   
