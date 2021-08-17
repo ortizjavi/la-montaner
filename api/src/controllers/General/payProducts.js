@@ -17,9 +17,9 @@ module.exports = {
 
       let preference = {
         back_urls: {
-          success: "http://localhost:3000/home/pay/success",
-          failure: "http://localhost:3000/home/pay/failure",
-          pending: "http://localhost:3000/home/pay/pending",
+          success: "https://la-montaner.herokuapp.com/home/pay/success",
+          failure: "https://la-montaner.herokuapp.com/home/pay/failure",
+          pending: "https://la-montaner.herokuapp.com/home/pay/pending",
         },
         auto_return: "approved",
         items: []
