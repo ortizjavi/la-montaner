@@ -15,7 +15,9 @@ export default function ExternAuthentication(props) {
   const dispatch = useDispatch();
 
   const responseGoogle = (response) => {
-    dispatch(login({ google: response.tokenId }));
+    if (response.tokenId){
+      dispatch(login({ google: response.tokenId }));
+    }
   };
 
   const responseFacebook = (response) => {
