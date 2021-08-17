@@ -151,19 +151,27 @@ export default function ProductDetail({ match, history }) {
                 </span>
               </p>
               <p>
-                Cantidad
-                <select value={qty} onChange={(e) => setQty(e.target.value)}>
-                {[...Array(detail.stock).keys()].map((x) => (
-          <option key={x + 1} value={x + 1}>
-            {x + 1}
-          </option>
-        ))}
+                Cantidad:
+                { 
+                  detail.stock > 0 ? (
+                    <select value={qty} onChange={(e) => setQty(e.target.value)}>
+                    {[...Array(detail.stock).keys()].map((x) => (
+                        <option key={x + 1} value={x + 1}>
+                          {x + 1}
+                       </option>
+                    ))}
                 </select>
+                  ) : ( <span>no disponible</span> )
+                }
               </p>
               <p>
-                <button type="button" onClick={addToCartHandler}>
-                  Agregar al carrito
-                </button>
+                {
+                  detail.stock > 0 ? (
+                    <button type="button" onClick={addToCartHandler}>
+                      Agregar al carrito
+                    </button>
+                  ) : null
+                }
               </p>
             </div>
           </div>
