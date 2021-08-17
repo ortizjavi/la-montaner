@@ -59,12 +59,11 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    /* color: grey;
-    border: grey solid 1px; */
     width: 18rem;
     height: 2rem;
-    color: gray;
+    /* color: gray; */
     font-style: italic;
-    /* border-radius: 30px; */
     padding: 0 1rem;
+    background-color: none;
 }
+

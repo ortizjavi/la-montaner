@@ -118,6 +118,13 @@ export default function Home() {
        
         {/* <button className={`${sort ==='asc' ? "actived" : 'home-button'}`} onClick={() => handleSort('asc')}> A-Z </button>
         <button className={`${sort ==='desc' ? "actived" : 'home-button'}`} onClick={() => handleSort('desc')}> Z-A </button> */}
+        <div className='home-range'>
+          { rangePrice[1] && <p>{`Rango de Precios: $${rangePrice[0]} - $${rangePrice[1]}`}</p> }
+          { sort && <p>{`Ordenado: ${sort ==='asc' ? 'A - Z' : 'Z - A'}`}</p> }
+        </div>
+        <button className='home-personicon' onClick={(e) => handlePriceSort(e)}>
+          {(rangePrice[1] || sort)  &&<ClearIcon />}
+        </button>
         <li className='home-list'>
           <select className='select-home' name="price" value='Precio' onChange={(e) =>handlePriceSort(e)}>
             <option id='none' value='Precio'>Ordenar por:</option>
@@ -128,13 +135,6 @@ export default function Home() {
             <option id='range3' value='desc'>Nombre: Z - A</option>
           </select>
         </li>
-        <div className='home-range'>
-          { rangePrice[1] && <h5 >{`Rango de Precios: $${rangePrice[0]} - $${rangePrice[1]}`}</h5> }
-          { sort && <h5 >{`Ordenado: ${sort ==='asc' ? 'A - Z' : 'Z - A'}`}</h5> }
-        </div>
-        <button className='home-personicon' onClick={(e) => handlePriceSort(e)}>
-          {(rangePrice[1] || sort)  &&<ClearIcon style={{ fontSize: 30,color:'#66D040' }} />}
-        </button>
       </div>
       <main className='home-main'>
           <section>
