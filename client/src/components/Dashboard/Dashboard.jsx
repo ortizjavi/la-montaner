@@ -10,7 +10,7 @@ const Dashboard = () => {
 
     const dispatch = useDispatch()
     const usuario = useSelector((state) => state.session.user);
-    const ordenes = useSelector((state) => state.cart.orders);
+    const ordenes = useSelector((state) => state.admin.orders);
 
     if(!ordenes){
         dispatch(getOrders())
