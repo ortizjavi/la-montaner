@@ -73,6 +73,7 @@
       background-color: white;
       cursor: pointer;
       height: 2rem;
+      width: 221px;
 }
 .select-home::-webkit-calendar-picker-indicator {
       border: none;
@@ -91,24 +92,24 @@
       /* margin-top: 9.5rem; */
       flex-direction: column;
       justify-content: center;
-      margin-left: 2rem;
       font-size: 1rem;
       align-items:flex-start;
-      width: 16rem;
+      width: auto;
       box-sizing: border-box;
       /* box-shadow: 0 0 1px 0 gray; */
 
 }
-.home-range h5{
-font-size: 1rem;
+.home-range p{
+      font-size: 0.9rem;
+      font-style: italic;
 }
 
 .home-personicon{
       background: white;     
-      /* margin-top: 8.7rem; */
       border: none;
       cursor: pointer;
-}
+      color: #a52a2a;
+      }
 .home-sidebar-container{
      
     /* margin-top: -4rem; */

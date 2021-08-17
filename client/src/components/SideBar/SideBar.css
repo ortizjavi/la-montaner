@@ -4,10 +4,10 @@
     margin-left: 2rem;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: flex-end;
     box-sizing: border-box;
-    border: 1px grey solid;
-    justify-content: flex-start;
+    /* border: 1px grey solid; */
+    justify-content:center;
     background: white;
 }
 .sidebar-title{

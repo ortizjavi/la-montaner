@@ -62,6 +62,12 @@
 .sp-h6{
     margin: 0;
     text-align: center;
+    color: green
+}
+.sp-h6-null{
+    margin: 0;
+    text-align: center;
+    color: red
 }
 
 .sp-link:hover{
