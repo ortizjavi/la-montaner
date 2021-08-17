@@ -33,7 +33,7 @@ const Cart = () => {
       }).then((willDelete) => {
         if (willDelete) {
           swal(
-            'Tu producto fue eliminado con exitó',{
+            'Tu producto fue eliminado con exitó :)',{
               icon: 'success'
             })
             dispatch(deleteCartProduct(id)); 
@@ -45,7 +45,7 @@ const Cart = () => {
 
   const removeAllHandler = () => {
     swal({
-      title: '¿Estás seguro que deseas vaciar tu carrito?',
+      title: '¿Estás seguro que quieres vaciar tu carrito?',
       icon: 'warning',
       buttons: ['Cancelar', true],
       dangerMode: true,
