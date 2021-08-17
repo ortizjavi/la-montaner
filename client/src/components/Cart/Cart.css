@@ -63,14 +63,15 @@
 
   .back-btn:hover {
     background-color: green;
+    color: white;
     transition: 0.25s;
     cursor: pointer;
   }
 
   .cartAllDelete_container {
     position: absolute;
-    top: 195px;
-    right: 100px;
+    top: 180px;
+    right: 60px;
   }
 
   .cartAllDelete_btn {
