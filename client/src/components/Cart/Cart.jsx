@@ -96,8 +96,8 @@ const Cart = () => {
           )}
         </div>
 
-        <div className='cartAllDelete_container'>
-          <button className='cartAllDelete_btn' onClick={() => removeAllHandler()}>Vaciar el carrito</button>
+        <div className='cartDeleteAll_container'>
+          <button className='cartDeleteAll_btn' onClick={() => removeAllHandler()}>Vaciar el carrito</button>
         </div>
 
         <div className="cartscreen__right">
