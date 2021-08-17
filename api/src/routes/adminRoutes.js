@@ -38,7 +38,8 @@ router.get("/usersList", getUsersList);
 // Admin
 router.post("/new", authenticateToken, authAdmin, newAdmin);
 router.get("/users", authenticateToken, authAdmin, getUsers);
-router.delete("/users", authenticateToken, authAdmin, deleteUser);
+router.delete("/users/:id", authenticateToken, authAdmin, deleteUser);
+//router.delete("/users/:id", deleteUser);
 router.put("/users", authenticateToken, authAdmin, resetUser);
 
 module.exports = router;

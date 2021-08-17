@@ -12,7 +12,8 @@ const adminReducer = (state = ADMIN_INITIAL_STATE, action) => {
     case actionTypes.GET_USERS:
       return { ...state, users: action.payload };
     case actionTypes.DELETE_USER:
-      return {...state, users: state.users.filter(user => user._id !== action.payload)}
+      const deletedUser = state.users?.filter(user => user._id !== action.payload) 
+      return {...state, users: deletedUser }
     case actionTypes.RESET_USER:
       const updatedUsers = state.users.slice();  
       updatedUsers.find(user => user._id === action.payload).reset = true;

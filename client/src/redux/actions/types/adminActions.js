@@ -53,12 +53,13 @@ export function getOrders() {
   };
 }
 
-export function deleteUser(user) {
+export function deleteUser(id) {
   return async function (dispatch) {
     try {
-      console.log(user);
-      const resp = await axios.delete(`${endpoints.DELETE_USER}`, { email : user.email });
-      return dispatch({ type: actionTypes.DELETE_USER, payload: user._id });
+      console.log(id);
+      await axios.delete(`${endpoints.DELETE_USER}/${id}`)
+      /* await axios.delete(`${endpoints.DELETE_USER}`, { email : user.email }); */
+      return dispatch({ type: actionTypes.DELETE_USER , payload:id});
     } catch (error) {
       console.log(error);
     }

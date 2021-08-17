@@ -17,6 +17,7 @@ import {
   resetUser
 } from "../../redux/actions/types/adminActions";
 import "./UsersTable.css";
+import { ROLE } from '../../utils/constants';
 const columns = [
   {
     id: "density",
@@ -62,7 +63,8 @@ export default function UsersTable() {
   }, [dispatch]);
 
   const users = useSelector((state) => state.admin.users);
-  const rows = users?.map((o) => {
+  const filterUser = users?.filter(u => ROLE.USER === u.role );
+  const rows = filterUser?.map((o) => {
     return createData(o._id, o.name, o.role, o.email, o.picture, "actions");
   });
   const classes = useStyles();
@@ -78,9 +80,13 @@ export default function UsersTable() {
     setPage(0);
   };
 
-  const handleDelete = (row) => {
+  const handleDelete = (e, row) => {
+    e.preventDefault();
     console.log("eliminar");
-    dispatch(deleteUser(getUser(row)))
+    const res= (getUser(row))
+    console.log(res._id)
+    dispatch(deleteUser(res._id))
+    dispatch(getUsers());
   };
   const handleAdmin = (row) => {
     console.log("sos admin");
@@ -92,7 +98,7 @@ export default function UsersTable() {
   };
 
   function getUser(row){
-    return users.find(user => user._id == row._id);
+    return users.find(user => user._id === row._id);
   }
 
   return (
@@ -147,7 +153,7 @@ export default function UsersTable() {
                               <Button
                                 variant="contained"
                                 className="eliminar"
-                                onClick={() => handleDelete(row)}
+                                onClick={(e) => handleDelete(e, row)}
                               >
                                 Eliminar
                               </Button>
