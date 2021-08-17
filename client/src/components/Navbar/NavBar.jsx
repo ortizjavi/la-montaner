@@ -44,6 +44,11 @@ function NavBar(props) {
           </SvgIcon>
         );
       }
+    
+      window.addEventListener('scroll', function () {
+        var header = document.querySelector('header');
+        header.classList.toggle('sticky', window.scrollY > 0)
+      })
    
   return (
     <header className="navbar">
@@ -52,18 +57,19 @@ function NavBar(props) {
       </NavLink>
       <SearchBar />
         <nav className='nav-container'>
+          <h2 className='nav-title'>La Montañes Craft Beer</h2>
           <ul className='nav-ul'>
             <li className="list-item">
-          <select className='nav-selec' name="category" value='' onChange={(e) =>handleCategory(e)}>
-            <option id='none' value='Precio'>Categorias:</option>
-            {state !== 'vertodos' && <option id='range1'  value='vertodos'>Ver Todas</option>}
-            <option id='range2' value='cervezas'>Cervezas</option>
-            <option id='range3' value='conservas'>Conservas</option>
-            <option id='range3' value='merchandising'>Merchandasing</option>
-            <option id='range3' value='otros'>Otros</option>
-          </select>
+              <select className='nav-selec' name="category" value='' onChange={(e) =>handleCategory(e)}>
+                <option id='none' value='Precio'>Categorias:</option>
+                {state !== 'vertodos' && <option id='range1'  value='vertodos'>Ver Todas</option>}
+                <option id='range2' value='cervezas'>Cervezas</option>
+                <option id='range3' value='conservas'>Conservas</option>
+                <option id='range3' value='merchandising'>Merchandasing</option>
+                <option id='range3' value='otros'>Otros</option>
+              </select>
           </li>
-          { state && <div className='' style={{marginLeft: 70}}>{`${state !=='vertodos' ? state.toUpperCase() : '  '}`}</div> }
+          { state && <p className='category-selected' >{`${state !=='vertodos' ? state.toUpperCase() : '  '}`}</p> }
           {/* <div>
           </div> */}
             {/* <li className="list-item">

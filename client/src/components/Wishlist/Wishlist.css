@@ -97,4 +97,24 @@
     flex-direction: column;
     flex-flow: column wrap;
   }
+
+  .product_container {
+    height: 10rem;
+    width: 7rem;
+  }
+
+  .product_name {
+    width: 90%;
+  }
+
+  .product_price {
+    margin-top: 5px;
+    margin-right: 20px;
+    font-size: 16px;
+  }
+
+  .product_image {
+    width: 90%;
+    height: 8rem;
+  }
 }
