@@ -16,7 +16,7 @@ import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { getOrders, updateStatus, getUsers } from "../../redux/actions/types/adminActions";
+import { getOrders, updateStatus, getUsers, getOrdersFilter } from "../../redux/actions/types/adminActions";
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -53,13 +53,13 @@ function Row(props) {
   const [open, setOpen] = React.useState(false);
   const classes = useRowStyles();
   
-  const [estado, setEstado] = React.useState(row.Estado);
+  const [estado, setEstado] = React.useState('');
 
 
   const handleChange = (event) => {
-    event.preventDefault()
     setEstado(event.target.value);
     dispatch (updateStatus(row.id, event.target.value));
+    dispatch(getOrders())
   };
 
   return (
@@ -85,7 +85,7 @@ function Row(props) {
         <Select
           labelId="demo-controlled-open-select-label"
           id="demo-controlled-open-select"
-          value={estado}
+          value={row.Estado}
           onChange={handleChange}
         >
           <MenuItem value={'Creada'}>Creada</MenuItem>
@@ -121,7 +121,7 @@ function Row(props) {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {row.Orden.map((historyRow) => (
+                  {row.Orden?.map((historyRow) => (
                     <TableRow key={historyRow.date}>
                       <TableCell component="th" scope="row">
                         {historyRow.name}
@@ -163,13 +163,20 @@ Row.propTypes = {
 
 export default function OrdersAdmin() {
   const dispatch = useDispatch();
+  const classes = useRowStyles();
 
   const ordenes = useSelector((state) => state.admin.orders);
   const users = useSelector((state) => state.admin.users);
+  const filtered = useSelector((state) => state.admin.filteredOrders);
+
+  const [status, setStatus] = React.useState('Estado');
+
   useEffect(() => {
     dispatch(getOrders());
     dispatch(getUsers());
-  }, [dispatch]);
+    dispatch(getOrdersFilter(status))
+  }, [dispatch, status]);
+
   const rows = ordenes?.map((o) => {
     const usuario = users?.find(us => us._id === o.user);
     let subtotal = 0;
@@ -196,6 +203,38 @@ export default function OrdersAdmin() {
     );
   });
 
+  const rowsFilter = filtered?.map((o) => {
+    const usuario = users?.find(us => us._id === o.user);
+    let subtotal = 0;
+    o.cart.forEach((i) => {
+      subtotal += i.price * i.stockSelected;
+    });
+    let orden = o.cart.map((i) => {
+      return {
+        date: o.createdAt,
+        name: i.name,
+        price: i.price,
+        stockSelected: i.stockSelected,
+      };
+    });
+    let name = usuario ? usuario.name : 'Rocio Juarez';
+    return createData(
+      o.cart[0].name,
+      o.createdAt.slice(0, 10),
+      name,
+      subtotal,
+      o.status,
+      orden,
+      o._id
+    );
+  });
+
+  const handleStatus = (e) => {
+    setStatus(e.target.value)
+  }
+
+  
+
   return (
     <TableContainer component={Paper}>
       <Table aria-label="collapsible table">
@@ -215,14 +254,34 @@ export default function OrdersAdmin() {
               <b>Precio</b>
             </TableCell>
             <TableCell align="right">
-              <b>Estado</b>
+            <FormControl className={classes.formControl}>
+              <Select
+                labelId="demo-controlled-open-select-label"
+                id="demo-controlled-open-select"
+                value={status}
+                onClick={(e) => handleStatus(e)}
+              >
+                <MenuItem value={'Estado'}>Estado</MenuItem>
+                <MenuItem value={'Creada'}>Creada</MenuItem>
+                <MenuItem value={'Procesando'}>Procesando</MenuItem>
+                <MenuItem value={'Cancelada'}>Cancelada</MenuItem>
+                <MenuItem value={'Completa'}>Completa</MenuItem>
+              </Select>
+            </FormControl>
             </TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows?.map((row) => (
+          {
+            status === 'Estado' ?
+          (rows?.map((row) => (
             <Row key={row.name} row={row}/>
-          ))}
+          )))
+        :
+        (rowsFilter?.map((row) => (
+          <Row key={row.name} row={row}/>
+        )))
+        }
         </TableBody>
       </Table>
     </TableContainer>
