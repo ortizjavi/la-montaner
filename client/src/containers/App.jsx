@@ -29,6 +29,7 @@ import Accordion from "../components/About/FAQ";
 import RegisterForm from "../components/ModalDialog/RegisterForm";
 import ResetForm from "../components/ModalDialog/ResetForm";
 import { ROLE } from "../utils/constants";
+import Address from "../components/Address/Address";
 
 const theme = createTheme({
   palette: {
@@ -112,6 +113,7 @@ export default function App() {
               <Route exact path="/cart" component={Cart} />
               <Route exact path="/wishlist" component={Wishlist} />
               <Route exact path="/about" component={AboutPage} />
+              <Route exact path="/add/address" component={Address} />
               <Route exact path="/faq" component={Accordion} />
             </div>
             <Footer />
