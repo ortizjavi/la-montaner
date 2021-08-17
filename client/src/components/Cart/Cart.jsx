@@ -9,9 +9,7 @@ import './Cart.css';
 import Pay from '../Pay/Pay';
 
 // Actions
-import { addCartProduct, deleteCartProduct } from "../../redux/actions/types/productActions";
-
-
+import { addCartProduct, deleteCartProduct, deleteCartAll } from "../../redux/actions/types/productActions";
 
 const Cart = () => {
   const dispatch = useDispatch();
@@ -28,14 +26,14 @@ const Cart = () => {
 
   const removeFromCartHandler = (id) => {
       swal({
-        title: 'Estas seguro que quieres eliminar este producto?',
+        title: '¿Estás seguro que quieres eliminar este producto?',
         icon: 'warning',
-        buttons: true,
+        buttons: ['Cancelar', true],
         dangerMode: true,
       }).then((willDelete) => {
         if (willDelete) {
           swal(
-            'Tu producto fue eliminada',{
+            'Tu producto fue eliminado con exitó :)',{
               icon: 'success'
             })
             dispatch(deleteCartProduct(id)); 
@@ -44,6 +42,27 @@ const Cart = () => {
         }
       })
   };
+
+  const removeAllHandler = () => {
+    swal({
+      title: '¿Estás seguro que quieres vaciar tu carrito?',
+      icon: 'warning',
+      buttons: ['Cancelar', true],
+      dangerMode: true,
+    }).then((willDelete) => {
+      if (willDelete && cartItems.length === 0) {
+        swal(
+          'Tu carrito se encuentra vacio :(', {
+            icon: 'error'
+          })
+      }else if (willDelete) {
+        swal('Tu carrito se vacio con exitó :)', {
+          icon: 'success'
+        })
+        dispatch(deleteCartAll())
+      } 
+    })
+  }
 
   const getCartCount = () => {
     return cartItems.reduce((stockSelected, item) => Number(item.stockSelected) + stockSelected, 0);
@@ -75,6 +94,10 @@ const Cart = () => {
               />
             ))
           )}
+        </div>
+
+        <div className='cartDeleteAll_container'>
+          <button className='cartDeleteAll_btn' onClick={() => removeAllHandler()}>Vaciar carrito</button>
         </div>
 
         <div className="cartscreen__right">
