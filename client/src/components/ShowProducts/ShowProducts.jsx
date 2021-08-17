@@ -94,15 +94,17 @@ const ShowProducts = ({allProducts}) => {
                       {
                         item.stock > 0 ? 
                         (<h6 className='sp-h6'>Tenemos en stock!</h6>)
-                        : (<h6 className='sp-h6'>No tenemos stock</h6>)
+                        : (<h6 className='sp-h6-null'>No tenemos stock</h6>)
                       }
                     </NavLink>
-                    <button
+                    { item.stock > 0 ?
+                      <button
                       className="sp-button"
                       onClick={() => addToCartHandler(item._id)}
                     >
                       Agregar al Carrito
                     </button>
+                    : null}
                   </div>
                 )}
               </>

@@ -18,7 +18,6 @@ export default function SearchBar() {
     const [state, setState] = useState({product: "", icono:true,})
     const [searched, setSearched] = useState('')
 
-
     useEffect(() => {
         dispatch(getAllProductsAutocomplete(state.product))
     }, [state.product])
@@ -64,10 +63,9 @@ export default function SearchBar() {
         dispatch(searchProductsAction(''))
         
     }
-
     return(
         <div className='sb-container'>
-            <form className="form-container" >
+            <form className="form-container" onSubmit={(e) => handleSubmit(e)} >
                 <label >     
                     <input list="product" multiple value={state.product} className='input_search' 
                     autoComplete='off' placeholder='Buscar Productos' name="product" 
@@ -86,7 +84,7 @@ export default function SearchBar() {
                     }  
                 </datalist>
                 
-                        <SearchIcon className='nav-personicon' onClick={(e) => handleSubmit(e)} style={{ fontSize: 40,color:'#24262b' }} />
+                        <SearchIcon className='nav-personicon' onClick={(e) => handleSubmit(e)} style={{ fontSize: 40,color:'#24262b'}} />
                 
                 {/* {
                     state.icono ?
@@ -106,7 +104,7 @@ export default function SearchBar() {
                     <div className='sb-result-container'>
                         <span className='sb-result'>{`Resultados de:  ${searched}`}</span>
                         <button className='nav-personicon' onClick={clearSearch}>
-                            <ClearIcon style={{ fontSize: 20,color:'#66D040' }} />
+                            <ClearIcon style={{ fontSize: 20,color:'#66D040'}} />
                         </button>
                     </div>:
                     <p>{searched}</p>
