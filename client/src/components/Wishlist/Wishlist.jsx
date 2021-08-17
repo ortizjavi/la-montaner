@@ -23,7 +23,7 @@ export default function Wishlist() {
       {
         wishlistItems.length === 0 ? (
           <div className='no_product_container'>
-            <h3>No tienes productos favoritos.</h3>
+            <h3>Tu lista de deseados esta vacia...</h3>
             <Link className='back-home-btn' to="/home">Volver a la tienda</Link>
           </div>
         ) : (
