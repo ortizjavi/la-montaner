@@ -46,7 +46,7 @@ const store = createStore(
 );
 
 if (session.token) {
-  store.dispatch(login({ token: session.token }));
+  store.dispatch(login({ token: session.token }, true));
 }
 
 export default store;

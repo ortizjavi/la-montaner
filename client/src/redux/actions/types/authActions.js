@@ -2,7 +2,7 @@ import axios from 'axios';
 import * as actionTypes from '../names';
 import * as endpoints from '../../../utils/endpoints';
 
-export function login(payload) {
+export function login(payload, tokenLogin = false) {
   return async function (dispatch) {
     try {
       const response = await axios.post(`${endpoints.AUTH_LOGIN}`, payload);
@@ -11,10 +11,11 @@ export function login(payload) {
         payload: setUserSession(response.data)
       });
     } catch (e) {
-      return dispatch({
-        type: actionTypes.LOGIN_FAILED,
-        payload: e.response.data
-      });
+      if (!tokenLogin)
+        return dispatch({
+          type: actionTypes.LOGIN_FAILED,
+          payload: e.response.data
+        });
     }
   }
 }
