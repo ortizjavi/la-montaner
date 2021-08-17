@@ -26,7 +26,7 @@ const Cart = () => {
 
   const removeFromCartHandler = (id) => {
       swal({
-        title: 'Estas seguro que quieres eliminar este producto?',
+        title: '¿Estás seguro que quieres eliminar este producto?',
         icon: 'warning',
         buttons: ['Cancelar', true],
         dangerMode: true,
@@ -45,7 +45,7 @@ const Cart = () => {
 
   const removeAllHandler = () => {
     swal({
-      title: '¿Estas seguro que deseas vaciar tu carrito?',
+      title: '¿Estás seguro que deseas vaciar tu carrito?',
       icon: 'warning',
       buttons: ['Cancelar', true],
       dangerMode: true,
