@@ -50,13 +50,13 @@ export default function Address() {
 
   const [address, setAddress] = useState({
     provincia: "",
-    dirrecion: "",
+    direccion: "",
     mcl: "",
   });
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const newAddress = `${address.provincia} ${address.dirrecion} ${address.mcl}`;
+      const newAddress = `${address.provincia}-${address.mcl}-${address.direccion}`;
       if (!usuario.role) {
         swal({
           title: "Por favor inicia sesion",
