@@ -16,6 +16,9 @@ function NavBar(props) {
   const [category, setCategory] = useState(initialCategories)
   const currentCategoryState = useSelector(state => state.root.currentCategoryState)
   const user = useSelector(state => state.session.user)
+  const cart = useSelector((state) => state.cart);
+
+  const { cartSubtotal } = cart;
 
   const isUser = user && user.role;
 
@@ -111,9 +114,10 @@ function NavBar(props) {
           <FavoriteIcon className='fav-icon-nav'/>
       </Link>
       <Link to="/cart" className='nav-icon'>
-        
           <ShoppingCartIcon className='nav-personicon' style={{ fontSize: 40 }} />
-        
+        <div className='cart_subtotal_container'>
+          <h3 className='cart_subtotal'>{cartSubtotal}</h3>
+        </div>
       </Link>
       {isUser ?
         <div className='nav-icon'>
