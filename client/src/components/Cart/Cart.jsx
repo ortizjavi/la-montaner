@@ -56,7 +56,7 @@ const Cart = () => {
             icon: 'error'
           })
       }else if (willDelete) {
-        swal('Tu carrito se vacio con exitó :)', {
+        swal('Tu carrito se vació con exitó :)', {
           icon: 'success'
         })
         dispatch(deleteCartAll())
