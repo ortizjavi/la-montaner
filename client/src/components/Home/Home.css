@@ -46,6 +46,21 @@
             border-radius: 50px;
             border-bottom: 2px solid #C88E34;
             box-sizing: border-box;
+            width: 2.5rem;
+      }
+      .Home-filter .actived {
+            margin-left: 1rem;
+            background: rgb(240, 238, 238);
+            color: grey;
+            font-weight: 500;
+            border: none;
+            outline: none;
+            font-size: 1rem;
+            cursor: pointer;
+            width: 2.5rem;
+            border-radius: 50px;
+            border-bottom: 2px solid #C88E34;
+            box-sizing: border-box;
       }
       .home-list{
         list-style: none;
@@ -75,10 +90,7 @@
       height: 2rem;
       width: 221px;
 }
-.select-home::-webkit-calendar-picker-indicator {
-      border: none;
-      border-bottom: solid #CB9D57 1px;
-}
+
 .select-sidebar option:hover{
     color: white;
     background: black;

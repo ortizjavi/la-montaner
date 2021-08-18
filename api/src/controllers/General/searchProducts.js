@@ -150,9 +150,9 @@ module.exports = {
           const product = await Product.find( { $and: [ { price: { $gte: prices[0] } }, { price: { $lte: prices[1] } } ] } )
                                         .limit(ProductsPerPage)
                                         .skip(ProductsPerPage * page)
-                                        // .sort({
-                                        //     price: 1
-                                        // })
+                                        .sort({
+                                          name: req.query.sort
+                                      })
           const productLength = (await Product.find({ $and: [ { price: { $gte: prices[0] } }, { price: { $lte: prices[1] } } ] })).length
           return res.json([productLength, product]);
         } catch (error) {

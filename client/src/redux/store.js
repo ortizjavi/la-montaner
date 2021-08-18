@@ -33,6 +33,7 @@ const initialState = {
   },
   cart: {
     cartItems: cartItemsInLocalStorage,
+    cartSubtotal: 0,
   },
   wishlist: {
     wishlistItems: wishlistItemsInLocalStorage,

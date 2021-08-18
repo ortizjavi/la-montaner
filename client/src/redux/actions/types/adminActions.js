@@ -53,6 +53,16 @@ export function getOrders() {
   };
 }
 
+export function getOrdersFilter(status) {
+  return function (dispatch) {
+    try {
+      return dispatch({type: actionTypes.GET_ORDER_FILTERED, payload: status})
+    } catch (error) {
+      console.log(error)
+    }
+  }
+}
+
 export function deleteUser(id) {
   return async function (dispatch) {
     try {
