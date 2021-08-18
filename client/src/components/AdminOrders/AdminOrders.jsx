@@ -34,10 +34,10 @@ const useRowStyles = makeStyles((theme) => ({
   },
 }));
 
-function createData(Detalle, Usuario, Fecha, Precio, Estado, Orden, id) {
+function createData( Usuario,Direccion, Fecha, Precio, Estado, Orden, id) {
   return {
-    Detalle,
     Usuario,
+    Direccion,
     Fecha,
     Precio,
     Estado,
@@ -75,10 +75,10 @@ function Row(props) {
           </IconButton>
         </TableCell>
         <TableCell component="th" scope="row">
-          {row.Detalle}
+          {row.Usuario}
         </TableCell>
+        <TableCell align="right">{row.Direccion}</TableCell>
         <TableCell align="right">{row.Fecha}</TableCell>
-        <TableCell align="right">{row.Usuario}</TableCell>
         <TableCell align="right">{row.Precio}</TableCell>
         <TableCell align="right">
       <FormControl className={classes.formControl}>
@@ -193,9 +193,9 @@ export default function OrdersAdmin() {
     });
     let name = usuario ? usuario.name : 'Rocio Juarez';
     return createData(
-      o.cart[0].name,
-      o.createdAt.slice(0, 10),
       name,
+      o.address,
+      o.createdAt.slice(0, 10),
       subtotal,
       o.status,
       orden,
@@ -219,9 +219,9 @@ export default function OrdersAdmin() {
     });
     let name = usuario ? usuario.name : 'Rocio Juarez';
     return createData(
-      o.cart[0].name,
-      o.createdAt.slice(0, 10),
       name,
+      o.address,
+      o.createdAt.slice(0, 10),
       subtotal,
       o.status,
       orden,
@@ -242,10 +242,10 @@ export default function OrdersAdmin() {
           <TableRow>
             <TableCell />
             <TableCell>
-              <b>Detalle</b>
+              <b>Usuario</b>
             </TableCell>
             <TableCell align="right">
-              <b>Usuario</b>
+              <b>Direccion</b>
             </TableCell>
             <TableCell align="right">
               <b>Fecha</b>
