@@ -50,7 +50,7 @@
       }
       .Home-filter .actived {
             margin-left: 1rem;
-            background: none;
+            background: rgb(240, 238, 238);
             color: grey;
             font-weight: 500;
             border: none;

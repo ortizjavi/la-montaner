@@ -66,9 +66,8 @@ function NavBar(props, {history}) {
         var header = document.querySelector('header');
         header.classList.toggle('sticky', window.scrollY > 0)
       })
-console.log('state es: ', state) 
-console.log('currentCategoryState es: ', currentCategoryState)  
-  return (
+
+ return (
     <header className="navbar">
       <NavLink to='/home' className='nav-personicon'>
         <img className='nb-img' src="https://res.cloudinary.com/la-montanes/image/upload/v1629134641/logopng_qbilvd.png" alt="Montañez Logo" />
@@ -78,44 +77,14 @@ console.log('currentCategoryState es: ', currentCategoryState)
           <h2 className='nav-title'>La Montañes Craft Beer</h2>
           <ul className='nav-ul'>
             <li className="list-item">
-              <select className='nav-selec' name="category" value='' onChange={(e) =>handleCategory(e)}>
-                <option id='none' value='Precio'>Categorias:</option>
-                {state !== 'vertodos' && <option id='range1'  value='vertodos'>Ver Todas</option>}
+              <select className='nav-selec' id='select' name="select" size='5' onClick={(e) =>handleCategory(e)}>
+                <option id='range1'  value='vertodos'>Todos los productos</option>
                 <option id='range2' value='cervezas'>Cervezas</option>
                 <option id='range3' value='conservas'>Conservas</option>
-                <option id='range3' value='merchandising'>Merchandasing</option>
+                <option id='range3' value='merchandising'>Merchandising</option>
                 <option id='range3' value='otros'>Otros</option>
               </select>
           </li>
-          {/* { state && <p className='category-selected' >{`${state !=='vertodos' ? state.toUpperCase() : '  '}`}</p> } */}
-          { currentCategoryState && <p className='category-selected' >{`${currentCategoryState !=='vertodos' ? currentCategoryState.toUpperCase() : '  '}`}</p> }
-          {/* <div>
-          </div> */}
-            {/* <li className="list-item">
-              <NavLink to='/home'>
-                <input className={`${currentCategoryState === 'vertodos' ? 'Nav-vertodos' : "actived-vertodos"}`} type="button" value="Ver Todos" onClick={() => setState('vertodos')} />
-              </NavLink>
-            </li>
-            <li className="list-item">
-            <NavLink to='/home'>
-            <input className={`${currentCategoryState === 'cervezas' ? "actived" : 'Nav-button'}`} type="button" value="Cervezas" onClick={() => setState('cervezas')} />
-            </NavLink>
-            </li>
-            <li className="list-item">
-            <NavLink to='/home'>
-            <input className={`${currentCategoryState === 'conservas' ? "actived" : 'Nav-button'}`} type="button" value="Conservas" onClick={() => setState('conservas')} />
-            </NavLink> 
-            </li>
-            <li className="list-item">
-            <NavLink to='/home'>
-              <input className={`${currentCategoryState === 'merchandising' ? "actived" : 'Nav-button'}`} type="button" value="Merchadising" onClick={() => setState('merchandising')} />
-            </NavLink>
-            </li>
-            <li className="list-item">
-            <NavLink to='/home'>
-              <input className={`${currentCategoryState === 'otros' ? "actived" : 'Nav-button'}`} type="button" value="Otros" onClick={() => setState('otros')} />
-            </NavLink>
-            </li>*/}
         </ul>
       </nav>
       <div className='nav-icons-container'>
