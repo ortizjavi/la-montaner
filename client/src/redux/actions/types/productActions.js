@@ -264,14 +264,13 @@ export function orderStatus(cart, user) {
       const resp = await axios.post(`${endpoints.ORDER_STATUS}`, {
         cart,
         user,
-      }); 
-      return  dispatch({ type: actionTypes.ORDER_STATUS, payload: resp.data });
+      });
+      return dispatch({ type: actionTypes.ORDER_STATUS, payload: resp.data });
     } catch (error) {
       console.log(error);
     }
   };
 }
-
 
 export function addFavProducts(id) {
   return async function (dispatch) {
@@ -300,6 +299,9 @@ export function removeFavProduct(id) {
 
 export function addCartSubTotal(subtotal) {
   return async function (dispatch) {
-    return dispatch({ type: actionTypes.ADD_CART_SUB_TOTAL, payload: subtotal });
-  }
+    return dispatch({
+      type: actionTypes.ADD_CART_SUB_TOTAL,
+      payload: subtotal,
+    });
+  };
 }

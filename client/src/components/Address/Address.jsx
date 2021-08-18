@@ -1,7 +1,8 @@
 import axios from "axios";
 import React, { useState } from "react";
 import TextField from "@material-ui/core/TextField";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
+import { useParams } from "react-router";
 import Button from "@material-ui/core/Button";
 import swal from "sweetalert";
 import "./Address.css";
@@ -41,10 +42,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 export default function Address() {
-  const [createProduct, setCreateProduct] = useState({
-    departamento: "",
+  const { id } = useParams();
+  const [address, setAddress] = useState({
+    provincia: "",
     MCL: "",
-    barrio: "",
     direccion: "",
   });
   const handleSubmit = async (e) => {
@@ -55,18 +56,18 @@ export default function Address() {
         text: "Se ha añadido con exito!",
         icon: "success",
       });
-
-      setTimeout(
-        () => (document.location.href = "http://localhost:3000/home"),
-        3000
+      let post = await axios.post(
+        `http://localhost:3001/product/address/${id}`,
+        { address: `${address.provincia} ${address.mcl} ${address.direccion}` }
       );
+      console.log(post);
     } catch (err) {
       console.log(err);
     }
   };
   const handleInputChange = (e) => {
-    setCreateProduct({
-      ...createProduct,
+    setAddress({
+      ...address,
       [e.target.name]: e.target.value,
     });
   };
@@ -78,8 +79,8 @@ export default function Address() {
       <form className={contentPC.root} onSubmit={handleSubmit}>
         <TextField
           id="outlined-helperText"
-          name="departamento"
-          label="Departamento"
+          name="provincia"
+          label="Provincia"
           isRequired="true"
           required
           defaultValue=""
@@ -89,19 +90,8 @@ export default function Address() {
         />
         <TextField
           id="outlined-helperText"
-          name="MCL"
+          name="mcl"
           label="Municipio, capital o localidad"
-          isRequired="true"
-          required
-          defaultValue=""
-          helperText="* Campo requerido"
-          variant="outlined"
-          onChange={handleInputChange}
-        />
-        <TextField
-          id="outlined-helperText"
-          name="barrio"
-          label="Barrio"
           isRequired="true"
           required
           defaultValue=""
