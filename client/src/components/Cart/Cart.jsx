@@ -5,11 +5,16 @@ import swal from "sweetalert";
 
 // Components
 import CartItem from "./CartItem.jsx";
-import './Cart.css';
-import Pay from '../Pay/Pay';
+import "./Cart.css";
+import Pay from "../Pay/Pay";
 
 // Actions
-import { addCartProduct, deleteCartProduct, deleteCartAll, addCartSubTotal } from "../../redux/actions/types/productActions";
+import {
+  addCartProduct,
+  deleteCartProduct,
+  deleteCartAll,
+  addCartSubTotal,
+} from "../../redux/actions/types/productActions";
 
 const Cart = () => {
   const dispatch = useDispatch();
@@ -17,7 +22,7 @@ const Cart = () => {
   const { cartItems } = cart;
 
   useEffect(() => {
-      window.localStorage.setItem(`cart`, JSON.stringify(cartItems))
+    window.localStorage.setItem(`cart`, JSON.stringify(cartItems));
   }, [cartItems]);
 
   const qtyChangeHandler = (id, qty) => {
@@ -25,55 +30,55 @@ const Cart = () => {
   };
 
   const removeFromCartHandler = (id) => {
-      swal({
-        title: '¿Estás seguro que quieres eliminar este producto?',
-        icon: 'warning',
-        buttons: ['Cancelar', true],
-        dangerMode: true,
-      }).then((willDelete) => {
-        if (willDelete) {
-          swal(
-            'Tu producto fue eliminado con exito :)',{
-              icon: 'success'
-            })
-            dispatch(deleteCartProduct(id)); 
-        }else{
-          return swal('Tu producto sigue en el carrito :)')
-        }
-      })
+    swal({
+      title: "¿Estás seguro que quieres eliminar este producto?",
+      icon: "warning",
+      buttons: ["Cancelar", true],
+      dangerMode: true,
+    }).then((willDelete) => {
+      if (willDelete) {
+        swal("Tu producto fue eliminado con exito :)", {
+          icon: "success",
+        });
+        dispatch(deleteCartProduct(id));
+      } else {
+        return swal("Tu producto sigue en el carrito :)");
+      }
+    });
   };
 
   const removeAllHandler = () => {
     swal({
-      title: '¿Estás seguro que quieres vaciar tu carrito?',
-      icon: 'warning',
-      buttons: ['Cancelar', true],
+      title: "¿Estás seguro que quieres vaciar tu carrito?",
+      icon: "warning",
+      buttons: ["Cancelar", true],
       dangerMode: true,
     }).then((willDelete) => {
       if (willDelete && cartItems.length === 0) {
-        swal(
-          'Tu carrito se encuentra vacio :(', {
-            icon: 'error'
-          })
-      }else if (willDelete) {
-        swal('Tu carrito se vació con exito :)', {
-          icon: 'success'
-        })
-        dispatch(deleteCartAll())
-      } 
-    })
-  }
-
+        swal("Tu carrito se encuentra vacio :(", {
+          icon: "error",
+        });
+      } else if (willDelete) {
+        swal("Tu carrito se vació con exito :)", {
+          icon: "success",
+        });
+        dispatch(deleteCartAll());
+      }
+    });
+  };
 
   const getCartCount = () => {
-    return cartItems.reduce((stockSelected, item) => Number(item.stockSelected) + stockSelected, 0);
+    return cartItems.reduce(
+      (stockSelected, item) => Number(item.stockSelected) + stockSelected,
+      0
+    );
   };
 
   const subtotal = getCartCount();
 
   useEffect(() => {
-    dispatch(addCartSubTotal(subtotal))
-  }, [subtotal])
+    dispatch(addCartSubTotal(subtotal));
+  }, [subtotal]);
 
   const getCartSubTotal = () => {
     return cartItems
@@ -89,7 +94,10 @@ const Cart = () => {
 
           {cartItems.length === 0 ? (
             <div>
-              Tu carrito esta vacio. <Link to="/home" className='back-btn'>Volver a la tienda</Link>
+              Tu carrito esta vacio.{" "}
+              <Link to="/home" className="back-btn">
+                Volver a la tienda
+              </Link>
             </div>
           ) : (
             cartItems.map((item) => (
@@ -103,8 +111,13 @@ const Cart = () => {
           )}
         </div>
 
-        <div className='cartDeleteAll_container'>
-          <button className='cartDeleteAll_btn' onClick={() => removeAllHandler()}>Vaciar carrito</button>
+        <div className="cartDeleteAll_container">
+          <button
+            className="cartDeleteAll_btn"
+            onClick={() => removeAllHandler()}
+          >
+            Vaciar carrito
+          </button>
         </div>
 
         <div className="cartscreen__right">
@@ -113,7 +126,7 @@ const Cart = () => {
             <p>${getCartSubTotal()}</p>
           </div>
           <div>
-            <Pay cart={cartItems}/>
+            <Pay cart={cartItems} />
           </div>
         </div>
       </div>

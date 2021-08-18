@@ -19,6 +19,5 @@ router.post("/product/pay", payProducts);
 router.post("/product/order", createOrder);
 router.get("/product/order", getOrders);
 router.put("/product/order/:id", updateOrders);
-router.post("/product/address/:id", createAddress);
 
 module.exports = router;

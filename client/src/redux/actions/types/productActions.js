@@ -258,12 +258,13 @@ export async function orderPay(cart) {
   }
 }
 
-export function orderStatus(cart, user) {
+export function orderStatus(cart, user, address) {
   return async function (dispatch) {
     try {
       const resp = await axios.post(`${endpoints.ORDER_STATUS}`, {
         cart,
         user,
+        address,
       });
       return dispatch({ type: actionTypes.ORDER_STATUS, payload: resp.data });
     } catch (error) {

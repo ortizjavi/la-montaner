@@ -32,27 +32,6 @@ module.exports = {
     const update = { ...req.body };
     try {
       const newOrder = await Order.findByIdAndUpdate(id, update, { new: true });
-
-      res.json({
-        ok: true,
-        orders: newOrder,
-      });
-    } catch (error) {
-      console.log(error);
-      res.json({ ok: false });
-    }
-  },
-  createAddress: async (req, res) => {
-    const { id } = req.params;
-    const { address } = req.body;
-    console.log(address);
-    try {
-      const newOrder = await Order.findByIdAndUpdate(
-        id,
-        { address },
-        { new: true }
-      );
-
       res.json({
         ok: true,
         orders: newOrder,

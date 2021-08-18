@@ -113,7 +113,7 @@ export default function App() {
               <Route exact path="/cart" component={Cart} />
               <Route exact path="/wishlist" component={Wishlist} />
               <Route exact path="/about" component={AboutPage} />
-              <Route exact path="/add/address/:id" component={Address} />
+              <Route exact path="/add/address" component={Address} />
               <Route exact path="/faq" component={Accordion} />
             </div>
             <Footer />

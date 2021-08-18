@@ -1,10 +1,11 @@
-import axios from "axios";
+import { orderStatus } from "../../redux/actions/types/productActions";
+import { useDispatch, useSelector } from "react-redux";
 import React, { useState } from "react";
 import TextField from "@material-ui/core/TextField";
 import { makeStyles } from "@material-ui/core/styles";
-import { useParams } from "react-router";
 import Button from "@material-ui/core/Button";
 import swal from "sweetalert";
+import { useHistory } from "react-router-dom";
 import "./Address.css";
 
 const useStyles = makeStyles((theme) => ({
@@ -42,25 +43,29 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 export default function Address() {
-  const { id } = useParams();
+  const usuario = useSelector((state) => state.session.user);
+  const cart = useSelector((state) => state.cart.cartItems);
+  const dispatch = useDispatch();
+  const history = useHistory();
+
   const [address, setAddress] = useState({
     provincia: "",
-    MCL: "",
-    direccion: "",
+    dirrecion: "",
+    mcl: "",
   });
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      swal({
-        title: "Dirreción Añadida!",
-        text: "Se ha añadido con exito!",
-        icon: "success",
-      });
-      let post = await axios.post(
-        `http://localhost:3001/product/address/${id}`,
-        { address: `${address.provincia} ${address.mcl} ${address.direccion}` }
-      );
-      console.log(post);
+      const newAddress = `${address.provincia} ${address.dirrecion} ${address.mcl}`;
+      if (!usuario.role) {
+        swal({
+          title: "Por favor inicia sesion",
+          icon: "warning",
+        });
+        history.push("/login");
+      } else {
+        dispatch(orderStatus(cart, usuario._id, newAddress));
+      }
     } catch (err) {
       console.log(err);
     }
