@@ -90,10 +90,7 @@
       height: 2rem;
       width: 221px;
 }
-.select-home::-webkit-calendar-picker-indicator {
-      border: none;
-      border-bottom: solid #CB9D57 1px;
-}
+
 .select-sidebar option:hover{
     color: white;
     background: black;
