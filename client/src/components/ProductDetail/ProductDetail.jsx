@@ -2,12 +2,13 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
 import { Link } from "react-router-dom";
+import swal from "sweetalert";
 import { getProductDetail } from "../../redux/actions/types/productActions";
 import Loading from "../Loading/Loading.js";
 import "./ProductDetail.css";
 
-
 import { addCartProduct, addFavProducts, removeFavProduct} from "../../redux/actions/types/productActions";
+import { getOrders } from "../../redux/actions/types/adminActions";
 
 //Slider2
 //import { BsChevronLeft, BsChevronCompactRight } from "react-icons/fa";
@@ -35,12 +36,18 @@ export default function ProductDetail({ match, history }) {
   const { cartItems } = cart;
 
   //wishlist
-  const wishlist = useSelector((state) => state.wishlist);
-  const { wishlistItems } = wishlist;
+  let wishlist = useSelector((state) => state.wishlist);
+  let { wishlistItems } = wishlist;
   const fav = wishlistItems.find(product => product.id === id);
+
   //slider states
   const [current, setCurrent] = useState(0);
   const length = detail?.img?.length;
+
+  //Cart order user
+  let usuario = useSelector((state) => state.session.user);
+  usuario = Object.entries(usuario);
+  //const ordenes = useSelector((state) => state.admin.orders); 
 
   useEffect(() => {
     dispatch(getProductDetail(id));
@@ -71,14 +78,29 @@ export default function ProductDetail({ match, history }) {
   }
 
   const handleRemoveFav = () => {
-    console.log('funcion de removeFav')
     dispatch(removeFavProduct(id));
   }
 
   const handleAddFav = () => {
-    console.log("funcion de add fav")
     dispatch(addFavProducts(id));
   }
+
+  const handleWishlist = () => {
+    swal({
+      title: 'Por favor inicia sesión',
+      icon: 'warning'
+      })
+  }
+
+  // if(!ordenes){
+  //   dispatch(getOrders())
+  // }
+  // const userId = ordenes?.find(o => o.user === usuario._id);
+  // console.log('dashboard/respuesta', userId)
+  // console.log('dashboard/ordenes', ordenes)
+  //console.log(ordenes)
+  // console.log('user state', usuario);
+  // console.log('datauser/user:',usuario.name)
 
   return (
     <div>
@@ -127,12 +149,25 @@ export default function ProductDetail({ match, history }) {
               <div className="name_fav_detail">
               <p className="detail__name">{detail.name}</p>
               
-               {
+               {/* {
                  fav ?
                 <FavoriteIcon onClick={handleRemoveFav} className="detail_fav" />
                 :
                 <FavoriteBorderIcon onClick={handleAddFav} className="detail_fav" />
+               } */}
+
+               {
+                 !usuario || usuario.length === 0 ? (
+                   <Link to='/login'>
+                    <FavoriteBorderIcon onClick={() => handleWishlist()} className="detail_fav" />
+                   </Link>
+                 ) : fav ? (
+                  <FavoriteIcon onClick={handleRemoveFav} className="detail_fav" />
+                 ) : (
+                  <FavoriteBorderIcon onClick={handleAddFav} className="detail_fav" />
+                 )
                }
+
                </div>                               
               <p className="detail_stars">⭐⭐⭐⭐⭐</p>
               <p>Descripción: {detail.description}</p>
