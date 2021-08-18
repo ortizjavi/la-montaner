@@ -246,26 +246,27 @@ export function filterByPrice(filter, pageNumber) {
   }
 }
 
-export async function orderPay(cart) {
-  try {
-    const resp = await axios.post(`${endpoints.ORDER_PAY}`, {
-      locale: "es-AR",
-      compra: cart,
-    });
-    return (window.location.href = resp.data.response.init_point);
-  } catch (error) {
-    console.log(error);
-  }
-}
-
-export function orderStatus(cart, user) {
+export function createOrder(cart, user) {
   return async function (dispatch) {
     try {
       const resp = await axios.post(`${endpoints.ORDER_STATUS}`, {
         cart,
         user,
-      }); 
-      return  dispatch({ type: actionTypes.ORDER_STATUS, payload: resp.data });
+      });
+      dispatch({ type: actionTypes.ORDER_CREATED, payload: resp.data.order });
+      return (window.location.href = resp.data.mp_link);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+
+
+export function updateOrder(data) {
+  return async function (dispatch) {
+    try {
+      const resp = await axios.put(`${endpoints.ORDER_STATUS}`, data);
+      console.log(resp.data);
     } catch (error) {
       console.log(error);
     }

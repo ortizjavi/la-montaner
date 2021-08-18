@@ -1,6 +1,5 @@
 import {
-  orderPay,
-  orderStatus,
+  createOrder,
 } from "../../redux/actions/types/productActions";
 import { useDispatch, useSelector } from "react-redux";
 import React from "react";
@@ -26,8 +25,7 @@ export default function Pay({ cart }) {
         history.push("/login")
     }
     else{
-      dispatch(orderStatus(cart, usuario._id));
-      orderPay(cart);
+      dispatch(createOrder(cart, usuario._id));
     }
     
   };
