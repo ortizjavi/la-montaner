@@ -21,7 +21,8 @@ module.exports = {
 
     getOrders: async (req, res) => {
         try {
-            const orders = await Order.find();
+            const orders = await Order.find()
+                                    .populate('user',"_id name picture");
             res.json(orders)
         } catch (error) {
             console.log(error)
