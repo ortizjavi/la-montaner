@@ -17,8 +17,6 @@ const Dashboard = () => {
     }
     const respuesta = ordenes?.find(o => o.user === usuario._id);
 
-    console.log('dashboard/respuesta',respuesta)
-    console.log('dashboard/ordenes',ordenes)
 
     return (
         <div className="dashboard-container">
