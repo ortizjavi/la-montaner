@@ -82,7 +82,7 @@ export default function AddressModal() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const newAddress = `${address.provincia} - ${address.mcl} - ${address.direccion} `;
+      const newAddress = `${address.provincia}-${address.mcl}-${address.direccion}`;
       if (!usuario.role) {
         swal({
           title: "Por favor inicia sesion",
