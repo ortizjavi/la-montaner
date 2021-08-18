@@ -90,6 +90,7 @@ export default function AddressModal() {
         });
         history.push("/login");
       } else {
+        setOpen(false);
         return dispatch(addAddress(newAddress));
       }
     } catch (err) {
