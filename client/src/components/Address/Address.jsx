@@ -1,12 +1,35 @@
-import axios from "axios";
-import React, { useState } from "react";
+import React, { useState, useEffect } from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import Modal from '@material-ui/core/Modal';
+import { useDispatch, useSelector } from "react-redux";
 import TextField from "@material-ui/core/TextField";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import swal from "sweetalert";
+import { useHistory } from "react-router-dom";
 import "./Address.css";
+import { addAddress } from '../../redux/actions/types/productActions';
+
+
+function getModalStyle() {
+  const top = 20;
+  const left = 25;
+
+  return {
+    top: `${top}%`,
+    left: `${left}%`
+  };
+}
 
 const useStyles = makeStyles((theme) => ({
+  paper: {
+    position: 'absolute',
+    width: 500,
+    left: 100,
+    backgroundColor: theme.palette.background.paper,
+    border: '2px solid #000',
+    boxShadow: theme.shadows[5],
+    padding: theme.spacing(2, 4, 3),
+  },
   root: {
     alignContent: "center",
     "& .MuiTextField-root": {
@@ -40,46 +63,74 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: 345,
   },
 }));
-export default function Address() {
-  const [createProduct, setCreateProduct] = useState({
-    departamento: "",
-    MCL: "",
-    barrio: "",
+
+export default function AddressModal() {
+  const dispatch = useDispatch();
+  const classes = useStyles();
+  // getModalStyle is not a pure function, we roll the style only on the first render
+  const [modalStyle] = React.useState(getModalStyle());
+  const [open, setOpen] = React.useState(false);
+  const usuario = useSelector((state) => state.session.user);
+  const history = useHistory();
+
+
+  const [address, setAddress] = useState({
+    provincia: "",
     direccion: "",
+    mcl: "",
   });
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      swal({
-        title: "Dirreción Añadida!",
-        text: "Se ha añadido con exito!",
-        icon: "success",
-      });
-
-      setTimeout(
-        () => (document.location.href = "http://localhost:3000/home"),
-        3000
-      );
+      const newAddress = `${address.provincia}-${address.mcl}-${address.direccion}`;
+      if (!usuario.role) {
+        swal({
+          title: "Por favor inicia sesion",
+          icon: "warning",
+        });
+        history.push("/login");
+      } else {
+        setOpen(false);
+        return dispatch(addAddress(newAddress));
+      }
     } catch (err) {
       console.log(err);
     }
   };
   const handleInputChange = (e) => {
-    setCreateProduct({
-      ...createProduct,
+    setAddress({
+      ...address,
       [e.target.name]: e.target.value,
     });
   };
   const contentPC = useStyles();
 
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   return (
-    <div className="contentPC">
+    <div>
+      <button type="button" onClick={handleOpen}>
+        Cargar Dirección
+      </button>
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="simple-modal-title"
+        aria-describedby="simple-modal-description"
+      >
+      <div style={modalStyle} className={classes.paper}>
       <h2>Añade tu dirección</h2>
       <form className={contentPC.root} onSubmit={handleSubmit}>
         <TextField
           id="outlined-helperText"
-          name="departamento"
-          label="Departamento"
+          name="provincia"
+          label="Provincia"
           isRequired="true"
           required
           defaultValue=""
@@ -89,19 +140,8 @@ export default function Address() {
         />
         <TextField
           id="outlined-helperText"
-          name="MCL"
+          name="mcl"
           label="Municipio, capital o localidad"
-          isRequired="true"
-          required
-          defaultValue=""
-          helperText="* Campo requerido"
-          variant="outlined"
-          onChange={handleInputChange}
-        />
-        <TextField
-          id="outlined-helperText"
-          name="barrio"
-          label="Barrio"
           isRequired="true"
           required
           defaultValue=""
@@ -124,6 +164,8 @@ export default function Address() {
           Enviar
         </Button>
       </form>
+    </div>
+      </Modal>
     </div>
   );
 }
