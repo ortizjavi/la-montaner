@@ -14,6 +14,7 @@
     width: 13rem;
     margin: 5px 10px;
     position: relative;
+    padding-bottom: 13px;
 }
 .sp-product_container:hover{
     box-shadow: 0 0 5px 0 gray;
