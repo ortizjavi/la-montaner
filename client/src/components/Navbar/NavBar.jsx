@@ -8,14 +8,18 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import SvgIcon from '@material-ui/core/SvgIcon';
 import FavoriteIcon from '@material-ui/icons/Favorite';
+import swal from "sweetalert";
 import { searchProductsAction, selectCategoryAction } from '../../redux/actions/types/productActions.js';
 import { logout } from '../../redux/actions/types/authActions.js';
 
-function NavBar(props) {
+function NavBar(props, {history}) {
   let initialCategories = { vertodos: false, cervezas: false, conservas: false, merchandising: false, otros: false }
   const [category, setCategory] = useState(initialCategories)
   const currentCategoryState = useSelector(state => state.root.currentCategoryState)
   const user = useSelector(state => state.session.user)
+  const cart = useSelector((state) => state.cart);
+
+  const { cartSubtotal } = cart;
 
   const isUser = user && user.role;
 
@@ -24,7 +28,9 @@ function NavBar(props) {
   var sort = 'asc'
   const allProducts = useSelector(state => state.root.allProducts)
 
-  const [state, setState] = useState(currentCategoryState)
+  const [state, setState] = useState(currentCategoryState);
+  let usuario = useSelector((state) => state.session.user);
+  usuario = Object.entries(usuario);
 
     
 
@@ -40,6 +46,14 @@ function NavBar(props) {
 
       setState(e.target.value)
     }
+
+    const handleWishlist = () => {
+      swal({
+        title: 'Por favor inicia sesión',
+        icon: 'warning'
+        })
+    }
+
     function HomeIcon(props) {
         return (
           <SvgIcon {...props}>
@@ -112,13 +126,21 @@ console.log('currentCategoryState es: ', currentCategoryState)
          
   
       </Link>
-      <Link to="/wishlist" className='nav-icon'>
-          <FavoriteIcon className='fav-icon-nav'/>
-      </Link>
+
+      {
+                 !usuario || usuario.length === 0 ? (
+                   <Link to='/login'>
+                     <FavoriteIcon onClick={() => handleWishlist()} className='fav-icon-nav'/>
+                   </Link>
+                 ) : <Link to="/wishlist"><FavoriteIcon className='fav-icon-nav'/></Link>
+              }
+
+
       <Link to="/cart" className='nav-icon'>
-        
           <ShoppingCartIcon className='nav-personicon' style={{ fontSize: 40 }} />
-        
+        <div className='cart_subtotal_container'>
+          <h3 className='cart_subtotal'>{cartSubtotal}</h3>
+        </div>
       </Link>
       {isUser ?
         <div className='nav-icon'>
