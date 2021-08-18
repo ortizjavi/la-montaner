@@ -228,12 +228,12 @@ export function getMaximumPrice(price) {
   }
 }
 
-export function filterByPrice(filter, pageNumber) {
+export function filterByPrice(sort, filter, pageNumber) {
   if (filter) {
     return async function (dispatch) {
       try {
         const response = await axios.get(
-          `${endpoints.GET_PRODUCTS}?pageNumber=${pageNumber}&priceSort=${filter}`
+          `${endpoints.GET_PRODUCTS}?pageNumber=${pageNumber}&sort=${sort}&priceSort=${filter}`
         );
         return dispatch({
           type: actionTypes.ALL_PRODUCTS,

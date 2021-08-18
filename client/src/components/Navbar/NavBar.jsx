@@ -26,6 +26,7 @@ function NavBar(props) {
 
   const [state, setState] = useState(currentCategoryState)
 
+    
 
     useEffect(()=> {
       dispatch(selectCategoryAction(state))
@@ -35,6 +36,8 @@ function NavBar(props) {
   
     const handleCategory = (e) =>{
       e.preventDefault()
+      state === e.target.value ?  dispatch(selectCategoryAction(state)) :
+
       setState(e.target.value)
     }
     function HomeIcon(props) {
@@ -49,7 +52,8 @@ function NavBar(props) {
         var header = document.querySelector('header');
         header.classList.toggle('sticky', window.scrollY > 0)
       })
-   
+console.log('state es: ', state) 
+console.log('currentCategoryState es: ', currentCategoryState)  
   return (
     <header className="navbar">
       <NavLink to='/home' className='nav-personicon'>
@@ -69,7 +73,8 @@ function NavBar(props) {
                 <option id='range3' value='otros'>Otros</option>
               </select>
           </li>
-          { state && <p className='category-selected' >{`${state !=='vertodos' ? state.toUpperCase() : '  '}`}</p> }
+          {/* { state && <p className='category-selected' >{`${state !=='vertodos' ? state.toUpperCase() : '  '}`}</p> } */}
+          { currentCategoryState && <p className='category-selected' >{`${currentCategoryState !=='vertodos' ? currentCategoryState.toUpperCase() : '  '}`}</p> }
           {/* <div>
           </div> */}
             {/* <li className="list-item">

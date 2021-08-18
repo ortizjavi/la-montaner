@@ -10,9 +10,13 @@ export default function Pagination({response}) {
   const currentInit = useSelector(state => state.root.currentPage)
   const currentCategoryState = useSelector( state => state.root.currentCategoryState)
 
-
   const [currentPage, setCurrentPage] = React.useState(currentInit);
   // const [currentPage, setCurrentPage] = React.useState(1);
+
+  useEffect(() => {
+    setCurrentPage(currentInit)
+  }, [currentInit])
+
 
   useEffect(()=>{
     dispatch(currentPageAction(currentPage))    
