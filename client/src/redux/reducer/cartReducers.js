@@ -2,6 +2,7 @@ import * as actionTypes from "../actions/names";
 
 const CART_INITIAL_STATE = {
   cartItems: [],
+  cartSubtotal: 0,
 };
 
 const cartReducer = (state = CART_INITIAL_STATE, action) => {
@@ -31,6 +32,7 @@ const cartReducer = (state = CART_INITIAL_STATE, action) => {
       };
     case actionTypes.DELETE_CART_ALL:
       return { ...state, cartItems: [] };
+    case actionTypes.ADD_CART_SUB_TOTAL: return { ...state, cartSubtotal: action.payload };
     default:
       return state;
   }
