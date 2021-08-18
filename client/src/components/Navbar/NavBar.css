@@ -185,9 +185,26 @@ width: 10rem;
 .nav-container {
     width: 40%;
     display: flex;
-    flex-direction: column;
+    flex-direction: raw;
     align-items: center;
 }
+
+.nav-container select {
+      /* for Firefox */
+  -moz-appearance: none;
+  /* for Chrome */
+  -webkit-appearance: none;
+}
+
+.nav-container option {
+    height: fit-content;
+    padding: 0px 0px 0px;
+    background-color: transparent;
+    margin: 0px 0px 0px 0px;
+    /* margin-bottom: 0;
+    margin-top: 0; */
+}
+
 
 .nav-icon {
     width: auto;
