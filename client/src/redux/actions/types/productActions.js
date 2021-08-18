@@ -297,3 +297,9 @@ export function removeFavProduct(id) {
     return dispatch({ type: actionTypes.DELETE_FAV_PRODUCT, payload: id });
   };
 }
+
+export function addCartSubTotal(subtotal) {
+  return async function (dispatch) {
+    return dispatch({ type: actionTypes.ADD_CART_SUB_TOTAL, payload: subtotal });
+  }
+}

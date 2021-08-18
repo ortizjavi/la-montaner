@@ -232,6 +232,18 @@ width: 10rem;
     box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
 }
 
+.cart_subtotal_container {
+  position: absolute;
+  top: 60px;
+  right: 38px;
+  padding: 5px;
+  border-radius: 50%;
+}
+
+.cart_subtotal {
+  color: black;
+}
+
 
 
 

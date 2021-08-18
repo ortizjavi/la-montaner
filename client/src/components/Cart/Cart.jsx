@@ -9,7 +9,7 @@ import './Cart.css';
 import Pay from '../Pay/Pay';
 
 // Actions
-import { addCartProduct, deleteCartProduct, deleteCartAll } from "../../redux/actions/types/productActions";
+import { addCartProduct, deleteCartProduct, deleteCartAll, addCartSubTotal } from "../../redux/actions/types/productActions";
 
 const Cart = () => {
   const dispatch = useDispatch();
@@ -33,7 +33,7 @@ const Cart = () => {
       }).then((willDelete) => {
         if (willDelete) {
           swal(
-            'Tu producto fue eliminado con exitó :)',{
+            'Tu producto fue eliminado con exito :)',{
               icon: 'success'
             })
             dispatch(deleteCartProduct(id)); 
@@ -56,7 +56,7 @@ const Cart = () => {
             icon: 'error'
           })
       }else if (willDelete) {
-        swal('Tu carrito se vacio con exitó :)', {
+        swal('Tu carrito se vació con exito :)', {
           icon: 'success'
         })
         dispatch(deleteCartAll())
@@ -64,9 +64,16 @@ const Cart = () => {
     })
   }
 
+
   const getCartCount = () => {
     return cartItems.reduce((stockSelected, item) => Number(item.stockSelected) + stockSelected, 0);
   };
+
+  const subtotal = getCartCount();
+
+  useEffect(() => {
+    dispatch(addCartSubTotal(subtotal))
+  }, [subtotal])
 
   const getCartSubTotal = () => {
     return cartItems
