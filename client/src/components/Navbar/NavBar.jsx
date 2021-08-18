@@ -32,6 +32,7 @@ function NavBar(props, {history}) {
   let usuario = useSelector((state) => state.session.user);
   usuario = Object.entries(usuario);
 
+    
 
     useEffect(()=> {
       dispatch(selectCategoryAction(state))
@@ -41,6 +42,8 @@ function NavBar(props, {history}) {
   
     const handleCategory = (e) =>{
       e.preventDefault()
+      state === e.target.value ?  dispatch(selectCategoryAction(state)) :
+
       setState(e.target.value)
     }
 
@@ -63,7 +66,8 @@ function NavBar(props, {history}) {
         var header = document.querySelector('header');
         header.classList.toggle('sticky', window.scrollY > 0)
       })
-   
+console.log('state es: ', state) 
+console.log('currentCategoryState es: ', currentCategoryState)  
   return (
     <header className="navbar">
       <NavLink to='/home' className='nav-personicon'>
@@ -83,7 +87,8 @@ function NavBar(props, {history}) {
                 <option id='range3' value='otros'>Otros</option>
               </select>
           </li>
-          { state && <p className='category-selected' >{`${state !=='vertodos' ? state.toUpperCase() : '  '}`}</p> }
+          {/* { state && <p className='category-selected' >{`${state !=='vertodos' ? state.toUpperCase() : '  '}`}</p> } */}
+          { currentCategoryState && <p className='category-selected' >{`${currentCategoryState !=='vertodos' ? currentCategoryState.toUpperCase() : '  '}`}</p> }
           {/* <div>
           </div> */}
             {/* <li className="list-item">

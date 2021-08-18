@@ -25,12 +25,15 @@ export default function SearchBar() {
     useEffect(() => {
         if(currentCategoryState !== 'vertodos'){
             setState({product: "", icono:true,})
+            // clearSearch()
         }
         // setSearched('')
     }, [currentCategoryState])
 
     const handleChange = event => {
         event.preventDefault();
+        setSearched('')
+        dispatch(searchProductsAction(''))
         let bool= event.target.value.length>1;
         if(event.target.value.length <=2){
             setState({ ...state, [event.target.name]: event.target.value,  icono:!bool });
@@ -38,9 +41,10 @@ export default function SearchBar() {
             setState({ ...state, [event.target.name]: event.target.value, icono:!bool  });
             // dispatch(searchProductsAction(state.product))
         }
-     }
+    }
     const handleSubmit = event => {
         event.preventDefault();
+        currentCategoryState !== 'vertodos' && dispatch(selectCategoryAction('vertodos'))
         if(state.product.length){
             if(!state.icono){
                 setSearched(state.product)
