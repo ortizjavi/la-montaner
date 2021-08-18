@@ -15,6 +15,7 @@ import {
   deleteCartAll,
   addCartSubTotal,
 } from "../../redux/actions/types/productActions";
+import AddressModal from "../Address/Address.jsx";
 
 const Cart = () => {
   const dispatch = useDispatch();
@@ -126,6 +127,7 @@ const Cart = () => {
             <p>${getCartSubTotal()}</p>
           </div>
           <div>
+            <AddressModal/>
             <Pay cart={cartItems} />
           </div>
         </div>

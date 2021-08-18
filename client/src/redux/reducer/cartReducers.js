@@ -3,6 +3,7 @@ import * as actionTypes from "../actions/names";
 const CART_INITIAL_STATE = {
   cartItems: [],
   cartSubtotal: 0,
+  address: '',
 };
 
 const cartReducer = (state = CART_INITIAL_STATE, action) => {
@@ -19,6 +20,7 @@ const cartReducer = (state = CART_INITIAL_STATE, action) => {
     case actionTypes.DELETE_CART_PRODUCT: return { ...state, cartItems: state.cartItems.filter( (product) => product.id !== action.payload) };
     case actionTypes.DELETE_CART_ALL: return { ...state, cartItems: [] };
     case actionTypes.ADD_CART_SUB_TOTAL: return { ...state, cartSubtotal: action.payload };
+    case actionTypes.ADD_ADDRESS: return {...state, address: action.payload}
     default: return state;
   }
 };

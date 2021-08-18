@@ -306,3 +306,12 @@ export function addCartSubTotal(subtotal) {
     });
   };
 }
+
+export function addAddress(address) {
+  return async function (dispatch) {
+    return dispatch({
+      type: actionTypes.ADD_ADDRESS,
+      payload: address,
+    });
+  };
+}

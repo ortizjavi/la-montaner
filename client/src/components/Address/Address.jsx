@@ -1,14 +1,35 @@
-import { orderStatus } from "../../redux/actions/types/productActions";
+import React, { useState, useEffect } from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import Modal from '@material-ui/core/Modal';
 import { useDispatch, useSelector } from "react-redux";
-import React, { useState } from "react";
 import TextField from "@material-ui/core/TextField";
-import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import swal from "sweetalert";
 import { useHistory } from "react-router-dom";
 import "./Address.css";
+import { addAddress } from '../../redux/actions/types/productActions';
+
+
+function getModalStyle() {
+  const top = 20;
+  const left = 25;
+
+  return {
+    top: `${top}%`,
+    left: `${left}%`
+  };
+}
 
 const useStyles = makeStyles((theme) => ({
+  paper: {
+    position: 'absolute',
+    width: 500,
+    left: 100,
+    backgroundColor: theme.palette.background.paper,
+    border: '2px solid #000',
+    boxShadow: theme.shadows[5],
+    padding: theme.spacing(2, 4, 3),
+  },
   root: {
     alignContent: "center",
     "& .MuiTextField-root": {
@@ -42,21 +63,26 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: 345,
   },
 }));
-export default function Address() {
-  const usuario = useSelector((state) => state.session.user);
-  const cart = useSelector((state) => state.cart.cartItems);
+
+export default function AddressModal() {
   const dispatch = useDispatch();
+  const classes = useStyles();
+  // getModalStyle is not a pure function, we roll the style only on the first render
+  const [modalStyle] = React.useState(getModalStyle());
+  const [open, setOpen] = React.useState(false);
+  const usuario = useSelector((state) => state.session.user);
   const history = useHistory();
+
 
   const [address, setAddress] = useState({
     provincia: "",
-    dirrecion: "",
+    direccion: "",
     mcl: "",
   });
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const newAddress = `${address.provincia} ${address.dirrecion} ${address.mcl}`;
+      const newAddress = `${address.provincia} - ${address.mcl} - ${address.direccion} `;
       if (!usuario.role) {
         swal({
           title: "Por favor inicia sesion",
@@ -64,7 +90,7 @@ export default function Address() {
         });
         history.push("/login");
       } else {
-        dispatch(orderStatus(cart, usuario._id, newAddress));
+        return dispatch(addAddress(newAddress));
       }
     } catch (err) {
       console.log(err);
@@ -78,8 +104,26 @@ export default function Address() {
   };
   const contentPC = useStyles();
 
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   return (
-    <div className="contentPC">
+    <div>
+      <button type="button" onClick={handleOpen}>
+        Cargar Dirección
+      </button>
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="simple-modal-title"
+        aria-describedby="simple-modal-description"
+      >
+      <div style={modalStyle} className={classes.paper}>
       <h2>Añade tu dirección</h2>
       <form className={contentPC.root} onSubmit={handleSubmit}>
         <TextField
@@ -119,6 +163,8 @@ export default function Address() {
           Enviar
         </Button>
       </form>
+    </div>
+      </Modal>
     </div>
   );
 }
