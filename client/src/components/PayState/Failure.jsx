@@ -1,8 +1,26 @@
-import React from "react";
-import Button from "@material-ui/core/Button";
+import {
+  updateOrder,
+} from "../../redux/actions/types/productActions";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useLocation } from "react-router-dom";
 import "./PayState.css";
-import NavBar from "../Navbar/NavBar";
+
 export default function Failure() {
+  const location = useLocation();
+  const dispatch = useDispatch();
+  const usuario = useSelector((state) => state.session.user);
+
+  useEffect(() => {
+    console.log(usuario)
+    const queries = new URLSearchParams(location.search);
+    dispatch(updateOrder({
+      _id: usuario._id,
+      status: queries.get("status"),
+      preference_id: queries.get("preference_id")
+    }))
+  }, [])
+
   return (
     <div>
       <div className="psContend">

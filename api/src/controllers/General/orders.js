@@ -7,14 +7,14 @@ module.exports = {
 
         //products, user, status(creado por default)
         try {
-            const preference = await mercadopago(cart)
-            const order = new Order({ cart, user, mp_preference: preference.id });
+            const mpResponse = await mercadopago(cart);
+            const order = new Order({ cart, user, mp_preference: mpResponse.body.id });
             const saveOrder = await order.save();
-            const { mp_preference, ...orderProps } = saveOrder;
+            const { mp_preference, ...orderProps } = saveOrder._doc;
             res.json({
                 ok: true,
                 order: orderProps,
-                mp_link: preference.response.init_point
+                mp_link: mpResponse.response.init_point
             });
         } catch (error) {
             console.log(error)
