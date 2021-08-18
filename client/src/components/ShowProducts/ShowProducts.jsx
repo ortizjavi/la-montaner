@@ -33,7 +33,7 @@ const ShowProducts = ({allProducts}) => {
 
   const addToCartHandler  = (id) => {
     swal({
-      title: "producto agregado al carrito",
+      title: "Producto agregado al carrito",
       icon: "success",
       button: "ok",
     });
