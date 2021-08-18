@@ -33,7 +33,7 @@ const Cart = () => {
       }).then((willDelete) => {
         if (willDelete) {
           swal(
-            'Tu producto fue eliminado con exitó :)',{
+            'Tu producto fue eliminado con exito :)',{
               icon: 'success'
             })
             dispatch(deleteCartProduct(id)); 
@@ -56,7 +56,7 @@ const Cart = () => {
             icon: 'error'
           })
       }else if (willDelete) {
-        swal('Tu carrito se vació con exitó :)', {
+        swal('Tu carrito se vació con exito :)', {
           icon: 'success'
         })
         dispatch(deleteCartAll())
