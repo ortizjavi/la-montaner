@@ -1,20 +1,18 @@
-import React, { useState, useEffect } from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import Modal from "@material-ui/core/Modal";
-import { useDispatch, useSelector } from "react-redux";
-import TextField from "@material-ui/core/TextField";
+import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import Modal from '@material-ui/core/Modal';
+import { useSelector } from "react-redux";
 import Button from "@material-ui/core/Button";
-import swal from "sweetalert";
-import { useHistory } from "react-router-dom";
-import Stepper from "@material-ui/core/Stepper";
-import Step from "@material-ui/core/Step";
-import StepButton from "@material-ui/core/StepButton";
-import Typography from "@material-ui/core/Typography";
-import FormControl from "@material-ui/core/FormControl";
-import Select from "@material-ui/core/Select";
-import InputLabel from "@material-ui/core/InputLabel";
-import AddressModal from "./Address";
-import LoginForm from "../ModalDialog/LoginForm";
+import Stepper from '@material-ui/core/Stepper';
+import Step from '@material-ui/core/Step';
+import StepButton from '@material-ui/core/StepButton';
+import Typography from '@material-ui/core/Typography';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+import InputLabel from '@material-ui/core/InputLabel';
+import AddressModal from './Address';
+import LoginForm from '../ModalDialog/LoginForm';
+import Pay from '../Pay/Pay'
 
 function getModalStyle() {
   const top = 20;
@@ -62,18 +60,6 @@ function getSteps() {
   ];
 }
 
-function getStepContent(step) {
-  switch (step) {
-    case 0:
-      return "Paso 1: Select campaign settings...";
-    case 1:
-      return "Step 2: What is an ad group anyways?";
-    case 2:
-      return "Step 3: This is the bit I really care about!";
-    default:
-      return "Unknown step";
-  }
-}
 
 export default function HorizontalNonLinearAlternativeLabelStepper() {
   const classes = useStyles();
@@ -84,6 +70,8 @@ export default function HorizontalNonLinearAlternativeLabelStepper() {
   const [modalStyle] = React.useState(getModalStyle());
   const [open, setOpen] = React.useState(false);
   const usuario = useSelector((state) => state.session.user);
+  const cart = useSelector((state) => state.cart);
+  const { cartItems } = cart;
 
   const handleOpen = () => {
     setOpen(true);
@@ -154,11 +142,17 @@ export default function HorizontalNonLinearAlternativeLabelStepper() {
     return completed.has(step);
   }
 
-  const [state, setState] = React.useState("local");
+  const [state, setState] = React.useState('local');
+  const [statePay, setStatePay] = React.useState('efectivo');
 
   const handleChange = (e) => {
     setState(e.target.value);
     console.log(state);
+  };
+
+  const handleChangePay = (e) => {
+    setStatePay(e.target.value)
+    console.log(state)
   };
 
   return (
@@ -173,107 +167,104 @@ export default function HorizontalNonLinearAlternativeLabelStepper() {
         aria-describedby="simple-modal-description"
       >
         <div style={modalStyle} className={classes.paper}>
-          <Stepper alternativeLabel nonLinear activeStep={activeStep}>
-            {steps.map((label, index) => {
-              const stepProps = {};
-              const buttonProps = {};
-              if (isStepSkipped(index)) {
-                stepProps.completed = false;
-              }
-              return (
-                <Step key={label} {...stepProps}>
-                  <StepButton
-                    onClick={handleStep(index)}
-                    completed={isStepComplete(index)}
-                    {...buttonProps}
-                  >
-                    {label}
-                  </StepButton>
-                </Step>
-              );
-            })}
-          </Stepper>
-          {activeStep === 0 && !usuario.role ? (
-            <LoginForm />
-          ) : activeStep === 1 && !usuario.role ? (
-            <div>
-              <FormControl variant="outlined" className={classes.formControl}>
-                <InputLabel htmlFor="outlined-age-native-simple">
-                  Metodo de Envio
-                </InputLabel>
-                <Select
-                  native
-                  value={state}
-                  onChange={(e) => handleChange(e)}
-                  label="Envio"
-                >
-                  <option value={"local"}>Retiro en el local</option>
-                  <option value={"domicilio"}>Envio a domicilio</option>
-                </Select>
-              </FormControl>
-              {state === "domicilio" ? (
-                <AddressModal />
-              ) : (
-                <h4>Direccion del local</h4>
-              )}
-            </div>
-          ) : (
-            <div>Paga boludo</div>
-          )}
+      <Stepper alternativeLabel nonLinear activeStep={activeStep}>
+        {steps.map((label, index) => {
+          const stepProps = {};
+          const buttonProps = {};
+          if (isStepSkipped(index)) {
+            stepProps.completed = false;
+          }
+          return (
+            <Step key={label} {...stepProps}>
+              <StepButton
+                onClick={handleStep(index)}
+                completed={isStepComplete(index)}
+                {...buttonProps}
+              >
+                {label}
+              </StepButton>
+            </Step>
+          );
+        })}
+      </Stepper>
+      { activeStep === 0 ?
+        !usuario.role?(<LoginForm/>)
+        :handleComplete(0)
+        : activeStep === 1 ? (
+           <div>
+          <FormControl variant="outlined" className={classes.formControl}>
+          <InputLabel htmlFor="outlined-age-native-simple">Metodo de Envio</InputLabel>
+          <Select
+            native
+            value={state}
+            onChange={(e) => handleChange(e)}
+            label="Envio"
+          >
+            <option value={'local'}>Retiro en el local</option>
+            <option value={'domicilio'}>Envio a domicilio</option>
+          </Select>
+        </FormControl>
+          {state === 'domicilio' ?
+             <AddressModal/> 
+             :
+             <h4>Direccion del local</h4>
+          }
+             </div>
+         )
+         : 
+         <div>
+         <FormControl variant="outlined" className={classes.formControl}>
+         <InputLabel htmlFor="outlined-age-native-simple">Metodo de Pago</InputLabel>
+         <Select
+           native
+           value={statePay}
+           onChange={(e) => handleChangePay(e)}
+           label="Pago"
+         >
+           <option value={'efectivo'}>Efectivo</option>
+           <option value={'mp'}>Otros medios</option>
+         </Select>
+       </FormControl>
+       </div>
+      }
+      <div>
+        {allStepsCompleted() ? (
           <div>
-            {allStepsCompleted() ? (
-              <div>
-                <Typography className={classes.instructions}>
-                  All steps completed - you&apos;re finished
-                </Typography>
-                <Button onClick={handleReset}>Reset</Button>
-              </div>
-            ) : (
-              <div>
-                <Typography className={classes.instructions}>
-                  {getStepContent(activeStep)}
-                </Typography>
-                <div>
-                  <Button
-                    disabled={activeStep === 0}
-                    onClick={handleBack}
-                    className={classes.button}
-                  >
-                    Back
-                  </Button>
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={handleNext}
-                    className={classes.button}
-                  >
-                    Next
-                  </Button>
-
-                  {activeStep !== steps.length &&
-                    (completed.has(activeStep) ? (
-                      <Typography
-                        variant="caption"
-                        className={classes.completed}
-                      >
-                        Step {activeStep + 1} already completed
-                      </Typography>
-                    ) : (
-                      <Button
-                        variant="contained"
-                        color="primary"
-                        onClick={handleComplete}
-                      >
-                        {completedSteps() === totalSteps() - 1
-                          ? "Finish"
-                          : "Complete Step"}
-                      </Button>
-                    ))}
-                </div>
-              </div>
-            )}
+            <Typography className={classes.instructions}>
+              All steps completed - you&apos;re finished
+            </Typography>
+            <Button onClick={handleReset}>Reset</Button>
           </div>
-        </div>
+        ) : (
+             <div>
+            <div> 
+              <Button disabled={activeStep === 0} onClick={handleBack} className={classes.button}>
+                Back
+              </Button>
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={handleNext}
+                className={classes.button}
+              >
+                Next
+              </Button>
+
+              {activeStep !== steps.length &&
+                (completed.has(activeStep) ? (
+                  <Typography variant="caption" className={classes.completed}>
+                    Step {activeStep + 1} already completed
+                  </Typography>
+                ) : (
+                  <Button variant="contained" color="primary" onClick={handleComplete}>
+                    {completedSteps() === totalSteps() - 1 ? <Pay cart={cartItems} medio={statePay}/> : 'Paso Completado'}
+                  </Button>
+                ))}
+            </div>
+            </div>
+          )}
+          </div>
+          </div>
       </Modal>
     </div>
   );
