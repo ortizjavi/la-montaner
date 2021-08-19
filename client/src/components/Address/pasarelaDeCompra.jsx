@@ -12,10 +12,11 @@ import Select from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
 import AddressModal from './Address';
 import LoginForm from '../ModalDialog/LoginForm';
-import Pay from '../Pay/Pay'
+import Pay from '../Pay/Pay';
+import './Address.css';
 
 function getModalStyle() {
-  const top = 20;
+  const top = 15;
   const left = 25;
 
   return {
@@ -27,8 +28,8 @@ function getModalStyle() {
 const useStyles = makeStyles((theme) => ({
   paper: {
     position: "absolute",
-    width: 500,
-    left: 100,
+    width: 700,
+    left: 70,
     backgroundColor: theme.palette.background.paper,
     border: "2px solid #000",
     boxShadow: theme.shadows[5],
@@ -192,8 +193,9 @@ export default function HorizontalNonLinearAlternativeLabelStepper() {
         :handleComplete(0)
         : activeStep === 1 ? (
            <div>
-          <FormControl variant="outlined" className={classes.formControl}>
-          <InputLabel htmlFor="outlined-age-native-simple">Metodo de Envio</InputLabel>
+          <FormControl variant="outlined" className={classes.root}>
+          <InputLabel htmlFor="outlined-age-native-simple"
+          >Metodo de Envio</InputLabel>
           <Select
             native
             value={state}
@@ -213,7 +215,7 @@ export default function HorizontalNonLinearAlternativeLabelStepper() {
          )
          : 
          <div>
-         <FormControl variant="outlined" className={classes.formControl}>
+         <FormControl variant="outlined" className={classes.root}>
          <InputLabel htmlFor="outlined-age-native-simple">Metodo de Pago</InputLabel>
          <Select
            native
@@ -230,35 +232,32 @@ export default function HorizontalNonLinearAlternativeLabelStepper() {
       <div>
         {allStepsCompleted() ? (
           <div>
-            <Typography className={classes.instructions}>
-              All steps completed - you&apos;re finished
-            </Typography>
             <Button onClick={handleReset}>Reset</Button>
           </div>
         ) : (
-             <div>
-            <div> 
+          <div>
+            <div className= "buttonsContainer"> 
               <Button disabled={activeStep === 0} onClick={handleBack} className={classes.button}>
                 Back
               </Button>
-              <Button
-                variant="contained"
-                color="primary"
-                onClick={handleNext}
-                className={classes.button}
-              >
-                Next
-              </Button>
-
               {activeStep !== steps.length &&
                 (completed.has(activeStep) ? (
                   <Typography variant="caption" className={classes.completed}>
                     Step {activeStep + 1} already completed
                   </Typography>
                 ) : (
-                  <Button variant="contained" color="primary" onClick={handleComplete}>
-                    {completedSteps() === totalSteps() - 1 ? <Pay cart={cartItems} medio={statePay}/> : 'Paso Completado'}
-                  </Button>
+                  <div>
+                    {completedSteps() === totalSteps() - 1 ? <Pay cart={cartItems} medio={statePay}/> : activeStep >= 1 && 
+                    <Button
+                variant="contained"
+                color="primary"
+                onClick={handleComplete}
+                className={classes.button}
+              >
+               Siguiente
+              </Button>
+               }
+              </div>
                 ))}
             </div>
             </div>
