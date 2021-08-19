@@ -17,9 +17,10 @@ export default function Home() {
   const allProducts = useSelector( state => state.root.allProducts)
   const currentCategoryState = useSelector( state => state.root.currentCategoryState)
   const maxPrice3 = useSelector(state => state.root.maxPrice)
+
   const [rangePrice, setRangePrice] = useState('')
   const [leftFilter, setLeftFilter] = useState('')
-
+  const [flag, setFlag] = useState(false)
   const [sort, setSort] = useState('asc')
   const maxPrice1 = Math.ceil(maxPrice3 * (1/3))
   const maxPrice2 = Math.ceil(maxPrice3 * (2/3))
@@ -80,9 +81,9 @@ export default function Home() {
     }
   }
 
-
   
   const handleSort = (paramsort) => {
+    setFlag(true)
     setLeftFilter('')
     setSort(paramsort)
   }
@@ -95,16 +96,15 @@ export default function Home() {
     if(e.target.value === 'range2') range = [maxPrice1+1, maxPrice2] 
     if(e.target.value === 'range3') range = [maxPrice2+1, maxPrice3]
     setRangePrice(range)
+    if(range.length > 0) setFlag(true)
+
   }
 
   const triggerFilter = () => {
-    // currentCategoryState !== 'vertodos' ? window.location.reload() :
-    // setLeftFilter('')
-    // console.log('currentPage: ', currentPage)
     (rangePrice && currentCategoryState === 'vertodos') ? dispatch(filterByPrice(sort, rangePrice, 0)) : dispatch(searchProducts({sort, pageNumber: currentPage-1, name:'', category:currentCategoryState} ))
     dispatch(currentPageAction(1));
+    setFlag(false)
   }
-
   return (
     <div>
       {
@@ -120,7 +120,11 @@ export default function Home() {
               <option id='range3' value='range3'>Precio entre: ${maxPrice2+1} - ${maxPrice3}</option>
             </select>
           </li>
-          <button onClick={triggerFilter}><SortIcon /></button>
+          {
+            flag === true ? 
+            <button onClick={triggerFilter}>Ordenar</button> : null
+          }
+          
       </div> : 
        <div className='Home-filter'></div>
       }
