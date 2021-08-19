@@ -14,6 +14,7 @@ router.post("/login",
 			return login(req, res, next);
 		}
 		req.headers['authorization'] = `Bearer ${req.body.token}`;
+		req.populate = 'orders'
 		next();
 	},
  	authenticateToken,

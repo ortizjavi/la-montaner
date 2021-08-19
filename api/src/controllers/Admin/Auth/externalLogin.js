@@ -36,7 +36,7 @@ module.exports = (req, res, next) => {
 	}
 	
 	login(token).then((payload) => {
-		return User.findOne({ email: payload.email })
+		return User.findOne({ email: payload.email }).populate('orders')
 		.then((user) => {
 			if (user){
 				return user;
