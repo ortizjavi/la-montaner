@@ -1,80 +1,115 @@
-import React from 'react';
+import React,{useState} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { FaEye } from 'react-icons/fa';
 import { getOrders } from '../../redux/actions/types/adminActions';
 import './DashTable.css';
 
 
 const Tabla = () =>{ 
+
   const dispatch = useDispatch()
+  const orders = useSelector((state) => state.admin.orders);
+  const user = useSelector((state) => state.session.user);
+  const response = orders?.filter(o => o.user._id === user._id);
+  const [state, setState] = useState('') 
 
-  const ordenes = useSelector((state) => state.cart.orders);
-
-  if(!ordenes){
+  if(!orders.length){
       dispatch(getOrders())
   }
-  // const respuesta = ordenes?.find(o => o.user === usuario._id);
+  
+  const handleState = e =>{
+    const cardOrder = response?.find(o => o._id === e.target.id);
+    setState(cardOrder)
+    cardOrder?.cart.map(e => 
+      console.log('dashTable/card/e ', e.name)
+      )
+  }
 
-    const ponerFilas = () => ordenes?.map( (orden, key) => (
+    const ponerFilas = (res) => res?.map( (orden, key) => (
           <tr className='dt-tr' key={ orden._id }>
             <td>
-              { orden.cart[0].name}
+              { orden?.createdAt} 
             </td>
             <td>
-              { orden.createdAt}
+              { orden?.status}
             </td>
+           
             <td>
-              { orden.status}
-            </td>
-            <td>
-              {/* { orden.pay} */}
-            </td>
-            <td>
-              {/* { orden.send} */}
-            </td>
-            <td>
-              {/* { orden.total} */}
-            </td>
-            <td>
-                <Link to={ `/dashboard` }>
-                    <div className="eye-solid icon">
-                        <FaEye/>
-                    </div>
-                </Link>
+                <input type='button' className="eye-solid icon" id={orden._id} value='Ver' onClick={(e) => handleState(e) } >
+                        {/* <FaEye/> */}
+                </input >
             </td>
           </tr>
           ))
       
     return (
     <div>
+      { !state ?
+
         <table className='table'>
             <thead>
-                <th>
-                    Orden
-                </th>
                 <th>
                     Fecha
                 </th>
                 <th>
                     Estado
                 </th>
-                {/* <th>
-                    Pago
-                </th>
-                <th>
-                    Envío
-                </th>
+            
                 <th>
                     Total
-                </th> */}
+                </th> 
             </thead>
+
             <tbody className='dt-tbody'>
-                { ponerFilas() }
+                { ponerFilas(response)}
             </tbody>
         </table>
+        :
+        <section>
+            <div>
+                <table className='table'>
+                  <h4>Detalles</h4>
+                    {/* <button onClick={setState('')}>Volver</button>  */}
+                  <thead >
+                    <th></th>
+                    <th>
+                      Producto
+                    </th>
+
+                    <th>
+                      Precio
+                    </th>
+                  </thead>
+                {/* <tbody className='dt-tbody'> */}
+                  <tbody className=''>
+                  {
+                    state.cart?.map( product => (
+                      <tr className='dt-tr' key={ product.id }>
+                        <td>
+                          <NavLink className="" to={`/home/${product.id}`}>
+                            <img src={product.image} width='20px'/>
+                          </NavLink>
+                        </td> 
+                        <td>
+                          <NavLink className="" to={`/home/${product.id}`}>
+                            { product.name}
+                          </NavLink>
+                        </td>
+                        <td>
+                          { product.price}
+                        </td> 
+                      </tr>
+                    ))
+                  }
+                  </tbody>
+                </table>
+            </div>
+        </section>
+      }  
     </div>
 )};
 
 
 export default Tabla;
+

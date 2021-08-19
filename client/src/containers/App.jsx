@@ -28,6 +28,7 @@ import AboutPage from "../components/About/About";
 import Accordion from "../components/About/FAQ";
 import RegisterForm from "../components/ModalDialog/RegisterForm";
 import ResetForm from "../components/ModalDialog/ResetForm";
+import UserSetting from "../components/UserSetting/UserSetting";
 import { ROLE } from "../utils/constants";
 import Address from "../components/Address/Address";
 
@@ -95,6 +96,12 @@ export default function App() {
                 exact
                 path="/dashboard"
                 component={Dashboard}
+                roles={[ROLE.USER]}
+              />
+              <PrivateRoute
+                exact
+                path="/dashboard/setting"
+                component={UserSetting}
                 roles={[ROLE.USER]}
               />
               <PrivateRoute
