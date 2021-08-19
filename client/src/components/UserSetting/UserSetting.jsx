@@ -3,6 +3,7 @@ import { useDispatch, useSelector} from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import axios from 'axios';
 import './UserSetting.css'
+import {UPDATE_USER} from '../../utils/endpoints';
 
 
 
@@ -12,11 +13,28 @@ const UserSetting =  () => {
     const dispatch = useDispatch();
     const user = useSelector((state) => state.session.user);
 
-    const [input, setInput] = useState({name: user.name, image: '', phone:'', email:'', adress:'', dni:'',});
+    const [input, setInput] = useState({
+      name: user.name,
+      given_name: user.given_name, 
+      family_name: user.family_name,
+      picture: user.picture, 
+      email: user.email, 
+      // adress: '', 
+      });
 
-    const handleSubmit = e =>{
+
+    const handleSubmit = async e =>{
       e.preventDefault();
-      alert('creado con éxito')
+      try {
+        const resp = await axios.put(`${UPDATE_USER}/${user._id}`, {...input,
+          name: input.given_name +' '+ input.family_name
+        });
+        console.log('userSettings ',resp.data);
+      } catch (error) {
+        console.log('components/UserSetting/Error ',error);
+      }
+      alert('Cambios agragados con éxito')
+      
     }
 
     const handleChange = (event) =>{
@@ -46,7 +64,7 @@ const UserSetting =  () => {
           }
         )
         .then((res) => {
-          setInput({...input, image: res.data.secure_url});
+          setInput({...input, picture: res.data.secure_url});
         })
         .catch((err) => console.log('UserSetting/uploadImage/Error: ',err));
   };
@@ -56,13 +74,20 @@ const UserSetting =  () => {
     return(
         <section className='userSetting-container'>
           <br></br>
-            <h1> Modifica tus datos</h1>
+
+            <h3>Hola, {user.name} Modifica tus datos</h3>
             <br></br>
             <>
             <form className='userSetting-form' onSubmit={ e => handleSubmit(e)}>
               <section className='section_create'>
                 <label>Nombre  </label>
-                <input  name="name" value={input.name} placeholder={user.name} onChange={handleChange}/>
+                <input  name="given_name" value={input.given_name} placeholder={user.given_name} onChange={handleChange}/>
+                <br></br>
+              </section>
+
+              <section className='section_create'>
+                <label>Apellido  </label>
+                <input  name="family_name" value={input.family_name} placeholder={user.family_name} onChange={handleChange}/>
                 <br></br>
               </section>
 
@@ -70,19 +95,20 @@ const UserSetting =  () => {
                 <br></br>
                 <label>Imagen  </label>
                 <br></br>
-                <img className='usersetting-img' src={input.image ? input.image :  user.picture} />
+                {/* <img className='usersetting-img' src={input.image ? input.image :  user.picture} /> */}
+                <img className='usersetting-img' src={input.picture } />
                 <br></br>
-                <input class="custom-file-input" name="image" accept="image/*" type='file'  onChange={uploadImage}/>
+                <input class="custom-file-input" name="picture" accept="image/*" type='file'  onChange={uploadImage}/>
                 <br></br>
-                <button type='button' onClick={() => setInput({...input, image:''})}> Borrar</button>
+                <button type='button' onClick={() => setInput({...input, picture:''})}> Borrar</button>
                 <br></br>
               </section>
 
-              <section className='section_create'>
+              {/* <section className='section_create'>
                 <label>Telefono</label>
                 <input name="phone" value={input.phone} onChange={handleChange}/>
                 <br></br>
-              </section>
+              </section> */}
 
               <section className='section_create'>
                 <label>Correo</label>
@@ -95,11 +121,12 @@ const UserSetting =  () => {
                 <input name="adress" multiple value={input.adress} onChange={handleChange}/>
                 <br></br>
               </section>
-              <section className='section_create'>
+
+              {/* <section className='section_create'>
                 <label>DNI </label>
                 <input name="dni" multiple value={input.dni} onChange={handleChange}/>
                 <br></br>
-              </section>
+              </section> */}
                 <button type="submit">Modificar</button>
                 <br></br>
             <NavLink to={'/dashboard'}>

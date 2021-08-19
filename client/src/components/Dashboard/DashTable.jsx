@@ -25,11 +25,12 @@ const Tabla = () =>{
       console.log('dashTable/card/e ', e.name)
       )
   }
+  console.log('DashTable/user: ',user)
 
     const ponerFilas = (res) => res?.map( (orden, key) => (
           <tr className='dt-tr' key={ orden._id }>
             <td>
-              { orden?.createdAt} 
+              { orden?.createdAt.slice(0,10)} 
             </td>
             <td>
               { orden?.status}
@@ -99,6 +100,9 @@ const Tabla = () =>{
                         <td>
                           { product.price}
                         </td> 
+                        <td>
+                          {product.stockSelected}
+                        </td>
                       </tr>
                     ))
                   }
