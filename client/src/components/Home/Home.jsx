@@ -98,35 +98,32 @@ export default function Home() {
   }
 
   const triggerFilter = () => {
-    setLeftFilter('')
-    dispatch(currentPageAction(1))
-    currentCategoryState !== 'vertodos' && window.location.reload()
-    rangePrice ? dispatch(filterByPrice(sort, rangePrice, 0)) : dispatch(searchProducts({sort, pageNumber: currentPage-1, name:'', category:currentCategoryState} ))
+    // currentCategoryState !== 'vertodos' ? window.location.reload() :
+    // setLeftFilter('')
+    // console.log('currentPage: ', currentPage)
+    (rangePrice && currentCategoryState === 'vertodos') ? dispatch(filterByPrice(sort, rangePrice, 0)) : dispatch(searchProducts({sort, pageNumber: currentPage-1, name:'', category:currentCategoryState} ))
+    dispatch(currentPageAction(1));
   }
 
   return (
     <div>
-      <div className='Home-filter'>
-       
-        <button className={`${sort ==='asc' ? "actived" : 'home-button'}`} onClick={() => handleSort('asc')}> A-Z </button>
-        <button className={`${sort ==='desc' ? "actived" : 'home-button'}`} onClick={() => handleSort('desc')}> Z-A </button>
-        {/* <div className='home-range'>
-          { rangePrice[1] && <p>{`Rango de Precios: $${rangePrice[0]} - $${rangePrice[1]}`}</p> }
-        </div> */}
-        {/* <button className='home-personicon' onClick={(e) => handlePriceSort(e)}>
-          {(rangePrice[1] || sort)  &&<ClearIcon />}
-        </button> */}
-        <li className='home-list'>
-          <select className='select-home' name="price" value='Precio' onChange={(e) =>handlePriceSort(e)}>
-            {/* <option id='none' value='Precio'>Ordenar por:</option> */}
-            <option id='todos'  value='todos'>Todos los precios</option>
-            <option id='range1'  value='range1'>Precio entre: $0 - ${maxPrice1}</option>
-            <option id='range2' value='range2'>Precio entre: ${maxPrice1+1} - ${maxPrice2}</option>
-            <option id='range3' value='range3'>Precio entre: ${maxPrice2+1} - ${maxPrice3}</option>
-          </select>
-        </li>
-        <button onClick={triggerFilter}><SortIcon /></button>
-      </div>
+      {
+        currentCategoryState === 'vertodos' ?
+        <div className='Home-filter'>
+          <button className={`${sort ==='asc' ? "actived" : 'home-button'}`} onClick={() => handleSort('asc')}> A-Z </button>
+          <button className={`${sort ==='desc' ? "actived" : 'home-button'}`} onClick={() => handleSort('desc')}> Z-A </button>
+          <li className='home-list'>
+            <select className='select-home' id='select' name="select" onClick={(e) =>handlePriceSort(e)}>
+              <option id='todos'  value='todos'>Todos los precios</option>
+              <option id='range1'  value='range1'>Precio entre: $0 - ${maxPrice1}</option>
+              <option id='range2' value='range2'>Precio entre: ${maxPrice1+1} - ${maxPrice2}</option>
+              <option id='range3' value='range3'>Precio entre: ${maxPrice2+1} - ${maxPrice3}</option>
+            </select>
+          </li>
+          <button onClick={triggerFilter}><SortIcon /></button>
+      </div> : 
+       <div className='Home-filter'></div>
+      }
       <main className='home-main'>
           <section>
             {

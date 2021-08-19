@@ -246,12 +246,13 @@ export function filterByPrice(sort, filter, pageNumber) {
   }
 }
 
-export function createOrder(cart, user) {
+export function createOrder(cart, user, address) {
   return async function (dispatch) {
     try {
       const resp = await axios.post(`${endpoints.ORDER_STATUS}`, {
         cart,
         user,
+        address
       });
       dispatch({ type: actionTypes.ORDER_CREATED, payload: resp.data.order });
       return (window.location.href = resp.data.mp_link);
@@ -272,7 +273,6 @@ export function updateOrder(data) {
     }
   };
 }
-
 
 export function addFavProducts(id) {
   return async function (dispatch) {
@@ -301,6 +301,18 @@ export function removeFavProduct(id) {
 
 export function addCartSubTotal(subtotal) {
   return async function (dispatch) {
-    return dispatch({ type: actionTypes.ADD_CART_SUB_TOTAL, payload: subtotal });
-  }
+    return dispatch({
+      type: actionTypes.ADD_CART_SUB_TOTAL,
+      payload: subtotal,
+    });
+  };
+}
+
+export function addAddress(address) {
+  return async function (dispatch) {
+    return dispatch({
+      type: actionTypes.ADD_ADDRESS,
+      payload: address,
+    });
+  };
 }

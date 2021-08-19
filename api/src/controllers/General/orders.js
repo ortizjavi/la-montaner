@@ -50,5 +50,6 @@ module.exports = {
             console.log(error)
             res.json({ ok: false })
         }
+
     }
-}
+};

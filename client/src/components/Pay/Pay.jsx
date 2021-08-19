@@ -11,6 +11,7 @@ export default function Pay({ cart }) {
   const dispatch = useDispatch();
   const history = useHistory();
   const usuario = useSelector((state) => state.session.user);
+  const address = useSelector((state) => state.cart.address);
 
   const handlePay = (e) => {
     e.preventDefault();
@@ -25,9 +26,8 @@ export default function Pay({ cart }) {
         history.push("/login")
     }
     else{
-      dispatch(createOrder(cart, usuario._id));
+      dispatch(createOrder(cart, usuario._id, address));
     }
-    
   };
   return (
     <div>
