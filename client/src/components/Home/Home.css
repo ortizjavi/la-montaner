@@ -116,6 +116,14 @@
       font-style: italic;
 }
 
+.Home-filter.actived-order {
+      display:flex;
+      background-color: gray;
+}
+.desatived-order {
+      display: none;
+}
+
 .home-personicon{
       background: white;     
       border: none;

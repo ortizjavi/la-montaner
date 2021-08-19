@@ -32,6 +32,12 @@ function NavBar(props, {history}) {
   let usuario = useSelector((state) => state.session.user);
   usuario = Object.entries(usuario);
 
+  useEffect(() => {
+    window.addEventListener('scroll', function () {
+        var header = document.querySelector('header');
+        header?.classList.toggle('sticky', window.scrollY > 0)
+      })
+  }, [])
     
 
     useEffect(()=> {
@@ -62,10 +68,7 @@ function NavBar(props, {history}) {
         );
       }
     
-      window.addEventListener('scroll', function () {
-        var header = document.querySelector('header');
-        header?.classList.toggle('sticky', window.scrollY > 0)
-      })
+      
 
  return (
     <header className="navbar">
