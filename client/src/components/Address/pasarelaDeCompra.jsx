@@ -1,11 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
-import { useDispatch, useSelector } from "react-redux";
-import TextField from "@material-ui/core/TextField";
+import { useSelector } from "react-redux";
 import Button from "@material-ui/core/Button";
-import swal from "sweetalert";
-import { useHistory } from "react-router-dom";
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepButton from '@material-ui/core/StepButton';
