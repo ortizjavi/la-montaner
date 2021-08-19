@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Modal from '@material-ui/core/Modal';
 import { useDispatch, useSelector } from "react-redux";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
@@ -10,15 +9,6 @@ import "./Address.css";
 import { addAddress } from '../../redux/actions/types/productActions';
 
 
-function getModalStyle() {
-  const top = 20;
-  const left = 25;
-
-  return {
-    top: `${top}%`,
-    left: `${left}%`
-  };
-}
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -66,10 +56,6 @@ const useStyles = makeStyles((theme) => ({
 
 export default function AddressModal() {
   const dispatch = useDispatch();
-  const classes = useStyles();
-  // getModalStyle is not a pure function, we roll the style only on the first render
-  const [modalStyle] = React.useState(getModalStyle());
-  const [open, setOpen] = React.useState(false);
   const usuario = useSelector((state) => state.session.user);
   const history = useHistory();
 
@@ -90,7 +76,6 @@ export default function AddressModal() {
         });
         history.push("/login");
       } else {
-        setOpen(false);
         return dispatch(addAddress(newAddress));
       }
     } catch (err) {
@@ -105,26 +90,8 @@ export default function AddressModal() {
   };
   const contentPC = useStyles();
 
-  const handleOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
-
   return (
     <div>
-      <button type="button" onClick={handleOpen}>
-        Cargar Dirección
-      </button>
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="simple-modal-title"
-        aria-describedby="simple-modal-description"
-      >
-      <div style={modalStyle} className={classes.paper}>
       <h2>Añade tu dirección</h2>
       <form className={contentPC.root} onSubmit={handleSubmit}>
         <TextField
@@ -164,8 +131,6 @@ export default function AddressModal() {
           Enviar
         </Button>
       </form>
-    </div>
-      </Modal>
     </div>
   );
 }
