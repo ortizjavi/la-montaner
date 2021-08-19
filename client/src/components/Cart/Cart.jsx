@@ -6,7 +6,6 @@ import swal from "sweetalert";
 // Components
 import CartItem from "./CartItem.jsx";
 import "./Cart.css";
-import Pay from "../Pay/Pay";
 
 // Actions
 import {
@@ -128,7 +127,6 @@ const Cart = () => {
           </div>
           <div>
             <HorizontalNonLinearAlternativeLabelStepper/>
-            <Pay cart={cartItems} />
           </div>
         </div>
       </div>

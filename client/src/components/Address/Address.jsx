@@ -69,15 +69,11 @@ export default function AddressModal() {
     e.preventDefault();
     try {
       const newAddress = `${address.provincia}-${address.mcl}-${address.direccion}`;
-      if (!usuario.role) {
-        swal({
-          title: "Por favor inicia sesion",
-          icon: "warning",
-        });
-        history.push("/login");
-      } else {
+      swal({
+        title: "Direccion guardada!",
+        icon: "success",
+      });
         return dispatch(addAddress(newAddress));
-      }
     } catch (err) {
       console.log(err);
     }
