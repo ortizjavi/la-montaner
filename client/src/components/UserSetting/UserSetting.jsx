@@ -12,7 +12,7 @@ const UserSetting =  () => {
 
     const dispatch = useDispatch();
     const user = useSelector((state) => state.session.user);
-
+console.log(user)
     const [input, setInput] = useState({
       name: user.name,
       given_name: user.given_name, 
