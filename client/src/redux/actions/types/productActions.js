@@ -267,7 +267,7 @@ export function updateOrder(data) {
   return async function (dispatch) {
     try {
       const resp = await axios.put(`${endpoints.ORDER_STATUS}`, data);
-      console.log(resp.data);
+      dispatch({ type: actionTypes.ORDER_UPDATED, payload: resp.data.order });
     } catch (error) {
       console.log(error);
     }
