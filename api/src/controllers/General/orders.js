@@ -9,9 +9,10 @@ module.exports = {
         //products, user, status(creado por default)
         try {
             const mpResponse = await mercadopago(cart);
+            console.log(mpResponse);
             const order = new Order({ cart, user, mp_preference: mpResponse.body.id });
             const saveOrder = await order.save();
-            const { mp_preference, ...orderProps } = saveOrder._doc;
+            const { ...orderProps } = saveOrder._doc;
             await User.findByIdAndUpdate(user,
                 { $push: { 'orders': saveOrder._id } }
             )
