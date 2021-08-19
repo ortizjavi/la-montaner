@@ -16,9 +16,7 @@ import EditProduct from "../components/EditProduct/EditProduct";
 import NavBar from "../components/Navbar/NavBar";
 import Cart from "../components/Cart/Cart";
 import Wishlist from "../components/Wishlist/Wishlist";
-import Success from "../components/PayState/Success";
-import Pending from "../components/PayState/Pending";
-import Failure from "../components/PayState/Failure";
+import PayState from "../components/PayState/PayState";
 import PrivateRoute from "../components/PrivateRoute/PrivateRoute";
 import PublicRoute from "../components/PublicRoute/PublicRoute";
 import LoginForm from "../components/ModalDialog/LoginForm";
@@ -111,9 +109,7 @@ export default function App() {
                 roles={[ROLE.USER]}
               />
               <Route exact path="/home/products/pay" component={Pay} />
-              <Route exact path="/home/pay/success" component={Success} />
-              <Route exact path="/home/pay/pending" component={Pending} />
-              <Route exact path="/home/pay/failure" component={Failure} />
+              <Route exact path="/home/pay/:status" component={PayState} />
               <PublicRoute exact path="/login" component={LoginForm} />
               <PublicRoute exact path="/register" component={RegisterForm} />
               <Route exact path="/home/:id" component={ProductDetail} />

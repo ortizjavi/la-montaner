@@ -27,6 +27,10 @@ const OrderSchema = Schema(
       type: String,
       trim: true,
     },
+    mp_preference: {
+        type: String,
+        required: true
+    }
   },
   { timestamps: true }
 );
