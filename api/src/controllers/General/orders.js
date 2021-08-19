@@ -1,9 +1,10 @@
 const mercadopago = require('../../utils/mercadopago');
-const Order= require ("../../models/Orders");
+const Order = require("../../models/Orders");
+const User = require("../../models/Users/User");
 
 module.exports = {
     createOrder: async (req, res) => {
-        const {cart, user} = req.body
+        const { cart, user } = req.body
 
         //products, user, status(creado por default)
         try {
@@ -11,6 +12,9 @@ module.exports = {
             const order = new Order({ cart, user, mp_preference: mpResponse.body.id });
             const saveOrder = await order.save();
             const { mp_preference, ...orderProps } = saveOrder._doc;
+            await User.findByIdAndUpdate(user,
+                { $push: { 'orders': saveOrder._id } }
+            )
             res.json({
                 ok: true,
                 order: orderProps,
@@ -32,11 +36,11 @@ module.exports = {
             console.log(error)
         }
     },
-    updateOrders: async (req,res) => {
+    updateOrders: async (req, res) => {
         const { id } = req.params;
-        const update= {...req.body}
+        const update = { ...req.body }
         try {
-            const newOrder = await Order.findByIdAndUpdate(id, update,{new:true})
+            const newOrder = await Order.findByIdAndUpdate(id, update, { new: true })
 
             res.json({
                 ok: true,
@@ -44,7 +48,7 @@ module.exports = {
             })
         } catch (error) {
             console.log(error)
-            res.json({ok: false})
+            res.json({ ok: false })
         }
     }
 }
