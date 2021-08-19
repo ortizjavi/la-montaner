@@ -15,6 +15,7 @@ import Select from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
 import AddressModal from './Address';
 import LoginForm from '../ModalDialog/LoginForm';
+import Pay from '../Pay/Pay'
 
 function getModalStyle() {
     const top = 20;
@@ -58,18 +59,6 @@ function getSteps() {
   return ['Logueate o Registrate', 'Añade una dirección de envio', 'Metodo de pago'];
 }
 
-function getStepContent(step) {
-  switch (step) {
-    case 0:
-      return 'Paso 1: Select campaign settings...';
-    case 1:
-      return 'Step 2: What is an ad group anyways?';
-    case 2:
-      return 'Step 3: This is the bit I really care about!';
-    default:
-      return 'Unknown step';
-  }
-}
 
 export default function HorizontalNonLinearAlternativeLabelStepper() {
   const classes = useStyles();
@@ -80,6 +69,8 @@ export default function HorizontalNonLinearAlternativeLabelStepper() {
   const [modalStyle] = React.useState(getModalStyle());
   const [open, setOpen] = React.useState(false);
   const usuario = useSelector((state) => state.session.user);
+  const cart = useSelector((state) => state.cart);
+  const { cartItems } = cart;
 
   const handleOpen = () => {
     setOpen(true);
@@ -152,9 +143,15 @@ export default function HorizontalNonLinearAlternativeLabelStepper() {
   }
 
   const [state, setState] = React.useState('local');
+  const [statePay, setStatePay] = React.useState('efectivo');
 
   const handleChange = (e) => {
     setState(e.target.value)
+    console.log(state)
+  };
+
+  const handleChangePay = (e) => {
+    setStatePay(e.target.value)
     console.log(state)
   };
 
@@ -192,8 +189,8 @@ export default function HorizontalNonLinearAlternativeLabelStepper() {
       </Stepper>
       { activeStep === 0 ?
         !usuario.role?(<LoginForm/>)
-        :
-         activeStep === 1 (
+        :handleComplete(0)
+        : activeStep === 1 ? (
            <div>
           <FormControl variant="outlined" className={classes.formControl}>
           <InputLabel htmlFor="outlined-age-native-simple">Metodo de Envio</InputLabel>
@@ -208,11 +205,27 @@ export default function HorizontalNonLinearAlternativeLabelStepper() {
           </Select>
         </FormControl>
           {state === 'domicilio' ?
-             <AddressModal/> :
+             <AddressModal/> 
+             :
              <h4>Direccion del local</h4>
           }
              </div>
          )
+         : 
+         <div>
+         <FormControl variant="outlined" className={classes.formControl}>
+         <InputLabel htmlFor="outlined-age-native-simple">Metodo de Pago</InputLabel>
+         <Select
+           native
+           value={statePay}
+           onChange={(e) => handleChangePay(e)}
+           label="Pago"
+         >
+           <option value={'efectivo'}>Efectivo</option>
+           <option value={'mp'}>Otros medios</option>
+         </Select>
+       </FormControl>
+       </div>
       }
       <div>
         {allStepsCompleted() ? (
@@ -223,9 +236,8 @@ export default function HorizontalNonLinearAlternativeLabelStepper() {
             <Button onClick={handleReset}>Reset</Button>
           </div>
         ) : (
-          <div>
-            <Typography className={classes.instructions}>{getStepContent(activeStep)}</Typography>
-            <div>
+             <div>
+            <div> 
               <Button disabled={activeStep === 0} onClick={handleBack} className={classes.button}>
                 Back
               </Button>
@@ -245,7 +257,7 @@ export default function HorizontalNonLinearAlternativeLabelStepper() {
                   </Typography>
                 ) : (
                   <Button variant="contained" color="primary" onClick={handleComplete}>
-                    {completedSteps() === totalSteps() - 1 ? 'Finish' : 'Complete Step'}
+                    {completedSteps() === totalSteps() - 1 ? <Pay cart={cartItems} medio={statePay}/> : 'Paso Completado'}
                   </Button>
                 ))}
             </div>

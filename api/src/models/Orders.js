@@ -21,7 +21,11 @@ const OrderSchema = Schema(
     },
     address: {
       type: String,
-      defaults: "holi",
+      default: 'Retiro en local',
+    },
+    payment: {
+      type: String,
+      default: 'Efectivo'
     },
     date: {
       type: String,
