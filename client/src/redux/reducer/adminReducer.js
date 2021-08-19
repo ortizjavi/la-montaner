@@ -11,6 +11,7 @@ const adminReducer = (state = ADMIN_INITIAL_STATE, action) => {
     case actionTypes.GET_ORDERS:
       return { ...state, orders: action.payload };
     case actionTypes.GET_USERS:
+      console.log('adminReducers/payload: ',action.payload)
       return { ...state, users: action.payload };
     case actionTypes.DELETE_USER:
       const deletedUser = state.users?.filter(user => user._id !== action.payload) 

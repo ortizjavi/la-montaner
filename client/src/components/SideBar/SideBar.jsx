@@ -38,11 +38,11 @@ function SideBar(){
 				<FaFileInvoiceDollar style={{ fontSize: 30, color:"grey" }}/>
 				<span>Facturación</span>
 			</NavLink>
-			<NavLink to='/dashboard' className='sidebar-navlink'>
+			{/* <NavLink to='/dashboard' className='sidebar-navlink'>
 				<LocalShippingIcon style={{ fontSize: 30, color:"grey" }}/>
 				<span>Enviados</span>				
-			</NavLink>
-			<NavLink to='/dashboard' className='sidebar-navlink'>
+			</NavLink> */}
+			<NavLink to='/dashboard/setting' className='sidebar-navlink'>
 				<SettingsIcon style={{ fontSize: 30, color:"grey" }}/>
 				<span>Configuración</span>				
 			</NavLink>

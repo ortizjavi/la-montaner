@@ -15,27 +15,27 @@ import LoginForm from '../ModalDialog/LoginForm';
 import Pay from '../Pay/Pay'
 
 function getModalStyle() {
-    const top = 20;
-    const left = 25;
-  
-    return {
-      top: `${top}%`,
-      left: `${left}%`
-    };
-  }
+  const top = 20;
+  const left = 25;
+
+  return {
+    top: `${top}%`,
+    left: `${left}%`,
+  };
+}
 
 const useStyles = makeStyles((theme) => ({
-    paper: {
-        position: 'absolute',
-        width: 500,
-        left: 100,
-        backgroundColor: theme.palette.background.paper,
-        border: '2px solid #000',
-        boxShadow: theme.shadows[5],
-        padding: theme.spacing(2, 4, 3),
-      },
+  paper: {
+    position: "absolute",
+    width: 500,
+    left: 100,
+    backgroundColor: theme.palette.background.paper,
+    border: "2px solid #000",
+    boxShadow: theme.shadows[5],
+    padding: theme.spacing(2, 4, 3),
+  },
   root: {
-    width: '100%',
+    width: "100%",
   },
   button: {
     marginRight: theme.spacing(1),
@@ -44,7 +44,7 @@ const useStyles = makeStyles((theme) => ({
     marginRight: theme.spacing(1),
   },
   completed: {
-    display: 'inline-block',
+    display: "inline-block",
   },
   instructions: {
     marginTop: theme.spacing(1),
@@ -53,7 +53,11 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function getSteps() {
-  return ['Logueate o Registrate', 'Añade una dirección de envio', 'Metodo de pago'];
+  return [
+    "Logueate o Registrate",
+    "Añade una dirección de envio",
+    "Metodo de pago",
+  ];
 }
 
 
@@ -100,8 +104,7 @@ export default function HorizontalNonLinearAlternativeLabelStepper() {
   const handleNext = () => {
     const newActiveStep =
       isLastStep() && !allStepsCompleted()
-        ?
-          steps.findIndex((step, i) => !completed.has(i))
+        ? steps.findIndex((step, i) => !completed.has(i))
         : activeStep + 1;
 
     setActiveStep(newActiveStep);
@@ -143,8 +146,8 @@ export default function HorizontalNonLinearAlternativeLabelStepper() {
   const [statePay, setStatePay] = React.useState('efectivo');
 
   const handleChange = (e) => {
-    setState(e.target.value)
-    console.log(state)
+    setState(e.target.value);
+    console.log(state);
   };
 
   const handleChangePay = (e) => {
@@ -154,7 +157,7 @@ export default function HorizontalNonLinearAlternativeLabelStepper() {
 
   return (
     <div className={classes.root}>
-        <button type="button" onClick={handleOpen}>
+      <button type="button" onClick={handleOpen}>
         Comprar!
       </button>
       <Modal
@@ -258,10 +261,10 @@ export default function HorizontalNonLinearAlternativeLabelStepper() {
                   </Button>
                 ))}
             </div>
+            </div>
+          )}
           </div>
-        )}
-      </div>
-      </div>
+          </div>
       </Modal>
     </div>
   );
