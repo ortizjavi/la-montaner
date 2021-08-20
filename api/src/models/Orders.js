@@ -19,7 +19,11 @@ const OrderSchema = Schema(
     },
     address: {
       type: String,
-      defaults: "holi"
+      default: '',
+    },
+    payment: {
+      type: String,
+      default: 'Efectivo',
     },
     date: {
       type: String,
