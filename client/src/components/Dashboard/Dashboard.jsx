@@ -22,8 +22,7 @@ const Dashboard = () => {
         <div className="dashboard-container">
             <SideBar/>
             <div>
-                
-                <h3>{respuesta?.cart[0].name}</h3>
+                {/* <h3>{respuesta?.cart[0].name}</h3> */}
                 <DataUser />
             <main className='dashboard-main'>
                 <DashTable/>
