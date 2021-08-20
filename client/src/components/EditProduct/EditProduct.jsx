@@ -163,8 +163,7 @@ function EditProductChild({ producto, defaultState }) {
   const [review, setReview] = useState([]);
   const allCategories = useSelector((state) => state.root.allCategories);
   const dispatch = useDispatch();
-  const productoId = useSelector((state) => state.root.productDetail);
-  const {reviews} =productoId;
+
 
   const contentPC = useStyles();
   const classes = StylesAccord();
