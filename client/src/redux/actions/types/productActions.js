@@ -318,3 +318,10 @@ export function addAddress(address) {
     });
   };
 }
+
+export function addReview(data){
+	return async (dispatch) => {
+		await axios.put(`${endpoints.ADD_REVIEW}`, { content: data.content, id: data.id, calification: data.calification, idUsuario: data.idUsuario},
+		);
+	};
+};
