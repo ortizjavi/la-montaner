@@ -1,5 +1,8 @@
 require('dotenv').config();
 const nodemailer = require('nodemailer');
+const fs = require('fs');
+const os = require('os');
+const path = require('path');
 
 const transport = nodemailer.createTransport({
 	port: 587,
@@ -8,7 +11,6 @@ const transport = nodemailer.createTransport({
 		user: process.env.MAIL_USER,
 		pass: process.env.MAIL_PASSWORD
 	},
-	secure: true
 })
 
 const sendEmail = {};
@@ -24,20 +26,23 @@ sendEmail.sendFormEmail = (email,name) => {
 	});	
 }
 
-sendEmail.emailNotification = (email,name, desc) => {
-	return transport.sendMail({
-		from: `La Montañes <${process.env.MAIL_USER}>`,
-		to: process.env.MAIL_NOTIFIED,
-		subject: `${name} se ha contactado por la web de La Montañes`,
-		html: ` <span> Hola Chicha,</span>
-			<p> Te dejamos los datos de la consulta envíada por la web: </p>
-			<p>
-				&nbsp;&nbsp;&nbsp;&nbsp; Nombre: ${name}
-			<br>
-				&nbsp;&nbsp;&nbsp;&nbsp; Correo: ${email}
-			<br>
-				&nbsp;&nbsp;&nbsp;&nbsp; Consulta: ${desc}
-			</p>
-		`,
-	});	
+
+sendEmail.processingOrder = (email, name, payment, shipping) => {
+	fs.readFile(path.resolve(__dirname, '../html/emailTemplate.html'), (err, data) => {
+		data.replace('{title}', `Hola ${name}, tu orden fue confirmada!`);
+		data.replace('{paymentTitle}', `Pagaste ${payment.total}`);
+		const shippingTitle = shipping.delivery ? 'Envío a domicilio' : 'Retiro por local';
+		data.replace('{paymentInfo}', `con ${payment.method}`);
+		data.replace('{shippingTitle}', shippingTitle);
+		data.replace('{shippingInfo}', `${shipping.address}`);
+		
+		return transport.sendMail({
+			from: `La Montañes <${process.env.MAIL_USER}>`,
+			to: email,
+			subject: `Gracias por tu compra!`,
+			html: data.toString()
+		})
+	})
 }
+
+module.exports = sendEmail;

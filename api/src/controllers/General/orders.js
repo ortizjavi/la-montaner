@@ -4,6 +4,7 @@ const User = require("../../models/Users/User");
 
 module.exports = {
     createOrder: async (req, res) => {
+
         const { cart, user, address, mercadopago } = req.body
 
         //products, user, status(creado por default)
@@ -16,7 +17,13 @@ module.exports = {
                 mp_link = mpResponse.response.init_point
             }
             
-            const order = new Order({ cart, user, address, mp_preference: preference_id });
+            const order = new Order({ 
+                cart, 
+                user,
+                address,
+                mp_preference: preference_id, 
+            });
+
             const saveOrder = await order.save();
             const { ...orderProps } = saveOrder._doc;
             await User.findByIdAndUpdate(user,
