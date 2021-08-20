@@ -7,7 +7,6 @@ module.exports = async (req, res, next) => {
         const { reviews } = allReviews;
 
         const filterReviews = allReviews.map(elem => elem.reviews);
-        console.log(filterReviews);
         
         res.json(filterReviews);
     } catch (error) {
