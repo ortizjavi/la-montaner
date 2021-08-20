@@ -16,6 +16,8 @@ import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
 import { useSelector } from 'react-redux';
+import Button from "@material-ui/core/Button";
+import Paper from '@material-ui/core/Paper';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -33,7 +35,12 @@ const useStyles = makeStyles((theme) => ({
     div: {
         width: '95%',
         margin: '30px 40px',
-    }
+    },
+    paper: {
+        padding: theme.spacing(2),
+        textAlign: 'center',
+        color: theme.palette.text.secondary,
+      },
   }));
   
   const marks = [
@@ -88,13 +95,28 @@ export default function SalesAdmin() {
     }
   };
 
+  const handleSale = () => {
+    
+  }
+
+
 
   return (
     <MuiPickersUtilsProvider utils={DateFnsUtils}>
         <div className={classes.div}>
+          <Paper className={classes.paper}>
       <Grid justifyContent="space-evenly" container spacing={3}>
-          <Grid item xs={12} justifyContent="center">
+          <Grid item xs={6}>
             <h2>Crea tu Descuento!</h2>
+          </Grid>
+          <Grid item xs={6}>
+            <Button variant="contained"
+            color="primary"
+            disableElevation
+            onClick={handleSale}
+            size="large"
+             >
+                 Crear</Button>
           </Grid>
           <Grid item xs={3}>
         <KeyboardDatePicker
@@ -145,6 +167,7 @@ export default function SalesAdmin() {
       </FormGroup>
     </FormControl>
       </Grid>
+    </Paper>
       </div>
     </MuiPickersUtilsProvider>
   );
