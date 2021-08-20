@@ -121,11 +121,8 @@ export default function Home() {
               <option id='range3' value='range3'>Precio entre: ${maxPrice2+1} - ${maxPrice3}</option>
             </select>
           </li>
-          {
-            flag === true ? 
-            <button onClick={triggerFilter}>Ordenar</button> : null
-          }
-          
+            {/* flag === true ?  */}
+            <button className={`${flag === true ? 'order-button' : 'order-button-false'}`} onClick={triggerFilter}>Ordenar</button>         
       </div> : 
        <div className='Home-filter'></div>
       }
