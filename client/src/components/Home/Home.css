@@ -4,6 +4,9 @@
       #008037 button comprar
       #3F4A45 iconos login carrito
       #022E1A footer  */
+      .home-div-container{
+            margin-top: -7rem;
+      }
 
       .Home-filter{
             display: flex;

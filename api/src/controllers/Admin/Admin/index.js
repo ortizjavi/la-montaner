@@ -4,7 +4,6 @@ const deleteUser = require('./deleteUser');
 const resetUser = require('./resetUser');
 const addReview = require('./addReview');
 const getReviews = require('./getReviews');
-const deleteReview = require('./deleteReview');
 
 module.exports = {
 	newAdmin,
@@ -13,5 +12,4 @@ module.exports = {
 	resetUser,
 	addReview,
 	getReviews,
-	deleteReview,
 }

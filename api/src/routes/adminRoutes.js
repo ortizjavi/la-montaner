@@ -24,7 +24,6 @@ const {
   resetUser,
   addReview,
   getReviews,
-  deleteReview,
 } = require("../controllers/Admin/Admin");
 
 // Categories
@@ -41,7 +40,7 @@ router.get("/usersList", getUsersList);
 // User Review
 router.get("/addReview", getReviews);
 router.put('/addReview', authenticateToken, addReview);
-router.delete('/deleteReview', authenticateToken, deleteReview);
+
 // Admin
 router.post("/new", authenticateToken, authAdmin, newAdmin);
 router.get("/users", authenticateToken, authAdmin, getUsers);
