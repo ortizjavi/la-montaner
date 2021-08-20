@@ -62,6 +62,10 @@ const UserSetting =  () => {
         .catch((err) => console.log('UserSetting/uploadImage/Error: ',err));
     };
 
+    const reloadPage = () => {
+      window.location.reload()
+    }
+
     return(
         <section className='userSetting-container'>
           <br></br>
@@ -114,7 +118,7 @@ const UserSetting =  () => {
                 <br></br>
               </section> */}
 
-                <button className='us-button' type="submit">Agregar Los Cambios</button>
+                <button className='us-button' type="submit" onClick={reloadPage}>Agregar Los Cambios</button>
                 <br></br>
             <NavLink className='us-button' to={'/dashboard'}>
                 Regresar
