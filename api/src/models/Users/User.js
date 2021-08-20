@@ -38,8 +38,12 @@ const userSchema = new Schema({
   },
   reset: {
     type: Boolean,
-    default: false,
+    default: false
   },
+  orders: [{
+    type : Schema.Types.ObjectId,
+    ref : 'Order'
+  }]
 });
 
 userSchema.statics.hashPassword = (password, salt) => {

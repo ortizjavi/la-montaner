@@ -1,6 +1,6 @@
 import {
-  orderPay,
-  orderStatus,
+  createOrder,
+  orderPay
 } from "../../redux/actions/types/productActions";
 import { useDispatch, useSelector } from "react-redux";
 import React from "react";
@@ -22,11 +22,10 @@ export default function Pay({ cart , medio}) {
         title: "Gracias por tu compra!",
         icon: "success",
       })
-      dispatch(orderStatus(cart, usuario._id, address));
+      dispatch(createOrder(cart, usuario._id, address));
     }
     else{
-      dispatch(orderStatus(cart, usuario._id, address, 'MercadoPago'));
-      orderPay(cart);
+      dispatch(createOrder(cart, usuario._id, address, true));
     }
   };
   return (

@@ -34,8 +34,13 @@ const sessionReducer = (state = SESSION_INITIAL_STATE, action) => {
         ...state,
         user: action.payload,
       };
-    case actionTypes.ORDER_STATUS:
-      return { ...state, orders: state.orders.concat(action.payload.order) };
+    case actionTypes.ORDER_CREATED:
+      return {
+        ...state,
+        orders: state.orders ? 
+                state.orders.concat(action.payload) : 
+                [action.payload]
+      };
     default: return state;
   }
 };

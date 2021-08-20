@@ -1,7 +1,6 @@
 import React from "react";
 import {NavLink} from "react-router-dom";
 import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
-import DescriptionIcon from '@material-ui/icons/Description';
 import LocalShippingIcon from '@material-ui/icons/LocalShipping';
 import SettingsIcon from '@material-ui/icons/Settings';
 import MenuIcon from '@material-ui/icons/Menu';
@@ -25,19 +24,18 @@ function SideBar(){
 	<div> 
 		<navigator className="sidebar-container">
 			<span className='sidebar-title'>
-			<MenuIcon/>
+			{/* <MenuIcon/> */}
 			<h3 >Mi Cuenta</h3>
 			</span>
 			<div className='sidebar-section'>
 			<NavLink to='/dashboard' className='sidebar-navlink'>
 				<ShoppingBasketIcon style={{ fontSize: 30, color:"grey" }} />
-				<span>Compras</span>
+				<span className='sidebar-actived'>Compras</span>
 			</NavLink>
-			<NavLink to='/dashboard' className='sidebar-navlink'>
-				{/* <DescriptionIcon style={{ fontSize: 30, color:"grey" }}/> */}
+			{/* <NavLink to='/dashboard' className='sidebar-navlink'>
 				<FaFileInvoiceDollar style={{ fontSize: 30, color:"grey" }}/>
 				<span>Facturación</span>
-			</NavLink>
+			</NavLink> */}
 			{/* <NavLink to='/dashboard' className='sidebar-navlink'>
 				<LocalShippingIcon style={{ fontSize: 30, color:"grey" }}/>
 				<span>Enviados</span>				
