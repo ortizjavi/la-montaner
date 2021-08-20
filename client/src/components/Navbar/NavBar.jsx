@@ -98,34 +98,37 @@ function NavBar(props, {history}) {
         </ul>
       </nav> */}
       <div className='nav-icons-container'>
-      <NavLink to='/home' className='nav-icon'>
-        
-        {/* <h3 className='nav-title'>La Montañes Craft Beer <StorefrontIcon/></h3> */}
-        < StorefrontIcon className='nav-personicon'/>
-    </NavLink>
 
       
       <Link to='/login' className='nav-icon'>
         {user && user.picture ? 
-        <img className='imgStyle' src={user.picture} alt="imagen de usuario" width="30" height="30" ></img> 
+        <img className='imgStyle' src={user.picture} alt="imagen de usuario" width="50" height="50" ></img> 
         : <PersonIcon className='nav-personicon' style={{ fontSize: 40 }} />}
          
   
       </Link>
+      <NavLink to='/home' className='nav-icon'>
+        
+        {/* <h3 className='nav-title'>La Montañes Craft Beer <StorefrontIcon/></h3> */}
+        < StorefrontIcon className='nav-personicon'/>
+      </NavLink>
 
       {
                  !usuario || usuario.length === 0 ? (
-                   <Link to='/login'>
+                   <Link to='/login' className='nav-icon'>
                      <FavoriteIcon onClick={() => handleWishlist()} className='fav-icon-nav'/>
                    </Link>
-                 ) : <Link to="/wishlist"><FavoriteIcon className='fav-icon-nav'/></Link>
+                 ) : <Link to="/wishlist" className='nav-icon'><FavoriteIcon className='fav-icon-nav'/></Link>
               }
 
 
       <Link to="/cart" className='nav-icon'>
           <ShoppingCartIcon className='nav-personicon' style={{ fontSize: 40 }} />
         <div className='cart_subtotal_container'>
-          <h3 className='cart_subtotal'>{cartSubtotal}</h3>
+          {
+            !usuario || usuario.length === 0 || cartSubtotal > 0 &&
+            <h3 className='cart_subtotal'>{cartSubtotal}</h3>
+          }
         </div>
       </Link>
       {isUser ?
@@ -149,7 +152,7 @@ function NavBar(props, {history}) {
                     </li>
                 </ul>
     </section>
-}
+    }
     </>
   );
 };
