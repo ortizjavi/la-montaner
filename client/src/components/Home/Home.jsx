@@ -9,6 +9,7 @@ import SortIcon from '@material-ui/icons/Sort';
 
 
 
+
 export default function Home() {
 
   const dispatch = useDispatch();
@@ -106,7 +107,7 @@ export default function Home() {
     setFlag(false)
   }
   return (
-    <div>
+    <div className='home-div-container'>
       {
         currentCategoryState === 'vertodos' ?
         <div className='Home-filter'>
