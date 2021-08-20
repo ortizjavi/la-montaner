@@ -6,6 +6,7 @@ mercadopago.configure({
     "TEST-7665548571999255-081017-8db4487dcda48e5cc676f0d587b05af6-13063487",
 });
 //Tabla de ordenes de compra
+const Order = require("../../models/Orders");
 
 module.exports = {
   payProducts: async (req, res) => {
@@ -34,4 +35,27 @@ module.exports = {
       console.log(err);
     }
   },
+
+  /* getPayProducts: async(req,res) => {
+    const product =req.params;
+    try {
+      const compra = await Order.findById(id);
+      const carrito = await Cart.findById(compra.cart);
+      let compra2= [];
+      for(let i=0; i<carrito.producto.length; i++){
+        let title = carrito.producto[i].name;
+        let unit_price = carrito.producto[i].price;
+        let quantity = carrito.quantity[i];
+        compra2.push({title, unit_price,quantity})
+      }
+      res.json({
+        compra2
+      });
+    } catch (error) {
+      console.log(error)
+      res.json({
+        ok: false
+      })
+    }
+  } */
 };

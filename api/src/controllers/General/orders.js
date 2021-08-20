@@ -1,24 +1,31 @@
-const mercadopago = require('../../utils/mercadopago');
+const mp = require('../../utils/mercadopago');
 const Order = require("../../models/Orders");
 const User = require("../../models/Users/User");
 
 module.exports = {
     createOrder: async (req, res) => {
-        const { cart, user } = req.body
+        const { cart, user, address, mercadopago } = req.body
 
         //products, user, status(creado por default)
         try {
-            const mpResponse = await mercadopago(cart);
-            const order = new Order({ cart, user, mp_preference: mpResponse.body.id });
+            let preference_id = '';
+            let mp_link = '';
+            if (mercadopago){
+                const mpResponse = await mp(cart);
+                preference_id = mpResponse.body.id;
+                mp_link = mpResponse.response.init_point
+            }
+            
+            const order = new Order({ cart, user, address, mp_preference: preference_id });
             const saveOrder = await order.save();
-            const { mp_preference, ...orderProps } = saveOrder._doc;
+            const { ...orderProps } = saveOrder._doc;
             await User.findByIdAndUpdate(user,
                 { $push: { 'orders': saveOrder._id } }
             )
             res.json({
                 ok: true,
                 order: orderProps,
-                mp_link: mpResponse.response.init_point
+                mp_link: mp_link
             });
         } catch (error) {
             console.log(error)
