@@ -70,26 +70,28 @@ export default function SearchBar() {
     return(
         <div className='sb-container'>
             <form className="form-container" onSubmit={(e) => handleSubmit(e)} >
-                <label >     
-                    <input list="product" multiple value={state.product} className='input_search' 
-                    autoComplete='off' placeholder='Buscar Productos' name="product" 
-                    onChange={(e)=>handleChange(e)} />
-                </label>   
+                <NavLink to='/home'>
+                    <label >     
+                        <input list="product" multiple value={state.product} className='input_search' 
+                        autoComplete='off' placeholder='Buscar Productos' name="product" 
+                        onChange={(e)=>handleChange(e)} />
+                    </label>  
+                </NavLink> 
                 <datalist className='sb-option'  id="product" multiple >
                     {   
                         state.product.length >=2 ?
                         allProductsAutocomplete[1]?.map( (t, key) => (
-                            // <NavLink className='sb-option' to={`/home/${t._id}`}>
+                        <NavLink className='sb-option' to={`/home/${t._id}`}>
                                 <option className='sb-option'  key={key} value={t.name} />  
-                            //</NavLink> 
+                        </NavLink> 
                         ))
                         :
                             <option/>
                     }  
                 </datalist>
-                
+                <NavLink to='/home'>
                         <SearchIcon className='nav-personicon' onClick={(e) => handleSubmit(e)} style={{ fontSize: 40,color:'#24262b'}} />
-                
+                </NavLink>
                 {/* {
                     state.icono ?
                     <button className='nav-personicon'>
