@@ -20,9 +20,9 @@ export default function PayState() {
   useEffect(() => {
     const queries = new URLSearchParams(location.search);
     dispatch(updateOrder({
-      _id: usuario._id,
       status: queries.get("status"),
-      preference_id: queries.get("preference_id")
+      payment_type: queries.get("payment_type"),
+      mp_preference: queries.get("preference_id"),
     }))
   }, [])
 

@@ -4,24 +4,22 @@ const OrderSchema = Schema(
   {
     cart: {
       type: Schema.Types.Array,
-      required: true,
+      required: true
     },
-
     status: {
       type: String,
       enum: ["Creada", "Procesando", "Completa", "Cancelada"],
-      default: "Procesando",
-      required: true,
+      default: "Creada",
+      required: true
     },
-
     user: {
       type: Schema.Types.ObjectId,
       ref: "User",
-      required: true,
+      required: true
     },
     address: {
       type: String,
-      default: 'Retiro en local',
+      default: '',
     },
     payment: {
       type: String,
@@ -29,11 +27,17 @@ const OrderSchema = Schema(
     },
     date: {
       type: String,
-      trim: true,
+      trim: true
+    },
+    payment_status: {
+      type: String,
+    },
+    payment_method: {
+      type: String,
     },
     mp_preference: {
-        type: String,
-        required: true
+      type: String,
+      required: true
     }
   },
   { timestamps: true }

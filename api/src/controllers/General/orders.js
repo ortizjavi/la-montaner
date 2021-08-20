@@ -10,7 +10,9 @@ module.exports = {
         try {
             let preference_id = '';
             let mp_link = '';
+            let payment = 'Efectivo'
             if (mercadopago){
+                payment = 'MercadoPago'
                 const mpResponse = await mp(cart);
                 preference_id = mpResponse.body.id;
                 mp_link = mpResponse.response.init_point
