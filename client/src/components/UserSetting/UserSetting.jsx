@@ -6,13 +6,10 @@ import './UserSetting.css'
 import {UPDATE_USER} from '../../utils/endpoints';
 
 
-
-
 const UserSetting =  () => {
 
     const dispatch = useDispatch();
     const user = useSelector((state) => state.session.user);
-console.log(user)
     const [input, setInput] = useState({
       name: user.name,
       given_name: user.given_name, 
@@ -22,19 +19,15 @@ console.log(user)
       // adress: '', 
       });
 
-
     const handleSubmit = async e =>{
       e.preventDefault();
       try {
         const resp = await axios.put(`${UPDATE_USER}/${user._id}`, {...input,
           name: input.given_name +' '+ input.family_name
-        });
-        console.log('userSettings ',resp.data);
+        }).then(res => res.data.ok ? alert('Cambios agragados con éxito') : alert('Intentalo nuevamente'))
       } catch (error) {
         console.log('components/UserSetting/Error ',error);
       }
-      alert('Cambios agragados con éxito')
-      
     }
 
     const handleChange = (event) =>{
@@ -42,7 +35,7 @@ console.log(user)
       setInput({...input, [event.target.name]: event.target.value,})
     }
     
-  const uploadImage = async (e) => {
+    const uploadImage = async (e) => {
 
     const files = e.target.files;
     const images = new FormData();
@@ -67,15 +60,13 @@ console.log(user)
           setInput({...input, picture: res.data.secure_url});
         })
         .catch((err) => console.log('UserSetting/uploadImage/Error: ',err));
-  };
-
-    console.log('usersetting/user',user)
+    };
 
     return(
         <section className='userSetting-container'>
           <br></br>
 
-            <h3>Hola, {user.name} Modifica tus datos</h3>
+            <h3>Hola, <i>{input.given_name}</i> Modifica tus datos</h3>
             <br></br>
             <>
             <form className='userSetting-form' onSubmit={ e => handleSubmit(e)}>
@@ -90,18 +81,19 @@ console.log(user)
                 <input  name="family_name" value={input.family_name} placeholder={user.family_name} onChange={handleChange}/>
                 <br></br>
               </section>
-
+              
               <section className='section_create'>
+                <label>Correo</label>
+                <input name="email" value={input.email}  onChange={handleChange}/>
+                <br></br>
+              </section>
+
+              <section className='section_create us-section-img'>
                 <br></br>
                 <label>Imagen  </label>
-                <br></br>
-                {/* <img className='usersetting-img' src={input.image ? input.image :  user.picture} /> */}
                 <img className='usersetting-img' src={input.picture } />
-                <br></br>
                 <input class="custom-file-input" name="picture" accept="image/*" type='file'  onChange={uploadImage}/>
-                <br></br>
-                <button type='button' onClick={() => setInput({...input, picture:''})}> Borrar</button>
-                <br></br>
+                <button className='us-button' type='button' onClick={() => setInput({...input, picture:''})}>Borrar Imagen</button>
               </section>
 
               {/* <section className='section_create'>
@@ -110,26 +102,21 @@ console.log(user)
                 <br></br>
               </section> */}
 
-              <section className='section_create'>
-                <label>Correo</label>
-                <input name="email" value={input.email}  onChange={handleChange}/>
-                <br></br>
-              </section>
-
-              <section className='section_create'>
+              {/* <section className='section_create'>
                 <label>Direccion  </label>
                 <input name="adress" multiple value={input.adress} onChange={handleChange}/>
                 <br></br>
-              </section>
+              </section> */}
 
               {/* <section className='section_create'>
                 <label>DNI </label>
                 <input name="dni" multiple value={input.dni} onChange={handleChange}/>
                 <br></br>
               </section> */}
-                <button type="submit">Modificar</button>
+
+                <button className='us-button' type="submit">Agregar Los Cambios</button>
                 <br></br>
-            <NavLink to={'/dashboard'}>
+            <NavLink className='us-button' to={'/dashboard'}>
                 Regresar
             </NavLink>
             </form>
