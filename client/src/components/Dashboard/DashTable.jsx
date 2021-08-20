@@ -33,12 +33,12 @@ const Tabla = () =>{
   const ponerFilas = (res) => res?.map( (order, key) => (
         <tr className='dt-tr' key={ order._id }>
           <td>
-            { order?.createdAt?.slice(0,10)} 
+            {order?.createdAt?.slice(0,10)} 
           </td>
           <td>
-            { order?.status}
+            {order?.status}
           </td>
-            { order.cart.reduce((accumulator, currentValue) => {
+            { '$ ' +  order.cart.reduce((accumulator, currentValue) => {
                 return accumulator + currentValue.price;
               }, 0)
             }
@@ -108,7 +108,7 @@ const Tabla = () =>{
                         </NavLink>
                       </td>
                       <td>
-                        { product.price}
+                        { '$ ' + product.price}
                       </td> 
                       <td>
                         {product.stockSelected}
@@ -116,9 +116,10 @@ const Tabla = () =>{
                     </tr>
                   ))
                 }
-                <p className='dt-p'>Total: {state.cart.reduce((accumulator, currentValue) => {
+                <p className='dt-p'>Total: $ {state.cart.reduce((accumulator, currentValue) => {
                 return accumulator + currentValue.price;
               }, 0) }</p>
+                <p className='dt-p'>Fecha de compra: {state.createdAt?.slice(0,10)}</p>
                 </tbody>
               </table>
           </div>
