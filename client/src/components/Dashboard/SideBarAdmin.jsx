@@ -27,6 +27,8 @@ import UsersTable from "../UsersTable/UsersTable";
 import { useDispatch, useSelector } from "react-redux";
 import { getAdminProducts, getOrders, getUsers } from "../../redux/actions/types/adminActions";
 import { getCategories } from "../../redux/actions/types/categoryActions";
+import LocalOfferIcon from '@material-ui/icons/LocalOffer';
+//import SalesAdmin from "./SalesAdmin";
 
 const drawerWidth = 240;
 
@@ -242,6 +244,17 @@ export default function SideBarAdmin() {
             </ListItemIcon>
             <ListItemText primary="Usuarios" />
           </ListItem>
+          <ListItem>
+            <ListItemIcon>
+              <IconButton className="iconSB">
+                <LocalOfferIcon
+                  onClick={(e) => handleButton(e, "descuentos")}
+                  value="descuentos"
+                />
+              </IconButton>
+            </ListItemIcon>
+            <ListItemText primary="Descuentos" />
+          </ListItem>
         </List>
         <Divider />
       </Drawer>
@@ -255,7 +268,9 @@ export default function SideBarAdmin() {
           <OrdersAdmin />
         ) : button === "usuarios" ? (
           <UsersTable />
-        ) : (
+        ) /* : button === 'descuentos' ? (
+          <SalesAdmin/>
+        ) */:(
           <div className="cardsAdmin">
             <div onClick={(e) => handleButton(e, "productos")}>
               <IoBeer />

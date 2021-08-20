@@ -2,6 +2,7 @@ const { Router } = require("express");
 
 const router = Router();
 
+const { authenticateToken } = require('../middlewares/auth');
 const { searchProducts } = require("../controllers/General/searchProducts");
 const { getProductDetail } = require("../controllers/General/getProductDetail");
 
@@ -19,11 +20,11 @@ const updateUsers = require("../controllers/General/updateUsers");
 
 router.get("/", searchProducts);
 router.get("/:id", getProductDetail);
-router.post("/product/pay", payProducts);
-router.post("/product/order", createOrder);
-router.get("/product/order", getOrders);
-router.put("/product/order", updatePayment);
-router.put("/product/order/:id", updateOrders);
-router.put("/user/:id", updateUsers);
+router.post("/product/pay", authenticateToken, payProducts);
+router.post("/product/order", authenticateToken, createOrder);
+router.get("/product/order", authenticateToken, getOrders);
+router.put("/product/order", authenticateToken, updatePayment);
+router.put("/product/order/:id", authenticateToken, updateOrders);
+router.put("/user/:id", authenticateToken, updateUsers);
 
 module.exports = router;
