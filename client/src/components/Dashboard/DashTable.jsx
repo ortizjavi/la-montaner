@@ -2,7 +2,6 @@ import React,{useState} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { FaEye } from 'react-icons/fa';
-import { getOrders } from '../../redux/actions/types/adminActions';
 import './DashTable.css';
 import { addCartSubTotal } from '../../redux/actions/types/productActions';
 
@@ -10,21 +9,19 @@ import { addCartSubTotal } from '../../redux/actions/types/productActions';
 const Tabla = () =>{ 
 
   const dispatch = useDispatch()
-  // const orders = useSelector((state) => state.admin.orders);
   const user = useSelector((state) => state.session.user);
-  // const response = orders?.filter(o => o.user === user._id);
   const [state, setState] = useState('') 
 
-  // if(!orders.length){
+  // const orders = useSelector((state) => state.admin.orders);
+  // const response = orders?.filter(o => o.user === user._id);
+
+  // if(!user.length){
   //     dispatch(getOrders())
   // }
   
   const handleState = e =>{
     const cardOrder = user.orders?.find(o => o._id === e.target.id);
     setState(cardOrder)
-    // cardOrder?.cart.map(e => 
-    //   console.log('dashTable/card/e ', e.name)
-    //   )
   }
   console.log('DashTable/user: ',user)
 
@@ -33,22 +30,21 @@ const Tabla = () =>{
     setState('')
   }
 
-
   const ponerFilas = (res) => res?.map( (order, key) => (
         <tr className='dt-tr' key={ order._id }>
           <td>
-            { order?.createdAt?.slice(0,10)} 
+            {order?.createdAt?.slice(0,10)} 
           </td>
           <td>
-            { order?.status}
+            {order?.status}
           </td>
-            { order.cart.reduce((accumulator, currentValue) => {
+            { '$ ' +  order.cart.reduce((accumulator, currentValue) => {
                 return accumulator + currentValue.price;
               }, 0)
             }
           <td>
         
-              <input type='button' className="eye-solid icon" id={order._id} value='Ver' onClick={(e) => handleState(e) } >
+              <input type='button' className="eye-solid-icon" id={order._id} value='Detalles' onClick={(e) => handleState(e) } >
                       {/* <FaEye/> */}
               </input >
           </td>
@@ -64,11 +60,11 @@ const Tabla = () =>{
               <th>
                   Fecha
               </th>
-              <th>
+              <th className='dt-th2'>
                   Estado
               </th>
           
-              <th>
+              <th className='dt-th3'>
                   Total
               </th> 
           </thead>
@@ -81,20 +77,23 @@ const Tabla = () =>{
       <section>
           <div>
               <table className='table'>
-                <h4>Detalles</h4>
-                  <button onClick={goBack}>Volver</button> 
+                <button className="eye-solid-icon dt-bu2"  onClick={goBack}>Volver</button> 
                 <thead >
-                  <th></th>
+                  <th className='dt-th2'>
+
+                  </th>
                   <th>
                     Producto
                   </th>
-
-                  <th>
+                  <th className='dt-th2'>
                     Precio
                   </th>
+                  <th className='dt-th3'>
+                    Cantidad
+                  </th>
+
                 </thead>
-              {/* <tbody className='dt-tbody'> */}
-                <tbody className=''>
+              <tbody className='dt-tbody'>
                 {
                   state.cart?.map( product => (
                     <tr className='dt-tr' key={ product.id }>
@@ -109,7 +108,7 @@ const Tabla = () =>{
                         </NavLink>
                       </td>
                       <td>
-                        { product.price}
+                        { '$ ' + product.price}
                       </td> 
                       <td>
                         {product.stockSelected}
@@ -117,12 +116,14 @@ const Tabla = () =>{
                     </tr>
                   ))
                 }
-                <p>Total: {state.cart.reduce((accumulator, currentValue) => {
+                <p className='dt-p'>Total: $ {state.cart.reduce((accumulator, currentValue) => {
                 return accumulator + currentValue.price;
               }, 0) }</p>
+                <p className='dt-p'>Fecha de compra: {state.createdAt?.slice(0,10)}</p>
                 </tbody>
               </table>
           </div>
+
       </section>
     }  
   </div>
