@@ -4,12 +4,10 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import React from "react";
 import Button from "@material-ui/core/Button";
-import {useHistory} from "react-router-dom";
 import swal from "sweetalert";
 
-export default function Pay({ cart }) {
+export default function Pay({ cart , medio}) {
   const dispatch = useDispatch();
-  const history = useHistory();
   const usuario = useSelector((state) => state.session.user);
   const address = useSelector((state) => state.cart.address);
 
@@ -18,15 +16,15 @@ export default function Pay({ cart }) {
     console.log(cart);
     console.log(usuario._id)
 
-    if(!usuario.role){
+    if(medio === 'efectivo'){
       swal({
-        title: 'Por favor inicia sesion',
-        icon: 'warning'
-        })
-        history.push("/login")
+        title: "Gracias por tu compra!",
+        icon: "success",
+      })
+      dispatch(createOrder(cart, usuario._id, address));
     }
     else{
-      dispatch(createOrder(cart, usuario._id, address));
+      dispatch(createOrder(cart, usuario._id, address, true));
     }
   };
   return (

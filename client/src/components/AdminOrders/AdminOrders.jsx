@@ -34,12 +34,13 @@ const useRowStyles = makeStyles((theme) => ({
   },
 }));
 
-function createData( Usuario,Direccion, Fecha, Precio, Estado, Orden, id) {
+function createData( Usuario,Direccion, Fecha, Precio, Pago, Estado, Orden, id) {
   return {
     Usuario,
     Direccion,
     Fecha,
     Precio,
+    Pago,
     Estado,
     Orden,
     id
@@ -80,6 +81,7 @@ function Row(props) {
         <TableCell align="right">{row.Direccion}</TableCell>
         <TableCell align="right">{row.Fecha}</TableCell>
         <TableCell align="right">{row.Precio}</TableCell>
+        <TableCell align="right">{row.Pago}</TableCell>
         <TableCell align="right">
       <FormControl className={classes.formControl}>
         <Select
@@ -197,6 +199,7 @@ export default function OrdersAdmin() {
       o.address,
       o.createdAt.slice(0, 10),
       subtotal,
+      o.payment,
       o.status,
       orden,
       o._id
@@ -223,6 +226,7 @@ export default function OrdersAdmin() {
       o.address,
       o.createdAt.slice(0, 10),
       subtotal,
+      o.payment,
       o.status,
       orden,
       o._id
@@ -252,6 +256,9 @@ export default function OrdersAdmin() {
             </TableCell>
             <TableCell align="right">
               <b>Precio</b>
+            </TableCell>
+            <TableCell align="right">
+              <b>Pago</b>
             </TableCell>
             <TableCell align="right">
             <FormControl className={classes.formControl}>

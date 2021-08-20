@@ -6,7 +6,6 @@ import swal from "sweetalert";
 // Components
 import CartItem from "./CartItem.jsx";
 import "./Cart.css";
-import Pay from "../Pay/Pay";
 
 // Actions
 import {
@@ -15,7 +14,7 @@ import {
   deleteCartAll,
   addCartSubTotal,
 } from "../../redux/actions/types/productActions";
-import AddressModal from "../Address/Address.jsx";
+import HorizontalNonLinearAlternativeLabelStepper from "../Address/pasarelaDeCompra.jsx";
 
 const Cart = () => {
   const dispatch = useDispatch();
@@ -127,8 +126,7 @@ const Cart = () => {
             <p>${getCartSubTotal()}</p>
           </div>
           <div>
-            <AddressModal/>
-            <Pay cart={cartItems} />
+            <HorizontalNonLinearAlternativeLabelStepper/>
           </div>
         </div>
       </div>
