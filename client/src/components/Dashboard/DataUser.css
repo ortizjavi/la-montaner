@@ -2,11 +2,12 @@
     margin-top: 1vh;
     padding: 1vh;
     display: flex;
-    justify-content: space-evenly;
+    /* justify-content: space-evenly; */
     border: solid 1px grey;
     background: white;
 }
 .dataUser-section{
+    margin-left: 25%;
     display: flex;
     justify-content: space-evenly;
 }
@@ -15,5 +16,6 @@
 	color: #022E1A;
 }
 .du-image{
+    margin: 3% 16% 3% 3%;
     border-radius: 40px;
 }
