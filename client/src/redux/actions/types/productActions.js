@@ -246,16 +246,20 @@ export function filterByPrice(sort, filter, pageNumber) {
   }
 }
 
-export function createOrder(cart, user, address) {
+
+export function createOrder(cart, user, address, mercadopago) {
   return async function (dispatch) {
     try {
       const resp = await axios.post(`${endpoints.ORDER_STATUS}`, {
         cart,
         user,
-        address
+        address,
+        mercadopago
       });
       dispatch({ type: actionTypes.ORDER_CREATED, payload: resp.data.order });
-      return (window.location.href = resp.data.mp_link);
+      if(mercadopago) {
+        return (window.location.href = resp.data.mp_link);
+      }
     } catch (error) {
       console.log(error);
     }

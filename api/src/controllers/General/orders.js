@@ -4,11 +4,12 @@ const User = require("../../models/Users/User");
 
 module.exports = {
     createOrder: async (req, res) => {
-        const { cart, user, mercadopago } = req.body
+
+        const { cart, user, address, mercadopago } = req.body
 
         //products, user, status(creado por default)
         try {
-            let preference_id = ''
+            let preference_id = '';
             let mp_link = '';
             if (mercadopago){
                 const mpResponse = await mp(cart);
@@ -18,7 +19,8 @@ module.exports = {
             
             const order = new Order({ 
                 cart, 
-                user, 
+                user,
+                address,
                 mp_preference: preference_id, 
             });
 
