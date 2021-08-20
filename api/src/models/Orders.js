@@ -4,32 +4,36 @@ const OrderSchema = Schema(
   {
     cart: {
       type: Schema.Types.Array,
-      required: true,
+      required: true
     },
-
     status: {
       type: String,
       enum: ["Creada", "Procesando", "Completa", "Cancelada"],
-      default: "Procesando",
-      required: true,
+      default: "Creada",
+      required: true
     },
-
     user: {
       type: Schema.Types.ObjectId,
       ref: "User",
-      required: true,
+      required: true
     },
     address: {
       type: String,
-      defaults: "holi",
+      defaults: "holi"
     },
     date: {
       type: String,
-      trim: true,
+      trim: true
+    },
+    payment_status: {
+      type: String,
+    },
+    payment_method: {
+      type: String,
     },
     mp_preference: {
-        type: String,
-        required: true
+      type: String,
+      required: true
     }
   },
   { timestamps: true }

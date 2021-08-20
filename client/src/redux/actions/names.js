@@ -47,6 +47,7 @@ export const ORDER_PAY = "ORDER_PAY";
 export const ORDER_STATUS = "ORDER_STATUS";
 export const ORDER_CREATED = "ORDER_CREATED"
 export const GET_ORDERS = "GET_ORDERS";
+export const ORDER_UPDATED = 'ORDER_UPDATED';
 export const GET_ORDER_FILTERED = "GET_ORDER_FILTERED";
 export const ADD_CART_SUB_TOTAL = 'ADD_CART_SUB_TOTAL';
 export const ADD_ADDRESS = 'ADD_ADDRESS';
