@@ -7,15 +7,15 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
-    padding-top: 1rem;
+    /* padding-top: 1rem; */
     box-sizing: border-box;
     /* margin-top: 15px; */
-    padding-right: 2rem;
-    /* border-bottom: solid gray 0.5px; */
+    /* padding-right: 1rem; */
+    border-bottom: solid #a52a2a 0.3rem;
     /* box-shadow: 0 0 3px 0 gray; */
     position: fixed;
     transition: 0.6s;
-    background-color:#dcdcdc9e;
+    background-color:#022E1A;
     z-index: 100000;
 }
 
@@ -25,7 +25,7 @@
 }
 
 .sticky img{
-    transform: scale(0.9);
+    transform: scale(0.65);
     transition: 0.6s;
 }
 
@@ -49,8 +49,9 @@
 }
 
 .nb-img{
-    margin-left: 2rem;
+    /* margin-left: 2rem; */
     cursor: pointer;
+    width: 55%;
 }
 
 .nav-title {
@@ -76,10 +77,12 @@
     font-weight: 400;
     border: none;
     outline: none;
-    font-size: 1rem;
-    width: 12%;
+    width: auto;
     cursor: pointer;
+    font-size: 1rem;
     height: 1.5rem;
+    margin-right: 1rem;
+    margin-left: 1rem;
 }
 
 .Nav-button:hover{
@@ -133,10 +136,10 @@ width: 10rem;
     border-bottom: #C88E34 solid 1px ;
     border-top: #C88E34 solid 1px ;
     font-size: 1rem;
-    width: 10%;
+    width: auto;
     height: 1.5rem;
-    /* font-size: 1.2rem; */
-    /* margin-left: 2rem; */
+    margin-right: 1rem;
+    margin-left: 1rem;
 }
 
 .Nav-button.active {
@@ -149,7 +152,7 @@ width: 10rem;
     border: none;
     cursor: pointer;
     width: 20%;
-    color: black;
+    color: #ffffff;
     background-color: transparent;
 }
 
@@ -164,7 +167,7 @@ width: 10rem;
 }
 
 .fav-icon-nav{
-    color: #000000;
+    color: #ffffff;
 }
 
 .fav-icon-nav:hover {
@@ -211,21 +214,32 @@ width: 10rem;
 
 .nav-icon {
     width: auto;
-    padding: 0 20px;
+    /* padding: 0 20px; */
+    /* margin-right: 1rem; */
+    
 }
 
 .nav-icon button {
     width: 100%;
 }
+
 .nav-icon svg {
-    width: 100% !important;
+    /* width: 100% !important; */
     transition: none;
+    margin-left: 5px;
+    margin-right: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+    font-size: 1.7rem!important;
+    width: 1em!important;
+    
 }
 
 .nav-icons-container {
-    width: 25%;
+    width: 10rem;
     display: flex;
     justify-content: flex-end;
+    align-items: center;
 }
 
 .nav-selec{
@@ -254,24 +268,27 @@ width: 10rem;
 
 .cart_subtotal_container {
   position: absolute;
-  top: 60px;
-  right: 38px;
+  top: 45px;
+  right: 145px;
   padding: 5px;
   border-radius: 50%;
 }
 
-.cart_subtotal {
-  color: black;
+.sticky .cart_subtotal_container {
+    top: 20px;
+    transition: 0.6s;
 }
+
+
 .navbar-section{
     width: 100%;
     height: 2rem;
     margin: 0;
-    margin-top: 8rem;
+    margin-top: 8.5rem;
     display: flex;
     justify-content: center;
     position: relative;
-    background-color:#dcdcdc9e;
+    /* background-color:#dcdcdc9e; */
 
 }
 
