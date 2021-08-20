@@ -78,34 +78,6 @@ function NavBar(props, { history }) {
     );
   }
 
-  useEffect(() => {
-    dispatch(selectCategoryAction(state));
-    dispatch(searchProductsAction(""));
-    //toca preguntar si ek search tiene estado
-  }, [state]);
-
-  const handleCategory = (e) => {
-    e.preventDefault();
-    state === e.target.value
-      ? dispatch(selectCategoryAction(state))
-      : setState(e.target.value);
-  };
-
-  const handleWishlist = () => {
-    swal({
-      title: "Por favor inicia sesión",
-      icon: "warning",
-    });
-  };
-
-  function HomeIcon(props) {
-    return (
-      <SvgIcon {...props}>
-        <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
-      </SvgIcon>
-    );
-  }
-
   return (
     <header className="navbar">
       <NavLink to="/home" className="nav-personicon">

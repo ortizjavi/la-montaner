@@ -1,7 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import Button from "@material-ui/core/Button";
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
@@ -13,7 +13,9 @@ import InputLabel from '@material-ui/core/InputLabel';
 import AddressModal from './Address';
 import LoginForm from '../ModalDialog/LoginForm';
 import Pay from '../Pay/Pay';
+import swal from "sweetalert";
 import './Address.css';
+import { createOrder } from '../../redux/actions/types/productActions';
 
 function getModalStyle() {
   const top = 15;
@@ -63,6 +65,7 @@ function getSteps() {
 
 
 export default function HorizontalNonLinearAlternativeLabelStepper() {
+  const dispatch = useDispatch();
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
   const [completed, setCompleted] = React.useState(new Set());
@@ -72,7 +75,7 @@ export default function HorizontalNonLinearAlternativeLabelStepper() {
   const [open, setOpen] = React.useState(false);
   const usuario = useSelector((state) => state.session.user);
   const cart = useSelector((state) => state.cart);
-  const { cartItems } = cart;
+  const { cartItems, address } = cart;
 
   const handleOpen = () => {
     setOpen(true);
@@ -154,6 +157,24 @@ export default function HorizontalNonLinearAlternativeLabelStepper() {
   const handleChangePay = (e) => {
     setStatePay(e.target.value)
     console.log(state)
+  };
+
+  const handlePay = (e) => {
+    e.preventDefault();
+    console.log(cart);
+    console.log(usuario._id)
+
+    if(statePay === 'efectivo'){
+      swal({
+        title: "Gracias por tu compra!",
+        icon: "success",
+      })
+      dispatch(createOrder(cartItems, usuario._id, address));
+      setOpen(false);
+    }
+    else{
+      dispatch(createOrder(cartItems, usuario._id, address, true));
+    }
   };
 
   return (
@@ -247,15 +268,28 @@ export default function HorizontalNonLinearAlternativeLabelStepper() {
                   </Typography>
                 ) : (
                   <div>
-                    {completedSteps() === totalSteps() - 1 ? <Pay cart={cartItems} medio={statePay}/> : activeStep >= 1 && 
+                    {completedSteps() === totalSteps() - 1 
+                    ? 
                     <Button
-                variant="contained"
-                color="primary"
-                onClick={handleComplete}
-                className={classes.button}
-              >
-               Siguiente
-              </Button>
+                    className={classes.button}
+                    onClick={handlePay}
+                    variant="contained"
+                    color="primary"
+                    >
+                      Ir a pagar
+                    </Button>
+                    : 
+                    activeStep === 1 && (state === 'local' || address?.length > 0)
+                    &&
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        onClick={handleComplete}
+                        className={classes.button}
+                      >
+                      Siguiente
+                      </Button>
+                    
                }
               </div>
                 ))}
