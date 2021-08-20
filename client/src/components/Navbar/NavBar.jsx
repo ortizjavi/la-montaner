@@ -13,6 +13,7 @@ import { searchProductsAction, selectCategoryAction } from '../../redux/actions/
 import { logout } from '../../redux/actions/types/authActions.js';
 // import { IoStorefrontOutline } from 'react-icons/ri';
 import StorefrontIcon from '@material-ui/icons/Storefront';
+import logoLanding from "../../img/logoLanding.png";
 
 
 function NavBar(props, {history}) {
@@ -78,9 +79,6 @@ function NavBar(props, {history}) {
  return (
    <>
     <header className="navbar">
-      <NavLink to='/home' className='nav-personicon'>
-        <img className='nb-img' src="https://res.cloudinary.com/la-montanes/image/upload/v1629134641/logopng_qbilvd.png" alt="Montañez Logo" />
-      </NavLink>
       <SearchBar />
      
         {/* <nav className='nav-container'>
@@ -97,6 +95,12 @@ function NavBar(props, {history}) {
           </li>
         </ul>
       </nav> */}
+       <NavLink to='/home' className='nav-personicon'>
+        <img className='nb-img' 
+        // src="https://res.cloudinary.com/la-montanes/image/upload/v1629134641/logopng_qbilvd.png" 
+        src={logoLanding} 
+        alt="Montañez Logo" />
+      </NavLink>
       <div className='nav-icons-container'>
 
       
