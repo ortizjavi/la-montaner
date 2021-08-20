@@ -4,14 +4,15 @@ const User = require("../../models/Users/User");
 
 module.exports = {
     createOrder: async (req, res) => {
-
         const { cart, user, address, mercadopago } = req.body
 
         //products, user, status(creado por default)
         try {
             let preference_id = '';
             let mp_link = '';
+            let payment = 'Efectivo'
             if (mercadopago){
+                payment = 'MercadoPago'
                 const mpResponse = await mp(cart);
                 preference_id = mpResponse.body.id;
                 mp_link = mpResponse.response.init_point
@@ -21,6 +22,7 @@ module.exports = {
                 cart, 
                 user,
                 address,
+                payment,
                 mp_preference: preference_id, 
             });
 
