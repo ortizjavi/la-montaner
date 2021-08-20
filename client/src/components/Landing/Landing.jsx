@@ -21,7 +21,7 @@ export default function Landing() {
                   </Link>
               </li>
               <li>
-                <a href="https://www.youtube.com/watch?v=0qaVdtwbUvo" target='_blank'>
+                <a href="https://www.youtube.com/watch?v=0qaVdtwbUvo" target='_blank' rel='noopener noreferrer'>
                   <button>No</button>
                 </a>
               </li>
