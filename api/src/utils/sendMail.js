@@ -28,19 +28,20 @@ sendEmail.sendFormEmail = (email,name) => {
 
 
 sendEmail.processingOrder = (email, name, payment, shipping) => {
-	fs.readFile(path.resolve(__dirname, '../html/emailTemplate.html'), (err, data) => {
-		data.replace('{title}', `Hola ${name}, tu orden fue confirmada!`);
-		data.replace('{paymentTitle}', `Pagaste ${payment.total}`);
+	return fs.readFile(path.resolve(__dirname, '../html/emailTemplate.html'), (err, data) => {
+		data = data.toString();
+		data = data.replace('{title}', `Hola ${name}, tu orden fue confirmada!`);
+		data = data.replace('{paymentTitle}', `Pagaste $ ${payment.total}`);
 		const shippingTitle = shipping.delivery ? 'Envío a domicilio' : 'Retiro por local';
-		data.replace('{paymentInfo}', `con ${payment.method}`);
-		data.replace('{shippingTitle}', shippingTitle);
-		data.replace('{shippingInfo}', `${shipping.address}`);
+		data = data.replace('{paymentInfo}', `con ${payment.method}`);
+		data = data.replace('{shippingTitle}', shippingTitle);
+		data = data.replace('{shippingInfo}', `${shipping.address}`);
 		
 		return transport.sendMail({
 			from: `La Montañes <${process.env.MAIL_USER}>`,
 			to: email,
 			subject: `Gracias por tu compra!`,
-			html: data.toString()
+			html: data
 		})
 	})
 }
