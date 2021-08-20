@@ -23,7 +23,7 @@ const OrderSchema = Schema(
     },
     payment: {
       type: String,
-      default: 'Efectivo'
+      default: 'Efectivo',
     },
     date: {
       type: String,

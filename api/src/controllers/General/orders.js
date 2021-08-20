@@ -18,7 +18,14 @@ module.exports = {
                 mp_link = mpResponse.response.init_point
             }
             
-            const order = new Order({ cart, user, address, mp_preference: preference_id });
+            const order = new Order({ 
+                cart, 
+                user,
+                address,
+                payment,
+                mp_preference: preference_id, 
+            });
+
             const saveOrder = await order.save();
             const { ...orderProps } = saveOrder._doc;
             await User.findByIdAndUpdate(user,
