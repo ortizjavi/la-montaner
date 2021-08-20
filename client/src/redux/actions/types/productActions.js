@@ -327,10 +327,3 @@ export function addReview(data){
 		);
 	};
 };
-
-export function deleteReview(data){
-	return async (dispatch) => {
-		await axios.delete(`${endpoints.DELETE_REVIEW}`, { content: data.content, id: data.id, calification: data.calification, idUsuario: data.idUsuario},
-		);
-	};
-};

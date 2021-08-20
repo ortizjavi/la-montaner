@@ -5,72 +5,60 @@ import { Link } from "react-router-dom";
 import swal from "sweetalert";
 import { getProductDetail } from "../../redux/actions/types/productActions";
 import Loading from "../Loading/Loading.js";
-import StarRatingComponent from "react-star-rating-component";
 import { FaStar } from "react-icons/fa";
 import { Divider, Avatar, Grid, Paper } from "@material-ui/core";
 import "./ProductDetail.css";
+import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
+import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
+import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
+import FavoriteIcon from "@material-ui/icons/Favorite";
 
 import {
   addCartProduct,
   addFavProducts,
   removeFavProduct,
   addReview,
-  deleteReview,
 } from "../../redux/actions/types/productActions";
 import { getOrders } from "../../redux/actions/types/adminActions";
 
-//Slider2
-//import { BsChevronLeft, BsChevronCompactRight } from "react-icons/fa";
-import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
-import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
-
-//Favs
-import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
-import FavoriteIcon from "@material-ui/icons/Favorite";
-
 export default function ProductDetail({ match, history }) {
   const { id } = useParams();
-
-  const detail = useSelector((state) => state.root.productDetail);
-
   const dispatch = useDispatch();
 
-  //local states
-  const [qty, setQty] = useState(1);
-  const [loading, setLoading] = useState(true);
-  const [count, setCount] = useState(1);
-
-  //cart
+  //State selector
+  const detail = useSelector((state) => state.root.productDetail);
   const cart = useSelector((state) => state.cart);
   const { cartItems } = cart;
-
-  //wishlist
   let wishlist = useSelector((state) => state.wishlist);
-  let { wishlistItems } = wishlist;
-  const fav = wishlistItems.find((product) => product.id === id);
-
-  //slider states
-  const [current, setCurrent] = useState(0);
-  const length = detail?.img?.length;
-
-  //Cart order user
   let currentUser = useSelector((state) => state.session.user);
   let userOrders = currentUser.orders;
+  const ordenes = useSelector((state) => state.admin.orders);
+
+  //States
+  const [qty, setQty] = useState(1);
+  const [loading, setLoading] = useState(true);
+  let { wishlistItems } = wishlist;
+  const [current, setCurrent] = useState(0);
+
+  const fav = wishlistItems.find((product) => product.id === id);
+  const length = detail?.img?.length;
+
+  //Cart order 
   let carritoUsuarioConMap = userOrders?.map(el => el.cart);
   let mapDentroDeCarrito = carritoUsuarioConMap?.map(el => el.map(ele => ele.id))
   let filtrarElMap = mapDentroDeCarrito?.map(ele => ele.includes(id))
-  let comproElProducto = filtrarElMap?.find(el => el === 'true' ? 'true' : 'false');
+  let comproElProducto = filtrarElMap?.filter(el => el === 'true' ? 'true' : 'false');
+  let finalCompro = comproElProducto?.find(el => el === true);
 
+  //Reviews
   let totalReviews = detail.reviews;
   let idReviews = totalReviews?.map(el => el.idUsuario);
-  let mapReviews = idReviews?.map(el => el === currentUser._id ? 'true' : 'false');
-  let hizoReview = mapReviews?.filter(el => el === "true");
-
-  //////
+  let mapReviews = idReviews?.map(el => el === currentUser._id ? true : false);
+  let hizoReview = mapReviews?.filter(el => el === true ? true : false);
+ 
+  //Order user
   let usuarioPrueba = currentUser;
   let usuario = Object.entries(currentUser);
-  const ordenes = useSelector((state) => state.admin.orders);
-  const allOrders = ordenes?.filter(o => o.user === usuarioPrueba._id);
 
   //reviews
   const [calification, setCalification] = useState(0);
@@ -80,35 +68,26 @@ export default function ProductDetail({ match, history }) {
   const [ rating, setRating ] = useState(null);
   const [ hover, setHover ] = useState(null);
 
-  // const productsKeys = Object.keys(detail);
-  // const guardarReviews = productsKeys.map(el => el?.reviews);
-  // const filterReviews = guardarReviews.filter(el => el?.name === user?.name);
 
   useEffect(() => {
     dispatch(getProductDetail(id));
     dispatch(getOrders())
-    console.log('las reviews ', detail.reviews);
-    console.log('si es true compro el producto ', comproElProducto);
-
-    console.log('detalle de la review ', totalReviews);
-    //console.log('ids de las reviews ', idReviews);
-    console.log('si es true ya hizo una review ', hizoReview);
-    
     setTimeout(() => {
       setLoading(false);
     }, 1000);
-  }, [detail._id, dispatch, match, usuarioPrueba, userOrders, id]);
+  }, [dispatch, match, usuarioPrueba, userOrders, id, detail._id]);
 
   useEffect(() => {
     window.localStorage.setItem("wishlist", JSON.stringify(wishlistItems));
   }, [wishlistItems]);
+
 
   useEffect(() => {
     if (detail.rating) {
       let totalStars = detail.rating.reduce((a, b) => a + b, 0);
       setStars(totalStars / detail.rating.length);
     }
-  }, [detail]);
+  }, [detail, detail.reviews]);
 
   const addToCartHandler = () => {
     dispatch(addCartProduct(detail._id, qty));
@@ -159,28 +138,6 @@ export default function ProductDetail({ match, history }) {
     setContent("");
     setCalification(0);
   };
-
-  const removeReview = (e) => {
-    e.preventDefault();
-    console.log('eliminaste tu review');
-    dispatch(
-      deleteReview({
-        content,
-        id,
-        calification,
-        idUsuario: currentUser._id,
-      })
-    );
-  }
-  // if(!ordenes){
-  //   dispatch(getOrders())
-  // }
-  
-  // console.log('dashboard/respuesta', userId)
-  // console.log('dashboard/ordenes', ordenes)
-  //console.log(ordenes)
-  // console.log('user state', usuario);
-  // console.log('datauser/user:',usuario.name)
 
   return (
     <div>
@@ -311,11 +268,11 @@ export default function ProductDetail({ match, history }) {
             <div>
               {!usuario || usuario.length === 0 ? null : 
               detail.stock === 0 ? null : 
-              !comproElProducto ? null :
-              hizoReview[0] === "true" ? null :
+              !finalCompro ? null :
+             
               (
                 <div>
-                  <form onSubmit={(e) => handleSubmit(e)}>
+                  <form onSubmit={(e) => handleSubmit(e)} style={mapReviews !== undefined ? {display: 'none'} : {display: 'block'}}>
                     <textarea
                       className="text-area"
                       type="text"
@@ -380,15 +337,6 @@ export default function ProductDetail({ match, history }) {
                                   {" "}
                                   {el.content}{" "}
                                 </p>
-
-                                {
-                              hizoReview[0] === "true" ? 
-                              (
-                                <button onClick={(e) => removeReview(e)}>X</button>
-                              )
-                               : null
-                                }
-
                       <div className='detail-rating'>
                         {[...Array(el.calification)].map((star, i) => {
                         const ratingValue = i + 1;

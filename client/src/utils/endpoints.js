@@ -17,8 +17,6 @@ export const CREATE_PRODUCT = `${ADMIN_SERVER}/product`;
 export const UPDATE_PRODUCT = `${ADMIN_SERVER}/product`;
 export const DELETE_PRODUCT = `${ADMIN_SERVER}/product`;
 export const ADD_REVIEW = `${ADMIN_SERVER}/addReview`;
-export const DELETE_REVIEW = `${ADMIN_SERVER}/deleteReview`;
-
 
 //endpoint de compras
 export const ORDER_PAY = `${SERVER}/product/pay`;
