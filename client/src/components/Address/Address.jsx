@@ -56,8 +56,6 @@ const useStyles = makeStyles((theme) => ({
 
 export default function AddressModal() {
   const dispatch = useDispatch();
-  const usuario = useSelector((state) => state.session.user);
-  const history = useHistory();
 
 
   const [address, setAddress] = useState({
@@ -124,7 +122,7 @@ export default function AddressModal() {
           onChange={handleInputChange}
         />
         <Button variant="contained" color="primary" type="submit">
-          Enviar
+          Guardar dirección!
         </Button>
       </form>
     </div>

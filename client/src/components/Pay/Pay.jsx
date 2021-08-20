@@ -1,6 +1,5 @@
 import {
   createOrder,
-  orderPay
 } from "../../redux/actions/types/productActions";
 import { useDispatch, useSelector } from "react-redux";
 import React from "react";
