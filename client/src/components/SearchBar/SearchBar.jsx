@@ -90,7 +90,7 @@ export default function SearchBar() {
                     }  
                 </datalist>
                 <NavLink to='/home'>
-                        <SearchIcon className='nav-personicon' onClick={(e) => handleSubmit(e)} style={{ fontSize: 40,color:'#24262b'}} />
+                        <SearchIcon className='nav-personicon' onClick={(e) => handleSubmit(e)} style={{ fontSize: 40,color:'#ffffff'}} />
                 </NavLink>
                 {/* {
                     state.icono ?

@@ -64,19 +64,16 @@
   grid-column: 1/-1;
   width: 100%;
   padding: 10px 16px;
-  background: #047e28;
-  cursor: pointer;
+  padding: 5px 15px;
+  background: #171717;
   color: #f4f4f4;
-  border: none;
   cursor: pointer;
-  border-radius: 5px;
-  transition: 0.2s ease-out;
-  outline: none;
-  font-weight: bold;
 }
 
 .right__info p > button:hover {
-  box-shadow: 0 0 10px 0 #ffffff;
+  opacity: 0.9;
+    background-color: #686868;
+    cursor: pointer;
 }
 .right__info p > button:active {
   outline: 0;
@@ -87,6 +84,16 @@
 .right__info select {
   padding: 10px 16px;
 }
+
+.detail-rating input[type='radio']{
+  display: none;
+}
+
+.star{
+  cursor: pointer;
+  transition: color 200ms;
+}
+
 
 @media (max-width: 960px) {
   .productscreen {

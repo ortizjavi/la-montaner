@@ -9,6 +9,7 @@ import SortIcon from '@material-ui/icons/Sort';
 
 
 
+
 export default function Home() {
 
   const dispatch = useDispatch();
@@ -106,7 +107,7 @@ export default function Home() {
     setFlag(false)
   }
   return (
-    <div>
+    <div className='home-div-container'>
       {
         currentCategoryState === 'vertodos' ?
         <div className='Home-filter'>
@@ -120,11 +121,8 @@ export default function Home() {
               <option id='range3' value='range3'>Precio entre: ${maxPrice2+1} - ${maxPrice3}</option>
             </select>
           </li>
-          {
-            flag === true ? 
-            <button onClick={triggerFilter}>Ordenar</button> : null
-          }
-          
+            {/* flag === true ?  */}
+            <button className={`${flag === true ? 'order-button' : 'order-button-false'}`} onClick={triggerFilter}>Ordenar</button>         
       </div> : 
        <div className='Home-filter'></div>
       }
