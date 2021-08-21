@@ -1,7 +1,6 @@
 import axios from "axios";
 import * as actionTypes from "../names";
 import * as endpoints from "../../../utils/endpoints";
-import { session } from '../../../utils/localStorage'
 
 export function getProductDetail(id) {
   return async function (dispatch) {
@@ -270,16 +269,11 @@ export function createOrder(cart, user, address, mercadopago) {
 
 export function updateOrder(data) {
   return async function (dispatch) {
-    const token = session.token;
     try {
       const resp = await axios.put(
         `${endpoints.ORDER_STATUS}`,
-         data,
-         {
-           headers: {
-             authorization: `Bearer ${token}`
-           }
-         });
+         data
+      );
       dispatch({ type: actionTypes.ORDER_UPDATED, payload: resp.data.order });
     } catch (error) {
       console.log(error);
