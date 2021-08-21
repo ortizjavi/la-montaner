@@ -53,17 +53,15 @@
   }
 
   .back-btn {
-    border: 1px solid black;
-    padding: 5px;
-    border-radius: 5px;
-    text-decoration: none;
-    color: black;
+    padding: 5px 15px;
+    background: #171717;
+    color: #f4f4f4;
+    cursor: pointer;
   }
 
   .back-btn:hover {
-    background-color: green;
-    color: white;
-    transition: 0.25s;
+    opacity: 0.9;
+    background-color: #686868;
     cursor: pointer;
   }
 
@@ -74,17 +72,16 @@
   }
 
   .cartDeleteAll_btn {
-    background-color: white;
-    font-size: 15px;
-    border: 1px solid black;
-    border-radius: 5px;
-    padding: 7px;
+    padding: 10px 17px;
+    width: 100%;
+    background: #171717;
+    color: #f4f4f4;
+    cursor: pointer;
   }
 
   .cartDeleteAll_btn:hover {
-    background-color: green;
-    transition: 0.25s;
-    color: white;
+    opacity: 0.9;
+    background-color: #686868;
     cursor: pointer;
   }
   
