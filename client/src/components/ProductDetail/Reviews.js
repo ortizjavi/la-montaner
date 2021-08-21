@@ -118,7 +118,7 @@ const Reviews = ({id}) => {
               ) }
             </div>
 
-            <div>
+            <div className='detail-reviews'>
             {detail.reviews && detail.reviews.length > 0 ? (
               <div className='container-reviews'>
                 <h1>Comentarios</h1>
@@ -130,7 +130,7 @@ const Reviews = ({id}) => {
                           <Paper style={{ padding: "40px 20px" }}>
                             <Grid container wrap="nowrap" spacing={2}>
                               <Grid item>
-                                <Avatar alt="Remy Sharp" src={ 'https://cdn.iconscout.com/icon/free/png-256/care-emoji-with-beer-2419208-2012657.png'} />
+                                <Avatar alt="Remy Sharp" src={ 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQvNWMQCa4lQMnbd0_uS3QTPGbrmoN3LGxACM4J78RHLYV3jTVttHgbZNA3e2DtItWhuv4&usqp=CAU'} />
                               </Grid>
                               <Grid justifyContent="flex-start" item xs zeroMinWidth>
                                 <h4 style={{ margin: 0, textAlign: "left" }}>
