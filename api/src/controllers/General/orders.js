@@ -8,11 +8,11 @@ module.exports = {
 
         //products, user, status(creado por default)
         try {
-            let preference_id = '';
-            let mp_link = '';
-            let payment = 'Efectivo'
+            let preference_id = '', mp_link = '';
+            let payment = 'Efectivo', status = 'Procesando';
             if (mercadopago){
-                payment = 'MercadoPago'
+                payment = 'MercadoPago';
+                status = 'Creada';
                 const mpResponse = await mp(cart);
                 preference_id = mpResponse.body.id;
                 mp_link = mpResponse.response.init_point
@@ -21,6 +21,7 @@ module.exports = {
             const order = new Order({ 
                 cart, 
                 user,
+                status,
                 address,
                 payment,
                 mp_preference: preference_id, 
