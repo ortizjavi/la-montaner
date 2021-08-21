@@ -3,7 +3,7 @@ const Order = require("../../models/Orders");
 const User = require("../../models/Users/User");
 
 module.exports = {
-    createOrder: async (req, res) => {
+    createOrder: async (req, res, next) => {
         const { cart, user, address, mercadopago } = req.body
 
         //products, user, status(creado por default)
@@ -32,15 +32,18 @@ module.exports = {
                 { $push: { 'orders': saveOrder._id } }
             )
 
+
+            req.res = {
+                ok: true,
+                order: orderProps,
+                mp_link: mp_link
+            }
+
             if (!mercadopago){
                 req.order = saveOrder;
-                req.res = {
-                    ok: true,
-                    order: orderProps,
-                    mp_link: mp_link
-                }
-                next();
+                return next();
             }
+            res.json(req.res);
         } catch (error) {
             console.log(error)
             res.json({
