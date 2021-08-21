@@ -24,19 +24,24 @@
   }
   
   .cartItem__deleteBtn {
-    padding: 10px 17px;
-    color: red;
+    padding: 5px 10px;
+    width: 100%;
+    color: rgb(236, 54, 54);
     background: #f4f4f4;
     border: 1px solid #171717;
     cursor: pointer;
     transition: all 0.3s ease-out;
+  }
+
+  .cartItem__deleteBtn .MuiSvgIcon-root{
+    height: 0.9em;
   }
   
   .cartItem__deleteBtn:hover,
   .carItem__deleteBtn:active,
   .carItem__deleteBtn:focus {
     background: #171717;
-    transform: scale(1.2);
+    transform: scale(1);
   }
   
   @media (max-width: 700px) {

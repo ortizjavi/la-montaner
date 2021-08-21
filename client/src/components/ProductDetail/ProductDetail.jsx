@@ -3,26 +3,25 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
 import { Link } from "react-router-dom";
 import swal from "sweetalert";
-import { getProductDetail } from "../../redux/actions/types/productActions";
 import Loading from "../Loading/Loading.js";
 import { FaStar } from "react-icons/fa";
-import { Divider, Avatar, Grid, Paper } from "@material-ui/core";
 import "./ProductDetail.css";
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import FavoriteIcon from "@material-ui/icons/Favorite";
+import Reviews from './Reviews';
 
 import {
   addCartProduct,
   addFavProducts,
+  getProductDetail,
   removeFavProduct,
-  addReview,
 } from "../../redux/actions/types/productActions";
 import { getOrders } from "../../redux/actions/types/adminActions";
 
 export default function ProductDetail({ match, history }) {
-  const { id } = useParams();
+  const { id } = useParams(); //pasarle por props
   const dispatch = useDispatch();
 
   //State selector
@@ -30,45 +29,23 @@ export default function ProductDetail({ match, history }) {
   const cart = useSelector((state) => state.cart);
   const { cartItems } = cart;
   let wishlist = useSelector((state) => state.wishlist);
+  let { wishlistItems } = wishlist;
   let currentUser = useSelector((state) => state.session.user);
   let userOrders = currentUser.orders;
-  const ordenes = useSelector((state) => state.admin.orders);
 
-  //States
+  //Local states
   const [qty, setQty] = useState(1);
   const [loading, setLoading] = useState(true);
-  let { wishlistItems } = wishlist;
   const [current, setCurrent] = useState(0);
 
   const fav = wishlistItems.find((product) => product.id === id);
   const length = detail?.img?.length;
 
-  //Cart order 
-  let carritoUsuarioConMap = userOrders?.map(el => el.cart);
-  let mapDentroDeCarrito = carritoUsuarioConMap?.map(el => el.map(ele => ele.id))
-  let filtrarElMap = mapDentroDeCarrito?.map(ele => ele.includes(id))
-  let comproElProducto = filtrarElMap?.filter(el => el === 'true' ? 'true' : 'false');
-  let finalCompro = comproElProducto?.find(el => el === true);
-
-  //Reviews
-  let totalReviews = detail.reviews;
-  let idReviews = totalReviews?.map(el => el.idUsuario);
-  let mapReviews = idReviews?.map(el => el === currentUser._id ? true : false);
-  let hizoReview = mapReviews?.filter(el => el === true ? true : false);
- 
   //Order user
   let usuarioPrueba = currentUser;
   let usuario = Object.entries(currentUser);
 
-  //reviews
-  const [calification, setCalification] = useState(0);
-  const [stars, setStars] = useState(0);
-  const [errors, setErrors] = useState("");
-  const [content, setContent] = useState("");
-  const [ rating, setRating ] = useState(null);
-  const [ hover, setHover ] = useState(null);
-
-
+    
   useEffect(() => {
     dispatch(getProductDetail(id));
     dispatch(getOrders())
@@ -80,14 +57,6 @@ export default function ProductDetail({ match, history }) {
   useEffect(() => {
     window.localStorage.setItem("wishlist", JSON.stringify(wishlistItems));
   }, [wishlistItems]);
-
-
-  useEffect(() => {
-    if (detail.rating) {
-      let totalStars = detail.rating.reduce((a, b) => a + b, 0);
-      setStars(totalStars / detail.rating.length);
-    }
-  }, [detail, detail.reviews]);
 
   const addToCartHandler = () => {
     dispatch(addCartProduct(detail._id, qty));
@@ -119,24 +88,6 @@ export default function ProductDetail({ match, history }) {
       title: "Por favor inicia sesión",
       icon: "warning",
     });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (calification < 1 || calification > 5) {
-      setErrors("");
-    }
-    dispatch(
-      addReview({
-        content: content,
-        id,
-        calification: calification,
-        idUsuario: currentUser._id,
-      })
-    );
-    console.log("agregaste tu review");
-    setContent("");
-    setCalification(0);
   };
 
   return (
@@ -225,8 +176,8 @@ export default function ProductDetail({ match, history }) {
                         ); 
                       })}
               </div>
+              <p>{detail.description}</p>
             </div>
-
             <div>
               <div className="right__info">
                 <p>
@@ -265,111 +216,13 @@ export default function ProductDetail({ match, history }) {
                 </p>
               </div>
             </div>
-            <div>
-              {!usuario || usuario.length === 0 ? null : 
-              detail.stock === 0 ? null : 
-              !finalCompro ? null :
-             
-              (
-                <div>
-                  <form onSubmit={(e) => handleSubmit(e)} style={mapReviews !== undefined ? {display: 'none'} : {display: 'block'}}>
-                    <textarea
-                      className="text-area"
-                      type="text"
-                      placeholder="Agregue su opinión sobre este producto..."
-                      value={content}
-                      onChange={(e) => setContent(e.target.value)}
-                    />
-                    <div className='detail-rating'>
-                      {[...Array(5)].map((star, i) => {
-                        const ratingValue = i + 1;
-
-                        return (
-                          <label>
-                            <input 
-                              type='radio'
-                              name='rating'
-                              value={ratingValue}
-                              onClick={() => setRating(ratingValue)}
-                              onChange={(e) => setCalification(ratingValue)}
-                            />
-                            <FaStar 
-                              className='star'
-                              color={ratingValue <= (hover || rating) ? '#ffc107' : '#e4e5e9'}
-                              size={30}
-                              onMouseEnter={() => setHover(ratingValue)}
-                              onMouseLeave={() => setHover(null)}
-                            />
-                          </label>
-                        ); 
-                      })}
-                      <button type="submit">calificar</button>
-                      <Link to={"/home"}>
-                        <button className="back">volver</button>
-                      </Link>
-                    </div>
-                  </form>
-                </div>
-              ) }
-            </div>
-         
+           <div>
+            
+           </div>
           </div>
         </div>
       )}
-      {detail.reviews && detail.reviews.length > 0 ? (
-              <div>
-                <h1>Comentarios</h1>
-                <ul>
-                  {detail.reviews &&
-                    detail.reviews.map((el, idx) => {
-                      return (
-                        <li key={idx}>
-                          <Paper style={{ padding: "40px 20px" }}>
-                            <Grid container wrap="nowrap" spacing={2}>
-                              <Grid item>
-                                <Avatar alt="Remy Sharp" src={currentUser.picture ? currentUser.picture : 'https://cdn.iconscout.com/icon/free/png-256/care-emoji-with-beer-2419208-2012657.png'} />
-                              </Grid>
-                              <Grid justifyContent="left" item xs zeroMinWidth>
-                                <h4 style={{ margin: 0, textAlign: "left" }}>
-                                  {el.name}
-                                </h4>
-                                <p style={{ textAlign: "left" }}>
-                                  {" "}
-                                  {el.content}{" "}
-                                </p>
-                      <div className='detail-rating'>
-                        {[...Array(el.calification)].map((star, i) => {
-                        const ratingValue = i + 1;
-
-                        return (
-                          <label>
-                            <input 
-                              type='radio'
-                              name='rating'
-                              value={ratingValue}
-                            />
-                            <FaStar 
-                              className='star'
-                              color={'#ffc107'}
-                              size={15}
-                            />
-                          </label>
-                        ); 
-                      })}
-                      </div>
-                              </Grid>
-                            </Grid>
-                            <Divider
-                              variant="fullWidth"
-                              style={{ margin: "30px 0" }}
-                            />
-                          </Paper>
-                        </li>
-                      );
-                    })}
-                </ul>
-              </div>
-            ) : null}
+      <Reviews id={id} />
     </div>
   );
 }

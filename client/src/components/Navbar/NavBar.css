@@ -272,6 +272,7 @@ width: 10rem;
   right: 145px;
   padding: 5px;
   border-radius: 50%;
+  color: rgb(248, 87, 87)
 }
 
 .sticky .cart_subtotal_container {
