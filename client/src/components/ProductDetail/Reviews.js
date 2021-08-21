@@ -71,21 +71,14 @@ const Reviews = ({id}) => {
 
     return (
         <div>
-            <div className='reviews-div'>
+            <div className='container-reviews-div'>
             {!usuario || usuario.length === 0 ? null : 
               detail.stock === 0 ? null : 
               !finalCompro ? null :
               (
-                <div>
-                  <form onSubmit={(e) => handleSubmit(e)} style={includesss ? {display: 'none'} : {display: 'block'}}>
-                    <textarea
-                      className="text-area"
-                      type="text"
-                      placeholder="Agregue su opinión sobre este producto..."
-                      value={content}
-                      onChange={(e) => setContent(e.target.value)}
-                    />
-                    <div className='detail-rating'>
+                <div className='form-reviews'>
+                <form onSubmit={(e) => handleSubmit(e)} style={includesss ? {display: 'none'} : {display: 'block'}}>
+                  <div className='detail-rating'>
                       {[...Array(5)].map((star, i) => {
                         const ratingValue = i + 1;
 
@@ -108,13 +101,24 @@ const Reviews = ({id}) => {
                           </label>
                         ); 
                       })}
+                    </div>
+                 
+                    <textarea
+                      className="text-area"
+                      type="text"
+                      placeholder="Agregue su opinión sobre este producto..."
+                      value={content}
+                      onChange={(e) => setContent(e.target.value)}
+                    />
+                    <div className='buttons-review'>
                       <button type="submit">calificar</button>
                       <Link to={"/home"}>
                         <button className="back">volver</button>
                       </Link>
-                    </div>
+                      </div>
                   </form>
                 </div>
+                
               ) }
             </div>
 
