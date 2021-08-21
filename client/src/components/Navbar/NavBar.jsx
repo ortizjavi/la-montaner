@@ -126,14 +126,12 @@ function NavBar(props, {history}) {
               }
 
 
-      <Link to="/cart" className='nav-icon'>
+      <Link to="/cart" className='nav-icon cart_subtotal_container'>
           <ShoppingCartIcon className='nav-personicon' style={{ fontSize: 40 }} />
-        <div className='cart_subtotal_container'>
           {
             !usuario || usuario.length === 0 || cartSubtotal > 0 &&
             <h3 className='cart_subtotal'>{cartSubtotal}</h3>
           }
-        </div>
       </Link>
       {isUser ?
         <div className='nav-icon'>
