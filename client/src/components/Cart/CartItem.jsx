@@ -2,7 +2,7 @@ import "./CartItem.css";
 import { Link } from "react-router-dom";
 import DeleteIcon from '@material-ui/icons/Delete';
 
-const CartItem = ({ item, qtyChangeHandler, removeHandler }) => {
+export default function CartItem({ item, qtyChangeHandler, removeHandler }) {
 
   return (
     <div className="cartitem">
@@ -34,5 +34,3 @@ const CartItem = ({ item, qtyChangeHandler, removeHandler }) => {
     </div>
   );
 };
-
-export default CartItem;
