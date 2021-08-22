@@ -33,7 +33,10 @@ const initialState = {
   },
   cart: {
     cartItems: cartItemsInLocalStorage,
-    cartSubtotal: 0,
+    cartSubtotal: cartItemsInLocalStorage?.reduce(
+      (stockSelected, item) => Number(item.stockSelected) + stockSelected,
+      0
+    ),
   },
   wishlist: {
     wishlistItems: wishlistItemsInLocalStorage,
