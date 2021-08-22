@@ -52,6 +52,21 @@ export function resetPassword(payload) {
   }
 }
 
+export function recoveryPassword(payload) {
+  return async function (dispatch) {
+    try {
+      await axios.post(`${endpoints.AUTH_RECOVERY_PASS}`, payload);
+     
+    } catch (e) {
+     
+        return dispatch({
+          type: actionTypes.LOGIN_FAILED,
+          payload: e.response.data
+        });
+    }
+  }
+}
+
 function setUserSession(data) {
   const { token, ...userProps } = data;
   setAuthDefaulHeaders(token);
