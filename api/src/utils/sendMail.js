@@ -53,4 +53,18 @@ sendEmail.processingOrder = (email, name, payment, shipping) => {
 	})
 }
 
+sendEmail.passRecoveryEmail = (email,name, newPass) => {
+	return fs.readFile(path.resolve(__dirname, '../html/passRecoveryTemplate.html'), (err, data) => {
+		data = data.toString();
+		data = data.replace('{title}', `Hola ${name}`);
+		data = data.replace('{shippingTitle}', newPass);
+	return transport.sendMail({
+		from: `La Montañes <${process.env.MAIL_USER}>`,
+		to: email,
+		subject: "Gracias por contactarte con La Montañes!",
+		html: data
+	});	
+})
+}
+
 module.exports = sendEmail;
