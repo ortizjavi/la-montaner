@@ -194,6 +194,9 @@ export function addCartProduct(productId, stockSelected) {
         stockSelected,
       },
     });
+    dispatch({
+      type: actionTypes.CART_SUBTOTAL_PLUS_ONE
+    })
   };
 }
 
