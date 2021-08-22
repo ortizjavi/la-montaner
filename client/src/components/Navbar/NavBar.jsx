@@ -16,6 +16,22 @@ import StorefrontIcon from '@material-ui/icons/Storefront';
 import logoLanding from "../../img/logoLanding.png";
 
 
+function CartSubTotal(){
+  const cartSubtotal = useSelector((state) => state.cart.cartSubtotal);
+  useEffect(() => {
+    console.log(cartSubtotal)
+  }, [cartSubtotal])
+  return (
+    <>
+    {
+      (cartSubtotal > 0) ?
+      <h3 className='cart_subtotal'>{cartSubtotal}</h3>
+      : null
+    }
+    </>
+  )
+}
+
 function NavBar(props, {history}) {
   const location = useLocation()
   console.log('Navbar/location',location)
@@ -23,10 +39,7 @@ function NavBar(props, {history}) {
   const [category, setCategory] = useState(initialCategories)
   const currentCategoryState = useSelector(state => state.root.currentCategoryState)
   const user = useSelector(state => state.session.user)
-  const cart = useSelector((state) => state.cart);
-
-  const { cartSubtotal } = cart;
-
+  const usuario = Object.entries(user);
   const isUser = user && user.role;
 
   const dispatch = useDispatch();
@@ -35,8 +48,6 @@ function NavBar(props, {history}) {
   const allProducts = useSelector(state => state.root.allProducts)
 
   const [state, setState] = useState(currentCategoryState);
-  let usuario = useSelector((state) => state.session.user);
-  usuario = Object.entries(usuario);
 
   useEffect(() => {
     window.addEventListener('scroll', function () {
@@ -67,12 +78,12 @@ function NavBar(props, {history}) {
     }
 
     function HomeIcon(props) {
-        return (
-          <SvgIcon {...props}>
-            <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
-          </SvgIcon>
-        );
-      }
+      return (
+        <SvgIcon {...props}>
+          <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
+        </SvgIcon>
+      );
+    }
     
       
 
@@ -118,26 +129,21 @@ function NavBar(props, {history}) {
       </NavLink>
 
       {
-                 !usuario || usuario.length === 0 ? (
-                   <Link to='/login' className='nav-icon'>
-                     <FavoriteIcon onClick={() => handleWishlist()} className='fav-icon-nav'/>
-                   </Link>
-                 ) : <Link to="/wishlist" className='nav-icon'><FavoriteIcon className='fav-icon-nav'/></Link>
-              }
+         !usuario || usuario.length === 0 ? (
+           <Link to='/login' className='nav-icon'>
+             <FavoriteIcon onClick={() => handleWishlist()} className='fav-icon-nav'/>
+           </Link>
+         ) : <Link to="/wishlist" className='nav-icon'><FavoriteIcon className='fav-icon-nav'/></Link>
+      }
 
 
       <Link to="/cart" className='nav-icon cart_subtotal_container'>
           <ShoppingCartIcon className='nav-personicon' style={{ fontSize: 40 }} />
-          {
-            !usuario || usuario.length === 0 || cartSubtotal > 0 &&
-            <h3 className='cart_subtotal'>{cartSubtotal}</h3>
-          }
+          <CartSubTotal/>
       </Link>
       {isUser ?
         <div className='nav-icon'>
-          
-            <ExitToAppIcon className='nav-personicon' onClick={(e) => dispatch(logout())} style={{ fontSize: 40 }} />
-        
+            <ExitToAppIcon className='nav-personicon' onClick={(e) => dispatch(logout())} style={{ fontSize: 40 }} />     
         </div>
       : null}
       </div>
