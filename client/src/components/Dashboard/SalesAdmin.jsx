@@ -10,15 +10,11 @@ import {
 import Typography from "@material-ui/core/Typography";
 import Slider from "@material-ui/core/Slider";
 import TextField from "@material-ui/core/TextField";
-import FormLabel from "@material-ui/core/FormLabel";
-import FormControl from "@material-ui/core/FormControl";
-import FormGroup from "@material-ui/core/FormGroup";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Switch from "@material-ui/core/Switch";
-import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import Button from "@material-ui/core/Button";
 import Paper from "@material-ui/core/Paper";
 import { newSale } from "../../redux/actions/types/adminActions";
+import { setDate } from "date-fns/esm";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -67,13 +63,10 @@ function valuetext(value) {
 }
 
 export default function SalesAdmin() {
+  const dispatch = useDispatch();
   const classes = useStyles();
-
-  const categories = useSelector((state) => state.root.allCategories);
-  const cart = useSelector((state) => state.cart.cartItems);
-
+  const [addDate, setAddDate] = React.useState(false);
   const [selectedDate, setSelectedDate] = React.useState(new Date());
-  const [stateCategories, setStateCategories] = React.useState([]);
   const [sale, setSale] = React.useState({
     price: 0,
     discount: 0,
@@ -82,28 +75,12 @@ export default function SalesAdmin() {
   const handleChangeState = (e) => {
     setSale({ ...sale, [e.target.name]: e.target.value });
   };
-  const handleChangeState2 = (e, v) => {
-    setSale({ ...sale, discount: v });
+  const handleChangeDiscount = (e, value) => {
+    setSale({ ...sale, discount: value });
   };
 
   const handleDateChange = (date) => {
-    console.log(selectedDate);
     setSelectedDate(date);
-  };
-
-  const handleChange = (event) => {
-    console.log("CHANGE", event.target.checked);
-    if (!stateCategories[event.target.name]) {
-      setStateCategories({
-        ...stateCategories,
-        [event.target.name]: true,
-      });
-    } else {
-      setStateCategories({
-        ...stateCategories,
-        [event.target.name]: !stateCategories[event.target.name],
-      });
-    }
   };
 
   const handleSale = () => {
@@ -114,8 +91,8 @@ export default function SalesAdmin() {
         ...sale,
         date: date,
       };
-      newSale(newSales);
       console.log(newSales);
+      dispatch(newSale(newSales));
     } catch (err) {
       console.log(err);
     }
@@ -140,17 +117,30 @@ export default function SalesAdmin() {
               </Button>
             </Grid>
             <Grid item xs={3}>
-              <KeyboardDatePicker
-                margin="normal"
-                id="date-picker-dialog"
-                label="Fecha de descuento"
-                format="MM/dd/yyyy"
-                value={selectedDate}
-                onChange={handleDateChange}
-                KeyboardButtonProps={{
-                  "aria-label": "change date",
-                }}
-              />
+              {addDate ? (
+                <KeyboardDatePicker
+                  margin="normal"
+                  id="date-picker-dialog"
+                  label="Fecha de descuento"
+                  format="MM/dd/yyyy"
+                  value={selectedDate}
+                  onChange={handleDateChange}
+                  KeyboardButtonProps={{
+                    "aria-label": "change date",
+                  }}
+                />
+              ) : (
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={() => {
+                    setAddDate(true);
+                  }}
+                  size="large"
+                >
+                  Fecha Especial
+                </Button>
+              )}
             </Grid>
             <Grid item xs={3}>
               <form className={classes.rootInput} noValidate autoComplete="off">
@@ -175,7 +165,7 @@ export default function SalesAdmin() {
                   name="discount"
                   getAriaValueText={valuetext}
                   aria-labelledby="discrete-slider-custom"
-                  onChange={handleChangeState2}
+                  onChange={handleChangeDiscount}
                   value={sale.discount}
                   step={5}
                   valueLabelDisplay="auto"
@@ -183,21 +173,6 @@ export default function SalesAdmin() {
                 />
               </div>
             </Grid>
-            {/* <FormControl component="fieldset">
-      <FormLabel component="legend">Productos</FormLabel>
-      <FormGroup>
-          <Grid item xs={12}>
-          {
-              categories?.map(c => (
-                  <FormControlLabel
-                    control={<Switch checked={stateCategories[c.name]} onChange={handleChange} name={c.name} />}
-                    label={c.name}
-                  />
-              ))
-          }
-          </Grid>
-      </FormGroup> 
-    </FormControl> */}
           </Grid>
         </Paper>
       </div>
