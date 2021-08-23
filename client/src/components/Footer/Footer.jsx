@@ -23,7 +23,7 @@ const Footer = ()=>{
       }
 
     return(
-        <div>
+        <div className='footer-father'>
             <div className="container-footer">
               <div className="row-footer">
 

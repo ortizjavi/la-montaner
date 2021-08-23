@@ -18,13 +18,16 @@ export default function PayState() {
   const usuario = useSelector((state) => state.session.user);
 
   useEffect(() => {
-    const queries = new URLSearchParams(location.search);
-    dispatch(updateOrder({
-      status: queries.get("status"),
-      payment_type: queries.get("payment_type"),
-      mp_preference: queries.get("preference_id"),
-    }))
-  }, [])
+    if (usuario.role){
+      const queries = new URLSearchParams(location.search);
+      dispatch(updateOrder({
+        status: queries.get("status"),
+        payment_type: queries.get("payment_type"),
+        mp_preference: queries.get("preference_id"),
+      }))
+    }
+    
+  }, [usuario, dispatch, location.search])
 
   let h2, img, p, h2ClassName;
   if (status === SUCCESS_STATUS){

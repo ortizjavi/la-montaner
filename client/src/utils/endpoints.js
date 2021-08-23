@@ -6,6 +6,7 @@ export const ADMIN_SERVER = `${SERVER}/admin`;
 export const AUTH_LOGIN = `${SERVER}/login`;
 export const AUTH_REGISTER = `${SERVER}/register`;
 export const AUTH_RESET = `${SERVER}/user/reset`
+export const AUTH_RECOVERY_PASS = `${SERVER}/user/pass`
 
 // endpoints de las categorias
 export const ADMIN_CATEGORY = `${ADMIN_SERVER}/category`;
