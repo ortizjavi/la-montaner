@@ -2,7 +2,7 @@ export const Data = [
     {
       question: '¿Cómo comprar?',
       answer: `
-      Elegí el producto que querés comprar y acé clic en el botón de "Agregar al carrito". Esto agregará el producto a tu carrito y te llevará al mismo.
+      Elegí el producto que querés comprar y hacé clic en el botón de "Agregar al carrito". Esto agregará el producto a tu carrito y te llevará al mismo.
       Podés seguir agregando otros productos al carrito o sino hacé clic en "Comprar". Completá tus datos de contacto y hacé clic en "Continuar".
       Ingresá la dirección a donde deseas recibir el producto.
       Seleccioná el método de envío que desees. 
