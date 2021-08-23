@@ -42,7 +42,6 @@ export default function Reviews({id}) {
 // }, [dispatch, detail.reviews])
 
     const handleSubmit = (e) => {
-        e.preventDefault();
         if (calification < 1 || calification > 5) {
           setErrors("");
         }
