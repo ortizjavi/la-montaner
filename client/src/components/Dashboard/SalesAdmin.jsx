@@ -18,6 +18,7 @@ import Switch from '@material-ui/core/Switch';
 import { useSelector } from 'react-redux';
 import Button from "@material-ui/core/Button";
 import Paper from '@material-ui/core/Paper';
+import { newSale } from '../../redux/actions/types/adminActions';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -68,11 +69,22 @@ const useStyles = makeStyles((theme) => ({
   
 
 export default function SalesAdmin() {
+
     const classes = useStyles();
 
     const categories = useSelector(state => state.root.allCategories)
+    const cart = useSelector(state => state.cart.cartItems);
+
     const [selectedDate, setSelectedDate] = React.useState(new Date());
     const [stateCategories, setStateCategories] = React.useState([]);
+    const [newSale, setNewSale] = React.useState({
+      price: 0,
+      discount: 0, 
+    })
+
+    const handleChangeState = (e) => {
+      setNewSale({...newSale, [e.target.name]: e.target.value})
+    }
 
 
     const handleDateChange = (date) => {
@@ -96,7 +108,12 @@ export default function SalesAdmin() {
   };
 
   const handleSale = () => {
-    
+    const newSales = {
+      ...newSale,
+      date : selectedDate.slice(5,15),
+    }
+    console.log(newSales)
+    newSale(newSales);
   }
 
 
@@ -133,7 +150,9 @@ export default function SalesAdmin() {
         </Grid>
         <Grid item xs={3}>
         <form className={classes.rootInput} noValidate autoComplete="off">
-            <TextField id="outlined-basic" label="Precio Base"     variant="outlined" type="number" InputProps={{ inputProps: { min: 0, max: 99999 } }}/>
+            <TextField id="outlined-basic" label="Precio Base"     variant="outlined" type="number" 
+            name='price' onChange={handleChangeState}
+            InputProps={{ inputProps: { min: 0, max: 99999 } }}/>
         </form>
         </Grid>
         <Grid item xs={6}>
@@ -143,15 +162,17 @@ export default function SalesAdmin() {
         </Typography>
         <Slider
         defaultValue={20}
+        name='discount'
         getAriaValueText={valuetext}
         aria-labelledby="discrete-slider-custom"
+        onChange={handleChangeState}
         step={5}
         valueLabelDisplay="auto"
         marks={marks}
       />
       </div>
       </Grid>
-      <FormControl component="fieldset">
+      {/* <FormControl component="fieldset">
       <FormLabel component="legend">Productos</FormLabel>
       <FormGroup>
           <Grid item xs={12}>
@@ -164,8 +185,8 @@ export default function SalesAdmin() {
               ))
           }
           </Grid>
-      </FormGroup>
-    </FormControl>
+      </FormGroup> 
+    </FormControl> */}
       </Grid>
     </Paper>
       </div>

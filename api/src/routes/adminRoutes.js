@@ -26,6 +26,11 @@ const {
   getReviews,
 } = require("../controllers/Admin/Admin");
 
+const {
+  createSale,
+  getSales
+} = require("../controllers/Admin/Sales/sales")
+
 // Categories
 router.get("/category", getCategories);
 router.post("/category", authenticateToken, authAdmin, createCategory);
@@ -47,5 +52,9 @@ router.get("/users", authenticateToken, authAdmin, getUsers);
 router.delete("/users/:id", authenticateToken, authAdmin, deleteUser);
 //router.delete("/users/:id", deleteUser);
 router.put("/users", authenticateToken, authAdmin, resetUser);
+
+//Sales
+router.post("/sales", createSale);
+router.get("/sales",getSales)
 
 module.exports = router;
