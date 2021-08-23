@@ -52,7 +52,7 @@ const ProductSchema = Schema({
     type: Object,
   },
   rating: {
-    type: Number,
+    type: [Number],
   }
 });
 
