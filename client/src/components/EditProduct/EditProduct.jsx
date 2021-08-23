@@ -23,7 +23,6 @@ import {
   updateProducts,
   clearProductDetail
 } from "../../redux/actions/types/productActions";
-import clsx from 'clsx';
 import Accordion from '@material-ui/core/Accordion';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
@@ -31,6 +30,8 @@ import AccordionActions from '@material-ui/core/AccordionActions';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Divider from '@material-ui/core/Divider';
+import Rating from '@material-ui/lab/Rating';
+import Box from '@material-ui/core/Box';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -132,6 +133,7 @@ const StylesAccord = makeStyles((theme) => ({
   secondaryHeading: {
     fontSize: theme.typography.pxToRem(15),
     color: theme.palette.text.secondary,
+    margin:"20px 20px 20px 20px",
   },
   icon: {
     verticalAlign: 'bottom',
@@ -139,7 +141,11 @@ const StylesAccord = makeStyles((theme) => ({
     width: 20,
   },
   details: {
-    alignItems: 'center',
+    alignItems: 'start',
+  },
+  star: {
+    width:'80px',
+
   },
   column: {
     flexBasis: '33.33%',
@@ -451,7 +457,7 @@ function EditProductChild({ producto, defaultState }) {
           id="outlined-number"
           label="Volumen"
           type="number"
-          placeholder={producto.volumen.toString()}
+          placeholder={producto.volumen?.toString()}
           defaultValue={createProduct.volumen}
           InputProps={{ inputProps: { min: 0, max: 99999 } }}
           name="volumen"
@@ -487,8 +493,15 @@ function EditProductChild({ producto, defaultState }) {
             <Typography className={classes.heading}>{r.name}</Typography>
           </div>
         </AccordionSummary>
-        <AccordionDetails className={classes.details}>
-          <Typography className={classes.heading}>{r.content}</Typography>
+        <Divider />
+          <div className={classes.secondaryHeading}>
+          <Typography className={classes.heading}>"{r.content}"</Typography>
+          </div>
+        <AccordionDetails className={classes.star}>
+        <Typography component="legend">Calificación:<nav></nav></Typography>
+        <div className={classes.star}>
+        <Rating name="read-only"  value={r.calification} readOnly/>
+        </div>
         </AccordionDetails>
         <AccordionActions>
           <Button size="small" color="primary" onClick={(e) => deleteReview(e, r)}>
