@@ -13,13 +13,21 @@ const transport = nodemailer.createTransport({
 	},
 })
 
-let html_template = '', processTemplate = '', completedTemplate = '';
+let html_template = '', processTemplate = '', completedTemplate = '', passwordTemplate = '';
 fs.readFile(path.resolve(__dirname, '../html/emailTemplate.html'), (err, data) => {
 	html_template = data.toString();
-	processTemplate = html_template.replace('<!-- ORDER_SUMMARY', '')
+	processTemplate = html_template.replace(/<!-- COMPLETED_ORDER.*COMPLETED_ORDER -->/, '')
+									.replace(/<!-- PASSWORD_RECOVERY.*PASSWORD_RECOVERY -->/, '');
+	processTemplate = processTemplate.replace('<!-- ORDER_SUMMARY', '')
 											.replace('ORDER_SUMMARY -->', '');
-	completedTemplate = html_template.replace('<!-- COMPLETED_ORDER', '')
+	completedTemplate = html_template.replace(/<!-- ORDER_SUMMARY.*ORDER_SUMMARY -->/, '')
+									  .replace(/<!-- PASSWORD_RECOVERY.*PASSWORD_RECOVERY -->/, '');
+	completedTemplate = completedTemplate.replace('<!-- COMPLETED_ORDER', '')
 											.replace('COMPLETED_ORDER -->', '');
+	passwordTemplate = html_template.replace(/<!-- ORDER_SUMMARY.*ORDER_SUMMARY -->/, '')
+									  .replace(/<!-- COMPLETED_ORDER.*COMPLETED_ORDER -->/, '');
+	passwordTemplate = passwordTemplate.replace('<!-- PASSWORD_RECOVERY', '')
+											.replace('PASSWORD_RECOVERY -->', '');
 });
 
 
@@ -42,11 +50,11 @@ sendEmail.processingOrder = (email, name, payment, shipping) => {
 	data = data.replace('{title}', `Hola ${name}, tu orden fue confirmada!`);
 	let paymentTitle;
 	if (payment.method === 'Efectivo'){
-		paymentTitle = 'A pagar'
+		paymentTitle = 'A pagar';
 	} else {
-		paymentTitle = 'Pagaste'
+		paymentTitle = 'Pagaste';
 	}
-	data = data.replace('{paymentTitle}', `${paymentTitle} $ ${payment.total}`);
+	data = data.replace('{paymentTitle}', `${payme} $ ${payment.total}`);
 	let shippingTitle, shippingAddress;
 	if(shipping.delivery){
 		shippingTitle = 'Envío a domicilio';
@@ -69,7 +77,7 @@ sendEmail.processingOrder = (email, name, payment, shipping) => {
 
 sendEmail.completedOrder = (email, name, shipping) => {
 	let data = completedTemplate;
-	data = data.replace(/{title}/g, `Hola ${name}, tu orden fue actualizada!`);
+	data = data.replace('{title}', `Hola ${name}, tu orden fue actualizada!`);
 
 	let shippingTitle, shippingAddress;
 	if(shipping.delivery){
@@ -81,8 +89,8 @@ sendEmail.completedOrder = (email, name, shipping) => {
 		shippingTitle = 'Retiro por local';
 		shippingAddress = 'Dirección de Chicha';
 	}
-	data = data.replace(/{shippingTitle}/g, `${shippingTitle}`);
-	data = data.replace(/{shippingInfo}/g, `${shippingAddress}`);
+	data = data.replace('{shippingTitle}', `${shippingTitle}`);
+	data = data.replace('{shippingInfo}', `${shippingAddress}`);
 
 	return transport.sendMail({
 		from: `La Montañes <${process.env.MAIL_USER}>`,
@@ -94,13 +102,15 @@ sendEmail.completedOrder = (email, name, shipping) => {
 
 
 sendEmail.passRecoveryEmail = (email,name, newPass) => {
-	let data = html_template;
-	data = data.replace('{title}', `Hola ${name}`);
-	data = data.replace('{shippingTitle}', newPass);
+	let data = passwordTemplate;
+	data = data.replace('{title}', `Hola ${name}, solicitaste recuperar tu contraseña.`);
+	data = data.replace('{passwordMssg}', `Por favor seguí
+	 este <a href="http://localhost:3000/login">link</a> e ingresa este token como tu contraseña`);
+	data = data.replace('{passwordToken}', newPass);
 	return transport.sendMail({
 		from: `La Montañes <${process.env.MAIL_USER}>`,
 		to: email,
-		subject: "Gracias por contactarte con La Montañes!",
+		subject: "Recupera tu contraseña",
 		html: data
 	});	
 }
