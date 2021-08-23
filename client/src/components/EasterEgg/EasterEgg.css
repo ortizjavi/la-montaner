@@ -1,0 +1,10 @@
+.gameIcon {
+    width: 30%;
+    background-color: #388e3c;
+    height: 300px;
+}
+
+.gameIcon svg {
+    width: 30%;
+    font-size: 200px;
+}

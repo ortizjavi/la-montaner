@@ -11,7 +11,6 @@ import ProductCreation from "../components/ProductCreation/ProductCreation";
 import CategoryCreation from "../components/CategoryCreation/CategoryCreation";
 import Pay from "../components/Pay/Pay";
 import Dashboard from "../components/Dashboard/Dashboard";
-import DashboardAdmin from "../components/Dashboard/DashboardAdmin";
 import EditProduct from "../components/EditProduct/EditProduct";
 import NavBar from "../components/Navbar/NavBar";
 import Cart from "../components/Cart/Cart";
@@ -29,6 +28,7 @@ import ResetForm from "../components/ModalDialog/ResetForm";
 import UserSetting from "../components/UserSetting/UserSetting";
 import { ROLE } from "../utils/constants";
 import Address from "../components/Address/Address";
+import EasterEgg from "../components/EasterEgg/EasterEgg";
 
 const theme = createTheme({
   palette: {
@@ -117,6 +117,7 @@ export default function App() {
               <Route exact path="/wishlist" component={Wishlist} />
               <Route exact path="/about" component={AboutPage} />
               <Route exact path="/add/address" component={Address} />
+              <Route exact path="/game" component={EasterEgg} />
               <Route exact path="/faq" component={Accordion} />
             </div>
             <Footer />
