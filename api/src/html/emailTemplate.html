@@ -135,6 +135,7 @@ a, a:hover {
 
 	<!-- PARAGRAPH -->
 	<!-- Set text color and font family ("sans-serif" or "Georgia, serif"). Duplicate all text styles in links, including line-height -->
+	<!-- ORDER_SUMMARY
 	<tr>
 		<td align="center" valign="top" style="border-collapse: collapse; border-spacing: 0; margin: 0; padding: 0; padding-left: 6.7%; padding-right: 6.7%; width: 87.5%; font-size: 22px; font-weight: 400; line-height: 160%;
 			padding-top: 25px; 
@@ -144,15 +145,15 @@ a, a:hover {
 				Resumen de tu compra:
 		</td>
 	</tr>
-	<!-- LIST -->
+	<!- - LIST - ->
 	<tr>
 		<td align="center" valign="top" style="border-collapse: collapse; border-spacing: 0; margin: 0; padding: 0; padding-left: 6.25%; padding-right: 6.25%;text-align: left;" class="list-item"><table align="center" border="0" cellspacing="0" cellpadding="0" style="width: inherit; margin: 0; padding: 0; border-collapse: collapse; border-spacing: 0;">
 			
-			<!-- LIST ITEM -->
+			<!- - LIST ITEM - ->
 			<tr>
 
-				<!-- LIST ITEM IMAGE -->
-				<!-- Image text color should be opposite to background color. Set your url, image src, alt and title. Alt text should fit the image size. Real image size should be x2 -->
+				<!- - LIST ITEM IMAGE - ->
+				<!- - Image text color should be opposite to background color. Set your url, image src, alt and title. Alt text should fit the image size. Real image size should be x2 - ->
 				<td align="left" valign="top" style="border-collapse: collapse; border-spacing: 0;
 					padding-top: 30px;
 					padding-right: 20px;"><img
@@ -162,23 +163,23 @@ a, a:hover {
 					alt="H" title="Forma de envio"
 					width="50" height="40"></td>
 
-				<!-- LIST ITEM TEXT -->
-				<!-- Set text color and font family ("sans-serif" or "Georgia, serif"). Duplicate all text styles in links, including line-height -->
+				<!- - LIST ITEM TEXT - ->
+				<!- - Set text color and font family ("sans-serif" or "Georgia, serif"). Duplicate all text styles in links, including line-height - ->
 				<td align="left" valign="top" style="font-size: 17px; font-weight: 400; line-height: 160%; border-collapse: collapse; border-spacing: 0; margin: 0; padding: 0;
 					padding-top: 25px;
 					color: #000000;
 					font-family: sans-serif;" class="paragraph">
-						<b style="color: #333333;">{shippingTitle}</b><br/>
+						<b style="color: #333333;"> {shippingTitle} </b><br/>
 						{shippingInfo}
 				</td>
 
 			</tr>
 
-			<!-- LIST ITEM -->
+			<!- - LIST ITEM - ->
 			<tr>
 
-				<!-- LIST ITEM IMAGE -->
-				<!-- Image text color should be opposite to background color. Set your url, image src, alt and title. Alt text should fit the image size. Real image size should be x2 -->
+				<!- - LIST ITEM IMAGE - ->
+				<!- - Image text color should be opposite to background color. Set your url, image src, alt and title. Alt text should fit the image size. Real image size should be x2 - ->
 				<td align="left" valign="top" style="border-collapse: collapse; border-spacing: 0;
 					padding-top: 30px;
 					padding-right: 20px;"><img
@@ -188,8 +189,8 @@ a, a:hover {
 					alt="D" title="Designer friendly"
 					width="50" height="40"></td>
 
-				<!-- LIST ITEM TEXT -->
-				<!-- Set text color and font family ("sans-serif" or "Georgia, serif"). Duplicate all text styles in links, including line-height -->
+				<!- - LIST ITEM TEXT - ->
+				<!- - Set text color and font family ("sans-serif" or "Georgia, serif"). Duplicate all text styles in links, including line-height - ->
 				<td align="left" valign="top" style="font-size: 17px; font-weight: 400; line-height: 160%; border-collapse: collapse; border-spacing: 0; margin: 0; padding: 0;
 					padding-top: 25px;
 					color: #000000;
@@ -218,27 +219,57 @@ a, a:hover {
 			</td>
 		</tr>
 
-	<!-- LINE -->
-	<!-- Set line color -->
+	<!- - LINE - ->
+	<!- - Set line color - ->
 	<tr>
 		<td align="center" valign="top" style="border-collapse: collapse; border-spacing: 0; margin: 0; padding: 0; padding-left: 6.25%; padding-right: 6.25%; width: 87.5%;
 			padding-top: 25px;" class="line"><hr
 			color="#E0E0E0" align="center" width="100%" size="1" noshade style="margin: 0; padding: 0;" />
 		</td>
 	</tr>
-
-	<!-- PARAGRAPH -->
-	<!-- Set text color and font family ("sans-serif" or "Georgia, serif"). Duplicate all text styles in links, including line-height -->
-	<!-- <tr>
-		<td align="center" valign="top" style="border-collapse: collapse; border-spacing: 0; margin: 0; padding: 0; padding-left: 6.25%; padding-right: 6.25%; width: 87.5%; font-size: 17px; font-weight: 400; line-height: 160%;
-			padding-top: 20px;
-			padding-bottom: 25px;
+ORDER_SUMMARY -->
+<!-- COMPLETED_ORDER
+	<tr>
+		<td align="center" valign="top" style="border-collapse: collapse; border-spacing: 0; margin: 0; padding: 0; padding-left: 6.7%; padding-right: 6.7%; width: 87.5%; font-size: 22px; font-weight: 400; line-height: 160%;
+			padding-top: 25px; 
 			color: #000000;
+			text-align: left;
 			font-family: sans-serif;" class="paragraph">
-				Have a&nbsp;question? <a href="mailto:support@ourteam.com" target="_blank" style="color: #127DB3; font-family: sans-serif; font-size: 17px; font-weight: 400; line-height: 160%;">support@ourteam.com</a>
+				{deliveryMssg}
 		</td>
-	</tr> -->
+	</tr>
+	<!- - LIST - ->
+	<tr>
+		<td align="center" valign="top" style="border-collapse: collapse; border-spacing: 0; margin: 0; padding: 0; padding-left: 6.25%; padding-right: 6.25%; padding-bottom: 30px;text-align: left;" class="list-item"><table align="center" border="0" cellspacing="0" cellpadding="0" style="width: inherit; margin: 0; padding: 0; border-collapse: collapse; border-spacing: 0;">
+			
+			<!- - LIST ITEM - ->
+			<tr>
 
+				<!- - LIST ITEM IMAGE - ->
+				<!- - Image text color should be opposite to background color. Set your url, image src, alt and title. Alt text should fit the image size. Real image size should be x2 - ->
+				<td align="left" valign="top" style="border-collapse: collapse; border-spacing: 0;
+					padding-top: 30px;
+					padding-right: 20px;"><img
+				border="0" vspace="0" hspace="0" style="padding: 0; margin: 0; outline: none; text-decoration: none; -ms-interpolation-mode: bicubic; border: none; display: block;
+					color: #000000;"
+					src="https://http2.mlstatic.com/resources/frontend/statics/buyingflow-frontend-emails/1.15.0/images/shipping/shipping-mail.png"
+					alt="H" title="Forma de envio"
+					width="50" height="40"></td>
+
+				<!- - LIST ITEM TEXT - ->
+				<!- - Set text color and font family ("sans-serif" or "Georgia, serif"). Duplicate all text styles in links, including line-height - ->
+				<td align="left" valign="top" style="font-size: 17px; font-weight: 400; line-height: 160%; border-collapse: collapse; border-spacing: 0; margin: 0; padding: 0;
+					padding-top: 25px;
+					color: #000000;
+					font-family: sans-serif;" class="paragraph">
+						<b style="color: #333333;"> {shippingTitle} </b><br/>
+						{shippingInfo}
+				</td>
+
+			</tr>
+		</table></td>
+	</tr>
+COMPLETED_ORDER -->
 <!-- End of WRAPPER -->
 </table>
 
@@ -255,7 +286,6 @@ a, a:hover {
 			padding-top: 25px;" class="social-icons"><table
 			width="150" border="0" cellpadding="0" cellspacing="0" align="center" style="border-collapse: collapse; border-spacing: 0; padding: 0;">
 			<tr>
-
 				<!-- ICON 1 -->
 				<td align="center" valign="middle" style="margin: 0; padding: 0; padding-left: 10px; padding-right: 10px; border-collapse: collapse; border-spacing: 0;"><a target="_blank"
 					href="https://www.facebook.com/pablo.alisio"
@@ -264,26 +294,7 @@ a, a:hover {
 					alt="F" title="Facebook"
 					width="44" height="44"
 					src="https://raw.githubusercontent.com/konsav/email-templates/master/images/social-icons/facebook.png"></a></td>
-
 				<!-- ICON 2 -->
-<!-- 				<td align="center" valign="middle" style="margin: 0; padding: 0; padding-left: 10px; padding-right: 10px; border-collapse: collapse; border-spacing: 0;"><a target="_blank"
-					href="https://raw.githubusercontent.com/konsav/email-templates/"
-				style="text-decoration: none;"><img border="0" vspace="0" hspace="0" style="padding: 0; margin: 0; outline: none; text-decoration: none; -ms-interpolation-mode: bicubic; border: none; display: inline-block;
-					color: #000000;"
-					alt="T" title="Twitter"
-					width="44" height="44"
-					src="https://raw.githubusercontent.com/konsav/email-templates/master/images/social-icons/twitter.png"></a></td>		 -->		
-
-				<!-- ICON 3 -->
-<!-- 				<td align="center" valign="middle" style="margin: 0; padding: 0; padding-left: 10px; padding-right: 10px; border-collapse: collapse; border-spacing: 0;"><a target="_blank"
-					href="https://raw.githubusercontent.com/konsav/email-templates/"
-				style="text-decoration: none;"><img border="0" vspace="0" hspace="0" style="padding: 0; margin: 0; outline: none; text-decoration: none; -ms-interpolation-mode: bicubic; border: none; display: inline-block;
-					color: #000000;"
-					alt="G" title="Google Plus"
-					width="44" height="44"
-					src="https://raw.githubusercontent.com/konsav/email-templates/master/images/social-icons/googleplus.png"></a></td>		
- -->
-				<!-- ICON 4 -->
 				<td align="center" valign="middle" style="margin: 0; padding: 0; padding-left: 10px; padding-right: 10px; border-collapse: collapse; border-spacing: 0;"><a target="_blank"
 					href="https://www.instagram.com/lamontanes/"
 				style="text-decoration: none;"><img border="0" vspace="0" hspace="0" style="padding: 0; margin: 0; outline: none; text-decoration: none; -ms-interpolation-mode: bicubic; border: none; display: inline-block;
