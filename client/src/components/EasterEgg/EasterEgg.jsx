@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import React, { useState } from "react";
 import { FaHandRock, FaHandScissors, FaHandPaper } from "react-icons/fa";
 import "./EasterEgg.css";
+import Box from "./Box";
 
 export default function EasterEgg() {
   const dispatch = useDispatch();
@@ -46,6 +47,7 @@ export default function EasterEgg() {
       <div className="gameIcon">
         <FaHandRock />
       </div>
+      <Box option={"holi"} />
       <div className="gameIcon">
         <FaHandPaper />
       </div>

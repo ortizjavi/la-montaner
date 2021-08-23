@@ -13,7 +13,6 @@ export function getUsers() {
   };
 }
 
-
 export function getAdminProducts() {
   return async function (dispatch) {
     try {
@@ -27,7 +26,6 @@ export function getAdminProducts() {
     }
   };
 }
-
 
 export function updateStatus(id, estado) {
   return async function () {
@@ -56,20 +54,23 @@ export function getOrders() {
 export function getOrdersFilter(status) {
   return function (dispatch) {
     try {
-      return dispatch({type: actionTypes.GET_ORDER_FILTERED, payload: status})
+      return dispatch({
+        type: actionTypes.GET_ORDER_FILTERED,
+        payload: status,
+      });
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
 }
 
 export function deleteUser(id) {
   return async function (dispatch) {
     try {
       console.log(id);
-      await axios.delete(`${endpoints.DELETE_USER}/${id}`)
+      await axios.delete(`${endpoints.DELETE_USER}/${id}`);
       /* await axios.delete(`${endpoints.DELETE_USER}`, { email : user.email }); */
-      return dispatch({ type: actionTypes.DELETE_USER , payload:id});
+      return dispatch({ type: actionTypes.DELETE_USER, payload: id });
     } catch (error) {
       console.log(error);
     }
@@ -79,7 +80,9 @@ export function deleteUser(id) {
 export function resetUser(user) {
   return async function (dispatch) {
     try {
-      const resp = await axios.put(`${endpoints.RESET_USER}`, { email : user.email });
+      const resp = await axios.put(`${endpoints.RESET_USER}`, {
+        email: user.email,
+      });
       return dispatch({ type: actionTypes.RESET_USER, payload: resp });
     } catch (error) {
       console.log(error);
@@ -87,28 +90,27 @@ export function resetUser(user) {
   };
 }
 
-export function newAdmin(user) {
-	return async function (dispatch) {
+export function newSale(sale) {
+  return async function () {
     try {
-      const resp = await axios.post(`${endpoints.NEW_ADMIN}`, { email : user.email });
+      console.log("holi");
+      const resp = await axios.post(`${endpoints.ADMIN_SALES}`, sale);
+      console.log(resp);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+
+export function newAdmin(user) {
+  return async function (dispatch) {
+    try {
+      const resp = await axios.post(`${endpoints.NEW_ADMIN}`, {
+        email: user.email,
+      });
       return dispatch({ type: actionTypes.DELETE_USER, payload: user._id });
     } catch (error) {
       console.log(error);
     }
   };
 }
-
-export function newSale(sale) {
-	return async function () {
-    try {
-      const resp = await axios.post(`${endpoints.ADMIN_SALES}`, sale);
-      return({ type: actionTypes.ADD_SALE_CART });
-    } catch (error) {
-      console.log(error);
-    }
-  };
-}
-
-
-
-
