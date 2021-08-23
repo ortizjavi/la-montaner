@@ -14,7 +14,6 @@ import { useDispatch } from "react-redux";
 import Button from "@material-ui/core/Button";
 import Paper from "@material-ui/core/Paper";
 import { newSale } from "../../redux/actions/types/adminActions";
-import { setDate } from "date-fns/esm";
 
 const useStyles = makeStyles((theme) => ({
   root: {
