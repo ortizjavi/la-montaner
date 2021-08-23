@@ -92,7 +92,7 @@ export default function ProductDetail({ match, history }) {
   };
 
   return (
-    <div>
+    <div className='big-container-detail'>
       {loading ? (
         <Loading />
       ) : (
