@@ -93,9 +93,19 @@ export function resetUser(user) {
 export function newSale(sale) {
   return async function () {
     try {
-      console.log("holi");
       const resp = await axios.post(`${endpoints.ADMIN_SALES}`, sale);
       console.log(resp);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+
+export function getSales() {
+  return async function (dispatch) {
+    try {
+      const resp = await axios.get(`${endpoints.ADMIN_SALES}`);
+      return dispatch({type: actionTypes.ADD_SALE_CART, payload: resp.data})
     } catch (error) {
       console.log(error);
     }
