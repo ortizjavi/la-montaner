@@ -19,13 +19,14 @@ import Wishlist from "../components/Wishlist/Wishlist";
 import PayState from "../components/PayState/PayState";
 import PrivateRoute from "../components/PrivateRoute/PrivateRoute";
 import PublicRoute from "../components/PublicRoute/PublicRoute";
-import LoginForm from "../components/ModalDialog/LoginForm";
+import LoginForm from "../components/LoginRegister/LoginForm";
 import Footer from "../components/Footer/Footer";
 import SideBarAdmin from "../components/Dashboard/SideBarAdmin";
 import AboutPage from "../components/About/About";
 import Accordion from "../components/About/FAQ";
-import RegisterForm from "../components/ModalDialog/RegisterForm";
-import ResetForm from "../components/ModalDialog/ResetForm";
+import RegisterForm from "../components/LoginRegister/RegisterForm";
+import ResetForm from "../components/LoginRegister/ResetForm";
+import PasswordRecovery from "../components/LoginRegister/PasswordRecovery";
 import UserSetting from "../components/UserSetting/UserSetting";
 import { ROLE } from "../utils/constants";
 import Address from "../components/Address/Address";
@@ -106,6 +107,12 @@ export default function App() {
                 exact
                 path="/reset"
                 component={ResetForm}
+                roles={[ROLE.USER]}
+              />
+               <PublicRoute
+                exact
+                path="/pass"
+                component={PasswordRecovery}
                 roles={[ROLE.USER]}
               />
               <Route exact path="/home/products/pay" component={Pay} />

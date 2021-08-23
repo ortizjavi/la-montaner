@@ -11,7 +11,7 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
 import AddressModal from './Address';
-import LoginForm from '../ModalDialog/LoginForm';
+import LoginForm from '../LoginRegister/LoginForm';
 import Pay from '../Pay/Pay';
 import swal from "sweetalert";
 import './Address.css';

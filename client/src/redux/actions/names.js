@@ -50,7 +50,9 @@ export const GET_ORDERS = "GET_ORDERS";
 export const ORDER_UPDATED = 'ORDER_UPDATED';
 export const GET_ORDER_FILTERED = "GET_ORDER_FILTERED";
 export const ADD_CART_SUB_TOTAL = 'ADD_CART_SUB_TOTAL';
+export const CART_SUBTOTAL_PLUS_ONE = 'CART_SUBTOTAL_PLUS_ONE'
 export const ADD_ADDRESS = 'ADD_ADDRESS';
+
 
 //login/register action names
 export const LOGIN_USER = "LOGIN_USER";
@@ -58,3 +60,4 @@ export const REGISTER_USER = "REGISTER_USER";
 export const REGISTER_FAILED = "REGISTER_FAILED";
 export const LOGIN_FAILED = "LOGIN_FAILED";
 export const RESET_PASSWORD = "RESET_PASSWORD";
+export const RECOVERY_PASSWORD = "RECOVERY_PASSWORD";

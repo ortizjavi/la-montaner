@@ -8,12 +8,7 @@ import CartItem from "./CartItem.jsx";
 import "./Cart.css";
 
 // Actions
-import {
-  addCartProduct,
-  deleteCartProduct,
-  deleteCartAll,
-  addCartSubTotal,
-} from "../../redux/actions/types/productActions";
+import * as productActions from '../../redux/actions/types/productActions.js';
 import HorizontalNonLinearAlternativeLabelStepper from "../Address/pasarelaDeCompra.jsx";
 
 const Cart = () => {
@@ -26,7 +21,7 @@ const Cart = () => {
   }, [cartItems]);
 
   const qtyChangeHandler = (id, qty) => {
-    dispatch(addCartProduct(id, qty));
+    dispatch(productActions.addCartProduct(id, qty));
   };
 
   const removeFromCartHandler = (id) => {
@@ -40,7 +35,7 @@ const Cart = () => {
         swal("Tu producto fue eliminado con exito :)", {
           icon: "success",
         });
-        dispatch(deleteCartProduct(id));
+        dispatch(productActions.deleteCartProduct(id));
       } else {
         return swal("Tu producto sigue en el carrito :)");
       }
@@ -62,7 +57,7 @@ const Cart = () => {
         swal("Tu carrito se vació con exito :)", {
           icon: "success",
         });
-        dispatch(deleteCartAll());
+        dispatch(productActions.deleteCartAll());
       }
     });
   };
@@ -77,7 +72,7 @@ const Cart = () => {
   const subtotal = getCartCount();
 
   useEffect(() => {
-    dispatch(addCartSubTotal(subtotal));
+    dispatch(productActions.addCartSubTotal(subtotal));
   }, [subtotal]);
 
   const getCartSubTotal = () => {

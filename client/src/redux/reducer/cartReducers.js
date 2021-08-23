@@ -21,6 +21,7 @@ const cartReducer = (state = CART_INITIAL_STATE, action) => {
     case actionTypes.DELETE_CART_ALL: return { ...state, cartItems: [] };
     case actionTypes.ADD_CART_SUB_TOTAL: return { ...state, cartSubtotal: action.payload };
     case actionTypes.ADD_ADDRESS: return {...state, address: action.payload}
+    case actionTypes.CART_SUBTOTAL_PLUS_ONE: return {...state, cartSubtotal: state.cartSubtotal + 1}
     default: return state;
   }
 };

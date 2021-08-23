@@ -1,0 +1,126 @@
+.reviews-div{
+display: flex;
+justify-content: center;
+}
+
+.text-area {
+  width: 550px;
+  border-radius: 5px;
+  margin: 15px 15px;
+  border: solid 1.5px;
+}
+
+.detail-rating input[type="radio"] {
+  display: none;
+}
+
+.star {
+  cursor: pointer;
+  transition: color 200ms;
+}
+
+.detail-reviews{
+  display: flex;
+  justify-content: center;
+}
+
+.text-area {
+  width: 550px;
+  border-radius: 5px;
+  margin: 15px 15px;
+  border: solid 1.5px;
+}
+
+.review {
+  background-color: white;
+  display: grid;
+  border-radius: 5px;
+  margin-bottom: 5px;
+  margin-top: 5px;
+}
+
+.rating {
+  font-size: 16px;
+  font-weight: bold;
+}
+.rating input {
+  border-radius: 4px;
+  margin-left: 10px;
+  margin-right: 5px;
+  height: 20px;
+  width: 70px;
+}
+
+.container-reviews {
+  padding-top: 25px;
+  width: 60%;
+  background-color: #ffffff;
+  margin: 0 auto;
+}
+.container-reviews h1 {
+  color: rgb(0, 0, 0);
+}
+.container-reviews h4 {
+  padding: 0;
+  margin: 5px;
+  text-align: left;
+}
+.container-reviews h5 {
+  font-size: 0.7rem;
+}
+
+.container-reviews .MuiPaper-root {
+  background-color: #c4c1c12d;
+  border: 5px solid transparent;
+  border-bottom: 6px solid #C88E34;
+}
+
+.review-button{
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+}
+
+.review-button button{
+  padding: 10px 17px;
+  width: 15%;
+  background: #171717;
+  color: #f4f4f4;
+  cursor: pointer;
+}
+
+.review-button button:hover{
+  opacity: 0.9;
+  background-color: #686868;
+}
+
+
+/* FORM */
+.container-reviews-div{
+  position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 30px 100px;
+}
+
+.form-reviews{
+	display: flex;
+  flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	background-color: #fff;
+	box-shadow: 0px 0px 19px 5px rgba(0,0,0,0.19);
+}
+
+.field{
+  width: 100%;
+	border: 2px solid rgba(0, 0, 0, 0);
+	outline: none;
+	background-color: rgba(230, 230, 230, 0.6);
+	padding: 0.5rem 1rem;
+	font-size: 1.1rem;
+	margin-bottom: 22px;
+	transition: .3s;
+}
