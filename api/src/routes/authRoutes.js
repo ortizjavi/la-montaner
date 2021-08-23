@@ -4,7 +4,8 @@ const { authenticateToken } = require('../middlewares/auth');
 const {
   login,
   register,
-  resetPassword
+  resetPassword,
+  recoveryPassword
 } = require("../controllers/Admin/Auth");
 
 // Auth
@@ -26,5 +27,6 @@ router.post("/login",
 router.post("/register", register);
 
 router.put("/user/reset", resetPassword);
+router.post("/user/pass", recoveryPassword);
 
 module.exports = router;

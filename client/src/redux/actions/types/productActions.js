@@ -194,6 +194,9 @@ export function addCartProduct(productId, stockSelected) {
         stockSelected,
       },
     });
+    dispatch({
+      type: actionTypes.CART_SUBTOTAL_PLUS_ONE
+    })
   };
 }
 
@@ -270,7 +273,10 @@ export function createOrder(cart, user, address, mercadopago) {
 export function updateOrder(data) {
   return async function (dispatch) {
     try {
-      const resp = await axios.put(`${endpoints.ORDER_STATUS}`, data);
+      const resp = await axios.put(
+        `${endpoints.ORDER_STATUS}`,
+         data
+      );
       dispatch({ type: actionTypes.ORDER_UPDATED, payload: resp.data.order });
     } catch (error) {
       console.log(error);
