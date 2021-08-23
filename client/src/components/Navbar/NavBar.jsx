@@ -1,16 +1,19 @@
-import React, { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import './NavBar.css';
-import { Link, NavLink, useLocation } from 'react-router-dom';
-import SearchBar from '../SearchBar/SearchBar';
-import PersonIcon from '@material-ui/icons/Person';
-import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
-import SvgIcon from '@material-ui/core/SvgIcon';
-import FavoriteIcon from '@material-ui/icons/Favorite';
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import "./NavBar.css";
+import { Link, NavLink, useLocation } from "react-router-dom";
+import SearchBar from "../SearchBar/SearchBar";
+import PersonIcon from "@material-ui/icons/Person";
+import ExitToAppIcon from "@material-ui/icons/ExitToApp";
+import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
+import SvgIcon from "@material-ui/core/SvgIcon";
+import FavoriteIcon from "@material-ui/icons/Favorite";
 import swal from "sweetalert";
-import { searchProductsAction, selectCategoryAction } from '../../redux/actions/types/productActions.js';
-import { logout } from '../../redux/actions/types/authActions.js';
+import {
+  searchProductsAction,
+  selectCategoryAction,
+} from "../../redux/actions/types/productActions.js";
+import { logout } from "../../redux/actions/types/authActions.js";
 // import { IoStorefrontOutline } from 'react-icons/ri';
 import StorefrontIcon from '@material-ui/icons/Storefront';
 import logoLanding from "../../img/logoLanding.png";
@@ -43,9 +46,9 @@ function NavBar(props, {history}) {
   const isUser = user && user.role;
 
   const dispatch = useDispatch();
-  const currentPage = useSelector(state => state.root.currentPage)
-  var sort = 'asc'
-  const allProducts = useSelector(state => state.root.allProducts)
+  const currentPage = useSelector((state) => state.root.currentPage);
+  var sort = "asc";
+  const allProducts = useSelector((state) => state.root.allProducts);
 
   const [state, setState] = useState(currentCategoryState);
 
@@ -163,11 +166,12 @@ function NavBar(props, {history}) {
     }
     </>
   );
-};
+}
 
 export default NavBar;
 
-
-     {/* <NavLink to='/home'>
+{
+  /* <NavLink to='/home'>
               <input className={`${currentCategoryState === 'conservas' ? "actived" : 'Nav-button'}`} type="button" value="Conservas" onClick={() => setState('conservas')} />
-            </NavLink> */}
+            </NavLink> */
+}

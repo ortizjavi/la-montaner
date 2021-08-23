@@ -249,7 +249,6 @@ export function filterByPrice(sort, filter, pageNumber) {
   }
 }
 
-
 export function createOrder(cart, user, address, mercadopago) {
   return async function (dispatch) {
     try {
@@ -257,10 +256,10 @@ export function createOrder(cart, user, address, mercadopago) {
         cart,
         user,
         address,
-        mercadopago
+        mercadopago,
       });
       dispatch({ type: actionTypes.ORDER_CREATED, payload: resp.data.order });
-      if(mercadopago) {
+      if (mercadopago) {
         return (window.location.href = resp.data.mp_link);
       }
     } catch (error) {
@@ -268,7 +267,6 @@ export function createOrder(cart, user, address, mercadopago) {
     }
   };
 }
-
 
 export function updateOrder(data) {
   return async function (dispatch) {
