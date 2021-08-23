@@ -6,7 +6,7 @@ import { Divider, Avatar, Grid, Paper } from "@material-ui/core";
 import { addReview, getProductDetail} from "../../redux/actions/types/productActions";
 import './Reviews.css';
 
-const Reviews = ({id}) => {
+export default function Reviews({id}) {
     const dispatch = useDispatch();
     const detail = useSelector((state) => state.root.productDetail);
     let currentUser = useSelector((state) => state.session.user);
@@ -186,5 +186,3 @@ const Reviews = ({id}) => {
         </div>
     )
 }
-
-export default Reviews;

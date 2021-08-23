@@ -11,13 +11,7 @@ import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import Reviews from './Reviews';
-
-import {
-  addCartProduct,
-  addFavProducts,
-  getProductDetail,
-  removeFavProduct,
-} from "../../redux/actions/types/productActions";
+import * as productActions from '../../redux/actions/types/productActions.js';
 import { getOrders } from "../../redux/actions/types/adminActions";
 
 export default function ProductDetail({ match, history }) {
@@ -26,12 +20,11 @@ export default function ProductDetail({ match, history }) {
 
   //State selector
   const detail = useSelector((state) => state.root.productDetail);
-  const cart = useSelector((state) => state.cart);
-  const { cartItems } = cart;
   let wishlist = useSelector((state) => state.wishlist);
-  let { wishlistItems } = wishlist;
   let currentUser = useSelector((state) => state.session.user);
+
   let userOrders = currentUser.orders;
+  let { wishlistItems } = wishlist;
 
   //Local states
   const [qty, setQty] = useState(1);
@@ -44,10 +37,9 @@ export default function ProductDetail({ match, history }) {
   //Order user
   let usuarioPrueba = currentUser;
   let usuario = Object.entries(currentUser);
-
     
   useEffect(() => {
-    dispatch(getProductDetail(id));
+    dispatch(productActions.getProductDetail(id));
     dispatch(getOrders())
     setTimeout(() => {
       setLoading(false);
@@ -59,7 +51,7 @@ export default function ProductDetail({ match, history }) {
   }, [wishlistItems]);
 
   const addToCartHandler = () => {
-    dispatch(addCartProduct(detail._id, qty));
+    dispatch(productActions.addCartProduct(detail._id, qty));
     history.push(`/cart`);
   };
 
@@ -76,11 +68,11 @@ export default function ProductDetail({ match, history }) {
   }
 
   const handleRemoveFav = () => {
-    dispatch(removeFavProduct(id));
+    dispatch(productActions.removeFavProduct(id));
   };
 
   const handleAddFav = () => {
-    dispatch(addFavProducts(id));
+    dispatch(productActions.addFavProducts(id));
   };
 
   const handleWishlist = () => {
@@ -215,9 +207,8 @@ export default function ProductDetail({ match, history }) {
                   ) : null}
                 </p>
               </div>
-            </div>
-           <div>
-            
+             </div>
+            <div>
            </div>
           </div>
         </div>
