@@ -98,6 +98,17 @@ export function newAdmin(user) {
   };
 }
 
+export function newSale(sale) {
+	return async function () {
+    try {
+      const resp = await axios.post(`${endpoints.ADMIN_SALES}`, sale);
+      return({ type: actionTypes.ADD_SALE_CART });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+
 
 
 
