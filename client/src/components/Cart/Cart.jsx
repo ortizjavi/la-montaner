@@ -1,7 +1,11 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import swal from "sweetalert";
+import Button from '@material-ui/core/Button';
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
+import { makeStyles } from '@material-ui/core/styles';
 
 // Components
 import CartItem from "./CartItem.jsx";
@@ -10,15 +14,42 @@ import "./Cart.css";
 // Actions
 import * as productActions from '../../redux/actions/types/productActions.js';
 import HorizontalNonLinearAlternativeLabelStepper from "../Address/pasarelaDeCompra.jsx";
+import { getSales } from "../../redux/actions/types/adminActions.js";
+
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    width: '100%',
+    '& > * + *': {
+      marginTop: theme.spacing(2),
+    },
+  },
+}));
 
 const Cart = () => {
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
-  const { cartItems } = cart;
+  const { cartItems, sales } = cart;
+  const classes = useStyles();
+  const [open, setOpen] = useState(false);
+  const [offers, setOffers] = useState(0)
+
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setOpen(false);
+  };
+
 
   useEffect(() => {
     window.localStorage.setItem(`cart`, JSON.stringify(cartItems));
   }, [cartItems]);
+  
 
   const qtyChangeHandler = (id, qty) => {
     dispatch(productActions.addCartProduct(id, qty));
@@ -63,23 +94,34 @@ const Cart = () => {
   };
 
   const getCartCount = () => {
-    return cartItems.reduce(
+      return  cartItems.reduce(
       (stockSelected, item) => Number(item.stockSelected) + stockSelected,
       0
-    );
-  };
-
-  const subtotal = getCartCount();
-
-  useEffect(() => {
-    dispatch(productActions.addCartSubTotal(subtotal));
-  }, [subtotal]);
-
-  const getCartSubTotal = () => {
-    return cartItems
-      .reduce((price, item) => price + item.price * item.stockSelected, 0)
+      );
+    };
+    
+    const subtotal = getCartCount();
+    
+    useEffect(() => {
+      dispatch(productActions.addCartSubTotal(subtotal));
+      dispatch(getSales())
+    }, [subtotal]);
+    
+    const getCartSubTotal = () => {
+      const resultado = cartItems.reduce((price, item) => price + item.price * item.stockSelected, 0)
       .toFixed(2);
-  };
+      console.log(offers)
+      return resultado
+    };
+    
+    const alert = () => {
+      const offertas = sales?.filter(s => 
+        (s.price <= getCartSubTotal()))
+        if(offertas?.length >= 0){
+          offertas.map(s => setOffers(s.discount))
+        }
+    }
+
 
   return (
     <>
@@ -120,6 +162,15 @@ const Cart = () => {
             <p>Subtotal ({getCartCount()}) items</p>
             <p>${getCartSubTotal()}</p>
           </div>
+          <div className={classes.root}>
+             {
+              offers === 0 ? alert() 
+              : 
+          <Alert onClose={handleClose} severity="success">
+            Tenes un descuento!
+          </Alert>
+            }
+    </div>
           <div>
             <HorizontalNonLinearAlternativeLabelStepper/>
           </div>

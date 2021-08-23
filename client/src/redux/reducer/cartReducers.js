@@ -4,7 +4,7 @@ const CART_INITIAL_STATE = {
   cartItems: [],
   cartSubtotal: 0,
   address: '',
-  sale: 0,
+  sales: [],
 };
 
 const cartReducer = (state = CART_INITIAL_STATE, action) => {
@@ -24,7 +24,7 @@ const cartReducer = (state = CART_INITIAL_STATE, action) => {
     case actionTypes.ADD_ADDRESS: return {...state, address: action.payload}
     case actionTypes.CART_SUBTOTAL_PLUS_ONE: return {...state, cartSubtotal: state.cartSubtotal + 1}
     case actionTypes.ADD_SALE_CART: return {
-      ...state, sale: action.payload
+      ...state, sales: action.payload
     }
     default: return state;
   }
