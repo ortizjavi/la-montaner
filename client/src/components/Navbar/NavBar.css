@@ -267,18 +267,18 @@ width: 10rem;
 }
 
 .cart_subtotal_container {
+  position: relative;
+}
+
+.cart_subtotal {
   position: absolute;
-  top: 45px;
-  right: 145px;
-  padding: 5px;
+  top: -30px;
+  right: 0;
   border-radius: 50%;
   color: rgb(248, 87, 87)
 }
 
-.sticky .cart_subtotal_container {
-    top: 20px;
-    transition: 0.6s;
-}
+
 
 
 .navbar-section{

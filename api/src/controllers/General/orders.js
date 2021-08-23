@@ -3,16 +3,16 @@ const Order = require("../../models/Orders");
 const User = require("../../models/Users/User");
 
 module.exports = {
-    createOrder: async (req, res) => {
+    createOrder: async (req, res, next) => {
         const { cart, user, address, mercadopago } = req.body
 
         //products, user, status(creado por default)
         try {
-            let preference_id = '';
-            let mp_link = '';
-            let payment = 'Efectivo'
+            let preference_id = '', mp_link = '';
+            let payment = 'Efectivo', status = 'Procesando';
             if (mercadopago){
-                payment = 'MercadoPago'
+                payment = 'MercadoPago';
+                status = 'Creada';
                 const mpResponse = await mp(cart);
                 preference_id = mpResponse.body.id;
                 mp_link = mpResponse.response.init_point
@@ -21,6 +21,7 @@ module.exports = {
             const order = new Order({ 
                 cart, 
                 user,
+                status,
                 address,
                 payment,
                 mp_preference: preference_id, 
@@ -31,11 +32,19 @@ module.exports = {
             await User.findByIdAndUpdate(user,
                 { $push: { 'orders': saveOrder._id } }
             )
-            res.json({
+
+
+            req.res = {
                 ok: true,
                 order: orderProps,
                 mp_link: mp_link
-            });
+            }
+
+            if (!mercadopago){
+                req.order = saveOrder;
+                return next();
+            }
+            res.json(req.res);
         } catch (error) {
             console.log(error)
             res.json({
@@ -52,16 +61,21 @@ module.exports = {
             console.log(error)
         }
     },
-    updateOrders: async (req, res) => {
+    updateOrders: async (req, res, next) => {
         const { id } = req.params;
         const update = { ...req.body }
         try {
             const newOrder = await Order.findByIdAndUpdate(id, update, { new: true })
 
-            res.json({
+            req.res = {
                 ok: true,
                 orders: newOrder
-            })
+            }
+            if (update.status === 'Completa'){
+                req.order = newOrder;
+                next();
+            }
+            res.json(req.res);
         } catch (error) {
             console.log(error)
             res.json({ ok: false })

@@ -91,6 +91,9 @@ const LoginForm = () => {
             <div className={'title'}>¿No tienes cuenta?  
              <Link to={'/register'}> Regístrate</Link>
             </div> 
+            <div className={'titlePass'}>
+              <Link to={'/pass'}>Olvidé mi contraseña</Link>
+           </div>
             <div>
             <ExternAuthentication/>
             </div>

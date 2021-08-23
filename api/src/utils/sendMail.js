@@ -28,21 +28,43 @@ sendEmail.sendFormEmail = (email,name) => {
 
 
 sendEmail.processingOrder = (email, name, payment, shipping) => {
-	fs.readFile(path.resolve(__dirname, '../html/emailTemplate.html'), (err, data) => {
-		data.replace('{title}', `Hola ${name}, tu orden fue confirmada!`);
-		data.replace('{paymentTitle}', `Pagaste ${payment.total}`);
-		const shippingTitle = shipping.delivery ? 'Envío a domicilio' : 'Retiro por local';
-		data.replace('{paymentInfo}', `con ${payment.method}`);
-		data.replace('{shippingTitle}', shippingTitle);
-		data.replace('{shippingInfo}', `${shipping.address}`);
+	return fs.readFile(path.resolve(__dirname, '../html/emailTemplate.html'), (err, data) => {
+		data = data.toString();
+		data = data.replace('{title}', `Hola ${name}, tu orden fue confirmada!`);
+		data = data.replace('{paymentTitle}', `Pagaste $ ${payment.total}`);
+		let shippingTitle, shippingAddress;
+		if(shipping.delivery){
+			shippingTitle = 'Envío a domicilio';
+			shippingAddress = shipping.address;
+		} else {
+			shippingTitle = 'Retiro por local';
+			shippingAddress = 'Dirección de Chicha';
+		}
+		data = data.replace('{paymentInfo}', `con ${payment.method}`);
+		data = data.replace('{shippingTitle}', shippingTitle);
+		data = data.replace('{shippingInfo}', `${shippingAddress}`);
 		
 		return transport.sendMail({
 			from: `La Montañes <${process.env.MAIL_USER}>`,
 			to: email,
 			subject: `Gracias por tu compra!`,
-			html: data.toString()
+			html: data
 		})
 	})
+}
+
+sendEmail.passRecoveryEmail = (email,name, newPass) => {
+	return fs.readFile(path.resolve(__dirname, '../html/passRecoveryTemplate.html'), (err, data) => {
+		data = data.toString();
+		data = data.replace('{title}', `Hola ${name}`);
+		data = data.replace('{shippingTitle}', newPass);
+	return transport.sendMail({
+		from: `La Montañes <${process.env.MAIL_USER}>`,
+		to: email,
+		subject: "Gracias por contactarte con La Montañes!",
+		html: data
+	});	
+})
 }
 
 module.exports = sendEmail;
