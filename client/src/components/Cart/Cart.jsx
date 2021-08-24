@@ -2,17 +2,17 @@ import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import swal from "sweetalert";
-import Button from '@material-ui/core/Button';
-import Snackbar from '@material-ui/core/Snackbar';
-import MuiAlert from '@material-ui/lab/Alert';
-import { makeStyles } from '@material-ui/core/styles';
+import Button from "@material-ui/core/Button";
+import Snackbar from "@material-ui/core/Snackbar";
+import MuiAlert from "@material-ui/lab/Alert";
+import { makeStyles } from "@material-ui/core/styles";
 
 // Components
 import CartItem from "./CartItem.jsx";
 import "./Cart.css";
 
 // Actions
-import * as productActions from '../../redux/actions/types/productActions.js';
+import * as productActions from "../../redux/actions/types/productActions.js";
 import HorizontalNonLinearAlternativeLabelStepper from "../Address/pasarelaDeCompra.jsx";
 import { getSales } from "../../redux/actions/types/adminActions.js";
 
@@ -22,8 +22,8 @@ function Alert(props) {
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    width: '100%',
-    '& > * + *': {
+    width: "100%",
+    "& > * + *": {
       marginTop: theme.spacing(2),
     },
   },
@@ -35,21 +35,11 @@ const Cart = () => {
   const { cartItems, sales } = cart;
   const classes = useStyles();
   const [open, setOpen] = useState(false);
-  const [offers, setOffers] = useState(0)
-
-
-  const handleClose = (event, reason) => {
-    if (reason === 'clickaway') {
-      return;
-    }
-    setOpen(false);
-  };
-
+  const [offers, setOffers] = useState(0);
 
   useEffect(() => {
     window.localStorage.setItem(`cart`, JSON.stringify(cartItems));
   }, [cartItems]);
-  
 
   const qtyChangeHandler = (id, qty) => {
     dispatch(productActions.addCartProduct(id, qty));
@@ -94,34 +84,40 @@ const Cart = () => {
   };
 
   const getCartCount = () => {
-      return  cartItems.reduce(
+    return cartItems.reduce(
       (stockSelected, item) => Number(item.stockSelected) + stockSelected,
       0
-      );
-    };
-    
-    const subtotal = getCartCount();
-    
-    useEffect(() => {
-      dispatch(productActions.addCartSubTotal(subtotal));
-      dispatch(getSales())
-    }, [subtotal]);
-    
-    const getCartSubTotal = () => {
-      const resultado = cartItems.reduce((price, item) => price + item.price * item.stockSelected, 0)
-      .toFixed(2);
-      console.log(offers)
-      return resultado
-    };
-    
-    const alert = () => {
-      const offertas = sales?.filter(s => 
-        (s.price <= getCartSubTotal()))
-        if(offertas?.length >= 0){
-          offertas.map(s => setOffers(s.discount))
-        }
-    }
+    );
+  };
 
+  const subtotal = getCartCount();
+
+  useEffect(() => {
+    dispatch(productActions.addCartSubTotal(subtotal));
+    dispatch(getSales());
+  }, [subtotal, dispatch]);
+
+  const getCartSubTotal = () => {
+    const resultado = cartItems
+      .reduce((price, item) => price + item.price * item.stockSelected, 0)
+      .toFixed(2);
+    console.log(offers);
+    return resultado;
+  };
+
+  const alert = () => {
+    const offertas = [];
+    sales?.forEach((s) => {
+      if (s.price <= getCartSubTotal()) {
+        offertas.push(s.discount);
+      }
+    });
+    if (offertas?.length >= 1) {
+      offertas.sort();
+      setOffers(offertas[offertas.length - 1]);
+      setOpen(true);
+    }
+  };
 
   return (
     <>
@@ -160,19 +156,29 @@ const Cart = () => {
         <div className="cartscreen__right">
           <div className="cartscreen__info">
             <p>Subtotal ({getCartCount()}) items</p>
-            <p>${getCartSubTotal()}</p>
+            {offers === 0 ? (
+              <p>${getCartSubTotal()}</p>
+            ) : (
+              <p>
+                <b>
+                  ${getCartSubTotal() - getCartSubTotal() * (offers * 0.01)}
+                </b>
+              </p>
+            )}
           </div>
           <div className={classes.root}>
-             {
-              offers === 0 ? alert() 
-              : 
-          <Alert onClose={handleClose} severity="success">
-            Tenes un descuento!
-          </Alert>
-            }
-    </div>
+            {offers === 0 ? (
+              alert() && <p>${getCartSubTotal()}</p>
+            ) : open ? (
+              <Alert onClose={() => setOpen(false)} severity="success">
+                {`Tenes un descuento de ${offers}%!`}
+              </Alert>
+            ) : (
+              <p>${getCartSubTotal()}</p>
+            )}
+          </div>
           <div>
-            <HorizontalNonLinearAlternativeLabelStepper/>
+            <HorizontalNonLinearAlternativeLabelStepper />
           </div>
         </div>
       </div>
