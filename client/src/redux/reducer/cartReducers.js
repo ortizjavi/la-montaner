@@ -17,7 +17,7 @@ const cartReducer = (state = CART_INITIAL_STATE, action) => {
       } else {
         return { ...state, cartItems: state.cartItems.concat(newProduct) };
       }
-    case actionTypes.DELETE_CART_PRODUCT: return { ...state, cartItems: state.cartItems.filter( (product) => product.id !== action.payload) };
+    case actionTypes.DELETE_CART_PRODUCT: return { ...state, cartItems: state.cartItems.filter((product) => product.id !== action.payload) };
     case actionTypes.DELETE_CART_ALL: return { ...state, cartItems: [] };
     case actionTypes.ADD_CART_SUB_TOTAL: return { ...state, cartSubtotal: action.payload };
     case actionTypes.ADD_ADDRESS: return {...state, address: action.payload}
