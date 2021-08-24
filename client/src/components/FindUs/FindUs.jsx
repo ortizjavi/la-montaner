@@ -1,6 +1,9 @@
 import { React } from 'react';
 import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
 import { FaWhatsapp } from "react-icons/fa";
+import WhatsAppIcon from '@material-ui/icons/WhatsApp';
+import MailOutlineIcon from '@material-ui/icons/MailOutline';
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import {WHATSAPP_LINK} from '../../utils/constants';
 import './FindUs.css';
 //import { useForm } from 'react-hook-form';
@@ -9,17 +12,7 @@ import './FindUs.css';
 export default function FindUs() {
   const mapStyle = { height: '400px', width: '600px', margin: '0 auto'};
   const location = { lat: -31.73197584607406, lng: -64.45617099471914};
-  // const { register, errors, handleSubmit } = useForm();
 
-  // const handleForm = (data, e) => {
-  // 	console.log('datos enviados')
-  // 	e.target.reset();
-  // 	swal('Su consulta ha sido enviada', 
-  //     {
-  // 		icon: "success",
-  // 	});
-  // };
-  
   return (
   <div classsName='div-map'>
     <div classsName='div-image-map'>
@@ -35,42 +28,36 @@ export default function FindUs() {
     </div>
       <div className='location-info'>
         <h2> Nos encontramos en Villa Serranita, Córdoba </h2>
-        <h3>Por cualquier consulta escribinos:</h3>
-        <p>Por Whatsapp: </p>
-        <a href={WHATSAPP_LINK} target="_blank" rel='noopener noreferrer'><FaWhatsapp /></a>
-
-          <div>
-            <p>Por mail:</p>
-            {/* <form onSubmit={handleSubmit(handleForm)}>
-            <h3>Nombre y apellido </h3>
-            input
-            className='inputs'
-            type='text'
-            {...register('name', { required: true, minLength: 4 })}
-            />
-
-            <span>{errors?.name?.message}</span>
-            <h3>Asunto: </h3>
-            <input
-            className='inputs'
-            type='text'
-            {...register('subject', { required: true, minLength: 3 })}
-            />
-
-            <h3>Mensaje: </h3>
-				<textarea
-				className='messageInput'
-                {...register('message', {
-                required: true,
-                minLength: 4,
-                maxLength: 150,
-                })}
-                ></textarea>
-                <br />
-                <button className='contactBtn'>enviar</button>
-          </form> */}
+      
+          <div className='caja-flex-pages'>
+            <div className='sub-caja-pages'>
+              <div>
+                <ShoppingCartIcon className='icon-naranja' />
+                <h2 className='texto-destacado titulo-retiro'>Retiro</h2>
+                <h5>(Pedidos ya realizados)</h5>
+                <p>Lunes a viernes de 10:00 a 20.00 hs</p>
+              </div>
           </div>
+
+          <div className='sub-caja-pages'>
+          <div>
+                <MailOutlineIcon className='icon-naranja' />
+                <h2 className='texto-destacado titulo-retiro'>Mail</h2>
+                <h5>lamontanes@gmail.com</h5>
+              </div>  
+          </div>
+
+          <div className='sub-caja-pages'>
+          <div>
+         <WhatsAppIcon className='icon-naranja'/>
+                <h2 className='texto-destacado titulo-retiro'>Chat</h2>
+                <h5>Horario:</h5>
+                <p>Lunes a viernes de 10:00 a 20.00 hs</p>
+              </div>  
+          </div>
+
       </div>
+    </div>
     </div>
   )
 }
