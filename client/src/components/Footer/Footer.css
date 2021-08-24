@@ -3,7 +3,7 @@
 .footer-father{
 	display: flex;
 	background: #022E1A;
-	width: 100vw;
+	width: 100%;
 }
 .container-footer{
 	font-family: 'Poppins', sans-serif;
@@ -12,6 +12,7 @@
 }
 .row-footer{
 	display: flex;
+	flex-wrap: wrap;
     width: 100%;
 	margin: 0 auto;
 }
