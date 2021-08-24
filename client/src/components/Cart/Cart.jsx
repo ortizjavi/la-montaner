@@ -104,7 +104,7 @@ const Cart = () => {
 
         <div className="cartDeleteAll_container">
           <button
-            className= {cartItems.length === 0 ? 'cartDeleteDisable' : 'cartDeleteAll_btn'}
+            className= {cartItems.length === 0 ? 'cartDeleteAllDisable' : 'cartDeleteAll_btn'}
             onClick={() => removeAllHandler()}
           >
             Vaciar carrito
