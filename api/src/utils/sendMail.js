@@ -13,19 +13,24 @@ const transport = nodemailer.createTransport({
 	},
 })
 
+const COMPLETED_BLOCK = /<!-- COMPLETED_ORDER((.|\n)*)COMPLETED_ORDER -->/;
+const PROCESS_BLOCK = /<!-- ORDER_SUMMARY((.|\n)*)ORDER_SUMMARY -->/;
+const PASSWORD_BLOCK = /<!-- PASSWORD_RECOVERY((.|\n)*)PASSWORD_RECOVERY -->/;
+
+
 let html_template = '', processTemplate = '', completedTemplate = '', passwordTemplate = '';
 fs.readFile(path.resolve(__dirname, '../html/emailTemplate.html'), (err, data) => {
 	html_template = data.toString();
-	processTemplate = html_template.replace(/<!-- COMPLETED_ORDER.*COMPLETED_ORDER -->/, '')
-									.replace(/<!-- PASSWORD_RECOVERY.*PASSWORD_RECOVERY -->/, '');
+	processTemplate = html_template.replace(COMPLETED_BLOCK, '')
+									.replace(PASSWORD_BLOCK, '');
 	processTemplate = processTemplate.replace('<!-- ORDER_SUMMARY', '')
 											.replace('ORDER_SUMMARY -->', '');
-	completedTemplate = html_template.replace(/<!-- ORDER_SUMMARY.*ORDER_SUMMARY -->/, '')
-									  .replace(/<!-- PASSWORD_RECOVERY.*PASSWORD_RECOVERY -->/, '');
+	completedTemplate = html_template.replace(PROCESS_BLOCK, '')
+									  .replace(PASSWORD_BLOCK, '');
 	completedTemplate = completedTemplate.replace('<!-- COMPLETED_ORDER', '')
 											.replace('COMPLETED_ORDER -->', '');
-	passwordTemplate = html_template.replace(/<!-- ORDER_SUMMARY.*ORDER_SUMMARY -->/, '')
-									  .replace(/<!-- COMPLETED_ORDER.*COMPLETED_ORDER -->/, '');
+	passwordTemplate = html_template.replace(PROCESS_BLOCK, '')
+									  .replace(COMPLETED_BLOCK, '');
 	passwordTemplate = passwordTemplate.replace('<!-- PASSWORD_RECOVERY', '')
 											.replace('PASSWORD_RECOVERY -->', '');
 });
