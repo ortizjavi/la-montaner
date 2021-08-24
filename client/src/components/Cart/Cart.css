@@ -71,6 +71,10 @@
     right: 67px;
   }
 
+  .cartDeleteDisable {
+    display: none;
+  }
+
   .cartDeleteAll_btn {
     padding: 10px 17px;
     width: 100%;
