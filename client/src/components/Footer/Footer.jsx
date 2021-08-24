@@ -23,6 +23,7 @@ const Footer = ()=>{
       }
 
     return(
+      <>
         <div className='footer-father'>
             <div className="container-footer">
               <div className="row-footer">
@@ -74,14 +75,14 @@ const Footer = ()=>{
                 </ul>
                 </div>
               </div>
-              {/* <div className="footer-col">
-                 <a className='footer-icon-w' href={WHATSAPP_LINK} target="_blank">
-                    <WhatsAppIcon style={{ fontSize: 160 }} />
-                 </a>
-             </div> */}
               </div>             
             </div>
         </div>
+        <div>
+            <a href={WHATSAPP_LINK} className="float" target="_blank">
+            <WhatsAppIcon style={{ fontSize: 50 }} className='my-float' />
+            </a> </div>
+            </>
     )
 }
 
