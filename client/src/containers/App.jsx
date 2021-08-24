@@ -30,6 +30,8 @@ import PasswordRecovery from "../components/LoginRegister/PasswordRecovery";
 import UserSetting from "../components/UserSetting/UserSetting";
 import { ROLE } from "../utils/constants";
 import Address from "../components/Address/Address";
+import FindUs from "../components/FindUs/FindUs";
+import UserReviewsTable from "../components/Dashboard/UserReviews";
 
 const theme = createTheme({
   palette: {
@@ -105,6 +107,12 @@ export default function App() {
               />
               <PrivateRoute
                 exact
+                path="/dashboard/userreviews"
+                component={UserReviewsTable}
+                roles={[ROLE.USER]}
+              />
+              <PrivateRoute
+                exact
                 path="/reset"
                 component={ResetForm}
                 roles={[ROLE.USER]}
@@ -125,6 +133,7 @@ export default function App() {
               <Route exact path="/about" component={AboutPage} />
               <Route exact path="/add/address" component={Address} />
               <Route exact path="/faq" component={Accordion} />
+              <Route exact path="/map" component={FindUs} />
             </div>
             <Footer />
           </>

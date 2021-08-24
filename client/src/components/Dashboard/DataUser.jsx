@@ -21,23 +21,10 @@ const DataUser = () =>{
             <h4> Hola, {user.given_name}</h4>
 
             <div className='dataUser-section'>
-                <NavLink className='du-link' to='/wishlist'>
+                {/* <NavLink className='du-link' to='/wishlist'>
                     <BsHeart style={{ fontSize: 30, color:"grey" }}/>
                     <h5>Lista De Deseos</h5>
-                </NavLink >
-                <NavLink className='du-link' to='/dashboard'>
-                    <RateReviewIcon style={{ fontSize: 30, color:"grey" }}/>
-                    <h5>Reviews</h5>
-                </NavLink >
-                {/* <NavLink className='du-link' to='/dashboard'>
-                    <FaComments style={{fontSize: 30, color:"grey"}}/>
-                    <h5> Comentarios</h5>
-                </NavLink>
-                <NavLink className='du-link' to='/dashboard'>
-                    <IoIosNotificationsOutline style={{fontSize: 30, color:"grey"}}/>
-                    <h5>Notificaciones</h5>
-                </NavLink> */}
-
+                </NavLink > */}
             </div>
         </div>
     )
