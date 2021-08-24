@@ -46,7 +46,7 @@ sendEmail.sendFormEmail = (email,name) => {
 
 
 sendEmail.processingOrder = (email, name, payment, shipping) => {
-	let data = html_template;
+	let data = processTemplate;
 	data = data.replace('{title}', `Hola ${name}, tu orden fue confirmada!`);
 	let paymentTitle;
 	if (payment.method === 'Efectivo'){

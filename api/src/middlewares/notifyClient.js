@@ -24,7 +24,7 @@ module.exports = async (req, res, next) => {
 	} else if (req.order.status === 'Completa'){
 		const user = await User.findOne({ _id: req.order.user })
 		completedOrder(
-			req.user.email, 
+			user.email, 
 			user.given_name,
 			{
 				delivery: req.order.address.length,
