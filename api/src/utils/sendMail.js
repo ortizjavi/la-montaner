@@ -54,7 +54,7 @@ sendEmail.processingOrder = (email, name, payment, shipping) => {
 	} else {
 		paymentTitle = 'Pagaste';
 	}
-	data = data.replace('{paymentTitle}', `${payment} $ ${payment.total}`);
+	data = data.replace('{paymentTitle}', `${paymentTitle} $ ${payment.total}`);
 	let shippingTitle, shippingAddress;
 	if(shipping.delivery){
 		shippingTitle = 'Envío a domicilio';
