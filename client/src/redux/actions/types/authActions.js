@@ -55,7 +55,7 @@ export function resetPassword(payload) {
 export function recoveryPassword(payload) {
   return async function (dispatch) {
     try {
-      await axios.post(`${endpoints.AUTH_RECOVERY_PASS}`, payload);
+     await axios.post(`${endpoints.AUTH_RECOVERY_PASS}`, payload);
      
     } catch (e) {
      
@@ -83,6 +83,12 @@ export function logout() {
   }
 }
 
+export function clearLoginFailed() {
+  return {
+    type: actionTypes.LOGIN_FAILED,
+    payload: ''
+  }
+}
 
 function setAuthDefaulHeaders(token) {
   axios.defaults.headers.common['authorization'] = `Bearer ${token}`;

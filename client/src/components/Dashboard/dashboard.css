@@ -6,7 +6,7 @@
 	justify-content: center;
 	align-items: center;
 	text-align: center;
-	background: rgba(245, 245, 245, 1);
+	/* background: rgba(245, 245, 245, 1); */
 }
 
 .dashboard-container div:first-child {
