@@ -84,10 +84,6 @@
   transform: translateY(3px);
 }
 
-.detail_stars_number {
-  font-weight: bold;
-}
-
 .detail-heart{
  text-align: right;
   margin-top: 20px;
