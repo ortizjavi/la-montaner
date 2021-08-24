@@ -5,7 +5,9 @@ import LocalShippingIcon from '@material-ui/icons/LocalShipping';
 import SettingsIcon from '@material-ui/icons/Settings';
 import MenuIcon from '@material-ui/icons/Menu';
 import SvgIcon from '@material-ui/core/SvgIcon';
+import { BsHeart } from 'react-icons/bs';
 import { FaFileInvoiceDollar } from 'react-icons/fa';
+import RateReviewIcon from '@material-ui/icons/RateReview';
 import './SideBar.css';
 
 
@@ -28,10 +30,10 @@ function SideBar(){
 			<h3 >Mi Cuenta</h3>
 			</span>
 			<div className='sidebar-section'>
-			<NavLink to='/dashboard' className='sidebar-navlink'>
+			{/* <NavLink to='/dashboard' className='sidebar-navlink'>
 				<ShoppingBasketIcon style={{ fontSize: 30, color:"grey" }} />
-				<span className='sidebar-actived'>Compras</span>
-			</NavLink>
+				<span className='sidebar-actived'>Mis compras</span>
+			</NavLink> */}
 			{/* <NavLink to='/dashboard' className='sidebar-navlink'>
 				<FaFileInvoiceDollar style={{ fontSize: 30, color:"grey" }}/>
 				<span>Facturación</span>
@@ -40,6 +42,14 @@ function SideBar(){
 				<LocalShippingIcon style={{ fontSize: 30, color:"grey" }}/>
 				<span>Enviados</span>				
 			</NavLink> */}
+			<NavLink to='/wishlist' className='sidebar-navlink'>
+                <BsHeart style={{ fontSize: 30, color:"grey" }}/>
+                <span>Lista De Deseos</span>
+            </NavLink >
+			<NavLink to='/dashboard/userreviews' className='sidebar-navlink'>
+				<RateReviewIcon style={{ fontSize: 30, color:"grey" }}/>
+				<span>Reviews</span>				
+			</NavLink>
 			<NavLink to='/dashboard/setting' className='sidebar-navlink'>
 				<SettingsIcon style={{ fontSize: 30, color:"grey" }}/>
 				<span>Configuración</span>				
