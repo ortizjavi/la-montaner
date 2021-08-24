@@ -326,7 +326,7 @@ export function addAddress(address) {
 }
 
 export function addReview(data){
-	return async (dispatch) => {
+	return async () => {
 		await axios.put(`${endpoints.ADD_REVIEW}`, { 
           content: data.content,
           id: data.id,
