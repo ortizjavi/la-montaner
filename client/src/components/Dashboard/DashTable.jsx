@@ -10,7 +10,7 @@ const Tabla = () =>{
   const user = useSelector((state) => state.session.user);
 
   const [state, setState] = useState('') 
-  
+console.log(user.orders?.createdAt?.slice(0,10)) 
   const handleState = e =>{
     const cardOrder = user.orders?.find(o => o._id === e.target.id);
     setState(cardOrder)
@@ -23,15 +23,17 @@ const Tabla = () =>{
   const ponerFilas = (res) => res?.map( (order, key) => (
         <tr className='dt-tr' key={ order._id }>
           <td>
-            {order?.createdAt?.slice(0,10)} 
+            {order?.createdAt?.slice(0,10).split('-').reverse().join('/')} 
           </td>
           <td>
             {order?.status}
           </td>
+          <td>
             { '$ ' +  order.cart.reduce((accumulator, currentValue) => {
                 return accumulator + currentValue.price;
               }, 0)
             }
+          </td>
           <td>
         
               <input type='button' className="eye-solid-icon" id={order._id} value='&#171;' onClick={(e) => handleState(e) } >
@@ -69,9 +71,9 @@ const Tabla = () =>{
       </table>
       :
       <section>
-          <div>
+              {/* <p className='volver' onClick={goBack}>&#x2B05; Volver</p> */}
+              <button className='volver' onClick={goBack}>&#x2B05; Volver</button>
               <table className='table'>
-                <button className="eye-solid-icon dt-bu2"  onClick={goBack}>Volver</button> 
                 <thead >
                   <th className='dt-th2'>
 
@@ -93,7 +95,7 @@ const Tabla = () =>{
                     <tr className='dt-tr' key={ product.id }>
                       <td>
                         <NavLink className="" to={`/home/${product.id}`}>
-                          <img src={product.image} width='20px'/>
+                          <img src={product.image} width='60px'/>
                         </NavLink>
                       </td> 
                       <td>
@@ -113,11 +115,9 @@ const Tabla = () =>{
                 <p className='dt-p'>Total: $ {state.cart.reduce((accumulator, currentValue) => {
                 return accumulator + currentValue.price;
               }, 0) }</p>
-                <p className='dt-p'>Fecha de compra: {state.createdAt?.slice(0,10)}</p>
+                <p className='dt-p'>Fecha de compra: {state.createdAt?.slice(0,10).split('-').reverse().join('/')}</p>
                 </tbody>
               </table>
-          </div>
-
       </section>
     }  
   </div>
