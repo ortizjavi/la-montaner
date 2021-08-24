@@ -195,8 +195,8 @@ export function addCartProduct(productId, stockSelected) {
       },
     });
     dispatch({
-      type: actionTypes.CART_SUBTOTAL_PLUS_ONE
-    })
+      type: actionTypes.CART_SUBTOTAL_PLUS_ONE,
+    });
   };
 }
 
@@ -271,10 +271,7 @@ export function createOrder(cart, user, address, mercadopago) {
 export function updateOrder(data) {
   return async function (dispatch) {
     try {
-      const resp = await axios.put(
-        `${endpoints.ORDER_STATUS}`,
-         data
-      );
+      const resp = await axios.put(`${endpoints.ORDER_STATUS}`, data);
       dispatch({ type: actionTypes.ORDER_UPDATED, payload: resp.data.order });
     } catch (error) {
       console.log(error);
@@ -325,9 +322,23 @@ export function addAddress(address) {
   };
 }
 
-export function addReview(data){
-	return async (dispatch) => {
-		await axios.put(`${endpoints.ADD_REVIEW}`, { content: data.content, id: data.id, calification: data.calification, idUsuario: data.idUsuario},
-		);
-	};
-};
+export function addReview(data) {
+  return async (dispatch) => {
+    await axios.put(`${endpoints.ADD_REVIEW}`, {
+      content: data.content,
+      id: data.id,
+      calification: data.calification,
+      idUsuario: data.idUsuario,
+    });
+  };
+}
+
+export function addDiscount(discount) {
+  return async function (dispatch) {
+    console.log("descuento", discount);
+    return dispatch({
+      type: actionTypes.ADD_DISCOUNT,
+      payload: discount,
+    });
+  };
+}

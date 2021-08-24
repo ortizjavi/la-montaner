@@ -36,15 +36,39 @@ const Cart = () => {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
   const [offers, setOffers] = useState(0);
+  const [total, setTotal] = useState(0);
 
   useEffect(() => {
     window.localStorage.setItem(`cart`, JSON.stringify(cartItems));
   }, [cartItems]);
+  useEffect(() => {
+    dispatch(productActions.addDiscount(offers));
+  }, [offers, dispatch]);
+
+  const alert = () => {
+    if (sales) {
+      let offertas = [];
+      for (let i = 0; i < sales.length; i++) {
+        if (sales[i].price <= total) {
+          console.log("total", total);
+          offertas.push(sales[i].discount);
+        }
+      }
+      if (offertas.length === 0 && offers > 0) {
+        setOpen(false);
+        setOffers(0);
+      }
+      if (offertas.length >= 1) {
+        console.log(offertas);
+        setOffers(offertas[offertas.length - 1]);
+        setOpen(true);
+      }
+    }
+  };
 
   const qtyChangeHandler = (id, qty) => {
     dispatch(productActions.addCartProduct(id, qty));
   };
-
   const removeFromCartHandler = (id) => {
     swal({
       title: "¿Estás seguro que quieres eliminar este producto?",
@@ -78,6 +102,7 @@ const Cart = () => {
         swal("Tu carrito se vació con exito :)", {
           icon: "success",
         });
+
         dispatch(productActions.deleteCartAll());
       }
     });
@@ -95,28 +120,18 @@ const Cart = () => {
   useEffect(() => {
     dispatch(productActions.addCartSubTotal(subtotal));
     dispatch(getSales());
+    getCartSubTotal();
   }, [subtotal, dispatch]);
+  useEffect(() => {
+    alert();
+  }, [total]);
 
   const getCartSubTotal = () => {
+    console.log("holi");
     const resultado = cartItems
       .reduce((price, item) => price + item.price * item.stockSelected, 0)
       .toFixed(2);
-    console.log(offers);
-    return resultado;
-  };
-
-  const alert = () => {
-    const offertas = [];
-    sales?.forEach((s) => {
-      if (s.price <= getCartSubTotal()) {
-        offertas.push(s.discount);
-      }
-    });
-    if (offertas?.length >= 1) {
-      offertas.sort();
-      setOffers(offertas[offertas.length - 1]);
-      setOpen(true);
-    }
+    setTotal(resultado);
   };
 
   return (
@@ -157,26 +172,23 @@ const Cart = () => {
           <div className="cartscreen__info">
             <p>Subtotal ({getCartCount()}) items</p>
             {offers === 0 ? (
-              <p>${getCartSubTotal()}</p>
+              <p>${total}</p>
             ) : (
               <p>
-                <b>
-                  ${getCartSubTotal() - getCartSubTotal() * (offers * 0.01)}
-                </b>
+                <b>${Math.round(total - total * (offers * 0.01))} </b>
+                <br />
+                <span className="discount">${total}</span>
               </p>
             )}
           </div>
-          <div className={classes.root}>
-            {offers === 0 ? (
-              alert() && <p>${getCartSubTotal()}</p>
-            ) : open ? (
+          {offers > 0 && open && (
+            <div className={classes.root}>
               <Alert onClose={() => setOpen(false)} severity="success">
                 {`Tenes un descuento de ${offers}%!`}
               </Alert>
-            ) : (
-              <p>${getCartSubTotal()}</p>
-            )}
-          </div>
+            </div>
+          )}
+
           <div>
             <HorizontalNonLinearAlternativeLabelStepper />
           </div>
