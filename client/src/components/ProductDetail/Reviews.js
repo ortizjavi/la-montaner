@@ -173,9 +173,9 @@ export default function Reviews({id}) {
                 </ul>
                 {
                   detail.reviews.length > 3 ? (
-                    <div className='review-button'>
-                  <button value='verMas' onClick={(e) => handleReviews(e)}>Ver más</button>
-                  <button value='verMenos' onClick={(e) => handleReviews(e)}>Ver menos</button>
+                  <div className='review-button'>
+                    <button className={showReviews === detail.reviews.length ? 'disable' : null} value='verMas' onClick={(e) => handleReviews(e)}>Ver más</button>
+                    <button className={showReviews === 3 || showReviews < 3 ? 'disable' : null} value='verMenos' onClick={(e) => handleReviews(e)}>Ver menos</button>
                   </div>
                   ) : null
                 }
