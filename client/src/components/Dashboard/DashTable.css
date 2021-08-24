@@ -1,32 +1,40 @@
 .table-title {
-	margin-block: 0.5rem;
+	margin: 0.02rem;
+}
+
+.volver {
+	display: flex;
+	justify-content: flex-start;
+	margin: none;
+	height: 1.5rem;
+	background-color: transparent;
+	border: none;
+	cursor: pointer;
+}
+.volver:hover{
+	background-color: lightgray;
 }
 
 .table {
-	padding-top: 1rem;
 	width: 100%;
-    /* display:block; */
 	
 
 }
 .table thead{
 	display: flex;
     justify-content: space-around;
-    /* padding-left: 2%; */
-    /* padding-right: 2%; */
-    /* width: 95%; */
     flex-direction: row;
     flex-wrap: nowrap;
     align-items: center;
+	margin-top: 1rem;
 }
 .table th {
 	width: 7rem;	
 }
 .table td {
-	    /* padding-top: 10px; */
+	    padding-top: 10px;
 		padding-bottom: 5px;
-		/* margin-right: 2rem; */
-		width: 7rem;
+		width: 7.5rem;
 }
 .dt-th2{
 	/* margin-left: 27%; */
@@ -35,10 +43,10 @@
 	/* margin-left: 24%; */
 }
 .dt-tbody{
-	height: 25vh;
+	height: 20vh;
 	/* display:block; */
 	display:flex;
-	justify-content: center;
+	justify-content: flex-start;
 	flex-direction: column;
 	overflow-y: scroll;
 }
@@ -50,10 +58,12 @@
 	display: flex;
     justify-content: space-around;
 	align-items: center;
+	background-color: white;
+	margin-top: 0.5rem;
+	padding-left: 1rem;
 }
 
 .eye-solid-icon{
-	/* margin-right: 2rem; */
 	background: #24262b;
     color: white;
 	cursor: pointer;
@@ -70,6 +80,8 @@
 	margin-bottom: 1rem;
 }
 .dt-p{
-	text-align: end;
+	text-align:end;
     margin-right: 5%;
+	font-size: 0.9rem;
+	margin-block: 0;
 }

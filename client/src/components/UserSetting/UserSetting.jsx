@@ -18,13 +18,12 @@ const UserSetting =  () => {
       email: user.email, 
       // adress: '', 
       });
-
     const handleSubmit = async e =>{
       e.preventDefault();
       try {
         const resp = await axios.put(`${UPDATE_USER}/${user._id}`, {...input,
           name: input.given_name +' '+ input.family_name
-        }).then(res => res.data.ok ? alert('Cambios agragados con éxito') : alert('Intentalo nuevamente'))
+        }).then(res => res.data.ok ? alert('Cambios agragados con éxito') : alert('Intentalo nuevamente')).then(window.location.reload())
       } catch (error) {
         console.log('components/UserSetting/Error ',error);
       }
@@ -62,9 +61,7 @@ const UserSetting =  () => {
         .catch((err) => console.log('UserSetting/uploadImage/Error: ',err));
     };
 
-    const reloadPage = () => {
-      window.location.reload()
-    }
+    
 
     return(
         <section className='userSetting-container'>
@@ -73,34 +70,33 @@ const UserSetting =  () => {
           </NavLink>
           <br></br>
 
-            <h3>Hola, <i>{input.given_name}</i> Modifica tus datos</h3>
+            <h3>¿Deseas modificar tus datos?</h3>
             <br></br>
             <>
             <form className='userSetting-form' onSubmit={ e => handleSubmit(e)}>
               <section className='section_create'>
-                <label>Nombre  </label>
+                <label>Nombre: </label>
                 <input  name="given_name" value={input.given_name} placeholder={user.given_name} onChange={handleChange}/>
                 <br></br>
-              </section>
+              {/* </section> */}
 
-              <section className='section_create'>
-                <label>Apellido  </label>
+              {/* <section className='section_create'> */}
+                <label>Apellido: </label>
                 <input  name="family_name" value={input.family_name} placeholder={user.family_name} onChange={handleChange}/>
                 <br></br>
-              </section>
+              {/* </section> */}
               
-              <section className='section_create'>
-                <label>Correo</label>
+              {/* <section className='section_create'> */}
+                <label>e-mail:    </label>
                 <input name="email" value={input.email}  onChange={handleChange}/>
                 <br></br>
               </section>
 
-              <section className='section_create us-section-img'>
-                <br></br>
-                <label>Imagen  </label>
+              <section className='section_create-us-section-img'>
+                <p>Carga una foto</p>
                 <img className='usersetting-img' src={input.picture } />
                 <input class="custom-file-input" name="picture" accept="image/*" type='file'  onChange={uploadImage}/>
-                <button className='us-button' type='button' onClick={() => setInput({...input, picture:''})}>Borrar Imagen</button>
+                <button className='us-button' type='button' onClick={() => setInput({...input, picture:''})}>Borrar</button>
               </section>
 
               {/* <section className='section_create'>
@@ -121,12 +117,11 @@ const UserSetting =  () => {
                 <br></br>
               </section> */}
 
-                <button className='us-button' type="submit" onClick={reloadPage}>Agregar Los Cambios</button>
-                <br></br>
             {/* <NavLink className='us-button' to={'/dashboard'}>
                 Regresar
-            </NavLink> */}
+              </NavLink> */}
             </form>
+              <button className='us-button' type="submit" onClick={handleSubmit}>Agregar Los Cambios</button>
             </>
             <NavLink to='/dashboard'>
                 <p>&#x2B05; Volver</p>
