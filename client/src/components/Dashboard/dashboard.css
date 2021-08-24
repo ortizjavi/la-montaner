@@ -1,4 +1,3 @@
-
 .dashboard-container {
 	min-height: inherit;
 	width: 100%;
@@ -30,15 +29,16 @@
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: center;
-	width: 100%
+	width: 100%;
+	margin: 5% 0;
 }
 
-.cardsAdmin div {
+.cardsAO {
 	border-radius: 18px;
 	background: #ffffff;
 	box-shadow: 8px 8px 16px #a3a3a3, -8px -8px 16px #ffffff;
-	width: 30%;
-	margin: 3%;
+	width: 25%;
+	margin: 2%;
 	height: 200px;
 	display: grid;
 	grid-template-columns: 35% 65%;
@@ -46,7 +46,7 @@
 	transition: .2s all;
 }
 
-.cardsAdmin svg {
+.cardsAO svg {
 	font-size: 100px;
 	margin: auto 20px;
 	height: 200%;
@@ -54,32 +54,28 @@
 	grid-row-end: 2;
 }
 
-.cardsAdmin h3 {
+.cardsAO h3 {
 	text-align: center;
 	font-size: 30px;
 	margin: 0 10px;
 	grid-column-start: 2;
 }
 
-.cardsAdmin h2 {
+.cardsAO h2 {
 	text-align: center;
 	font-size: 30px;
 	align-self: flex-end;
 	margin: 10px
 }
 
-.cardsAdmin div:hover {
+.cardsAO:hover {
 	transform: scale(1);
 	opacity: 1;
 	box-shadow: 0 8px 20px 0px rgba(0, 0, 0, 0.125);
 	transform: scale(1.1);
 }
 
-.cardsAdmin .cardsAdmin div:hover {
-	background-color: black;
-}
-
-.cardsAdmin div:focus, .cardsAdmin div:hover {
+.cardsAO:focus, .cardsAO:hover {
 	outline: 0;
 	color: #fff;
 	background-color: #047E28;
@@ -115,4 +111,3 @@
 	border: solid 1px gray;
 	background: white;
 }
-

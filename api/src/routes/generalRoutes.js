@@ -17,7 +17,7 @@ const updatePayment = require("../controllers/General/updatePayment");
 
 const { payProducts } = require("../controllers/General/payProducts");
 
-const updateUsers = require("../controllers/General/updateUsers")
+const updateUsers = require("../controllers/General/updateUsers");
 
 router.get("/", searchProducts);
 router.get("/:id", getProductDetail);
