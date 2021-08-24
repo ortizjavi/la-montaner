@@ -60,7 +60,7 @@ export default function Reviews({id}) {
       const handleReviews = (e) => {
         e.preventDefault();
         if(e.target.value === 'verMas'){
-          setShowReviews(7);
+          setShowReviews(10);
         } else if(e.target.value === 'verMenos') {
           setShowReviews(3);
         } else{

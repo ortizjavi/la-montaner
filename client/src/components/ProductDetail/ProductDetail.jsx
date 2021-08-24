@@ -134,10 +134,7 @@ export default function ProductDetail({ match, history }) {
             </div>
           </div>
           <div className="productscreen__right">
-            <div className="detail_info">
-              <div className="name_fav_detail">
-                <p className="detail__name">{detail.name}</p>
-
+          <div className='detail-heart'>
                 {!usuario || usuario.length === 0 ? (
                   <Link to="/login">
                     <FavoriteBorderIcon
@@ -155,7 +152,13 @@ export default function ProductDetail({ match, history }) {
                     onClick={handleAddFav}
                     className="detail_fav"
                   />
-                )}
+                )} </div>
+            <div className="detail_info">
+            
+              <div className="name_fav_detail">
+                <p className="detail__name">{detail.name}</p>
+
+                
               </div>
               <div className='detail_stars'>
               <Rating 
@@ -166,9 +169,11 @@ export default function ProductDetail({ match, history }) {
               readOnly
               />
               </div>
+
+              <div className='detail-description'>
               <p>{detail.description}</p>
+              </div>
             </div>
-            <div>
               <div className="right__info">
                 <p>
                   Precio:
@@ -205,7 +210,6 @@ export default function ProductDetail({ match, history }) {
                   ) : null}
                 </p>
               </div>
-             </div>
             <div>
            </div>
           </div>
