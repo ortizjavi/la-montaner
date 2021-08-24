@@ -147,7 +147,7 @@ export default function Reviews({id}) {
                         {[...Array(el.calification)].map((star, i) => {
                         const ratingValue = i + 1;
                         return (
-                          <label>
+                          <label key={i}>
                             <input 
                               type='radio'
                               name='rating'
