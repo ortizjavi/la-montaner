@@ -13,6 +13,7 @@ import FavoriteIcon from "@material-ui/icons/Favorite";
 import Reviews from './Reviews';
 import * as productActions from '../../redux/actions/types/productActions.js';
 import { getOrders } from "../../redux/actions/types/adminActions";
+import { Rating } from '@material-ui/lab';
 
 export default function ProductDetail({ match, history }) {
   const { id } = useParams(); //pasarle por props
@@ -30,6 +31,7 @@ export default function ProductDetail({ match, history }) {
   const [qty, setQty] = useState(1);
   const [loading, setLoading] = useState(true);
   const [current, setCurrent] = useState(0);
+  const [stars, setStars] = useState(0);
 
   const fav = wishlistItems.find((product) => product.id === id);
   const length = detail?.img?.length;
@@ -49,6 +51,13 @@ export default function ProductDetail({ match, history }) {
   useEffect(() => {
     window.localStorage.setItem("wishlist", JSON.stringify(wishlistItems));
   }, [wishlistItems]);
+
+  useEffect(() => {
+    if (detail.rating) {
+      let totalStars = detail.rating.reduce((a, b) => a + b, 0);
+      setStars(totalStars / detail.rating.length);
+    }
+  }, [detail.rating]);
 
   const addToCartHandler = () => {
     dispatch(productActions.addCartProduct(detail._id, qty));
@@ -83,7 +92,7 @@ export default function ProductDetail({ match, history }) {
   };
 
   return (
-    <div>
+    <div className='big-container-detail'>
       {loading ? (
         <Loading />
       ) : (
@@ -125,10 +134,7 @@ export default function ProductDetail({ match, history }) {
             </div>
           </div>
           <div className="productscreen__right">
-            <div className="detail_info">
-              <div className="name_fav_detail">
-                <p className="detail__name">{detail.name}</p>
-
+          <div className='detail-heart'>
                 {!usuario || usuario.length === 0 ? (
                   <Link to="/login">
                     <FavoriteBorderIcon
@@ -146,31 +152,28 @@ export default function ProductDetail({ match, history }) {
                     onClick={handleAddFav}
                     className="detail_fav"
                   />
-                )}
-              </div>
-              <div className='detail-rating'>
-              {[...Array(5)].map((star, i) => {
-                        const ratingValue = i + 1;
+                )} </div>
+            <div className="detail_info">
+            
+              <div className="name_fav_detail">
+                <p className="detail__name">{detail.name}</p>
 
-                        return (
-                          <label>
-                            <input 
-                              type='radio'
-                              name='rating'
-                              value={ratingValue}
-                            />
-                            <FaStar 
-                              className='star'
-                              color={'#ffc107'}
-                              size={25}
-                            />
-                          </label>
-                        ); 
-                      })}
+                
               </div>
+              <div className='detail_stars'>
+              <Rating 
+              name="read-only"  
+              value={stars}
+              defaultValue={4} 
+              precision={0.5}
+              readOnly
+              />
+              </div>
+
+              <div className='detail-description'>
               <p>{detail.description}</p>
+              </div>
             </div>
-            <div>
               <div className="right__info">
                 <p>
                   Precio:
@@ -207,7 +210,6 @@ export default function ProductDetail({ match, history }) {
                   ) : null}
                 </p>
               </div>
-             </div>
             <div>
            </div>
           </div>

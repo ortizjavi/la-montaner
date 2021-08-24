@@ -3,28 +3,18 @@ import { useSelector, useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { FaEye } from 'react-icons/fa';
 import './DashTable.css';
-import { addCartSubTotal } from '../../redux/actions/types/productActions';
+import { getProductDetail } from '../../redux/actions/types/productActions';
 
 
 const Tabla = () =>{ 
-
-  const dispatch = useDispatch()
   const user = useSelector((state) => state.session.user);
+
   const [state, setState] = useState('') 
-
-  // const orders = useSelector((state) => state.admin.orders);
-  // const response = orders?.filter(o => o.user === user._id);
-
-  // if(!user.length){
-  //     dispatch(getOrders())
-  // }
   
   const handleState = e =>{
     const cardOrder = user.orders?.find(o => o._id === e.target.id);
     setState(cardOrder)
   }
-  console.log('DashTable/user: ',user)
-
 
   const goBack = () => {
     setState('')
@@ -44,7 +34,7 @@ const Tabla = () =>{
             }
           <td>
         
-              <input type='button' className="eye-solid-icon" id={order._id} value='Detalles' onClick={(e) => handleState(e) } >
+              <input type='button' className="eye-solid-icon" id={order._id} value='&#171;' onClick={(e) => handleState(e) } >
                       {/* <FaEye/> */}
               </input >
           </td>
@@ -53,6 +43,7 @@ const Tabla = () =>{
     
   return (
   <div>
+    <h3 className='table-title'>Mis compras</h3>
     { !state ?
 
       <table className='table'>
@@ -67,10 +58,13 @@ const Tabla = () =>{
               <th className='dt-th3'>
                   Total
               </th> 
+              <th className='dt-th3'>
+                  Ver detalles
+              </th> 
           </thead>
 
           <tbody className='dt-tbody'>
-              { ponerFilas(user.orders)}
+              { user.orders && ponerFilas(user.orders)}
           </tbody>
       </table>
       :

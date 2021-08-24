@@ -1,0 +1,15 @@
+.div-map{
+    display: flex;
+	flex-direction:row;
+}
+
+.div-image-map{
+   margin-top: 100px;
+}
+
+.location-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
