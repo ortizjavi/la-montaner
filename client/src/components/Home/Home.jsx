@@ -127,7 +127,7 @@ export default function Home() {
        <div className='Home-filter'></div>
       }
       <main className='home-main'>
-          <section>
+          <section className='home-section-filters'>
             {
               currentCategoryState ==='cervezas' ?
               <Filters  onChangeFilter={(e) => { onChangeFilter(e) }} leftFilter={leftFilter} />
