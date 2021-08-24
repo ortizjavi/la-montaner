@@ -1,0 +1,8 @@
+.div-map{
+    display: flex;
+	flex-direction:row;
+}
+
+.div-image-map{
+   margin-top: 100px;
+}
