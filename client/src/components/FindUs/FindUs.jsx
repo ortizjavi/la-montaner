@@ -23,7 +23,7 @@ export default function FindUs() {
   return (
   <div classsName='div-map'>
     <div classsName='div-image-map'>
-      <LoadScript googleMapsApiKey={process.env.REACT_APP_GOOGLE_API_KEY} className='loadScript-div'>
+      <LoadScript googleMapsApiKey='AIzaSyC7MPsGJ-Zbo5Tdt4xof6TPywH970pO0zw' className='loadScript-div'>
         <GoogleMap
           mapContainerStyle={mapStyle}
           zoom={15}
