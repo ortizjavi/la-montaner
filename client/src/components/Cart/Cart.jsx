@@ -50,7 +50,6 @@ const Cart = () => {
       let offertas = [];
       for (let i = 0; i < sales.length; i++) {
         if (sales[i].price <= total) {
-          console.log("total", total);
           offertas.push(sales[i].discount);
         }
       }
@@ -59,10 +58,11 @@ const Cart = () => {
         setOffers(0);
       }
       if (offertas.length >= 1) {
-        console.log(offertas);
         setOffers(offertas[offertas.length - 1]);
         setOpen(true);
       }
+    } else {
+      console.log("holi2");
     }
   };
 
@@ -122,12 +122,13 @@ const Cart = () => {
     dispatch(getSales());
     getCartSubTotal();
   }, [subtotal, dispatch]);
+
   useEffect(() => {
+    dispatch(getSales());
     alert();
-  }, [total]);
+  }, [total, dispatch, alert]);
 
   const getCartSubTotal = () => {
-    console.log("holi");
     const resultado = cartItems
       .reduce((price, item) => price + item.price * item.stockSelected, 0)
       .toFixed(2);
