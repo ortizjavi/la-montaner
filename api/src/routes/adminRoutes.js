@@ -28,7 +28,8 @@ const {
 
 const {
   createSale,
-  getSales
+  getSales,
+  deleteSales
 } = require("../controllers/Admin/Sales/sales")
 
 // Categories
@@ -54,7 +55,8 @@ router.delete("/users/:id", authenticateToken, authAdmin, deleteUser);
 router.put("/users", authenticateToken, authAdmin, resetUser);
 
 //Sales
-router.post("/sales", createSale);
-router.get("/sales",getSales)
+router.post("/sales", authenticateToken, authAdmin, createSale);
+router.delete("/sales/:id",authenticateToken, authAdmin, deleteSales);
+router.get("/sales",getSales);
 
 module.exports = router;

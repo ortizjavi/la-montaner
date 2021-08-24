@@ -169,3 +169,45 @@
 .home-img{
       width: 100%;
 }
+
+@media screen and (max-width: 480px) {
+      .home-section-filters{
+            display: none;
+      }
+
+      .Home-filter {
+            margin-top: 10rem;
+      }
+      .home-button, .home-list, .select-home, .order-button{
+            font-size: 10px;
+            margin: 0;
+      }
+      .select-home{
+            width: 80%;
+      }
+      .items-container{
+            margin: 0;
+      }
+}
+@media screen and (max-width: 700px) {
+      .home-section-filters{
+            display: none;
+      }
+      .items-container{
+            margin: 0;
+      }
+      
+}
+@media screen and (max-width:900px) {
+      .items-container{
+            margin: 0;
+      }
+      .home-section-filters{
+      width: 12rem;
+      margin: 0;
+      }
+      .home-sidebar-container{
+            width: 12rem;
+            margin-left: 1rem;
+      }
+}

@@ -27,4 +27,18 @@ getSales: async (req, res) => {
         console.log(error)
     }
 },
+deleteSales: async (req, res, next) => {
+  const { id } = req.params;
+  try {
+      await Sale.findByIdAndDelete(id)
+      res.json({
+          ok: true
+      })
+  } catch (error) {
+      console.log(error);
+      res.json({
+          ok: false
+      })
+  }
+}
 }

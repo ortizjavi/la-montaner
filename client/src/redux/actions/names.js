@@ -45,6 +45,7 @@ export const ADD_CART_INPROGRESS = "ADD_CART_INPROGRESS";
 export const ADD_CART_COMPLETED = "ADD_CART_COMPLETED";
 export const ADD_SALE_CART = "ADD_SALE_CART";
 export const ADD_DISCOUNT = "ADD_DISCOUNT";
+export const DELETE_SALES = "DELETE_SALES";
 export const ORDER_PAY = "ORDER_PAY";
 export const ORDER_STATUS = "ORDER_STATUS";
 export const ORDER_CREATED = "ORDER_CREATED";
@@ -54,6 +55,8 @@ export const GET_ORDER_FILTERED = "GET_ORDER_FILTERED";
 export const ADD_CART_SUB_TOTAL = "ADD_CART_SUB_TOTAL";
 export const CART_SUBTOTAL_PLUS_ONE = "CART_SUBTOTAL_PLUS_ONE";
 export const ADD_ADDRESS = "ADD_ADDRESS";
+export const DELETE_ORDER = "DELETE_ORDER";
+export const NEW_SALE = "NEW_SALE";
 
 //login/register action names
 export const LOGIN_USER = "LOGIN_USER";

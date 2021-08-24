@@ -8,6 +8,16 @@ import { getOrders } from "../../redux/actions/types/adminActions";
 
 const Dashboard = () => {
 
+    const dispatch = useDispatch()
+    const usuario = useSelector((state) => state.session.user);
+    const ordenes = useSelector((state) => state.admin.orders);
+
+    if(!ordenes){
+        dispatch(getOrders())
+    }
+    // const respuesta = ordenes?.find(o => o.user === usuario._id);
+
+
     return (
         <div className="dashboard-container">
             <SideBar/>
