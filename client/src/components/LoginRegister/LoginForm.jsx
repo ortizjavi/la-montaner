@@ -11,97 +11,105 @@ import FilledInput from '@material-ui/core/FilledInput';
 import ExternAuthentication from '../Authentication/Authentication';
 import './LoginForm.css';
 import { Link } from 'react-router-dom'
-import { login } from "../../redux/actions/types/authActions";
+import { login, clearLoginFailed } from "../../redux/actions/types/authActions";
 
 const LoginForm = () => {
-    const dispatch = useDispatch()
-    const[email, setEmail] = useState('');
-    const[password, setPassword] = useState('');
-    const[showPassword, setShowPassword] = useState(false);
-    const [error, setError] = useState('')
-    const user = useSelector(state => state.session.user);
-    const loginFailed = useSelector(state => state.session.loginFailed);
-    const history = useHistory();
+  const dispatch = useDispatch()
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
+  const [error, setError] = useState('')
+  const user = useSelector(state => state.session.user);
+  const loginFailed = useSelector(state => state.session.loginFailed);
+  const history = useHistory();
 
-    const handleClickShowPassword = () => {
-      setShowPassword(!showPassword)
+  const handleClickShowPassword = () => {
+    setShowPassword(!showPassword)
   };
- const handleMouseDownPassword = (e) => {
+  const handleMouseDownPassword = (e) => {
     e.preventDefault();
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    dispatch(login({ email, password }))
+  }
+
+useEffect(() => {
+  return () => {
+    dispatch(clearLoginFailed())
+  }
+}, [])
+
+  useEffect(() => {
+    if (loginFailed) {
+      setError(loginFailed);
+    }
+  }, [loginFailed])
+
+  useEffect(() => {
+    if (user.role) {
+      if (user.reset) {
+        return history.push('/reset')
+      }
+      history.push('/home');
+    }
+  }, [user])
+
+  return (
+    <form className={'formStyles'} onSubmit={handleSubmit}>
+      <div className={'title'}>Ingresá tu email y tu contraseña</div>
+      <TextField
+        placeholder="Email *"
+        label="Email"
+        variant="filled"
+        type="email"
+        required
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+      />
+      <FilledInput
+        placeholder="Contraseña *"
+        label="Contraseña"
+        variant="filled"
+        type={showPassword ? 'text' : 'password'}
+        name="password"
+        required
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+        endAdornment={
+          <InputAdornment position="end" >
+            <IconButton
+              aria-label="toggle password visibility"
+              onClick={handleClickShowPassword}
+              onMouseDown={handleMouseDownPassword}
+              edge="end"
+            >
+              {showPassword ? <Visibility /> : <VisibilityOff />}
+            </IconButton>
+          </InputAdornment>
+        }
+      />
+      <div className='btnStyles'>
+        <Button type="submit" variant="contained" color="primary">
+          Acceder
+        </Button>
+      </div>
+      {error ? <span className='errorMsg'>{error}</span> : null}
+      <div className={'title'}>¿No tienes cuenta?
+        <Link to={'/register'}> Regístrate</Link>
+      </div>
+      <div className={'titlePass'}>
+        <Link to={'/pass'}>Olvidé mi contraseña</Link>
+      </div>
+      <div>
+        <ExternAuthentication />
+      </div>
+
+    </form>
+  );
 };
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
-       dispatch(login({email, password}))
-    }
+export default LoginForm;
 
-    useEffect(() => {
-      if(loginFailed) 
-      setError(loginFailed);
-  
-    }, [loginFailed])
-
-    useEffect(() => {
-      if (user.role){
-        if(user.reset){
-          return history.push('/reset')
-        }
-        history.push('/home');
-      }
-    }, [user])
-
-    return (
-        <form className={'formStyles'} onSubmit={handleSubmit}>
-          <div className={'title'}>Ingresá tu email y tu contraseña</div>
-          <TextField
-            label="Email"
-            variant="filled"
-            type="email"
-            required
-            value={email}
-            onChange={e => setEmail(e.target.value)}
-          />
-          <FilledInput
-          label="Contraseña"
-          variant="filled"
-          type={showPassword ? 'text' : 'password'}
-          name="password"
-          required
-          value={password}
-          onChange={e => setPassword(e.target.value)}
-          endAdornment={
-              <InputAdornment position="end" >
-                  <IconButton
-                      aria-label="toggle password visibility"
-                      onClick={handleClickShowPassword}
-                      onMouseDown={handleMouseDownPassword}
-                      edge="end"
-                  >
-                      {showPassword ? <Visibility /> : <VisibilityOff />}
-                  </IconButton>
-              </InputAdornment>
-          }
-      /> 
-          <div className='btnStyles'>
-            <Button type="submit" variant="contained" color="primary">
-              Acceder
-            </Button>
-            </div>
-            {error ? <span className='errorMsg'>{error}</span> : null}
-            <div className={'title'}>¿No tienes cuenta?  
-             <Link to={'/register'}> Regístrate</Link>
-            </div> 
-            <div className={'titlePass'}>
-              <Link to={'/pass'}>Olvidé mi contraseña</Link>
-           </div>
-            <div>
-            <ExternAuthentication/>
-            </div>
-          
-        </form>
-      );
-    };
-
- export default LoginForm;
-    
 

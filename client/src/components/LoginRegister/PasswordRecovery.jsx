@@ -3,70 +3,78 @@ import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import swal from "sweetalert";
 import './LoginForm.css';
 import { recoveryPassword } from "../../redux/actions/types/authActions";
 
 const PasswordRecovery = () => {
-    const dispatch = useDispatch()
-    const[email, setEmail] = useState('');
-    const[name, setName] = useState('');
-    const [error, setError] = useState('')
-    const user = useSelector(state => state.session.user);
-    const loginFailed = useSelector(state => state.session.loginFailed);
-    const history = useHistory();
+  const dispatch = useDispatch();
+  const [email, setEmail] = useState('');
+  const [error, setError] = useState('');
+  const loginFailed = useSelector(state => state.session.loginFailed);
+  const history = useHistory();
 
+
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+   
+    dispatch(recoveryPassword({ email })).then((result) => {
+      result && result.payload === "Invalid user" ?
+        setError(loginFailed) :
+        swal({
+          title: "Revisa tu casilla de correo!",
+          icon: "success",
+          buttons: true,
+        }).then((ok) => {
+          if (ok) {
+            history.push('/home')
+          }
+        })
+      
+    })
+  }
+  
+const handleChange =(e) =>{
+  setEmail(e.target.value)
+if(!e.target.value){
+  setError('')
+}
+}
+
+  useEffect(() => {
+    if(loginFailed) {
+    setError(loginFailed);
+    } else {
+      setError('')
+    }
+  }, [loginFailed])
+  
+  
  
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        console.log('sadasdas')
-      dispatch(recoveryPassword({email, name}))
-    }
 
-    useEffect(() => {
-      if(loginFailed) 
-      setError(loginFailed);
-  
-    }, [loginFailed]) 
 
-   /*  useEffect(() => {
-      if (user.role){
-        if(user.reset){
-          return history.push('/reset')
-        }
-        history.push('/home');
-      }
-    }, [user]) */
+  return (
+    <form className={'formStyles'} onSubmit={handleSubmit}>
+      <div className={'title'}>Ingresá tu email</div>
+      <TextField
+        label="Email"
+        variant="filled"
+        type="email"
+        required
+        value={email}
+        onChange={handleChange}
+      />
+      {error ? <span className='errorMsg'>{error}</span> : null}
+      <div className='btnStyles'>
+        <Button type="submit" variant="contained" color="primary">
+          Enviar
+        </Button>
+      </div>
+    </form>
+  );
+};
 
-    return (
-        <form className={'formStyles'} onSubmit={handleSubmit}>
-          <div className={'title'}>Ingresá tu email</div>
-          <TextField
-            label="Email"
-            variant="filled"
-            type="email"
-            required
-            value={email}
-            onChange={e => setEmail(e.target.value)}
-          />
-          <TextField
-            label="Name"
-            variant="filled"
-            type="name"
-            required
-            value={name}
-            onChange={e => setName(e.target.value)}
-          />
-            {error ? <span className='errorMsg'>{error}</span> : null}
-      
-          <div className='btnStyles'>
-            <Button type="submit" variant="contained" color="primary">
-              Enviar
-            </Button>
-            </div>
-        </form>
-      );
-    };
+export default PasswordRecovery;
 
- export default PasswordRecovery;
-    
