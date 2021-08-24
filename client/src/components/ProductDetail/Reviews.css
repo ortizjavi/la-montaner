@@ -94,6 +94,20 @@ justify-content: center;
   background-color: #686868;
 }
 
+.buttons-review button{
+  padding: 10px 17px;
+  width: 15%;
+  background: #171717;
+  color: #f4f4f4;
+  cursor: pointer;
+}
+
+
+.buttons-review button:hover{
+  opacity: 0.9;
+  background-color: #686868;
+}
+
 
 /* FORM */
 .container-reviews-div{

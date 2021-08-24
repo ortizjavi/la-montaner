@@ -108,11 +108,13 @@ const RegisterForm = () => {
                     variant="filled"
                     name="email"
                     required
+                    type="email"
                     value={input.email}
                     onChange={handleInputChange}
                 />
 
                 <FilledInput
+                    placeholder="Contraseña *"
                     label="Contraseña"
                     variant="filled"
                     type={input.showPassword ? 'text' : 'password'}
@@ -134,6 +136,7 @@ const RegisterForm = () => {
                 />
                 <p>Ingresa nuevamente tu contraseña</p>
                 <FilledInput
+                    placeholder="Contraseña *"
                     label="Contraseña"
                     variant="filled"
                     type={checkPassword.showCheckPassword ? 'text' : 'password'}

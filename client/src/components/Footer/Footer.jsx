@@ -40,6 +40,9 @@ const Footer = ()=>{
                 <ul>
                 <NavLink to={'/faq'}> <li><a href="#" rel='noopener noreferrer'>FAQ</a></li> </NavLink>
                 </ul>
+                <ul>
+                <NavLink to={'/map'}> <li><a href="#" rel='noopener noreferrer'>Dónde estamos</a></li> </NavLink>
+                </ul>
               </div>
               <div className="footer-col">
                 <h4>Contactanos </h4>

@@ -71,9 +71,9 @@ module.exports = {
                 ok: true,
                 orders: newOrder
             }
-            if (update.status === 'Completa'){
+            if (newOrder.status === 'Completa'){
                 req.order = newOrder;
-                next();
+                return next();
             }
             res.json(req.res);
         } catch (error) {

@@ -16,7 +16,7 @@ module.exports = (req, res, next) => {
             req.res = { ok: true, order: doc }
 			if (statusNotNull){
 				req.order = doc;
-				next();
+				return next();
 			}
 			res.json(req.res);
 		}

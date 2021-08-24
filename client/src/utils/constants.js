@@ -1,8 +1,9 @@
 const numChicha = '5493515992780';
 const mensajeChicha ='Che quiero comprar birras🍻';
-export const WHATSAPP_LINK = `https://wa.me/${numChicha}?text=${encodeURIComponent(mensajeChicha)}`;
 const USER = 'USER';
 const ADMIN = 'ADMIN';
+
+export const WHATSAPP_LINK = `https://wa.me/${numChicha}?text=${encodeURIComponent(mensajeChicha)}`;
 export const ROLE = {
   USER,
   ADMIN
