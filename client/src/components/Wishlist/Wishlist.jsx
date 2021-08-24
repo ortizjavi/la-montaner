@@ -28,7 +28,7 @@ export default function Wishlist() {
           </div>
         ) : (
           wishlistItems.map((product) => (
-            <div className='product_container'>
+            <div key={product.id} className='product_container'>
               <div className='delete_btn_container'>
                 <button className='delete_btn' onClick={() => handleRemove(product.id)}> <DeleteIcon/> </button>
               </div>
