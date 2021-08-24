@@ -68,6 +68,9 @@ const UserSetting =  () => {
 
     return(
         <section className='userSetting-container'>
+          <NavLink to='/dashboard'>
+                <p>&#x2B05; Volver</p>
+          </NavLink>
           <br></br>
 
             <h3>Hola, <i>{input.given_name}</i> Modifica tus datos</h3>
@@ -120,11 +123,14 @@ const UserSetting =  () => {
 
                 <button className='us-button' type="submit" onClick={reloadPage}>Agregar Los Cambios</button>
                 <br></br>
-            <NavLink className='us-button' to={'/dashboard'}>
+            {/* <NavLink className='us-button' to={'/dashboard'}>
                 Regresar
-            </NavLink>
+            </NavLink> */}
             </form>
             </>
+            <NavLink to='/dashboard'>
+                <p>&#x2B05; Volver</p>
+          </NavLink>
         </section>
     )
 }
