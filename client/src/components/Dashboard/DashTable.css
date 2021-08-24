@@ -1,43 +1,59 @@
+.table-title {
+	margin-block: 0.5rem;
+}
+
 .table {
 	padding-top: 1rem;
-	padding-left: 1rem;
 	width: 100%;
-    display:block;
+    /* display:block; */
+	
 
 }
 .table thead{
-    display: flex; 
-    justify-content:end;
-	padding-left: 2%;
+	display: flex;
+    justify-content: space-around;
+    /* padding-left: 2%; */
+    /* padding-right: 2%; */
+    /* width: 95%; */
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+}
+.table th {
+	width: 7rem;	
 }
 .table td {
-	padding-top: 10px;
-	padding-bottom: 10px;
-	margin-right: 2rem;
+	    /* padding-top: 10px; */
+		padding-bottom: 5px;
+		/* margin-right: 2rem; */
+		width: 7rem;
 }
 .dt-th2{
-	margin-left: 27%;
+	/* margin-left: 27%; */
 }
 .dt-th3{
-	margin-left: 24%;
+	/* margin-left: 24%; */
 }
 .dt-tbody{
-	margin-top: 1rem;
 	height: 25vh;
-	display:block;
+	/* display:block; */
+	display:flex;
+	justify-content: center;
+	flex-direction: column;
 	overflow-y: scroll;
 }
 .dt-tbody td{
-	padding-left: 3px;
+	/* padding-left: 3px; */
 }
 .dt-tr{
-	margin-left: 1rem;
+	/* margin-left: 1rem; */
 	display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
+	align-items: center;
 }
 
 .eye-solid-icon{
-	margin-right: 2rem;
+	/* margin-right: 2rem; */
 	background: #24262b;
     color: white;
 	cursor: pointer;
