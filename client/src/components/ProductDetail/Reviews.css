@@ -94,6 +94,10 @@ justify-content: center;
   background-color: #686868;
 }
 
+.disable {
+  display: none;
+}
+
 .buttons-review button{
   padding: 10px 17px;
   width: 15%;
