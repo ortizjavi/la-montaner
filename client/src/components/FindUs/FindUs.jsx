@@ -6,8 +6,6 @@ import './FindUs.css';
 //import { useForm } from 'react-hook-form';
 //import swal from "sweetalert";
 
-import { GOOGLE_API_KEY } from '../../utils/constants.js';
-
 export default function FindUs() {
   const mapStyle = { height: '400px', width: '600px', margin: '0 auto'};
   const location = { lat: -30.856862725386204, lng: -64.51534707428485};
@@ -25,7 +23,7 @@ export default function FindUs() {
   return (
   <div classsName='div-map'>
     <div classsName='div-image-map'>
-      <LoadScript googleMapsApiKey={GOOGLE_API_KEY} className='loadScript-div'>
+      <LoadScript googleMapsApiKey={process.env.REACT_APP_GOOGLE_API_KEY} className='loadScript-div'>
         <GoogleMap
           mapContainerStyle={mapStyle}
           zoom={15}
