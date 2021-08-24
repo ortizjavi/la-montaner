@@ -8,7 +8,7 @@ import './FindUs.css';
 
 export default function FindUs() {
   const mapStyle = { height: '400px', width: '600px', margin: '0 auto'};
-  const location = { lat: -30.856862725386204, lng: -64.51534707428485};
+  const location = { lat: -31.73197584607406, lng: -64.45617099471914};
   // const { register, errors, handleSubmit } = useForm();
 
   // const handleForm = (data, e) => {
@@ -34,7 +34,7 @@ export default function FindUs() {
       </LoadScript>
     </div>
       <div className='location-info'>
-        <h2> Nos encontramos en Cordoba </h2>
+        <h2> Nos encontramos en Villa Serranita, Córdoba </h2>
         <h3>Por cualquier consulta escribinos:</h3>
         <p>Por Whatsapp: </p>
         <a href={WHATSAPP_LINK} target="_blank" rel='noopener noreferrer'><FaWhatsapp /></a>
