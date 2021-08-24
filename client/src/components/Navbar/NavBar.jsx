@@ -17,6 +17,9 @@ import { logout } from "../../redux/actions/types/authActions.js";
 // import { IoStorefrontOutline } from 'react-icons/ri';
 import StorefrontIcon from '@material-ui/icons/Storefront';
 import logoLanding from "../../img/logoLanding.png";
+import MenuIcon from '@material-ui/icons/Menu';
+import CloseIcon from '@material-ui/icons/Close';
+// import MobileNavBar from "./MobileNavBar";
 
 
 function CartSubTotal(){
@@ -94,63 +97,95 @@ function NavBar(props, {history}) {
    <>
     <header className="navbar">
       <SearchBar />
+      
      
-        {/* <nav className='nav-container'>
-          <ul className='nav-ul'>
-            <li className="list-item">
-              <select className='nav-selec' id='select' name="select" size='5' onClick={(e) =>handleCategory(e)}>
-                <option id='range1'  value='vertodos'>Todos los productos</option>
-                <option id='range2' value='cervezas'>Cervezas</option>
-                <option id='range3' value='conservas'>Conservas</option>
-                <option id='range3' value='merchandising'>Merchandising</option>
-                <option id='range3' value='otros'>Otros</option>
-              </select>
-              
-          </li>
-        </ul>
-      </nav> */}
-       <NavLink to='/home' className='nav-personicon'>
+       <NavLink to='/home' className='nav-personicon' title='Ir a la tienda'>
         <img className='nb-img' 
-        // src="https://res.cloudinary.com/la-montanes/image/upload/v1629134641/logopng_qbilvd.png" 
         src={logoLanding} 
         alt="Montañez Logo" />
       </NavLink>
+      {/* <MobileNavBar/> */}
+
       <div className='nav-icons-container'>
 
-      
-      <Link to='/login' className='nav-icon'>
-        {user && user.picture ? 
-        <img className='imgStyle' src={user.picture} alt="imagen de usuario" width="50" height="50" ></img> 
-        : <PersonIcon className='nav-personicon' style={{ fontSize: 40 }} />}
-         
-  
-      </Link>
-      <NavLink to='/home' className='nav-icon'>
-        
-        {/* <h3 className='nav-title'>La Montañes Craft Beer <StorefrontIcon/></h3> */}
-        < StorefrontIcon className='nav-personicon'/>
-      </NavLink>
+        <Link to='/login' className='nav-icon' title='Usuario'>
+          {user && user.picture ? 
+          <img className='imgStyle' src={user.picture} alt="imagen de usuario" width="50" height="50" ></img> 
+          : <PersonIcon className='nav-personicon' style={{ fontSize: 40 }} />}
+        </Link>
 
-      {
-         !usuario || usuario.length === 0 ? (
-           <Link to='/login' className='nav-icon'>
-             <FavoriteIcon onClick={() => handleWishlist()} className='fav-icon-nav'/>
-           </Link>
-         ) : <Link to="/wishlist" className='nav-icon'><FavoriteIcon className='fav-icon-nav'/></Link>
-      }
+        <NavLink to='/home' className='nav-icon' title='Ir a la tienda'>
+          
+          < StorefrontIcon className='nav-personicon' />
+        </NavLink>
 
+        {
+          !usuario || usuario.length === 0 ? (
+            <Link to='/login' className='nav-icon' title='Favoritos'>
+              <FavoriteIcon onClick={() => handleWishlist()} className='fav-icon-nav'/>
+            </Link>
+          ) : <Link to="/wishlist" className='nav-icon' title='Favoritos'><FavoriteIcon className='fav-icon-nav'/></Link>
+        }
 
-      <Link to="/cart" className='nav-icon cart_subtotal_container'>
-          <ShoppingCartIcon className='nav-personicon' style={{ fontSize: 40 }} />
-          <CartSubTotal/>
-      </Link>
-      {isUser ?
-        <div className='nav-icon'>
-            <ExitToAppIcon className='nav-personicon' onClick={(e) => dispatch(logout())} style={{ fontSize: 40 }} />     
-        </div>
-      : null}
+        <Link to="/cart" className='nav-icon cart_subtotal_container' title='Carrito de compras'>
+            <ShoppingCartIcon className='nav-personicon' style={{ fontSize: 40 }} />
+            <CartSubTotal/>
+        </Link>
+
+        {isUser ?
+          <div className='nav-icon' title='Cerrar sesion'>
+              <ExitToAppIcon className='nav-personicon' onClick={(e) => dispatch(logout())} style={{ fontSize: 40 }} />     
+          </div>
+        : null}
       </div>
+
+      
+      <div className='nav-icons-container-mobile'>
+        {/* <CloseIcon style={{ fontSize: 40 }} /> */}
+        <ul>
+        <MenuIcon className='nav-menu-mobile' style={{ fontSize: 40 }} />
+          <li>
+            <Link to='/login' className='nav-icon' title='Usuario'>
+              {user && user.picture ? 
+              <img className='imgStyle-mobile' src={user.picture} alt="imagen de usuario" width="50" height="50" ></img> 
+              : <PersonIcon className='nav-personicon' style={{ fontSize: 40 }} />}
+              <span>Usuario</span>
+            </Link>
+          </li>
+          <li>
+            <Link to='/home' className='nav-icon' title='Ir a la tienda'>
+              
+              < StorefrontIcon className='nav-personicon' /><span>Tienda</span>
+            </Link>
+          </li>
+          {
+            !usuario || usuario.length === 0 ? (
+              <li>
+              <Link to='/login' className='nav-icon' title='Favoritos'>
+                <FavoriteIcon onClick={() => handleWishlist()} className='fav-icon-nav'/><span>Favoritos</span>     
+              </Link>
+              </li>
+            ) : <li> <Link to="/wishlist" className='nav-icon' title='Favoritos'><FavoriteIcon className='fav-icon-nav'/><span>Favoritos</span></Link></li>
+          }
+          <li>
+            <Link to="/cart" className='nav-icon cart_subtotal_container' title='Carrito de compras'>
+                <ShoppingCartIcon className='nav-personicon' style={{ fontSize: 40 }} /><span>Carrito</span> 
+                <CartSubTotal/>
+            </Link>
+          </li>
+          {isUser ?
+            <li className='nav-icon-mobile' title='Cerrar sesion'>
+              <Link className='nav-icon-mobile' onClick={(e) => dispatch(logout())}>
+                <ExitToAppIcon  className='fav-icon-nav'  style={{ fontSize: 40 }} />
+                <span>Cerrar Sesion</span> 
+              </Link>    
+            </li>
+          : null}
+        </ul>
+      </div>
+    
     </header>
+
     { location.pathname === '/home' &&
     <section >      
                 <ul className='navbar-ul'>
@@ -170,8 +205,4 @@ function NavBar(props, {history}) {
 
 export default NavBar;
 
-{
-  /* <NavLink to='/home'>
-              <input className={`${currentCategoryState === 'conservas' ? "actived" : 'Nav-button'}`} type="button" value="Conservas" onClick={() => setState('conservas')} />
-            </NavLink> */
-}
+

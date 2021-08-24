@@ -1,7 +1,7 @@
 
 .navbar {
     height: 8rem;
-    width: 100vw;
+    width: 100%;
     top: 0;
     left: 0;
     display: flex;
@@ -214,6 +214,7 @@ width: 10rem;
 
 .nav-icon {
     width: auto;
+    cursor: pointer;
     /* padding: 0 20px; */
     /* margin-right: 1rem; */
     
@@ -289,6 +290,7 @@ width: 10rem;
     display: flex;
     justify-content: center;
     position: relative;
+    flex-wrap: wrap;
     /* background-color:#dcdcdc9e; */
 
 }
@@ -298,7 +300,105 @@ width: 10rem;
 }
 
 
+.nav-icons-container-mobile{
+    display: none;
+}
+.nav-menu-mobile{
+    position: relative;
+}
+.imgStyle-mobile{
+    border-radius: 90px;
+    width: 40px;
+    height: 40px;
+    margin-right: 1rem;
+}
 
 
 
+@media screen and (max-width:690px) {
+.nav-icons-container{
+    display: none;
+    transition: 0.6s;
+}    
 
+.nav-icons-container-mobile{
+    /* transition: 0.6s; */
+    display: flex;
+    flex-direction: column;
+    color: white;
+    position: absolute;
+    margin-left: 75%; 
+  
+}
+
+.nav-icons-container-mobile:hover {
+  margin-right: 18%;
+  width: 10rem;
+}
+.nb-img{
+    position: absolute;
+    width: 17%;
+    margin-left: -65%;
+    margin-top: -5%;
+}
+.nav-icons-container-mobile:hover .nav-menu-mobile{
+   padding-left: 6.15rem;
+    padding-top: -0.2rem;
+}
+.nav-icons-container-mobile a span{
+    color: white;
+}
+.nav-icons-container-mobile a {
+    display: flex;
+    align-items: center;
+    
+}
+.nav-icons-container-mobile ul li{
+    display: none;
+    border: 1px solid #cccccc;
+    background-color: #ffffff;
+}
+.nav-icons-container-mobile ul:hover {
+    margin-top: 17rem;
+    float: right;
+    width: 100%;
+
+}
+.nav-icons-container-mobile ul:hover li{
+    display: block;
+    width: 100%;
+    line-height: unset;
+    white-space: nowrap;
+}
+.nav-icons-container-mobile ul li a, .nav-icon {
+    padding: 0.5rem ;
+    line-height: unset;
+    white-space: nowrap;
+    /* background-color:#022E1A; */
+    background: #24262b;
+
+}
+.nav-icons-container-mobile ul li a:hover {
+    opacity: 0.7;
+}
+
+}
+
+@media screen and (max-width:480px) {
+    .nav-icons-container-mobile:hover ul li {
+        background-color: blanchedalmond;
+        width: 9rem;
+        margin-left: -25%;
+    }
+    .nav-icons-container-mobile:hover .nav-menu-mobile{
+        padding-left: 4.15rem;
+         padding-top: -0.2rem;
+     }
+     .nb-img{
+        position: absolute;
+        width: 25%;
+        margin-left: -65%;
+        margin-top: -8%;
+    }
+  
+}
