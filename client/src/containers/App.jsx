@@ -31,6 +31,7 @@ import UserSetting from "../components/UserSetting/UserSetting";
 import { ROLE } from "../utils/constants";
 import Address from "../components/Address/Address";
 import FindUs from "../components/FindUs/FindUs";
+import UserReviewsTable from "../components/Dashboard/UserReviews";
 
 const theme = createTheme({
   palette: {
@@ -102,6 +103,12 @@ export default function App() {
                 exact
                 path="/dashboard/setting"
                 component={UserSetting}
+                roles={[ROLE.USER]}
+              />
+              <PrivateRoute
+                exact
+                path="/dashboard/userreviews"
+                component={UserReviewsTable}
                 roles={[ROLE.USER]}
               />
               <PrivateRoute
