@@ -168,10 +168,12 @@ export default function ProductDetail({ match, history }) {
               precision={0.5}
               readOnly
               />
-              </div>
+              </div> 
 
               <div className='detail-description'>
               <p>{detail.description}</p>
+                <p>Ibu: {detail.ibu}</p>
+                <p>Abv: {detail.abv}%</p>
               </div>
             </div>
               <div className="right__info">

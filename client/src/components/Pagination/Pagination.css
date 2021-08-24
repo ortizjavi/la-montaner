@@ -26,6 +26,8 @@ font-size_narvar:rgb(130,130,130); */
 .pagination{
     display: flex;
     justify-content: center;
+    width: 100%;
+    margin-top: 2rem;
 }
 .pagination  ul{
       list-style: none;
@@ -39,7 +41,7 @@ font-size_narvar:rgb(130,130,130); */
         background-color: #24262b;
         padding: 10px 10px;
         margin-right: 8px;
-        border-radius: 8px;
+        border-radius: 100px;
         font-family: sans-serif;
         color: #fff;
         font-size: 1.1rem;
@@ -47,9 +49,17 @@ font-size_narvar:rgb(130,130,130); */
         text-align: center;
         user-select: none;
 }
+.pagination ul li:first-child{
+        padding: 0;
+        background: none;
+        color: black;
+}
   
 .pagination ul  li:last-child{
           margin-right: 0px;
+          padding: 0;
+          background: none;
+          color: black;
         }
   
 .pagination ul  li:not(.active-p):not(.disabled){
@@ -72,6 +82,7 @@ font-size_narvar:rgb(130,130,130); */
 .pagination ul  li.disabled{
           background: rgb(43,149,89,0);
           pointer-events: none;
+          filter: invert(100%);
         }
       
     
