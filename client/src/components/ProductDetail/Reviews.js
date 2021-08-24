@@ -59,10 +59,10 @@ export default function Reviews({id}) {
     
       const handleReviews = (e) => {
         e.preventDefault();
-        if(e.target.value === 'verMas'){
-          setShowReviews(10);
+        if(e.target.value === 'verMas' ) {
+          setShowReviews(showReviews + 3);
         } else if(e.target.value === 'verMenos') {
-          setShowReviews(3);
+          setShowReviews(showReviews - 3);
         } else{
           setShowReviews(3);
         }
@@ -147,7 +147,7 @@ export default function Reviews({id}) {
                         {[...Array(el.calification)].map((star, i) => {
                         const ratingValue = i + 1;
                         return (
-                          <label>
+                          <label key={i}>
                             <input 
                               type='radio'
                               name='rating'
@@ -174,8 +174,20 @@ export default function Reviews({id}) {
                 {
                   detail.reviews.length > 3 ? (
                   <div className='review-button'>
-                    <button className={showReviews === detail.reviews.length ? 'disable' : null} value='verMas' onClick={(e) => handleReviews(e)}>Ver más</button>
-                    <button className={showReviews === 3 || showReviews < 3 ? 'disable' : null} value='verMenos' onClick={(e) => handleReviews(e)}>Ver menos</button>
+                    <button 
+                      className={showReviews === detail.reviews.length || showReviews > detail.reviews.length ? 'disable' : null} 
+                      value='verMas' 
+                      onClick={(e) => handleReviews(e)}
+                    >
+                      Ver más
+                    </button>
+                    <button 
+                      className={showReviews === 3 || showReviews < 3 ? 'disable' : null} 
+                      value='verMenos' 
+                      onClick={(e) => handleReviews(e)}
+                    >
+                      Ver menos
+                    </button>
                   </div>
                   ) : null
                 }
