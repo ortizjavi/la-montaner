@@ -53,8 +53,8 @@ const Cart = () => {
         swal("Tu carrito se vació con exito :)", {
           icon: "success",
         });
+        dispatch(productActions.deleteCartAll());
       } 
-      dispatch(productActions.deleteCartAll());
     });
   };
 

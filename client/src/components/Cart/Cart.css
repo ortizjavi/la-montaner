@@ -62,6 +62,7 @@
   .back-btn:hover {
     opacity: 0.9;
     background-color: #686868;
+    transition: 0.25s;
     cursor: pointer;
   }
 
@@ -86,6 +87,7 @@
   .cartDeleteAll_btn:hover {
     opacity: 0.9;
     background-color: #686868;
+    transition: 0.25s;
     cursor: pointer;
   }
   
