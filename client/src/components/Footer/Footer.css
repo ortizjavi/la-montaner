@@ -104,23 +104,32 @@
 	background-color: #ffffff;
 }
 
-
-/* whatsapp big logo */
-/* .footer-div-w{
-    color: white;
-    text-decoration: none;
-    cursor: pointer;
-	float: right;
+.float{
+	width:60px;
+	height:60px;
+	background-color:#25d366;
+	color:#FFF;
+	border-radius:50px;
+	text-align:center;
+	box-shadow: 2px 2px 6px rgb(0 0 0 / 40%);
+ 	z-index:50;
+	opacity: 1;
+	position: fixed;
+	top: auto;
+	bottom: 20px;
+	right: 55px;
+	transition: all 0.35s ease;
+}
+.float:hover {
+  text-decoration: none;
+  color: #25d366;
+  background-color:#fff;
 }
 
-.footer-icon-w{
-	position: absolute;
-    top: -30px;
-    color: white;
-    border-radius: 60px;
-    background: #66D040;
-    cursor: pointer;
-}	 */
+.my-float{
+margin-top:5px;
+margin-left: 2px;
+}
 
 /*responsive*/
 @media(max-width: 767px){
