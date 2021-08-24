@@ -49,16 +49,12 @@ const Cart = () => {
       buttons: ["Cancelar", true],
       dangerMode: true,
     }).then((willDelete) => {
-      if (willDelete && cartItems.length === 0) {
-        swal("Tu carrito se encuentra vacio :(", {
-          icon: "error",
-        });
-      } else if (willDelete) {
+      if (willDelete) {
         swal("Tu carrito se vació con exito :)", {
           icon: "success",
         });
         dispatch(productActions.deleteCartAll());
-      }
+      } 
     });
   };
 
@@ -108,7 +104,7 @@ const Cart = () => {
 
         <div className="cartDeleteAll_container">
           <button
-            className="cartDeleteAll_btn"
+            className= {cartItems.length === 0 ? 'cartDeleteAllDisable' : 'cartDeleteAll_btn'}
             onClick={() => removeAllHandler()}
           >
             Vaciar carrito
