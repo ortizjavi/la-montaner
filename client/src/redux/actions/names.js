@@ -44,15 +44,18 @@ export const DELETE_CART_ALL = "DELETE_CART_ALL";
 export const ADD_CART_INPROGRESS = "ADD_CART_INPROGRESS";
 export const ADD_CART_COMPLETED = "ADD_CART_COMPLETED";
 export const ADD_SALE_CART = "ADD_SALE_CART";
+export const DELETE_SALES = "DELETE_SALES";
 export const ORDER_PAY = "ORDER_PAY";
 export const ORDER_STATUS = "ORDER_STATUS";
-export const ORDER_CREATED = "ORDER_CREATED"
+export const ORDER_CREATED = "ORDER_CREATED";
 export const GET_ORDERS = "GET_ORDERS";
 export const ORDER_UPDATED = 'ORDER_UPDATED';
 export const GET_ORDER_FILTERED = "GET_ORDER_FILTERED";
+export const DELETE_ORDER = "DELETE_ORDER";
 export const ADD_CART_SUB_TOTAL = 'ADD_CART_SUB_TOTAL';
 export const CART_SUBTOTAL_PLUS_ONE = 'CART_SUBTOTAL_PLUS_ONE'
 export const ADD_ADDRESS = 'ADD_ADDRESS';
+export const NEW_SALE = "NEW_SALE";
 
 
 //login/register action names

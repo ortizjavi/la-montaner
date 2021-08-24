@@ -81,5 +81,19 @@ module.exports = {
             res.json({ ok: false })
         }
 
+    },
+    deleteOrders: async (req, res, next) => {
+        const { id } = req.params;
+        try {
+            await Order.findByIdAndDelete(id)
+            res.json({
+                ok: true
+            })
+        } catch (error) {
+            console.log(error);
+            res.json({
+                ok: false
+            })
+        }
     }
 };

@@ -23,9 +23,15 @@ const cartReducer = (state = CART_INITIAL_STATE, action) => {
     case actionTypes.ADD_CART_SUB_TOTAL: return { ...state, cartSubtotal: action.payload };
     case actionTypes.ADD_ADDRESS: return {...state, address: action.payload}
     case actionTypes.CART_SUBTOTAL_PLUS_ONE: return {...state, cartSubtotal: state.cartSubtotal + 1}
+    case actionTypes.NEW_SALE: return {
+      ...state, sales: [...state.sales, action.payload]
+    }
     case actionTypes.ADD_SALE_CART: return {
       ...state, sales: action.payload
     }
+    case actionTypes.DELETE_SALES: 
+    const deletedSale = state.sales?.filter(s => s._id !== action.payload) 
+      return {...state, sales: deletedSale }
     default: return state;
   }
 };
