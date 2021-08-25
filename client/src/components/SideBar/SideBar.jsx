@@ -5,6 +5,7 @@ import LocalShippingIcon from '@material-ui/icons/LocalShipping';
 import SettingsIcon from '@material-ui/icons/Settings';
 import MenuIcon from '@material-ui/icons/Menu';
 import SvgIcon from '@material-ui/core/SvgIcon';
+import FavoriteIcon from '@material-ui/icons/Favorite';
 import { BsHeart } from 'react-icons/bs';
 import { FaFileInvoiceDollar } from 'react-icons/fa';
 import RateReviewIcon from '@material-ui/icons/RateReview';
@@ -47,7 +48,7 @@ function SideBar(){
 			</NavLink> */}
 			<Tooltip TransitionComponent={Zoom} title='Favoritos' arrow placement="right-start">
 				<NavLink to='/wishlist' className='sidebar-navlink'>
-					<BsHeart style={{ fontSize: 40, color:"grey" }}/>
+					<FavoriteIcon style={{ fontSize: 40, color:"grey" }}/>
 				</NavLink >
 			</Tooltip>
 			<Tooltip TransitionComponent={Zoom} title='Mis Reviews' arrow placement="right-start">
@@ -73,7 +74,7 @@ function SideBar(){
 					{/* <div className='sidebar-section'> */}
 						<li>
 							<NavLink to='/wishlist' className='sidebar-navlink'>
-								<BsHeart style={{ fontSize: 20, color:"white" }}/>
+								<FavoriteIcon style={{ fontSize: 20, color:"white" }}/>
 								<span>Lista De Deseos</span>
 							</NavLink >
 						</li>

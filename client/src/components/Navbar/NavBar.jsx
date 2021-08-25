@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "./NavBar.css";
-import { Link, NavLink, useLocation } from "react-router-dom";
+import { Link, NavLink, useLocation, useHistory } from "react-router-dom";
 import SearchBar from "../SearchBar/SearchBar";
 import PersonIcon from "@material-ui/icons/Person";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
@@ -40,6 +40,7 @@ function CartSubTotal(){
 }
 
 function NavBar(props, {history}) {
+  const { push } = useHistory()
   const location = useLocation()
   console.log('Navbar/location',location)
   let initialCategories = { vertodos: false, cervezas: false, conservas: false, merchandising: false, otros: false }
@@ -96,8 +97,11 @@ function NavBar(props, {history}) {
         </SvgIcon>
       );
     }
-    
-      
+  
+    const exit = (e) => {
+      dispatch(logout())
+      push('/home')
+    }    
 
  return (
    <>
@@ -143,7 +147,7 @@ function NavBar(props, {history}) {
 
         {isUser ?
           <div className='nav-icon' title='Cerrar sesion'>
-              <ExitToAppIcon className='nav-personicon' onClick={(e) => handleLogOut(e)} style={{ fontSize: 40 }} />     
+              <ExitToAppIcon className='nav-personicon' onClick={exit} style={{ fontSize: 40 }} />     
           </div>
         : null}
       </div>
