@@ -7,8 +7,10 @@ module.exports = (req, res, next) => {
 
 	User.findOne({ email }).then((user) => {
 		if (!user) return res.status(400).send('User not found');
-		User.updateOne(user, { $set : { reset: true } }).then((op) => {
+		User.updateOne({ email: user.email }, { $set : { reset: true } }).then((op) => {
 			if (!op && !op.ok) return res.sendStatus(500);
+			console.log(op);
+			console.log(user);
 			res.sendStatus(200);
 		})
 	})

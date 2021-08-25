@@ -4,6 +4,8 @@ import { NavLink } from 'react-router-dom';
 import axios from 'axios';
 import './UserSetting.css'
 import {UPDATE_USER} from '../../utils/endpoints';
+import loader from './loader.gif'
+import swal from "sweetalert";
 
 
 const UserSetting =  () => {
@@ -18,16 +20,19 @@ const UserSetting =  () => {
       email: user.email, 
       // adress: '', 
       });
+    const [loading, setLoading] = useState(true)
 
     const handleSubmit = async e =>{
       e.preventDefault();
       try {
         const resp = await axios.put(`${UPDATE_USER}/${user._id}`, {...input,
           name: input.given_name +' '+ input.family_name
-        }).then(res => res.data.ok ? alert('Cambios agragados con éxito') : alert('Intentalo nuevamente'))
+        }).then(res => res.data.ok ? swal({title: "Cambios agregados con éxito", icon: "success",})
+        : swal({title: "Intenta de nuevo", icon: "warning", dangerMode: true}))
       } catch (error) {
         console.log('components/UserSetting/Error ',error);
       }
+      window.location.reload()
     }
 
     const handleChange = (event) =>{
@@ -36,7 +41,7 @@ const UserSetting =  () => {
     }
     
     const uploadImage = async (e) => {
-
+    setLoading(false)
     const files = e.target.files;
     const images = new FormData();
     const axiosInstance = axios.create();
@@ -58,13 +63,12 @@ const UserSetting =  () => {
         )
         .then((res) => {
           setInput({...input, picture: res.data.secure_url});
+          setLoading(true)
         })
         .catch((err) => console.log('UserSetting/uploadImage/Error: ',err));
     };
 
-    const reloadPage = () => {
-      window.location.reload()
-    }
+    
 
     return(
         <section className='userSetting-container'>
@@ -73,60 +77,40 @@ const UserSetting =  () => {
           </NavLink>
           <br></br>
 
-            <h3>Hola, <i>{input.given_name}</i> Modifica tus datos</h3>
+            <h3>¿Deseas modificar tus datos?</h3>
             <br></br>
             <>
             <form className='userSetting-form' onSubmit={ e => handleSubmit(e)}>
               <section className='section_create'>
-                <label>Nombre  </label>
+                <label>Nombre: </label>
                 <input  name="given_name" value={input.given_name} placeholder={user.given_name} onChange={handleChange}/>
                 <br></br>
-              </section>
+              {/* </section> */}
 
-              <section className='section_create'>
-                <label>Apellido  </label>
+              {/* <section className='section_create'> */}
+                <label>Apellido: </label>
                 <input  name="family_name" value={input.family_name} placeholder={user.family_name} onChange={handleChange}/>
                 <br></br>
-              </section>
+              {/* </section> */}
               
-              <section className='section_create'>
-                <label>Correo</label>
+              {/* <section className='section_create'> */}
+                <label>e-mail:    </label>
                 <input name="email" value={input.email}  onChange={handleChange}/>
                 <br></br>
               </section>
 
-              <section className='section_create us-section-img'>
-                <br></br>
-                <label>Imagen  </label>
-                <img className='usersetting-img' src={input.picture } />
+              <section className='section_create-us-section-img'>
+                <p>Carga una foto para tu cuenta</p>
+                {
+                  loading ? <img className='usersetting-img' src={input.picture} /> 
+                  : <img className='usersetting-img' src={loader} /> 
+                }
+                
                 <input class="custom-file-input" name="picture" accept="image/*" type='file'  onChange={uploadImage}/>
-                <button className='us-button' type='button' onClick={() => setInput({...input, picture:''})}>Borrar Imagen</button>
+                <button className='us-button' type='button' onClick={() => setInput({...input, picture:''})}>Borrar</button>
               </section>
-
-              {/* <section className='section_create'>
-                <label>Telefono</label>
-                <input name="phone" value={input.phone} onChange={handleChange}/>
-                <br></br>
-              </section> */}
-
-              {/* <section className='section_create'>
-                <label>Direccion  </label>
-                <input name="adress" multiple value={input.adress} onChange={handleChange}/>
-                <br></br>
-              </section> */}
-
-              {/* <section className='section_create'>
-                <label>DNI </label>
-                <input name="dni" multiple value={input.dni} onChange={handleChange}/>
-                <br></br>
-              </section> */}
-
-                <button className='us-button' type="submit" onClick={reloadPage}>Agregar Los Cambios</button>
-                <br></br>
-            {/* <NavLink className='us-button' to={'/dashboard'}>
-                Regresar
-            </NavLink> */}
             </form>
+              <button className='us-button' type="submit" onClick={handleSubmit}>Agregar Los Cambios</button>
             </>
             <NavLink to='/dashboard'>
                 <p>&#x2B05; Volver</p>

@@ -17,7 +17,7 @@ module.exports = (req, res) => {
                     { $set: { password: hashed, reset: true } }
 
                 ).then(() => {
-                    passRecoveryEmail(email, name, newPass)
+                    passRecoveryEmail(email, user.name, newPass)
                 }).then(() => {
                     res.sendStatus(200);
                 });
