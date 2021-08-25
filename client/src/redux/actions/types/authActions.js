@@ -43,8 +43,7 @@ export function resetPassword(payload) {
     try {
       const response = await axios.put(`${endpoints.AUTH_RESET}`, payload);
       return dispatch({
-        type: actionTypes.RESET_PASSWORD,
-        payload: response.data
+        type: actionTypes.RESET_PASSWORD
       });
     } catch (e) {
       console.log(e);

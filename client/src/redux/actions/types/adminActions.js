@@ -80,7 +80,7 @@ export function resetUser(user) {
   return async function (dispatch) {
     try {
       const resp = await axios.put(`${endpoints.RESET_USER}`, { email : user.email });
-      return dispatch({ type: actionTypes.RESET_USER, payload: resp });
+      return dispatch({ type: actionTypes.RESET_USER, payload: user._id });
     } catch (error) {
       console.log(error);
     }
