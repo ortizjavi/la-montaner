@@ -53,27 +53,26 @@ const Cart = () => {
         descuento.slice(5, 7) <= rango.end.slice(5, 7)
       ) {
         if (descuento.slice(8, 10) <= rango.end.slice(8, 10)) {
-          return "tenes descuento!";
+          return true;
         }
-        return "sin descuento";
+        return false;
       }
-      return "sin descuento";
+      return false;
     }
-    return "sin descuento";
+    return false;
   };
   const alert = () => {
     if (sales) {
-      let dia = new Date();
+      let dia = new Date().toISOString().slice(0, 10);
       let offertas = [];
       for (let i = 0; i < sales.length; i++) {
-        /* if (sales[i].date.end && discountDate(dia, sales[i].date)) {
-          offertas.push(sales[i].discount);
-        } */
-        if (sales[i].price <= total && !sales[i].date) {
-          offertas.push(sales[i].discount);
-        } else if (sales[i].price <= total && dia === sales[i].date.start) {
+        if (sales[i].date.end && discountDate(dia, sales[i].date)) {
           offertas.push(sales[i].discount);
         }
+        if (sales[i].price <= total && !sales[i].date) {
+          offertas.push(sales[i].discount);
+        }
+        offertas.push(sales[i].discount);
       }
       if (offertas.length === 0 && offers > 0) {
         setOpen(false);
@@ -83,8 +82,6 @@ const Cart = () => {
         setOffers(offertas[offertas.length - 1]);
         setOpen(true);
       }
-    } else {
-      console.log("holi2");
     }
   };
 
