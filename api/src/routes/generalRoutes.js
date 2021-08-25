@@ -12,6 +12,7 @@ const {
   createAddress,
   getOrders,
   updateOrders,
+  deleteOrders,
 } = require("../controllers/General/orders");
 const updatePayment = require("../controllers/General/updatePayment");
 
@@ -26,6 +27,7 @@ router.post("/product/order", authenticateToken, createOrder, notifyClient);
 router.get("/product/order", authenticateToken, getOrders);
 router.put("/product/order", authenticateToken, updatePayment, notifyClient);
 router.put("/product/order/:id", authenticateToken, updateOrders, notifyClient);
+router.delete("/product/order/:id", deleteOrders);
 router.put("/user/:id", authenticateToken, updateUsers);
 
 module.exports = router;

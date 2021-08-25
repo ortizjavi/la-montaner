@@ -6,7 +6,7 @@
     flex-direction: column;
     box-sizing: border-box;
     /* border: 1px grey solid; */
-    background-color: #c4c1c12d;
+    /* background-color: #c4c1c12d; */
     border-radius: 8px;
     align-items: center;
     margin: 1rem;
@@ -33,12 +33,17 @@ margin-top: 4rem;
     margin: 1rem;
 
 }
-.sidebar-navlink span{
+
+.sidebar-navlink path:hover {
+    color:#a52a2a;
+    
+}
+/* .sidebar-navlink span{
     padding-left: 0.2rem;
 }
 .sidebar-actived{
     color: red;
-}
+} */
 .sidebar-container-mobile{
     display: none;
 }

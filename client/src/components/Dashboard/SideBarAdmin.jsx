@@ -28,6 +28,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   getAdminProducts,
   getOrders,
+  getSales,
   getUsers,
 } from "../../redux/actions/types/adminActions";
 import { getCategories } from "../../redux/actions/types/categoryActions";
@@ -116,12 +117,14 @@ export default function SideBarAdmin() {
   useEffect(() => {
     dispatch(getOrders());
     dispatch(getUsers());
+    dispatch(getSales());
   }, [dispatch]);
 
   const productos = useSelector((state) => state.root.adminProducts);
   const categorias = useSelector((state) => state.root.allCategories);
   const orders = useSelector((state) => state.admin.orders);
   const users = useSelector((state) => state.admin.users);
+  const sales = useSelector(state => state.cart.sales);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -315,7 +318,7 @@ export default function SideBarAdmin() {
               onClick={(e) => handleButton(e, "descuentos")}
             >
               <LocalOfferIcon />
-              <h2>{users?.length}</h2>
+              <h2>{sales?.length}</h2>
               <h3>Ofertas</h3>
             </div>
           </div>
