@@ -2,9 +2,9 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import DeleteIcon from '@material-ui/icons/Delete';
-import { removeFavProduct } from '../../redux/actions/types/productActions';
+import { removeFavProduct, addCartProduct } from '../../redux/actions/types/productActions';
+import swal from 'sweetalert';
 import './Wishlist.css';
-
 export default function Wishlist() {
   const dispatch = useDispatch();
   const wishlist = useSelector((state) => state.wishlist);
@@ -17,6 +17,14 @@ export default function Wishlist() {
   const handleRemove = (id) => {
     dispatch(removeFavProduct(id));
   };
+
+  const handleAddToCart = (id) => {
+    swal({
+      title: 'Producto agregado al carrito.',
+      icon: 'success',
+    })
+    dispatch(addCartProduct(id, '1'));
+  }
 
   return (
     <div className="root_container">
@@ -50,6 +58,21 @@ export default function Wishlist() {
             </div>
             <h5 className="product_name">{product.name}</h5>
             <h4 className="product_price">${product.price}</h4>
+
+            {product.stock > 0 ? (
+              <h6 className="sp-h6">Tenemos en stock!</h6>
+            ) : (
+              <h6 className="sp-h6-null">No tenemos stock</h6>
+            )}
+
+            {product.stock > 0 ? (
+              <button
+                className="sp-button"
+                onClick={() => handleAddToCart(product.id)}
+              >
+                Agregar al Carrito
+              </button>
+            ) : null}
           </div>
         ))
       )}
