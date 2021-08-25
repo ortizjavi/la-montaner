@@ -28,6 +28,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+
 const Cart = () => {
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
@@ -46,13 +47,13 @@ const Cart = () => {
 
   const alert = () => {
     if (sales) {
-      let dia = new Date();
+      let dia = new Date().toISOString().slice(0, 10);
       let offertas = [];
       for (let i = 0; i < sales.length; i++) {
         if (sales[i].price <= total && !sales[i].date) {
           offertas.push(sales[i].discount);
         }
-        else if (sales[i].price <= total && dia === sales[i].date) {
+        else if (sales[i].price <= total && dia === sales[i].date.start) {
           offertas.push(sales[i].discount);
         }
       }

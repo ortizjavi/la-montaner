@@ -128,10 +128,10 @@ export default function SalesAdmin() {
 
   const rows = sales?.map(s =>{ 
     const date = (s.date ? 
-      s.date.start.toString().slice(0, 10)
+      s.date.start
       && s.date.end ? 
-      `${s.date.start.toString().slice(0, 10)} - ${s.date.end?.toString().slice(0, 10)}`
-      : s.date.start.toString().slice(0, 10)
+      `${s.date.start} - ${s.date.end}`
+      : s.date.start
     : 'Sin Fecha Especial')
     return createData(date, s.price, s.discount, s._id)
     })
@@ -148,7 +148,10 @@ export default function SalesAdmin() {
        if(state === 'rango'){
         const newSales = {
           ...sale,
-          date: selectedRange,
+          date: {
+            start : selectedRange.start.toISOString().slice(0, 10),
+            end : selectedRange.end.toISOString().slice(0, 10)
+          },
         };
         dispatch(newSale(newSales));
         swal("Genial!", "El descuento fue creado!", "success");
@@ -156,7 +159,9 @@ export default function SalesAdmin() {
       else if (state === 'fecha'){
         const newSales = {
           ...sale,
-          date: selectedDate,
+          date: {
+            start: selectedDate.start.toISOString().slice(0, 10)
+          },
         };
         dispatch(newSale(newSales));
         swal("Genial!", "El descuento fue creado!", "success");
