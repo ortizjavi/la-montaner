@@ -37,7 +37,7 @@
   margin-left: 20px;
   padding: 10px;
   position: relative;
-} 
+}
 
 .product_container:hover {
   box-shadow: 0 0 5px 0 gray;
@@ -64,7 +64,7 @@
 .image_link {
   text-decoration: none;
   font-family: sans-serif;
-  color:grey;
+  color: grey;
   border-radius: 4px;
   text-align: center;
   max-height: 40px;

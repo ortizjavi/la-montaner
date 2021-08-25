@@ -8,7 +8,7 @@ import './FAQ.css';
 const Accordion = () => {
   const [clicked, setClicked] = useState(false);
 
-  const toggle = index => {
+  const toggle = (index) => {
     if (clicked === index) {
       //if clicked question is already active, then close it
       return setClicked(null);
@@ -18,16 +18,22 @@ const Accordion = () => {
   };
 
   return (
-     <div className="container-accordion"> 
+    <div className="container-accordion">
       <div className="accordionSection">
         <div className="container">
-        <img src={smallBeer} alt="beerLogo" height="80px"/>
+          <img src={smallBeer} alt="beerLogo" height="80px" />
           {Data.map((item, index) => {
             return (
               <>
                 <div className="wrap" onClick={() => toggle(index)} key={index}>
                   <h1>{item.question}</h1>
-                  <span>{clicked === index ? <RemoveIcon className="icon-accordion" /> : <ControlPointIcon className="icon-accordion"/>}</span>
+                  <span>
+                    {clicked === index ? (
+                      <RemoveIcon className="icon-accordion" />
+                    ) : (
+                      <ControlPointIcon className="icon-accordion" />
+                    )}
+                  </span>
                 </div>
                 {clicked === index ? (
                   <div className="dropdown">
