@@ -34,7 +34,7 @@ const sessionReducer = (state = SESSION_INITIAL_STATE, action) => {
         user: { ...state.user, reset : false },
       };
     case actionTypes.ORDER_CREATED:
-      state.user.orders = state.user.orders.push(action.payload);
+      state.user.orders.push(action.payload);
       return {
         ...state
       };
