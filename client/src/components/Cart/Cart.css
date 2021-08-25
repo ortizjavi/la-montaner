@@ -91,6 +91,11 @@
   cursor: pointer;
 }
 
+.discount {
+  text-decoration: line-through;
+  color: rgb(226, 55, 55);
+}
+
 @media (max-width: 1320px) {
   .cartscreen {
     max-width: 900px;
@@ -107,7 +112,6 @@
   .cartscreen {
     flex-direction: column;
   }
-
   .cartscreen__right {
     margin: 1rem;
   }

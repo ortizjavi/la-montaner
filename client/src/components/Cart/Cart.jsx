@@ -7,8 +7,8 @@ import MuiAlert from "@material-ui/lab/Alert";
 import { makeStyles } from "@material-ui/core/styles";
 
 // Components
-import CartItem from './CartItem.jsx';
-import './Cart.css';
+import CartItem from "./CartItem.jsx";
+import "./Cart.css";
 
 // Actions
 import * as productActions from "../../redux/actions/types/productActions.js";
@@ -43,16 +43,35 @@ const Cart = () => {
   useEffect(() => {
     dispatch(productActions.addDiscount(offers));
   }, [offers, dispatch]);
-
+  const discountDate = (descuento, rango) => {
+    if (
+      descuento.slice(0, 4) >= rango.start.slice(0, 4) &&
+      descuento.slice(0, 4) <= rango.end.slice(0, 4)
+    ) {
+      if (
+        descuento.slice(5, 7) >= rango.start.slice(5, 7) &&
+        descuento.slice(5, 7) <= rango.end.slice(5, 7)
+      ) {
+        if (descuento.slice(8, 10) <= rango.end.slice(8, 10)) {
+          return "tenes descuento!";
+        }
+        return "sin descuento";
+      }
+      return "sin descuento";
+    }
+    return "sin descuento";
+  };
   const alert = () => {
     if (sales) {
       let dia = new Date();
       let offertas = [];
       for (let i = 0; i < sales.length; i++) {
+        /* if (sales[i].date.end && discountDate(dia, sales[i].date)) {
+          offertas.push(sales[i].discount);
+        } */
         if (sales[i].price <= total && !sales[i].date) {
           offertas.push(sales[i].discount);
-        }
-        else if (sales[i].price <= total && dia === sales[i].date) {
+        } else if (sales[i].price <= total && dia === sales[i].date.start) {
           offertas.push(sales[i].discount);
         }
       }
@@ -74,32 +93,32 @@ const Cart = () => {
   };
   const removeFromCartHandler = (id) => {
     swal({
-      title: '¿Estás seguro que quieres eliminar este producto?',
-      icon: 'warning',
-      buttons: ['Cancelar', true],
+      title: "¿Estás seguro que quieres eliminar este producto?",
+      icon: "warning",
+      buttons: ["Cancelar", true],
       dangerMode: true,
     }).then((willDelete) => {
       if (willDelete) {
-        swal('Tu producto fue eliminado con exito :)', {
-          icon: 'success',
+        swal("Tu producto fue eliminado con exito :)", {
+          icon: "success",
         });
         dispatch(productActions.deleteCartProduct(id));
       } else {
-        return swal('Tu producto sigue en el carrito :)');
+        return swal("Tu producto sigue en el carrito :)");
       }
     });
   };
 
   const removeAllHandler = () => {
     swal({
-      title: '¿Estás seguro que quieres vaciar tu carrito?',
-      icon: 'warning',
-      buttons: ['Cancelar', true],
+      title: "¿Estás seguro que quieres vaciar tu carrito?",
+      icon: "warning",
+      buttons: ["Cancelar", true],
       dangerMode: true,
     }).then((willDelete) => {
       if (willDelete) {
-        swal('Tu carrito se vació con exito :)', {
-          icon: 'success',
+        swal("Tu carrito se vació con exito :)", {
+          icon: "success",
         });
 
         dispatch(productActions.deleteCartAll());
@@ -110,7 +129,7 @@ const Cart = () => {
   const getCartCount = () => {
     return cartItems.reduce(
       (stockSelected, item) => Number(item.stockSelected) + stockSelected,
-      0,
+      0
     );
   };
 
@@ -141,7 +160,7 @@ const Cart = () => {
 
           {cartItems.length === 0 ? (
             <div>
-              Tu carrito esta vacio.{' '}
+              Tu carrito esta vacio.{" "}
               <Link to="/home" className="back-btn">
                 Volver a la tienda
               </Link>
@@ -162,8 +181,8 @@ const Cart = () => {
           <button
             className={
               cartItems.length === 0
-                ? 'cartDeleteAllDisable'
-                : 'cartDeleteAll_btn'
+                ? "cartDeleteAllDisable"
+                : "cartDeleteAll_btn"
             }
             onClick={() => removeAllHandler()}
           >
