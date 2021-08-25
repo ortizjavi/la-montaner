@@ -21,6 +21,7 @@
     "react-facebook-login": "^4.1.1",
     "react-google-login": "^5.2.2",
     "react-icons": "^4.2.0",
+    "react-infinite-calendar": "^2.3.1",
     "react-redux": "^7.2.4",
     "react-responsive-carousel": "^3.2.20",
     "react-router-dom": "^5.2.0",
