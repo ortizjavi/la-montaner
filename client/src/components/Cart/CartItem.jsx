@@ -1,5 +1,5 @@
-import "./CartItem.css";
-import { Link } from "react-router-dom";
+import './CartItem.css';
+import { Link } from 'react-router-dom';
 import DeleteIcon from '@material-ui/icons/Delete';
 
 export default function CartItem({ item, qtyChangeHandler, removeHandler }) {
@@ -32,4 +32,4 @@ export default function CartItem({ item, qtyChangeHandler, removeHandler }) {
       </button>
     </div>
   );
-};
+}
