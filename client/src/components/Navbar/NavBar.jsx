@@ -181,13 +181,9 @@ function NavBar(props, {history}) {
           </li>
           {isUser ?
             <li className='nav-icon-mobile' title='Cerrar sesion'>
-<<<<<<< Updated upstream
-              <Link className='nav-icon-mobile' onClick={(e) => dispatch(logout())}>
-                <ExitToAppIcon  className='fav-icon-nav'  style={{ fontSize: 30 }} />
-=======
               <Link className='nav-icon-mobile' onClick={(e) => handleLogOut(e)}>
                 <ExitToAppIcon  className='fav-icon-nav'  style={{ fontSize: 40 }} />
->>>>>>> Stashed changes
+
                 <span>Cerrar Sesion</span> 
               </Link>    
             </li>
