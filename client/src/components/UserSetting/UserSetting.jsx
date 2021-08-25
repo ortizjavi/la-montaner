@@ -85,16 +85,16 @@ const UserSetting =  () => {
                 <label>Nombre: </label>
                 <input  name="given_name" value={input.given_name} placeholder={user.given_name} onChange={handleChange}/>
                 <br></br>
-              </section>
+              {/* </section> */}
 
-              <section className='section_create'>
+              {/* <section className='section_create'> */}
                 <label>Apellido: </label>
                 <input  name="family_name" value={input.family_name} placeholder={user.family_name} onChange={handleChange}/>
                 <br></br>
-              </section>
+              {/* </section> */}
               
-              <section className='section_create'>
-                <label>Correo &nbsp;&nbsp;    </label>
+              {/* <section className='section_create'> */}
+                <label>e-mail:    </label>
                 <input name="email" value={input.email}  onChange={handleChange}/>
                 <br></br>
               </section>
@@ -110,7 +110,7 @@ const UserSetting =  () => {
                 <button className='us-button' type='button' onClick={() => setInput({...input, picture:''})}>Borrar</button>
               </section>
             </form>
-              <button className='us-button' type="submit" onClick={handleSubmit}>Agregar Los Cambios</button>
+              <button className='us-button' type="submit" onClick={handleSubmit}>Agregar los Cambios</button>
             </>
             <NavLink to='/dashboard'>
                 <p>&#x2B05; Volver</p>
