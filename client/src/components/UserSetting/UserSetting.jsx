@@ -4,6 +4,8 @@ import { NavLink } from 'react-router-dom';
 import axios from 'axios';
 import './UserSetting.css'
 import {UPDATE_USER} from '../../utils/endpoints';
+import loader from './loader.gif'
+import swal from "sweetalert";
 
 
 const UserSetting =  () => {
@@ -18,15 +20,19 @@ const UserSetting =  () => {
       email: user.email, 
       // adress: '', 
       });
+    const [loading, setLoading] = useState(true)
+
     const handleSubmit = async e =>{
       e.preventDefault();
       try {
         const resp = await axios.put(`${UPDATE_USER}/${user._id}`, {...input,
           name: input.given_name +' '+ input.family_name
-        }).then(res => res.data.ok ? alert('Cambios agragados con éxito') : alert('Intentalo nuevamente')).then(window.location.reload())
+        }).then(res => res.data.ok ? swal({title: "Cambios agregados con éxito", icon: "success",})
+        : swal({title: "Intenta de nuevo", icon: "warning", dangerMode: true}))
       } catch (error) {
         console.log('components/UserSetting/Error ',error);
       }
+      window.location.reload()
     }
 
     const handleChange = (event) =>{
@@ -35,7 +41,7 @@ const UserSetting =  () => {
     }
     
     const uploadImage = async (e) => {
-
+    setLoading(false)
     const files = e.target.files;
     const images = new FormData();
     const axiosInstance = axios.create();
@@ -57,6 +63,7 @@ const UserSetting =  () => {
         )
         .then((res) => {
           setInput({...input, picture: res.data.secure_url});
+          setLoading(true)
         })
         .catch((err) => console.log('UserSetting/uploadImage/Error: ',err));
     };
@@ -93,35 +100,17 @@ const UserSetting =  () => {
               </section>
 
               <section className='section_create-us-section-img'>
-                <p>Carga una foto</p>
-                <img className='usersetting-img' src={input.picture } />
+                <p>Carga una foto para tu cuenta</p>
+                {
+                  loading ? <img className='usersetting-img' src={input.picture} /> 
+                  : <img className='usersetting-img' src={loader} /> 
+                }
+                
                 <input class="custom-file-input" name="picture" accept="image/*" type='file'  onChange={uploadImage}/>
                 <button className='us-button' type='button' onClick={() => setInput({...input, picture:''})}>Borrar</button>
               </section>
-
-              {/* <section className='section_create'>
-                <label>Telefono</label>
-                <input name="phone" value={input.phone} onChange={handleChange}/>
-                <br></br>
-              </section> */}
-
-              {/* <section className='section_create'>
-                <label>Direccion  </label>
-                <input name="adress" multiple value={input.adress} onChange={handleChange}/>
-                <br></br>
-              </section> */}
-
-              {/* <section className='section_create'>
-                <label>DNI </label>
-                <input name="dni" multiple value={input.dni} onChange={handleChange}/>
-                <br></br>
-              </section> */}
-
-            {/* <NavLink className='us-button' to={'/dashboard'}>
-                Regresar
-              </NavLink> */}
             </form>
-              <button className='us-button' type="submit" onClick={handleSubmit}>Agregar Los Cambios</button>
+              <button className='us-button' type="submit" onClick={handleSubmit}>Agregar los Cambios</button>
             </>
             <NavLink to='/dashboard'>
                 <p>&#x2B05; Volver</p>
