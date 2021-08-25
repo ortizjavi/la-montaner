@@ -1,6 +1,6 @@
-import axios from 'axios';
-import * as actionTypes from '../names';
-import * as endpoints from '../../../utils/endpoints';
+import axios from "axios";
+import * as actionTypes from "../names";
+import * as endpoints from "../../../utils/endpoints";
 
 export function getProductDetail(id) {
   return async function (dispatch) {
@@ -31,14 +31,14 @@ export function getAllProductsAutocomplete(query) {
   return async function (dispatch) {
     try {
       const response = await axios.get(
-        `${endpoints.GET_PRODUCTS}?name=${query}`,
+        `${endpoints.GET_PRODUCTS}?name=${query}`
       );
       return dispatch({
         type: actionTypes.ALL_PRODUCTS_AUTOCOMPLETE,
         payload: response.data,
       });
     } catch (e) {
-      console.log('actions/types/getAllProducts-Error:', e);
+      console.log("actions/types/getAllProducts-Error:", e);
     }
   };
 }
@@ -71,7 +71,7 @@ export async function updateProducts(id, producto) {
   try {
     const resp = await axios.put(
       `${endpoints.ADMIN_GET_PRODUCTS}/${id}`,
-      producto,
+      producto
     );
     return resp.data;
   } catch (error) {
@@ -84,43 +84,43 @@ export function searchProducts({ sort, pageNumber, name, category }) {
     return async function (dispatch) {
       try {
         const response = await axios.get(
-          `${endpoints.GET_PRODUCTS}?pageNumber=${pageNumber}&sort=${sort}&name=${name}`,
+          `${endpoints.GET_PRODUCTS}?pageNumber=${pageNumber}&sort=${sort}&name=${name}`
         );
         return dispatch({
           type: actionTypes.ALL_PRODUCTS,
           payload: response.data,
         });
       } catch (e) {
-        console.log('actions/types/productActions/searchProducts-Error:', e);
+        console.log("actions/types/productActions/searchProducts-Error:", e);
       }
     };
   } else {
-    if (category === 'vertodos' || !category) {
+    if (category === "vertodos" || !category) {
       return async function (dispatch) {
         try {
           const response = await axios.get(
-            `${endpoints.GET_PRODUCTS}?pageNumber=${pageNumber}&sort=${sort}`,
+            `${endpoints.GET_PRODUCTS}?pageNumber=${pageNumber}&sort=${sort}`
           );
           return dispatch({
             type: actionTypes.ALL_PRODUCTS,
             payload: response.data,
           });
         } catch (e) {
-          console.log('actions/types/productActions/searchProducts-Error:', e);
+          console.log("actions/types/productActions/searchProducts-Error:", e);
         }
       };
     } else {
       return async function (dispatch) {
         try {
           const response = await axios.get(
-            `${endpoints.GET_PRODUCTS}?pageNumber=${pageNumber}&sort=${sort}&categories=${category}`,
+            `${endpoints.GET_PRODUCTS}?pageNumber=${pageNumber}&sort=${sort}&categories=${category}`
           );
           return dispatch({
             type: actionTypes.ALL_PRODUCTS,
             payload: response.data,
           });
         } catch (e) {
-          console.log('actions/types/productActions/searchProducts-Error:', e);
+          console.log("actions/types/productActions/searchProducts-Error:", e);
         }
       };
     }
@@ -131,14 +131,14 @@ export function filterProductsCategory(sort, pageNumber, category) {
     return async function (dispatch) {
       try {
         const response = await axios.get(
-          `${endpoints.GET_PRODUCTS}?pageNumber=${pageNumber}&sort=${sort}&categories=${category}`,
+          `${endpoints.GET_PRODUCTS}?pageNumber=${pageNumber}&sort=${sort}&categories=${category}`
         );
         return dispatch({
           type: actionTypes.FILTER_PRODUCTS_CATEGORY,
           payload: response.data,
         });
       } catch (e) {
-        console.log('actions/types/productActions/searchProducts-Error:', e);
+        console.log("actions/types/productActions/searchProducts-Error:", e);
       }
     };
   }
@@ -152,15 +152,15 @@ export function filterProducts(data, sort, pageNumber) {
           `${
             endpoints.GET_PRODUCTS
           }?pageNumber=${pageNumber}&sort=${sort}&${Object.keys(
-            data,
-          )}=${Object.values(data)}`,
+            data
+          )}=${Object.values(data)}`
         );
         return dispatch({
           type: actionTypes.ALL_PRODUCTS,
           payload: response.data,
         });
       } catch (e) {
-        console.log('actions/types/productActions/filterProducts-Error:', e);
+        console.log("actions/types/productActions/filterProducts-Error:", e);
       }
     };
   }
@@ -213,19 +213,19 @@ export function deleteCartAll() {
 }
 
 export function getMaximumPrice(price) {
-  console.log('action/getmaxprice: ', price);
+  console.log("action/getmaxprice: ", price);
   if (price) {
     return async function (dispatch) {
       try {
         const response = await axios.get(
-          `${endpoints.GET_PRODUCTS}?price=GiveMeMaxPrice`,
+          `${endpoints.GET_PRODUCTS}?price=GiveMeMaxPrice`
         );
         return dispatch({
           type: actionTypes.GET_MAX_PRICE,
           payload: response.data,
         });
       } catch (e) {
-        console.log('actions/types/productActions/getMaximumPrice-Error:', e);
+        console.log("actions/types/productActions/getMaximumPrice-Error:", e);
       }
     };
   }
@@ -236,14 +236,14 @@ export function filterByPrice(sort, filter, pageNumber) {
     return async function (dispatch) {
       try {
         const response = await axios.get(
-          `${endpoints.GET_PRODUCTS}?pageNumber=${pageNumber}&sort=${sort}&priceSort=${filter}`,
+          `${endpoints.GET_PRODUCTS}?pageNumber=${pageNumber}&sort=${sort}&priceSort=${filter}`
         );
         return dispatch({
           type: actionTypes.ALL_PRODUCTS,
           payload: response.data,
         });
       } catch (e) {
-        console.log('actions/types/productActions/filterByPrice-Error:', e);
+        console.log("actions/types/productActions/filterByPrice-Error:", e);
       }
     };
   }
@@ -259,6 +259,7 @@ export function createOrder(cart, user, address, mercadopago) {
         mercadopago,
       });
       dispatch({ type: actionTypes.ORDER_CREATED, payload: resp.data.order });
+      console.log("mercado", mercadopago);
       if (mercadopago) {
         return (window.location.href = resp.data.mp_link);
       }
@@ -327,6 +328,15 @@ export function addAddress(address) {
   };
 }
 
+export function addDiscount(discount) {
+  return async function (dispatch) {
+    console.log("descuento", discount);
+    return dispatch({
+      type: actionTypes.ADD_DISCOUNT,
+      payload: discount,
+    });
+  };
+}
 export function addReview(data) {
   return async () => {
     await axios.put(`${endpoints.ADD_REVIEW}`, {

@@ -26,6 +26,7 @@ export const GET_USERS = `${ADMIN_SERVER}/users`;
 export const DELETE_USER = `${ADMIN_SERVER}/users`;
 export const RESET_USER = `${ADMIN_SERVER}/users`;
 export const NEW_ADMIN = `${ADMIN_SERVER}/new`;
+export const ADMIN_SALES = `${ADMIN_SERVER}/sales`;
 
 //endpoint de usuario
 export const UPDATE_USER = `${SERVER}/user`;
