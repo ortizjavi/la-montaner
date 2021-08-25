@@ -293,6 +293,7 @@ export function addFavProducts(id) {
           name: data.name,
           image: data.img[0],
           price: data.price,
+          stock: data.stock,
         },
       });
     } catch (e) {
