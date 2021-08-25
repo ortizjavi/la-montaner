@@ -139,10 +139,7 @@ function NavBar(props, {history}) {
 
         <Link to="/cart" className='nav-icon cart_subtotal_container' title='Carrito de compras'>
             <ShoppingCartIcon className='nav-personicon' style={{ fontSize: 40 }} />
-            {
-              isUser && 
             <CartSubTotal/>
-            }
         </Link>
 
         {isUser ?
