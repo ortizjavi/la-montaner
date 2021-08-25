@@ -143,7 +143,7 @@ function NavBar(props, {history}) {
       <div className='nav-icons-container-mobile'>
         {/* <CloseIcon style={{ fontSize: 40 }} /> */}
         <ul>
-        <MenuIcon className='nav-menu-mobile' style={{ fontSize: 40 }} />
+        <MenuIcon className='nav-menu-mobile' style={{ fontSize: 40, color:'white' }} />
           <li>
             <Link to='/login' className='nav-icon' title='Usuario'>
               {user && user.picture ? 
@@ -176,7 +176,7 @@ function NavBar(props, {history}) {
           {isUser ?
             <li className='nav-icon-mobile' title='Cerrar sesion'>
               <Link className='nav-icon-mobile' onClick={(e) => dispatch(logout())}>
-                <ExitToAppIcon  className='fav-icon-nav'  style={{ fontSize: 40 }} />
+                <ExitToAppIcon  className='fav-icon-nav'  style={{ fontSize: 30 }} />
                 <span>Cerrar Sesion</span> 
               </Link>    
             </li>
