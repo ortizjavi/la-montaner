@@ -3,7 +3,7 @@ const { Schema, model } = require("mongoose");
 const SalesSchema = Schema(
     {
       date: {
-        type: String,
+        type: Object,
       },
       price: {
         type: Number,
