@@ -119,14 +119,13 @@ const Cart = () => {
 
   useEffect(() => {
     dispatch(productActions.addCartSubTotal(subtotal));
-    dispatch(getSales());
     getCartSubTotal();
+    dispatch(getSales());
   }, [subtotal, dispatch]);
 
   useEffect(() => {
-    dispatch(getSales());
     alert();
-  }, [total, dispatch, alert]);
+  }, [total, alert]);
 
   const getCartSubTotal = () => {
     const resultado = cartItems

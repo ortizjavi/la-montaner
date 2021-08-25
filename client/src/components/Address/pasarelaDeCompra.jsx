@@ -15,7 +15,7 @@ import LoginForm from "../LoginRegister/LoginForm";
 import Pay from "../Pay/Pay";
 import swal from "sweetalert";
 import "./Address.css";
-import { createOrder } from "../../redux/actions/types/productActions";
+import { createOrder, deleteCartAll } from "../../redux/actions/types/productActions";
 
 function getModalStyle() {
   const top = 15;
@@ -176,7 +176,9 @@ export default function HorizontalNonLinearAlternativeLabelStepper() {
           return p;
         });
 
-        return dispatch(createOrder(cartDiscount, usuario._id, address, true));
+        dispatch(createOrder(cartDiscount, usuario._id, address));
+        setOpen(false);
+        return dispatch(deleteCartAll())
       }
       dispatch(createOrder(cartItems, usuario._id, address));
       setOpen(false);
@@ -188,7 +190,8 @@ export default function HorizontalNonLinearAlternativeLabelStepper() {
           return p;
         });
 
-        return dispatch(createOrder(cartDiscount, usuario._id, address, true));
+        dispatch(createOrder(cartDiscount, usuario._id, address, true));
+        return dispatch(deleteCartAll())
       }
       dispatch(createOrder(cartItems, usuario._id, address, true));
     }

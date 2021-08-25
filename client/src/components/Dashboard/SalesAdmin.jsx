@@ -23,6 +23,12 @@ import TableRow from '@material-ui/core/TableRow';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import IconButton from "@material-ui/core/IconButton";
 import swal from "sweetalert";
+import InfiniteCalendar, {
+  Calendar,
+  withRange,
+} from 'react-infinite-calendar';
+import 'react-infinite-calendar/styles.css';
+
 
 
 const useStyles = makeStyles((theme) => ({
@@ -87,6 +93,8 @@ export default function SalesAdmin() {
     price: 0,
     discount: 0,
   });
+
+  const CalendarWithRange = withRange(Calendar);
   
   useEffect(() => {
     dispatch(getSales())
@@ -94,7 +102,10 @@ export default function SalesAdmin() {
   
   const sales = useSelector(state => state.cart.sales)
 
-  const rows = sales?.map(s => createData(s.date, s.price, s.discount, s._id))
+  const rows = sales?.map(s =>{ 
+    const date = s.date ? s.date : 'Sin Fecha Especial'
+    return createData(date, s.price, s.discount, s._id)
+    })
 
   const handleChangeState = (e) => {
     setSale({ ...sale, [e.target.name]: e.target.value });
@@ -104,19 +115,25 @@ export default function SalesAdmin() {
   };
 
   const handleDateChange = (date) => {
-    setSelectedDate(date);
+    //setSelectedDate(date);
+    console.log(date)
   };
 
   const handleSale = () => {
     try {
       const options = { year: "numeric", month: "numeric", day: "numeric" };
-      const date = selectedDate.toLocaleDateString(undefined, options);
-      const newSales = {
-        ...sale,
-        date: date,
-      };
-      dispatch(newSale(newSales));
-      swal("Genial!", "El descuento fue creado!", "success");
+      if(addDate){
+        const date = selectedDate.toLocaleDateString(undefined, options);
+        const newSales = {
+          ...sale,
+          date: date,
+        };
+        dispatch(newSale(newSales));
+        swal("Genial!", "El descuento fue creado!", "success");
+      } else {
+        dispatch(newSale(sale));
+        swal("Genial!", "El descuento fue creado!", "success");
+      }
     } catch (err) {
       console.log(err);
     }
@@ -163,7 +180,20 @@ export default function SalesAdmin() {
             </Grid>
             <Grid item xs={3}>
               {addDate ? (
-                <KeyboardDatePicker
+                <InfiniteCalendar
+                min={new Date()}
+                minDate={new Date()}
+                Component={CalendarWithRange}
+                selected={{
+                  start: new Date(),
+                  end: new Date(),
+                }}
+                locale={{
+                  headerFormat: 'MMM Do',
+                }}
+                onChange={(e)=> handleDateChange(e.target.selected)}
+              />
+                /* <KeyboardDatePicker
                   margin="normal"
                   id="date-picker-dialog"
                   label="Fecha de descuento"
@@ -173,7 +203,7 @@ export default function SalesAdmin() {
                   KeyboardButtonProps={{
                     "aria-label": "change date",
                   }}
-                />
+                /> */
               ) : (
                 <Button
                   variant="contained"
