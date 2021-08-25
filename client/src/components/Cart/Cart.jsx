@@ -52,7 +52,13 @@ const Cart = () => {
         descuento.slice(5, 7) >= rango.start.slice(5, 7) &&
         descuento.slice(5, 7) <= rango.end.slice(5, 7)
       ) {
-        if (descuento.slice(8, 10) <= rango.end.slice(8, 10)) {
+        if (
+          descuento.slice(5, 7) === rango.end.slice(5, 7) &&
+          descuento.slice(8, 10) <= rango.end.slice(8, 10)
+        ) {
+          return true;
+        }
+        if (descuento.slice(5, 7) < rango.end.slice(5, 7)) {
           return true;
         }
         return false;
@@ -66,13 +72,19 @@ const Cart = () => {
       let dia = new Date().toISOString().slice(0, 10);
       let offertas = [];
       for (let i = 0; i < sales.length; i++) {
-        if (sales[i].date.end && discountDate(dia, sales[i].date)) {
+        console.log("dia", dia);
+        console.log(sales[i].date.end);
+        if (
+          sales[i].date.end &&
+          sales[i].price <= total &&
+          discountDate(dia, sales[i].date)
+        ) {
+          offertas.push(sales[i].discount);
+        } else if (sales[i].price <= total && dia === sales[i].start) {
+          offertas.push(sales[i].discount);
+        } else if (sales[i].price <= total && (dia === sales[i]) === {}) {
           offertas.push(sales[i].discount);
         }
-        if (sales[i].price <= total && !sales[i].date) {
-          offertas.push(sales[i].discount);
-        }
-        offertas.push(sales[i].discount);
       }
       if (offertas.length === 0 && offers > 0) {
         setOpen(false);
@@ -80,7 +92,6 @@ const Cart = () => {
       }
       if (offertas.length >= 1) {
         setOffers(offertas[offertas.length - 1]);
-        setOpen(true);
       }
     }
   };
@@ -200,9 +211,9 @@ const Cart = () => {
               </p>
             )}
           </div>
-          {offers > 0 && open && (
+          {offers > 0 && !open && (
             <div className={classes.root}>
-              <Alert onClose={() => setOpen(false)} severity="success">
+              <Alert onClose={() => setOpen(!open)} severity="success">
                 {`Tenes un descuento de ${offers}%!`}
               </Alert>
             </div>
