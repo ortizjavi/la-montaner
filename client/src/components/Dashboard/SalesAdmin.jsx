@@ -28,6 +28,9 @@ import InfiniteCalendar, {
 } from 'react-infinite-calendar';
 import 'react-infinite-calendar/styles.css';
 import Modal from "@material-ui/core/Modal";
+import FormControl from "@material-ui/core/FormControl";
+import Select from "@material-ui/core/Select";
+import InputLabel from "@material-ui/core/InputLabel";
 
 
 
@@ -102,7 +105,7 @@ export default function SalesAdmin() {
     end: Date(),
   });
 
-  const [selectedDate2, setSelectedDate2] = React.useState({
+  const [selectedRange, setSelectedRange] = React.useState({
     start:Date(),
     end: Date(),
   });
@@ -113,7 +116,6 @@ export default function SalesAdmin() {
   const [modalStyle] = React.useState(getModalStyle());
   const [open, setOpen] = React.useState(false);
   const [open2, setOpen2] = React.useState(false);
-  const [open3, setOpen3] = React.useState(false);
 
   const CalendarWithRange = withRange(Calendar);
 
@@ -125,7 +127,12 @@ export default function SalesAdmin() {
   const sales = useSelector(state => state.cart.sales)
 
   const rows = sales?.map(s =>{ 
-    const date = s.date ? s.date : 'Sin Fecha Especial'
+    const date = (s.date ? 
+      s.date.start.toString().slice(0, 10)
+      && s.date.end ? 
+      `${s.date.start.toString().slice(0, 10)} - ${s.date.end?.toString().slice(0, 10)}`
+      : s.date.start.toString().slice(0, 10)
+    : 'Sin Fecha Especial')
     return createData(date, s.price, s.discount, s._id)
     })
 
@@ -138,21 +145,26 @@ export default function SalesAdmin() {
 
   const handleSale = () => {
     try {
-      const options = { year: "numeric", month: "numeric", day: "numeric" };
-      console.log(selectedDate)
-      console.log(selectedDate2)
-      /* if(addDate){
-        const date = selectedDate.toLocaleDateString(undefined, options);
+       if(state === 'rango'){
         const newSales = {
           ...sale,
-          date: date,
+          date: selectedRange,
         };
         dispatch(newSale(newSales));
-        swal("Genial!", "El descuento fue creado!", "success");  */
-      /* } else {
+        swal("Genial!", "El descuento fue creado!", "success");
+      } 
+      else if (state === 'fecha'){
+        const newSales = {
+          ...sale,
+          date: selectedDate,
+        };
+        dispatch(newSale(newSales));
+        swal("Genial!", "El descuento fue creado!", "success");
+      }
+      else {
         dispatch(newSale(sale));
         swal("Genial!", "El descuento fue creado!", "success");
-      } */
+      }
     } catch (err) {
       console.log(err);
     }
@@ -187,10 +199,6 @@ export default function SalesAdmin() {
     setOpen2(true);
   };
 
-  const handleOpen3 = () => {
-    setOpen3(true);
-  };
-
   const handleClose = () => {
     setOpen(false);
   };
@@ -198,13 +206,10 @@ export default function SalesAdmin() {
     setOpen2(false);
   };
 
-  const handleClose3 = () => {
-    setOpen3(false);
-  };
 
   const onCalendarSelect = (e) => {
    if (e.eventType === 3)  {
-      setSelectedDate({
+      setSelectedRange({
             start: e.start,
             end: e.end,
         });
@@ -212,66 +217,18 @@ export default function SalesAdmin() {
   }
 
 const onCalendarSelect2 = (e) => {
-     setSelectedDate2({
+     setSelectedDate({
            start: e});
 }
 
-const body = (
-  <div style={modalStyle} className={classes.paper}>
-    <Button
-                  variant="contained"
-                  color="primary"
-                  onClick={
-                    handleOpen
-                  }
-                  size="large"
-                >
-                  Rango de Fechas
-                </Button>
-                <Modal
-                  open={open}
-                  onClose={handleClose}
-                  aria-labelledby="simple-modal-title"
-                  aria-describedby="simple-modal-description"
-                >
-                <InfiniteCalendar
-                style={modalStyle}  
-                className={classes.paper}
-                min={new Date()}
-                minDate={new Date()}
-                Component={CalendarWithRange}
-                selected={selectedDate}
-                locale={{
-                  headerFormat: 'MMM Do',
-                }}
-                onSelect={onCalendarSelect}
-              />
-              </Modal>
-              <Button
-                  variant="contained"
-                  color="primary"
-                  onClick={
-                    handleOpen2
-                  }
-                  size="large"
-                >
-                  Fecha Especial
-                </Button>
-                <Modal
-                  open={open2}
-                  onClose={handleClose2}
-                  aria-labelledby="simple-modal-title"
-                  aria-describedby="simple-modal-description"
-                >
-                <InfiniteCalendar
-                  min={new Date()} 
-                  minDate={new Date()} 
-                  selected={selectedDate2.start}
-                  onSelect={onCalendarSelect2}
-                />
-              </Modal>
-  </div>
-);
+const [state, setState] = React.useState('');
+
+const handleChange = (e) => {
+  console.log(e.target.value)
+  setState(e.target.value);
+  if(e.target.value === 'fecha') return handleOpen2()
+  if (e.target.value === 'rango') return handleOpen()
+};
 
   return (
     <MuiPickersUtilsProvider utils={DateFnsUtils}>
@@ -292,35 +249,42 @@ const body = (
               </Button>
             </Grid>
             <Grid item xs={3}>
-            <Button
-                  variant="contained"
-                  color="primary"
-                  onClick={
-                    handleOpen3
-                  }
-                  size="large"
+            <FormControl variant="outlined">
+                <InputLabel htmlFor="outlined-age-native-simple">
+                  Fecha
+                </InputLabel>
+                <Select
+                  native
+                  value={state}
+                  onChange={(e) => handleChange(e)}
+                  label="Fechas"
                 >
-                  Fechas Especiales
-                </Button>
-                <Modal
-                  open={open3}
-                  onClose={handleClose3}
+                  <option value={"sinFecha"}>Sin fecha Especial</option>
+                  <option value={'fecha'}>Fecha Especial</option>
+                  <option value={'rango'}>Rango de fechas</option>
+                </Select>
+              </FormControl>
+            {
+              state === 'fecha' 
+              ? 
+              <div style={modalStyle} className={classes.paper}>
+              <Modal
+                  open={open2}
+                  onClose={handleClose2}
                   aria-labelledby="simple-modal-title"
                   aria-describedby="simple-modal-description"
                 >
-                  {body}
-                  </Modal>
-            {/* <Button
-                  variant="contained"
-                  color="primary"
-                  onClick={
-                    handleOpen
-                  }
-                  size="large"
-                >
-                  Rango de Fechas
-                </Button>
-                <Modal
+                <InfiniteCalendar
+                  min={new Date()} 
+                  minDate={new Date()} 
+                  selected={selectedDate.start}
+                  onSelect={onCalendarSelect2}
+                />
+              </Modal>
+              </div>
+              : 
+              <div style={modalStyle} className={classes.paper}>
+              <Modal
                   open={open}
                   onClose={handleClose}
                   aria-labelledby="simple-modal-title"
@@ -332,36 +296,15 @@ const body = (
                 min={new Date()}
                 minDate={new Date()}
                 Component={CalendarWithRange}
-                selected={selectedDate}
+                selected={selectedRange}
                 locale={{
                   headerFormat: 'MMM Do',
                 }}
                 onSelect={onCalendarSelect}
               />
               </Modal>
-              <Button
-                  variant="contained"
-                  color="primary"
-                  onClick={
-                    handleOpen2
-                  }
-                  size="large"
-                >
-                  Fecha Especial
-                </Button>
-                <Modal
-                  open={open2}
-                  onClose={handleClose2}
-                  aria-labelledby="simple-modal-title"
-                  aria-describedby="simple-modal-description"
-                >
-                <InfiniteCalendar
-                  min={new Date()} 
-                  minDate={new Date()} 
-                  selected={selectedDate2.start}
-                  onSelect={onCalendarSelect2}
-                />
-              </Modal> */}
+              </div>
+            }
             </Grid>
             <Grid item xs={3}>
               <form className={classes.rootInput} noValidate autoComplete="off">
