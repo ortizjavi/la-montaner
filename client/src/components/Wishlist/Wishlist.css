@@ -9,6 +9,31 @@
   margin-top: 10px;
 }
 
+.wishlistDeleteAll_container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.wishlistDeleteAll_btn {
+  padding: 10px 17px;
+  margin-top: 20px;
+  background: #171717;
+  color: #f4f4f4;
+  cursor: pointer;
+}
+
+.wishlistDeleteAll_btn:hover {
+  opacity: 0.9;
+  background-color: #686868;
+  transition: 0.25s;
+  cursor: pointer;
+}
+
+.wishlistDeleteAllDisable {
+  display: none;
+}
+
 .back-home-btn {
   margin-left: 65px;
   padding: 7px;
