@@ -1,18 +1,18 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router";
-import { Link } from "react-router-dom";
-import swal from "sweetalert";
-import Loading from "../Loading/Loading.js";
-import { FaStar } from "react-icons/fa";
-import "./ProductDetail.css";
-import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
-import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
-import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
-import FavoriteIcon from "@material-ui/icons/Favorite";
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router';
+import { Link } from 'react-router-dom';
+import swal from 'sweetalert';
+import Loading from '../Loading/Loading.js';
+import { FaStar } from 'react-icons/fa';
+import './ProductDetail.css';
+import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
+import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
+import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
+import FavoriteIcon from '@material-ui/icons/Favorite';
 import Reviews from './Reviews';
 import * as productActions from '../../redux/actions/types/productActions.js';
-import { getOrders } from "../../redux/actions/types/adminActions";
+import { getOrders } from '../../redux/actions/types/adminActions';
 import { Rating } from '@material-ui/lab';
 
 export default function ProductDetail({ match, history }) {
@@ -39,17 +39,17 @@ export default function ProductDetail({ match, history }) {
   //Order user
   let usuarioPrueba = currentUser;
   let usuario = Object.entries(currentUser);
-    
+
   useEffect(() => {
     dispatch(productActions.getProductDetail(id));
-    dispatch(getOrders())
+    dispatch(getOrders());
     setTimeout(() => {
       setLoading(false);
     }, 1000);
   }, [dispatch, match, usuarioPrueba, userOrders, id, detail._id]);
 
   useEffect(() => {
-    window.localStorage.setItem("wishlist", JSON.stringify(wishlistItems));
+    window.localStorage.setItem('wishlist', JSON.stringify(wishlistItems));
   }, [wishlistItems]);
 
   useEffect(() => {
@@ -86,13 +86,13 @@ export default function ProductDetail({ match, history }) {
 
   const handleWishlist = () => {
     swal({
-      title: "Por favor inicia sesión",
-      icon: "warning",
+      title: 'Por favor inicia sesión',
+      icon: 'warning',
     });
   };
 
   return (
-    <div className='big-container-detail'>
+    <div className="big-container-detail">
       {loading ? (
         <Loading />
       ) : (
@@ -112,7 +112,7 @@ export default function ProductDetail({ match, history }) {
                   {detail.img.map((slide, index) => {
                     return (
                       <div
-                        className={index === current ? "slide active" : "slide"}
+                        className={index === current ? 'slide active' : 'slide'}
                         key={index}
                       >
                         {index === current && (
@@ -134,86 +134,78 @@ export default function ProductDetail({ match, history }) {
             </div>
           </div>
           <div className="productscreen__right">
-          <div className='detail-heart'>
-                {!usuario || usuario.length === 0 ? (
-                  <Link to="/login">
-                    <FavoriteBorderIcon
-                      onClick={() => handleWishlist()}
-                      className="detail_fav"
-                    />
-                  </Link>
-                ) : fav ? (
-                  <FavoriteIcon
-                    onClick={handleRemoveFav}
-                    className="detail_fav"
-                  />
-                ) : (
+            <div className="detail-heart">
+              {!usuario || usuario.length === 0 ? (
+                <Link to="/login">
                   <FavoriteBorderIcon
-                    onClick={handleAddFav}
+                    onClick={() => handleWishlist()}
                     className="detail_fav"
                   />
-                )} </div>
+                </Link>
+              ) : fav ? (
+                <FavoriteIcon
+                  onClick={handleRemoveFav}
+                  className="detail_fav"
+                />
+              ) : (
+                <FavoriteBorderIcon
+                  onClick={handleAddFav}
+                  className="detail_fav"
+                />
+              )}{' '}
+            </div>
             <div className="detail_info">
-            
               <div className="name_fav_detail">
                 <p className="detail__name">{detail.name}</p>
-
-                
               </div>
-              <div className='detail_stars'>
-              <Rating 
-              name="read-only"  
-              value={stars}
-              defaultValue={4} 
-              precision={0.5}
-              readOnly
-              />
-              </div> 
+              <div className="detail_stars">
+                <Rating
+                  name="read-only"
+                  value={stars}
+                  defaultValue={4}
+                  precision={0.5}
+                  readOnly
+                />
+              </div>
 
-              <div className='detail-description'>
-              <p>{detail.description}</p>
+              <div className="detail-description">
+                <p>{detail.description}</p>
                 <p>Ibu: {detail.ibu}</p>
                 <p>Abv: {detail.abv}%</p>
               </div>
             </div>
-              <div className="right__info">
-                <p>
-                  Precio:
-                  <span>${detail.price}</span>
-                </p>
-                <p>
-                  Stock:
-                  <span>
-                    {detail.stock > 0 ? "disponible" : "no disponible"}
-                  </span>
-                </p>
-                <p>
-                  Cantidad:
-                  {detail.stock > 0 ? (
-                    <select
-                      value={qty}
-                      onChange={(e) => setQty(e.target.value)}
-                    >
-                      {[...Array(detail.stock).keys()].map((x) => (
-                        <option key={x + 1} value={x + 1}>
-                          {x + 1}
-                        </option>
-                      ))}
-                    </select>
-                  ) : (
-                    <span>no disponible</span>
-                  )}
-                </p>
-                <p>
-                  {detail.stock > 0 ? (
-                    <button type="button" onClick={addToCartHandler}>
-                      Agregar al carrito
-                    </button>
-                  ) : null}
-                </p>
-              </div>
-            <div>
-           </div>
+            <div className="right__info">
+              <p>
+                Precio:
+                <span>${detail.price}</span>
+              </p>
+              <p>
+                Stock:
+                <span>{detail.stock > 0 ? 'disponible' : 'no disponible'}</span>
+              </p>
+              <p>
+                Cantidad:
+                {detail.stock > 0 ? (
+                  <select value={qty} onChange={(e) => setQty(e.target.value)}>
+                    {[...Array(detail.stock).keys()].map((x) => (
+                      <option key={x + 1} value={x + 1}>
+                        {x + 1}
+                      </option>
+                    ))}
+                  </select>
+                ) : (
+                  <span>no disponible</span>
+                )}
+              </p>
+              <p>
+                {detail.stock > 0 ? (
+                  <button type="button" onClick={addToCartHandler}>
+                    Agregar al carrito
+                  </button>
+                ) : null}
+              </p>
+            </div>
+            <div></div>
           </div>
         </div>
       )}

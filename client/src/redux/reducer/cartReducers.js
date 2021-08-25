@@ -62,8 +62,7 @@ const cartReducer = (state = CART_INITIAL_STATE, action) => {
     case actionTypes.DELETE_SALES:
       const deletedSale = state.sales?.filter((s) => s._id !== action.payload);
       return { ...state, sales: deletedSale };
-    default:
-      return state;
+    default: return state;
   }
 };
 

@@ -1,8 +1,6 @@
 import React,{useEffect, useState} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getAdminProducts } from '../../redux/actions/types/adminActions';
-import SideBar from "../SideBar/SideBar";
-import DataUser from "./DataUser";
 import { Divider } from "@material-ui/core";
 import './UserReviews.css'
 import { NavLink } from 'react-router-dom';
@@ -17,11 +15,10 @@ const UserReviewsTable = () =>{
        
         dispatch(getAdminProducts())
     }, [])
-
     let reviewsUSER = []
     let onlyReviews = Products?.filter(e => e.reviews)
     onlyReviews.map(e => e.reviews.map(el => el.idUsuario === user._id && reviewsUSER.push(e)))
-
+    
     return (
         <div className='container-reviews'>
             <NavLink to='/dashboard'>
@@ -34,12 +31,12 @@ const UserReviewsTable = () =>{
                  
                  <div className='rev-card'>
                      <div className='rev-product'>
-                        <NavLink to={`/home/${reviewsUSER._id}`}>
+                        <NavLink to={`/home/${el._id}`}>
                             <img className="rev-img" src={el?.img[0]} alt="" />
                         </NavLink>
                      </div>
                      <div className='rev-content'>
-                        <NavLink to={`/home/${reviewsUSER._id}`}>
+                        <NavLink to={`/home/${el._id}`}>
                             <h4>{el.name}</h4>
                         </NavLink>
                          <Divider
@@ -47,12 +44,12 @@ const UserReviewsTable = () =>{
                               style={{ margin: "10px 0" }}
                             />
                           {el.reviews.map(e => {
-                             if (e.idUsuario === user._id) 
-                             return <p>Calificación: {e.calification}</p>
+                             if (e.idUsuario === user._id && e.calification) 
+                             return <p>Calificación: {e.calification} Estrellas</p>
                          })}
                          {el.reviews.map(e => {
-                             if (e.idUsuario === user._id) 
-                             return <p>Review: {e.content}</p>
+                             if (e.idUsuario === user._id && e.content) 
+                             return <p>Comentario: {e.content}</p>
                          })}
                      </div>
                  </div>

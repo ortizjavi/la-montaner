@@ -9,6 +9,7 @@ import { BsHeart } from 'react-icons/bs';
 import { FaFileInvoiceDollar } from 'react-icons/fa';
 import RateReviewIcon from '@material-ui/icons/RateReview';
 import './SideBar.css';
+import Tooltip from '@material-ui/core/Tooltip';
 
 
 
@@ -27,7 +28,7 @@ function SideBar(){
 		<navigator className="sidebar-container">
 			<span className='sidebar-title'>
 			{/* <MenuIcon/> */}
-			<h3 >Mi Cuenta</h3>
+			{/* <h3 >Mi Cuenta</h3> */}
 			</span>
 			<div className='sidebar-section'>
 			{/* <NavLink to='/dashboard' className='sidebar-navlink'>
@@ -42,18 +43,21 @@ function SideBar(){
 				<LocalShippingIcon style={{ fontSize: 30, color:"grey" }}/>
 				<span>Enviados</span>				
 			</NavLink> */}
-			<NavLink to='/wishlist' className='sidebar-navlink'>
-                <BsHeart style={{ fontSize: 30, color:"grey" }}/>
-                <span>Lista De Deseos</span>
-            </NavLink >
-			<NavLink to='/dashboard/userreviews' className='sidebar-navlink'>
-				<RateReviewIcon style={{ fontSize: 30, color:"grey" }}/>
-				<span>Reviews</span>				
-			</NavLink>
-			<NavLink to='/dashboard/setting' className='sidebar-navlink'>
-				<SettingsIcon style={{ fontSize: 30, color:"grey" }}/>
-				<span>Configuración</span>				
-			</NavLink>
+			<Tooltip title='Favoritos' arrow placement="right-start">
+				<NavLink to='/wishlist' className='sidebar-navlink'>
+					<BsHeart style={{ fontSize: 40, color:"grey" }}/>
+				</NavLink >
+			</Tooltip>
+			<Tooltip title='Mis Reviews' arrow placement="right-start">
+				<NavLink to='/dashboard/userreviews' className='sidebar-navlink'>
+					<RateReviewIcon style={{ fontSize: 40, color:"grey" }}/>
+				</NavLink>
+			</Tooltip>
+			<Tooltip title='Modificar mis datos' arrow placement="right-start">
+				<NavLink to='/dashboard/setting' className='sidebar-navlink'>
+					<SettingsIcon style={{ fontSize: 40, color:"grey" }}/>
+				</NavLink>
+			</Tooltip>
 			</div>
 			</navigator>
 		</div>

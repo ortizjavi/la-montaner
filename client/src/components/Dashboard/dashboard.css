@@ -108,6 +108,6 @@
 	margin-top: 5%;
 	flex-basis: 60%;
 	height: 40vh;
-	border: solid 1px gray;
+	/* border: solid 1px gray; */
 	background: white;
 }

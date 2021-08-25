@@ -5,7 +5,7 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import swal from "sweetalert";
 import './LoginForm.css';
-import { recoveryPassword } from "../../redux/actions/types/authActions";
+import { recoveryPassword, clearLoginFailed } from "../../redux/actions/types/authActions";
 
 const PasswordRecovery = () => {
   const dispatch = useDispatch();
@@ -33,6 +33,7 @@ const PasswordRecovery = () => {
         })
       
     })
+   
   }
   
 const handleChange =(e) =>{
@@ -50,7 +51,11 @@ if(!e.target.value){
     }
   }, [loginFailed])
   
-  
+  useEffect(() => {
+    return () => {
+      dispatch(clearLoginFailed())
+    }
+  }, [])
  
 
 
