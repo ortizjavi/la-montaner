@@ -87,7 +87,6 @@ function NavBar(props, {history}) {
 
     const handleLogOut = (e) => {
       dispatch(logout())
-      dispatch(deleteCartAll());
     }
 
     function HomeIcon(props) {
@@ -100,6 +99,7 @@ function NavBar(props, {history}) {
   
     const exit = (e) => {
       dispatch(logout())
+      dispatch(deleteCartAll());
       push('/home')
     }    
 
@@ -139,10 +139,7 @@ function NavBar(props, {history}) {
 
         <Link to="/cart" className='nav-icon cart_subtotal_container' title='Carrito de compras'>
             <ShoppingCartIcon className='nav-personicon' style={{ fontSize: 40 }} />
-            {
-              isUser && 
             <CartSubTotal/>
-            }
         </Link>
 
         {isUser ?
@@ -190,7 +187,6 @@ function NavBar(props, {history}) {
             <li className='nav-icon-mobile' title='Cerrar sesion'>
               <Link className='nav-icon-mobile' onClick={(e) => handleLogOut(e)}>
                 <ExitToAppIcon  className='fav-icon-nav'  style={{ fontSize: 40 }} />
-
                 <span>Cerrar Sesion</span> 
               </Link>    
             </li>
