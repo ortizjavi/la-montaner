@@ -60,6 +60,36 @@ function SideBar(){
 			</Tooltip>
 			</div>
 			</navigator>
+
+			<navigator className="sidebar-container-mobile">
+				<ul>	
+				<MenuIcon className='sidebar-menu-mobile' style={{ fontSize: 40, color:'black' }} />
+					{/* <span className='sidebar-title'>
+						<h3 >Mi Cuenta</h3>
+					</span> */}
+
+					{/* <div className='sidebar-section'> */}
+						<li>
+							<NavLink to='/wishlist' className='sidebar-navlink'>
+								<BsHeart style={{ fontSize: 20, color:"white" }}/>
+								<span>Lista De Deseos</span>
+							</NavLink >
+						</li>
+						<li>
+							<NavLink to='/dashboard/userreviews' className='sidebar-navlink'>
+								<RateReviewIcon style={{ fontSize: 20, color:"white" }}/>
+								<span>Reviews</span>				
+							</NavLink>
+						</li>
+						<li>
+							<NavLink to='/dashboard/setting' className='sidebar-navlink'>
+								<SettingsIcon style={{ fontSize: 20, color:"white" }}/>
+								<span>Configuración</span>				
+							</NavLink>
+						</li>
+					{/* </div> */}
+				</ul>
+			</navigator>
 		</div>
 	)
 }

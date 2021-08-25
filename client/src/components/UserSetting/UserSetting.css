@@ -28,6 +28,7 @@
 }
 
 .section_create input{
+  /* width: 60%; */
   width: 16rem;
   height: 1.5rem;
   font-size: 1rem;
@@ -61,6 +62,15 @@
   background: white;
   margin-block: 1rem;
   padding: 0  1rem;
+.us-section-img{
+  display: flex;
+  align-items: center; 
+  flex-direction: column;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  background: white;
+  margin-bottom: 1rem;
+  padding: 0;
   border-radius: 5px;
 } */
 .usersetting-img{
@@ -69,6 +79,13 @@
     border-radius: 80px;
     object-fit: scale-down;
     margin: 0rem;
+    /* margin: 0 2rem; */
+}
+.us-section-img label{
+  background-color:#dcdcdc9e;
+  height:  2rem;
+  width: 100%;
+  margin-left: 0;
 }
 .custom-file-input::-webkit-file-upload-button {
     /* visibility: hidden; */
@@ -83,6 +100,12 @@
     font-size: 1rem;
     margin-block: 0.5rem;
   }
+  .custom-file-input{
+    margin-left: 0 !important;
+    padding-left: 0 !important;
+    width: 12rem !important;
+    color: white;
+  }
   .custom-file-input::before {
     /* content: 'Seleccionar una imagen'; */
     /* display: inline-block; */
@@ -94,7 +117,7 @@
     white-space: nowrap;
     cursor: pointer;
     font-size: 1rem;
-    margin-block: 0.5rem;
+    margin: 0;
   }
   .custom-file-input:hover::-webkit-file-upload-button {
     background: #686868;
@@ -110,11 +133,54 @@
     cursor: pointer;
     border: none;
     border-radius: 3px;
-    padding: 5px;
-    margin-bottom: 2rem;
+    padding: 2px 3px;
+    margin-bottom: 3px;
     font-size: 1rem;
     margin-block: 0.5rem;
+    height: 1.5rem;
   }
   .us-button:hover{
       background: #686868;
+  }
+  @media screen and (max-width:700px) {
+  .userSetting-container{
+    font-size: 12px;
+  }
+  .us-section-img{
+    margin: 2px 0;
+
+  }
+  .userSetting-form{
+    padding: 0.5rem;
+  }
+  /* .section_create{
+padding: 2px;
+  } */
+  .section_create input{
+    font-size: 12px;  
+    width: 85%;
+    padding: 0 2px;
+    height: 1.5rem;
+  }
+  .custom-file-input{
+    word-break: break-all;
+    word-wrap: word-break;
+    margin: 0 !important;
+    width: 8rem !important;
+
+  }
+
+  .custom-file-input::before{
+    word-break: break-all;
+    word-wrap: word-break;
+    display: inline-block;
+    margin: 0;
+  }
+  
+  .custom-file-input::before {
+    font-size: 10px;
+  }
+  .us-button{
+    font-size: 10px;
+  }
   }

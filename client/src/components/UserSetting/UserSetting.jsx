@@ -85,16 +85,16 @@ const UserSetting =  () => {
                 <label>Nombre: </label>
                 <input  name="given_name" value={input.given_name} placeholder={user.given_name} onChange={handleChange}/>
                 <br></br>
-              {/* </section> */}
+              </section>
 
-              {/* <section className='section_create'> */}
+              <section className='section_create'>
                 <label>Apellido: </label>
                 <input  name="family_name" value={input.family_name} placeholder={user.family_name} onChange={handleChange}/>
                 <br></br>
-              {/* </section> */}
+              </section>
               
-              {/* <section className='section_create'> */}
-                <label>e-mail:    </label>
+              <section className='section_create'>
+                <label>Correo &nbsp;&nbsp;    </label>
                 <input name="email" value={input.email}  onChange={handleChange}/>
                 <br></br>
               </section>
