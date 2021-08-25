@@ -28,6 +28,7 @@ import InfiniteCalendar, {
   withRange,
 } from 'react-infinite-calendar';
 import 'react-infinite-calendar/styles.css';
+import Modal from "@material-ui/core/Modal";
 
 
 
@@ -84,15 +85,30 @@ function createData(fecha, precioBase, descuento, id) {
   return { fecha, precioBase, descuento, id };
 }
 
+function getModalStyle() {
+  const top = 15;
+  const left = 25;
+
+  return {
+    top: `${top}%`,
+    left: `${left}%`,
+  };
+}
+
 export default function SalesAdmin() {
   const dispatch = useDispatch();
   const classes = useStyles();
   const [addDate, setAddDate] = React.useState(false);
-  const [selectedDate, setSelectedDate] = React.useState(new Date());
+  const [selectedDate, setSelectedDate] = React.useState({
+    start:Date(),
+    end: Date(),
+  });
   const [sale, setSale] = React.useState({
     price: 0,
     discount: 0,
   });
+  const [modalStyle] = React.useState(getModalStyle());
+  const [open, setOpen] = React.useState(false);
 
   const CalendarWithRange = withRange(Calendar);
   
@@ -114,22 +130,24 @@ export default function SalesAdmin() {
     setSale({ ...sale, discount: value });
   };
 
-  const handleDateChange = (date) => {
+  const handleDateChange = (e) => {
     //setSelectedDate(date);
-    console.log(date)
+    //console.log('Hola!!!!', e, selectedDate)
+    
   };
 
   const handleSale = () => {
     try {
       const options = { year: "numeric", month: "numeric", day: "numeric" };
       if(addDate){
-        const date = selectedDate.toLocaleDateString(undefined, options);
+        console.log(selectedDate)
+        /* const date = selectedDate.toLocaleDateString(undefined, options);
         const newSales = {
           ...sale,
           date: date,
         };
         dispatch(newSale(newSales));
-        swal("Genial!", "El descuento fue creado!", "success");
+        swal("Genial!", "El descuento fue creado!", "success"); */
       } else {
         dispatch(newSale(sale));
         swal("Genial!", "El descuento fue creado!", "success");
@@ -160,6 +178,24 @@ export default function SalesAdmin() {
     });
   };
 
+  const handleOpen = () => {
+    setOpen(true);
+    setAddDate(true) 
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const onCalendarSelect = (e) => {
+   if (e.eventType === 3)  {
+      setSelectedDate({
+            start: e.start,
+            end: e.end,
+        });
+    }
+}
+
   return (
     <MuiPickersUtilsProvider utils={DateFnsUtils}>
       <div className={classes.div}>
@@ -179,21 +215,37 @@ export default function SalesAdmin() {
               </Button>
             </Grid>
             <Grid item xs={3}>
-              {addDate ? (
+            <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={
+                    handleOpen
+                  }
+                  size="large"
+                >
+                  Fecha Especial
+                </Button>
+                <Modal
+                  open={open}
+                  onClose={handleClose}
+                  aria-labelledby="simple-modal-title"
+                  aria-describedby="simple-modal-description"
+                >
                 <InfiniteCalendar
+                style={modalStyle}  
+                className={classes.paper}
                 min={new Date()}
                 minDate={new Date()}
                 Component={CalendarWithRange}
-                selected={{
-                  start: new Date(),
-                  end: new Date(),
-                }}
+                selected={selectedDate}
                 locale={{
                   headerFormat: 'MMM Do',
                 }}
-                onChange={(e)=> handleDateChange(e.target.selected)}
+                onSelect={onCalendarSelect}
+                /* onChange={(e)=> handleDateChange(e)} */
               />
-                /* <KeyboardDatePicker
+              </Modal>
+                {/* <KeyboardDatePicker
                   margin="normal"
                   id="date-picker-dialog"
                   label="Fecha de descuento"
@@ -203,19 +255,8 @@ export default function SalesAdmin() {
                   KeyboardButtonProps={{
                     "aria-label": "change date",
                   }}
-                /> */
-              ) : (
-                <Button
-                  variant="contained"
-                  color="primary"
-                  onClick={() => {
-                    setAddDate(true);
-                  }}
-                  size="large"
-                >
-                  Fecha Especial
-                </Button>
-              )}
+                />  */}
+
             </Grid>
             <Grid item xs={3}>
               <form className={classes.rootInput} noValidate autoComplete="off">
