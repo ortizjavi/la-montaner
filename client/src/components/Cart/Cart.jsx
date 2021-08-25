@@ -3,8 +3,6 @@ import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import swal from "sweetalert";
-import Button from "@material-ui/core/Button";
-import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -48,9 +46,13 @@ const Cart = () => {
 
   const alert = () => {
     if (sales) {
+      let dia = new Date();
       let offertas = [];
       for (let i = 0; i < sales.length; i++) {
-        if (sales[i].price <= total) {
+        if (sales[i].price <= total && !sales[i].date) {
+          offertas.push(sales[i].discount);
+        }
+        else if (sales[i].price <= total && dia === sales[i].date) {
           offertas.push(sales[i].discount);
         }
       }
