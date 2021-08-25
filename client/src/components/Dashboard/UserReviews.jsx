@@ -14,7 +14,6 @@ const UserReviewsTable = () =>{
     const dispatch = useDispatch()
 
     useEffect(() => {
-       
         dispatch(getAdminProducts())
     }, [])
     let reviewsUSER = []
@@ -29,9 +28,8 @@ const UserReviewsTable = () =>{
         <div className='container-reviews'>
             <h1 className='rev-title'>Mis Comentarios y Calificaciones</h1>
          {
-             reviewsUSER ?
+             reviewsUSER.length > 0 ?
              reviewsUSER.map(el => (
-                 
                  <div className='rev-card'>
                      <div className='rev-product'>
                         <NavLink to={`/home/${el._id}`}>
@@ -46,21 +44,40 @@ const UserReviewsTable = () =>{
                               variant="fullWidth"
                               style={{ margin: "10px 0" }}
                             />
+                        <div className='rev-stars'>
                           {el.reviews.map(e => {
                              if (e.idUsuario === user._id && e.calification) 
-                            //  return <p>Mi calificación: {e.calification} Estrellas</p>,
-                            
-                                return <FaStar className="star" size={30} />
-                            
+                            return [...Array(e.calification)].map((star, i) => {
+                                const ratingValue = i + 1;
+                                return (
+                                  <label key={i}>
+                                    <input
+                                      type="radio"
+                                      name="rating"
+                                      value={ratingValue}
+                                    />
+                                    <FaStar
+                                      className="star"
+                                      color={'#ffc107'}
+                                      size={15}
+                                    />
+                                  </label>
+                                );
+                              })
                          })}
+                         </div>
                          {el.reviews.map(e => {
                              if (e.idUsuario === user._id && e.content) 
                              return <p>Mi comentario: {e.content}</p>
                          })}
                      </div>
                  </div>
-             )) : <h4>No has dejado comentario o puntaje sobre ningún producto todavía</h4>
-             
+             )) : 
+             <div>
+             <h4>No has dejado comentario o puntaje todavía, te invitamos a dejar
+             tu review de nuestros productos</h4>
+             <img src='https://res.cloudinary.com/la-montanes/image/upload/v1629930541/productBeer_fokmid.png' alt='beer' height='350px'/>
+             </div>
          }   
        </div>
        <NavLink to='/dashboard'>
