@@ -28,7 +28,7 @@ const UserSetting =  () => {
         const resp = await axios.put(`${UPDATE_USER}/${user._id}`, {...input,
           name: input.given_name +' '+ input.family_name
         }).then(res => res.data.ok ? swal({title: "Cambios agregados con éxito", icon: "success",})
-        : swal({title: "Intenta de nuevo", dangerMode: true}))
+        : swal({title: "Intenta de nuevo", icon: "warning", dangerMode: true}))
       } catch (error) {
         console.log('components/UserSetting/Error ',error);
       }
