@@ -10,10 +10,12 @@ import { FaFileInvoiceDollar } from 'react-icons/fa';
 import RateReviewIcon from '@material-ui/icons/RateReview';
 import './SideBar.css';
 import Tooltip from '@material-ui/core/Tooltip';
+import Zoom from '@material-ui/core/Zoom';
 
 
 
 function SideBar(){
+
 
 	function HomeIcon(props) {
         return (
@@ -43,17 +45,17 @@ function SideBar(){
 				<LocalShippingIcon style={{ fontSize: 30, color:"grey" }}/>
 				<span>Enviados</span>				
 			</NavLink> */}
-			<Tooltip title='Favoritos' arrow placement="right-start">
+			<Tooltip TransitionComponent={Zoom} title='Favoritos' arrow placement="right-start">
 				<NavLink to='/wishlist' className='sidebar-navlink'>
 					<BsHeart style={{ fontSize: 40, color:"grey" }}/>
 				</NavLink >
 			</Tooltip>
-			<Tooltip title='Mis Reviews' arrow placement="right-start">
+			<Tooltip TransitionComponent={Zoom} title='Mis Reviews' arrow placement="right-start">
 				<NavLink to='/dashboard/userreviews' className='sidebar-navlink'>
 					<RateReviewIcon style={{ fontSize: 40, color:"grey" }}/>
 				</NavLink>
 			</Tooltip>
-			<Tooltip title='Modificar mis datos' arrow placement="right-start">
+			<Tooltip TransitionComponent={Zoom} title='Modificar mis datos' arrow placement="right-start">
 				<NavLink to='/dashboard/setting' className='sidebar-navlink'>
 					<SettingsIcon style={{ fontSize: 40, color:"grey" }}/>
 				</NavLink>
