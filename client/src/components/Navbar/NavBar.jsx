@@ -12,6 +12,7 @@ import swal from "sweetalert";
 import {
   searchProductsAction,
   selectCategoryAction,
+  deleteCartAll
 } from "../../redux/actions/types/productActions.js";
 import { logout } from "../../redux/actions/types/authActions.js";
 // import { IoStorefrontOutline } from 'react-icons/ri';
@@ -83,6 +84,11 @@ function NavBar(props, {history}) {
         })
     }
 
+    const handleLogOut = (e) => {
+      dispatch(logout())
+      dispatch(deleteCartAll());
+    }
+
     function HomeIcon(props) {
       return (
         <SvgIcon {...props}>
@@ -129,12 +135,15 @@ function NavBar(props, {history}) {
 
         <Link to="/cart" className='nav-icon cart_subtotal_container' title='Carrito de compras'>
             <ShoppingCartIcon className='nav-personicon' style={{ fontSize: 40 }} />
+            {
+              isUser && 
             <CartSubTotal/>
+            }
         </Link>
 
         {isUser ?
           <div className='nav-icon' title='Cerrar sesion'>
-              <ExitToAppIcon className='nav-personicon' onClick={(e) => dispatch(logout())} style={{ fontSize: 40 }} />     
+              <ExitToAppIcon className='nav-personicon' onClick={(e) => handleLogOut(e)} style={{ fontSize: 40 }} />     
           </div>
         : null}
       </div>
@@ -143,7 +152,7 @@ function NavBar(props, {history}) {
       <div className='nav-icons-container-mobile'>
         {/* <CloseIcon style={{ fontSize: 40 }} /> */}
         <ul>
-        <MenuIcon className='nav-menu-mobile' style={{ fontSize: 40 }} />
+        <MenuIcon className='nav-menu-mobile' style={{ fontSize: 40, color:'white' }} />
           <li>
             <Link to='/login' className='nav-icon' title='Usuario'>
               {user && user.picture ? 
@@ -175,8 +184,9 @@ function NavBar(props, {history}) {
           </li>
           {isUser ?
             <li className='nav-icon-mobile' title='Cerrar sesion'>
-              <Link className='nav-icon-mobile' onClick={(e) => dispatch(logout())}>
+              <Link className='nav-icon-mobile' onClick={(e) => handleLogOut(e)}>
                 <ExitToAppIcon  className='fav-icon-nav'  style={{ fontSize: 40 }} />
+
                 <span>Cerrar Sesion</span> 
               </Link>    
             </li>

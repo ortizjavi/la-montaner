@@ -1,3 +1,7 @@
+.rev-title {
+    margin-block: 0;
+}
+
 .rev-card {
     width: 100%;
     display: flex;
@@ -45,4 +49,8 @@
 
 .rev-content h4{
     color:black
+}
+
+.rev-volver {
+    padding-top: 0.5rem;
 }

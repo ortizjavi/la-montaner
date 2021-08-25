@@ -20,11 +20,12 @@ const UserReviewsTable = () =>{
     onlyReviews.map(e => e.reviews.map(el => el.idUsuario === user._id && reviewsUSER.push(e)))
     
     return (
-        <div className='container-reviews'>
+        <>
             <NavLink to='/dashboard'>
-                <p>&#x2B05; Volver</p>
+                <p className='rev-volver'>&#x2B05; Volver</p>
             </NavLink>
-            <h1>Mis Comentarios y Calificaciones</h1>
+        <div className='container-reviews'>
+            <h1 className='rev-title'>Mis Comentarios y Calificaciones</h1>
          {
              reviewsUSER ?
              reviewsUSER.map(el => (
@@ -45,11 +46,11 @@ const UserReviewsTable = () =>{
                             />
                           {el.reviews.map(e => {
                              if (e.idUsuario === user._id && e.calification) 
-                             return <p>Calificación: {e.calification} Estrellas</p>
+                             return <p>Mi calificación: {e.calification} Estrellas</p>
                          })}
                          {el.reviews.map(e => {
                              if (e.idUsuario === user._id && e.content) 
-                             return <p>Comentario: {e.content}</p>
+                             return <p>Mi comentario: {e.content}</p>
                          })}
                      </div>
                  </div>
@@ -57,6 +58,10 @@ const UserReviewsTable = () =>{
              
          }   
        </div>
+       <NavLink to='/dashboard'>
+                <p className='rev-volver'>&#x2B05; Volver</p>
+       </NavLink>
+       </>
        
     )
 }
