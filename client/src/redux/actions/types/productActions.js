@@ -259,6 +259,7 @@ export function createOrder(cart, user, address, mercadopago) {
         mercadopago,
       });
       dispatch({ type: actionTypes.ORDER_CREATED, payload: resp.data.order });
+      console.log("mercado", mercadopago);
       if (mercadopago) {
         return (window.location.href = resp.data.mp_link);
       }

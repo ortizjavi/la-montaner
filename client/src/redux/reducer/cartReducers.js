@@ -47,7 +47,6 @@ const cartReducer = (state = CART_INITIAL_STATE, action) => {
         sales: action.payload,
       };
     case actionTypes.ADD_DISCOUNT:
-      console.log("es", action.payload);
       return {
         ...state,
         discount: action.payload,
