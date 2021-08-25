@@ -15,7 +15,8 @@ const wishlistReducer = (state = WISHLIST_INITIAL_STATE, action) => {
       } else {
         return { ...state, wishlistItems: state.wishlistItems.concat(newFav) };
       }
-    case actionTypes.DELETE_FAV_PRODUCT: return { ...state, wishlistItems: state.wishlistItems.filter((fav) => fav.id !== action.payload) }
+    case actionTypes.DELETE_FAV_PRODUCT: return { ...state, wishlistItems: state.wishlistItems.filter((fav) => fav.id !== action.payload) };
+    case actionTypes.DELETE_FAV_ALL: return { ...state, wishlistItems: [] };
     default: return state
   }
 }
