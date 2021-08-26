@@ -1,5 +1,17 @@
+.container-user-reviews {
+    display: flex;
+    padding-top: 1rem;
+    width: 85%;
+    background-color: #ffffff;
+    flex-direction: column;
+    align-items: center;
+    margin-left: 8rem;
+    margin-right: 8rem;
+  }
+
 .rev-title {
-    margin-block: 0;
+    margin-bottom: 1rem;
+    margin-top: 0;
 }
 
 .rev-card {
@@ -9,6 +21,7 @@
     align-items: center;
     margin-left: 2rem;
     margin-right: 2rem;
+    margin-bottom: 1rem;
     /* background-color: rgb(93, 156, 177); */
     justify-content: flex-start;
 
@@ -64,4 +77,25 @@
 
 .star {
     color: #ffc107;
+}
+@media screen and (max-width: 480px) {
+    .rev-title {
+        font-size: 1.5rem;
+        margin-left: 3rem;
+    }
+    .rev-content {
+        font-size: 0.7rem;
+        padding: 0.2rem;
+        margin: 0;
+    }
+    .rev-content h4 {
+        font-size: 0.8rem;
+    }
+    .rev-card {
+        margin: 0;
+    }
+    .container-user-reviews {
+        display: flex;
+        margin: 1rem;
+    }
 }
