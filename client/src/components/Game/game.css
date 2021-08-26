@@ -1,0 +1,28 @@
+.gameIcon {
+    background-color: #388e3c;
+    height: 20vh;
+    border-radius: 50%;
+    width: 20vh;
+    border: 10px solid #fafafa;
+    box-shadow: 5px 5px 10px #bebebe, -5px -5px 10px #ffffff;
+}
+
+.gameIcon svg {
+    height: 16vh;
+    color: #fff;
+    font-size: 500px;
+}
+
+.countFichas {
+    display: grid;
+    width: 100%;
+    grid-template-columns: 30% 30% 30%;
+    justify-content: center;
+    justify-items: center;
+}
+
+.seleccionM {
+    font-size: 20px;
+    text-align: center;
+    margin: 15px 10%
+}
