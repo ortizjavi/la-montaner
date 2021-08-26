@@ -59,8 +59,9 @@ useEffect(() => {
   return (
     <div className={'loginContainer'}>
     <form className={'formStyles'} onSubmit={handleSubmit}>
-      <div className={'title'}>Ingresá tu email y tu contraseña</div>
+      <div className={'titleLogin'}>Ingresá tu email y tu contraseña</div>
       <TextField
+        className="loginInput"
         placeholder="Email *"
         label="Email"
         variant="filled"
@@ -70,6 +71,7 @@ useEffect(() => {
         onChange={(e) => setEmail(e.target.value)}
       />
       <FilledInput
+        className="loginInput"
         placeholder="Contraseña *"
         label="Contraseña"
         variant="filled"
@@ -97,7 +99,7 @@ useEffect(() => {
         </Button>
       </div>
       {error ? <span className='errorMsg'>{error}</span> : null}
-      <div className={'title'}>¿No tienes cuenta?
+      <div className={'titleLogin'}>¿No tienes cuenta?
         <Link to={'/register'}> Regístrate</Link>
       </div>
       <div className={'titlePass'}>

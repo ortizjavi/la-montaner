@@ -6,6 +6,7 @@ import FacebookLogin from "react-facebook-login";
 import FacebookIcon from "@material-ui/icons/Facebook";
 import { login } from "../../redux/actions/types/authActions";
 
+
 export default function ExternAuthentication(props) {
 
   const googleBtnTitle = props.register ? 'Continuar con Google' 

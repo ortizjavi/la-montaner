@@ -1,6 +1,6 @@
 .external-login-button button {
     font-family: IBMPlexSans, sans-serif;
-    font-size: 14px;
+    font-size: 1rem;
     font-weight: 600;
     letter-spacing: .5px;
     line-height: 32px;
@@ -31,6 +31,7 @@
     padding-left: 45px;
 }
 
+
 .external-login-button button :first-child {
     padding: 0px 20px;
 }
@@ -41,6 +42,7 @@
 
 .fb-btn button {
     text-align: right;
+    font-size: .9rem;
 }
 
 .login-fb-icon {
@@ -57,132 +59,6 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-}
-
-@media screen and (max-width: 480px) {
-    .external-login-button button :first-child {
-        max-width: 100%;
-        font-size: 8px;
-        padding: 0px 5px;
-    }
-    .external-login-button button span {
-        max-width: 100%;
-        font-size: 10px;
-        margin-left: -3%;
-    }
-    .external-login-button button svg {
-        margin-left: -15%;
-    }
-    .fb-btn {
-        position: relative;
-    }
-    .fb-btn button {
-        text-align: center;
-    }
-    .login-fb-icon {
-        position: absolute;
-        z-index: 3;
-        color: #0079d3;
-        pointer-events: none;
-        left: 25px;
-        top: 13px;
-    }
-    .external-login-button button {
-        font-family: IBMPlexSans, sans-serif;
-        font-size: 8px;
-        font-weight: 600;
-        letter-spacing: .5px;
-        line-height: 32px;
-        color: #fff;
-        display: inline-block;
-        border: none;
-        border-radius: 4px;
-        text-align: right;
-        background: #0079d3;
-        text-transform: uppercase;
-        cursor: pointer;
-        line-height: unset;
-        min-height: 35px;
-        max-width: 10vw;
-        width: auto;
-        min-width: 200px;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        background-color: #fff;
-        color: #0079d3;
-        border: 1px solid #0079d3;
-        display: block;
-        height: auto;
-        margin: 8px 10px;
-        padding: 12px 28px;
-        width: 100%;
-       
-    }
-   
-}
-
-@media screen and (max-width: 700px) {
-    .external-login-button button :first-child {
-        max-width: 100%;
-        font-size: 8px;
-        padding: 0px 5px;
-    }
-    .external-login-button button span {
-        max-width: 100%;
-        font-size: 10px;
-        margin-left: -3%;
-    }
-    .external-login-button button svg {
-        margin-left: -15%;
-    }
-    .fb-btn {
-        position: relative;
-    }
-    .fb-btn button {
-        text-align: center;
-    }
-    .login-fb-icon {
-        position: absolute;
-        z-index: 3;
-        color: #0079d3;
-        pointer-events: none;
-        left: 25px;
-        top: 13px;
-    }
-    .external-login-button button {
-        font-family: IBMPlexSans, sans-serif;
-        font-size: 8px;
-        font-weight: 600;
-        letter-spacing: .5px;
-        line-height: 32px;
-        color: #fff;
-        display: inline-block;
-        border: none;
-        border-radius: 4px;
-        text-align: right;
-        background: #0079d3;
-        text-transform: uppercase;
-        cursor: pointer;
-        line-height: unset;
-        min-height: 35px;
-        max-width: 10vw;
-        width: auto;
-        min-width: 200px;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        background-color: #fff;
-        color: #0079d3;
-        border: 1px solid #0079d3;
-        display: block;
-        height: auto;
-        margin: 8px 10px;
-        padding: 12px 28px;
-        width: 100%;
-       
-    }
-   
 }
 
 @media screen and (max-width: 900px) {
@@ -215,7 +91,7 @@
     }
     .external-login-button button {
         font-family: IBMPlexSans, sans-serif;
-        font-size: 8px;
+        font-size: 1rem;
         font-weight: 600;
         letter-spacing: .5px;
         line-height: 32px;
@@ -229,7 +105,7 @@
         cursor: pointer;
         line-height: unset;
         min-height: 35px;
-        max-width: 10vw;
+        max-width: 40vw;
         width: auto;
         min-width: 200px;
         overflow: hidden;
@@ -245,5 +121,137 @@
         width: 100%;
        
     }
-   
+     .fb-btn button{
+        font-size: .6rem;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .external-login-button button :first-child {
+        max-width: 100%;
+        font-size: 8px;
+        padding: 0px 5px;
+    }
+    .external-login-button button span {
+        max-width: 100%;
+        font-size: 10px;
+        margin-left: -3%;
+    }
+    .external-login-button button svg {
+        margin-left: -15%;
+    }
+    .fb-btn {
+        position: relative;
+    }
+    .fb-btn button {
+        text-align: center;
+    }
+    .login-fb-icon {
+        position: absolute;
+        z-index: 3;
+        color: #0079d3;
+        pointer-events: none;
+        left: 25px;
+        top: 13px;
+    }
+    .external-login-button button {
+        font-family: IBMPlexSans, sans-serif;
+        font-size: 1rem;
+        font-weight: 600;
+        letter-spacing: .5px;
+        line-height: 32px;
+        color: #fff;
+        display: inline-block;
+        border: none;
+        border-radius: 4px;
+        text-align: right;
+        background: #0079d3;
+        text-transform: uppercase;
+        cursor: pointer;
+        line-height: unset;
+        min-height: 35px;
+        max-width: 40vw;
+        width: auto;
+        min-width: 200px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        background-color: #fff;
+        color: #0079d3;
+        border: 1px solid #0079d3;
+        display: block;
+        height: auto;
+        margin: 8px 10px;
+        padding: 12px 28px;
+        width: 100%;  
+    }
+     .fb-btn button{
+        font-size: .6rem;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .external-login-button button :first-child {
+        max-width: 100%;
+        font-size: 8px;
+        padding: 0px 5px;
+    }
+    .external-login-button button span {
+        max-width: 100%;
+        font-size: 10px;
+        margin-left: -3%;
+    }
+    .external-login-button button svg {
+        margin-left: -15%;
+    }
+    .fb-btn {
+        position: relative;
+    }
+    .fb-btn button {
+        text-align: center;
+    }
+    .login-fb-icon {
+        position: absolute;
+        z-index: 3;
+        color: #0079d3;
+        pointer-events: none;
+        left: 25px;
+        top: 13px;
+    }
+    .external-login-button button {
+        font-family: IBMPlexSans, sans-serif;
+        font-size: .65rem;
+        font-weight: 600;
+        letter-spacing: .5px;
+        line-height: 32px;
+        color: #fff;
+        display: inline-block;
+        border: none;
+        border-radius: 4px;
+        text-align: right;
+        background: #0079d3;
+        text-transform: uppercase;
+        cursor: pointer;
+        line-height: unset;
+        min-height: 35px;
+        max-width: 60vw;
+        width: auto;
+        min-width: 200px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        background-color: #fff;
+        color: #0079d3;
+        border: 1px solid #0079d3;
+        display: block;
+        height: auto;
+        margin: 8px 10px;
+        padding: 12px 28px;
+        width: 100%;
+       
+    }
+
+    .fb-btn button{
+        font-size: .6rem;
+    }
 }
