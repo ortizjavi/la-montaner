@@ -5,6 +5,7 @@ import { ROLE } from '../../utils/constants';
 const PublicRoute = ({component : Component, ...rest}) => {
     
     const user = useSelector(state => state.session.user);
+    
     return (
         <Route {...rest}>
         { !user.role ? 

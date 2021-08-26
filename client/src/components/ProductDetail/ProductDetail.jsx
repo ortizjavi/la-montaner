@@ -14,6 +14,8 @@ import Reviews from './Reviews';
 import * as productActions from '../../redux/actions/types/productActions.js';
 import { getOrders } from '../../redux/actions/types/adminActions';
 import { Rating } from '@material-ui/lab';
+import { FaCircle } from 'react-icons/fa';
+
 
 export default function ProductDetail({ match, history }) {
   const { id } = useParams(); //pasarle por props
@@ -170,9 +172,22 @@ export default function ProductDetail({ match, history }) {
 
               <div className="detail-description">
                 <p>{detail.description}</p>
-                <p>Ibu: {detail.ibu}</p>
-                <p>Abv: {detail.abv}%</p>
               </div>
+
+{ (detail.ibu && detail.abv) && 
+ (
+  <div className='sipd-center'>
+                <table>
+                  <tbody>
+                    <tr>
+                      <td>Ibu: {detail.ibu}</td>
+                      <td>Abv: {detail.abv}%</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+)}
+         
             </div>
             <div className="right__info">
               <p>
@@ -181,7 +196,12 @@ export default function ProductDetail({ match, history }) {
               </p>
               <p>
                 Stock:
-                <span>{detail.stock > 0 ? 'disponible' : 'no disponible'}</span>
+                <span>{detail.stock > 0 ? 
+                <div className='stock-disponible'>
+                <FaCircle /> <p>disponible</p></div> 
+                :  <div className='stock-noDisponible'>
+                <FaCircle /> <p> no disponible</p></div>}
+                </span>
               </p>
               <p>
                 Cantidad:
