@@ -77,3 +77,13 @@
     color:red;
 }
 
+.titleRegister{
+    color: grey;
+    font-weight: 400;
+    border: none;
+    outline: none;
+    font-size: 1.2rem;
+    margin-top:5%;
+    margin-left: 4rem;
+    width: 20rem;
+}

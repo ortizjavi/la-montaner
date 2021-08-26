@@ -6,13 +6,14 @@
 	display: flex;
 	justify-content: flex-start;
 	margin: none;
-	height: 1.5rem;
+	height: 0.5rem;
 	background-color: transparent;
 	border: none;
 	cursor: pointer;
 }
 .volver:hover{
-	background-color: lightgray;
+	/* background-color: lightgray; */
+	font-weight: bold;
 }
 
 .table {
@@ -36,12 +37,12 @@
 		padding-bottom: 5px; */
 		width: 7.5rem;
 }
-.dt-th2{
-	/* margin-left: 27%; */
+/* .dt-th2{
+	margin-left: 27%;
 }
 .dt-th3{
-	/* margin-left: 24%; */
-}
+	margin-left: 24%;
+} */
 .dt-tbody{
 	height: 20vh;
 	/* display:block; */
@@ -50,16 +51,17 @@
 	flex-direction: column;
 	overflow-y: scroll;
 }
-.dt-tbody td{
-	/* padding-left: 3px; */
-}
+/* .dt-tbody td{
+	padding-left: 3px;
+} */
 .dt-tr{
 	/* margin-left: 1rem; */
 	display: flex;
     justify-content: space-around;
 	align-items: center;
 	background-color: white;
-	margin-top: 0.5rem;
+	/* margin-top: 0.5rem; */
+	/* margin-block: 0; */
 	padding-left: 1rem;
 }
 

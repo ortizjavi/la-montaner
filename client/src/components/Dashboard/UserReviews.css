@@ -51,8 +51,15 @@
     color:black
 }
 
+.rev-stars input[type='radio'] {
+    display: none;
+  }
+
 .rev-volver {
     padding-top: 0.5rem;
+}
+.rev-volver:hover {
+    font-weight: bold;
 }
 
 .star {
