@@ -314,7 +314,7 @@ width: 10rem;
     width: 120px;
     margin-top: 2px;
     text-align: center;
-    background-color: #A6A17E;
+    background-color: #122E1A;
 }
 
 
@@ -340,9 +340,10 @@ width: 10rem;
 }
 
 .other-categories-item:hover{
-    color: #122E1A;
+    color: white;
     font-weight: 500;
     box-shadow: 0 0 5px 0 #ffffff;
+    background-color: #C88E34;
 }
 
 .navButtonDiv {
