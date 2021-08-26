@@ -8,9 +8,23 @@ export const ROLE = {
   USER,
   ADMIN
 };
+
 export const FIXED_CATEGORIES = [
   "cervezas",
-  "conservas",
   "merchandising",
-  "otros",
+  "otros"
 ];
+
+export const FIXED_CATEGORIES_NAV = [
+  "vertodos",
+  "cervezas",
+  "merchandising"
+];
+
+export const FIXED_NAV_CATEGORIES_VALUES = [
+  "Todos los Productos",
+  "Cervezas",
+  "Merchandising"
+]
+
+export const OTHERS_CATEGORY = 'otros'
