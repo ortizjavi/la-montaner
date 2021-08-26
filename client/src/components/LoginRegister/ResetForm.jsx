@@ -11,13 +11,15 @@ import { resetPassword } from '../../redux/actions/types/authActions'
 
 const ResetForm = () => {
     const user = useSelector(state => state.session.user);
-    const dispatch= useDispatch();
+    const dispatch = useDispatch();
     const history = useHistory();
+    const pRgx = new RegExp(`^(.{0,7}|[^0-9]*|[^A-Z]*|[^a-z]*|[a-zA-Z0-9]*)$`)
     const [error, setError] = useState('')
     const [input, setInput] = useState({
-        oldPassword:'',
+        oldPassword: '',
         password: '',
         showPassword: false,
+        showOldPassword: false
     })
     const [checkPassword, setCheckPassword] = useState({
         checkPassword: '',
@@ -35,6 +37,12 @@ const ResetForm = () => {
             showPassword: !input.showPassword
         })
     };
+    function handleClickShowOldPassword() {
+        setInput({
+            ...input,
+            showOldPassword: !input.showOldPassword
+        })
+    };
 
     function handleMouseDownPassword(e) {
         e.preventDefault();
@@ -47,8 +55,24 @@ const ResetForm = () => {
             [event.target.name]: event.target.value
         })
     }
-
+    function handleInputChangeOldPassword(event) {
+        event.preventDefault();
+        setInput({
+            ...input,
+            [event.target.name]: event.target.value
+        })
+    }
     function handleInputChange(event) {
+        if (pRgx.test(event.target.value)) {
+            setError(`La contraseña debe contener:  
+            al menos ocho caracteres, 
+            un número,
+            una letra mayúscula,
+            una letra minúscula y
+            un carácter especial.`)
+        } else {
+            setError('')
+        }
         setInput({
             ...input,
             [event.target.name]: event.target.value
@@ -58,32 +82,32 @@ const ResetForm = () => {
     function handleSubmit(event) {
         event.preventDefault();
         (checkPassword.checkPassword && checkPassword.checkPassword === input.password) ?
-         dispatch(resetPassword({oldPassword: input.oldPassword, password : input.password})) :   
-        setError('Las contraseñas no coinciden')        
+            dispatch(resetPassword({ oldPassword: input.oldPassword, password: input.password })) :
+            setError('Las contraseñas no coinciden')
     }
 
     useEffect(() => {
-        if(!user.reset) 
-        history.push('/home')
+        if (!user.reset)
+            history.push('/home')
     }, [user])
 
 
     return (
         <form className={'registerForm'} onSubmit={handleSubmit}>
             <div className='fields'>
-            <FilledInput
+                <FilledInput
                     placeholder="Antigua Contraseña"
                     variant="filled"
-                    type={input.showPassword ? 'text' : 'password'}
+                    type={input.showOldPassword ? 'text' : 'password'}
                     name="oldPassword"
                     required
                     value={input.oldPassword}
-                    onChange={handleInputChange}
+                    onChange={handleInputChangeOldPassword}
                     endAdornment={
                         <InputAdornment position="end" >
                             <IconButton
                                 aria-label="toggle password visibility"
-                                onClick={handleClickShowPassword}
+                                onClick={handleClickShowOldPassword}
                                 edge="end"
                             >
                                 {input.showPassword ? <Visibility /> : <VisibilityOff />}
