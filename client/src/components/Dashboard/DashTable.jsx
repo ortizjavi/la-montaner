@@ -49,7 +49,8 @@ const Tabla = () =>{
           </td>
           <td>
         
-              <input type='button' className="eye-solid-icon" id={order._id} value='&#171;' onClick={(e) => handleState(e) } >
+              <input type='button' className="eye-solid-icon" id={order._id} value='&#128221;' onClick={(e) => handleState(e) } >
+              {/* <input type='button' className="eye-solid-icon" id={order._id} value='&#128065;' onClick={(e) => handleState(e) } > */}
                       {/* <FaEye/> */}
               </input >
           </td>
@@ -73,7 +74,7 @@ const Tabla = () =>{
                   Total
               </th> 
               <th className='dt-th3'>
-                  Ver detalles
+                  Detalles
               </th> 
           </thead>
 
