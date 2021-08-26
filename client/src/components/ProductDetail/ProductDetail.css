@@ -178,17 +178,17 @@
   justify-content: center;
 }
 
-table{
+.sipd-center table{
   text-align: center;
 }
 
-tr{
+.sipd-center tr{
     display: table-row;
     vertical-align: inherit;
     border-color: rgb(0, 0, 0);
 }
 
-td{
+.sipd-center td{
   /* border: 1px solid #000; */
     padding: 5px;
     text-transform: uppercase;
