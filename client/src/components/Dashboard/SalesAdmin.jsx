@@ -128,7 +128,8 @@ export default function SalesAdmin() {
         ? `${s.date.start} - ${s.date.end}`
         : s.date.start
       : "Sin Fecha Especial";
-    return createData(date, s.price, s.discount, s._id);
+      const price = s.price === 0 ? 'Juego' : s.price;
+    return createData(date, price, s.discount, s._id);
   });
 
   const handleChangeState = (e) => {

@@ -8,11 +8,15 @@ const SalesSchema = Schema(
     },
     price: {
       type: Number,
-      required: true,
+      default: 0,
     },
     discount: {
       type: Number,
       required: true,
+    },
+    user: {
+      type: Schema.Types.ObjectId,
+      ref: "User",
     },
   },
   { timestamps: true }

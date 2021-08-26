@@ -21,7 +21,9 @@ export const Ficha = ({name='default', onClick}) => {
     const classes = useStyles();
 
     const handleClick = () => {
-      onClick(name)
+      if(onClick){
+        onClick(name)
+      }
     }
     
     return (

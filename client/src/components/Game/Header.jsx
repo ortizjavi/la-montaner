@@ -12,15 +12,10 @@ const useStyles = makeStyles((theme) => ({
       '& > *': {
         margin: theme.spacing(1),
         width: "100vw",
-        height: '19vh',
+        height: '8vh',
         border: "1px solid",
         //padding: "2em",
         borderRadius: "5px",
-      },
-      paper: {
-        padding: theme.spacing(1),
-        textAlign: 'center',
-        color: theme.palette.text.secondary,
       },
     },
   }));
@@ -34,9 +29,7 @@ export default function Header () {
         <div className={classes.root}>
             <Grid container spacing={2}>
                 <Grid item xs={12}>
-                    <Paper elevation={3} className={classes.paper}>
-                        <h1>Piedra, Papel o Tijera</h1>
-                    </Paper>
+                        <h3>Piedra, Papel o Tijera</h3>
                 </Grid>
                 <Grid item xs={12}>
                     <Table/>
