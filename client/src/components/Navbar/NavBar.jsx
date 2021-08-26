@@ -6,7 +6,6 @@ import SearchBar from "../SearchBar/SearchBar";
 import PersonIcon from "@material-ui/icons/Person";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
-import SvgIcon from "@material-ui/core/SvgIcon";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import swal from "sweetalert";
 import {
@@ -18,15 +17,16 @@ import { logout } from "../../redux/actions/types/authActions.js";
 import StorefrontIcon from '@material-ui/icons/Storefront';
 import logoLanding from "../../img/logoLanding.png";
 import MenuIcon from '@material-ui/icons/Menu';
-import CloseIcon from '@material-ui/icons/Close';
-// import MobileNavBar from "./MobileNavBar";
-
+import {
+  FIXED_CATEGORIES,
+  FIXED_CATEGORIES_NAV,
+  FIXED_NAV_CATEGORIES_VALUES,
+  OTHERS_CATEGORY
+} from '../../utils/constants.js';
+import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 
 function CartSubTotal(){
   const cartSubtotal = useSelector((state) => state.cart.cartSubtotal);
-  useEffect(() => {
-    console.log(cartSubtotal)
-  }, [cartSubtotal])
   return (
     <>
     {
@@ -38,76 +38,71 @@ function CartSubTotal(){
   )
 }
 
+function scrollListener(){
+  var header = document.querySelector('header');
+  header?.classList.toggle('sticky', window.scrollY > 0)
+}
+
 function NavBar(props, {history}) {
   const location = useLocation()
-  console.log('Navbar/location',location)
-  let initialCategories = { vertodos: false, cervezas: false, conservas: false, merchandising: false, otros: false }
-  const [category, setCategory] = useState(initialCategories)
   const currentCategoryState = useSelector(state => state.root.currentCategoryState)
+  const [state, setState] = useState(currentCategoryState);
   const user = useSelector(state => state.session.user)
   const usuario = Object.entries(user);
   const isUser = user && user.role;
-
   const dispatch = useDispatch();
-  const currentPage = useSelector((state) => state.root.currentPage);
-  var sort = "asc";
-  const allProducts = useSelector((state) => state.root.allProducts);
-
-  const [state, setState] = useState(currentCategoryState);
-
   useEffect(() => {
-    window.addEventListener('scroll', function () {
-        var header = document.querySelector('header');
-        header?.classList.toggle('sticky', window.scrollY > 0)
-      })
+    window.addEventListener('scroll', scrollListener);
+    return () => {
+      window.removeEventListener('scroll', scrollListener);
+    }
   }, [])
     
-
-    useEffect(()=> {
-      dispatch(selectCategoryAction(state))
-      dispatch(searchProductsAction(''))
+  useEffect(()=> {
+    dispatch(selectCategoryAction(state));
+    dispatch(searchProductsAction(''));
 //toca preguntar si ek search tiene estado
-    },[state])
+  },[state, dispatch])
   
-    const handleCategory = (e) =>{
-      e.preventDefault()
-      state === e.target.id ?  dispatch(selectCategoryAction(state)) :
+  const handleCategory = (e) =>{
+    e.preventDefault()
+    state === e.target.id ?  dispatch(selectCategoryAction(state)) :
+    setState(e.target.id);
+  }
 
-      setState(e.target.id)
-    }
+  const handleWishlist = () => {
+    swal({
+      title: 'Por favor inicia sesión',
+      icon: 'warning'
+    })
+  }
 
-    const handleWishlist = () => {
-      swal({
-        title: 'Por favor inicia sesión',
-        icon: 'warning'
-        })
-    }
-
-    function HomeIcon(props) {
-      return (
-        <SvgIcon {...props}>
-          <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
-        </SvgIcon>
-      );
-    }
-    
-      
+  const renderCategories = () => {
+    return (
+      <>
+      {FIXED_CATEGORIES_NAV.map((c, i) => (
+        <input 
+          className={`${state === c ? "actived" : 'Nav-button'}`} 
+          type="button" id={c} 
+          value={FIXED_NAV_CATEGORIES_VALUES[i]} 
+          key={i} onClick={(e) =>handleCategory(e)}
+        />
+      ))}
+      <OtherCategories selected={currentCategoryState} handleCategory={handleCategory}/>
+      </>
+    )
+  }
 
  return (
    <>
     <header className="navbar">
-      <SearchBar />
-      
-     
-       <NavLink to='/home' className='nav-personicon' title='Ir a la tienda'>
+      <SearchBar /> 
+      <NavLink to='/home' className='nav-personicon' title='Ir a la tienda'>
         <img className='nb-img' 
         src={logoLanding} 
         alt="Montañez Logo" />
       </NavLink>
-      {/* <MobileNavBar/> */}
-
       <div className='nav-icons-container'>
-
         <Link to='/login' className='nav-icon' title='Usuario'>
           {user && user.picture ? 
           <img className='imgStyle' src={user.picture} alt="imagen de usuario" width="50" height="50" ></img> 
@@ -118,7 +113,6 @@ function NavBar(props, {history}) {
           
           < StorefrontIcon className='nav-personicon' />
         </NavLink>
-
         {
           !usuario || usuario.length === 0 ? (
             <Link to='/login' className='nav-icon' title='Favoritos'>
@@ -126,20 +120,16 @@ function NavBar(props, {history}) {
             </Link>
           ) : <Link to="/wishlist" className='nav-icon' title='Favoritos'><FavoriteIcon className='fav-icon-nav'/></Link>
         }
-
         <Link to="/cart" className='nav-icon cart_subtotal_container' title='Carrito de compras'>
             <ShoppingCartIcon className='nav-personicon' style={{ fontSize: 40 }} />
             <CartSubTotal/>
         </Link>
-
         {isUser ?
           <div className='nav-icon' title='Cerrar sesion'>
               <ExitToAppIcon className='nav-personicon' onClick={(e) => dispatch(logout())} style={{ fontSize: 40 }} />     
           </div>
         : null}
-      </div>
-
-      
+      </div> 
       <div className='nav-icons-container-mobile'>
         {/* <CloseIcon style={{ fontSize: 40 }} /> */}
         <ul>
@@ -183,25 +173,114 @@ function NavBar(props, {history}) {
           : null}
         </ul>
       </div>
-    
     </header>
-
     { location.pathname === '/home' &&
     <section >      
                 <ul className='navbar-ul'>
                     <li className='navbar-section'>
-                        <input className={`${state === 'vertodos' ? "actived" : 'Nav-button'}`} type="button" id='vertodos'value="Todos los Productos" onClick={(e) =>handleCategory(e)}/>
-                        <input className={`${state === 'cervezas' ? "actived" : 'Nav-button'}`}  type="button" id='cervezas' value="Cervezas" onClick={(e) =>handleCategory(e)}/>
-                        <input className={`${state=== 'conservas'? "actived" : 'Nav-button'}`}  type="button" id='conservas' value="Conservas" onClick={(e) =>handleCategory(e)}/>
-                        <input className={`${state === 'merchandising' ? "actived" : 'Nav-button'}`} type="button"id='merchandising' value="Merchadising" onClick={(e) =>handleCategory(e)}/>
-                         <input className={`${state ==='otros' ? "actived" : 'Nav-button'}`} type="button" value="Otros" id='otros' onClick={(e) =>handleCategory(e)}/>
+                      { renderCategories() }
                     </li>
+                      }
                 </ul>
     </section>
     }
     </>
   );
 }
+
+function OtherCategories(props){
+  const [open, setOpen] = useState(null);
+  const [current, setCurrent] = useState(OTHERS_CATEGORY);
+  const wrapperRef = React.createRef(null);
+  let allCategories = useSelector(state => 
+    state.root.allCategories.map(c => c.name)
+    .filter(c => !FIXED_CATEGORIES.includes(c))
+  );
+
+  const toggleOpen = () => {
+    setOpen(op => !op);
+  }
+
+  useEffect(() => {
+    /**
+     * Alert if clicked on outside of element
+     */
+    const handleClickOutside = (event) => {
+      if (wrapperRef.current && !wrapperRef.current.contains(event.target)){
+        setOpen(false);
+      }
+    }
+    // Bind the event listener
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+        // Unbind the event listener on clean up
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [wrapperRef]);
+
+  useEffect(() => {
+    let selected = allCategories.includes(props.selected);
+    if (selected){
+       if (current !== props.selected){
+         setCurrent(props.selected)
+       }
+    } else {
+      if (current !== OTHERS_CATEGORY){
+        setCurrent(OTHERS_CATEGORY);
+      }
+    }
+  }, [props.selected])
+
+ 
+  let selected = allCategories.includes(props.selected);
+
+  if (selected){
+    if (current !== OTHERS_CATEGORY){
+      allCategories.unshift(OTHERS_CATEGORY);
+    }
+    allCategories = allCategories.filter(c => c !== current);
+  }
+
+  const handleClick = (e) => {
+    setOpen(false);
+    props.handleCategory(e);
+  }
+
+  return (
+    <>
+    <div 
+      className={`${(selected || props.selected === OTHERS_CATEGORY) 
+                  && !open ? "actived" : 'Nav-button'} navButtonDiv`} 
+      id={current}
+      onClick={props.handleCategory}
+    >
+      { current.charAt(0).toUpperCase() + current.slice(1) }
+    </div>
+    {allCategories.length ? 
+    <div className='other-categories-container'>
+      <KeyboardArrowDownIcon onClick={toggleOpen}/>
+      { open ?
+          <div ref={wrapperRef} className="other-categories-list">
+          {
+           allCategories?.map((c, i) => (
+             <div
+             className="other-categories-item"
+             key={i} id={c}
+             onClick={handleClick}> 
+             { c === OTHERS_CATEGORY ? 'Todos los Otros' : c.charAt(0).toUpperCase() + c.slice(1)} 
+             </div>
+           ))
+          }
+          </div>
+      : null }
+    </div>
+    : null }
+    </>
+  );
+}
+
+
+
 
 export default NavBar;
 
