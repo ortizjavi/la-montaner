@@ -45,6 +45,7 @@ const UserReviewsTable = () =>{
                               style={{ margin: "10px 0" }}
                             />
                         <div className='rev-stars'>
+                            <p>Mi calificación:  
                           {el.reviews.map(e => {
                              if (e.idUsuario === user._id && e.calification) 
                             return [...Array(e.calification)].map((star, i) => {
@@ -64,11 +65,11 @@ const UserReviewsTable = () =>{
                                   </label>
                                 );
                               })
-                         })}
+                         })} </p>
                          </div>
                          {el.reviews.map(e => {
                              if (e.idUsuario === user._id && e.content) 
-                             return <p>Mi comentario: {e.content}</p>
+                             return <p>Mi comentario: "{e.content}"</p>
                          })}
                      </div>
                  </div>

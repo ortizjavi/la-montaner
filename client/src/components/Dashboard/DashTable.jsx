@@ -22,7 +22,6 @@ const Tabla = () =>{
   onlyReviews.map(e => e.reviews.map(el => el.idUsuario === user._id && thisUserReviews.push(e)))
 ////////
 
-console.log(user.orders.reverse())
   const [state, setState] = useState('') 
 
   const handleState = e =>{
@@ -56,7 +55,6 @@ console.log(user.orders.reverse())
           </td>
         </tr>
         ))
- console.log(state)   
   return (
   <div>
     <h3 className='table-title'>Mis compras</h3>

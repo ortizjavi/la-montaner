@@ -58,6 +58,9 @@
 .rev-volver {
     padding-top: 0.5rem;
 }
+.rev-volver:hover {
+    font-weight: bold;
+}
 
 .star {
     color: #ffc107;

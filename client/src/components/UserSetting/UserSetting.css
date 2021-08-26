@@ -1,3 +1,11 @@
+.setting-volver {
+  padding-top: 0.5rem;
+  font-size: 1rem;
+}
+.setting-volver:hover {
+  font-weight: bold;
+}
+
 .userSetting-container{
   display: flex;
   align-items: center;
