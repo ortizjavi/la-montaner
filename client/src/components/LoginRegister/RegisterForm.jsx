@@ -18,7 +18,7 @@ const RegisterForm = () => {
     const registerFailed = useSelector(state => state.session.registerFailed);
     const [error, setError] = useState('')
     const pRgx = new RegExp(`^(.{0,7}|[^0-9]*|[^A-Z]*|[^a-z]*|[a-zA-Z0-9]*)$`)
-    const eRgx = new RegExp(`^[a-z0-9!#$%&'*+/=?^_\`{|}~-]+@[a-z0-9-]*\.[a-z0-9-]*$`);
+    const eRgx = new RegExp(`[a-zA-Z0-9!#$%&'*_+-]([\.]?[a-zA-Z0-9!#$%&'*_+-])+@[a-zA-Z0-9]([^@&%$\/()=?¿!.,:;]|\d)+[a-zA-Z0-9][\.][a-zA-Z]{2,4}([\.][a-zA-Z]{2})?`)
     const [input, setInput] = useState({
         given_name: '',
         family_name: '',
