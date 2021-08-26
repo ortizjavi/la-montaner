@@ -61,8 +61,9 @@
   color: rgb(0, 0, 0);
 }
 .container-reviews h4 {
-  padding: 0;
+  padding-top: 12px;
   margin: 5px;
+  font-size: 18px;
   text-align: left;
 }
 .container-reviews h5 {
@@ -73,6 +74,7 @@
   background-color: #c4c1c12d;
   border: 5px solid transparent;
   border-bottom: 6px solid #c88e34;
+  padding: 0!important;
 }
 
 .review-button {

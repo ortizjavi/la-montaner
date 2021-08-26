@@ -110,7 +110,7 @@ const UserSetting =  () => {
                 <button className='us-button' type='button' onClick={() => setInput({...input, picture:''})}>Borrar</button>
               </section>
             </form>
-              <button className='us-button' type="submit" onClick={handleSubmit}>Agregar Los Cambios</button>
+              <button className='us-button' type="submit" onClick={handleSubmit}>Agregar los Cambios</button>
             </>
             <NavLink to='/dashboard'>
                 <p>&#x2B05; Volver</p>

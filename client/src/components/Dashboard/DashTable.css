@@ -24,7 +24,7 @@
 	display: flex;
     justify-content: space-around;
     flex-direction: row;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
     align-items: center;
 	margin-top: 1rem;
 }
@@ -32,8 +32,8 @@
 	width: 7rem;	
 }
 .table td {
-	    padding-top: 10px;
-		padding-bottom: 5px;
+	    /* padding-top: 10px;
+		padding-bottom: 5px; */
 		width: 7.5rem;
 }
 .dt-th2{
@@ -84,4 +84,9 @@
     margin-right: 5%;
 	font-size: 0.9rem;
 	margin-block: 0;
+}
+
+.need-review {
+	color: red;
+	font-size: 0.6rem;
 }

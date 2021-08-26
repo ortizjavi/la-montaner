@@ -13,7 +13,6 @@ export function getUsers() {
   };
 }
 
-
 export function getAdminProducts() {
   return async function (dispatch) {
     try {
@@ -27,7 +26,6 @@ export function getAdminProducts() {
     }
   };
 }
-
 
 export function updateStatus(id, estado) {
   return async function () {
@@ -53,23 +51,38 @@ export function getOrders() {
   };
 }
 
+export function deleteOrder(id) {
+  return async function (dispatch) {
+    try {
+      console.log(id);
+      await axios.delete(`${endpoints.ORDER_STATUS}/${id}`);
+      return dispatch({ type: actionTypes.DELETE_ORDER, payload: id });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+
 export function getOrdersFilter(status) {
   return function (dispatch) {
     try {
-      return dispatch({type: actionTypes.GET_ORDER_FILTERED, payload: status})
+      return dispatch({
+        type: actionTypes.GET_ORDER_FILTERED,
+        payload: status,
+      });
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
 }
 
 export function deleteUser(id) {
   return async function (dispatch) {
     try {
       console.log(id);
-      await axios.delete(`${endpoints.DELETE_USER}/${id}`)
+      await axios.delete(`${endpoints.DELETE_USER}/${id}`);
       /* await axios.delete(`${endpoints.DELETE_USER}`, { email : user.email }); */
-      return dispatch({ type: actionTypes.DELETE_USER , payload:id});
+      return dispatch({ type: actionTypes.DELETE_USER, payload: id });
     } catch (error) {
       console.log(error);
     }
@@ -87,10 +100,34 @@ export function resetUser(user) {
   };
 }
 
-export function newAdmin(user) {
-	return async function (dispatch) {
+export function newSale(sale) {
+  return async function (dispatch) {
     try {
-      const resp = await axios.post(`${endpoints.NEW_ADMIN}`, { email : user.email });
+      const resp = await axios.post(`${endpoints.ADMIN_SALES}`, sale);
+      return dispatch({type: actionTypes.NEW_SALE, payload: resp.data.sale})
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+
+export function getSales() {
+  return async function (dispatch) {
+    try {
+      const resp = await axios.get(`${endpoints.ADMIN_SALES}`);
+      return dispatch({type: actionTypes.ADD_SALE_CART, payload: resp.data})
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+
+export function newAdmin(user) {
+  return async function (dispatch) {
+    try {
+      const resp = await axios.post(`${endpoints.NEW_ADMIN}`, {
+        email: user.email,
+      });
       return dispatch({ type: actionTypes.DELETE_USER, payload: user._id });
     } catch (error) {
       console.log(error);
@@ -98,6 +135,13 @@ export function newAdmin(user) {
   };
 }
 
-
-
-
+export function deleteSale(id) {
+  return async function (dispatch) {
+    try {
+      await axios.delete(`${endpoints.ADMIN_SALES}/${id}`);
+      return dispatch({ type: actionTypes.DELETE_SALES, payload: id });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}

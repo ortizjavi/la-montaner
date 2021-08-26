@@ -1,29 +1,27 @@
+import "./NavBar.css";
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import "./NavBar.css";
-import { Link, NavLink, useLocation } from "react-router-dom";
-import SearchBar from "../SearchBar/SearchBar";
+import { Link, NavLink, useLocation, useHistory } from "react-router-dom";
 import PersonIcon from "@material-ui/icons/Person";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import FavoriteIcon from "@material-ui/icons/Favorite";
+import MenuIcon from '@material-ui/icons/Menu';
+import StorefrontIcon from '@material-ui/icons/Storefront';
 import swal from "sweetalert";
 import {
   searchProductsAction,
   selectCategoryAction,
+  deleteCartAll
 } from "../../redux/actions/types/productActions.js";
 import { logout } from "../../redux/actions/types/authActions.js";
-// import { IoStorefrontOutline } from 'react-icons/ri';
-import StorefrontIcon from '@material-ui/icons/Storefront';
 import logoLanding from "../../img/logoLanding.png";
-import MenuIcon from '@material-ui/icons/Menu';
 import {
-  FIXED_CATEGORIES,
   FIXED_CATEGORIES_NAV,
-  FIXED_NAV_CATEGORIES_VALUES,
-  OTHERS_CATEGORY
+  FIXED_NAV_CATEGORIES_VALUES
 } from '../../utils/constants.js';
-import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
+import OtherCategories from './OtherCategories';
+import SearchBar from "../SearchBar/SearchBar";
 
 function CartSubTotal(){
   const cartSubtotal = useSelector((state) => state.cart.cartSubtotal);
@@ -44,6 +42,7 @@ function scrollListener(){
 }
 
 function NavBar(props, {history}) {
+  const { push } = useHistory()
   const location = useLocation()
   const currentCategoryState = useSelector(state => state.root.currentCategoryState)
   const [state, setState] = useState(currentCategoryState);
@@ -93,6 +92,17 @@ function NavBar(props, {history}) {
     )
   }
 
+  const handleLogOut = (e) => {
+    dispatch(logout())
+  }
+
+
+  const exit = (e) => {
+    dispatch(logout())
+    dispatch(deleteCartAll());
+    push('/home')
+  }    
+
  return (
    <>
     <header className="navbar">
@@ -126,14 +136,13 @@ function NavBar(props, {history}) {
         </Link>
         {isUser ?
           <div className='nav-icon' title='Cerrar sesion'>
-              <ExitToAppIcon className='nav-personicon' onClick={(e) => dispatch(logout())} style={{ fontSize: 40 }} />     
+              <ExitToAppIcon className='nav-personicon' onClick={exit} style={{ fontSize: 40 }} />     
           </div>
         : null}
       </div> 
       <div className='nav-icons-container-mobile'>
-        {/* <CloseIcon style={{ fontSize: 40 }} /> */}
         <ul>
-        <MenuIcon className='nav-menu-mobile' style={{ fontSize: 40 }} />
+        <MenuIcon className='nav-menu-mobile' style={{ fontSize: 40, color:'white' }} />
           <li>
             <Link to='/login' className='nav-icon' title='Usuario'>
               {user && user.picture ? 
@@ -165,7 +174,7 @@ function NavBar(props, {history}) {
           </li>
           {isUser ?
             <li className='nav-icon-mobile' title='Cerrar sesion'>
-              <Link className='nav-icon-mobile' onClick={(e) => dispatch(logout())}>
+              <Link className='nav-icon-mobile' onClick={(e) => handleLogOut(e)}>
                 <ExitToAppIcon  className='fav-icon-nav'  style={{ fontSize: 40 }} />
                 <span>Cerrar Sesion</span> 
               </Link>    
@@ -187,100 +196,6 @@ function NavBar(props, {history}) {
     </>
   );
 }
-
-function OtherCategories(props){
-  const [open, setOpen] = useState(null);
-  const [current, setCurrent] = useState(OTHERS_CATEGORY);
-  const wrapperRef = React.createRef(null);
-  let allCategories = useSelector(state => 
-    state.root.allCategories.map(c => c.name)
-    .filter(c => !FIXED_CATEGORIES.includes(c))
-  );
-
-  const toggleOpen = () => {
-    setOpen(op => !op);
-  }
-
-  useEffect(() => {
-    /**
-     * Alert if clicked on outside of element
-     */
-    const handleClickOutside = (event) => {
-      if (wrapperRef.current && !wrapperRef.current.contains(event.target)){
-        setOpen(false);
-      }
-    }
-    // Bind the event listener
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-        // Unbind the event listener on clean up
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [wrapperRef]);
-
-  useEffect(() => {
-    let selected = allCategories.includes(props.selected);
-    if (selected){
-       if (current !== props.selected){
-         setCurrent(props.selected)
-       }
-    } else {
-      if (current !== OTHERS_CATEGORY){
-        setCurrent(OTHERS_CATEGORY);
-      }
-    }
-  }, [props.selected])
-
- 
-  let selected = allCategories.includes(props.selected);
-
-  if (selected){
-    if (current !== OTHERS_CATEGORY){
-      allCategories.unshift(OTHERS_CATEGORY);
-    }
-    allCategories = allCategories.filter(c => c !== current);
-  }
-
-  const handleClick = (e) => {
-    setOpen(false);
-    props.handleCategory(e);
-  }
-
-  return (
-    <>
-    <div 
-      className={`${(selected || props.selected === OTHERS_CATEGORY) 
-                  && !open ? "actived" : 'Nav-button'} navButtonDiv`} 
-      id={current}
-      onClick={props.handleCategory}
-    >
-      { current.charAt(0).toUpperCase() + current.slice(1) }
-    </div>
-    {allCategories.length ? 
-    <div className='other-categories-container'>
-      <KeyboardArrowDownIcon onClick={toggleOpen}/>
-      { open ?
-          <div ref={wrapperRef} className="other-categories-list">
-          {
-           allCategories?.map((c, i) => (
-             <div
-             className="other-categories-item"
-             key={i} id={c}
-             onClick={handleClick}> 
-             { c === OTHERS_CATEGORY ? 'Todos los Otros' : c.charAt(0).toUpperCase() + c.slice(1)} 
-             </div>
-           ))
-          }
-          </div>
-      : null }
-    </div>
-    : null }
-    </>
-  );
-}
-
-
-
 
 export default NavBar;
 
