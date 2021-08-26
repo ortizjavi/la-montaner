@@ -32,6 +32,7 @@ import Address from "../components/Address/Address";
 import EasterEgg from "../components/EasterEgg/EasterEgg";
 import FindUs from "../components/FindUs/FindUs";
 import UserReviewsTable from "../components/Dashboard/UserReviews";
+import  Header  from "../components/Game/Header";
 
 const theme = createTheme({
   palette: {
@@ -130,9 +131,9 @@ export default function App() {
               <Route exact path="/home/:id" component={ProductDetail} />
               <Route exact path="/cart" component={Cart} />
               <Route exact path="/wishlist" component={Wishlist} />
+              <Route exact path="/game" component={Header}/> 
               <Route exact path="/about" component={AboutPage} />
               <Route exact path="/add/address" component={Address} />
-              <Route exact path="/game" component={EasterEgg} />
               <Route exact path="/faq" component={Accordion} />
               <Route exact path="/map" component={FindUs} />
             </div>
