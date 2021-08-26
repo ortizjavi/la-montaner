@@ -44,6 +44,7 @@ export const Table = () => {
     setSelect(name);
     const mon = await house();
     const victory = results(name, mon);
+    endGame();
     setResult(victory);
     if (victory === "Ganaste!") {
       setScore(score + 1);
@@ -51,7 +52,6 @@ export const Table = () => {
     if (victory === "Perdiste") {
       setScoreHouse(scoreHouse + 1);
     }
-    endGame();
   };
 
   const results = (select, house) => {
@@ -83,26 +83,22 @@ export const Table = () => {
       }
     }
   };
-
   const endGame = () => {
-    if (score === 3) {
-      dispatch(winGame());
-      swal(
-        "Ganaste!",
-        "Vas a tener disponible el descuento en tu carrito!",
-        "success"
-      );
-      setScore(0);
-      setScoreHouse(0);
+    if(score === 3){
+        dispatch(winGame());
+        swal("Ganaste!", "Vas a tener disponible el descuento en tu carrito!", "success");
+        setScore(0);
+        setScoreHouse(0);
     }
-    if (scoreHouse === 3) {
-      swal("Perdiste :(", "Podes volver a intentarlo!", "error");
-      setScore(0);
-      setScoreHouse(0);
+    if(scoreHouse === 3){
+        swal ( "Perdiste :(" ,  "Podes volver a intentarlo!" ,  "error" )
+        setScore(0);
+        setScoreHouse(0);
     }
-  };
+}
 
   const handleTryAgainClick = () => {
+    endGame();
     setUserActive(false);
   };
 
