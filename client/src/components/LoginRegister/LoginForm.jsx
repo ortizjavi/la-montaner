@@ -57,6 +57,7 @@ useEffect(() => {
   }, [user])
 
   return (
+    <div className={'loginContainer'}>
     <form className={'formStyles'} onSubmit={handleSubmit}>
       <div className={'title'}>Ingresá tu email y tu contraseña</div>
       <TextField
@@ -107,6 +108,7 @@ useEffect(() => {
       </div>
 
     </form>
+    </div>
   );
 };
 
