@@ -72,9 +72,8 @@ const Cart = () => {
       let dia = new Date().toISOString().slice(0, 10);
       let offertas = [];
       for (let i = 0; i < sales.length; i++) {
-        console.log("dia", dia);
-        console.log(sales[i].date.end);
-        if (
+        if ( 
+          sales[i].date &&
           sales[i].date.end &&
           sales[i].price <= total &&
           discountDate(dia, sales[i].date)
