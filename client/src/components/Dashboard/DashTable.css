@@ -66,12 +66,11 @@
 }
 
 .eye-solid-icon{
-	background: #24262b;
-    color: white;
+	background: none;
+	font-size: 2rem;
 	cursor: pointer;
 	border: none;
-	border-radius: 3px;
-	padding: 5px;
+	border-radius: 5px;
 }
 .eye-solid-icon:hover{
     background: #686868;
@@ -86,9 +85,45 @@
     margin-right: 5%;
 	font-size: 0.9rem;
 	margin-block: 0;
+    background-color: #c4c1c12d;
+	font-weight: bold;
+	padding: 3px;
 }
 
 .need-review {
 	color: red;
 	font-size: 0.6rem;
+}
+
+@media screen and (max-width: 700px) {
+
+	.table th {
+	width: 5rem;	
+	}
+	.table td {
+		width: 5.5rem;
+	}
+	.eye-solid-icon{
+	font-size: 1.5rem;
+	}
+}
+@media screen and (max-width: 480px) {
+
+	.table th {
+	width: 3rem;
+	font-size: 0.6rem;	
+	}
+	.table td {
+		width: 3.5rem;
+	font-size: 0.6rem;	
+
+	}
+	.dt-p{
+		font-size: 0.6rem;
+	}
+
+	.eye-solid-icon{
+		font-size: 1rem;
+	}
+	
 }
