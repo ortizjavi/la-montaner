@@ -18,7 +18,7 @@ import { createOrder, deleteCartAll } from "../../redux/actions/types/productAct
 
 function getModalStyle() {
   const top = 15;
-  const left = 25;
+  const left = 0;
 
   return {
     top: `${top}%`,
@@ -29,18 +29,27 @@ function getModalStyle() {
 const useStyles = makeStyles((theme) => ({
   paper: {
     position: "absolute",
-    width: 700,
-    left: 70,
+    width: "60%",
+    marginLeft:"17%",
     backgroundColor: theme.palette.background.paper,
     border: "2px solid #000",
     boxShadow: theme.shadows[5],
-    padding: theme.spacing(2, 4, 3),
+    padding: theme.spacing(2, 1, 1),
+  },
+  stepper:{
+    padding: theme.spacing(2, 1, 3, 1),
+  },
+  step:{
+    padding: theme.spacing(1, 0, 0),
+    border: "2px solid white",
+
   },
   root: {
     width: "100%",
   },
   button: {
     marginRight: theme.spacing(1),
+    marginTop: theme.spacing(1),
   },
   backButton: {
     marginRight: theme.spacing(1),
@@ -198,7 +207,7 @@ export default function HorizontalNonLinearAlternativeLabelStepper() {
 
   return (
     <div className={classes.root}>
-      <button type="button" onClick={handleOpen}>
+      <button type="button" onClick={handleOpen} className={classes.btComprar}>
         Comprar!
       </button>
       <Modal
@@ -208,7 +217,7 @@ export default function HorizontalNonLinearAlternativeLabelStepper() {
         aria-describedby="simple-modal-description"
       >
         <div style={modalStyle} className={classes.paper}>
-          <Stepper alternativeLabel nonLinear activeStep={activeStep}>
+          <Stepper alternativeLabel nonLinear activeStep={activeStep} className={classes.stepper}>
             {steps.map((label, index) => {
               const stepProps = {};
               const buttonProps = {};
@@ -216,7 +225,7 @@ export default function HorizontalNonLinearAlternativeLabelStepper() {
                 stepProps.completed = false;
               }
               return (
-                <Step key={label} {...stepProps}>
+                <Step key={label} {...stepProps} className={classes.step}>
                   <StepButton
                     onClick={handleStep(index)}
                     completed={isStepComplete(index)}
