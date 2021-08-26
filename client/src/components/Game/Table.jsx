@@ -50,6 +50,7 @@ export const Table = () => {
         setSelect(name)
         const mon = await house()
         const victory = results(name, mon)
+        endGame()
         setResult(victory);
         if(victory === 'Ganaste!'){
             setScore(score+1)
@@ -57,7 +58,6 @@ export const Table = () => {
         if(victory === 'Perdiste'){
             setScoreHouse(scoreHouse+1)
         }
-        endGame();
     }
 
     const results = (select, house) => {
@@ -106,6 +106,7 @@ export const Table = () => {
 
 
     const handleTryAgainClick = () => {
+        endGame()
         setUserActive(false)
     }
 
@@ -147,7 +148,9 @@ export const Table = () => {
                         </div>
                         <div>
                             <h3>{result}</h3>
-                            <Button onClick={handleTryAgainClick}>Try Again</Button>
+                            <Button onClick={handleTryAgainClick}>
+                                Seguir Jugando
+                            </Button>
                         </div>
                         </Grid>
                 )
