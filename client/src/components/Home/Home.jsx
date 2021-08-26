@@ -1,5 +1,6 @@
 import React, { useEffect, useState }  from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import {  searchProducts, filterProducts, getMaximumPrice, filterByPrice, selectCategoryAction,currentPageAction,searchProductsAction } from '../../redux/actions/types/productActions.js';
 import Filters from '../Filters/Filters.jsx';
 import ShowProducts from '../ShowProducts/ShowProducts';
@@ -135,7 +136,7 @@ export default function Home() {
               :
               <div className="home-sidebar-container">
                 <picture>
-                  <img className='home-img' src="https://res.cloudinary.com/la-montanes/image/upload/v1629909437/homeSideBarMontaner_qzmnup.png" alt="Vaso de Cerveza" />
+                 <Link to='/game'> <img className='home-img' src="https://res.cloudinary.com/la-montanes/image/upload/v1629999861/sideBannerBigBackground_2_a9decd.gif" alt="Vaso de Cerveza" /> </Link>
                 </picture>
                
               </div>
