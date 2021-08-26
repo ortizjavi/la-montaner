@@ -6,16 +6,18 @@ export function login(payload, tokenLogin = false) {
   return async function (dispatch) {
     try {
       const response = await axios.post(`${endpoints.AUTH_LOGIN}`, payload);
-      return dispatch({
+      dispatch({
         type: actionTypes.LOGIN_USER,
         payload: setUserSession(response.data)
       });
     } catch (e) {
       if (!tokenLogin)
-        return dispatch({
+        dispatch({
           type: actionTypes.LOGIN_FAILED,
           payload: e.response.data
         });
+    } finally {
+      dispatch({ type: 'STOP_LOADING' })
     }
   }
 }

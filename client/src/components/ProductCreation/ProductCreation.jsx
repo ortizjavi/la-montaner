@@ -18,7 +18,10 @@ import CardActions from "@material-ui/core/CardActions";
 import CardMedia from "@material-ui/core/CardMedia";
 import swal from "sweetalert";
 import "./ProductCreation.css";
-
+import { 
+  FIXED_CATEGORIES_NAV,
+  OTHERS_CATEGORY
+} from '../../utils/constants.js';
 const useStyles = makeStyles((theme) => ({
   root: {
     alignContent: "center",
@@ -93,6 +96,11 @@ export default function ProductCreation() {
         text: `${createProduct.name} se ha añadido con exito!`,
         icon: "success",
       });
+      if (!createProduct.categories.filter(c => FIXED_CATEGORIES_NAV.includes(c)).length){
+        if (!createProduct.categories.includes(OTHERS_CATEGORY)){
+          createProduct.categories.push(OTHERS_CATEGORY);
+        }
+      }
       /* await setCreateProduct({ ...createProduct, img: image }); */
       let post = await axios.post("http://localhost:3001/admin/product", {
         ...createProduct,
