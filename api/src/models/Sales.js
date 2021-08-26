@@ -8,7 +8,7 @@ const SalesSchema = Schema(
     },
     price: {
       type: Number,
-      required: true,
+      default: 0,
     },
     discount: {
       type: Number,

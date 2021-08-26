@@ -1,6 +1,9 @@
+/* .filter-sidebar-container {
+    background-color: red;
+} */
 .filters-container{
     /* margin-top: -4rem; */
-    background: white;
+    /* background: white; */
     width: 16rem;
     height: 32rem;
     margin-left: 2rem;
@@ -45,16 +48,17 @@
 
 .select-sidebar:hover {
     border-width: thin;
+    background-color: lightgrey;
 }
 .sidebar-title h1{
     display: flex;
     font-size: 2rem;
-    color: #CB9D57;
+    color: #a52a2a;
     /* padding-bottom: 1rem; */
 }
 .select-filters{
     border: none;
-    background: #CB9D57;
+    background: gray;
 }
 
 /* .filter-result{
@@ -93,7 +97,7 @@
     margin-top: 0;
     margin-bottom: 0;
     font-size: 0.9rem;
-    color: #CB9D57;
+    color: gray
 }
 
 .sb-h4{

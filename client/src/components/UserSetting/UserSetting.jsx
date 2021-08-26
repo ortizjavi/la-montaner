@@ -68,13 +68,13 @@ const UserSetting =  () => {
         .catch((err) => console.log('UserSetting/uploadImage/Error: ',err));
     };
 
-    
 
     return(
+      <>
+        <NavLink to='/dashboard'>
+              <p className='setting-volver'>&#x2B05; Volver</p>
+        </NavLink>
         <section className='userSetting-container'>
-          <NavLink to='/dashboard'>
-                <p>&#x2B05; Volver</p>
-          </NavLink>
           <br></br>
 
             <h3>¿Deseas modificar tus datos?</h3>
@@ -112,10 +112,11 @@ const UserSetting =  () => {
             </form>
               <button className='us-button' type="submit" onClick={handleSubmit}>Agregar los Cambios</button>
             </>
-            <NavLink to='/dashboard'>
-                <p>&#x2B05; Volver</p>
-          </NavLink>
         </section>
+        <NavLink to='/dashboard'>
+              <p className='setting-volver'>&#x2B05; Volver</p>
+        </NavLink>
+      </>
     )
 }
 

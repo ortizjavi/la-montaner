@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
 const Cart = () => {
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
-  const { cartItems, sales } = cart;
+  const { cartItems, sales, game } = cart;
   const classes = useStyles();
   const [open, setOpen] = useState(false);
   const [offers, setOffers] = useState(0);
@@ -69,12 +69,12 @@ const Cart = () => {
   };
   const alert = () => {
     if (sales) {
+      let discountGame = 0;
       let dia = new Date().toISOString().slice(0, 10);
       let offertas = [];
       for (let i = 0; i < sales.length; i++) {
-        if ( 
-          sales[i].date &&
-          sales[i].date.end &&
+        if (
+          sales[i].date?.end &&
           sales[i].price <= total &&
           discountDate(dia, sales[i].date)
         ) {
@@ -84,13 +84,27 @@ const Cart = () => {
         } else if (sales[i].price <= total && (dia === sales[i]) === {}) {
           offertas.push(sales[i].discount);
         }
+        else if (!sales[i].date && sales[i].price === 0){
+          discountGame = sales[i].discount;
+        }
       }
-      if (offertas.length === 0 && offers > 0) {
-        setOpen(false);
-        setOffers(0);
-      }
-      if (offertas.length >= 1) {
-        setOffers(offertas[offertas.length - 1]);
+      if(game && discountGame>0){
+        if (offertas.length === 0) {
+          setOffers(discountGame);
+        }
+        if (offertas.length >= 1) {
+          setOffers(offertas[offertas.length - 1]+discountGame);
+        }
+
+      } 
+      else{
+        if (offertas.length === 0 && offers > 0) {
+          setOpen(false);
+          setOffers(0);
+        }
+        if (offertas.length >= 1) {
+          setOffers(offertas[offertas.length - 1]);
+        }
       }
     }
   };

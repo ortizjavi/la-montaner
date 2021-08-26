@@ -143,3 +143,14 @@ export function deleteSale(id) {
     }
   };
 }
+
+export function winGame() {
+  return function (dispatch) {
+    try {
+      console.log('GANEEE')
+      return dispatch({ type: actionTypes.WIN_GAME, payload: true });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}

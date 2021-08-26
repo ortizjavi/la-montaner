@@ -25,7 +25,7 @@ const UserReviewsTable = () =>{
             <NavLink to='/dashboard'>
                 <p className='rev-volver'>&#x2B05; Volver</p>
             </NavLink>
-        <div className='container-reviews'>
+        <div className='container-user-reviews'>
             <h1 className='rev-title'>Mis Comentarios y Calificaciones</h1>
          {
              reviewsUSER.length > 0 ?
@@ -45,6 +45,7 @@ const UserReviewsTable = () =>{
                               style={{ margin: "10px 0" }}
                             />
                         <div className='rev-stars'>
+                            <p>Mi calificación:  
                           {el.reviews.map(e => {
                              if (e.idUsuario === user._id && e.calification) 
                             return [...Array(e.calification)].map((star, i) => {
@@ -64,11 +65,11 @@ const UserReviewsTable = () =>{
                                   </label>
                                 );
                               })
-                         })}
+                         })} </p>
                          </div>
                          {el.reviews.map(e => {
                              if (e.idUsuario === user._id && e.content) 
-                             return <p>Mi comentario: {e.content}</p>
+                             return <p>Mi comentario: "{e.content}"</p>
                          })}
                      </div>
                  </div>
@@ -80,9 +81,6 @@ const UserReviewsTable = () =>{
              </div>
          }   
        </div>
-       <NavLink to='/dashboard'>
-                <p className='rev-volver'>&#x2B05; Volver</p>
-       </NavLink>
        </>
        
     )

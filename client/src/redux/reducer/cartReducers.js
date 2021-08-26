@@ -6,6 +6,7 @@ const CART_INITIAL_STATE = {
   address: "",
   sales: [],
   discount: 0,
+  game:false,
 };
 
 const cartReducer = (state = CART_INITIAL_STATE, action) => {
@@ -61,6 +62,8 @@ const cartReducer = (state = CART_INITIAL_STATE, action) => {
     case actionTypes.DELETE_SALES:
       const deletedSale = state.sales?.filter((s) => s._id !== action.payload);
       return { ...state, sales: deletedSale };
+    case actionTypes.WIN_GAME:
+      return{...state, game:action.payload}
     default: return state;
   }
 };
