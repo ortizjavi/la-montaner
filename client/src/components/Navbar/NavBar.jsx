@@ -12,7 +12,8 @@ import swal from "sweetalert";
 import {
   searchProductsAction,
   selectCategoryAction,
-  deleteCartAll
+  deleteCartAll,
+  addCartSubTotal,
 } from "../../redux/actions/types/productActions.js";
 import { logout } from "../../redux/actions/types/authActions.js";
 import logoLanding from "../../img/logoLanding.png";
@@ -27,11 +28,7 @@ function CartSubTotal(){
   const cartSubtotal = useSelector((state) => state.cart.cartSubtotal);
   return (
     <>
-    {
-      (cartSubtotal > 0) ?
       <h3 className='cart_subtotal'>{cartSubtotal}</h3>
-      : null
-    }
     </>
   )
 }
@@ -96,12 +93,15 @@ function NavBar(props, {history}) {
 
   const handleLogOut = (e) => {
     dispatch(logout())
+    dispatch(deleteCartAll());
+    dispatch(addCartSubTotal(0))
   }
 
 
   const exit = (e) => {
     dispatch(logout())
     dispatch(deleteCartAll());
+    dispatch(addCartSubTotal(0))
     push('/home')
   }    
 
