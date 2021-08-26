@@ -94,7 +94,7 @@
 .landing_info {
   background: #c88e34;
   height: 6%;
-  width: 75%;
+  width: 50%;
   max-width: 50vw;
   margin: auto;
   display: flex;
@@ -122,9 +122,68 @@
   .div_content {
     width: 60vw;
   }
+  .landing_info {
+    width: 55%;
+  }
 
   .list_options button {
     padding: 10% 2.5vw;
     font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 900px) {
+  .landing_info {
+    width: 65%;
+  }
+  .div_content {
+    width: 70vw;
+  }
+}
+
+@media (max-width: 700px) {
+  .div_content {
+    width: 80vw;
+  }
+
+  .landing_info {
+    width: 75%;
+    max-width: 65vw;
+  }
+
+  .list_options button {
+    padding: 10% 5vw;
+    font-size: 1.5rem;
+  }
+
+  .landing_info p {
+    font-size: 1.35rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .div_content {
+    width: 100vw;
+  }
+  .landing_options h2 {
+    font-stretch: 1.75rem;
+  }
+
+  .list_options button {
+    padding: 10% 5vw;
+    font-size: 1.5rem;
+  }
+  .landing_info {
+    max-width: 70vw;
+    width: 70%;
+  }
+
+  .landing_info p {
+    font-size: 1.2rem;
+  }
+
+  .landing_options p {
+    font-size: .8rem;
+    padding-top: 5%;
   }
 }
