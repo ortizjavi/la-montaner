@@ -1,16 +1,30 @@
-import React,{useState} from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-import { FaEye } from 'react-icons/fa';
+import { getAdminProducts } from '../../redux/actions/types/adminActions';
 import './DashTable.css';
-import { getProductDetail } from '../../redux/actions/types/productActions';
 
 
 const Tabla = () =>{ 
   const user = useSelector((state) => state.session.user);
 
+////// 
+  const Products = useSelector( state => state.root.adminProducts)
+    
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+     
+      dispatch(getAdminProducts())
+  }, [])
+  let onlyReviews = Products?.filter(e => e.reviews?.length > 0)
+  let thisUserReviews = []
+  onlyReviews.map(e => e.reviews.map(el => el.idUsuario === user._id && thisUserReviews.push(e)))
+////////
+
+console.log(user.orders.reverse())
   const [state, setState] = useState('') 
-console.log(user.orders?.createdAt?.slice(0,10)) 
+
   const handleState = e =>{
     const cardOrder = user.orders?.find(o => o._id === e.target.id);
     setState(cardOrder)
@@ -30,7 +44,7 @@ console.log(user.orders?.createdAt?.slice(0,10))
           </td>
           <td>
             { '$ ' +  order.cart.reduce((accumulator, currentValue) => {
-                return accumulator + currentValue.price;
+                return accumulator + (currentValue.price*currentValue.stockSelected);
               }, 0)
             }
           </td>
@@ -42,7 +56,7 @@ console.log(user.orders?.createdAt?.slice(0,10))
           </td>
         </tr>
         ))
-    
+ console.log(state)   
   return (
   <div>
     <h3 className='table-title'>Mis compras</h3>
@@ -71,7 +85,6 @@ console.log(user.orders?.createdAt?.slice(0,10))
       </table>
       :
       <section>
-              {/* <p className='volver' onClick={goBack}>&#x2B05; Volver</p> */}
               <button className='volver' onClick={goBack}>&#x2B05; Volver</button>
               <table className='table'>
                 <thead >
@@ -102,6 +115,13 @@ console.log(user.orders?.createdAt?.slice(0,10))
                         <NavLink className="" to={`/home/${product.id}`}>
                           { product.name}
                         </NavLink>
+                        {
+                          state.status === 'Completa' ?
+                          thisUserReviews.find(el => el._id === product.id) ? null :
+                          <NavLink className="" to={`/home/${product.id}`}>
+                            <p className='need-review'>Calificar este producto</p>
+                          </NavLink> : null
+                        }
                       </td>
                       <td>
                         { '$ ' + product.price}
@@ -113,9 +133,10 @@ console.log(user.orders?.createdAt?.slice(0,10))
                   ))
                 }
                 <p className='dt-p'>Total: $ {state.cart.reduce((accumulator, currentValue) => {
-                return accumulator + currentValue.price;
+                return accumulator + (currentValue.price*currentValue.stockSelected);
               }, 0) }</p>
                 <p className='dt-p'>Fecha de compra: {state.createdAt?.slice(0,10).split('-').reverse().join('/')}</p>
+                <p className='dt-p'>Forma de pago: {state.payment}</p>
                 </tbody>
               </table>
       </section>

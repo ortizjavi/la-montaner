@@ -1,120 +1,161 @@
 .userSetting-container{
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    font-size: 1.1rem;
-    margin: 2rem;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  font-size: 1.1rem;
+  margin: 2rem;
 }
 .userSetting-container p{
-  margin-block: 0;
-  padding-block: 0.5rem;
+margin-block: 0;
+padding-block: 0.5rem;
 }
 .userSetting-container h3{
-  margin-block: 0;
+margin-block: 0;
 }
 
 .userSetting-form{
-  font-size: 1rem;
-  width: 50%;
-  height: auto;
-  background-color: #dcdcdc9e;
-  padding: 1rem;
-  border-radius: 10px;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  justify-content: space-evenly;
-  align-items: center;
+font-size: 1rem;
+width: 50%;
+height: auto;
+background-color: #dcdcdc9e;
+padding: 1rem;
+border-radius: 10px;
+display: flex;
+flex-direction: row;
+flex-wrap: wrap;
+justify-content: space-evenly;
+align-items: center;
 }
 
 .section_create input{
-  width: 16rem;
-  height: 1.5rem;
-  font-size: 1rem;
-  padding-left: 1rem;
-  margin: 0.2rem;
-  border-radius: 5px;
-  border: none;
-  background-color: white;
+width: 16rem;
+height: 1.5rem;
+font-size: 1rem;
+padding-left: 1rem;
+margin: 0.2rem;
+border-radius: 5px;
+border: none;
+background-color: white;
 }
 
 .section_create-us-section-img {
-  display: flex;
-  background-color: white;
-  /* margin-block: 1rem; */
-  padding-left: 1rem;
-  padding-right: 1rem;
-  border-radius: 5px;
-  flex-direction: column;
-  align-items: center;
+display: flex;
+background-color: white;
+/* margin-block: 1rem; */
+padding-left: 1rem;
+padding-right: 1rem;
+border-radius: 5px;
+flex-direction: column;
+align-items: center;
 }
 
 .section_create {
-  display: flex;
-  flex-direction: column;
+display: flex;
+flex-direction: column;
 }
 
 .section_create a{
-  margin: 2rem;
+margin: 2rem;
 }
-/* .us-section-img{
-  background: white;
-  margin-block: 1rem;
-  padding: 0  1rem;
-  border-radius: 5px;
-} */
+
 .usersetting-img{
-    width: 100px;
-    height: 100px;
-    border-radius: 80px;
-    object-fit: scale-down;
-    margin: 0rem;
+  width: 100px;
+  height: 100px;
+  border-radius: 80px;
+  object-fit: scale-down;
+  margin: 0rem;
+  position: relative;
+}
+.custom-file-input{
+  /* color: white; */
+  padding: 4px;
 }
 .custom-file-input::-webkit-file-upload-button {
-    /* visibility: hidden; */
-    /* content: 'Seleccionar una imagen'; */
-    background: #dcdcdc9e;
-    color: black;
-    cursor: pointer;
-    border: none;
-    border-radius: 3px;
-    padding: 5px;
-    margin-bottom: 2rem;
-    font-size: 1rem;
-    margin-block: 0.5rem;
-  }
-  .custom-file-input::before {
-    /* content: 'Seleccionar una imagen'; */
-    /* display: inline-block; */
-    background: #24262b;
-    color: white;
-    border-radius: 3px;
-    padding: 0.5rem;
-    outline: none;
-    white-space: nowrap;
-    cursor: pointer;
-    font-size: 1rem;
-    margin-block: 0.5rem;
-  }
-  .custom-file-input:hover::-webkit-file-upload-button {
-    background: #686868;
+  /* visibility: hidden; */
+  display: none;
 
+  padding: 5px;
+  width: 100%;
+}
+.custom-file-input::before {
+  content: 'Seleccionar Imagen';
+  /* display: inline-block; */
+  background: #dcdcdc9e;
+  color:black;
+  border-radius: 3px;
+  padding: 0.5rem;
+  outline: none;
+  /* white-space: wrap; */
+  cursor: pointer;
+  font-size: 1rem;
+  margin-block: 0.5rem;
+  
+}
+
+.custom-file-input:hover::before{
+  color: white;
+  background: #686868;
+
+}
+.us-button{
+  background: #dcdcdc9e;
+  color: black;
+  cursor: pointer;
+  border: none;
+  border-radius: 3px;
+  padding: 5px;
+  margin-bottom: 2rem;
+  font-size: 1rem;
+  margin-block: 0.5rem;
+}
+.us-button:hover{
+    background: #686868;
+    color: white;
+}
+
+@media screen and (max-width:700px) {
+  .userSetting-container{
+    font-size: 1rem;
   }
-  .custom-file-input:active::before {
-    background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
+
+  .us-section-img{
+    margin: 2px 0;
+  }
+
+  .userSetting-form{
+    padding: 0.5rem;
+    font-size: 12px;
+  }
+ 
+  .section_create > input{
+    font-size: 12px;  
+    width: 95%;
+    padding: 0 4px;
+    height: 1.5rem;
+  }
+
+  .custom-file-input{
+    width: 95% !important;
+    font-size: 10px;
+  }
+
+  .custom-file-input::before {
+    font-size: 10px;
   }
 
   .us-button{
-    background: #dcdcdc9e;
-    color: black;
-    cursor: pointer;
-    border: none;
-    border-radius: 3px;
-    padding: 5px;
-    margin-bottom: 2rem;
-    font-size: 1rem;
-    margin-block: 0.5rem;
+    font-size: 12px;
   }
-  .us-button:hover{
-      background: #686868;
+  }
+
+  @media screen and (max-width:480px) {
+  .userSetting-form{
+  width: 90%;
+  }
+  .section_create > input{
+  width: 60vw;
+  }
+  .section_create-us-section-img{
+    width: 55vw;
+  }
   }

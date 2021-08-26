@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { FaStar } from 'react-icons/fa';
 import { Divider, Avatar, Grid, Paper } from '@material-ui/core';
 import { addReview, getProductDetail } from '../../redux/actions/types/productActions';
+import swal from 'sweetalert';
 import './Reviews.css';
 
 export default function Reviews({ id }) {
@@ -48,8 +49,13 @@ export default function Reviews({ id }) {
   // }, [dispatch, detail.reviews])
 
   const handleSubmit = (e) => {
-    if (calification < 1 || calification > 5) {
-      setErrors('');
+    e.preventDefault();
+    if (calification === 0) {
+      return swal({
+        title: 'Tu review debe tener al menos una estrella.',
+        icon: 'error',
+        buttons: [false, true],
+      });
     }
     dispatch(
       addReview({
@@ -61,6 +67,7 @@ export default function Reviews({ id }) {
     );
     setContent('');
     setCalification(0);
+    window.location.reload();
   };
 
   const handleReviews = (e) => {

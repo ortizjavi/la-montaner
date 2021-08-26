@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "./NavBar.css";
-import { Link, NavLink, useLocation } from "react-router-dom";
+import { Link, NavLink, useLocation, useHistory } from "react-router-dom";
 import SearchBar from "../SearchBar/SearchBar";
 import PersonIcon from "@material-ui/icons/Person";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
@@ -12,6 +12,7 @@ import swal from "sweetalert";
 import {
   searchProductsAction,
   selectCategoryAction,
+  deleteCartAll
 } from "../../redux/actions/types/productActions.js";
 import { logout } from "../../redux/actions/types/authActions.js";
 // import { IoStorefrontOutline } from 'react-icons/ri';
@@ -39,6 +40,7 @@ function CartSubTotal(){
 }
 
 function NavBar(props, {history}) {
+  const { push } = useHistory()
   const location = useLocation()
   console.log('Navbar/location',location)
   let initialCategories = { vertodos: false, cervezas: false, conservas: false, merchandising: false, otros: false }
@@ -83,6 +85,11 @@ function NavBar(props, {history}) {
         })
     }
 
+    const handleLogOut = (e) => {
+      dispatch(logout())
+      dispatch(deleteCartAll());
+    }
+
     function HomeIcon(props) {
       return (
         <SvgIcon {...props}>
@@ -90,8 +97,11 @@ function NavBar(props, {history}) {
         </SvgIcon>
       );
     }
-    
-      
+  
+    const exit = (e) => {
+      dispatch(logout())
+      push('/home')
+    }    
 
  return (
    <>
@@ -129,12 +139,15 @@ function NavBar(props, {history}) {
 
         <Link to="/cart" className='nav-icon cart_subtotal_container' title='Carrito de compras'>
             <ShoppingCartIcon className='nav-personicon' style={{ fontSize: 40 }} />
+            {
+              isUser && 
             <CartSubTotal/>
+            }
         </Link>
 
         {isUser ?
           <div className='nav-icon' title='Cerrar sesion'>
-              <ExitToAppIcon className='nav-personicon' onClick={(e) => dispatch(logout())} style={{ fontSize: 40 }} />     
+              <ExitToAppIcon className='nav-personicon' onClick={exit} style={{ fontSize: 40 }} />     
           </div>
         : null}
       </div>
@@ -143,7 +156,7 @@ function NavBar(props, {history}) {
       <div className='nav-icons-container-mobile'>
         {/* <CloseIcon style={{ fontSize: 40 }} /> */}
         <ul>
-        <MenuIcon className='nav-menu-mobile' style={{ fontSize: 40 }} />
+        <MenuIcon className='nav-menu-mobile' style={{ fontSize: 40, color:'white' }} />
           <li>
             <Link to='/login' className='nav-icon' title='Usuario'>
               {user && user.picture ? 
@@ -175,8 +188,9 @@ function NavBar(props, {history}) {
           </li>
           {isUser ?
             <li className='nav-icon-mobile' title='Cerrar sesion'>
-              <Link className='nav-icon-mobile' onClick={(e) => dispatch(logout())}>
+              <Link className='nav-icon-mobile' onClick={(e) => handleLogOut(e)}>
                 <ExitToAppIcon  className='fav-icon-nav'  style={{ fontSize: 40 }} />
+
                 <span>Cerrar Sesion</span> 
               </Link>    
             </li>

@@ -259,6 +259,7 @@ export function createOrder(cart, user, address, mercadopago) {
         mercadopago,
       });
       dispatch({ type: actionTypes.ORDER_CREATED, payload: resp.data.order });
+      console.log("mercado", mercadopago);
       if (mercadopago) {
         return (window.location.href = resp.data.mp_link);
       }
@@ -290,6 +291,7 @@ export function addFavProducts(id) {
           name: data.name,
           image: data.img[0],
           price: data.price,
+          stock: data.stock,
         },
       });
     } catch (e) {
@@ -302,6 +304,10 @@ export function removeFavProduct(id) {
   return async function (dispatch) {
     return dispatch({ type: actionTypes.DELETE_FAV_PRODUCT, payload: id });
   };
+}
+
+export function removeFavAll() {
+  return { type: actionTypes.DELETE_FAV_ALL };
 }
 
 export function addCartSubTotal(subtotal) {
@@ -331,13 +337,13 @@ export function addDiscount(discount) {
     });
   };
 }
-export function addReview(data){
+export function addReview(data) {
   return async () => {
-    await axios.put(`${endpoints.ADD_REVIEW}`, { 
+    await axios.put(`${endpoints.ADD_REVIEW}`, {
       content: data.content,
       id: data.id,
       calification: data.calification,
-      idUsuario: data.idUsuario},
-    );
+      idUsuario: data.idUsuario,
+    });
   };
-};
+}
