@@ -87,7 +87,7 @@ export default function Reviews({ id }) {
         {!usuario || usuario.length === 0 ? null : detail.stock ===
           0 ? null : !finalCompro ? null : (
           <div className="form-reviews">
-            <form
+            <form className='form-styles-detail'
               onSubmit={(e) => handleSubmit(e)}
               style={includesss ? { display: 'none' } : { display: 'block' }}
             >
