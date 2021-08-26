@@ -2,6 +2,7 @@
     /* width: 16rem; */
     /* height: 60vh; */
     margin-left: 2rem;
+    margin-right: 0.5rem;
     display: flex;
     flex-direction: column;
     box-sizing: border-box;
@@ -9,7 +10,7 @@
     /* background-color: #c4c1c12d; */
     border-radius: 8px;
     align-items: center;
-    margin: 1rem;
+    margin-bottom: 3rem;
     
 }
 /* .sidebar-title{

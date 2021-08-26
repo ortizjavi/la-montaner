@@ -4,6 +4,7 @@ import {  searchProducts, filterProducts, getMaximumPrice, filterByPrice, select
 import Filters from '../Filters/Filters.jsx';
 import ShowProducts from '../ShowProducts/ShowProducts';
 import './Home.css';
+import montanesBeer from './montanesBeer.jpg'
 import ClearIcon from '@material-ui/icons/Clear';
 import SortIcon from '@material-ui/icons/Sort';
 
@@ -130,7 +131,7 @@ export default function Home() {
           <section className='home-section-filters'>
             {
               currentCategoryState ==='cervezas' ?
-              <Filters  onChangeFilter={(e) => { onChangeFilter(e) }} leftFilter={leftFilter} />
+              <Filters  onChangeFilter={(e) => { onChangeFilter(e) }} leftFilter={leftFilter} /> 
               :
               <div className="home-sidebar-container">
                 <picture>
@@ -139,6 +140,10 @@ export default function Home() {
                
               </div>
             }
+          {
+             currentCategoryState ==='cervezas' &&
+            <img className='montanesBeer' src={montanesBeer} alt='' />
+          }
           </section>
           <section className="items-container">
             <ShowProducts allProducts={allProducts}/>
