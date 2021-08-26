@@ -44,6 +44,8 @@ function scrollListener(){
 function NavBar(props, {history}) {
   const { push } = useHistory()
   const location = useLocation()
+  let initialCategories = { vertodos: false, cervezas: false, conservas: false, merchandising: false, otros: false }
+  const [category, setCategory] = useState(initialCategories)
   const currentCategoryState = useSelector(state => state.root.currentCategoryState)
   const [state, setState] = useState(currentCategoryState);
   const user = useSelector(state => state.session.user)
@@ -189,7 +191,7 @@ function NavBar(props, {history}) {
                     <li className='navbar-section'>
                       { renderCategories() }
                     </li>
-                      }
+                      
                 </ul>
     </section>
     }

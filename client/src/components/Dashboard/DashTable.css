@@ -36,12 +36,12 @@
 		padding-bottom: 5px; */
 		width: 7.5rem;
 }
-.dt-th2{
-	/* margin-left: 27%; */
+/* .dt-th2{
+	margin-left: 27%;
 }
 .dt-th3{
-	/* margin-left: 24%; */
-}
+	margin-left: 24%;
+} */
 .dt-tbody{
 	height: 20vh;
 	/* display:block; */
@@ -50,9 +50,9 @@
 	flex-direction: column;
 	overflow-y: scroll;
 }
-.dt-tbody td{
-	/* padding-left: 3px; */
-}
+/* .dt-tbody td{
+	padding-left: 3px;
+} */
 .dt-tr{
 	/* margin-left: 1rem; */
 	display: flex;
