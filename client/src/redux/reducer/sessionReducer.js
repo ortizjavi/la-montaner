@@ -44,6 +44,10 @@ const sessionReducer = (state = SESSION_INITIAL_STATE, action) => {
       return {
         ...state
       }
+    case 'LOADING_SESSION':
+      return { ...state, loading: true }
+    case 'STOP_LOADING':
+      return { ...state, loading: false }
     default: return state;
   }
 };

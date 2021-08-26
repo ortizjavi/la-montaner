@@ -30,6 +30,7 @@ console.log(session);
 const initialState = {
   session: {
     user: {},
+    loading: false
   },
   cart: {
     cartItems: cartItemsInLocalStorage,
@@ -50,6 +51,7 @@ const store = createStore(
 );
 
 if (session.token) {
+  store.dispatch({ type: 'LOADING_SESSION'})
   store.dispatch(login({ token: session.token }, true));
 }
 
