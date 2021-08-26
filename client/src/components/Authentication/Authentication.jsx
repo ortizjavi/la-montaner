@@ -28,7 +28,7 @@ export default function ExternAuthentication(props) {
   return (
     <div className="external-login-container">
       <br></br>
-      <div className="external-login-button">
+      <div className="external-login-button g-btn">
         <GoogleLogin
           clientId="185256781467-8t9jr2l450gsbuev5d12bs463280d0c4.apps.googleusercontent.com"
           buttonText={googleBtnTitle}
