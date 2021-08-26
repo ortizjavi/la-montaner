@@ -25,7 +25,8 @@
 }
 
 .text-area {
-  width: 550px;
+  /* width: 550px; */
+  width: 80%;
   border-radius: 5px;
   margin: 15px 15px;
   border: solid 1.5px;
@@ -53,9 +54,13 @@
 
 .container-reviews {
   padding-top: 25px;
-  width: 60%;
+  width: 80%;
   background-color: #ffffff;
   margin: 0 auto;
+}
+.container-reviews ul{
+  width: 100%;
+  padding: 5px;
 }
 .container-reviews h1 {
   color: rgb(0, 0, 0);
@@ -101,11 +106,13 @@
 }
 
 .buttons-review button {
-  padding: 10px 17px;
+  padding: 5px;
   width: 15%;
   background: #171717;
   color: #f4f4f4;
   cursor: pointer;
+  margin: 3px 5%;
+  border-radius: 5px;
 }
 
 .buttons-review button:hover {
@@ -119,17 +126,24 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 30px 100px;
+  /* padding: 30px 100px; */
+  padding: 5% 10%;
 }
 
 .form-reviews {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  /* justify-content: center; */
+  justify-content: space-around;
   align-items: center;
   text-align: center;
   background-color: #fff;
   box-shadow: 0px 0px 19px 5px rgba(0, 0, 0, 0.19);
+  width: 100%;
+  padding: 10px;
+}
+.form-reviews form{
+  width: 80vw;
 }
 
 .field {
@@ -141,4 +155,11 @@
   font-size: 1.1rem;
   margin-bottom: 22px;
   transition: 0.3s;
+}
+
+@media screen and (max-width: 480px) {
+.buttons-review button {
+font-size: 10px;
+}
+  
 }
