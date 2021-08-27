@@ -9,10 +9,11 @@ const useStyles = makeStyles((theme) => ({
     root: {
       display: 'flex',
       flexWrap: 'wrap',
+      height:theme.spacing(53),
       '& > *': {
         margin: theme.spacing(1),
         width: "90vw",
-        height: '11vh',
+        height: '12vh',
         border: "1px solid",
         //padding: "2em",
         borderRadius: "5px",
@@ -20,8 +21,12 @@ const useStyles = makeStyles((theme) => ({
         textAlign:"center",
         alignItems: "center",
         marginTop: theme.spacing(4),
+
       },
     },
+    title:{
+      marginTop: "0"
+    }
   }));
 
 
@@ -31,12 +36,12 @@ export default function Header () {
 
     return (
         <div className={classes.root}>
-            <Grid container spacing={2}>
-                <Grid item xs={12}>
-                        <h1>Piedra, Papel o Tijera</h1>
+            <Grid container spacing={2}  >
+                <Grid item xs={12} >
+                        <h1 className={classes.title} >Piedra, Papel o Tijera &#127867;</h1>
                 </Grid>
                 <Grid item xs={12}>
-                    <Table/>
+                    <Table />
                 </Grid>
             </Grid>
         </div>

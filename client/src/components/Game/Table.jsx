@@ -11,6 +11,9 @@ import { getSales, winGame } from "../../redux/actions/types/adminActions";
 import "./game.css";
 const maquina = ["papel", "tijera", "piedra"];
 
+
+
+
 export const Table = () => {
   const dispatch = useDispatch();
 
@@ -20,6 +23,8 @@ export const Table = () => {
   const [result, setResult] = useState("");
   const [score, setScore] = useState(0);
   const [scoreHouse, setScoreHouse] = useState(0);
+
+
   
   useEffect(() => {
     dispatch(getSales())
@@ -124,11 +129,11 @@ export const Table = () => {
   };
 
   return (
-    <div>
-      <Grid container spacing={3} justifyContent="center" alignItems="center">
-        <Grid item xs={12} className="scores">
+    <div  >
+      <Grid container spacing={3} justifyContent="center" alignItems="center" >
+        <Grid item xs={12} className="scores" >
           <Score value={score} />
-          <Rules/>
+          <Rules  />
           <ScoreHouse value={scoreHouse} />
         </Grid>
         {!userActive ? (
@@ -148,6 +153,8 @@ export const Table = () => {
               <p className="seleccionM">Selección de la Montañes</p>
             </div>
             <div>
+              { result === "Perdiste" 
+              ?
               <h3
                 className={
                   result === "Ganaste!"
@@ -157,8 +164,35 @@ export const Table = () => {
                     : "same"
                 }
               >
-                {result}
+                {result} &#128531; 
               </h3>
+              :
+              result === "Ganaste!"
+              ? 
+              <h3
+                className={
+                  result === "Ganaste!"
+                    ? "win"
+                    : result === "Perdiste"
+                    ? "lose"
+                    : "same"
+                }
+              >
+                {result} &#127881;
+              </h3>
+              :
+              <h3
+              className={
+                result === "Ganaste!"
+                  ? "win"
+                  : result === "Perdiste"
+                  ? "lose"
+                  : "same"
+              }
+            >
+              {result} 
+            </h3>
+              }
               <Button
                 onClick={handleTryAgainClick}
                 variant="contained"
