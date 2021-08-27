@@ -52,6 +52,7 @@
     /* margin-left: 2rem; */
     cursor: pointer;
     width: 55%;
+    margin-left: -17.5%;
 }
 
 .nav-title {
@@ -153,6 +154,7 @@ width: 10rem;
     width: 20%;
     color: #ffffff;
     background-color: transparent;
+    margin-left: 
 }
 
 .nav-personicon svg {
