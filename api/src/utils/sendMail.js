@@ -110,7 +110,7 @@ sendEmail.passRecoveryEmail = (email,name, newPass) => {
 	let data = passwordTemplate;
 	data = data.replace('{title}', `Hola ${name}, solicitaste recuperar tu contraseña.`);
 	data = data.replace('{passwordMssg}', `Por favor seguí
-	 este <a href="http://localhost:3000/login">link</a> e ingresa este token como tu contraseña`);
+	 este <a href="https://la-montaner.vercel.app/home/login">link</a> e ingresa este token como tu contraseña`);
 	data = data.replace('{passwordToken}', newPass);
 	return transport.sendMail({
 		from: `La Montañes <${process.env.MAIL_USER}>`,
