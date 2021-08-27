@@ -28,7 +28,7 @@ export function register(payload) {
       const response = await axios.post(`${endpoints.AUTH_REGISTER}`, payload);
       return dispatch({
         type: actionTypes.REGISTER_USER,
-        payload: response.data
+        payload: setUserSession(response.data)
       });
     } catch (e) {
 

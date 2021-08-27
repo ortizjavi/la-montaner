@@ -28,7 +28,10 @@ function CartSubTotal(){
   const cartSubtotal = useSelector((state) => state.cart.cartSubtotal);
   return (
     <>
+    {
+      cartSubtotal > 0 &&
       <h3 className='cart_subtotal'>{cartSubtotal}</h3>
+    }
     </>
   )
 }
@@ -121,7 +124,7 @@ function NavBar(props, {history}) {
           : <PersonIcon className='nav-personicon' style={{ fontSize: 40 }} />}
         </Link>
 
-        <NavLink to='/home' className='nav-icon' title='Ir a la tienda'>
+        <NavLink to='/home' className='nav-icon' title='Página principal'>
           
           < StorefrontIcon className='nav-personicon' />
         </NavLink>
@@ -137,7 +140,7 @@ function NavBar(props, {history}) {
             <CartSubTotal/>
         </Link>
         {isUser ?
-          <div className='nav-icon' title='Cerrar sesion'>
+          <div className='nav-icon' title='Cerrar sesión'>
               <ExitToAppIcon className='nav-personicon' onClick={exit} style={{ fontSize: 40 }} />     
           </div>
         : null}
@@ -175,10 +178,10 @@ function NavBar(props, {history}) {
             </Link>
           </li>
           {isUser ?
-            <li className='nav-icon-mobile' title='Cerrar sesion'>
+            <li className='nav-icon-mobile' title='Cerrar sesión'>
               <Link className='nav-icon-mobile' onClick={(e) => handleLogOut(e)}>
                 <ExitToAppIcon  className='fav-icon-nav'  style={{ fontSize: 40 }} />
-                <span>Cerrar Sesion</span> 
+                <span>Cerrar Sesión</span> 
               </Link>    
             </li>
           : null}

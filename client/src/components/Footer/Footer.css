@@ -78,6 +78,7 @@
 	color: #bbbbbb;
 	display: block;
 	transition: all 0.3s ease;
+	margin-left: -3px;
 }
 .footer-col ul li a:hover{
 	color: #ffffff;
@@ -131,16 +132,71 @@ margin-top:5px;
 margin-left: 2px;
 }
 
-/*responsive*/
-@media(max-width: 767px){
-  .footer-col{
-    width: 50%;
-    margin-bottom: 30px;
-}
-}
-@media(max-width: 574px){
-  .footer-col{
-    width: 100%;
-}
-}
+@media screen and (max-width: 480px) {
+	.row-footer {
+		display: flex;
+		flex-direction: column;
+	}
+	.float {
+		right: 100px;
+	}
+	.footer-navLink {
+		width: 40%;
+	}
+	.footer-col {
+		margin: 0.5rem;
+		margin-bottom: 0;
+		width: 90%;
+	}
+	.footer-col h4 {
+		font-size: 12px;
+		margin: 3px;
+	}
+	.footer-col h4::before {
+		display: none;
+	}
+	.footer-col ul {
+		display: flex;
+		flex-direction: row;
+		justify-content: flex-start;
+		align-items: flex-start;
+		margin-top: 3px;
+		margin-bottom: 0;
+	}
+	.footer-col ul li{
+		font-size: 12px;
+	}
+	.footer-col ul li a {
+		font-size: 12px
+	};
 
+}
+@media screen and (max-width: 695px) {
+	.footer-navLink {
+		width: 40%;
+	}
+	.footer-col {
+		margin: 0.5rem;
+		margin-bottom: 0;
+		width: 90%;
+	}
+	.footer-col h4 {
+		font-size: 12px;
+		margin: 3px;
+	}
+}
+@media screen and (max-width: 800px) {
+	.footer-col h4 {
+		font-size: 14px;
+		margin: 3px;
+	}
+	.float {
+		right: 20px;
+	}
+	.footer-col ul li{
+		font-size: 14px;
+	}
+	.footer-col ul li a {
+		font-size: 14px
+	}; 
+}

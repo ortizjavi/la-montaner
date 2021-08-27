@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Ficha } from "./Fichas";
 import { Rules } from "./Rules";
 import Button from "@material-ui/core/Button";
@@ -6,8 +6,8 @@ import { Score } from "./Score";
 import Grid from "@material-ui/core/Grid";
 import { ScoreHouse } from "./ScoreHouse";
 import swal from "sweetalert";
-import { useDispatch } from "react-redux";
-import { winGame } from "../../redux/actions/types/adminActions";
+import { useDispatch, useSelector } from "react-redux";
+import { getSales, winGame } from "../../redux/actions/types/adminActions";
 import "./game.css";
 const maquina = ["papel", "tijera", "piedra"];
 
@@ -20,6 +20,20 @@ export const Table = () => {
   const [result, setResult] = useState("");
   const [score, setScore] = useState(0);
   const [scoreHouse, setScoreHouse] = useState(0);
+  
+  useEffect(() => {
+    dispatch(getSales())
+  }, [dispatch])
+  
+  const sales = useSelector(state => state.cart.sales)
+
+  const discount = () => {
+    for(let i=0; i<sales?.length ; i++ ){
+      if(sales[i].price=== 0){
+        return sales[i].discount
+      }
+    }
+  }
 
   function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min)) + min;
@@ -85,18 +99,20 @@ export const Table = () => {
     }
   };
   const endGame = () => {
+    const descuento = discount()
+    console.log(descuento)
     if (score === 3) {
       dispatch(winGame());
       swal(
         "Ganaste!",
-        "Vas a tener disponible el descuento en tu carrito!",
+        `Vas a tener disponible un ${descuento}% de descuento en tu carrito!`,
         "success"
       );
       setScore(0);
       setScoreHouse(0);
     }
     if (scoreHouse === 3) {
-      swal("Perdiste :(", "Podes volver a intentarlo!", "error");
+      swal("Perdiste :(", "Puedes volver a intentarlo!", "error");
       setScore(0);
       setScoreHouse(0);
     }

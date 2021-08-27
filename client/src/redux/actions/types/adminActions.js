@@ -76,13 +76,11 @@ export function getOrdersFilter(status) {
   };
 }
 
-export function deleteUser(id) {
+export function deleteUser(user) {
   return async function (dispatch) {
     try {
-      console.log(id);
-      await axios.delete(`${endpoints.DELETE_USER}/${id}`);
-      /* await axios.delete(`${endpoints.DELETE_USER}`, { email : user.email }); */
-      return dispatch({ type: actionTypes.DELETE_USER, payload: id });
+      await axios.delete(`${endpoints.DELETE_USER}/${user._id}`);
+      return dispatch({ type: actionTypes.DELETE_USER, payload: user._id });
     } catch (error) {
       console.log(error);
     }

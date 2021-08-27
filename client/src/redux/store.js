@@ -25,7 +25,7 @@ const reducer = combineReducers({
   admin: adminReducer,
 });
 
-console.log(session);
+
 
 const initialState = {
   session: {

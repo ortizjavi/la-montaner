@@ -25,7 +25,7 @@ const UserReviewsTable = () =>{
             <NavLink to='/dashboard'>
                 <p className='rev-volver'>&#x2B05; Volver</p>
             </NavLink>
-        <div className='container-reviews'>
+        <div className='container-user-reviews'>
             <h1 className='rev-title'>Mis Comentarios y Calificaciones</h1>
          {
              reviewsUSER.length > 0 ?
@@ -81,9 +81,6 @@ const UserReviewsTable = () =>{
              </div>
          }   
        </div>
-       <NavLink to='/dashboard'>
-                <p className='rev-volver'>&#x2B05; Volver</p>
-       </NavLink>
        </>
        
     )
