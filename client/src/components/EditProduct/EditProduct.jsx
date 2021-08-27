@@ -207,7 +207,7 @@ function EditProductChild({ producto, defaultState }) {
             reviews: review
           });
           setTimeout(
-            () => (document.location.href = "https://la-montaner.vercel.app/home/admin"),
+            () => (document.location.href = "https://la-montaner.vercel.app/admin"),
             3000
           );
         } else {
