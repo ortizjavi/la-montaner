@@ -1,12 +1,25 @@
-import axios from "axios";
-import React, { useState } from "react";
+import React, { useState } from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import { useDispatch, useSelector } from "react-redux";
 import TextField from "@material-ui/core/TextField";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import swal from "sweetalert";
+import { useHistory } from "react-router-dom";
 import "./Address.css";
+import { addAddress } from '../../redux/actions/types/productActions';
+
+
 
 const useStyles = makeStyles((theme) => ({
+  paper: {
+    position: 'absolute',
+    width: 500,
+    left: 100,
+    backgroundColor: theme.palette.background.paper,
+    border: '2px solid #000',
+    boxShadow: theme.shadows[5],
+    padding: theme.spacing(2, 4, 3),
+  },
   root: {
     alignContent: "center",
     "& .MuiTextField-root": {
@@ -40,46 +53,45 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: 345,
   },
 }));
-export default function Address() {
-  const [createProduct, setCreateProduct] = useState({
-    departamento: "",
-    MCL: "",
-    barrio: "",
+
+export default function AddressModal() {
+  const dispatch = useDispatch();
+
+
+  const [address, setAddress] = useState({
+    provincia: "",
     direccion: "",
+    mcl: "",
   });
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      const newAddress = `${address.provincia}-${address.mcl}-${address.direccion}`;
       swal({
-        title: "Dirreción Añadida!",
-        text: "Se ha añadido con exito!",
+        title: "Direccion guardada!",
         icon: "success",
       });
-
-      setTimeout(
-        () => (document.location.href = "http://localhost:3000/home"),
-        3000
-      );
+        return dispatch(addAddress(newAddress));
     } catch (err) {
       console.log(err);
     }
   };
   const handleInputChange = (e) => {
-    setCreateProduct({
-      ...createProduct,
+    setAddress({
+      ...address,
       [e.target.name]: e.target.value,
     });
   };
   const contentPC = useStyles();
 
   return (
-    <div className="contentPC">
+    <div>
       <h2>Añade tu dirección</h2>
       <form className={contentPC.root} onSubmit={handleSubmit}>
         <TextField
           id="outlined-helperText"
-          name="departamento"
-          label="Departamento"
+          name="provincia"
+          label="Provincia"
           isRequired="true"
           required
           defaultValue=""
@@ -89,19 +101,8 @@ export default function Address() {
         />
         <TextField
           id="outlined-helperText"
-          name="MCL"
+          name="mcl"
           label="Municipio, capital o localidad"
-          isRequired="true"
-          required
-          defaultValue=""
-          helperText="* Campo requerido"
-          variant="outlined"
-          onChange={handleInputChange}
-        />
-        <TextField
-          id="outlined-helperText"
-          name="barrio"
-          label="Barrio"
           isRequired="true"
           required
           defaultValue=""
@@ -121,7 +122,7 @@ export default function Address() {
           onChange={handleInputChange}
         />
         <Button variant="contained" color="primary" type="submit">
-          Enviar
+          Guardar dirección!
         </Button>
       </form>
     </div>

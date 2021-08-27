@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import TextField from '@material-ui/core/TextField';
 import IconButton from '@material-ui/core/IconButton';
 import InputAdornment from '@material-ui/core/InputAdornment';
@@ -15,10 +15,10 @@ import './LoginForm.css';
 
 const RegisterForm = () => {
     const dispatch = useDispatch()
-    const history = useHistory();
     const registerFailed = useSelector(state => state.session.registerFailed);
-    const user = useSelector(state => state.session.user);
     const [error, setError] = useState('')
+    const pRgx = new RegExp(`^(.{0,7}|[^0-9]*|[^A-Z]*|[^a-z]*|[a-zA-Z0-9]*)$`)
+    const eRgx = new RegExp(`[a-zA-Z0-9!#$%&'*_+-]([\.]?[a-zA-Z0-9!#$%&'*_+-])+@[a-zA-Z0-9]([^@&%$\/()=?¿!.,:;]|\d)+[a-zA-Z0-9][\.][a-zA-Z]{2,4}([\.][a-zA-Z]{2})?`)
     const [input, setInput] = useState({
         given_name: '',
         family_name: '',
@@ -59,6 +59,42 @@ const RegisterForm = () => {
         })
     }
 
+    function handleInputPassword(event) {
+        if (!event.target.value) {
+            setError('')
+        }
+        else if (pRgx.test(event.target.value)) {
+            setError(`La contraseña debe contener:  
+            al menos ocho caracteres, 
+            un número,
+            una letra mayúscula,
+            una letra minúscula y
+            un carácter especial.`)
+        } else {
+            setError('')
+        }
+        setInput({
+            ...input,
+            [event.target.name]: event.target.value
+        })
+    }
+
+    function handleInputMail(event) {
+        if (!event.target.value) {
+            setError('')
+        }
+        else if (!eRgx.test(event.target.value)) {
+            setError(`Debes proveer una dirección de email válida.`)
+        } else {
+            setError('')
+        }
+        setInput({
+            ...input,
+            [event.target.name]: event.target.value
+        })
+    }
+
+
     function handleInputChange(event) {
         setInput({
             ...input,
@@ -67,27 +103,28 @@ const RegisterForm = () => {
     }
 
     function handleSubmit(event) {
-        
-     event.preventDefault();
-        (checkPassword.checkPassword && checkPassword.checkPassword !== input.password) ? 
-        setError('Las contraseñas no coinciden') : 
-        dispatch(register({ ...input, name: `${input.given_name} ${input.family_name}` }))
+        event.preventDefault();
+
+        (checkPassword.checkPassword && checkPassword.checkPassword !== input.password) ?
+            setError('Las contraseñas no coinciden') :
+            dispatch(register({ ...input, name: `${input.given_name} ${input.family_name}` }))
         console.log(registerFailed)
     }
 
     useEffect(() => {
-      if(registerFailed) 
-      setError(registerFailed);
-  
+        if (registerFailed)
+            setError(registerFailed);
+
     }, [registerFailed])
 
 
 
     return (
         <form className={'registerForm'} onSubmit={handleSubmit}>
-            <div className={'title'}>Ingresá tus datos y registrate</div>
+            <div className={'titleRegister titleRegisterPadding'}>Ingresá tus datos y registrate</div>
             <div className='fields'>
                 <TextField
+                    className="registerInput"
                     label="Nombre"
                     variant="filled"
                     name="given_name"
@@ -96,6 +133,7 @@ const RegisterForm = () => {
                     onChange={handleInputChange}
                 />
                 <TextField
+                    className="registerInput"
                     label="Apellido"
                     variant="filled"
                     name="family_name"
@@ -104,22 +142,26 @@ const RegisterForm = () => {
                     onChange={handleInputChange}
                 />
                 <TextField
+                    className="registerInput"
                     label="Email"
                     variant="filled"
                     name="email"
                     required
+                    type="email"
                     value={input.email}
-                    onChange={handleInputChange}
+                    onChange={handleInputMail}
                 />
 
                 <FilledInput
+                    className="registerInput"
+                    placeholder="Contraseña *"
                     label="Contraseña"
                     variant="filled"
                     type={input.showPassword ? 'text' : 'password'}
                     name="password"
                     required
                     value={input.password}
-                    onChange={handleInputChange}
+                    onChange={handleInputPassword}
                     endAdornment={
                         <InputAdornment position="end" >
                             <IconButton
@@ -132,8 +174,10 @@ const RegisterForm = () => {
                         </InputAdornment>
                     }
                 />
-                <p>Ingresa nuevamente tu contraseña</p>
+                <p className="titleRegister">Ingresa nuevamente tu contraseña</p>
                 <FilledInput
+                    className="registerInput"
+                    placeholder="Contraseña *"
                     label="Contraseña"
                     variant="filled"
                     type={checkPassword.showCheckPassword ? 'text' : 'password'}
@@ -155,13 +199,13 @@ const RegisterForm = () => {
                     }
                 />
                 {error ? <span className='errorMsg'>{error}</span> : null}
-                <div className={'title'}>¿Ya tienes cuenta?  
-             <Link to={'/login'}> Acceder</Link>
-            </div> 
                 <div className='btnStylesRegister'>
                     <Button type="submit" variant="contained" color="primary" >
                         Registrarse
                     </Button>
+                </div>
+                <div className={'titleRegister'}>¿Ya tienes cuenta?
+                    <Link to={'/login'}> Acceder</Link>
                 </div>
                 <ExternAuthentication register />
             </div>

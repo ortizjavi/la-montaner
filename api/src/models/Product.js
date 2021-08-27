@@ -48,6 +48,12 @@ const ProductSchema = Schema({
   others: {
     type: String,
   },
+  reviews: {
+    type: Object,
+  },
+  rating: {
+    type: [Number],
+  }
 });
 
 module.exports = model("Product", ProductSchema);

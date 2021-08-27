@@ -1,6 +1,6 @@
-.loading_container{
-    height: calc(100vh - 13rem - 130px);
-    display:flex;
-    justify-content: center;
-    align-items: center;
+.loading_container {
+  height: calc(100vh - 13rem - 130px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

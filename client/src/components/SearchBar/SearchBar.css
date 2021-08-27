@@ -20,15 +20,16 @@
 
 .input_search{
     border: none;
-    background-color: #dcdcdc1a;
+    background-color: transparent;
     border-bottom: 2px solid #a52a2a;
     font-size: 16px;
     height: 20px;
     padding: 0 20px;
-    width: 100%;
+    /* width: 100%; */
     outline: none;
     margin-left: 10px;
     margin-top: 8px;
+    color: white;
 }
 
 .input_search::active{
@@ -65,5 +66,15 @@
     font-style: italic;
     padding: 0 1rem;
     background-color: none;
+    color: white;
 }
 
+@media screen and (max-width:690px) {
+.sb-container{
+    margin-left: 27%;
+    
+}
+.input_search{
+    font-size: 10px;
+}
+}

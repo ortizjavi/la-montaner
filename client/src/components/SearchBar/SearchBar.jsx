@@ -25,12 +25,15 @@ export default function SearchBar() {
     useEffect(() => {
         if(currentCategoryState !== 'vertodos'){
             setState({product: "", icono:true,})
+            // clearSearch()
         }
         // setSearched('')
     }, [currentCategoryState])
 
     const handleChange = event => {
         event.preventDefault();
+        setSearched('')
+        dispatch(searchProductsAction(''))
         let bool= event.target.value.length>1;
         if(event.target.value.length <=2){
             setState({ ...state, [event.target.name]: event.target.value,  icono:!bool });
@@ -38,9 +41,10 @@ export default function SearchBar() {
             setState({ ...state, [event.target.name]: event.target.value, icono:!bool  });
             // dispatch(searchProductsAction(state.product))
         }
-     }
+    }
     const handleSubmit = event => {
         event.preventDefault();
+        currentCategoryState !== 'vertodos' && dispatch(selectCategoryAction('vertodos'))
         if(state.product.length){
             if(!state.icono){
                 setSearched(state.product)
@@ -66,26 +70,28 @@ export default function SearchBar() {
     return(
         <div className='sb-container'>
             <form className="form-container" onSubmit={(e) => handleSubmit(e)} >
-                <label >     
-                    <input list="product" multiple value={state.product} className='input_search' 
-                    autoComplete='off' placeholder='Buscar Productos' name="product" 
-                    onChange={(e)=>handleChange(e)} />
-                </label>   
+                <NavLink to='/home'>
+                    <label >     
+                        <input list="product" multiple value={state.product} className='input_search' 
+                        autoComplete='off' placeholder='Buscar Productos' name="product" 
+                        onChange={(e)=>handleChange(e)} />
+                    </label>  
+                </NavLink> 
                 <datalist className='sb-option'  id="product" multiple >
                     {   
                         state.product.length >=2 ?
                         allProductsAutocomplete[1]?.map( (t, key) => (
-                            // <NavLink className='sb-option' to={`/home/${t._id}`}>
+                        <NavLink className='sb-option' to={`/home/${t._id}`}>
                                 <option className='sb-option'  key={key} value={t.name} />  
-                            //</NavLink> 
+                        </NavLink> 
                         ))
                         :
                             <option/>
                     }  
                 </datalist>
-                
-                        <SearchIcon className='nav-personicon' onClick={(e) => handleSubmit(e)} style={{ fontSize: 40,color:'#24262b'}} />
-                
+                <NavLink to='/home'>
+                        <SearchIcon className='nav-personicon' onClick={(e) => handleSubmit(e)} style={{ fontSize: 40,color:'#ffffff'}} />
+                </NavLink>
                 {/* {
                     state.icono ?
                     <button className='nav-personicon'>

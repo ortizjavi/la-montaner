@@ -1,12 +1,12 @@
 const { Schema, model } = require("mongoose");
-const bcrypt = require('bcrypt');
-const ROLE = require('./Role');
+const bcrypt = require("bcrypt");
+const ROLE = require("./Role");
 
 const userSchema = new Schema({
   email: {
     type: String,
     required: true,
-    unique: true
+    unique: true,
   },
   password: {
     type: String,
@@ -25,31 +25,33 @@ const userSchema = new Schema({
     required: true,
   },
   picture: {
-    type: String
+    type: String,
   },
   role: {
-  	type: String,
-  	required: true,
-  	default: ROLE.USER
+    type: String,
+    required: true,
+    default: ROLE.USER,
   },
   verified: {
     type: Boolean,
-    default: false
+    default: false,
   },
   reset: {
     type: Boolean,
     default: false
-  }
+  },
+  orders: [{
+    type : Schema.Types.ObjectId,
+    ref : 'Order'
+  }]
 });
 
 userSchema.statics.hashPassword = (password, salt) => {
   return bcrypt.hash(password, salt);
-}
+};
 
 userSchema.statics.comparePassword = (password, password2) => {
   return bcrypt.compare(password, password2);
-}
-
-
+};
 
 module.exports = model("User", userSchema);

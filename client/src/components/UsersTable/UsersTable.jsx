@@ -18,6 +18,9 @@ import {
 } from "../../redux/actions/types/adminActions";
 import "./UsersTable.css";
 import { ROLE } from '../../utils/constants';
+import swal from "sweetalert";
+import DoneOutlineIcon from '@material-ui/icons/DoneOutline';
+
 const columns = [
   {
     id: "density",
@@ -42,8 +45,8 @@ const columns = [
   },
 ];
 
-function createData(_id, name, code, population, density, actions) {
-  return { _id, name, code, population, density, actions };
+function createData(_id, name, code, population, density, actions, reset) {
+  return { _id, name, code, population, density, actions, reset };
 }
 
 const useStyles = makeStyles({
@@ -53,6 +56,19 @@ const useStyles = makeStyles({
   container: {
     maxHeight: 440,
   },
+  actionsColumn: {
+    display: 'flex',
+    justifyContent: 'center'
+  },
+  actionButtons: {
+    width: '25%',
+    minWidth: '25%',
+    maxWidth: '25%',
+    fontSize: '0.75rem'
+  },
+  resetedUser: {
+    color: 'green'
+  }
 });
 
 export default function UsersTable() {
@@ -65,7 +81,7 @@ export default function UsersTable() {
   const users = useSelector((state) => state.admin.users);
   const filterUser = users?.filter(u => ROLE.USER === u.role );
   const rows = filterUser?.map((o) => {
-    return createData(o._id, o.name, o.role, o.email, o.picture, "actions");
+    return createData(o._id, o.name, o.role, o.email, o.picture, "actions", o.reset);
   });
   const classes = useStyles();
   const [page, setPage] = React.useState(0);
@@ -82,19 +98,52 @@ export default function UsersTable() {
 
   const handleDelete = (e, row) => {
     e.preventDefault();
-    console.log("eliminar");
     const res= (getUser(row))
-    console.log(res._id)
-    dispatch(deleteUser(res._id))
-    dispatch(getUsers());
+    swal({
+      title:`Estas seguro que quieres eliminar la cuenta de ${res.name}?`,
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    }).then((willAdmin) => {
+      if (willAdmin){
+        dispatch(deleteUser(res));
+        swal(`${res.name} ya no es usuario de La Montañes!`, {
+          icon: "success",
+        });
+      }
+    })
   };
   const handleAdmin = (row) => {
-    console.log("sos admin");
-    dispatch(newAdmin(getUser(row)))
+    const user = getUser(row);
+    swal({
+      title:`Estas seguro que quieres hacer administrador a ${user.name}?`,
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    }).then((willAdmin) => {
+      if (willAdmin){
+        dispatch(newAdmin(user));
+        swal(`${user.name} es un administrador!`, {
+          icon: "success",
+        });
+      }
+    })
   };
   const handleReset = (row) => {
-    console.log("revisa tu correo");
-    dispatch(resetUser(getUser(row)))
+    const user = getUser(row);
+    swal({
+      title:`Estas seguro que quieres forzar un reseteo de contraseña a ${user.name}?`,
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    }).then((willAdmin) => {
+      if (willAdmin){
+        dispatch(resetUser(getUser(row)))
+        swal(`${user.name} deberá cambiar su contraseña la próxima vez!`, {
+          icon: "success",
+        });
+      }
+    })
   };
 
   function getUser(row){
@@ -121,9 +170,9 @@ export default function UsersTable() {
           <TableBody>
             {rows
               ?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map((row) => {
+              .map((row, index) => {
                 return (
-                  <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
+                  <TableRow hover role="checkbox" tabIndex={-1} key={index}>
                     {columns.map((column) => {
                       const value = row[column.id];
                       return (
@@ -133,31 +182,38 @@ export default function UsersTable() {
                           ) : value && value.length > 40 ? (
                             <img src={value} alt="user" height="50px" />
                           ) : value === "actions" ? (
-                            <>
+                            <div className={classes.actionsColumn} >
+                              { row.reset ?
+                              (
+                                <div className={`${classes.actionButtons} botonUT`}>
+                                    <DoneOutlineIcon className={classes.resetedUser}/>
+                                </div>
+                              ):
                               <Button
                                 variant="contained"
                                 color="primary"
-                                className="botonUT"
+                                className={`${classes.actionButtons} botonUT`}
                                 onClick={() => handleReset(row)}
                               >
                                 Resetear contraseña
                               </Button>
+                              }
                               <Button
                                 variant="contained"
                                 color="secondary"
-                                className="botonUT"
+                                className={`${classes.actionButtons} botonUT`}
                                 onClick={() => handleAdmin(row)}
                               >
                                 Hacer Admin
                               </Button>
                               <Button
                                 variant="contained"
-                                className="eliminar"
+                                className={`${classes.actionButtons} eliminar`}
                                 onClick={(e) => handleDelete(e, row)}
                               >
                                 Eliminar
                               </Button>
-                            </>
+                            </div>
                           ) : (
                             value
                           )}

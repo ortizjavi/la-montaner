@@ -11,6 +11,7 @@ const adminReducer = (state = ADMIN_INITIAL_STATE, action) => {
     case actionTypes.GET_ORDERS:
       return { ...state, orders: action.payload };
     case actionTypes.GET_USERS:
+      console.log('adminReducers/payload: ',action.payload)
       return { ...state, users: action.payload };
     case actionTypes.DELETE_USER:
       const deletedUser = state.users?.filter(user => user._id !== action.payload) 
@@ -21,6 +22,9 @@ const adminReducer = (state = ADMIN_INITIAL_STATE, action) => {
       return { ...state, users: updatedUsers };
     case actionTypes.GET_ORDER_FILTERED:
       return {...state, filteredOrders: state.orders.filter(o => o.status === action.payload)}
+    case actionTypes.DELETE_ORDER:
+      const deletedOrder = state.orders?.filter(ord => ord._id !== action.payload) 
+      return {...state, orders: deletedOrder }
     default:
       return state;
   }

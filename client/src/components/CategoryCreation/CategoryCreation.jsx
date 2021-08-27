@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import swal from "sweetalert";
 import ArrowBackSharpIcon from '@material-ui/icons/ArrowBackSharp';
 import IconButton from "@material-ui/core/IconButton";
+import DeleteIcon from '@material-ui/icons/Delete';
 
 export default function CategoryCreator() {
   const dispatch = useDispatch();
@@ -69,7 +70,10 @@ export default function CategoryCreator() {
         {categories?.map((category, i) => (
           <li className="category-bullet" key={i}> {category.name.toUpperCase()}
             {FIXED_CATEGORIES.includes(category.name.toLowerCase()) ? null :
-              <button className="delete-btn" onClick={() => handleClick(category)}>X</button>}
+            <button className="delete-btn"
+            onClick={() => handleClick(category)}>
+            <DeleteIcon />
+          </button>}
           </li>
         ))}
       </ul>

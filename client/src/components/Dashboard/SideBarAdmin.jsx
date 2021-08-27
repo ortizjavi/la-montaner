@@ -25,8 +25,15 @@ import CategoryCreator from "../CategoryCreation/CategoryCreation";
 import OrdersAdmin from "../AdminOrders/AdminOrders";
 import UsersTable from "../UsersTable/UsersTable";
 import { useDispatch, useSelector } from "react-redux";
-import { getAdminProducts, getOrders, getUsers } from "../../redux/actions/types/adminActions";
+import {
+  getAdminProducts,
+  getOrders,
+  getSales,
+  getUsers,
+} from "../../redux/actions/types/adminActions";
 import { getCategories } from "../../redux/actions/types/categoryActions";
+import LocalOfferIcon from "@material-ui/icons/LocalOffer";
+import SalesAdmin from "./SalesAdmin";
 
 const drawerWidth = 240;
 
@@ -90,30 +97,34 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     padding: theme.spacing(3),
   },
+  sale: {
+    backgroundColor: "#000",
+  },
 }));
 
 export default function SideBarAdmin() {
-
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
   const [button, setButton] = React.useState("");
 
   useEffect(() => {
-    dispatch(getAdminProducts())
-    dispatch(getCategories())
-  }, [dispatch])
+    dispatch(getAdminProducts());
+    dispatch(getCategories());
+  }, [dispatch]);
 
   useEffect(() => {
-    dispatch(getOrders())
-    dispatch(getUsers())
-  }, [dispatch])
+    dispatch(getOrders());
+    dispatch(getUsers());
+    dispatch(getSales());
+  }, [dispatch]);
 
-  const productos = useSelector(state => state.root.adminProducts)
-  const categorias = useSelector(state => state.root.allCategories)
+  const productos = useSelector((state) => state.root.adminProducts);
+  const categorias = useSelector((state) => state.root.allCategories);
   const orders = useSelector((state) => state.admin.orders);
-  const users = useSelector((state) => state.admin.users); 
+  const users = useSelector((state) => state.admin.users);
+  const sales = useSelector(state => state.cart.sales);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -242,6 +253,17 @@ export default function SideBarAdmin() {
             </ListItemIcon>
             <ListItemText primary="Usuarios" />
           </ListItem>
+          <ListItem>
+            <ListItemIcon>
+              <IconButton className="iconSB">
+                <LocalOfferIcon
+                  onClick={(e) => handleButton(e, "descuentos")}
+                  value="descuentos"
+                />
+              </IconButton>
+            </ListItemIcon>
+            <ListItemText primary="Descuentos" />
+          </ListItem>
         </List>
         <Divider />
       </Drawer>
@@ -255,27 +277,49 @@ export default function SideBarAdmin() {
           <OrdersAdmin />
         ) : button === "usuarios" ? (
           <UsersTable />
+        ) : button === "descuentos" ? (
+          <SalesAdmin />
         ) : (
           <div className="cardsAdmin">
-            <div onClick={(e) => handleButton(e, "productos")}>
+            <div
+              className="cardsAO"
+              onClick={(e) => handleButton(e, "productos")}
+            >
               <IoBeer />
-              <h2>{productos?.length}</h2> 
+              <h2>{productos?.length}</h2>
               <h3>Productos</h3>
             </div>
-            <div onClick={(e) => handleButton(e, "categorias")}>
+            <div
+              className="cardsAO"
+              onClick={(e) => handleButton(e, "categorias")}
+            >
               <CategoryIcon />
               <h2>{categorias?.length}</h2>
               <h3>Categorias</h3>
             </div>
-            <div onClick={(e) => handleButton(e, "ordenes")}>
+            <div
+              className="cardsAO"
+              onClick={(e) => handleButton(e, "ordenes")}
+            >
               <StoreIcon />
               <h2>{orders?.length}</h2>
               <h3>Ordenes</h3>
             </div>
-            <div onClick={(e) => handleButton(e, "usuarios")}>
+            <div
+              className="cardsAO"
+              onClick={(e) => handleButton(e, "usuarios")}
+            >
               <AccountCircleIcon />
               <h2>{users?.length}</h2>
               <h3>Usuarios</h3>
+            </div>
+            <div
+              className="cardsAO"
+              onClick={(e) => handleButton(e, "descuentos")}
+            >
+              <LocalOfferIcon />
+              <h2>{sales?.length}</h2>
+              <h3>Ofertas</h3>
             </div>
           </div>
         )}

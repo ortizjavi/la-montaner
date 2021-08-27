@@ -4,15 +4,29 @@
       #008037 button comprar
       #3F4A45 iconos login carrito
       #022E1A footer  */
+      .home-div-container{
+            margin-top: -7rem;
+      }
 
       .Home-filter{
             display: flex;
             justify-content: flex-end;
+            align-items: center;
             font-size: 1rem;
             color: grey;
             height: 2rem;
             margin-bottom: 1rem;
+            margin-right: 2rem;
       }
+      .order-button {
+            background-color: #24262b;
+            color: white;
+      }
+
+      .order-button-false {
+            opacity: 0.3;
+      }
+
       .home-nav{
             position: fixed;
             background-color: white;
@@ -27,11 +41,12 @@
             display: flex;
             flex-wrap: wrap;
             justify-content: space-evenly;
-            margin: 0 6rem;
+            margin: 0 4rem;
             min-height: 50rem;
       }
       .home-button{
             margin-left: 1rem;
+            margin-right: 1rem;
             background: none;
             color: grey;
             font-weight: 400;
@@ -39,13 +54,38 @@
             outline: none;
             font-size: 1rem;
             cursor: pointer;
-
       }
       .home-button:hover {
             background: rgba(119, 103, 80, 0.1);
             border-radius: 50px;
             border-bottom: 2px solid #C88E34;
             box-sizing: border-box;
+            width: 2.5rem;
+      }
+      .home-button-actived {
+            margin-left: 1rem;
+            margin-right: 1rem;
+            background: none;
+            color: grey;
+            font-weight: 400;
+            border: none;
+            outline: none;
+            font-size: 1rem;
+            cursor: pointer;
+      }
+      .Home-filter .actived {
+            background: lightgray;
+            color: gray;
+            font-weight: 500;
+            border: none;
+            outline: none;
+            font-size: 1rem;
+            cursor: pointer;
+            width: 2.5rem;
+            border-radius: 50px;
+            /* border-bottom: 2px solid #C88E34; */
+            box-sizing: border-box;
+            
       }
       .home-list{
         list-style: none;
@@ -53,20 +93,10 @@
         font-size: 1.2rem;
         font-weight: 300;
       }
-   
-      /* .select-sidebar, option {
-      margin-right: -3rem;
-      color:grey;
-      width: 11rem;
-      height: 2rem;
-      border: none;
-      border-radius: 5px;
-       font-size: 1rem;
-      background-color: #253A46 ;
-      margin-bottom: 3rem;
-      cursor: pointer;
-} */
+
 .select-home{
+      margin-left: 1rem;
+      margin-right: 1rem;
       color: grey;
       font-size: 1rem;
       border: none;
@@ -75,10 +105,7 @@
       height: 2rem;
       width: 221px;
 }
-.select-home::-webkit-calendar-picker-indicator {
-      border: none;
-      border-bottom: solid #CB9D57 1px;
-}
+
 .select-sidebar option:hover{
     color: white;
     background: black;
@@ -89,19 +116,25 @@
       color: grey;
       padding: 3px;
       display: flex;
-      /* margin-top: 9.5rem; */
       flex-direction: column;
       justify-content: center;
       font-size: 1rem;
       align-items:flex-start;
       width: auto;
       box-sizing: border-box;
-      /* box-shadow: 0 0 1px 0 gray; */
 
 }
 .home-range p{
       font-size: 0.9rem;
       font-style: italic;
+}
+
+.Home-filter.actived-order {
+      display:flex;
+      background-color: gray;
+}
+.desatived-order {
+      display: none;
 }
 
 .home-personicon{
@@ -111,18 +144,71 @@
       color: #a52a2a;
       }
 .home-sidebar-container{
-     
-    /* margin-top: -4rem; */
     background: #CB9D57;
     width: 16rem;
     height: 32rem;
     margin-left: 2rem;
-    
-    background-image: url("https://turismoenargentina.com.ar/wp-content/uploads/2020/09/Valle-de-Paravachasca-Cordoba-Turismo-en-Argentina-4.jpg" );
     background-repeat: no-repeat;
     object-fit: contain;
     object-position: top center;  
 }
 .home-img{
       width: 100%;
+}
+
+.montanesBeer {
+      width: 75%;
+      margin-left: 3.5rem;
+      margin-right: 0.5rem;
+      border-radius: 10px;
+      box-shadow: 0px 4px 8px 1px gray;
+}
+.home-section-filters{
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+      width: 40%
+}
+
+@media screen and (max-width: 480px) {
+      .home-section-filters{
+            display: none;
+      }
+
+      .Home-filter {
+            margin-top: 10rem;
+      }
+      .home-button, .home-list, .select-home, .order-button{
+            font-size: 10px;
+            margin: 0;
+      }
+      .select-home{
+            width: 80%;
+      }
+      .items-container{
+            margin: 0;
+      }
+}
+@media screen and (max-width: 700px) {
+      .home-section-filters{
+            display: none;
+      }
+      .items-container{
+            margin: 0;
+      }
+      
+}
+@media screen and (max-width:900px) {
+      .items-container{
+            margin: 0;
+      }
+      .home-section-filters{
+      width: 12rem;
+      margin: 0;
+      }
+      .home-sidebar-container{
+            width: 12rem;
+            margin-left: 1rem;
+      }
 }

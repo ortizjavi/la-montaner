@@ -1,5 +1,7 @@
 import React, {useEffect} from "react";
 import { useDispatch, useSelector} from "react-redux"
+import NavigateNextIcon from '@material-ui/icons/NavigateNext';
+import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
 
 import createPagination from "./createPagination";
 import {currentPageAction} from "../../redux/actions/types/productActions";
@@ -10,9 +12,13 @@ export default function Pagination({response}) {
   const currentInit = useSelector(state => state.root.currentPage)
   const currentCategoryState = useSelector( state => state.root.currentCategoryState)
 
-
   const [currentPage, setCurrentPage] = React.useState(currentInit);
   // const [currentPage, setCurrentPage] = React.useState(1);
+
+  useEffect(() => {
+    setCurrentPage(currentInit)
+  }, [currentInit])
+
 
   useEffect(()=>{
     dispatch(currentPageAction(currentPage))    
@@ -40,7 +46,7 @@ export default function Pagination({response}) {
           className={`${pagination[0] === currentPage && "disabled"}`}
           onClick={handleClick.bind(null, currentPage - 1)}
         >
-          Anterior
+          <NavigateBeforeIcon style={{ fontSize: 50 }}/>
         </li>
         {pagination.map(page => (
           <li
@@ -54,7 +60,7 @@ export default function Pagination({response}) {
           className={`${pagination.reverse()[0] === currentPage && "disabled"}`}
           onClick={handleClick.bind(null, currentPage + 1)}
         >
-          Siguiente
+          <NavigateNextIcon style={{ fontSize: 50 }} />
         </li>
       </ul>
     </div>

@@ -10,7 +10,7 @@ module.exports = (req, res, next) => {
 
 	const email = req.body.email;
 	const passwordSent = req.body.password;
-	User.findOne({ email }).orFail().then((user) => {
+	User.findOne({ email }).orFail().populate('orders').then((user) => {
 		const { password, _id, ...userProps } = user._doc;
 
 		User.comparePassword(passwordSent, password).then((isEqual) => {

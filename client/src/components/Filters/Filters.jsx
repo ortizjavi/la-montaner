@@ -68,7 +68,6 @@ export default function Filters(props) {
           {/* <h5 className='filter-result'>{Object.values(props.leftFilter)[0]}</h5> */}
           {/* <button className='sidebar-buton' onClick={() => dispatch(selectCategoryAction(''))}>Borrar Filtros</button> */}
         </div>
-        <h4 className='sb-h4'>Las mejores cervezas  de <br></br> Cordoba</h4>
    </navigator>
   )
 }

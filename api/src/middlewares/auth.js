@@ -2,8 +2,8 @@ const User = require('../models/Users/User');
 const ROLE = require('../models/Users/Role')
 const verifyJWT = require('../utils/verifyJWT');
 
-const getUserById = (id) => {
-	return User.findById(id).orFail();
+const getUserById = (id, populate ='') => {
+	return User.findById(id).orFail().populate(populate);
 }
 
 const authRole  = (role) => {
@@ -24,7 +24,7 @@ const authenticateToken = (req, res, next) => {
 	}
 	verifyJWT(token).then((user) => {
 			// valid token, save user in request
-			getUserById(user._id)
+			getUserById(user._id, req.populate)
 			.then((user) => {
 				req.user = user;
 				if (user.reset) return res.status(420);

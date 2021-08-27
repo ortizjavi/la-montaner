@@ -23,6 +23,15 @@ import {
   updateProducts,
   clearProductDetail
 } from "../../redux/actions/types/productActions";
+import Accordion from '@material-ui/core/Accordion';
+import AccordionDetails from '@material-ui/core/AccordionDetails';
+import AccordionSummary from '@material-ui/core/AccordionSummary';
+import AccordionActions from '@material-ui/core/AccordionActions';
+import Typography from '@material-ui/core/Typography';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import Divider from '@material-ui/core/Divider';
+import Rating from '@material-ui/lab/Rating';
+import Box from '@material-ui/core/Box';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -86,6 +95,7 @@ export default function EditProduct() {
     description: "",
     volumen: 0,
     others: "",
+    reviews:[]
   };
 
   if (productoId && productoId._id) {
@@ -109,21 +119,66 @@ const getProps = (producto) => {
     description: producto.description,
     volumen: producto.volumen,
     others: producto.others,
+    reviews: producto.reviews,
   };
 };
+
+const StylesAccord = makeStyles((theme) => ({
+  root: {
+    width: '100%',
+  },
+  heading: {
+    fontSize: theme.typography.pxToRem(15),
+  },
+  secondaryHeading: {
+    fontSize: theme.typography.pxToRem(15),
+    color: theme.palette.text.secondary,
+    margin:"20px 20px 20px 20px",
+  },
+  icon: {
+    verticalAlign: 'bottom',
+    height: 20,
+    width: 20,
+  },
+  details: {
+    alignItems: 'start',
+  },
+  star: {
+    width:'80px',
+
+  },
+  column: {
+    flexBasis: '33.33%',
+  },
+  helper: {
+    borderLeft: `2px solid ${theme.palette.divider}`,
+    padding: theme.spacing(1, 2),
+  },
+  link: {
+    color: theme.palette.primary.main,
+    textDecoration: 'none',
+    '&:hover': {
+      textDecoration: 'underline',
+    },
+  },
+}));
 
 function EditProductChild({ producto, defaultState }) {
   const [loadingImg, setLoadingImg] = useState(0);
   const [image, setImage] = useState([]);
+  const [review, setReview] = useState([]);
   const allCategories = useSelector((state) => state.root.allCategories);
   const dispatch = useDispatch();
 
+
   const contentPC = useStyles();
+  const classes = StylesAccord();
 
   const [createProduct, setCreateProduct] = useState(getProps(producto));
 
   useEffect(() => {
     setImage(producto.img);
+    setReview(producto.reviews)
     return () => {
       dispatch(clearProductDetail());
       setCreateProduct(defaultState);
@@ -149,6 +204,7 @@ function EditProductChild({ producto, defaultState }) {
               createProduct.categories.includes(c.name)
             ),
             img: image,
+            reviews: review
           });
           setTimeout(
             () => (document.location.href = "http://localhost:3000/admin"),
@@ -216,6 +272,11 @@ function EditProductChild({ producto, defaultState }) {
     e.preventDefault();
     setImage(image.filter((j) => j !== i));
   };
+
+  const deleteReview = (e, r) => {
+    e.preventDefault();
+    setReview(review?.filter((j) => j !== r))
+  }
 
   return (
     <div className="contentPC">
@@ -396,7 +457,7 @@ function EditProductChild({ producto, defaultState }) {
           id="outlined-number"
           label="Volumen"
           type="number"
-          placeholder={producto.volumen.toString()}
+          placeholder={producto.volumen?.toString()}
           defaultValue={createProduct.volumen}
           InputProps={{ inputProps: { min: 0, max: 99999 } }}
           name="volumen"
@@ -419,6 +480,39 @@ function EditProductChild({ producto, defaultState }) {
           variant="outlined"
           onChange={handleInputChange}
         />
+        {
+          review?.map(r => (
+        <div className={classes.root}>
+          <Accordion defaultExpanded>
+            <AccordionSummary
+              expandIcon={<ExpandMoreIcon />}
+              aria-controls="panel1c-content"
+              id="panel1c-header"
+            >
+          <div className={classes.column}>
+            <Typography className={classes.heading}>{r.name}</Typography>
+          </div>
+        </AccordionSummary>
+        <Divider />
+          <div className={classes.secondaryHeading}>
+          <Typography className={classes.heading}>"{r.content}"</Typography>
+          </div>
+        <AccordionDetails className={classes.star}>
+        <Typography component="legend">Calificación:<nav></nav></Typography>
+        <div className={classes.star}>
+        <Rating name="read-only"  value={r.calification} readOnly/>
+        </div>
+        </AccordionDetails>
+        <AccordionActions>
+          <Button size="small" color="primary" onClick={(e) => deleteReview(e, r)}>
+            Eliminar
+          </Button>
+        </AccordionActions>
+      </Accordion>
+        <Divider />
+    </div>
+          ))
+        }
         <Button
           variant="contained"
           color="primary"

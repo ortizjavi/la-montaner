@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Charm:wght@400;700&display=swap%22");
+@import url('https://fonts.googleapis.com/css2?family=Charm:wght@400;700&display=swap%22');
 
 .landing_container {
   background-image: url(../../img/landingFondo.png);
@@ -24,11 +24,8 @@
   margin: 0 auto;
 }
 
-
-
-
-.landing_text{
-    width: 100%;
+.landing_text {
+  width: 100%;
   height: 100%;
 }
 
@@ -52,7 +49,6 @@
   padding-left: 3px;
   padding-right: 3px;
   list-style: none;
-
 }
 
 .landing_options h2 {
@@ -60,7 +56,6 @@
 }
 
 .list_options button {
-
   padding: 10% 2vw;
   margin: 0 1vw;
   font-size: 1.3rem;
@@ -79,7 +74,6 @@
   padding: 0;
   justify-content: center;
   margin: 0 auto;
-
 }
 
 .list_options button:hover {
@@ -100,7 +94,7 @@
 .landing_info {
   background: #c88e34;
   height: 6%;
-  width: 75%;
+  width: 50%;
   max-width: 50vw;
   margin: auto;
   display: flex;
@@ -119,20 +113,77 @@
   padding-top: 3%;
   font-weight: 500;
   font-style: italic;
-  font-family: "Charm", sans-serif;
+  font-family: 'Charm', sans-serif;
   color: #f5ba61;
   letter-spacing: 2px;
 }
 
-
-@media(max-width: 1300px){
+@media (max-width: 1300px) {
   .div_content {
     width: 60vw;
   }
-  
+  .landing_info {
+    width: 55%;
+  }
+
   .list_options button {
     padding: 10% 2.5vw;
     font-size: 1.5rem;
   }
+}
 
+@media (max-width: 900px) {
+  .landing_info {
+    width: 65%;
+  }
+  .div_content {
+    width: 70vw;
+  }
+}
+
+@media (max-width: 700px) {
+  .div_content {
+    width: 80vw;
+  }
+
+  .landing_info {
+    width: 75%;
+    max-width: 65vw;
+  }
+
+  .list_options button {
+    padding: 10% 5vw;
+    font-size: 1.5rem;
+  }
+
+  .landing_info p {
+    font-size: 1.35rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .div_content {
+    width: 100vw;
+  }
+  .landing_options h2 {
+    font-stretch: 1.75rem;
+  }
+
+  .list_options button {
+    padding: 10% 5vw;
+    font-size: 1.5rem;
+  }
+  .landing_info {
+    max-width: 70vw;
+    width: 70%;
+  }
+
+  .landing_info p {
+    font-size: 1.2rem;
+  }
+
+  .landing_options p {
+    font-size: .8rem;
+    padding-top: 5%;
+  }
 }

@@ -194,6 +194,9 @@ export function addCartProduct(productId, stockSelected) {
         stockSelected,
       },
     });
+    dispatch({
+      type: actionTypes.CART_SUBTOTAL_PLUS_ONE,
+    });
   };
 }
 
@@ -228,12 +231,12 @@ export function getMaximumPrice(price) {
   }
 }
 
-export function filterByPrice(filter, pageNumber) {
+export function filterByPrice(sort, filter, pageNumber) {
   if (filter) {
     return async function (dispatch) {
       try {
         const response = await axios.get(
-          `${endpoints.GET_PRODUCTS}?pageNumber=${pageNumber}&priceSort=${filter}`
+          `${endpoints.GET_PRODUCTS}?pageNumber=${pageNumber}&sort=${sort}&priceSort=${filter}`
         );
         return dispatch({
           type: actionTypes.ALL_PRODUCTS,
@@ -246,32 +249,36 @@ export function filterByPrice(filter, pageNumber) {
   }
 }
 
-export async function orderPay(cart) {
-  try {
-    const resp = await axios.post(`${endpoints.ORDER_PAY}`, {
-      locale: "es-AR",
-      compra: cart,
-    });
-    return (window.location.href = resp.data.response.init_point);
-  } catch (error) {
-    console.log(error);
-  }
-}
-
-export function orderStatus(cart, user) {
+export function createOrder(cart, user, address, mercadopago) {
   return async function (dispatch) {
     try {
       const resp = await axios.post(`${endpoints.ORDER_STATUS}`, {
         cart,
         user,
-      }); 
-      return  dispatch({ type: actionTypes.ORDER_STATUS, payload: resp.data });
+        address,
+        mercadopago,
+      });
+      dispatch({ type: actionTypes.ORDER_CREATED, payload: resp.data.order });
+      console.log("mercado", mercadopago);
+      if (mercadopago) {
+        return (window.location.href = resp.data.mp_link);
+      }
     } catch (error) {
       console.log(error);
     }
   };
 }
 
+export function updateOrder(data) {
+  return async function (dispatch) {
+    try {
+      const resp = await axios.put(`${endpoints.ORDER_STATUS}`, data);
+      dispatch({ type: actionTypes.ORDER_UPDATED, payload: resp.data.order });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
 
 export function addFavProducts(id) {
   return async function (dispatch) {
@@ -284,6 +291,7 @@ export function addFavProducts(id) {
           name: data.name,
           image: data.img[0],
           price: data.price,
+          stock: data.stock,
         },
       });
     } catch (e) {
@@ -298,8 +306,44 @@ export function removeFavProduct(id) {
   };
 }
 
+export function removeFavAll() {
+  return { type: actionTypes.DELETE_FAV_ALL };
+}
+
 export function addCartSubTotal(subtotal) {
   return async function (dispatch) {
-    return dispatch({ type: actionTypes.ADD_CART_SUB_TOTAL, payload: subtotal });
-  }
+    return dispatch({
+      type: actionTypes.ADD_CART_SUB_TOTAL,
+      payload: subtotal,
+    });
+  };
+}
+
+export function addAddress(address) {
+  return async function (dispatch) {
+    return dispatch({
+      type: actionTypes.ADD_ADDRESS,
+      payload: address,
+    });
+  };
+}
+
+export function addDiscount(discount) {
+  return async function (dispatch) {
+    console.log("descuento", discount);
+    return dispatch({
+      type: actionTypes.ADD_DISCOUNT,
+      payload: discount,
+    });
+  };
+}
+export function addReview(data) {
+  return async () => {
+    await axios.put(`${endpoints.ADD_REVIEW}`, {
+      content: data.content,
+      id: data.id,
+      calification: data.calification,
+      idUsuario: data.idUsuario,
+    });
+  };
 }

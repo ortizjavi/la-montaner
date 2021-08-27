@@ -6,16 +6,18 @@ export function login(payload, tokenLogin = false) {
   return async function (dispatch) {
     try {
       const response = await axios.post(`${endpoints.AUTH_LOGIN}`, payload);
-      return dispatch({
+      dispatch({
         type: actionTypes.LOGIN_USER,
         payload: setUserSession(response.data)
       });
     } catch (e) {
       if (!tokenLogin)
-        return dispatch({
+        dispatch({
           type: actionTypes.LOGIN_FAILED,
           payload: e.response.data
         });
+    } finally {
+      dispatch({ type: 'STOP_LOADING' })
     }
   }
 }
@@ -26,7 +28,7 @@ export function register(payload) {
       const response = await axios.post(`${endpoints.AUTH_REGISTER}`, payload);
       return dispatch({
         type: actionTypes.REGISTER_USER,
-        payload: response.data
+        payload: setUserSession(response.data)
       });
     } catch (e) {
 
@@ -43,11 +45,25 @@ export function resetPassword(payload) {
     try {
       const response = await axios.put(`${endpoints.AUTH_RESET}`, payload);
       return dispatch({
-        type: actionTypes.RESET_PASSWORD,
-        payload: response.data
+        type: actionTypes.RESET_PASSWORD
       });
     } catch (e) {
       console.log(e);
+    }
+  }
+}
+
+export function recoveryPassword(payload) {
+  return async function (dispatch) {
+    try {
+     await axios.post(`${endpoints.AUTH_RECOVERY_PASS}`, payload);
+     
+    } catch (e) {
+     
+        return dispatch({
+          type: actionTypes.LOGIN_FAILED,
+          payload: e.response.data
+        });
     }
   }
 }
@@ -68,6 +84,12 @@ export function logout() {
   }
 }
 
+export function clearLoginFailed() {
+  return {
+    type: actionTypes.LOGIN_FAILED,
+    payload: ''
+  }
+}
 
 function setAuthDefaulHeaders(token) {
   axios.defaults.headers.common['authorization'] = `Bearer ${token}`;

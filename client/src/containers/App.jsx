@@ -11,25 +11,28 @@ import ProductCreation from "../components/ProductCreation/ProductCreation";
 import CategoryCreation from "../components/CategoryCreation/CategoryCreation";
 import Pay from "../components/Pay/Pay";
 import Dashboard from "../components/Dashboard/Dashboard";
-import DashboardAdmin from "../components/Dashboard/DashboardAdmin";
 import EditProduct from "../components/EditProduct/EditProduct";
 import NavBar from "../components/Navbar/NavBar";
 import Cart from "../components/Cart/Cart";
 import Wishlist from "../components/Wishlist/Wishlist";
-import Success from "../components/PayState/Success";
-import Pending from "../components/PayState/Pending";
-import Failure from "../components/PayState/Failure";
+import PayState from "../components/PayState/PayState";
 import PrivateRoute from "../components/PrivateRoute/PrivateRoute";
 import PublicRoute from "../components/PublicRoute/PublicRoute";
-import LoginForm from "../components/ModalDialog/LoginForm";
+import LoginForm from "../components/LoginRegister/LoginForm";
 import Footer from "../components/Footer/Footer";
 import SideBarAdmin from "../components/Dashboard/SideBarAdmin";
 import AboutPage from "../components/About/About";
 import Accordion from "../components/About/FAQ";
-import RegisterForm from "../components/ModalDialog/RegisterForm";
-import ResetForm from "../components/ModalDialog/ResetForm";
+import RegisterForm from "../components/LoginRegister/RegisterForm";
+import ResetForm from "../components/LoginRegister/ResetForm";
+import PasswordRecovery from "../components/LoginRegister/PasswordRecovery";
+import UserSetting from "../components/UserSetting/UserSetting";
 import { ROLE } from "../utils/constants";
 import Address from "../components/Address/Address";
+import EasterEgg from "../components/EasterEgg/EasterEgg";
+import FindUs from "../components/FindUs/FindUs";
+import UserReviewsTable from "../components/Dashboard/UserReviews";
+import  Header  from "../components/Game/Header";
 
 const theme = createTheme({
   palette: {
@@ -99,22 +102,40 @@ export default function App() {
               />
               <PrivateRoute
                 exact
+                path="/dashboard/setting"
+                component={UserSetting}
+                roles={[ROLE.USER]}
+              />
+              <PrivateRoute
+                exact
+                path="/dashboard/userreviews"
+                component={UserReviewsTable}
+                roles={[ROLE.USER]}
+              />
+              <PrivateRoute
+                exact
                 path="/reset"
                 component={ResetForm}
                 roles={[ROLE.USER]}
               />
+               <PublicRoute
+                exact
+                path="/pass"
+                component={PasswordRecovery}
+                roles={[ROLE.USER]}
+              />
               <Route exact path="/home/products/pay" component={Pay} />
-              <Route exact path="/home/pay/success" component={Success} />
-              <Route exact path="/home/pay/pending" component={Pending} />
-              <Route exact path="/home/pay/failure" component={Failure} />
+              <Route exact path="/home/pay/:status" component={PayState} />
               <PublicRoute exact path="/login" component={LoginForm} />
               <PublicRoute exact path="/register" component={RegisterForm} />
               <Route exact path="/home/:id" component={ProductDetail} />
               <Route exact path="/cart" component={Cart} />
               <Route exact path="/wishlist" component={Wishlist} />
+              <Route exact path="/game" component={Header}/> 
               <Route exact path="/about" component={AboutPage} />
               <Route exact path="/add/address" component={Address} />
               <Route exact path="/faq" component={Accordion} />
+              <Route exact path="/map" component={FindUs} />
             </div>
             <Footer />
           </>

@@ -1,13 +1,12 @@
-import "./CartItem.css";
-import { Link } from "react-router-dom";
+import './CartItem.css';
+import { Link } from 'react-router-dom';
 import DeleteIcon from '@material-ui/icons/Delete';
 
-const CartItem = ({ item, qtyChangeHandler, removeHandler }) => {
-
+export default function CartItem({ item, qtyChangeHandler, removeHandler }) {
   return (
     <div className="cartitem">
       <div className="cartitem__image">
-        <img src={item.image} width="50" alt={item.name} />
+        <img src={item.image} width="90" alt={item.name} />
       </div>
       <Link to={`/home/${item.id}`} className="cartItem__name">
         <p>{item.name}</p>
@@ -33,6 +32,4 @@ const CartItem = ({ item, qtyChangeHandler, removeHandler }) => {
       </button>
     </div>
   );
-};
-
-export default CartItem;
+}

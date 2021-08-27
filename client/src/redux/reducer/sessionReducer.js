@@ -3,7 +3,6 @@ import * as actionTypes from "../actions/names";
 const SESSION_INITIAL_STATE = {
   user: {},
   registerFailed: '',
-  orders: [],
   loginFailed:''
 };
 
@@ -32,10 +31,23 @@ const sessionReducer = (state = SESSION_INITIAL_STATE, action) => {
       case actionTypes.RESET_PASSWORD:
       return {
         ...state,
-        user: action.payload,
+        user: { ...state.user, reset : false },
       };
-    case actionTypes.ORDER_STATUS:
-      return { ...state, orders: state.orders.concat(action.payload.order) };
+    case actionTypes.ORDER_CREATED:
+      state.user.orders.push(action.payload);
+      return {
+        ...state
+      };
+    case actionTypes.ORDER_UPDATED:
+      const order = state.user.orders.find(o => o._id === action.payload._id);
+      order = action.payload;
+      return {
+        ...state
+      }
+    case 'LOADING_SESSION':
+      return { ...state, loading: true }
+    case 'STOP_LOADING':
+      return { ...state, loading: false }
     default: return state;
   }
 };

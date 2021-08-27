@@ -1,28 +1,129 @@
+.table-title {
+	margin: 0.02rem;
+}
+
+.volver {
+	display: flex;
+	justify-content: flex-start;
+	margin: none;
+	height: 0.5rem;
+	background-color: transparent;
+	border: none;
+	cursor: pointer;
+}
+.volver:hover{
+	/* background-color: lightgray; */
+	font-weight: bold;
+}
+
 .table {
-	padding-top: 1rem;
-	padding-left: 1rem;
 	width: 100%;
-    display:block;
+	
 
 }
 .table thead{
-    display: flex;
+	display: flex;
     justify-content: space-around;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+	margin-top: 1rem;
+}
+.table th {
+	width: 7rem;	
 }
 .table td {
-	padding-top: 10px;
-	padding-bottom: 10px;
+	    /* padding-top: 10px;
+		padding-bottom: 5px; */
+		width: 7.5rem;
 }
+/* .dt-th2{
+	margin-left: 27%;
+}
+.dt-th3{
+	margin-left: 24%;
+} */
 .dt-tbody{
-	margin-top: 1rem;
-	height: 30vh;
-	display:block;
+	height: 20vh;
+	/* display:block; */
+	display:flex;
+	justify-content: flex-start;
+	flex-direction: column;
 	overflow-y: scroll;
 }
-.dt-tbody td{
+/* .dt-tbody td{
 	padding-left: 3px;
-}
+} */
 .dt-tr{
-	margin-left: 1rem;
+	/* margin-left: 1rem; */
+	display: flex;
+    justify-content: space-around;
+	align-items: center;
+	background-color: white;
+	/* margin-top: 0.5rem; */
+	/* margin-block: 0; */
+	padding-left: 1rem;
+}
 
+.eye-solid-icon{
+	background: none;
+	font-size: 2rem;
+	cursor: pointer;
+	border: none;
+	border-radius: 5px;
+}
+.eye-solid-icon:hover{
+    background: #686868;
+}
+.dt-bu2{
+	margin-left: 85%;
+	width: 8rem;
+	margin-bottom: 1rem;
+}
+.dt-p{
+	text-align:end;
+    margin-right: 5%;
+	font-size: 0.9rem;
+	margin-block: 0;
+    background-color: #c4c1c12d;
+	font-weight: bold;
+	padding: 3px;
+}
+
+.need-review {
+	color: red;
+	font-size: 0.6rem;
+}
+
+@media screen and (max-width: 700px) {
+
+	.table th {
+	width: 5rem;	
+	}
+	.table td {
+		width: 5.5rem;
+	}
+	.eye-solid-icon{
+	font-size: 1.5rem;
+	}
+}
+@media screen and (max-width: 480px) {
+
+	.table th {
+	width: 3rem;
+	font-size: 0.6rem;	
+	}
+	.table td {
+		width: 3.5rem;
+	font-size: 0.6rem;	
+
+	}
+	.dt-p{
+		font-size: 0.6rem;
+	}
+
+	.eye-solid-icon{
+		font-size: 1rem;
+	}
+	
 }

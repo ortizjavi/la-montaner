@@ -25,15 +25,19 @@ const reducer = combineReducers({
   admin: adminReducer,
 });
 
-console.log(session);
+
 
 const initialState = {
   session: {
     user: {},
+    loading: false
   },
   cart: {
     cartItems: cartItemsInLocalStorage,
-    cartSubtotal: 0,
+    cartSubtotal: cartItemsInLocalStorage?.reduce(
+      (stockSelected, item) => Number(item.stockSelected) + stockSelected,
+      0
+    ),
   },
   wishlist: {
     wishlistItems: wishlistItemsInLocalStorage,
@@ -47,6 +51,7 @@ const store = createStore(
 );
 
 if (session.token) {
+  store.dispatch({ type: 'LOADING_SESSION'})
   store.dispatch(login({ token: session.token }, true));
 }
 

@@ -1,67 +1,68 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router";
-import { Link } from "react-router-dom";
-import swal from "sweetalert";
-import { getProductDetail } from "../../redux/actions/types/productActions";
-import Loading from "../Loading/Loading.js";
-import "./ProductDetail.css";
-
-import { addCartProduct, addFavProducts, removeFavProduct} from "../../redux/actions/types/productActions";
-import { getOrders } from "../../redux/actions/types/adminActions";
-
-//Slider2
-//import { BsChevronLeft, BsChevronCompactRight } from "react-icons/fa";
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router';
+import { Link } from 'react-router-dom';
+import swal from 'sweetalert';
+import Loading from '../Loading/Loading.js';
+import { FaStar } from 'react-icons/fa';
+import './ProductDetail.css';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
-
-//Favs
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import FavoriteIcon from '@material-ui/icons/Favorite';
+import Reviews from './Reviews';
+import * as productActions from '../../redux/actions/types/productActions.js';
+import { getOrders } from '../../redux/actions/types/adminActions';
+import { Rating } from '@material-ui/lab';
+import { FaCircle } from 'react-icons/fa';
+
 
 export default function ProductDetail({ match, history }) {
-  const { id } = useParams();
-  
-  const detail = useSelector((state) => state.root.productDetail);
-
+  const { id } = useParams(); //pasarle por props
   const dispatch = useDispatch();
 
-  //local states
+  //State selector
+  const detail = useSelector((state) => state.root.productDetail);
+  let wishlist = useSelector((state) => state.wishlist);
+  let currentUser = useSelector((state) => state.session.user);
+
+  let userOrders = currentUser.orders;
+  let { wishlistItems } = wishlist;
+
+  //Local states
   const [qty, setQty] = useState(1);
   const [loading, setLoading] = useState(true);
-  const [count, setCount] = useState(1);
-
-  //cart
-  const cart = useSelector((state) => state.cart);
-  const { cartItems } = cart;
-
-  //wishlist
-  let wishlist = useSelector((state) => state.wishlist);
-  let { wishlistItems } = wishlist;
-  const fav = wishlistItems.find(product => product.id === id);
-
-  //slider states
   const [current, setCurrent] = useState(0);
+  const [stars, setStars] = useState(0);
+
+  const fav = wishlistItems.find((product) => product.id === id);
   const length = detail?.img?.length;
 
-  //Cart order user
-  let usuario = useSelector((state) => state.session.user);
-  usuario = Object.entries(usuario);
-  //const ordenes = useSelector((state) => state.admin.orders); 
+  //Order user
+  let usuarioPrueba = currentUser;
+  let usuario = Object.entries(currentUser);
 
   useEffect(() => {
-    dispatch(getProductDetail(id));
+    dispatch(productActions.getProductDetail(id));
+    dispatch(getOrders());
     setTimeout(() => {
       setLoading(false);
     }, 1000);
-  }, [id, dispatch, match]);
+  }, [dispatch, match, usuarioPrueba, userOrders, id, detail._id]);
 
   useEffect(() => {
     window.localStorage.setItem('wishlist', JSON.stringify(wishlistItems));
-  }, [wishlistItems])
+  }, [wishlistItems]);
 
-  const addToCartHandler  = () => {
-    dispatch(addCartProduct(detail._id, qty));
+  useEffect(() => {
+    if (detail.rating) {
+      let totalStars = detail.rating.reduce((a, b) => a + b, 0);
+      setStars(totalStars / detail.rating.length);
+    }
+  }, [detail.rating]);
+
+  const addToCartHandler = () => {
+    dispatch(productActions.addCartProduct(detail._id, qty));
     history.push(`/cart`);
   };
 
@@ -78,102 +79,116 @@ export default function ProductDetail({ match, history }) {
   }
 
   const handleRemoveFav = () => {
-    dispatch(removeFavProduct(id));
-  }
+    dispatch(productActions.removeFavProduct(id));
+  };
 
   const handleAddFav = () => {
-    dispatch(addFavProducts(id));
-  }
+    dispatch(productActions.addFavProducts(id));
+  };
 
   const handleWishlist = () => {
     swal({
       title: 'Por favor inicia sesión',
-      icon: 'warning'
-      })
-  }
-
-  // if(!ordenes){
-  //   dispatch(getOrders())
-  // }
-  // const userId = ordenes?.find(o => o.user === usuario._id);
-  // console.log('dashboard/respuesta', userId)
-  // console.log('dashboard/ordenes', ordenes)
-  //console.log(ordenes)
-  // console.log('user state', usuario);
-  // console.log('datauser/user:',usuario.name)
+      icon: 'warning',
+    });
+  };
 
   return (
-    <div>
+    <div className="big-container-detail">
       {loading ? (
         <Loading />
       ) : (
         <div className="productscreen">
           <div className="productscreen__left">
             <div className="left__image">
-            {detail.img.length > 1 ? (
-              <section className="slider">
-                <ArrowBackIosIcon
-                  className="left-arrow"
-                  onClick={prevSlide}
-                />
-                <ArrowForwardIosIcon
-                  className="right-arrow"
-                  onClick={nextSlide}
-                />
-                {detail.img.map((slide, index) => {
-                  return (
-                    <div
-                      className={index === current ? "slide active" : "slide"}
-                      key={index}
-                    >
-                      {index === current && (
-                        <img
-                          src={slide}
-                          alt="beerImage"
-                          className="image"
-                        />
-                      )}
-                    </div>
-                  );
-                })}
-              </section>
-            ) : (
-              <div className="slide.active">
-                  <img src={detail.img} alt="beerImage" className="imageSlide"/>
-                    </div>
-            )}
+              {detail.img.length > 1 ? (
+                <section className="slider">
+                  <ArrowBackIosIcon
+                    className="left-arrow"
+                    onClick={prevSlide}
+                  />
+                  <ArrowForwardIosIcon
+                    className="right-arrow"
+                    onClick={nextSlide}
+                  />
+                  {detail.img.map((slide, index) => {
+                    return (
+                      <div
+                        className={index === current ? 'slide active' : 'slide'}
+                        key={index}
+                      >
+                        {index === current && (
+                          <img src={slide} alt="beerImage" className="image" />
+                        )}
+                      </div>
+                    );
+                  })}
+                </section>
+              ) : (
+                <div className="slide.active">
+                  <img
+                    src={detail.img}
+                    alt="beerImage"
+                    className="imageSlide"
+                  />
+                </div>
+              )}
             </div>
           </div>
-            <div className="productscreen__right">
+          <div className="productscreen__right">
+            <div className="detail-heart">
+              {!usuario || usuario.length === 0 ? (
+                <Link to="/login">
+                  <FavoriteBorderIcon
+                    onClick={() => handleWishlist()}
+                    className="detail_fav"
+                  />
+                </Link>
+              ) : fav ? (
+                <FavoriteIcon
+                  onClick={handleRemoveFav}
+                  className="detail_fav"
+                />
+              ) : (
+                <FavoriteBorderIcon
+                  onClick={handleAddFav}
+                  className="detail_fav"
+                />
+              )}{' '}
+            </div>
             <div className="detail_info">
               <div className="name_fav_detail">
-              <p className="detail__name">{detail.name}</p>
-              
-               {/* {
-                 fav ?
-                <FavoriteIcon onClick={handleRemoveFav} className="detail_fav" />
-                :
-                <FavoriteBorderIcon onClick={handleAddFav} className="detail_fav" />
-               } */}
+                <p className="detail__name">{detail.name}</p>
+              </div>
+              <div className="detail_stars">
+                <Rating
+                  name="read-only"
+                  value={stars}
+                  defaultValue={4}
+                  precision={0.5}
+                  readOnly
+                />
+              </div>
 
-               {
-                 !usuario || usuario.length === 0 ? (
-                   <Link to='/login'>
-                    <FavoriteBorderIcon onClick={() => handleWishlist()} className="detail_fav" />
-                   </Link>
-                 ) : fav ? (
-                  <FavoriteIcon onClick={handleRemoveFav} className="detail_fav" />
-                 ) : (
-                  <FavoriteBorderIcon onClick={handleAddFav} className="detail_fav" />
-                 )
-               }
+              <div className="detail-description">
+                <p>{detail.description}</p>
+              </div>
 
-               </div>                               
-              <p className="detail_stars">⭐⭐⭐⭐⭐</p>
-              <p>Descripción: {detail.description}</p>
+{ (detail.ibu && detail.abv) && 
+ (
+  <div className='sipd-center'>
+                <table>
+                  <tbody>
+                    <tr>
+                      <td>Ibu: {detail.ibu}</td>
+                      <td>Abv: {detail.abv}%</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+)}
+         
             </div>
-            
-          <div>
             <div className="right__info">
               <p>
                 Precio:
@@ -181,38 +196,40 @@ export default function ProductDetail({ match, history }) {
               </p>
               <p>
                 Stock:
-                <span>
-                  {detail.stock > 0 ? "disponible" : "no disponible"}
+                <span>{detail.stock > 0 ? 
+                <div className='stock-disponible'>
+                <FaCircle /> <p>disponible</p></div> 
+                :  <div className='stock-noDisponible'>
+                <FaCircle /> <p> no disponible</p></div>}
                 </span>
               </p>
               <p>
                 Cantidad:
-                { 
-                  detail.stock > 0 ? (
-                    <select value={qty} onChange={(e) => setQty(e.target.value)}>
+                {detail.stock > 0 ? (
+                  <select value={qty} onChange={(e) => setQty(e.target.value)}>
                     {[...Array(detail.stock).keys()].map((x) => (
-                        <option key={x + 1} value={x + 1}>
-                          {x + 1}
-                       </option>
+                      <option key={x + 1} value={x + 1}>
+                        {x + 1}
+                      </option>
                     ))}
-                </select>
-                  ) : ( <span>no disponible</span> )
-                }
+                  </select>
+                ) : (
+                  <span>no disponible</span>
+                )}
               </p>
               <p>
-                {
-                  detail.stock > 0 ? (
-                    <button type="button" onClick={addToCartHandler}>
-                      Agregar al carrito
-                    </button>
-                  ) : null
-                }
+                {detail.stock > 0 ? (
+                  <button type="button" onClick={addToCartHandler}>
+                    Agregar al carrito
+                  </button>
+                ) : null}
               </p>
             </div>
-          </div>
+            <div></div>
           </div>
         </div>
       )}
+      <Reviews id={id} />
     </div>
   );
-};
+}
