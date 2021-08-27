@@ -16,6 +16,8 @@ const useStyles = makeStyles((theme) => ({
         border: "1px solid",
         //padding: "2em",
         borderRadius: "5px",
+        fontFamily: 'Poppins',
+        textAlign:"center",
       },
     },
   }));

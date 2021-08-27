@@ -26,3 +26,18 @@
     text-align: center;
     margin: 15px 10%
 }
+
+.scores{
+    display: grid;
+    width: 100%;
+    grid-template-columns: 30% 30% 30%;
+    justify-content: space-between;
+}
+
+.imgModal img{
+    width: 40%;
+    position: absolute;
+    top: inherit;
+    left: 30%;
+}
+ 

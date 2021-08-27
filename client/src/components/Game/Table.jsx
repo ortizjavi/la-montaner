@@ -105,8 +105,9 @@ export const Table = () => {
   return (
     <div>
       <Grid container spacing={3} justifyContent="center" alignItems="center">
-        <Grid item xs={12}>
+        <Grid item xs={12} className="scores">
           <Score value={score} />
+          <Rules/>
           <ScoreHouse value={scoreHouse} />
         </Grid>
         {!userActive ? (
@@ -114,17 +115,16 @@ export const Table = () => {
             <Ficha name="piedra" onClick={onClick} />
             <Ficha name="papel" onClick={onClick} />
             <Ficha name="tijera" onClick={onClick} />
-            {/*  <Rules/> */}
           </div>
         ) : (
           <div className="countFichas">
             <div>
               <Ficha name={select} />
-              <p className="seleccionM">Tu Seleccion</p>
+              <p className="seleccionM">Tu Selección</p>
             </div>
             <div>
               <Ficha name={houseSelect} />
-              <p className="seleccionM">Seleccion de la Montañes</p>
+              <p className="seleccionM">Selección de la Montañes</p>
             </div>
             <div>
               <h3>{result}</h3>
