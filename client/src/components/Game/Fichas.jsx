@@ -24,16 +24,56 @@ export const Ficha = ({ name = "default", onClick }) => {
   };
 
   return (
-    <div className="gameIcon" onClick={handleClick}>
-      <IconButton>
-        {name === "tijera" ? (
-          <FaHandScissors />
-        ) : name === "papel" ? (
-          <FaHandPaper />
-        ) : (
-          <FaHandRock />
-        )}
-      </IconButton>
-    </div>
+    <>
+      {onClick ? (
+        <div className="gameIcon" onClick={handleClick}>
+          <IconButton>
+            {name === "tijera" ? (
+              <img
+                src="https://cdn.discordapp.com/attachments/871916095873896448/880528030613774336/tijera.png"
+                className="gameIconsvg"
+                alt="tijeras"
+              />
+            ) : name === "papel" ? (
+              <img
+                src="https://cdn.discordapp.com/attachments/871916095873896448/880528021130461224/papel.png"
+                className="gameIconsvg"
+                alt="tijeras"
+              />
+            ) : (
+              <img
+                src="https://cdn.discordapp.com/attachments/871916095873896448/880528025781956678/piedra.png"
+                className="gameIconsvg"
+                alt="tijeras"
+              />
+            )}
+          </IconButton>
+        </div>
+      ) : (
+        <div className="resultIcon" onClick={handleClick}>
+          <IconButton>
+            {name === "tijera" ? (
+              <img
+                src="https://cdn.discordapp.com/attachments/871916095873896448/880528030613774336/tijera.png"
+                className="resultIconsvg"
+                alt="tijeras"
+              />
+            ) : name === "papel" ? (
+              <img
+                src="https://cdn.discordapp.com/attachments/871916095873896448/880528021130461224/papel.png"
+                className="resultIconsvg"
+                alt="tijeras"
+              />
+            ) : (
+              <img
+                src="https://cdn.discordapp.com/attachments/871916095873896448/880528025781956678/piedra.png"
+                className="resultIconsvg"
+                alt="tijeras"
+              />
+            )}
+          </IconButton>
+        </div>
+      )}
+    </>
   );
 };

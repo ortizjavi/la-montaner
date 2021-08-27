@@ -40,6 +40,7 @@ export const Table = () => {
   };
 
   const onClick = async (name) => {
+    setResult("");
     setUserActive(true);
     setSelect(name);
     const mon = await house();
@@ -84,18 +85,22 @@ export const Table = () => {
     }
   };
   const endGame = () => {
-    if(score === 3){
-        dispatch(winGame());
-        swal("Ganaste!", "Vas a tener disponible el descuento en tu carrito!", "success");
-        setScore(0);
-        setScoreHouse(0);
+    if (score === 3) {
+      dispatch(winGame());
+      swal(
+        "Ganaste!",
+        "Vas a tener disponible el descuento en tu carrito!",
+        "success"
+      );
+      setScore(0);
+      setScoreHouse(0);
     }
-    if(scoreHouse === 3){
-        swal ( "Perdiste :(" ,  "Podes volver a intentarlo!" ,  "error" )
-        setScore(0);
-        setScoreHouse(0);
+    if (scoreHouse === 3) {
+      swal("Perdiste :(", "Podes volver a intentarlo!", "error");
+      setScore(0);
+      setScoreHouse(0);
     }
-}
+  };
 
   const handleTryAgainClick = () => {
     endGame();
@@ -127,7 +132,17 @@ export const Table = () => {
               <p className="seleccionM">Selección de la Montañes</p>
             </div>
             <div>
-              <h3>{result}</h3>
+              <h3
+                className={
+                  result === "Ganaste!"
+                    ? "win"
+                    : result === "Perdiste"
+                    ? "lose"
+                    : "same"
+                }
+              >
+                {result}
+              </h3>
               <Button
                 onClick={handleTryAgainClick}
                 variant="contained"
