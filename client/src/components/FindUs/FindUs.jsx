@@ -10,7 +10,7 @@ import './FindUs.css';
 //import swal from "sweetalert";
 
 export default function FindUs() {
-  const mapStyle = { height: '400px', width: '600px', margin: '0 auto' };
+  const mapStyle = { height: '400px', width: '80%', margin: '0 auto' };
   const location = { lat: -31.73197584607406, lng: -64.45617099471914 };
 
   return (
