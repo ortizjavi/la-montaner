@@ -11,11 +11,11 @@ module.exports = (cartItems) => {
     try {
       let preference = {
         back_urls: {
-          success: "http://localhost:3000/home/pay/success",
-          failure: "http://localhost:3000/home/pay/failure",
-          pending: "http://localhost:3000/home/pay/pending",
+          success: "https://la-montaner.vercel.app/home/pay/success",
+          failure: "https://la-montaner.vercel.app/home/pay/failure",
+          pending: "https://la-montaner.vercel.app/home/pay/pending",
         },
-        auto_return: "approved",
+        auto_return: "approved", 
         items: []   
       };
 
