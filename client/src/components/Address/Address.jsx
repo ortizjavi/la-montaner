@@ -1,22 +1,20 @@
-import React, { useState } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import React, { useState } from "react";
+import { makeStyles } from "@material-ui/core/styles";
 import { useDispatch, useSelector } from "react-redux";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import swal from "sweetalert";
 import { useHistory } from "react-router-dom";
 import "./Address.css";
-import { addAddress } from '../../redux/actions/types/productActions';
-
-
+import { addAddress } from "../../redux/actions/types/productActions";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
-    position: 'absolute',
+    position: "absolute",
     width: 500,
     left: 100,
     backgroundColor: theme.palette.background.paper,
-    border: '2px solid #000',
+    border: "2px solid #000",
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
   },
@@ -56,8 +54,6 @@ const useStyles = makeStyles((theme) => ({
 
 export default function AddressModal() {
   const dispatch = useDispatch();
-
-
   const [address, setAddress] = useState({
     provincia: "",
     direccion: "",
@@ -71,7 +67,7 @@ export default function AddressModal() {
         title: "Direccion guardada!",
         icon: "success",
       });
-        return dispatch(addAddress(newAddress));
+      return dispatch(addAddress(newAddress));
     } catch (err) {
       console.log(err);
     }
