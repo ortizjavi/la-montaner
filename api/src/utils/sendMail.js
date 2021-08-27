@@ -66,7 +66,7 @@ sendEmail.processingOrder = (email, name, payment, shipping) => {
 		shippingAddress = shipping.address;
 	} else {
 		shippingTitle = 'Retiro por local';
-		shippingAddress = 'Dirección de Chicha';
+		shippingAddress = 'San Agustín 1455, Villa La Serranita, Córdoba';
 	}
 	data = data.replace('{paymentInfo}', `con ${payment.method}`);
 	data = data.replace('{shippingTitle}', `${shippingTitle}`);
@@ -92,7 +92,7 @@ sendEmail.completedOrder = (email, name, shipping) => {
 	} else {
 		data = data.replace('{deliveryMssg}', 'Tu birra te espera 🍺');
 		shippingTitle = 'Retiro por local';
-		shippingAddress = 'Dirección de Chicha';
+		shippingAddress = 'San Agustín 1455, Villa La Serranita, Córdoba';
 	}
 	data = data.replace('{shippingTitle}', `${shippingTitle}`);
 	data = data.replace('{shippingInfo}', `${shippingAddress}`);
