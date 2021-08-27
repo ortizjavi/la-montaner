@@ -7,6 +7,7 @@
   margin: auto;
   display: flex;
   justify-content: center;
+  margin-bottom: 7%;
 }
 
 .accordionSection {
@@ -67,3 +68,25 @@
     ///
 } */
 
+@media screen and (max-width:920px) {
+  .container-accordion {
+    margin-bottom: 15%;
+  }
+}
+@media screen and (max-width:750px) {
+  .dropdown p {
+    height: 10rem;
+    overflow-y: scroll;
+
+  }
+}
+@media screen and (max-width:535px) {
+  .container-accordion {
+    margin-bottom: 30%;
+  }
+}
+@media screen and (max-width:400px) {
+  .container-accordion {
+    margin-bottom: 45%;
+  }
+}

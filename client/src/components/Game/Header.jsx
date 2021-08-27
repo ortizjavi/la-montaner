@@ -11,13 +11,15 @@ const useStyles = makeStyles((theme) => ({
       flexWrap: 'wrap',
       '& > *': {
         margin: theme.spacing(1),
-        width: "100vw",
-        height: '8vh',
+        width: "90vw",
+        height: '11vh',
         border: "1px solid",
         //padding: "2em",
         borderRadius: "5px",
         fontFamily: 'Poppins',
         textAlign:"center",
+        alignItems: "center",
+        marginTop: theme.spacing(4),
       },
     },
   }));
@@ -31,7 +33,7 @@ export default function Header () {
         <div className={classes.root}>
             <Grid container spacing={2}>
                 <Grid item xs={12}>
-                        <h3>Piedra, Papel o Tijera</h3>
+                        <h1>Piedra, Papel o Tijera</h1>
                 </Grid>
                 <Grid item xs={12}>
                     <Table/>
