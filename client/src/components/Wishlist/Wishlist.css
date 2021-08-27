@@ -63,6 +63,7 @@
   padding: 10px;
   position: relative;
   padding-bottom: 30px;
+  border: solid 1px gray;
 }
 
 .product_container:hover {
@@ -127,10 +128,10 @@
     flex-flow: column wrap;
   }
 
-  .product_container {
+  /* .product_container {
     height: 10rem;
     width: 7rem;
-  }
+  } */
 
   .product_name {
     width: 90%;
