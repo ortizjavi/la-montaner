@@ -102,7 +102,7 @@ export default function ProductCreation() {
         }
       }
       /* await setCreateProduct({ ...createProduct, img: image }); */
-      let post = await axios.post("http://localhost:3001/admin/product", {
+      let post = await axios.post("https://la-montaner.herokuapp.com/admin/product", {
         ...createProduct,
         categories: allCategories.filter((c) =>
           createProduct.categories.includes(c.name)
@@ -111,7 +111,7 @@ export default function ProductCreation() {
       });
       console.log(post);
       setTimeout(
-        () => (document.location.href = "http://localhost:3000/admin"),
+        () => (document.location.href = "https://la-montaner.vercel.app/admin"),
         3000
       );
     } catch (err) {
