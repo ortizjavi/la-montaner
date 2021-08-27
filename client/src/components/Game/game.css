@@ -58,10 +58,15 @@
 }
 
 .scores{
-    display: grid;
+    /* display: grid; */
     width: 100%;
-    grid-template-columns: 30% 30% 30%;
-    justify-content: space-between;
+    display: flex;
+    justify-content: space-evenly;
+    /* grid-template-columns: 30% 30% 30%; */
+    /* justify-content: space-between; */
+}
+.scores div > div{
+    width: 8rem;
 }
 
 .imgModal img{
