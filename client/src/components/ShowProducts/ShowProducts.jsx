@@ -139,9 +139,9 @@ const ShowProducts = ({allProducts}) => {
                         <h5 className="link-name">{item?.name}</h5>
                         <h4 className="item_price">${item?.price}</h4>
                       {
-                        item.stock > 0 ? 
-                        (<h6 className='sp-h6'>Tenemos en stock!</h6>)
-                        : (<h6 className='sp-h6-null'>No tenemos stock</h6>)
+                        item.stock > 0 ? null
+                        // (<h6 className='sp-h6'>Tenemos en stock!</h6>)
+                        : (<h6 className='sp-h6-null'>Sin stock</h6>)
                       }
                     </NavLink>
                     { item.stock > 0 ?

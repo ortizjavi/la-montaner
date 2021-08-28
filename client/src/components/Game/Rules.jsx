@@ -1,19 +1,41 @@
 import React from 'react';
-import { Button, Modal } from '@material-ui/core'
+import { makeStyles } from '@material-ui/core/styles';
+import Modal from "@material-ui/core/Modal";
+import Button from '@material-ui/core/Button';
+import imageRules from '../../img/imageRules.png';
+import "./game.css";
 
 function getModalStyle() {
-    const top = 15;
-    const left = 25;
-  
-    return {
-      top: `${top}%`,
-      left: `${left}%`,
-    };
-  }
+  const top = 25;
+  const left = 15;
+
+  return {
+    top: `${top}%`,
+    left: `${left}%`,
+  };
+}
+
+const useStyles = makeStyles((theme) => ({
+  rules: {
+    height: "20%",
+  },
+  paper: {
+    position: "absolute",
+    width: 10,
+    left: 10,
+    backgroundColor: theme.palette.background.paper,
+    border: "2px solid #000",
+    boxShadow: theme.shadows[5],
+    padding: theme.spacing(2, 4, 3),
+  },
+}));
+
+
 
 
 export const Rules = () => {
-    const [modalStyle] = React.useState(getModalStyle());
+    const classes = useStyles();
+    const [modalStyle] = React.useState(getModalStyle);
     const [open, setOpen] = React.useState(false);
 
     const handleOpen = () => {
@@ -25,18 +47,22 @@ export const Rules = () => {
       };
 
     return (
-        <div>
+      <div>
             <Button
                 onClick={handleOpen}
-            >Reglas</Button> 
-            {/* <Modal
+            >Reglas
+            </Button>
+            <div className="modal">
+            <Modal
                  open={open}
                  onClose={handleClose}
                  aria-labelledby="simple-modal-title"
-                 aria-describedby="simple-modal-description"
-            >
-                Reglas
-            </Modal> */}
+                 aria-describedby="simple-modal-description">
+                    <div style={modalStyle} className="imgModal">
+                  <img src={imageRules} alt="reglas"/>
+                 </div>
+             </Modal>
+             </div> 
         </div>
     )
 }

@@ -52,6 +52,7 @@
     /* margin-left: 2rem; */
     cursor: pointer;
     width: 55%;
+    margin-left: -17.5%;
 }
 
 .nav-title {
@@ -73,13 +74,13 @@
 
 .Nav-button {
     background: none;
-    color: grey;
+    color: black;
     font-weight: 400;
     border: none;
     outline: none;
     width: auto;
     cursor: pointer;
-    font-size: 1rem;
+    font-size: 1.2rem;
     height: 1.5rem;
     margin-right: 1rem;
     margin-left: 1rem;
@@ -92,7 +93,7 @@
     width: 10rem;
     box-sizing: border-box; */
     /* color: #66D040; */
-    color: black;
+    color:grey;
 }
 
 /* .Nav-button:active{
@@ -134,7 +135,7 @@ width: 10rem;
     /* border-bottom: #C88E34 solid 3px ; */
     border-bottom: #C88E34 solid 1px ;
     border-top: #C88E34 solid 1px ;
-    font-size: 1rem;
+    font-size: 1.2rem;
     width: auto;
     height: 1.5rem;
     margin-right: 1rem;
@@ -153,6 +154,7 @@ width: 10rem;
     width: 20%;
     color: #ffffff;
     background-color: transparent;
+    margin-left: 
 }
 
 .nav-personicon svg {

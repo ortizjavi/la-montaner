@@ -18,7 +18,7 @@ const RegisterForm = () => {
     const registerFailed = useSelector(state => state.session.registerFailed);
     const [error, setError] = useState('')
     const pRgx = new RegExp(`^(.{0,7}|[^0-9]*|[^A-Z]*|[^a-z]*|[a-zA-Z0-9]*)$`)
-    const eRgx = new RegExp(`^[a-z0-9!#$%&'*+/=?^_\`{|}~-]+@[a-z0-9-]*\.[a-z0-9-]*$`);
+    const eRgx = new RegExp(`[a-zA-Z0-9!#$%&'*_+-]([\.]?[a-zA-Z0-9!#$%&'*_+-])+@[a-zA-Z0-9]([^@&%$\/()=?¿!.,:;]|\d)+[a-zA-Z0-9][\.][a-zA-Z]{2,4}([\.][a-zA-Z]{2})?`)
     const [input, setInput] = useState({
         given_name: '',
         family_name: '',
@@ -121,9 +121,10 @@ const RegisterForm = () => {
 
     return (
         <form className={'registerForm'} onSubmit={handleSubmit}>
-            <div className={'title'}>Ingresá tus datos y registrate</div>
+            <div className={'titleRegister titleRegisterPadding'}>Ingresá tus datos y registrate</div>
             <div className='fields'>
                 <TextField
+                    className="registerInput"
                     label="Nombre"
                     variant="filled"
                     name="given_name"
@@ -132,6 +133,7 @@ const RegisterForm = () => {
                     onChange={handleInputChange}
                 />
                 <TextField
+                    className="registerInput"
                     label="Apellido"
                     variant="filled"
                     name="family_name"
@@ -140,6 +142,7 @@ const RegisterForm = () => {
                     onChange={handleInputChange}
                 />
                 <TextField
+                    className="registerInput"
                     label="Email"
                     variant="filled"
                     name="email"
@@ -150,6 +153,7 @@ const RegisterForm = () => {
                 />
 
                 <FilledInput
+                    className="registerInput"
                     placeholder="Contraseña *"
                     label="Contraseña"
                     variant="filled"
@@ -170,8 +174,9 @@ const RegisterForm = () => {
                         </InputAdornment>
                     }
                 />
-                <p>Ingresa nuevamente tu contraseña</p>
+                <p className="titleRegister">Ingresa nuevamente tu contraseña</p>
                 <FilledInput
+                    className="registerInput"
                     placeholder="Contraseña *"
                     label="Contraseña"
                     variant="filled"

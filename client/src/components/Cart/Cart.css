@@ -41,7 +41,7 @@
 
 .cartscreen__right div button {
   padding: 10px 17px;
-  width: 30%;
+  /* width: 30%; */
   background: #171717;
   color: #f4f4f4;
   cursor: pointer;
@@ -68,8 +68,8 @@
 
 .cartDeleteAll_container {
   position: absolute;
-  top: 180px;
-  right: 67px;
+  top: 195px;
+  right: 15%;
 }
 
 .cartDeleteAllDisable {
@@ -100,6 +100,9 @@
   .cartscreen {
     max-width: 900px;
   }
+  .cartDeleteAll_container {
+    right: 10%;
+  }
 }
 
 @media (max-width: 960px) {
@@ -114,5 +117,8 @@
   }
   .cartscreen__right {
     margin: 1rem;
+  }
+  .cartDeleteAll_container {
+    right: 7%;
   }
 }

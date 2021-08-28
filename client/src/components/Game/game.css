@@ -1,0 +1,92 @@
+.gameIcon {
+    background-color: #388e3c;
+    height: 20vh;
+    border-radius: 50%;
+    width: 20vh;
+    border: 10px solid #fafafa;
+    box-shadow: 5px 5px 10px #bebebe, -5px -5px 10px #ffffff;
+    transition: all .7s
+}
+
+.resultIcon {
+    background-color: #388e3c;
+    height: 20vh;
+    border-radius: 50%;
+    width: 20vh;
+    border: 10px solid #fafafa;
+    box-shadow: 5px 5px 10px #bebebe, -5px -5px 10px #ffffff;
+    transition: all .7s
+}
+
+.gameIcon:hover {
+    margin-top: 20px;
+    background-color: #fff;
+    cursor: pointer;
+    border: 10px solid #388e3c;
+}
+
+.gameIcon:hover svg {
+    color: #388e3c
+}
+
+.resultIconsvg {
+    color: #fff;
+    width: 12vh;
+    height: 12vh;
+    margin: 2vh
+}
+
+.gameIconsvg {
+    width: 12vh;
+    height: 12vh;
+    margin: 2vh
+}
+
+.countFichas {
+    display: grid;
+    width: 100%;
+    grid-template-columns: 30% 30% 30%;
+    justify-content: center;
+    justify-items: center;
+}
+
+.seleccionM {
+    font-size: 20px;
+    max-width: 20vh;
+    text-align: center;
+    margin: 15px 10%
+}
+
+.scores{
+    /* display: grid; */
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    /* grid-template-columns: 30% 30% 30%; */
+    /* justify-content: space-between; */
+}
+.scores div > div{
+    margin-top: 10px;
+    width: 8rem;
+}
+
+.imgModal img{
+    width: 40%;
+    position: absolute;
+    top: inherit;
+    left: 30%;
+}
+ 
+.lose {
+    font-size: 30px;
+    color: rgb(255, 50, 50)
+}
+
+.win {
+    font-size: 30px;
+    color: #388e3c
+}
+
+.same {
+    font-size: 30px;
+}
