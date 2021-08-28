@@ -6,8 +6,6 @@ import MailOutlineIcon from '@material-ui/icons/MailOutline';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import { WHATSAPP_LINK } from '../../utils/constants';
 import './FindUs.css';
-//import { useForm } from 'react-hook-form';
-//import swal from "sweetalert";
 
 export default function FindUs() {
   const mapStyle = { height: '400px', width: '600px', margin: '0 auto' };
