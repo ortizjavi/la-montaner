@@ -37,7 +37,7 @@
   margin-block-start: 0;
 }
 
-.detail_info{
+.detail_info {
   width: 100%;
 }
 .detail__info > p,
@@ -178,40 +178,39 @@
   transform: scale(1.08);
 }
 
-.sipd-center{
+.sipd-center {
   display: flex;
   justify-content: center;
 }
 
-.sipd-center table{
+.sipd-center table {
   text-align: center;
 }
 
-.sipd-center tr{
-    display: table-row;
-    vertical-align: inherit;
-    border-color: rgb(0, 0, 0);
+.sipd-center tr {
+  display: table-row;
+  vertical-align: inherit;
+  border-color: rgb(0, 0, 0);
 }
 
-.sipd-center td{
-  /* border: 1px solid #000; */
-    padding: 5px;
-    text-transform: uppercase;
-    font-weight: 700;
-    background-color: #a52a2a;
-    color: white;
+.sipd-center td {
+  padding: 5px;
+  text-transform: uppercase;
+  font-weight: 700;
+  background-color: #a52a2a;
+  color: white;
 }
 
-.stock-disponible{
-    display: flex;
-    color: rgb(6, 139, 35);
-    display: flex;
-    position: absolute;
+.stock-disponible {
+  display: flex;
+  color: rgb(6, 139, 35);
+  display: flex;
+  position: absolute;
 }
 
-.stock-disponible p{
-  margin-block-start: 0!important;
-  margin-block-end: 0!important;
+.stock-disponible p {
+  margin-block-start: 0 !important;
+  margin-block-end: 0 !important;
   text-align: center;
   justify-content: center;
   align-items: center;
@@ -219,16 +218,16 @@
   margin-left: 10px;
 }
 
-.stock-noDisponible{
+.stock-noDisponible {
   display: flex;
   color: rgb(211, 18, 18);
   display: flex;
   position: absolute;
 }
 
-.stock-noDisponible p{
-  margin-block-start: 0!important;
-  margin-block-end: 0!important;
+.stock-noDisponible p {
+  margin-block-start: 0 !important;
+  margin-block-end: 0 !important;
   text-align: center;
   justify-content: center;
   align-items: center;
@@ -257,7 +256,7 @@
     margin: 0 auto;
   }
 
-  .name_fav_detail p{
+  .name_fav_detail p {
     font-size: 2rem;
   }
 
@@ -271,80 +270,24 @@
     margin: 0 auto;
   }
 
-  .imageSlide{
+  .imageSlide {
     width: 300px;
     height: 500px;
   }
 
   .detail-heart {
-  text-align: center;
-   margin: 10px;
+    text-align: center;
+    margin: 10px;
+  }
+
+  .right-arrow {
+    right: 190px;
+  }
+
+  .left-arrow {
+    left: 190px;
+  }
 }
-
-.right-arrow{
-  right: 190px;
-}
-
-.left-arrow{
-  left: 190px;
-
-}
-}
-
-
-/* @media (max-width: 870px) {
-  .productscreen {
-    flex-direction: column;
-  }
-
-  .productscreen__left {
-    flex-direction: column;
-    flex: 1;
-  }
-
-  .left__image {
-    flex: 1;
-  }
-
-  .detail_info {
-    flex: 1;
-    width: 80%;
-    margin: 0 auto;
-  }
-
-  .name_fav_detail p{
-    font-size: 2rem;
-  }
-
-  .productscreen__right {
-    flex: 1;
-    max-width: 100vh;
-  }
-
-  .right__info {
-    width: 90%;
-    margin: 0 auto;
-  }
-
-  .imageSlide{
-    width: 300px;
-    height: 500px;
-  }
-
-  .detail-heart {
-  text-align: center;
-   margin: 10px;
-}
-
-.right-arrow{
-  right: 110px;
-}
-
-.left-arrow{
-  left: 110px;
-
-}
-} */
 
 @media screen and (max-width: 820px) {
   .productscreen {
@@ -352,7 +295,7 @@
     justify-content: center;
   }
 
-  .productscreen{
+  .productscreen {
     width: 100%;
     text-align: center;
     align-items: center;
@@ -380,11 +323,11 @@
     width: 85%;
   }
 
-  .detail-reviews{
+  .detail-reviews {
     width: 100%;
   }
 
-  .container-reviews{
+  .container-reviews {
     width: 100%;
   }
 }
@@ -395,7 +338,7 @@
     justify-content: center;
   }
 
-  .productscreen{
+  .productscreen {
     width: 100%;
     text-align: center;
     align-items: center;
@@ -423,15 +366,15 @@
     width: 80%;
   }
 
-  .detail-reviews{
+  .detail-reviews {
     width: 100%;
   }
 
-  .container-reviews{
+  .container-reviews {
     width: 100%;
   }
 
-  .imageSlide{
+  .imageSlide {
     width: 250px;
     height: 400px;
   }
@@ -443,7 +386,7 @@
     justify-content: center;
   }
 
-  .productscreen{
+  .productscreen {
     width: 100%;
     text-align: center;
     align-items: center;
@@ -475,24 +418,24 @@
     margin: 0 auto;
   }
 
-  .detail-reviews{
+  .detail-reviews {
     width: 100%;
   }
 
-  .container-reviews{
+  .container-reviews {
     width: 100%;
   }
 
-  .imageSlide{
+  .imageSlide {
     width: 200px;
     height: 320px;
   }
 
-  .review-button{
+  .review-button {
     padding: 0;
   }
 
-  .review-button button{
+  .review-button button {
     padding: 10px 17px;
     width: 30%;
     background: #171717;
@@ -500,3 +443,4 @@
     cursor: pointer;
   }
 }
+
