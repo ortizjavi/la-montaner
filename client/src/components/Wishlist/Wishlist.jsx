@@ -2,13 +2,10 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import DeleteIcon from '@material-ui/icons/Delete';
-import {
-  removeFavProduct,
-  addCartProduct,
-  removeFavAll,
-} from '../../redux/actions/types/productActions';
+import { removeFavProduct, addCartProduct, removeFavAll } from '../../redux/actions/types/productActions';
 import swal from 'sweetalert';
 import './Wishlist.css';
+
 export default function Wishlist() {
   const dispatch = useDispatch();
   const wishlist = useSelector((state) => state.wishlist);
