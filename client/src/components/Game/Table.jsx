@@ -149,10 +149,6 @@ export const Table = () => {
               <p className="seleccionM">Tu Selección</p>
             </div>
             <div>
-              <Ficha name={houseSelect} />
-              <p className="seleccionM">Selección de la Montañes</p>
-            </div>
-            <div>
               { result === "Perdiste" 
               ?
               <h3
@@ -193,6 +189,8 @@ export const Table = () => {
               {result} 
             </h3>
               }
+              {
+                result !== "" ?
               <Button
                 onClick={handleTryAgainClick}
                 variant="contained"
@@ -200,7 +198,15 @@ export const Table = () => {
               >
                 Try Again
               </Button>
+              :
+              <p>En Juego</p>
+              }
             </div>
+            <div>
+              <Ficha name={houseSelect} />
+              <p className="seleccionM">Selección de la Montañes</p>
+            </div>
+           
           </div>
         )}
       </Grid>
