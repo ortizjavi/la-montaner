@@ -53,7 +53,7 @@ const Footer = ()=>{
                 </ul>
               </div>
               <div className="footer-col">
-              <div class="social-links">
+              <div className="social-links">
                 <h4>Seguinos </h4>
                 <ul>
                   <li><a 
