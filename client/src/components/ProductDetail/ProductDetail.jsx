@@ -4,7 +4,6 @@ import { useParams } from 'react-router';
 import { Link } from 'react-router-dom';
 import swal from 'sweetalert';
 import Loading from '../Loading/Loading.js';
-import { FaStar } from 'react-icons/fa';
 import './ProductDetail.css';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
@@ -15,7 +14,6 @@ import * as productActions from '../../redux/actions/types/productActions.js';
 import { getOrders } from '../../redux/actions/types/adminActions';
 import { Rating } from '@material-ui/lab';
 import { FaCircle } from 'react-icons/fa';
-
 
 export default function ProductDetail({ match, history }) {
   const { id } = useParams(); //pasarle por props
@@ -174,20 +172,18 @@ export default function ProductDetail({ match, history }) {
                 <p>{detail.description}</p>
               </div>
 
-{ (detail.ibu && detail.abv) && 
- (
-  <div className='sipd-center'>
-                <table>
-                  <tbody>
-                    <tr>
-                      <td>Ibu: {detail.ibu}</td>
-                      <td>Abv: {detail.abv}%</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-)}
-         
+              {detail.ibu && detail.abv && (
+                <div className="sipd-center">
+                  <table>
+                    <tbody>
+                      <tr>
+                        <td>Ibu: {detail.ibu}</td>
+                        <td>Abv: {detail.abv}%</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              )}
             </div>
             <div className="right__info">
               <p>
@@ -196,11 +192,16 @@ export default function ProductDetail({ match, history }) {
               </p>
               <p>
                 Stock:
-                <span>{detail.stock > 0 ? 
-                <div className='stock-disponible'>
-                <FaCircle /> <p>disponible</p></div> 
-                :  <div className='stock-noDisponible'>
-                <FaCircle /> <p> no disponible</p></div>}
+                <span>
+                  {detail.stock > 0 ? (
+                    <div className="stock-disponible">
+                      <FaCircle /> <p>disponible</p>
+                    </div>
+                  ) : (
+                    <div className="stock-noDisponible">
+                      <FaCircle /> <p> no disponible</p>
+                    </div>
+                  )}
                 </span>
               </p>
               <p>
