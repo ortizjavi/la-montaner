@@ -9,6 +9,10 @@ import swal from "sweetalert";
 import { useDispatch, useSelector } from "react-redux";
 import { getSales, winGame } from "../../redux/actions/types/adminActions";
 import "./game.css";
+import PiedraPapelTijera from '../../img/PiedraPapelTijera.png';
+import gameGif from '../../img/gameGif.gif';
+
+
 const maquina = ["papel", "tijera", "piedra"];
 
 
@@ -130,27 +134,30 @@ export const Table = () => {
 
   return (
     <div  >
-      <Grid container spacing={3} justifyContent="center" alignItems="center" >
-        <Grid item xs={12} className="scores" >
+      <Grid container spacing={4} justifyContent="center" alignItems="center" >
+      <Grid item xs={12}>
+          <div className="imgtitle scores">
           <Score value={score} />
-          <Rules  />
+            <img src={PiedraPapelTijera} alt=""/>
           <ScoreHouse value={scoreHouse} />
+          </div>
+      </Grid>
+        <Grid item xs={12} className="scores" >
+          <Rules />
         </Grid>
         {!userActive ? (
+        <Grid item xs={12}>
           <div className="countFichas">
             <Ficha name="piedra" onClick={onClick} />
             <Ficha name="papel" onClick={onClick} />
             <Ficha name="tijera" onClick={onClick} />
           </div>
+          </Grid>
         ) : (
           <div className="countFichas">
             <div>
               <Ficha name={select} />
               <p className="seleccionM">Tu Selección</p>
-            </div>
-            <div>
-              <Ficha name={houseSelect} />
-              <p className="seleccionM">Selección de la Montañes</p>
             </div>
             <div>
               { result === "Perdiste" 
@@ -189,10 +196,12 @@ export const Table = () => {
                   ? "lose"
                   : "same"
               }
-            >
+              >
               {result} 
             </h3>
               }
+              {
+                result !== "" ?
               <Button
                 onClick={handleTryAgainClick}
                 variant="contained"
@@ -200,7 +209,15 @@ export const Table = () => {
               >
                 Try Again
               </Button>
-            </div>
+              :null
+            }
+              </div>
+            <div>
+              <Ficha name={houseSelect} />
+              <p className="seleccionM">Selección de la Montañes</p>
+              </div>
+            
+           
           </div>
         )}
       </Grid>

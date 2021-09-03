@@ -34,7 +34,6 @@ const useStyles = makeStyles((theme) => ({
 
 
 export const Rules = () => {
-    const classes = useStyles();
     const [modalStyle] = React.useState(getModalStyle);
     const [open, setOpen] = React.useState(false);
 
@@ -50,6 +49,8 @@ export const Rules = () => {
       <div>
             <Button
                 onClick={handleOpen}
+                variant="contained"
+                color="#a52a2a"
             >Reglas
             </Button>
             <div className="modal">
