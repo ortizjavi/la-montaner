@@ -1,52 +1,42 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { FaStar } from 'react-icons/fa';
 import { Divider, Avatar, Grid, Paper } from '@material-ui/core';
-import { addReview, getProductDetail } from '../../redux/actions/types/productActions';
+import { addReview } from '../../redux/actions/types/productActions';
 import swal from 'sweetalert';
 import './Reviews.css';
 
 export default function Reviews({ id }) {
   const dispatch = useDispatch();
   const detail = useSelector((state) => state.root.productDetail);
-  let currentUser = useSelector((state) => state.session.user);
-  const ordenes = useSelector((state) => state.admin.orders);
+  const currentUser = useSelector((state) => state.session.user);
 
   const [rating, setRating] = useState(null);
   const [hover, setHover] = useState(null);
   const [calification, setCalification] = useState(0);
   const [showReviews, setShowReviews] = useState(3);
   const [content, setContent] = useState('');
-  const [errors, setErrors] = useState('');
 
   const detailReviews = detail?.reviews?.slice(0, showReviews);
-  let usuarioPrueba = currentUser;
-  let usuario = Object.entries(currentUser);
+  const usuario = Object.entries(currentUser);
 
   //Reviews
-  let totalReviews = detail.reviews;
-  let idReviews = totalReviews?.map((el) => el.idUsuario);
-  let mapReviews = idReviews?.map((el) =>
-    el === currentUser._id ? true : false,
-  );
-  let includesss = idReviews?.includes(currentUser._id);
+  const totalReviews = detail.reviews;
+  const idReviews = totalReviews?.map((el) => el.idUsuario);
+  const includesss = idReviews?.includes(currentUser._id);
 
   //Cart order
-  let userOrders = currentUser.orders;
-  let carritoUsuarioConMap = userOrders?.map((el) => el.cart);
-  let mapDentroDeCarrito = carritoUsuarioConMap?.map((el) =>
+  const userOrders = currentUser.orders;
+  const carritoUsuarioConMap = userOrders?.map((el) => el.cart);
+  const mapDentroDeCarrito = carritoUsuarioConMap?.map((el) =>
     el.map((ele) => ele.id),
   );
-  let filtrarElMap = mapDentroDeCarrito?.map((ele) => ele.includes(id));
-  let comproElProducto = filtrarElMap?.filter((el) =>
+  const filtrarElMap = mapDentroDeCarrito?.map((ele) => ele.includes(id));
+  const comproElProducto = filtrarElMap?.filter((el) =>
     el === 'true' ? 'true' : 'false',
   );
-  let finalCompro = comproElProducto?.find((el) => el === true);
-
-  // useEffect(() => {
-  //     getProductDetail(id);
-  // }, [dispatch, detail.reviews])
+  const finalCompro = comproElProducto?.find((el) => el === true);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -88,6 +78,7 @@ export default function Reviews({ id }) {
           0 ? null : !finalCompro ? null : (
           <div className="form-reviews">
             <form
+              className="form-styles-detail"
               onSubmit={(e) => handleSubmit(e)}
               style={includesss ? { display: 'none' } : { display: 'block' }}
             >
@@ -96,7 +87,7 @@ export default function Reviews({ id }) {
                   const ratingValue = i + 1;
 
                   return (
-                    <label>
+                    <label key={i}>
                       <input
                         type="radio"
                         name="rating"

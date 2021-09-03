@@ -1,19 +1,19 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
-import swal from "sweetalert";
-import MuiAlert from "@material-ui/lab/Alert";
-import { makeStyles } from "@material-ui/core/styles";
+import { useEffect, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
+import swal from 'sweetalert';
+import MuiAlert from '@material-ui/lab/Alert';
+import { makeStyles } from '@material-ui/core/styles';
 
 // Components
-import CartItem from "./CartItem.jsx";
-import "./Cart.css";
+import CartItem from './CartItem.jsx';
+import './Cart.css';
 
 // Actions
-import * as productActions from "../../redux/actions/types/productActions.js";
-import HorizontalNonLinearAlternativeLabelStepper from "../Address/pasarelaDeCompra.jsx";
-import { getSales } from "../../redux/actions/types/adminActions.js";
+import * as productActions from '../../redux/actions/types/productActions.js';
+import HorizontalNonLinearAlternativeLabelStepper from '../Address/pasarelaDeCompra.jsx';
+import { getSales } from '../../redux/actions/types/adminActions.js';
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -21,14 +21,14 @@ function Alert(props) {
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    width: "100%",
-    "& > * + *": {
+    width: '100%',
+    '& > * + *': {
       marginTop: theme.spacing(2),
     },
   },
 }));
 
-const Cart = () => {
+export default function Cart() {
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
   const { cartItems, sales, game } = cart;
@@ -83,21 +83,18 @@ const Cart = () => {
           offertas.push(sales[i].discount);
         } else if (sales[i].price <= total && (dia === sales[i]) === {}) {
           offertas.push(sales[i].discount);
-        }
-        else if (!sales[i].date && sales[i].price === 0){
+        } else if (!sales[i].date && sales[i].price === 0) {
           discountGame = sales[i].discount;
         }
       }
-      if(game && discountGame>0){
+      if (game && discountGame > 0) {
         if (offertas.length === 0) {
           setOffers(discountGame);
         }
         if (offertas.length >= 1) {
-          setOffers(offertas[offertas.length - 1]+discountGame);
+          setOffers(offertas[offertas.length - 1] + discountGame);
         }
-
-      } 
-      else{
+      } else {
         if (offertas.length === 0 && offers > 0) {
           setOpen(false);
           setOffers(0);
@@ -114,32 +111,32 @@ const Cart = () => {
   };
   const removeFromCartHandler = (id) => {
     swal({
-      title: "¿Estás seguro que quieres eliminar este producto?",
-      icon: "warning",
-      buttons: ["Cancelar", true],
+      title: '¿Estás seguro que quieres eliminar este producto?',
+      icon: 'warning',
+      buttons: ['Cancelar', true],
       dangerMode: true,
     }).then((willDelete) => {
       if (willDelete) {
-        swal("Tu producto fue eliminado con exito :)", {
-          icon: "success",
+        swal('Tu producto fue eliminado con exito :)', {
+          icon: 'success',
         });
         dispatch(productActions.deleteCartProduct(id));
       } else {
-        return swal("Tu producto sigue en el carrito :)");
+        return swal('Tu producto sigue en el carrito :)');
       }
     });
   };
 
   const removeAllHandler = () => {
     swal({
-      title: "¿Estás seguro que quieres vaciar tu carrito?",
-      icon: "warning",
-      buttons: ["Cancelar", true],
+      title: '¿Estás seguro que quieres vaciar tu carrito?',
+      icon: 'warning',
+      buttons: ['Cancelar', true],
       dangerMode: true,
     }).then((willDelete) => {
       if (willDelete) {
-        swal("Tu carrito se vació con exito :)", {
-          icon: "success",
+        swal('Tu carrito se vació con exito :)', {
+          icon: 'success',
         });
 
         dispatch(productActions.deleteCartAll());
@@ -150,7 +147,7 @@ const Cart = () => {
   const getCartCount = () => {
     return cartItems.reduce(
       (stockSelected, item) => Number(item.stockSelected) + stockSelected,
-      0
+      0,
     );
   };
 
@@ -181,7 +178,7 @@ const Cart = () => {
 
           {cartItems.length === 0 ? (
             <div>
-              Tu carrito esta vacio.{" "}
+              Tu carrito esta vacio.{' '}
               <Link to="/home" className="back-btn">
                 Volver a la tienda
               </Link>
@@ -202,8 +199,8 @@ const Cart = () => {
           <button
             className={
               cartItems.length === 0
-                ? "cartDeleteAllDisable"
-                : "cartDeleteAll_btn"
+                ? 'cartDeleteAllDisable'
+                : 'cartDeleteAll_btn'
             }
             onClick={() => removeAllHandler()}
           >
@@ -239,6 +236,4 @@ const Cart = () => {
       </div>
     </>
   );
-};
-
-export default Cart;
+}

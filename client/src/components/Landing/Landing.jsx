@@ -7,7 +7,7 @@ export default function Landing() {
   return (
     <div className="landing_container">
       <div className="div_content">
-        <div class="landing_text">
+        <div className="landing_text">
           <div className="logo_landing">
             <img src={logoLanding} alt="" width="500" height="450" />
           </div>

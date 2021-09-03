@@ -1,13 +1,10 @@
 import { React } from 'react';
 import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
-import { FaWhatsapp } from 'react-icons/fa';
 import WhatsAppIcon from '@material-ui/icons/WhatsApp';
 import MailOutlineIcon from '@material-ui/icons/MailOutline';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import { WHATSAPP_LINK } from '../../utils/constants';
 import './FindUs.css';
-//import { useForm } from 'react-hook-form';
-//import swal from "sweetalert";
 
 export default function FindUs() {
   const mapStyle = { height: '400px', width: '80%', margin: '0 auto' };
