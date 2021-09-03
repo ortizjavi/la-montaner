@@ -58,18 +58,20 @@
 }
 
 .scores{
-    width: 100%;
+    width: 100%; 
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-evenly; 
 }
 
 .scores .paper{
     background-color: #a52a2a;
     color: #ffffff;
+    display: grid;
+    justify-items: center;
 } 
 
 .scores div > div{
-    margin-top: 10px;
+    /* margin-top: 10px; */
     width: 8rem;
 }
 
@@ -93,3 +95,19 @@
 .same {
     font-size: 30px;
 }
+
+.imgtitle{
+    display: flex;
+    width: 100%; 
+}
+
+.imgtitle img {
+    width: 45%;
+}
+
+.butonGame{
+    width: 8rem; 
+    display: flex;
+    justify-content: center; 
+}
+

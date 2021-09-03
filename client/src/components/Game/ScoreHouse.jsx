@@ -6,9 +6,9 @@ export const ScoreHouse = ({value = 0 }) => {
     return (
         <div className="scores">
             <Paper elevation={3} className="paper">
-            <h3>La Montañes</h3>
-            <p>-----------</p>
-            <h2>{value}</h2>
+            <h4>La Montañes</h4>
+            <p>-------</p>
+            <h3>{value}</h3>
             </Paper>
         </div>
     )
